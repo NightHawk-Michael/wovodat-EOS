@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.wovodat.org" xmlns="http://www.wovodat.org" elementFormDefault="qualified">
+	
+	<!-- Comment on this XSD file -->
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+			WOVOML schema for uploading initial data for volcanoes and contacts to WOVOdat (www.wovodat.org).
+			Version 1.0
+			WOVOdat staff: Chris Newhall, Steve Malone, Eisuke Fujita, Florian Schwandner
+			WOVOdat developers: Jacopo Selva, Hideki Ueda, Antonius Ratdomopurbo, Alexandre Baguet, Chin Mei Lyou
+			This XML Schema Document (.xsd) was written by Alexandre Baguet, in April 2009
+		</xs:documentation>
+	</xs:annotation>
+	
+	<!-- ================================================================= -->
+	<!-- Simple types -->
+	<!-- ================================================================= -->
+	<!-- String 10 -->
+	<xs:simpleType name="string10">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 15 -->
+	<xs:simpleType name="string15">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 30 -->
+	<xs:simpleType name="string30">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 50 -->
+	<xs:simpleType name="string50">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 60 -->
+	<xs:simpleType name="string60">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 150 -->
+	<xs:simpleType name="string150">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="150"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 255 -->
+	<xs:simpleType name="string255">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Date time -->
+	<xs:simpleType name="dateTime">
+		<xs:restriction base="xs:string">
+			<xs:length value="19"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-[0-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[0-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-[0-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[0-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- ================================================================= -->
+	<!-- Complex types -->
+	<!-- ================================================================= -->
+	<!-- Elements -->
+	<xs:element name="wovoiniml">
+		<xs:complexType>
+			<xs:sequence>
+				<!-- Volcano -->
+				<xs:element name="volcano" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="vd_name" type="string255"/>
+							<xs:element name="vd_tzone" type="xs:decimal" minOccurs="0"/>
+							<xs:element name="vd_inf_cavw" type="string15"/>
+							<xs:element name="vd_inf_desc" type="string255" minOccurs="0"/>
+							<xs:element name="vd_inf_slat">
+								<xs:simpleType>
+									<xs:restriction base="xs:decimal">
+										<xs:minInclusive value="-90.000000000"/>
+										<xs:maxInclusive value="90.000000000"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="vd_inf_slon">
+								<xs:simpleType>
+									<xs:restriction base="xs:decimal">
+										<xs:minInclusive value="-180.000000000"/>
+										<xs:maxInclusive value="180.000000000"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="vd_inf_datum" type="string30"/>
+							<xs:element name="vd_inf_selev">
+								<xs:simpleType>
+									<xs:restriction base="xs:decimal">
+										<xs:minInclusive value="-9999"/>
+										<xs:maxInclusive value="9999"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="vd_inf_type" type="string255"/>
+							<xs:element name="vd_inf_evol" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:decimal">
+										<xs:minInclusive value="0"/>
+										<xs:maxInclusive value="99.9"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="vd_inf_numcald" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:integer">
+										<xs:minInclusive value="0"/>
+										<xs:maxInclusive value="99"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="vd_inf_lcald_dia" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:decimal">
+										<xs:minInclusive value="0"/>
+										<xs:maxInclusive value="999.9"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="vd_inf_ycald_lat" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:decimal">
+										<xs:minInclusive value="-90.000000000"/>
+										<xs:maxInclusive value="90.000000000"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="vd_inf_ycald_lon" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:decimal">
+										<xs:minInclusive value="-180.000000000"/>
+										<xs:maxInclusive value="180.000000000"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="vd_inf_ycald_datum" type="xs:string" minOccurs="0"/>
+							<xs:element name="vd_inf_stime" type="dateTime" minOccurs="0"/>
+							<xs:element name="vd_inf_stime_unc" type="dateTime" minOccurs="0"/>
+							<xs:element name="vd_inf_etime" type="dateTime" minOccurs="0"/>
+							<xs:element name="vd_inf_etime_unc" type="dateTime" minOccurs="0"/>
+							<xs:element name="cc_id" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:integer">
+										<xs:minInclusive value="0"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<!-- Contact -->
+				<xs:element name="contact" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="cc_code" type="string10" minOccurs="0"/>
+							<xs:element name="cc_fname" type="string30" minOccurs="0"/>
+							<xs:element name="cc_lname" type="string30" minOccurs="0"/>
+							<xs:element name="cc_obs" type="string150" minOccurs="0"/>
+							<xs:element name="cc_add1" type="string60" minOccurs="0"/>
+							<xs:element name="cc_add2" type="string60" minOccurs="0"/>
+							<xs:element name="cc_city" type="string50" minOccurs="0"/>
+							<xs:element name="cc_state" type="string30" minOccurs="0"/>
+							<xs:element name="cc_country" type="string50" minOccurs="0"/>
+							<xs:element name="cc_post" type="string30" minOccurs="0"/>
+							<xs:element name="cc_url" type="string255" minOccurs="0"/>
+							<xs:element name="cc_email" type="string255" minOccurs="0"/>
+							<xs:element name="cc_phone" type="string50" minOccurs="0"/>
+							<xs:element name="cc_phone2" type="string50" minOccurs="0"/>
+							<xs:element name="cc_fax" type="string60" minOccurs="0"/>
+							<xs:element name="cc_com" type="string255" minOccurs="0"/>
+							<xs:element name="cc_pubdate" type="dateTime" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

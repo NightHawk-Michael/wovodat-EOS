@@ -1,0 +1,2883 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.wovodat.org" xmlns="http://www.wovodat.org" elementFormDefault="qualified">
+	
+	<!-- ================================================================= -->
+	<!-- Comments on this XSD file -->
+	<!-- ================================================================= -->
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+			WOVOML schema for uploading/updating data to WOVOdat (www.wovodat.org).
+			Version 0.2
+			This XML Schema Document (.xsd) was written by Alexandre Baguet (WOVOdat team), in March 2010. Last update: January 2011.
+			For more information on how to use WOVOML, please refer to: http://www.wovodat.org/
+		</xs:documentation>
+	</xs:annotation>
+	
+	
+	<!-- ================================================================= -->
+	<!-- Simple types -->
+	<!-- ================================================================= -->
+	<!-- Double without NaN -Inf +Inf -->
+	<xs:simpleType name="double">
+		<xs:restriction base="xs:double">
+			<xs:minExclusive value="-INF"/>
+			<xs:maxExclusive value="INF"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Float without NaN -Inf +Inf -->
+	<xs:simpleType name="float">
+		<xs:restriction base="xs:float">
+			<xs:minExclusive value="-INF"/>
+			<xs:maxExclusive value="INF"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 10 -->
+	<xs:simpleType name="string10">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 10 (non-empty) -->
+	<xs:simpleType name="string10NE">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 12 -->
+	<xs:simpleType name="string12">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:maxLength value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 12 (non-empty) -->
+	<xs:simpleType name="string12NE">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:minLength value="1"/>
+			<xs:maxLength value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 30 -->
+	<xs:simpleType name="string30">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 30 (non-empty) -->
+	<xs:simpleType name="string30NE">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:minLength value="1"/>
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 50 -->
+	<xs:simpleType name="string50">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 60 -->
+	<xs:simpleType name="string60">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 255 -->
+	<xs:simpleType name="string255">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 255 (non-empty) -->
+	<xs:simpleType name="string255NE">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:minLength value="1"/>
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- String 511 -->
+	<xs:simpleType name="string511">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:maxLength value="511"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Degrees 0-90 -->
+	<xs:simpleType name="deg0-90">
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="90"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Degrees 0-360 -->
+	<xs:simpleType name="deg0-360">
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="360"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Degrees -90 +90 -->
+	<xs:simpleType name="deg-90-90">
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="-90"/>
+			<xs:maxInclusive value="90"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Degrees -180 +180 -->
+	<xs:simpleType name="deg-180-180">
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="-180"/>
+			<xs:maxInclusive value="180"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Yes No enumeration -->
+	<xs:simpleType name="yesNoEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="Y"/>
+			<xs:enumeration value="N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Success enumeration -->
+	<xs:simpleType name="successEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="Y"/>
+			<xs:enumeration value="N"/>
+			<xs:enumeration value="P"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Yes No Unknown enumeration -->
+	<xs:simpleType name="yesNoUnkEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="Y"/>
+			<xs:enumeration value="N"/>
+			<xs:enumeration value="U"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Yes No Maybe Unknown enumeration -->
+	<xs:simpleType name="yesNoMaybeUnkEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="Y"/>
+			<xs:enumeration value="N"/>
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="U"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Permanent campaign enumeration -->
+	<xs:simpleType name="permCampEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="P"/>
+			<xs:enumeration value="C"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Continuous periodically enumeration -->
+	<xs:simpleType name="contPeriodEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="P"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Processed raw enumeration -->
+	<xs:simpleType name="processedEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="P"/>
+			<xs:enumeration value="R"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Pressure measurement type enumeration -->
+	<xs:simpleType name="pressureMeasTypeEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="V"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Pair stacked enumeration -->
+	<xs:simpleType name="pairStackedEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="P"/>
+			<xs:enumeration value="S"/>
+			<xs:enumeration value="U"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Picks determination enumeration -->
+	<xs:simpleType name="picksDeterminationEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="H"/>
+			<xs:enumeration value="R"/>
+			<xs:enumeration value="U"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Qualitative depth enumeration -->
+	<xs:simpleType name="qualitativeDepthEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="D"/>
+			<xs:enumeration value="I"/>
+			<xs:enumeration value="S"/>
+			<xs:enumeration value="U"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Data type enumeration -->
+	<xs:simpleType name="dataTypeEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="H"/>
+			<xs:enumeration value="L"/>
+			<xs:enumeration value="U"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Distance enumeration -->
+	<xs:simpleType name="distEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="D"/>
+			<xs:enumeration value="I"/>
+			<xs:enumeration value="P"/>
+			<xs:enumeration value="U"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Quality enumeration -->
+	<xs:simpleType name="qualityEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="E"/>
+			<xs:enumeration value="G"/>
+			<xs:enumeration value="P"/>
+			<xs:enumeration value="U"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- DEM quality enumeration -->
+	<xs:simpleType name="DEMQualityEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="E"/>
+			<xs:enumeration value="F"/>
+			<xs:enumeration value="G"/>
+			<xs:enumeration value="U"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Start position enumeration -->
+	<xs:simpleType name="startPositionEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="BLC"/>
+			<xs:enumeration value="TLC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Limb enumeration -->
+	<xs:simpleType name="limbEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="ASC"/>
+			<xs:enumeration value="DES"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Precipitation type enumeration -->
+	<xs:simpleType name="precipitationTypeEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="R"/>
+			<xs:enumeration value="FR"/>
+			<xs:enumeration value="S"/>
+			<xs:enumeration value="H"/>
+			<xs:enumeration value="R-FR"/>
+			<xs:enumeration value="R-S"/>
+			<xs:enumeration value="R-H"/>
+			<xs:enumeration value="FR-R"/>
+			<xs:enumeration value="FR-S"/>
+			<xs:enumeration value="FR-H"/>
+			<xs:enumeration value="S-R"/>
+			<xs:enumeration value="S-FR"/>
+			<xs:enumeration value="S-H"/>
+			<xs:enumeration value="H-R"/>
+			<xs:enumeration value="H-FR"/>
+			<xs:enumeration value="H-S"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Earthquake type enumeration -->
+	<xs:simpleType name="eqTypeEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="R"/>
+			<xs:enumeration value="Q"/>
+			<xs:enumeration value="V"/>
+			<xs:enumeration value="VT"/>
+			<xs:enumeration value="VT_D"/>
+			<xs:enumeration value="VT_S"/>
+			<xs:enumeration value="H"/>
+			<xs:enumeration value="H_HLF"/>
+			<xs:enumeration value="H_LHF"/>
+			<xs:enumeration value="LF"/>
+			<xs:enumeration value="LF_LP"/>
+			<xs:enumeration value="LF_T"/>
+			<xs:enumeration value="LF_ILF"/>
+			<xs:enumeration value="VLP"/>
+			<xs:enumeration value="E"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Tremor type enumeration -->
+	<xs:simpleType name="trmTypeEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="G"/>
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="H"/>
+			<xs:enumeration value="C"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Gas species enumeration -->
+	<xs:simpleType name="gasSpeciesEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="CO2"/>
+			<xs:enumeration value="SO2"/>
+			<xs:enumeration value="H2S"/>
+			<xs:enumeration value="HCl"/>
+			<xs:enumeration value="HF"/>
+			<xs:enumeration value="CH4"/>
+			<xs:enumeration value="H2"/>
+			<xs:enumeration value="CO"/>
+			<xs:enumeration value="3He4He"/>
+			<xs:enumeration value="d13C"/>
+			<xs:enumeration value="d34S"/>
+			<xs:enumeration value="d18O"/>
+			<xs:enumeration value="dD"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Plume species enumeration -->
+	<xs:simpleType name="plumeSpeciesEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="CO2"/>
+			<xs:enumeration value="SO2"/>
+			<xs:enumeration value="H2S"/>
+			<xs:enumeration value="HCl"/>
+			<xs:enumeration value="HF"/>
+			<xs:enumeration value="CO"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Hydrologic species enumeration -->
+	<xs:simpleType name="hydroSpeciesEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="SO4"/>
+			<xs:enumeration value="H2S"/>
+			<xs:enumeration value="Cl"/>
+			<xs:enumeration value="F"/>
+			<xs:enumeration value="HCO3"/>
+			<xs:enumeration value="Mg"/>
+			<xs:enumeration value="Fe"/>
+			<xs:enumeration value="Ca"/>
+			<xs:enumeration value="Na"/>
+			<xs:enumeration value="K"/>
+			<xs:enumeration value="3He4He"/>
+			<xs:enumeration value="c3He4He"/>
+			<xs:enumeration value="d13C"/>
+			<xs:enumeration value="d34S"/>
+			<xs:enumeration value="d18O"/>
+			<xs:enumeration value="dD"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Original recalculated enumeration -->
+	<xs:simpleType name="oriRecalEnum">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="O"/>
+			<xs:enumeration value="R"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Time -->
+	<xs:simpleType name="time">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:length value="8"/>
+			<xs:pattern value="[0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Date time (BC accepted) -->
+	<xs:simpleType name="dateTimeBC">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value=""/>
+			<xs:pattern value="([ ])*"/>
+			<xs:pattern value="[0-9]{1}-0[0-9]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{1}-0[0-9]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{1}-0[0-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{1}-1[0-2]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{1}-1[0-2]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{1}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{1}-0[0-9]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{1}-0[0-9]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{1}-0[0-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{1}-1[0-2]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{1}-1[0-2]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{1}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{1}-0[0-9]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{1}-0[0-9]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{1}-0[0-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{1}-1[0-2]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{1}-1[0-2]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{1}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{1}-0[0-9]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{1}-0[0-9]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{1}-0[0-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{1}-1[0-2]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{1}-1[0-2]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{1}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{2}-0[0-9]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{2}-0[0-9]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{2}-0[0-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{2}-1[0-2]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{2}-1[0-2]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{2}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{2}-0[0-9]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{2}-0[0-9]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{2}-0[0-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{2}-1[0-2]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{2}-1[0-2]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{2}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{2}-0[0-9]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{2}-0[0-9]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{2}-0[0-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{2}-1[0-2]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{2}-1[0-2]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{2}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{2}-0[0-9]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{2}-0[0-9]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{2}-0[0-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{2}-1[0-2]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{2}-1[0-2]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{2}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{3}-0[0-9]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{3}-0[0-9]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{3}-0[0-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{3}-1[0-2]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{3}-1[0-2]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{3}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{3}-0[0-9]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{3}-0[0-9]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{3}-0[0-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{3}-1[0-2]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{3}-1[0-2]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{3}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{3}-0[0-9]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{3}-0[0-9]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{3}-0[0-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{3}-1[0-2]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{3}-1[0-2]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{3}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{3}-0[0-9]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{3}-0[0-9]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{3}-0[0-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{3}-1[0-2]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{3}-1[0-2]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{3}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{4}-0[0-9]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{4}-0[0-9]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{4}-0[0-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{4}-1[0-2]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{4}-1[0-2]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{4}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{4}-0[0-9]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{4}-0[0-9]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{4}-0[0-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{4}-1[0-2]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{4}-1[0-2]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{4}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{5}-0[0-9]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{5}-0[0-9]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{5}-0[0-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{5}-1[0-2]-0[0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{5}-1[0-2]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{5}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{5}-0[0-9]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{5}-0[0-9]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{5}-0[0-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{5}-1[0-2]-0[0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{5}-1[0-2]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="-[0-9]{5}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Date time -->
+	<xs:simpleType name="dateTime">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-[0-2][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-3[0-1]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[0-2][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-0[1-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-0[1-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-0[1-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-0[1-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Date time (can be empty) -->
+	<xs:simpleType name="dateTimeEmpty">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value=""/>
+			<xs:pattern value="([ ])*"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-[0-2][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-3[0-1]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[0-2][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-0[1-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-0[1-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-0[1-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-0[1-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Date time with microseconds -->
+	<xs:simpleType name="dateTimemsec">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-0[1-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-0[1-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-0[1-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-0[1-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-0[1-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-0[1-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[1-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-0[1-9] 2[0-3]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-0[1-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-0[1-9] 2[0-3]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[1-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Date time uncertainty -->
+	<xs:simpleType name="dateTimeUnc">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-[0-2][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-3[0-1]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[0-2][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-[0-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[0-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-[0-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[0-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Date time uncertainty with microseconds -->
+	<xs:simpleType name="dateTimeUncmsec">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-[0-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[0-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-[0-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[0-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9]"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-[0-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[0-2][0-9] [0-1][0-9]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] [0-1][0-9]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-[0-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-0[0-9]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-[0-2][0-9] 2[0-3]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+			<xs:pattern value="[0-9]{4}-1[0-2]-3[0-1] 2[0-3]:[0-5][0-9]:[0-5][0-9].([0-9])*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
+	<!-- ================================================================= -->
+	<!-- Groups -->
+	<!-- ================================================================= -->
+	<!-- Common network -->
+	<xs:group name="CommonNetworkGroup">
+		<xs:sequence>
+			<xs:element name="Volcanoes" type="VolcanoesType"/>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="area" type="float" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="diffUTC" type="float" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<!-- Latitude longitude group -->
+	<xs:group name="latLonGroup">
+		<xs:sequence>
+			<xs:element name="lat" type="deg-90-90"/>
+			<xs:element name="lon" type="deg-180-180"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<!-- Instrument latitude longitude group -->
+	<xs:group name="instLatLonGroup">
+		<xs:sequence>
+			<xs:element name="instLat" type="deg-90-90"/>
+			<xs:element name="instLon" type="deg-180-180"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<!-- Start latitude longitude group -->
+	<xs:group name="startLatLonGroup">
+		<xs:sequence>
+			<xs:element name="startLat" type="deg-90-90"/>
+			<xs:element name="startLon" type="deg-180-180"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<!-- Moment tensor -->
+	<xs:group name="momentTensorGroup">
+		<xs:sequence>
+			<xs:element name="momentTensorScale" type="float"/>
+			<xs:element name="momentTensorXX" type="float"/>
+			<xs:element name="momentTensorXY" type="float"/>
+			<xs:element name="momentTensorXZ" type="float"/>
+			<xs:element name="momentTensorYY" type="float"/>
+			<xs:element name="momentTensorYZ" type="float"/>
+			<xs:element name="momentTensorZZ" type="float"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<!-- Volcano/Eruption/Phase -->
+	<xs:group name="volcanoEruptionPhaseGroup">
+		<xs:choice>
+			<xs:element name="volcanoCode" type="string12NE"/>
+			<xs:element name="eruptionCode" type="string30NE"/>
+			<xs:element name="phaseCode" type="string30NE"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!-- Volcano/Phase -->
+	<xs:group name="volcanoPhaseGroup">
+		<xs:choice>
+			<xs:element name="volcanoCode" type="string12NE"/>
+			<xs:element name="phaseCode" type="string30NE"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!-- Station/Airplane -->
+	<xs:group name="stationAirplaneGroup">
+		<xs:choice>
+			<xs:element name="stationCode" type="string30NE"/>
+			<xs:element name="airplaneCode" type="string30NE"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!-- Network/Station -->
+	<xs:group name="networkStationGroup">
+		<xs:choice>
+			<xs:element name="networkCode" type="string30NE"/>
+			<xs:element name="stationCode" type="string30NE"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!-- Instrument/Station -->
+	<xs:group name="instrumentStationGroup">
+		<xs:choice>
+			<xs:element name="instrumentCode" type="string30NE"/>
+			<xs:element name="stationCode" type="string30NE"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!-- Instrument/InstStation -->
+	<xs:group name="instrumentInstStationGroup">
+		<xs:choice>
+			<xs:element name="instrumentCode" type="string30NE"/>
+			<xs:element name="instStationCode" type="string30NE"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!-- Instrument/Station/Satellite/Airplane -->
+	<xs:group name="instrumentStationSatelliteAirplaneGroup">
+		<xs:choice>
+			<xs:element name="instrumentCode" type="string30NE"/>
+			<xs:element name="stationCode" type="string30NE"/>
+			<xs:element name="satelliteCode" type="string30NE"/>
+			<xs:element name="airplaneCode" type="string30NE"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!-- Network event/Single station event -->
+	<xs:group name="networkSingleStationEventGroup">
+		<xs:choice>
+			<xs:element name="networkEventCode" type="string30NE"/>
+			<xs:element name="singleStationEventCode" type="string30NE"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!-- Network event/Single station event/Tremor -->
+	<xs:group name="networkStationTremorGroup">
+		<xs:choice>
+			<xs:element name="networkEventCode" type="string30NE"/>
+			<xs:element name="singleStationEventCode" type="string30NE"/>
+			<xs:element name="tremorCode" type="string30NE"/>
+		</xs:choice>
+	</xs:group>
+	
+	
+	<!-- ================================================================= -->
+	<!-- Complex types -->
+	<!-- ================================================================= -->
+	<!-- wovoml (root) -->
+	<xs:complexType name="wovomlType">
+		<xs:sequence>
+			<!-- Loading information -->
+			<xs:element name="LoadingInfo" type="LoadingInfoType"/>
+			<!-- Observation -->
+			<xs:element name="Observation" type="ObservationType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Eruption -->
+			<xs:element name="Eruption" type="EruptionType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Phase alone -->
+			<xs:element name="Phase" type="PhaseAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Video alone -->
+			<xs:element name="Video" type="VideoAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Forecast alone -->
+			<xs:element name="Forecast" type="ForecastAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Inferred processes -->
+			<xs:element name="InferredProcesses" type="InferredProcessesType" minOccurs="0"/>
+			<!-- Monitoring system -->
+			<xs:element name="MonitoringSystem" type="MonitoringSystemType" minOccurs="0"/>
+			<!-- Data -->
+			<xs:element name="Data" type="DataType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="version" type="xs:string" use="required"/>
+	</xs:complexType>
+	
+	<!-- Loading information -->
+	<xs:complexType name="LoadingInfoType">
+		<xs:sequence>
+			<xs:element name="volcanoCode" type="string12" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10NE"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Observation -->
+	<xs:complexType name="ObservationType">
+		<xs:sequence>
+			<xs:element name="volcanoCode" type="string12" minOccurs="0"/>
+			<xs:element name="description" type="xs:string" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Eruption -->
+	<xs:complexType name="EruptionType">
+		<xs:sequence>
+			<!-- Eruption information -->
+			<xs:element name="volcanoCode" type="string12" minOccurs="0"/>
+			<xs:element name="name" type="string60" minOccurs="0"/>
+			<xs:element name="narrative" type="string255" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTimeBC"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeBC" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="climaxTime" type="dateTimeBC" minOccurs="0"/>
+			<xs:element name="climaxTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Video -->
+			<xs:element name="Video" type="VideoType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Phase -->
+			<xs:element name="Phase" type="PhaseType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Phase -->
+	<xs:complexType name="PhaseType">
+		<xs:sequence>
+			<!-- Phase information -->
+			<xs:element name="phaseNumber" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTimeBC"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeBC" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="vei" type="xs:integer" minOccurs="0"/>
+			<xs:element name="maxLavaExtru" type="float" minOccurs="0"/>
+			<xs:element name="maxExpMassDis" type="float" minOccurs="0"/>
+			<xs:element name="dre" type="float" minOccurs="0"/>
+			<xs:element name="magmaMix" type="yesNoUnkEnum" minOccurs="0"/>
+			<xs:element name="maxColHeight" type="float" minOccurs="0"/>
+			<xs:element name="colHeightDet" type="string255" minOccurs="0"/>
+			<xs:element name="minSiO2MatrixGlass" type="float" minOccurs="0"/>
+			<xs:element name="maxSiO2MatrixGlass" type="float" minOccurs="0"/>
+			<xs:element name="minSiO2WholeRock" type="float" minOccurs="0"/>
+			<xs:element name="maxSiO2WholeRock" type="float" minOccurs="0"/>
+			<xs:element name="totCrystal" type="float" minOccurs="0"/>
+			<xs:element name="phenoContent" type="float" minOccurs="0"/>
+			<xs:element name="phenoAssemb" type="string255" minOccurs="0"/>
+			<xs:element name="preErupH2OContent" type="float" minOccurs="0"/>
+			<xs:element name="phenoMeltInclusion" type="string255" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Video -->
+			<xs:element name="Video" type="VideoType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Forecast -->
+			<xs:element name="Forecast" type="ForecastType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Phase alone -->
+	<xs:complexType name="PhaseAloneType">
+		<xs:sequence>
+			<!-- Phase information -->
+			<xs:element name="eruptionCode" type="string30NE"/>
+			<xs:element name="phaseNumber" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTimeBC"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeBC" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="vei" type="xs:integer" minOccurs="0"/>
+			<xs:element name="maxLavaExtru" type="float" minOccurs="0"/>
+			<xs:element name="maxExpMassDis" type="float" minOccurs="0"/>
+			<xs:element name="dre" type="float" minOccurs="0"/>
+			<xs:element name="magmaMix" type="yesNoUnkEnum" minOccurs="0"/>
+			<xs:element name="maxColHeight" type="float" minOccurs="0"/>
+			<xs:element name="colHeightDet" type="string255" minOccurs="0"/>
+			<xs:element name="minSiO2MatrixGlass" type="float" minOccurs="0"/>
+			<xs:element name="maxSiO2MatrixGlass" type="float" minOccurs="0"/>
+			<xs:element name="minSiO2WholeRock" type="float" minOccurs="0"/>
+			<xs:element name="maxSiO2WholeRock" type="float" minOccurs="0"/>
+			<xs:element name="totCrystal" type="float" minOccurs="0"/>
+			<xs:element name="phenoContent" type="float" minOccurs="0"/>
+			<xs:element name="phenoAssemb" type="string255" minOccurs="0"/>
+			<xs:element name="preErupH2OContent" type="float" minOccurs="0"/>
+			<xs:element name="phenoMeltInclusion" type="string255" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Video -->
+			<xs:element name="Video" type="VideoType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Forecast -->
+			<xs:element name="Forecast" type="ForecastType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Video -->
+	<xs:complexType name="VideoType">
+		<xs:sequence>
+			<xs:element name="link" type="string255" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="length" type="time" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Video alone -->
+	<xs:complexType name="VideoAloneType">
+		<xs:sequence>
+			<xs:group ref="volcanoEruptionPhaseGroup"/>
+			<xs:element name="link" type="string255" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="length" type="time" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Forecast -->
+	<xs:complexType name="ForecastType">
+		<xs:sequence>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="earliestStartTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="earliestStartTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="latestStartTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="latestStartTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="issueTime" type="dateTime"/>
+			<xs:element name="issueTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="timeSuccess" type="successEnum" minOccurs="0"/>
+			<xs:element name="magniSuccess" type="successEnum" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Forecast alone -->
+	<xs:complexType name="ForecastAloneType">
+		<xs:sequence>
+			<xs:group ref="volcanoPhaseGroup"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="earliestStartTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="earliestStartTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="latestStartTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="latestStartTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="issueTime" type="dateTime"/>
+			<xs:element name="issueTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="timeSuccess" type="successEnum" minOccurs="0"/>
+			<xs:element name="magniSuccess" type="successEnum" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Inferred processes -->
+	<xs:complexType name="InferredProcessesType">
+		<xs:sequence>
+			<!-- Magma movement -->
+			<xs:element name="MagmaMovement" type="MagmaMovementType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Volatile saturation -->
+			<xs:element name="VolatileSat" type="VolatileSatType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Magma pressure -->
+			<xs:element name="MagmaPressure" type="MagmaPressureType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Hydrothermal -->
+			<xs:element name="Hydrothermal" type="HydrothermalType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Regional tectonics -->
+			<xs:element name="RegionalTectonics" type="RegionalTectonicsType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Magma movement -->
+	<xs:complexType name="MagmaMovementType">
+		<xs:sequence>
+			<xs:element name="volcanoCode" type="string12NE"/>
+			<xs:element name="inferTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="inferTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="deepSupp" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="ascent" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="convecBelow" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="convecAbove" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="magmaMix" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="dikeIntru" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="pipeIntru" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="sillIntru" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Volatile saturation -->
+	<xs:complexType name="VolatileSatType">
+		<xs:sequence>
+			<xs:element name="volcanoCode" type="string12NE"/>
+			<xs:element name="inferTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="inferTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="CO2Sat" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="H2OSat" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="decompress" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="fugacity" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="volatileAdd" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="crystalOr2ndBoil" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="vesicul" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="devesicul" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="degas" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Magma pressure -->
+	<xs:complexType name="MagmaPressureType">
+		<xs:sequence>
+			<xs:element name="volcanoCode" type="string12NE"/>
+			<xs:element name="inferTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="inferTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="gasInduced" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="tectInduced" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Hydrothermal -->
+	<xs:complexType name="HydrothermalType">
+		<xs:sequence>
+			<xs:element name="volcanoCode" type="string12NE"/>
+			<xs:element name="inferTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="inferTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="heatGwater" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="poreDestab" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="poreDeform" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="hydrofract" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="boilTremor" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="absorSolGas" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="speciesEqbChange" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="boilDryChimneys" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Regional tectonics -->
+	<xs:complexType name="RegionalTectonicsType">
+		<xs:sequence>
+			<xs:element name="volcanoCode" type="string12NE"/>
+			<xs:element name="inferTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="inferTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="tectonicChanges" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="staticStress" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="dynamicStrain" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="localShear" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="slowEarthquake" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="distalPressure" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="distalDepressure" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="hydrothermalLubrication" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="earthTide" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="atmosInfluence" type="yesNoMaybeUnkEnum" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Monitoring system -->
+	<xs:complexType name="MonitoringSystemType">
+		<xs:sequence>
+			<!-- Airplane -->
+			<xs:element name="Airplane" type="AirplaneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Deformation network -->
+			<xs:element name="DeformationNetwork" type="DeformationNetworkType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Deformation station -->
+			<xs:element name="DeformationStation" type="DeformationStationAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Deformation instrument -->
+			<xs:element name="DeformationInstrument" type="DeformationInstrumentAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Tilt/Instrument instrument -->
+			<xs:element name="TiltStrainInstrument" type="TiltStrainInstrumentAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Gas network -->
+			<xs:element name="GasNetwork" type="GasNetworkType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Gas station -->
+			<xs:element name="GasStation" type="GasStationAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Gas instrument -->
+			<xs:element name="GasInstrument" type="GasInstrumentAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Hydrologic network -->
+			<xs:element name="HydrologicNetwork" type="HydrologicNetworkType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Hydrologic station -->
+			<xs:element name="HydrologicStation" type="HydrologicStationAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Hydrologic instrument -->
+			<xs:element name="HydrologicInstrument" type="HydrologicInstrumentAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Fields network -->
+			<xs:element name="FieldsNetwork" type="FieldsNetworkType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Fields station -->
+			<xs:element name="FieldsStation" type="FieldsStationAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Fields instrument -->
+			<xs:element name="FieldsInstrument" type="FieldsInstrumentAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Thermal network -->
+			<xs:element name="ThermalNetwork" type="ThermalNetworkType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Thermal station -->
+			<xs:element name="ThermalStation" type="ThermalStationAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Thermal instrument -->
+			<xs:element name="ThermalInstrument" type="ThermalInstrumentAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Seismic network -->
+			<xs:element name="SeismicNetwork" type="SeismicNetworkType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Seismic station -->
+			<xs:element name="SeismicStation" type="SeismicStationAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Seismic instrument -->
+			<xs:element name="SeismicInstrument" type="SeismicInstrumentAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Seismic component -->
+			<xs:element name="SeismicComponent" type="SeismicComponentAloneType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Airplane -->
+	<xs:complexType name="AirplaneType">
+		<xs:sequence>
+			<xs:element name="name" type="string50" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Gas instrument -->
+			<xs:element name="GasInstrument" type="GasInstrumentType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Thermal instrument -->
+			<xs:element name="ThermalInstrument" type="ThermalInstrumentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Deformation network -->
+	<xs:complexType name="DeformationNetworkType">
+		<xs:sequence>
+			<xs:group ref="CommonNetworkGroup"/>
+			<!-- Deformation station -->
+			<xs:element name="DeformationStation" type="DeformationStationType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Deformation station -->
+	<xs:complexType name="DeformationStationType">
+		<xs:sequence>
+			<xs:element name="name" type="string30" minOccurs="0"/>
+			<xs:element name="permInst" type="string255" minOccurs="0"/>
+			<xs:group ref="latLonGroup" minOccurs="0"/>
+			<xs:element name="elev" type="float" minOccurs="0"/>
+			<xs:element name="horizPrecision" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="diffUTC" type="float" minOccurs="0"/>
+			<xs:element name="refStation" type="yesNoEnum" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Deformation instrument -->
+			<xs:element name="DeformationInstrument" type="DeformationInstrumentType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Tilt/Instrument instrument -->
+			<xs:element name="TiltStrainInstrument" type="TiltStrainInstrumentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Deformation station alone -->
+	<xs:complexType name="DeformationStationAloneType">
+		<xs:sequence>
+			<xs:element name="networkCode" type="string30" minOccurs="0"/>
+			<xs:element name="name" type="string30" minOccurs="0"/>
+			<xs:element name="permInst" type="string255" minOccurs="0"/>
+			<xs:group ref="latLonGroup" minOccurs="0"/>
+			<xs:element name="datum" type="string30" minOccurs="0"/>
+			<xs:element name="elev" type="float" minOccurs="0"/>
+			<xs:element name="horizPrecision" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="diffUTC" type="float" minOccurs="0"/>
+			<xs:element name="refStation" type="yesNoEnum" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Deformation instrument -->
+			<xs:element name="DeformationInstrument" type="DeformationInstrumentType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Tilt/Instrument instrument -->
+			<xs:element name="TiltStrainInstrument" type="TiltStrainInstrumentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Deformation instrument -->
+	<xs:complexType name="DeformationInstrumentType">
+		<xs:sequence>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="type" type="string50" minOccurs="0"/>
+			<xs:element name="units" type="string30" minOccurs="0"/>
+			<xs:element name="resolution" type="float" minOccurs="0"/>
+			<xs:element name="signalToNoise" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Deformation instrument alone -->
+	<xs:complexType name="DeformationInstrumentAloneType">
+		<xs:sequence>
+			<xs:element name="stationCode" type="string30" minOccurs="0"/>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="type" type="string50" minOccurs="0"/>
+			<xs:element name="units" type="string30" minOccurs="0"/>
+			<xs:element name="resolution" type="float" minOccurs="0"/>
+			<xs:element name="signalToNoise" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Tilt/Strain instrument -->
+	<xs:complexType name="TiltStrainInstrumentType">
+		<xs:sequence>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="type" type="string50" minOccurs="0"/>
+			<xs:element name="depth" type="float" minOccurs="0"/>
+			<xs:element name="units" type="string30" minOccurs="0"/>
+			<xs:element name="resolution" type="float" minOccurs="0"/>
+			<xs:element name="direction1" type="deg0-360" minOccurs="0"/>
+			<xs:element name="direction2" type="deg0-360" minOccurs="0"/>
+			<xs:element name="direction3" type="deg0-360" minOccurs="0"/>
+			<xs:element name="direction4" type="deg0-360" minOccurs="0"/>
+			<xs:element name="electroConv1" type="float" minOccurs="0"/>
+			<xs:element name="electroConv2" type="float" minOccurs="0"/>
+			<xs:element name="electroConv3" type="float" minOccurs="0"/>
+			<xs:element name="electroConv4" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Tilt/Strain instrument alone -->
+	<xs:complexType name="TiltStrainInstrumentAloneType">
+		<xs:sequence>
+			<xs:element name="stationCode" type="string30" minOccurs="0"/>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="type" type="string50" minOccurs="0"/>
+			<xs:element name="depth" type="float" minOccurs="0"/>
+			<xs:element name="units" type="string30" minOccurs="0"/>
+			<xs:element name="resolution" type="float" minOccurs="0"/>
+			<xs:element name="direction1" type="deg0-360" minOccurs="0"/>
+			<xs:element name="direction2" type="deg0-360" minOccurs="0"/>
+			<xs:element name="direction3" type="deg0-360" minOccurs="0"/>
+			<xs:element name="direction4" type="deg0-360" minOccurs="0"/>
+			<xs:element name="electroConv1" type="float" minOccurs="0"/>
+			<xs:element name="electroConv2" type="float" minOccurs="0"/>
+			<xs:element name="electroConv3" type="float" minOccurs="0"/>
+			<xs:element name="electroConv4" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Gas network -->
+	<xs:complexType name="GasNetworkType">
+		<xs:sequence>
+			<xs:group ref="CommonNetworkGroup"/>
+			<!-- Gas station -->
+			<xs:element name="GasStation" type="GasStationType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Gas station -->
+	<xs:complexType name="GasStationType">
+		<xs:sequence>
+			<xs:element name="name" type="string50" minOccurs="0"/>
+			<xs:element name="type" type="string255" minOccurs="0"/>
+			<xs:element name="permInst" type="string255" minOccurs="0"/>
+			<xs:group ref="latLonGroup" minOccurs="0"/>
+			<xs:element name="elev" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="diffUTC" type="float" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Gas instrument -->
+			<xs:element name="GasInstrument" type="GasInstrumentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Gas station alone -->
+	<xs:complexType name="GasStationAloneType">
+		<xs:sequence>
+			<xs:element name="networkCode" type="string30" minOccurs="0"/>
+			<xs:element name="name" type="string50" minOccurs="0"/>
+			<xs:element name="type" type="string255" minOccurs="0"/>
+			<xs:element name="permInst" type="string255" minOccurs="0"/>
+			<xs:group ref="latLonGroup" minOccurs="0"/>
+			<xs:element name="elev" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="diffUTC" type="float" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Gas instrument -->
+			<xs:element name="GasInstrument" type="GasInstrumentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Gas instrument -->
+	<xs:complexType name="GasInstrumentType">
+		<xs:sequence>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="type" type="string255" minOccurs="0"/>
+			<xs:element name="units" type="string50" minOccurs="0"/>
+			<xs:element name="resolution" type="float" minOccurs="0"/>
+			<xs:element name="signalToNoise" type="float" minOccurs="0"/>
+			<xs:element name="calibration" type="string255" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Gas instrument alone -->
+	<xs:complexType name="GasInstrumentAloneType">
+		<xs:sequence>
+			<xs:group ref="stationAirplaneGroup" minOccurs="0"/>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="type" type="string255" minOccurs="0"/>
+			<xs:element name="units" type="string50" minOccurs="0"/>
+			<xs:element name="resolution" type="float" minOccurs="0"/>
+			<xs:element name="signalToNoise" type="float" minOccurs="0"/>
+			<xs:element name="calibration" type="string255" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Hydrologic network -->
+	<xs:complexType name="HydrologicNetworkType">
+		<xs:sequence>
+			<xs:group ref="CommonNetworkGroup"/>
+			<!-- Hydrologic station -->
+			<xs:element name="HydrologicStation" type="HydrologicStationType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Hydrologic station -->
+	<xs:complexType name="HydrologicStationType">
+		<xs:sequence>
+			<xs:element name="name" type="string30" minOccurs="0"/>
+			<xs:element name="waterBodyType" type="string255" minOccurs="0"/>
+			<xs:element name="permInst" type="string255" minOccurs="0"/>
+			<xs:element name="measurementFreq" type="string255" minOccurs="0"/>
+			<xs:element name="screenTop" type="float" minOccurs="0"/>
+			<xs:element name="screenBottom" type="float" minOccurs="0"/>
+			<xs:element name="wellDepth" type="double" minOccurs="0"/>
+			<xs:group ref="latLonGroup" minOccurs="0"/>
+			<xs:element name="elev" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="diffUTC" type="float" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Hydrologic instrument -->
+			<xs:element name="HydrologicInstrument" type="HydrologicInstrumentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Hydrologic station alone -->
+	<xs:complexType name="HydrologicStationAloneType">
+		<xs:sequence>
+			<xs:element name="networkCode" type="string30" minOccurs="0"/>
+			<xs:element name="name" type="string30" minOccurs="0"/>
+			<xs:element name="waterBodyType" type="string255" minOccurs="0"/>
+			<xs:element name="permInst" type="string255" minOccurs="0"/>
+			<xs:element name="screenTop" type="float" minOccurs="0"/>
+			<xs:element name="screenBottom" type="float" minOccurs="0"/>
+			<xs:element name="wellDepth" type="double" minOccurs="0"/>
+			<xs:group ref="latLonGroup" minOccurs="0"/>
+			<xs:element name="elev" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="diffUTC" type="float" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Hydrologic instrument -->
+			<xs:element name="HydrologicInstrument" type="HydrologicInstrumentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Hydrologic instrument -->
+	<xs:complexType name="HydrologicInstrumentType">
+		<xs:sequence>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="pressureMeasType" type="pressureMeasTypeEnum" minOccurs="0"/>
+			<xs:element name="type" type="string50" minOccurs="0"/>
+			<xs:element name="units" type="string50" minOccurs="0"/>
+			<xs:element name="resolution" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Hydrologic instrument alone -->
+	<xs:complexType name="HydrologicInstrumentAloneType">
+		<xs:sequence>
+			<xs:element name="stationCode" type="string30" minOccurs="0"/>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="pressureMeasType" type="pressureMeasTypeEnum" minOccurs="0"/>
+			<xs:element name="type" type="string50" minOccurs="0"/>
+			<xs:element name="units" type="string50" minOccurs="0"/>
+			<xs:element name="resolution" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Fields network -->
+	<xs:complexType name="FieldsNetworkType">
+		<xs:sequence>
+			<xs:group ref="CommonNetworkGroup"/>
+			<!-- Fields station -->
+			<xs:element name="FieldsStation" type="FieldsStationType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Fields station -->
+	<xs:complexType name="FieldsStationType">
+		<xs:sequence>
+			<xs:element name="name" type="string50" minOccurs="0"/>
+			<xs:element name="permInst" type="string255" minOccurs="0"/>
+			<xs:group ref="latLonGroup" minOccurs="0"/>
+			<xs:element name="elev" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="diffUTC" type="float" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Fields instrument -->
+			<xs:element name="FieldsInstrument" type="FieldsInstrumentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Fields station alone -->
+	<xs:complexType name="FieldsStationAloneType">
+		<xs:sequence>
+			<xs:element name="networkCode" type="string30" minOccurs="0"/>
+			<xs:element name="name" type="string50" minOccurs="0"/>
+			<xs:element name="permInst" type="string255" minOccurs="0"/>
+			<xs:group ref="latLonGroup" minOccurs="0"/>
+			<xs:element name="elev" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="diffUTC" type="float" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Fields instrument -->
+			<xs:element name="FieldsInstrument" type="FieldsInstrumentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Fields instrument -->
+	<xs:complexType name="FieldsInstrumentType">
+		<xs:sequence>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="type" type="string255" minOccurs="0"/>
+			<xs:element name="units" type="string255" minOccurs="0"/>
+			<xs:element name="resolution" type="float" minOccurs="0"/>
+			<xs:element name="sampleRate" type="float" minOccurs="0"/>
+			<xs:element name="filterType" type="string255" minOccurs="0"/>
+			<xs:element name="orientation" type="string255" minOccurs="0"/>
+			<xs:element name="calculation" type="string255" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Fields instrument alone -->
+	<xs:complexType name="FieldsInstrumentAloneType">
+		<xs:sequence>
+			<xs:element name="stationCode" type="string30" minOccurs="0"/>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="type" type="string255" minOccurs="0"/>
+			<xs:element name="units" type="string255" minOccurs="0"/>
+			<xs:element name="resolution" type="float" minOccurs="0"/>
+			<xs:element name="sampleRate" type="float" minOccurs="0"/>
+			<xs:element name="filterType" type="string255" minOccurs="0"/>
+			<xs:element name="orientation" type="string255" minOccurs="0"/>
+			<xs:element name="calculation" type="string255" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Thermal network -->
+	<xs:complexType name="ThermalNetworkType">
+		<xs:sequence>
+			<xs:group ref="CommonNetworkGroup"/>
+			<!-- Thermal station -->
+			<xs:element name="ThermalStation" type="ThermalStationType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Thermal station -->
+	<xs:complexType name="ThermalStationType">
+		<xs:sequence>
+			<xs:element name="name" type="string30" minOccurs="0"/>
+			<xs:element name="thermalFeatType" type="string255" minOccurs="0"/>
+			<xs:element name="groundType" type="string255" minOccurs="0"/>
+			<xs:element name="permInst" type="string255" minOccurs="0"/>
+			<xs:element name="measurementFreq" type="string255" minOccurs="0"/>
+			<xs:group ref="latLonGroup" minOccurs="0"/>
+			<xs:element name="elev" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="diffUTC" type="float" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Thermal instrument -->
+			<xs:element name="ThermalInstrument" type="ThermalInstrumentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Thermal station alone -->
+	<xs:complexType name="ThermalStationAloneType">
+		<xs:sequence>
+			<xs:element name="networkCode" type="string30" minOccurs="0"/>
+			<xs:element name="name" type="string30" minOccurs="0"/>
+			<xs:element name="thermalFeatType" type="string255" minOccurs="0"/>
+			<xs:element name="groundType" type="string255" minOccurs="0"/>
+			<xs:element name="permInst" type="string255" minOccurs="0"/>
+			<xs:group ref="latLonGroup" minOccurs="0"/>
+			<xs:element name="elev" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="diffUTC" type="float" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Thermal instrument -->
+			<xs:element name="ThermalInstrument" type="ThermalInstrumentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Thermal instrument -->
+	<xs:complexType name="ThermalInstrumentType">
+		<xs:sequence>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="type" type="string255" minOccurs="0"/>
+			<xs:element name="units" type="string50" minOccurs="0"/>
+			<xs:element name="resolution" type="float" minOccurs="0"/>
+			<xs:element name="signalToNoise" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Thermal instrument alone -->
+	<xs:complexType name="ThermalInstrumentAloneType">
+		<xs:sequence>
+			<xs:group ref="stationAirplaneGroup" minOccurs="0"/>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="type" type="string255" minOccurs="0"/>
+			<xs:element name="units" type="string50" minOccurs="0"/>
+			<xs:element name="resolution" type="float" minOccurs="0"/>
+			<xs:element name="signalToNoise" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Seismic network -->
+	<xs:complexType name="SeismicNetworkType">
+		<xs:sequence>
+			<xs:element name="Volcanoes" type="VolcanoesType" minOccurs="0"/>
+			<xs:element name="name" type="string30" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="velocityModel" type="string511" minOccurs="0"/>
+			<xs:element name="zeroDepth" type="string255" minOccurs="0"/>
+			<xs:element name="fixedDepth" type="yesNoUnkEnum" minOccurs="0"/>
+			<xs:element name="fixedDepthDesc" type="string255" minOccurs="0"/>
+			<xs:element name="numberOfSeismo" type="xs:integer" minOccurs="0"/>
+			<xs:element name="numberOfBBSeismo" type="xs:integer" minOccurs="0"/>
+			<xs:element name="numberOfSMPSeismo" type="xs:integer" minOccurs="0"/>
+			<xs:element name="numberOfDigiSeismo" type="xs:integer" minOccurs="0"/>
+			<xs:element name="numberOfAnaSeismo" type="xs:integer" minOccurs="0"/>
+			<xs:element name="numberOf3CompSeismo" type="xs:integer" minOccurs="0"/>
+			<xs:element name="numberOfMicro" type="xs:integer" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="diffUTC" type="float" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Seismic station -->
+			<xs:element name="SeismicStation" type="SeismicStationType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Seismic station -->
+	<xs:complexType name="SeismicStationType">
+		<xs:sequence>
+			<xs:element name="name" type="string30" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="instDepth" type="string255" minOccurs="0"/>
+			<xs:element name="instType" type="string255" minOccurs="0"/>
+			<xs:element name="systemGain" type="float" minOccurs="0"/>
+			<xs:group ref="latLonGroup" minOccurs="0"/>
+			<xs:element name="elev" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="diffUTC" type="float" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Seismic instrument -->
+			<xs:element name="SeismicInstrument" type="SeismicInstrumentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Seismic station alone -->
+	<xs:complexType name="SeismicStationAloneType">
+		<xs:sequence>
+			<xs:element name="networkCode" type="string30" minOccurs="0"/>
+			<xs:element name="name" type="string30" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="instDepth" type="string255" minOccurs="0"/>
+			<xs:element name="instType" type="string255" minOccurs="0"/>
+			<xs:element name="systemGain" type="float" minOccurs="0"/>
+			<xs:group ref="latLonGroup" minOccurs="0"/>
+			<xs:element name="elev" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="diffUTC" type="float" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Seismic instrument -->
+			<xs:element name="SeismicInstrument" type="SeismicInstrumentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Seismic instrument -->
+	<xs:complexType name="SeismicInstrumentType">
+		<xs:sequence>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="type" type="string255" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="dynamicRange" type="string255" minOccurs="0"/>
+			<xs:element name="gain" type="float" minOccurs="0"/>
+			<xs:element name="filters" type="string255" minOccurs="0"/>
+			<xs:element name="numberOfComp" type="xs:integer" minOccurs="0"/>
+			<xs:element name="respOverview" type="string255" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Seismic component -->
+			<xs:element name="SeismicComponent" type="SeismicComponentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Seismic instrument alone -->
+	<xs:complexType name="SeismicInstrumentAloneType">
+		<xs:sequence>
+			<xs:element name="stationCode" type="string30" minOccurs="0"/>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="type" type="string255" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="dynamicRange" type="string255" minOccurs="0"/>
+			<xs:element name="gain" type="float" minOccurs="0"/>
+			<xs:element name="filters" type="string255" minOccurs="0"/>
+			<xs:element name="numberOfComp" type="xs:integer" minOccurs="0"/>
+			<xs:element name="respOverview" type="string255" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Seismic component -->
+			<xs:element name="SeismicComponent" type="SeismicComponentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Seismic component -->
+	<xs:complexType name="SeismicComponentType">
+		<xs:sequence>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="type" type="string255" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="respDesc" type="string255" minOccurs="0"/>
+			<xs:element name="sampleRate" type="float" minOccurs="0"/>
+			<xs:element name="seedBandCode" type="string30" minOccurs="0"/>
+			<xs:element name="seedInstCode" type="string30" minOccurs="0"/>
+			<xs:element name="seedOrientCode" type="string30" minOccurs="0"/>
+			<xs:element name="sensitivity" type="string255" minOccurs="0"/>
+			<xs:element name="depth" type="float" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Seismic component alone -->
+	<xs:complexType name="SeismicComponentAloneType">
+		<xs:sequence>
+			<xs:element name="instrumentCode" type="string30" minOccurs="0"/>
+			<xs:element name="name" type="string255" minOccurs="0"/>
+			<xs:element name="type" type="string255" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="respDesc" type="string255" minOccurs="0"/>
+			<xs:element name="sampleRate" type="float" minOccurs="0"/>
+			<xs:element name="seedBandCode" type="string30" minOccurs="0"/>
+			<xs:element name="seedInstCode" type="string30" minOccurs="0"/>
+			<xs:element name="seedOrientCode" type="string30" minOccurs="0"/>
+			<xs:element name="sensitivity" type="string255" minOccurs="0"/>
+			<xs:element name="depth" type="float" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+		<xs:attribute name="revision" type="xs:integer"/>
+	</xs:complexType>
+	
+	<!-- Volcanoes list -->
+	<xs:complexType name="VolcanoesType">
+		<xs:sequence>
+			<xs:element name="volcanoCode" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="string30">
+							<xs:attribute name="number" type="xs:integer"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Volcano code -->
+	<xs:complexType name="VolcanoCodeType">
+		<xs:sequence>
+			<xs:element name="volcanoCode" type="string30" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Data -->
+	<xs:complexType name="DataType">
+		<xs:sequence>
+			<!-- Deformation -->
+			<xs:element name="Deformation" type="DeformationType" minOccurs="0"/>
+			<!-- Gas -->
+			<xs:element name="Gas" type="GasType" minOccurs="0"/>
+			<!-- Hydrologic -->
+			<xs:element name="Hydrologic" type="HydrologicType" minOccurs="0"/>
+			<!-- Fields -->
+			<xs:element name="Fields" type="FieldsType" minOccurs="0"/>
+			<!-- Thermal -->
+			<xs:element name="Thermal" type="ThermalType" minOccurs="0"/>
+			<!-- Seismic -->
+			<xs:element name="Seismic" type="SeismicType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Deformation -->
+	<xs:complexType name="DeformationType">
+		<xs:sequence>
+			<!-- Electronic tilt -->
+			<xs:element name="ElectronicTilt" type="ElectronicTiltType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Tilt vector -->
+			<xs:element name="TiltVector" type="TiltVectorType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Strain -->
+			<xs:element name="Strain" type="StrainType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- EDM -->
+			<xs:element name="EDM" type="EDMType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Angle -->
+			<xs:element name="Angle" type="AngleType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- GPS -->
+			<xs:element name="GPS" type="GPSType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- GPS vector -->
+			<xs:element name="GPSVector" type="GPSVectorType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Leveling -->
+			<xs:element name="Leveling" type="LevelingType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- InSAR image -->
+			<xs:element name="InSARImage" type="InSARImageType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Electronic tilt -->
+	<xs:complexType name="ElectronicTiltType">
+		<xs:sequence>
+			<xs:group ref="instrumentStationGroup"/>
+			<xs:element name="measTime" type="dateTimemsec" minOccurs="0"/>
+			<xs:element name="measTimeUnc" type="dateTimeUncmsec" minOccurs="0"/>
+			<xs:element name="sampleRate" type="double" minOccurs="0"/>
+			<xs:element name="tilt1" type="double" minOccurs="0"/>
+			<xs:element name="tilt1Unc" type="double" minOccurs="0"/>
+			<xs:element name="tilt2" type="double" minOccurs="0"/>
+			<xs:element name="tilt2Unc" type="double" minOccurs="0"/>
+			<xs:element name="processed" type="processedEnum" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Tilt vector -->
+	<xs:complexType name="TiltVectorType">
+		<xs:sequence>
+			<xs:group ref="instrumentStationGroup"/>
+			<xs:element name="startTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="magnitude" type="float" minOccurs="0"/>
+			<xs:element name="magnitudeUnc" type="float" minOccurs="0"/>
+			<xs:element name="azimuth" type="deg0-360" minOccurs="0"/>
+			<xs:element name="azimuthUnc" type="float" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Strain -->
+	<xs:complexType name="StrainType">
+		<xs:sequence>
+			<xs:group ref="instrumentStationGroup"/>
+			<xs:element name="measTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="measTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="component1" type="double" minOccurs="0"/>
+			<xs:element name="component1Unc" type="double" minOccurs="0"/>
+			<xs:element name="component2" type="double" minOccurs="0"/>
+			<xs:element name="component2Unc" type="double" minOccurs="0"/>
+			<xs:element name="component3" type="double" minOccurs="0"/>
+			<xs:element name="component3Unc" type="double" minOccurs="0"/>
+			<xs:element name="component4" type="double" minOccurs="0"/>
+			<xs:element name="component4Unc" type="double" minOccurs="0"/>
+			<xs:element name="volumetricStrain" type="double" minOccurs="0"/>
+			<xs:element name="volumetricStrainUnc" type="double" minOccurs="0"/>
+			<xs:element name="shearStrainAxis1" type="double" minOccurs="0"/>
+			<xs:element name="shearStrainAxis1Unc" type="double" minOccurs="0"/>
+			<xs:element name="azimuthAxis1" type="deg0-360" minOccurs="0"/>
+			<xs:element name="shearStrainAxis2" type="double" minOccurs="0"/>
+			<xs:element name="shearStrainAxis2Unc" type="double" minOccurs="0"/>
+			<xs:element name="azimuthAxis2" type="deg0-360" minOccurs="0"/>
+			<xs:element name="shearStrainAxis3" type="double" minOccurs="0"/>
+			<xs:element name="shearStrainAxis3Unc" type="double" minOccurs="0"/>
+			<xs:element name="azimuthAxis3" type="deg0-360" minOccurs="0"/>
+			<xs:element name="minPrincipalStrain" type="double" minOccurs="0"/>
+			<xs:element name="minPrincipalStrainUnc" type="double" minOccurs="0"/>
+			<xs:element name="maxPrincipalStrain" type="double" minOccurs="0"/>
+			<xs:element name="maxPrincipalStrainUnc" type="double" minOccurs="0"/>
+			<xs:element name="minPrincipalStrainDir" type="deg0-360" minOccurs="0"/>
+			<xs:element name="minPrincipalStrainDirUnc" type="float" minOccurs="0"/>
+			<xs:element name="maxPrincipalStrainDir" type="deg0-360" minOccurs="0"/>
+			<xs:element name="maxPrincipalStrainDirUnc" type="float" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- EDM -->
+	<xs:complexType name="EDMType">
+		<xs:sequence>
+			<xs:group ref="instrumentInstStationGroup"/>
+			<xs:element name="instrumentCode" type="string30" minOccurs="0"/>
+			<xs:element name="instStationCode" type="string30" minOccurs="0"/>
+			<xs:element name="targetStationCode" type="string30" minOccurs="0"/>
+			<xs:element name="measTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="measTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="lineLength" type="double" minOccurs="0"/>
+			<xs:element name="constantErr" type="float" minOccurs="0"/>
+			<xs:element name="scaleErr" type="float" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Angle -->
+	<xs:complexType name="AngleType">
+		<xs:sequence>
+			<xs:group ref="instrumentInstStationGroup"/>
+			<xs:element name="targetStation1Code" type="string30" minOccurs="0"/>
+			<xs:element name="targetStation2Code" type="string30" minOccurs="0"/>
+			<xs:element name="measTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="measTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="hAngle1" type="deg0-360" minOccurs="0"/>
+			<xs:element name="hAngle1Unc" type="float" minOccurs="0"/>
+			<xs:element name="hAngle2" type="deg0-360" minOccurs="0"/>
+			<xs:element name="hAngle2Unc" type="float" minOccurs="0"/>
+			<xs:element name="vAngle1" type="deg-90-90" minOccurs="0"/>
+			<xs:element name="vAngle1Unc" type="float" minOccurs="0"/>
+			<xs:element name="vAngle2" type="deg-90-90" minOccurs="0"/>
+			<xs:element name="vAngle2Unc" type="float" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- GPS -->
+	<xs:complexType name="GPSType">
+		<xs:sequence>
+			<xs:group ref="instrumentInstStationGroup"/>
+			<xs:element name="targetStation1Code" type="string30" minOccurs="0"/>
+			<xs:element name="targetStation2Code" type="string30" minOccurs="0"/>
+			<xs:element name="measTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="measTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:group ref="latLonGroup" minOccurs="0"/>
+			<xs:element name="elev" type="double" minOccurs="0"/>
+			<xs:element name="N-SErr" type="double" minOccurs="0"/>
+			<xs:element name="E-WErr" type="double" minOccurs="0"/>
+			<xs:element name="verticalErr" type="float" minOccurs="0"/>
+			<xs:element name="software" type="string50" minOccurs="0"/>
+			<xs:element name="orbits" type="string255" minOccurs="0"/>
+			<xs:element name="duration" type="string255" minOccurs="0"/>
+			<xs:element name="quality" type="qualityEnum" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- GPS vector -->
+	<xs:complexType name="GPSVectorType">
+		<xs:sequence>
+			<xs:group ref="instrumentStationGroup"/>
+			<xs:element name="startTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="magnitude" type="float" minOccurs="0"/>
+			<xs:element name="azimuth" type="deg0-360" minOccurs="0"/>
+			<xs:element name="inclination" type="deg0-90" minOccurs="0"/>
+			<xs:element name="northDispl" type="float" minOccurs="0"/>
+			<xs:element name="northDisplErr" type="float" minOccurs="0"/>
+			<xs:element name="eastDispl" type="float" minOccurs="0"/>
+			<xs:element name="eastDisplErr" type="float" minOccurs="0"/>
+			<xs:element name="vertDispl" type="float" minOccurs="0"/>
+			<xs:element name="vertDisplErr" type="float" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Leveling -->
+	<xs:complexType name="LevelingType">
+		<xs:sequence>
+			<xs:element name="instrumentCode" type="string30" minOccurs="0"/>
+			<xs:element name="refStationCode" type="string30" minOccurs="0"/>
+			<xs:element name="firstBMStationCode" type="string30" minOccurs="0"/>
+			<xs:element name="secondBMStationCode" type="string30" minOccurs="0"/>
+			<xs:element name="order" type="xs:integer" minOccurs="0"/>
+			<xs:element name="class" type="string30" minOccurs="0"/>
+			<xs:element name="measTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="measTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="elevChange" type="float" minOccurs="0"/>
+			<xs:element name="elevChangeUnc" type="float" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- InSAR image -->
+	<xs:complexType name="InSARImageType">
+		<xs:sequence>
+			<xs:element name="Satellites" type="SatellitesType" minOccurs="0"/>
+			<xs:element name="instrumentCode" type="string30" minOccurs="0"/>
+			<xs:element name="volcanoCode" type="string12" minOccurs="0"/>
+			<xs:group ref="startLatLonGroup" minOccurs="0"/>
+			<xs:element name="startPosition" type="startPositionEnum" minOccurs="0"/>
+			<xs:element name="rowOrder" type="string30" minOccurs="0"/>
+			<xs:element name="numbOfRows" type="xs:integer" minOccurs="0"/>
+			<xs:element name="numbOfCols" type="xs:integer" minOccurs="0"/>
+			<xs:element name="units" type="string30" minOccurs="0"/>
+			<xs:element name="nullValue" type="string30" minOccurs="0"/>
+			<xs:element name="location" type="string255" minOccurs="0"/>
+			<xs:element name="pair" type="pairStackedEnum" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="DEM" type="string50" minOccurs="0"/>
+			<xs:element name="bytesOrder" type="string30" minOccurs="0"/>
+			<xs:element name="img1Time" type="dateTime" minOccurs="0"/>
+			<xs:element name="img1TimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="img2Time" type="dateTime" minOccurs="0"/>
+			<xs:element name="img2TimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="metersPixelSize" type="float" minOccurs="0"/>
+			<xs:element name="degreesPixelSize" type="float" minOccurs="0"/>
+			<xs:element name="lookAngle" type="float" minOccurs="0"/>
+			<xs:element name="limb" type="limbEnum" minOccurs="0"/>
+			<xs:element name="processMethod" type="string255" minOccurs="0"/>
+			<xs:element name="software" type="string255" minOccurs="0"/>
+			<xs:element name="DEMQuality" type="DEMQualityEnum" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- InSAR image pixels -->
+			<xs:element name="InSARPixels" type="InSARPixelsType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Satellite list -->
+	<xs:complexType name="SatellitesType">
+		<xs:sequence>
+			<xs:element name="satelliteCode" type="string30" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- InSAR pixels -->
+	<xs:complexType name="InSARPixelsType">
+		<xs:sequence>
+			<!-- InSAR image pixel -->
+			<xs:element name="InSARPixel" type="InSARPixelType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- InSAR pixel -->
+	<xs:complexType name="InSARPixelType">
+		<xs:sequence>
+			<xs:element name="number" type="xs:integer"/>
+			<xs:element name="rangeOfChange" type="float"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Gas -->
+	<xs:complexType name="GasType">
+		<xs:sequence>
+			<!-- Directly sampled -->
+			<xs:element name="DirectlySampled" type="DirectlySampledType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Soil efflux -->
+			<xs:element name="SoilEfflux" type="SoilEffluxType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Plume -->
+			<xs:element name="Plume" type="PlumeType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Directly sampled -->
+	<xs:complexType name="DirectlySampledType">
+		<xs:sequence>
+			<xs:group ref="instrumentStationGroup"/>
+			<xs:element name="measTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="measTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="temperature" type="float" minOccurs="0"/>
+			<xs:element name="atmosPress" type="float" minOccurs="0"/>
+			<xs:element name="emissionRate" type="float" minOccurs="0"/>
+			<xs:element name="species" type="gasSpeciesEnum" minOccurs="0"/>
+			<xs:element name="waterFree" type="yesNoEnum" minOccurs="0"/>
+			<xs:element name="units" type="string30" minOccurs="0"/>
+			<xs:element name="concentration" type="float" minOccurs="0"/>
+			<xs:element name="concentrationUnc" type="float" minOccurs="0"/>
+			<xs:element name="recalculated" type="oriRecalEnum" minOccurs="0"/>
+			<xs:element name="environFactors" type="string255" minOccurs="0"/>
+			<xs:element name="sublimateMinerals" type="string255" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Soil efflux -->
+	<xs:complexType name="SoilEffluxType">
+		<xs:sequence>
+			<xs:group ref="instrumentStationGroup"/>
+			<xs:element name="measTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="measTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="species" type="string30" minOccurs="0"/>
+			<xs:element name="totalFlux" type="float" minOccurs="0"/>
+			<xs:element name="totalFluxUnc" type="float" minOccurs="0"/>
+			<xs:element name="numberOfPoints" type="xs:integer" minOccurs="0"/>
+			<xs:element name="area" type="float" minOccurs="0"/>
+			<xs:element name="highestFlux" type="float" minOccurs="0"/>
+			<xs:element name="highestTemp" type="float" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Plume -->
+	<xs:complexType name="PlumeType">
+		<xs:sequence>
+			<xs:element name="volcanoCode" type="string12" minOccurs="0"/>
+			<xs:group ref="instrumentStationGroup"/>
+			<xs:group ref="latLonGroup" minOccurs="0"/>
+			<xs:element name="height" type="float" minOccurs="0"/>
+			<xs:element name="heightDetermination" type="string255" minOccurs="0"/>
+			<xs:element name="measTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="measTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="species" type="plumeSpeciesEnum" minOccurs="0"/>
+			<xs:element name="units" type="string30" minOccurs="0"/>
+			<xs:element name="emissionRate" type="float" minOccurs="0"/>
+			<xs:element name="emissionRateUnc" type="float" minOccurs="0"/>
+			<xs:element name="recalculated" type="oriRecalEnum" minOccurs="0"/>
+			<xs:element name="windSpeed" type="float" minOccurs="0"/>
+			<xs:element name="weatherNotes" type="string255" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Hydrologic -->
+	<xs:complexType name="HydrologicType">
+		<xs:sequence>
+			<!-- Sample -->
+			<xs:element name="Sample" type="SampleType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Sample -->
+	<xs:complexType name="SampleType">
+		<xs:sequence>
+			<xs:group ref="instrumentStationGroup"/>
+			<xs:element name="measTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="measTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="temperature" type="float" minOccurs="0"/>
+			<xs:element name="elev" type="double" minOccurs="0"/>
+			<xs:element name="depth" type="double" minOccurs="0"/>
+			<xs:element name="waterLevelChange" type="double" minOccurs="0"/>
+			<xs:element name="atmosPress" type="float" minOccurs="0"/>
+			<xs:element name="springDischRate" type="double" minOccurs="0"/>
+			<xs:element name="precipitation" type="float" minOccurs="0"/>
+			<xs:element name="dailyPrecipitation" type="float" minOccurs="0"/>
+			<xs:element name="precipitationType" type="precipitationTypeEnum" minOccurs="0"/>
+			<xs:element name="pH" type="float" minOccurs="0"/>
+			<xs:element name="pHUnc" type="float" minOccurs="0"/>
+			<xs:element name="conductivity" type="float" minOccurs="0"/>
+			<xs:element name="conductivityUnc" type="float" minOccurs="0"/>
+			<xs:element name="species" type="hydroSpeciesEnum" minOccurs="0"/>
+			<xs:element name="units" type="string30" minOccurs="0"/>
+			<xs:element name="content" type="float" minOccurs="0"/>
+			<xs:element name="contentUnc" type="float" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Fields -->
+	<xs:complexType name="FieldsType">
+		<xs:sequence>
+			<!-- Magnetic -->
+			<xs:element name="Magnetic" type="MagneticType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Magnetic vector -->
+			<xs:element name="MagneticVector" type="MagneticVectorType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Electric -->
+			<xs:element name="Electric" type="ElectricType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Gravity -->
+			<xs:element name="Gravity" type="GravityType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Magnetic -->
+	<xs:complexType name="MagneticType">
+		<xs:sequence>
+			<xs:group ref="instrumentStationGroup"/>
+			<xs:element name="refStationCode" type="string30" minOccurs="0"/>
+			<xs:element name="measTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="measTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="F" type="double" minOccurs="0"/>
+			<xs:element name="FUnc" type="float" minOccurs="0"/>
+			<xs:element name="X" type="double" minOccurs="0"/>
+			<xs:element name="XUnc" type="float" minOccurs="0"/>
+			<xs:element name="Y" type="double" minOccurs="0"/>
+			<xs:element name="YUnc" type="float" minOccurs="0"/>
+			<xs:element name="Z" type="double" minOccurs="0"/>
+			<xs:element name="ZUnc" type="float" minOccurs="0"/>
+			<xs:element name="highPass" type="float" minOccurs="0"/>
+			<xs:element name="lowPass" type="float" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Magnetic vector -->
+	<xs:complexType name="MagneticVectorType">
+		<xs:sequence>
+			<xs:group ref="instrumentStationGroup"/>
+			<xs:element name="measTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="measTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="declination" type="deg0-360" minOccurs="0"/>
+			<xs:element name="inclination" type="deg0-90" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Electric -->
+	<xs:complexType name="ElectricType">
+		<xs:sequence>
+			<xs:element name="instrumentCode" type="string30" minOccurs="0"/>
+			<xs:element name="refStation1Code" type="string30" minOccurs="0"/>
+			<xs:element name="refStation2Code" type="string30" minOccurs="0"/>
+			<xs:element name="measTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="measTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="field" type="float" minOccurs="0"/>
+			<xs:element name="fieldUnc" type="float" minOccurs="0"/>
+			<xs:element name="direction" type="deg0-360" minOccurs="0"/>
+			<xs:element name="highPass" type="float" minOccurs="0"/>
+			<xs:element name="lowPass" type="float" minOccurs="0"/>
+			<xs:element name="selfPotential" type="float" minOccurs="0"/>
+			<xs:element name="selfPotentialUnc" type="float" minOccurs="0"/>
+			<xs:element name="apparentResistivity" type="float" minOccurs="0"/>
+			<xs:element name="apparentResistivityUnc" type="float" minOccurs="0"/>
+			<xs:element name="directResistivity" type="float" minOccurs="0"/>
+			<xs:element name="directResistivityUnc" type="float" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Gravity -->
+	<xs:complexType name="GravityType">
+		<xs:sequence>
+			<xs:group ref="instrumentStationGroup"/>
+			<xs:element name="refStationCode" type="string30" minOccurs="0"/>
+			<xs:element name="measTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="measTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="fieldStrength" type="double" minOccurs="0"/>
+			<xs:element name="fieldStrengthUnc" type="double" minOccurs="0"/>
+			<xs:element name="assocVertDispl" type="string255" minOccurs="0"/>
+			<xs:element name="assocGWaterLevel" type="string255" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Thermal -->
+	<xs:complexType name="ThermalType">
+		<xs:sequence>
+			<!-- Ground-based -->
+			<xs:element name="Ground-based" type="GroundBasedType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Thermal image -->
+			<xs:element name="ThermalImage" type="ThermalImageType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Ground-based -->
+	<xs:complexType name="GroundBasedType">
+		<xs:sequence>
+			<xs:group ref="instrumentStationGroup"/>
+			<xs:element name="measType" type="string255" minOccurs="0"/>
+			<xs:element name="measTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="measTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="measDepth" type="float" minOccurs="0"/>
+			<xs:element name="distance" type="float" minOccurs="0"/>
+			<xs:element name="recalculated" type="oriRecalEnum" minOccurs="0"/>
+			<xs:element name="temperature" type="float" minOccurs="0"/>
+			<xs:element name="temperatureUnc" type="float" minOccurs="0"/>
+			<xs:element name="area" type="float" minOccurs="0"/>
+			<xs:element name="heatFlux" type="float" minOccurs="0"/>
+			<xs:element name="heatFluxUnc" type="float" minOccurs="0"/>
+			<xs:element name="bgGeothermGradient" type="float" minOccurs="0"/>
+			<xs:element name="conductivity" type="float" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Thermal image -->
+	<xs:complexType name="ThermalImageType">
+		<xs:sequence>
+			<xs:element name="volcanoCode" type="string12" minOccurs="0"/>
+			<xs:group ref="instrumentStationSatelliteAirplaneGroup" minOccurs="0"/>
+			<xs:element name="instPlatform" type="string255" minOccurs="0"/>
+			<xs:group ref="instLatLonGroup" minOccurs="0"/>
+			<xs:element name="datum" type="string30" minOccurs="0"/>
+			<xs:element name="instAlt" type="float" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="time" type="dateTime" minOccurs="0"/>
+			<xs:element name="timeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="bandName" type="string255" minOccurs="0"/>
+			<xs:element name="highBandWavelength" type="float" minOccurs="0"/>
+			<xs:element name="lowBandWavelength" type="float" minOccurs="0"/>
+			<xs:element name="pixelSize" type="float" minOccurs="0"/>
+			<xs:element name="maxRadiance" type="float" minOccurs="0"/>
+			<xs:element name="maxRelativeRadiance" type="float" minOccurs="0"/>
+			<xs:element name="hottestPixelTemp" type="float" minOccurs="0"/>
+			<xs:element name="totRadiance" type="float" minOccurs="0"/>
+			<xs:element name="maxHeatFlux" type="float" minOccurs="0"/>
+			<xs:element name="nominalTempRes" type="float" minOccurs="0"/>
+			<xs:element name="atmosCorrection" type="string255" minOccurs="0"/>
+			<xs:element name="thermCorrection" type="string255" minOccurs="0"/>
+			<xs:element name="orthorecProc" type="string255" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Thermal image pixels -->
+			<xs:element name="ThermalPixels" type="ThermalPixelsType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Thermal pixels -->
+	<xs:complexType name="ThermalPixelsType">
+		<xs:sequence>
+			<!-- Thermal image pixel -->
+			<xs:element name="ThermalPixel" type="ThermalPixelType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Thermal pixel -->
+	<xs:complexType name="ThermalPixelType">
+		<xs:sequence>
+			<xs:group ref="latLonGroup"/>
+			<xs:element name="elev" type="float" minOccurs="0"/>
+			<xs:element name="radiance" type="float" minOccurs="0"/>
+			<xs:element name="heatFlux" type="float" minOccurs="0"/>
+			<xs:element name="temperature" type="float" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Seismic -->
+	<xs:complexType name="SeismicType">
+		<xs:sequence>
+			<!-- Network event -->
+			<xs:element name="NetworkEvent" type="NetworkEventType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Single station event -->
+			<xs:element name="SingleStationEvent" type="SingleStationEventType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Intensity -->
+			<xs:element name="Intensity" type="IntensityType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Tremor -->
+			<xs:element name="Tremor" type="TremorType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Waveform alone -->
+			<xs:element name="Waveform" type="WaveformAloneType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Interval -->
+			<xs:element name="Interval" type="IntervalType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- RSAM-SSAM -->
+			<xs:element name="RSAM-SSAM" type="RSAM-SSAMType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Network event -->
+	<xs:complexType name="NetworkEventType">
+		<xs:sequence>
+			<xs:element name="networkCode" type="string30NE"/>
+			<xs:element name="seismoArchive" type="string255" minOccurs="0"/>
+			<xs:element name="originTime" type="dateTimemsec" minOccurs="0"/>
+			<xs:element name="originTimeUnc" type="dateTimeUncmsec" minOccurs="0"/>
+			<xs:element name="duration" type="float" minOccurs="0"/>
+			<xs:element name="durationUnc" type="float" minOccurs="0"/>
+			<xs:element name="locaTechnique" type="string255NE"/>
+			<xs:element name="picksDetermination" type="picksDeterminationEnum" minOccurs="0"/>
+			<xs:group ref="latLonGroup" minOccurs="0"/>
+			<xs:element name="depth" type="float" minOccurs="0"/>
+			<xs:element name="fixedDepth" type="yesNoUnkEnum" minOccurs="0"/>
+			<xs:element name="numberOfStations" type="xs:integer" minOccurs="0"/>
+			<xs:element name="numberOfPhases" type="xs:integer" minOccurs="0"/>
+			<xs:element name="largestAzimuthGap" type="deg0-360" minOccurs="0"/>
+			<xs:element name="distClosestStation" type="float" minOccurs="0"/>
+			<xs:element name="travelTimeRMS" type="float" minOccurs="0"/>
+			<xs:element name="horizLocaErr" type="float" minOccurs="0"/>
+			<xs:element name="maxLonErr" type="xs:float" minOccurs="0"/>
+			<xs:element name="maxLatErr" type="xs:float" minOccurs="0"/>
+			<xs:element name="depthErr" type="float" minOccurs="0"/>
+			<xs:element name="locaQuality" type="string255" minOccurs="0"/>
+			<xs:element name="primMagnitude" type="float" minOccurs="0"/>
+			<xs:element name="primMagnitudeType" type="string30" minOccurs="0"/>
+			<xs:element name="secMagnitude" type="float" minOccurs="0"/>
+			<xs:element name="secMagnitudeType" type="string30" minOccurs="0"/>
+			<xs:element name="earthquakeType" type="eqTypeEnum" minOccurs="0"/>
+			<xs:group ref="momentTensorGroup" minOccurs="0"/>
+			<xs:element name="strike1" type="deg0-360" minOccurs="0"/>
+			<xs:element name="strike1Unc" type="float" minOccurs="0"/>
+			<xs:element name="dip1" type="deg0-90" minOccurs="0"/>
+			<xs:element name="dip1Unc" type="float" minOccurs="0"/>
+			<xs:element name="rake1" type="deg-180-180" minOccurs="0"/>
+			<xs:element name="rake1Unc" type="float" minOccurs="0"/>
+			<xs:element name="strike2" type="deg0-360" minOccurs="0"/>
+			<xs:element name="strike2Unc" type="float" minOccurs="0"/>
+			<xs:element name="dip2" type="deg0-90" minOccurs="0"/>
+			<xs:element name="dip2Unc" type="float" minOccurs="0"/>
+			<xs:element name="rake2" type="deg-180-180" minOccurs="0"/>
+			<xs:element name="rake2Unc" type="float" minOccurs="0"/>
+			<xs:element name="sampleRate" type="float" minOccurs="0"/>
+			<xs:element name="comments" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Waveform -->
+			<xs:element name="Waveform" type="WaveformType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Single station event -->
+	<xs:complexType name="SingleStationEventType">
+		<xs:sequence>
+			<xs:element name="stationCode" type="string30" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTimemsec" minOccurs="0"/>
+			<xs:element name="startTimeUnc" type="dateTimeUncmsec" minOccurs="0"/>
+			<xs:element name="duration" type="float" minOccurs="0"/>
+			<xs:element name="durationUnc" type="float" minOccurs="0"/>
+			<xs:element name="picksDetermination" type="picksDeterminationEnum" minOccurs="0"/>
+			<xs:element name="SPInterval" type="float" minOccurs="0"/>
+			<xs:element name="distActiveVent" type="float" minOccurs="0"/>
+			<xs:element name="maxAmplitude" type="float" minOccurs="0"/>
+			<xs:element name="sampleRate" type="float" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Waveform -->
+			<xs:element name="Waveform" type="WaveformType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Intensity -->
+	<xs:complexType name="IntensityType">
+		<xs:sequence>
+			<xs:element name="volcanoCode" type="string12" minOccurs="0"/>
+			<xs:group ref="networkSingleStationEventGroup" minOccurs="0"/>
+			<xs:element name="time" type="dateTime" minOccurs="0"/>
+			<xs:element name="timeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="city" type="string30" minOccurs="0"/>
+			<xs:element name="maxDistance" type="float" minOccurs="0"/>
+			<xs:element name="maxReported" type="float" minOccurs="0"/>
+			<xs:element name="distMaxReported" type="float" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Tremor -->
+	<xs:complexType name="TremorType">
+		<xs:sequence>
+			<xs:group ref="networkStationGroup" minOccurs="0"/>
+			<xs:element name="type" type="trmTypeEnum" minOccurs="0"/>
+			<xs:element name="qualitativeDepth" type="qualitativeDepthEnum" minOccurs="0"/>
+			<xs:element name="dominantFreq" type="float" minOccurs="0"/>
+			<xs:element name="secondDominantFreq" type="float" minOccurs="0"/>
+			<xs:element name="maxAmplitude" type="float" minOccurs="0"/>
+			<xs:element name="backgroundNoise" type="float" minOccurs="0"/>
+			<xs:element name="reducedDisp" type="float" minOccurs="0"/>
+			<xs:element name="reducedDispUnc" type="float" minOccurs="0"/>
+			<xs:element name="visibleActivity" type="string255" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="durationPerDay" type="float" minOccurs="0"/>
+			<xs:element name="durationPerDayUnc" type="float" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<!-- Waveform -->
+			<xs:element name="Waveform" type="WaveformType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Waveform -->
+	<xs:complexType name="WaveformType">
+		<xs:sequence>
+			<xs:element name="stationCode" type="string30" minOccurs="0"/>
+			<xs:element name="archive" type="string255" minOccurs="0"/>
+			<xs:element name="distSummit" type="distEnum" minOccurs="0"/>
+			<xs:element name="information" type="string255" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Waveform alone -->
+	<xs:complexType name="WaveformAloneType">
+		<xs:sequence>
+			<xs:group ref="networkStationTremorGroup"/>
+			<xs:element name="stationCode" type="string30" minOccurs="0"/>
+			<xs:element name="archive" type="string255" minOccurs="0"/>
+			<xs:element name="distSummit" type="distEnum" minOccurs="0"/>
+			<xs:element name="information" type="string255" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- Interval -->
+	<xs:complexType name="IntervalType">
+		<xs:sequence>
+			<xs:group ref="networkStationGroup" minOccurs="0"/>
+			<xs:element name="earthquakeType" type="eqTypeEnum" minOccurs="0"/>
+			<xs:element name="hDistSummit" type="float" minOccurs="0"/>
+			<xs:element name="meanDepth" type="float" minOccurs="0"/>
+			<xs:element name="verticalDisp" type="float" minOccurs="0"/>
+			<xs:element name="hypocenterHMigr" type="float" minOccurs="0"/>
+			<xs:element name="hypocenterVMigr" type="float" minOccurs="0"/>
+			<xs:element name="temporalPattern" type="string30" minOccurs="0"/>
+			<xs:element name="dataType" type="dataTypeEnum" minOccurs="0"/>
+			<xs:element name="picksDetermination" type="picksDeterminationEnum" minOccurs="0"/>
+			<xs:element name="numbOfRecEq" type="xs:integer" minOccurs="0"/>
+			<xs:element name="numbOfFeltEq" type="xs:integer" minOccurs="0"/>
+			<xs:element name="feltEqCntStartTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="feltEqCntStartTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="feltEqCntEndTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="feltEqCntEndTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="energyRelease" type="float" minOccurs="0"/>
+			<xs:element name="energyMeasStartTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="energyMeasStartTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="energyMeasEndTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="energyMeasEndTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime" minOccurs="0"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="description" type="string255" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- RSAM-SSAM -->
+	<xs:complexType name="RSAM-SSAMType">
+		<xs:sequence>
+			<xs:element name="stationCode" type="string30" minOccurs="0"/>
+			<xs:element name="cntInterval" type="float"/>
+			<xs:element name="cntIntervalUnc" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="endTime" type="dateTime"/>
+			<xs:element name="endTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+			<xs:element name="ownerCode" type="string10" minOccurs="0"/>
+			<xs:element name="pubDate" type="dateTimeEmpty" minOccurs="0"/>
+			<xs:element name="RSAM" type="RSAMType" minOccurs="0"/>
+			<xs:element name="SSAM" type="SSAMType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="string30" use="required"/>
+	</xs:complexType>
+	
+	<!-- RSAM -->
+	<xs:complexType name="RSAMType">
+		<xs:sequence>
+			<!-- RSAM data -->
+			<xs:element name="RSAMData" type="RSAMDataType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- RSAM data -->
+	<xs:complexType name="RSAMDataType">
+		<xs:sequence>
+			<xs:element name="cnt" type="float"/>
+			<xs:element name="calibration" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- SSAM -->
+	<xs:complexType name="SSAMType">
+		<xs:sequence>
+			<!-- SSAM data -->
+			<xs:element name="SSAMData" type="SSAMDataType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- SSAM data -->
+	<xs:complexType name="SSAMDataType">
+		<xs:sequence>
+			<xs:element name="lowFreq" type="float"/>
+			<xs:element name="highFreq" type="float"/>
+			<xs:element name="cnt" type="float"/>
+			<xs:element name="calibration" type="float" minOccurs="0"/>
+			<xs:element name="startTime" type="dateTime"/>
+			<xs:element name="startTimeUnc" type="dateTimeUnc" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<!-- ================================================================= -->
+	<!-- Root element -->
+	<!-- ================================================================= -->
+	<xs:element name="wovoml" type="wovomlType"/>
+	
+</xs:schema>

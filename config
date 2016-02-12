@@ -1,0 +1,7 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+[remote "origin"]
+	url = https://pvtuan10@bitbucket.org/pvtuan10/earth-observatory-singapore
+	fetch = +refs/heads/*:refs/remotes/origin/*
