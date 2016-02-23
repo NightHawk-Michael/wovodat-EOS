@@ -4,11 +4,10 @@ function showUpdateTableList($vol,$obs,$cbs){
 $i="";
 
 echo <<<HTMLBLOCK
-<!-- Page content -->
- 
-<div class="container" id="content">
-		
-	<div class="content" style="overflow:auto;">
+		<!-- Content -->
+
+		<div id="content" style="overflow:visible;">
+		<!-- Page content -->
 		
 		<h2 style="text-align:center;">Upload form for Magma Movement Information.  Table : ip_mag </h2>
 		
@@ -232,9 +231,8 @@ echo <<<HTMLBLOCK
 			<input type="submit" name="confirm" value="Confirm" />
 			</div>
 		</form>
-
-	</div>  <!-- end page content div -->
-</div>  <!-- end page container div -->
+		 
+		</div>  <!-- end page content div -->
 HTMLBLOCK;
 }
 

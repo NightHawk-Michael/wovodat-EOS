@@ -11,7 +11,6 @@ showCommonHeader();   			        //Show html header
 
 $result=$_GET['result'];
 
-
 if($result != 'false'){
 	showSuccessfulMessage();		   //Show sucessful message
 }else{

@@ -15,53 +15,47 @@
 ?>
 
 <html>
-
-<style type="text/css">
-label.error {font-size:12px; display:block; float: none; color: red;}
-</style>
-
-	<script src="/js/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="/js/jquery.validate.js"></script>
-	<script language='javascript' type='text/javascript'>
-	
-	$(document).ready(function(){
-
-		$("#observs").change(function(){
-			update_volcanos();
-		});	
-		
-		function update_volcanos(){  
-			
-			var institute=$('#observs').attr('value');
-			$.get('./convertie/selectVolOfInstitute2_ng.php?orgObsFormat=orgObsFormat&kode='+institute, show_gunung);
+	<script>
+		function select_observos_change(){
+			$('#observs').change(update_volcanos);
 		}
-		
+		function update_volcanos(){
+			var institute=$('#observs').attr('value');
+			$.get('./convertie/selectVolOfInstitute2.php?kode='+institute, show_gunung);
+			
+		}
 		function show_gunung(res){
 			$('#volanos').html(res);
 		}
-		
-	});
-</script>
+		$(document).ready(select_observos_change);
+	</script>
 
-	<div style="padding:5px 0px 0px 5px;">
-	<h2>Sending File</h2>
-	<p>This page is for sending a file to the WOVOdat team.</p><br/>
+	<div style="padding: 0px 0px 0px 5px;">
+	<br><br>
+	<h1>Sending File</h1>
+	<p>This page is for sending a file to the WOVOdat team.</p>
 
+<?php
+		echo "User: ".$uname."<br><br>";
+?>
 	<!-- Form -->
 	<form method="post" action="submit_file_check.php" name="upload_form" enctype="multipart/form-data">
 		<table>
 			<tr>
-				<th>Observatory (data owner) : </th>
 				<td>
+				<p1>Observatory (data owner) : </p1><br>
 					<div id='observos' style="float:left">
-						<select name='observs' id='observs' style="width:160px">
+						<select name='observs' id='observs' style="width:190px">
 						<option value="observatory">...</option>
 <?php
 							include 'php/include/db_connect_view.php';
-							
-							$result = mysql_query("select cc_code, cc_country, cc_obs, cc_id from cc order by cc_country");
-
-
+//							if ($ccd==200 || $ccd=199 || $ccd=3 ||$ccd=216) {
+							if ($uname=='ratdomopurbo' || $uname='cwidiwijayanti' ||$uname='chris') {
+								$result = mysql_query("select cc_code, cc_country, cc_obs, cc_id		from cc		order by cc_country");
+							}else{
+								$result = mysql_query("select cc_code, cc_country, cc_obs, cc_id 	from cc 	where cc_id='$ccd'  order by cc_country");
+							}
+//-- "is_numeric" to check if the user is wovodat-team; 
 							while ($v_arr = mysql_fetch_array($result)) {
 								if(!is_numeric($v_arr[0])){
 									$titles=htmlentities($v_arr[2], ENT_COMPAT, "cp1252");
@@ -84,10 +78,8 @@ label.error {font-size:12px; display:block; float: none; color: red;}
 						</select>
 					</div>
 				</td>
-			<tr/>
-			<tr>	
-				<th>Volcano: </th>
 				<td>
+				<p1>Volcano: </p1><br>
 					<div id="volanos">
 						<select name="vol" id="vol"  style="width:160px"><option value="volcano">.....</option></select>
 					</div>
@@ -101,7 +93,6 @@ label.error {font-size:12px; display:block; float: none; color: red;}
 					<input type="file" name="submit_file_inputfile" size="25" />
 				</td>
 			</tr>
-			<tr></tr>
 			<tr>
 				<th>Description/ comments:</th>
 				<td>

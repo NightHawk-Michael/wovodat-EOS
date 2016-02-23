@@ -43,8 +43,8 @@ if ($_FILES['submit_file_inputfile']['error']!=UPLOAD_ERR_OK) {
 // Get loader's cc_id
 $cc_id_load=$_SESSION['login']['cc_id'];
 
-// Directory
-$file_dir="/home/wovodat/incoming/others";
+// Directory C:/xampp/htdocs/home/wovodat/incoming
+$file_dir="C:/xampp/htdocs/home/wovodat/incoming/others";
 
 // Create destination file name: (cc_id)_(YYYYMMDDhhmmiss)_(original_file_name)
 
@@ -88,7 +88,7 @@ if (!file_record($ori_file_name, "O", $comments, $current_time, $cc_id_load, $re
 }
 
 // Report file upload to WOVOdat team
-
+/*
 // Include PEAR Mail package
 require_once "Mail-1.2.0/Mail.php";
 
@@ -97,7 +97,7 @@ $mail=Mail::factory("mail");
 
 // Headers and body
 $from="system@wovodat.org";
-$to ="wovodat@wovodat.org";
+$to="Purbo<rdpurbo@ntu.edu.sg>";
 $subject="File submission";
 $headers=array("From"=>$from, "Subject"=>$subject);
 $body="Hello WOVOdat administrator,\n\n".
@@ -113,7 +113,7 @@ $body="Hello WOVOdat administrator,\n\n".
 
 // Send email
 $mail->send($to, $headers, $body);
-
+*/
 // Inform user
 $_SESSION['upload']['message']="File ".$ori_file_name." will be studied later. We will contact you by email once it is done. Thank you for your contribution to WOVOdat.";
 header('Location: '.$url_root.'upload_success.php');

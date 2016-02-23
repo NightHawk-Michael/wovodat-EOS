@@ -1,4 +1,5 @@
 <?php
+//require_once "php/include/login_check.php";  // Nang commented on 25-Feb-2013
 require_once "php/include/get_root.php";      // Get root url
 include "php/include/db_connect.php";        // Changed on 29-feb-2012
 	
@@ -133,7 +134,7 @@ else if($stationdisplay == "MeteorologicalData"){
 		echo "</select>";
 	
 	}else{
-		echo "<h1 class='noinstrumenterror' style='text-align: left;color: #777777;font-size:12px;font-weight: bold;'>No Instrument for this station! Please upload instrument first to upload data!</h1>";	
+		echo "<h1 class='noinstrumenterror' style='width:300px;color: #777777;font-size:12px;font-weight: bold;'>No Instrument for this station you have chosen! Please upload instrument first to upload data!</h1>";	
 	}
 
 ?>

@@ -1,4 +1,5 @@
 <?php
+//require_once "php/include/login_check.php";  // Check login    Commented on 25-Feb-2013
 require_once "php/include/get_root.php";    // Get root url
 include "php/include/db_connect.php";  // Changed on 29-feb-2012
 
@@ -118,7 +119,8 @@ else if($stationdisplay == "DirectlySampledGas" || $stationdisplay == "SoilEfflu
 	
 	if($kilometer != "all"){   // link to jj_volnet and cn
 				
-		$sql= "select distinct gs.gs_name from gs, cn, vd where gs.cn_id = cn.cn_id and vd.vd_id = cn.vd_id and vd.vd_name = '$volca' and cn.cn_type='Gas' union select distinct s.gs_name FROM jj_volnet as j, gs as s,cc, vd_inf as vf, vd WHERE j.vd_id =vf.vd_id and j.jj_net_id = s.cn_id and cc.cc_id= s.cc_id and vd.vd_id=vf.vd_id and vd.vd_name='$volca' and j.jj_net_flag = 'C' and (sqrt(power(vf.vd_inf_slat - s.gs_lat, 2) + power(vf.vd_inf_slon - s.gs_lon, 2))*100)< '$kilometer'";           //changed ds_nlat/ds_nlon to correct one on 17-May-2012
+		$sql= "select distinct gs.gs_name from gs, cn, vd where gs.cn_id = cn.cn_id and vd.vd_id = cn.vd_id and vd.vd_name = '$volca' and cn.cn_type='Gas' union select distinct s.gs_name FROM jj_volnet as j, gs as s,cc, vd_inf as vf, vd WHERE j.vd_id =vf.vd_id and j.jj_net_id = s.cn_id and cc.cc_id= s.cc_id and vd.vd_id=vf.vd_id and vd.vd_name='$volca' and j.jj_net_flag = 'C' and (sqrt(power(vf.vd_inf_slat - s.gs_lat, 2) + power(vf.vd_inf_slon - s.gs_lon, 2))*100)< '$kilometer'";          
+		//changed ds_nlat/ds_nlon to correct one on 17-May-2012
 			$result = mysql_query($sql);
 	}
 	else{
@@ -131,6 +133,7 @@ else if($stationdisplay == "Plume_thermal_insar_Satellite"){ // This var is crea
 
 	if($stationdisplay_backup == "PlumeData"){
 		$sql="select distinct cs.cs_name from gi,cs where gi.cs_id = cs.cs_id and cs.cs_type='$plume_satellite_type'";
+	
 	}
 	else if($stationdisplay_backup == "InSARImage and InSARData"){
 		$sql="select distinct cs.cs_name from cs where cs.cs_type='$plume_satellite_type'";
@@ -244,7 +247,7 @@ if(isset($plume_satellite_type)){
 	}
 	else{
 		
-		echo "<h1 class='nosatelliteerror' style='text-align: left;color: #777777;font-size:12px;font-weight: bold;'>No Airborne for this volcano you have chosen!<br/> Please create an airborne first!</h1>";	
+		echo "<h1 class='nosatelliteerror' style='width:300px;color: #777777;font-size:12px;font-weight: bold;font-family: lucida, sans-serif;'>No Airborne for this volcano you have chosen!<br/> Please create an airborne first!</h1>";	
 	}	
 
 }
@@ -318,7 +321,7 @@ else{
 
 	}
 	else{
-		echo "<h1 id='nostation' class='nostationerror' style='text-align: left;color: #777777;font-size:12px;font-weight: bold;'>No station for this volcano!<br/> Please create a station first!</h1>";	
+		echo "<h1 id='nostation' class='nostationerror' style='width:300px;color: #777777;font-size:12px;font-weight: bold;font-family: lucida, sans-serif;'>No station for this volcano you have chosen!<br/> Please create a station first!</h1>";	
 	}
 	
 }		

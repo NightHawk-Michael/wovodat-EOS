@@ -11,7 +11,7 @@ if(!isset($_SESSION['login'])){       // can't proceed without log in
 
 if(!isset($_FILES['fname'])) {  // can't proceed when html form can't post anything if exceed 2MB (OR) directly come 
 	$fileerrors = "File submission fails. Please take note the maxmium file upload size is 2MB.<br/> Please try again!";		
-	include "../showxmlresult_ng.php";
+	include "/../showxmlresult_ng.php";
 	exit();
 }
 
@@ -63,10 +63,9 @@ if(isset($_POST['dd_tlt_processtype']))
 $filename=$_FILES['fname']['name'];
 $filesize=$_FILES['fname']['size'];
 
-$infile="../../../../../incoming/to_be_translated/"."$filename";//prepare the name of inputfile
+$infile="C:/xampp/htdocs/home/wovodat/incoming/to_be_translated/".$filename;//prepare the name of inputfile
 
-$outputfilepath="../../../../incoming/translated/";     //prepare the directory of output file
-
+$outputfilepath="C:/xampp/htdocs/home/wovodat/incoming/translated/";     //prepare the directory of output file
 $outputfilename=substr($filename,0,-4).".xml"; 
 $outfile=$outputfilepath.$outputfilename;
 
@@ -74,21 +73,21 @@ $fileextension=substr($filename,-3);
 		
 if($_FILES['fname']['type'] == "" && $filesize == "0") {  
 	$fileerrors = " File submission fails. The Maxmium file upload size is 2MB.<br/>File size you tried to upload is too  big/empty. Please try again!";
-	include "../showxmlresult_ng.php";
+	include "/../showxmlresult_ng.php";
 	exit();
 }else if($fileextension != 'csv'){  //Check csv file
 	$fileerrors = "File submission fails.<br/> The extension of file you tried to upload is not csv format. Please try again!";
-	include "../showxmlresult_ng.php";
+	include "/../showxmlresult_ng.php";
 	exit();
   
 }else if($filesize == 0){
 	$fileerrors = "File submission fails. <br/> File you tried to upload is empty. Please try again!";
-	include "../showxmlresult_ng.php";
+	include "/../showxmlresult_ng.php";
 	exit();
 }else if($filesize<= 2000000){    //Move "temp" to inputfile name	
 	if (!move_uploaded_file($_FILES['fname']['tmp_name'],$infile)){
 		$fileerrors = "File submission fails.  Please try again!";
-		include "../showxmlresult_ng.php";
+		include "/../showxmlresult_ng.php";
 		exit();
 	}    		  
 }
@@ -146,6 +145,7 @@ while(!feof($handle)){
 		
 			$numbOfRecEq=$seismic_interval[$i][1];
 		
+		//	if(($orgline[$numbOfRecEq] != 0) && ($orgline[$numbOfRecEq] != " ")){
 			if($orgline[$numbOfRecEq] != ""){		
 				$r = "\n\t<Interval code=\"$code\" station=\"$stationcode\" owner1=\"$observ\"$owner2$owner3>";
 				
@@ -254,6 +254,6 @@ while(!feof($handle)){
 	fwrite($outhandle, $fullxml);
 	fclose($outhandle);
 
-	include "../showxmlresult_ng.php";      //Show every results here...        
+	include "/../showxmlresult_ng.php";      //Show every results here...        
 
 ?>

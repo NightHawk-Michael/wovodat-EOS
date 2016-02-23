@@ -71,7 +71,7 @@ class SpecificConversionController {
             $converter->setOwner1($this->owner);
             $converter->setOwner2($_POST['owner2']);
             $converter->setOwner3($_POST['owner3']);
-			if(isset($_POST['instrument']))
+			if(isset($_POST['instrument']))                 //  Nang added 
 				$converter->setInstrument($_POST['instrument']);
 			$converter->setStation(substr($_POST['station'],0,strpos($_POST['station'],"_sflag_")));//stationcode            
 			$converter->setSampleRate($_POST['SamplingRate']);

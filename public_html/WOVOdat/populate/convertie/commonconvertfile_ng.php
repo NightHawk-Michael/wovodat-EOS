@@ -20,9 +20,11 @@ if(!isset($_FILES['fname'])) {  // can't proceed when html form can't post anyth
 if(isset($_POST['observ']))
 	$observ=$_POST['observ'];
 
+//Changed line 21-40 coz of vol list on 18-Mar-2013 
 if(isset($_POST['conv']))
 	$conv=$_POST['conv'];
 
+	
 if(isset($_POST['vol2'])){
 
 	$volLength=sizeof($_POST['vol2']);
@@ -38,10 +40,11 @@ if(isset($_POST['vol2'])){
 		$volcode=getvolcode($vol);        // Get cavw from DB 
 	}
 }	
+//Changed line 21-40 coz of vol list on 18-Mar-2013 	
 
-	
 if(isset($_POST['network']))
 	$network =$_POST['network'];
+
 
 if(isset($_POST['station']))
 	$station = $_POST['station'];
@@ -49,14 +52,7 @@ if(isset($_POST['station']))
 
 if(isset($_POST['instrument']))
 	$instrument = $_POST['instrument'];
-/*	
-if(isset($_POST['airplane']))  // Added on 1-june-2012  for gi and ti  
-	$airplane = $_POST['airplane'];
-
-if(isset($_POST['satellite']))    // Added on 1-june-2012  for gi and ti 
-	$satellite = $_POST['satellite'];
-*/
-
+	
 if(isset($_POST['airplane'])) { // Added on 1-june-2012  for gi and ti  
 
 	if($_POST['airplane'] != '' || $_POST['airplane'] != 'NULL'){
@@ -72,10 +68,11 @@ if(isset($_POST['satellite'])) {   // Added on 1-june-2012  for gi and ti
 		$satellite = $_POST['satellite'];
 	}else{
 		$satellite = "";
-
 	}	
-}		
+}	
 	
+//$volcode=getvolcode($vol);        // Get cavw from DB 
+
 if($conv == 'SeismicStation' || $conv == 'DeformationStation' || $conv == 'GasStation' ||   
 $conv == 'HydrologicStation' ||$conv == 'ThermalStation' || $conv == 'FieldsStation' || $conv == 'MeteoStation'){
 	
@@ -108,10 +105,9 @@ else if($conv == 'SeismicComponent'){
 $filename=$_FILES['fname']['name'];
 $filesize=$_FILES['fname']['size'];
 
-$infile="../../../../incoming/to_be_translated/".$filename;       //prepare the name of inputfile
+$infile="C:/xampp/htdocs/home/wovodat/incoming/to_be_translated/".$filename;//prepare the name of inputfile
 
-$outputfilepath="../../../../incoming/translated/";              //prepare the directory of output file
-
+$outputfilepath="C:/xampp/htdocs/home/wovodat/incoming/translated/";     //prepare the directory of output file
 $outputfilename=substr($filename,0,-4).".xml"; 
 $outfile=$outputfilepath.$outputfilename;
 
@@ -136,7 +132,7 @@ if($_FILES['fname']['type'] == "" && $filesize == "0") {
 		include "showxmlresult_ng.php";
 		exit();
 	}    		  
-}
+} 
 
 
 $findtable = array("SeismicNetwork" => "sn", "SeismicStation" => "ss", "SeismicInstrument" => "si", "SeismicComponent" => "si_cmp", "DeformationNetwork" => "cn", "GasNetwork" => "cn", "HydrologicNetwork" => "cn", "ThermalNetwork" => "cn", "FieldsNetwork" => "cn", "DeformationStation" => "ds", "DeformationInstrument_General" => "di_gen", "DeformationInstrument_Tilt/Strain" => "di_tlt", "HydrologicStation" => "hs", "HydrologicInstrument" => "hi", "GasStation" => "gs", "GasInstrument" => "gi", "ThermalStation" => "ts", "ThermalInstrument" => "ti", "FieldsStation" => "fs","FieldsInstrument" => "fi", "MeteoNetwork" => "cn", "MeteoStation" => "ms", "MeteoInstrument" => "mi", "Airplane" => "cs", "Satellite" => "cs");	
@@ -207,10 +203,9 @@ while(!feof($handle)){
 	
 	
 	if($conv == 'DeformationInstrument_General'){
-		//if($_POST['digen_select'] == "OtherTypes"){ // To put di_gen type from post value 
+	//	if($_POST['digen_select'] != "OtherTypes"){ // To put di_gen type from post value 
 			$sortedline[$di_gen_index]=$_POST['digen_select'];
-
-		//}
+	//	}
 	}  
 	
 	
@@ -262,7 +257,24 @@ while(!feof($handle)){
 		$owner3="";
 	}	
 	
-
+	/*
+	//Get cs_code for GasInstrument or ThermalInstrument
+	if($conv =='GasInstrument' || $conv =='ThermalInstrument') {
+		
+		if($cscodeindex){
+			$cscode = $orgline[$cscodeindex];	
+			
+			if($cscode != '' && $cscode != 'NULL'){
+				$cs_code=$cscode;
+			}else{
+				$cs_code="";
+			}
+		}else{
+			$cs_code="";
+		}
+		
+	}  */
+	
 	getxml_head_foot($conv,$outputxmlhead,$outputxmlfooter);
 
 	
@@ -337,7 +349,7 @@ while(!feof($handle)){
 		
 		$r	=convert_xml($r,$newfileheader,$sortedline,$xmlheader);  // convert to xml
 
-		$r  .="\t\t<startTime>$stime</startTime>";
+		$r .="\t\t<startTime>$stime</startTime>";
 		$r .="\n\t\t<endTime>$etime</endTime>";
 		$r .= "\n\t</SeismicComponent>";
 				

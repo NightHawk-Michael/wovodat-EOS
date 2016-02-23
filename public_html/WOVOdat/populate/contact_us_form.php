@@ -44,29 +44,27 @@ else {
         <meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
         <meta name="keywords" content="Volcano, Vulcano, Volcanoes">
         <link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-        <link href="/css/index.css" rel="stylesheet" />
-        <link href="/css/normalize.css" rel="stylesheet" />
+        <link href="/css/styles_beta.css" rel="stylesheet">
 		<script type="text/javascript" src="/js/scripts.js"></script>
-		<script src="/js/jquery-1.4.2.min.js"></script>                            
-		<script type="text/javascript" src="/js/jquery.validate.js"></script>        
-		<script type="text/javascript" src="/js/formValidation.js"></script>       
+		<script src="/js/jquery-1.4.2.min.js"></script>                          <!-- Nang added -->     
+		<script type="text/javascript" src="/js/jquery.validate.js"></script>    <!-- Nang added -->    
+	    <script type="text/javascript" src="/js/formValidation.js"></script>     <!-- Nang added -->      
 
-	<style type="text/css">
-		label.error {font-size:12px; display:block; float: none; color: red;}
-	</style>	
+		<style type="text/css">
+			label.error {font-size:12px; display:block; float: none; color: red;}
+		</style>	
 	</head>
 
     <body>
-	<!-- Nhat changed 1 June 2015 -->
-        <div class="body">
+        <div id="wrapborder_x">
             <!-- Header -->
-            <?php include 'php/include/header.php'; ?>  
- 		
-		<!-- Content -->
-		<div class = "container" >
+            <div id="wrap_x">
+                <?php include 'php/include/header_beta.php'; ?>  
+			<!-- Content -->
+			<div id="content" >
 
 				<!-- Left -->
-				<div class="content"><br><br>
+				<div id="contentlview"><br><br>
 					<table width="400" border="0" cellpadding="3" cellspacing="1">
 						<tr>
 							<td><strong><span style="font-size:16px;">Contact Form </span></strong></td>
@@ -128,10 +126,18 @@ else {
 							</td>
 						</tr>
 					</table>
-				</div>  <!-- end of content-->
-            </div> <!-- end of container -->  
-        </div> <!-- end of body -->  
-    <!-- Footer -->
-    <?php include 'php/include/footer.php'; ?>  
+				</div>  <!-- end of contentlview-->
+
+
+               </div> <!-- end of content -->
+            </div>  <!-- end wrap_x -->     
+            <div style="height: 20px"></div>
+            <div class="reservedSpace">
+            </div>
+        </div>   <!-- end of wrapborder_x -->
+		
+        <div class="wrapborder_x">
+            <?php include 'php/include/footer_main_beta.php'; ?>
+        </div>
     </body>
 </html>

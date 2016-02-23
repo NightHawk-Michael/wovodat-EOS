@@ -1,13 +1,20 @@
 <?php
-if (!isset($_SESSION))     
+if (!isset($_SESSION))      // Nang added 21-Mar-2013
     session_start();
 	
 include "php/include/db_connect.php";       
 
-function getobslist(){     
+function getobslist(){     // To use obs drop down box for monitoring system/data/specific (Nang added 21-Mar-2013)
 	global $link;
 
 	$data=array();
+/*
+	if ($_SESSION['permissions']['access']==0){
+		$sql = "select cc_code, cc_country, cc_obs, cc_id from cc order by cc_country";
+	}else{
+		$sql ="select cc_code, cc_country, cc_obs, cc_id from cc where cc_id='{$_SESSION['login']['cc_id']}' order by cc_country";
+	} 	
+*/
 	$sql = "select cc_code, cc_country, cc_obs, cc_id from cc order by cc_country";
 	$result = mysql_query($sql, $link);
 
@@ -47,6 +54,8 @@ function getvollist($obs){
 	$sql="select vd_name from vd where (vd.cc_id = (select cc_id from cc where cc.cc_code = '$obs') || 
 	vd.cc_id2 = (select cc_id from cc where cc.cc_code = '$obs') || vd.cc_id3 = (select cc_id from cc where cc.cc_code = '$obs') || vd.cc_id4 = (select cc_id from cc where cc.cc_code = '$obs')	
 	|| vd.cc_id5 = (select cc_id from cc where cc.cc_code = '$obs')) order by vd_name ASC";
+	
+	//echo $sql;
 
 	$result = mysql_query($sql, $link);
 
@@ -62,6 +71,7 @@ function getvollist($obs){
 
 	return $data;
 }
+
 
 
 function getowner($obs){
@@ -85,6 +95,7 @@ function getvolcode($vol){
 	return $row['vd_cavw'];
 
 }
+
 
 function getmultivolcode($vol,$volLength){
 	global $link;

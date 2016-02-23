@@ -14,7 +14,7 @@ require_once "php/include/get_root.php";
 // Get information stored
 $user_admin=$_SESSION['permissions']['user_admin'];
 $l_user_admin=$_SESSION['permissions']['l_user_admin'];
-$cc_id=$_SESSION['login']['cc_id'];          
+$cc_id=$_SESSION['login']['cc_id'];   // Nang added on 28-Feb-2013
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -24,96 +24,104 @@ $cc_id=$_SESSION['login']['cc_id'];
 	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
 	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
 	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes">
+	<link href="/css/styles_beta.css" rel="stylesheet">
 	<link href="/gif/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/jquery-1.4.2.min.js"></script>                 <script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
+	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
 </head>
-
 <body>
-    <div class="body">
-		<!-- Header -->
-		<?php include 'php/include/header.php'?>
+
+	<div id="wrapborder">
+	<div id="wrap">
+		<?php include 'php/include/header_beta.php'; ?>
 		<!-- Content -->
-			<div class = "container" >
-				<!-- Page content -->
-				<div class="content"><br><br>
-					<p>Which operation would you like to do?</p>
-					<ul>
-						<li>
-							<p><a href="manage_account.php">Change my password</a></p>
-						</li>
-						<li>
+		<div id="content">	
+			<div id="contentl">
+			<br><br>
+			<!-- Page content -->
+			<div>
+				<p>Which operation would you like to do?</p>
+				<ul>
+					<li>
+						<p><a href="manage_account.php">Change my password</a></p>
+					</li>
+					<li>
 <?php
 
 // If user has no admin permission for other users
 if ($l_user_admin==0) {
 	print <<<STRING
-							<p><a href="manage_contact_info.php">Change my contact information</a></p>
+					<p><a href="manage_contact_info.php">Change my contact information</a></p>
 STRING;
 }
 else {
 	print <<<STRING
-							<form action="manage_contact_info.php" enctype="multipart/form-data" method="post">
-								<p>Change contact information for:
-									<select name="select_user_ccinfo" style='width:375px;'>
-										<option value="$cc_id"> Myself ($user_name) </option>\n
+					<form action="manage_contact_info.php" enctype="multipart/form-data" method="post">
+						<p>Change contact information for:
+							<select name="select_user_ccinfo" style='width:375px;'>
+								<option value="$cc_id"> Myself ($user_name) </option>\n
 STRING;
 	for ($i=0; $i<$l_user_admin; $i++) {
 		$user_id=$user_admin['id'][$i];
 		$username=$user_admin['name'][$i];
 		print <<<STRING
-										<option value="$user_id"> $username </option>\n
+								<option value="$user_id"> $username </option>\n
 STRING;
 	}
 	print <<<STRING
-									</select>
-								</p>
-								<p><input type="submit" name="manage_contact_info_ok" value="OK" /></p>
-							</form>
+							</select>
+						</p>
+						<p><input type="submit" name="manage_contact_info_ok" value="OK" /></p>
+					</form>
 STRING;
 }
+
 ?>
-						</li>
-						<li>
+				</li>
+				<li>
 <?php
 
 // If user has no admin permission for other users
 if ($l_user_admin==0) {
 	print <<<STRING
-							<p><a href="search_granted_user.php">Grant permissions to other users</a></p>
+					<p><a href="search_granted_user.php">Grant permissions to other users</a></p>
 STRING;
 }
 else {
 	print <<<STRING
-							<form action="search_granted_user.php" enctype="multipart/form-data" method="post">
-								<p>Grant permissions to other users</p>
-								<p>Select granting user:
-									<select name="select_user_perm" style='width:375px;'>
-										<option value="$cc_id"> Myself ($user_name) </option>\n
+					<form action="search_granted_user.php" enctype="multipart/form-data" method="post">
+						<p>Grant permissions to other users</p>
+						<p>Select granting user:
+							<select name="select_user_perm" style='width:375px;'>
+								<option value="$cc_id"> Myself ($user_name) </option>\n
 STRING;
 	for ($i=0; $i<$l_user_admin; $i++) {
 		$user_id=$user_admin['id'][$i];
 		$username=$user_admin['name'][$i];
 		print <<<STRING
-										<option value="$user_id"> $username </option>\n
+								<option value="$user_id"> $username </option>\n
 STRING;
 	}
 	print <<<STRING
-									</select>
-								</p>
-								<p><input type="submit" name="manage_permissions_ok" value="OK" /></p>
-							</form>
+							</select>
+						</p>
+						<p><input type="submit" name="manage_permissions_ok" value="OK" /></p>
+					</form>
 STRING;
 }
+
 ?>
-						</li>
-					</ul>
-					
-             </div>
-            </div><!-- Content -->
+				</li>
+			</ul>
+		</div>
+			
 			</div>
-            <!-- Footer -->
-            <?php include 'php/include/footer.php'; ?>
-
-      
-    </body>
+		</div>
+		
+		<!-- Footer -->
+		<div id="footer">
+			<?php include 'php/include/footer_beta.php'; ?>
+		</div>
+		
+	</div>
+</body>
 </html>

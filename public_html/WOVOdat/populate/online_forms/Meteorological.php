@@ -51,13 +51,29 @@
 				for (var i = 0; i < 24; i++) {
 					var box = new $("<td></td>");
 					box.attr('id', 'fog' + i);
-					box.css({'width':20, 'height':20, 'background-color':'white'});
+
+					var select = $("<select name='fog"+i+"'></select>");
+					select.append(new Option("","0"));
+					select.append(new Option("01", "1"));
+					select.append(new Option("02", "2"));
+					select.append(new Option("03", "3"));
+					select.css("width","42px");
+					box.append(select);
+					$("#div_fog_coverage").css({
+						'position':'relative',
+						'left':'-60px'
+					});
+
+					/*box.css({'width':'20px','height':'20px','background-color':'white'});
 					box.click(function() {
 						var color = $(this).css('background-color');
-						if (color == 'white') color = 'grey';
+						//console.debug(color);
+						if (color == "rgb(255, 255, 255)") color = 'grey';
 						else color = 'white';
+						//console.debug('2'+color);
 						$(this).css('background-color', color);
-					});
+					});*/
+
 					$("#fog_spectrum").append(box);
 				}	
 			}
@@ -189,9 +205,9 @@
 		    	}
 		    	var st = "";
 		    	for(var i = 0; i < 24; i++) {
-		    		var color = $("#fog" + i).css('background-color');
-		    		if (color == 'white') st += '0';
-		    		else st += '1';
+		    		var value = $("[name='fog"+i+"']").val();
+		    		st+=value;
+		    		console.log(st);
 		    	}
 		    	$('[name = "fog_coverage"]').val(st);
 				var didConfirm = confirm("Are you sure to submit your data?");

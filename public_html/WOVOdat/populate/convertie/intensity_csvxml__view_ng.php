@@ -1,7 +1,5 @@
 <?php
-if (!isset($_SESSION))
-    session_start(); 
-	
+session_start();// Start session
 require_once "php/include/get_root.php";
 
 $uname="";
@@ -155,6 +153,7 @@ label.error {font-size:10px; display:block; color: red;}
 		</div>
 		<!-- Footer -->
 			<?php include 'php/include/footer_main_beta.php'; ?>
+			
 		</div> <!--end of wrap-->
 	</div> <!--end of wrapborder-->
 

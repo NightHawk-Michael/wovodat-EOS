@@ -1,4 +1,6 @@
 <?php
+	//$file = fopen("output.txt","w");
+
 	require_once('php/include/db_connect.php');
 	// Start session
 	session_start();
@@ -32,12 +34,7 @@
 	mysql_close($link);		
 	output();
 
-	function toString($arg, $prefix) {
-		global $data;
-		if (isset($data[$arg]))
-			if ($data[$arg] !== '') return $prefix . $data[$arg] . ';';
-		return '';
-	}
+	//fclose($file);
 
 	function get_fog_coverage($time) {
 		global $data;
@@ -45,26 +42,25 @@
 		$int = intval($time);
 		$i = $int - 6;
 		while ($i < $int) {
-			if ($data['fog_coverage'][$i] == '1') {
-				$j = $i;
-				while ($j < $time && $data['fog_coverage'][$j] == '1') $j++;
-				if ($res) $res.=', ';
-				$res.=sprintf("%02d-%02d", $i, $j);
-				$i = $j + 1;
-			} else $i++;
+			if ($data['fog_coverage'][$i] !== '0') 
+				$res.= ' '.( $i<10 ? '0' : '') . $i.'="0'.$data['fog_coverage'][$i].'"';
+			$i++;
 		}
-		if ($res) return "Fog=".$res.';';
+		if ($res) return "Fog coverage:".$res.';';
 		return'';
 	}
 
-	function get_comments($time) {
+	function get_med_obs($time) {
+		if ($time=='24') return '';
 		$res = "";
-		$res.=toString('temperature_min', 'Tmin=');
-		$res.=toString('temperature_max', 'Tmax=');
-		$res.=toString('visual_observation_'.$time,'');
+		global $data;
+		if ($data["visual_observation_".$time]!=='') 
+			$res.= "Visual observation: \"".$data["visual_observation_".$time]."\";";
 		$res.=get_fog_coverage($time);
-		$res.=toString('observed_precipitation_period', 'Prec=');
-		$res.=toString('comments','');
+		if ($data["temperature_min"]!=='') 
+			$res.="Tmin: ".$data["temperature_min"].";";
+		if ($data["temperature_max"]!=='') 
+			$res.="Tmax: ".$data["temperature_max"].";";
 		return $res;
 	}
 
@@ -74,7 +70,8 @@
 	}
 
 	function final_version2($s) {
-		if ($s !== '') return "'" . $s . "'";
+		if ($s !== '') 
+			return "'" . $s . "'";
 		else return 'NULL';
 	}
 
@@ -102,8 +99,8 @@
 			$temperature = final_version($data['temperature_' . $time]);
 		else $temperature = final_version('');
 
-		if (isset($data['humidity' . $time]))
-			$humidity = final_version($data['humidity' . $time]);
+		if (isset($data['humidity_' . $time]))
+			$humidity = final_version($data['humidity_' . $time]);
 		else $humidity = final_version('');
 
 		if (isset($data['barometric_pressure_' . $time]))
@@ -114,7 +111,9 @@
 		if ($barometric_pressure !== 'NULL') $barometric_pressure *= 1.33322368;
 		$dominant_wind_direction = final_version2($data['dominant_wind_direction_' . $time]);
 		$total_daily_precipitation = final_version($data['total_daily_precipitation']);
-		$comments = final_version2(get_comments($time));
+		$comments = final_version2($data['comments']);
+
+		$med_obs = final_version2(get_med_obs($time));
 
 		$today = new DateTime();	
 
@@ -122,9 +121,9 @@
 
 		$cc_id_load = $_SESSION['login']['cc_id'];
 
-		$sql = "INSERT INTO med(ms_id, med_code, med_time, med_temp, med_hd, med_bp, med_wdir, med_prec, med_com, cc_id, med_loaddate, med_pubdate, cc_id_load, med_ori) 
+		$sql = "INSERT INTO med(ms_id, med_code, med_time, med_temp, med_hd, med_bp, med_wdir, med_prec, med_com, cc_id, med_loaddate, med_pubdate, cc_id_load, med_ori, med_obs) 
 				VALUES($station_id, $med_code, $date_string, $temperature, $humidity, $barometric_pressure, $dominant_wind_direction,
-				$total_daily_precipitation, $comments, 134, $today_string, $pubdate, $cc_id_load, 'O')";
+				$total_daily_precipitation, $comments, 134, $today_string, $pubdate, $cc_id_load, 'O', $med_obs)";
 
 		//echo $sql;
 		global $error, $success, $waiting;
@@ -133,7 +132,7 @@
 			global $med_id;
 			$new_sql = "UPDATE med SET ms_id = $station_id, med_code = $med_code, med_time = $date_string, med_temp = $temperature, 
 			med_hd = $humidity, med_bp = $barometric_pressure, med_wdir = $dominant_wind_direction, med_prec = $total_daily_precipitation, 
-			med_com = $comments, cc_id = 134, med_loaddate = $today_string, med_pubdate = $pubdate, cc_id_load = $cc_id_load, med_ori = 'O' 
+			med_com = $comments, cc_id = 134, med_loaddate = $today_string, med_pubdate = $pubdate, cc_id_load = $cc_id_load, med_ori = 'O' , med_obs = $med_obs
 			WHERE med_id = $med_id";
 			array_push($waiting, array('date'=>$date_raw, 'sql'=>$new_sql, 'med_id'=>$med_id));
 			return;

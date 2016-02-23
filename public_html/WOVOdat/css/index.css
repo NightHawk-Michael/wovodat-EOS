@@ -1,35 +1,11 @@
 /**************************
 *	GLOBAL
 **************************/
-.body {
-	width:1030px;
-	height:865px;
-	margin:auto;  
-
-}
-
-
 .container {
-	width:1030px;
-	margin-left:auto;
-	margin-right:auto}
+	width:960px;
+	margin-left: auto;
+	margin-right:auto;
 }
-
-
-.footer {
-	position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-.containerSubmitL{
-	width:530px;
-}
-
-.containerSubmitR{
-	width:500px;
-}
-
 /* Nhat changed on 22-May-2015*/
 a {
 	text-decoration: none;
@@ -114,7 +90,7 @@ a {
 .jssorb05 .dn           (mousedown)
 */
 .jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
-    background: url(/img/slideshow/b05.png) no-repeat;
+    background: url(../image/b05.png) no-repeat;
     overflow: hidden;
     cursor: pointer;
 }
@@ -148,7 +124,7 @@ a {
     position: absolute;
     cursor: pointer;
     display: block;
-    background: url(/img/slideshow/a12.png) no-repeat;
+    background: url(../image/a12.png) no-repeat;
     overflow: hidden;
 }
 
@@ -190,7 +166,7 @@ a {
 	position: absolute;
 	cursor: pointer;
 	display: block;
-    background: url(/img/slideshow/a20.png) no-repeat;
+    background: url(../image/a20.png) no-repeat;
     overflow:hidden;
 }
 .jssora20l { background-position: -3px -33px; }
@@ -208,23 +184,13 @@ a {
 .welcome {
 	padding-left: 10px;
 	padding-right: 30px;
-	vertical-align: top;
-	padding-top : 15px;
 	width:60%;
 }
 
 .welcome p {
 	font-size: 12px;
-	font-family: lucida,sans-serif;
+	font-family: Arial;
 	text-align: justify;
-}
-
-@media screen and (-webkit-min-device-pixel-ratio:0){
-	.welcome p {
-	font-size: 13px;
-	font-family: lucida,sans-serif;
-	text-align: justify;
-	}
 }
 
 .welcome div {
@@ -251,21 +217,13 @@ a {
 	font-size: 14px;
 	color:black;
 	font-weight: bold;
-	text-align: center;
 }
 
 
 .download p {
 	font-size: 12px;
-}
-@media screen and (-webkit-min-device-pixel-ratio:0){
-	.download span a{
-		font-size:15px;
-	}
-
-	.download p{
-		font-size:13px;
-	}
+	font-family: Arial;
+	text-align: justify;
 }
 
 .graph-demo {
@@ -273,82 +231,6 @@ a {
 	margin-top: 25px;
 }
 
-.graph-demo p {
-	font-size: 11px;
-}
-@media screen and (-webkit-min-device-pixel-ratio:0){
-	.graph-demo p{
-		font-family: palatino;
-		font-size: 12px;
-	}
-}
-/**************************
-* 	LOGIN FORM
-***************************/
-#regisLogin{
-	background-color:#e4e8d1;
-	 font-size:11pt; 
-	 border-width:0px; 
-	 border-color:#d40000; 
-	 border-style:solid; 
-	 border-spacing:0px;
-	 padding:0px;
-}
-
-#regisLoginC1{
-	text-align:center; 
-	width:150px;
-	 height:70px; 
-	border-right-width:1px;
-	 border-right-color:#d40000; 
-	 border-right-style:solid;
-}
-
-#regisLoginC2{
-	text-align:center;
-	width:330px;
-	height:30px;
-	border-left-width:1px;
-	border-left-color:#d40000;
-	border-left-style:solid;
-}
-
-#regisLoginUname{
-	border-left-width:1px; 
-	border-left-color:#d40000; 
-	border-left-style:solid;
-}
-
-#regisLoginpw{
-	border-left-width:1px; 
-	border-left-color:#d40000; 
-}
-
-#regisLoginpw{
-	vertical-align:top;
-}
-
-#regisLoginSubmitButton{
-	text-align:right; 
-	vertical-align:top; 
-	height:40px;
-}
-
-#regisLoginError{
-	text-align:center; color:red; 
-	font-size:10pt; 
-	border-left-width:1px; 
-	border-left-color:#505050; 
-	border-left-style:solid;
-}
-
-#forgotPW{
-	text-align:center; 
-	font-size:10pt; 
-	border-left-width:1px; 
-	border-left-color:#505050; 
-	border-left-style:solid;
-}
 
 /************************** 
 *	HEADER
@@ -482,8 +364,6 @@ a {
 /************************** 
 *	FOOTER
 **************************/
-
-
 .footer-container {
 	background-color: rgb(153,0,0);
 	margin-top: 20px;
@@ -555,32 +435,4 @@ a {
 }
 
 
-/**************************
-* Button
-**************************/
-.button {
-	width : 89%;
-    display: inline-block;
-    outline: none;
-    text-align: left;
-    text-decoration: none;
-    padding: .2em 2em .2em;
-    -webkit-border-radius: .4em; 
-    -moz-border-radius: .4em;
-    border-radius: .4em;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-    box-shadow: 0 1px 2px rgba(0,0,0,.2);
-    margin-top: 8px;
-    height: 16px;
-}
-.button a:visited,.button a:link{
-    color: rgb(58,89,184);
-}
-.button a:hover{
-    text-decoration: underline;
-}
 
-.extendedButton{
-    width: 960px;
-}

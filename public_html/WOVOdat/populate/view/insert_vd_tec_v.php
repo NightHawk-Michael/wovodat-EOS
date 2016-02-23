@@ -5,11 +5,10 @@ $i="";
 
 
 echo <<<HTMLBLOCK
-<!-- Page content -->
- 
-<div class="container" id="content">
-		
-	<div class="content" style="overflow:auto;">
+		<!-- Content -->
+
+		<div id="content" style="overflow:auto;">
+		<!-- Page content -->
 		
 		<h2 style="text-align:center;">Upload form for Volcano Tectonic setting Information.  Table : vd_tec </h2> <br/>
 
@@ -113,8 +112,7 @@ echo <<<HTMLBLOCK
 			</div>
 		</form>
 		 
-	</div>  <!-- end page content div -->
-</div>  <!-- end page container div -->
+		</div>  <!-- end page content div -->
 HTMLBLOCK;
 }
 

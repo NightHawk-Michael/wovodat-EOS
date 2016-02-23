@@ -1,0 +1,25 @@
+<?php
+	require_once('php/include/db_connect.php');
+	// Start session
+	session_start();
+
+	// Regenerate session ID
+	session_regenerate_id(true);
+
+	// Get root url
+	require_once "php/include/get_root.php";
+
+	if(!isset($_SESSION['login'])) {
+		header('Location: /populate/login_required.php');// Session was not yet started.... Redirect to login required page
+		exit();
+	}
+
+	$data = $_POST['info'];
+	echo $data;
+	exit();
+	global $link;
+	$res = mysql_query($sql, $link);
+	if(!$res) array_push($error, $date_raw) echo 'Error!';
+	mysql_close($link);	
+	else echo 'Replaced!';
+?>

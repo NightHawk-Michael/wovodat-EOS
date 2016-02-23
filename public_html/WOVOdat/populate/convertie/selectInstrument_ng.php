@@ -1,6 +1,7 @@
 <?php
+//require_once "php/include/login_check.php";  //  Nang Commented on 25-Feb-2013
 require_once "php/include/get_root.php";           // Get root url
-include "php/include/db_connect.php";   
+include "php/include/db_connect.php";   // Changed on 29-feb-2012
 
 	
 $volca=trim($_GET['volcan']);  			    	    // Get valcano name
@@ -72,10 +73,25 @@ if($stationdis == 'check1' && $instrucomponent='noinstru1'){  // Get Network
 
 	if($stationdisplay == "SeismicInstrument" || $stationdisplay=="SeismicComponent"){
 
+/*	
+		$result = mysql_query("SELECT a.sn_name	FROM sn a, vd b	WHERE a.vd_id=b.vd_id and b.vd_name='$volca'") or die(mysql_error());
+	
+		if (! mysql_num_rows($result)){      // if (false)
+	
+			$result= mysql_query("SELECT a.sn_name FROM sn a, vd b, jj_volnet c WHERE  c.jj_net_flag='S' and c.jj_net_id=a.sn_id and c.vd_id=b.vd_id and b.vd_name='$volca'")or die(mysql_error());
+	
+		}
+*/
 		$result= mysql_query("SELECT a.sn_name	FROM sn a, vd b	WHERE a.vd_id=b.vd_id and b.vd_name='$volca' union SELECT a.sn_name FROM sn a, vd b, jj_volnet c WHERE  c.jj_net_flag='S' and c.jj_net_id=a.sn_id and c.vd_id=b.vd_id and b.vd_name='$volca'")or die(mysql_error());	
 	}  
 	else{
-
+/*
+		$result = mysql_query("SELECT a.cn_name	FROM cn a, vd b	WHERE  a.vd_id=b.vd_id and b.vd_name='$volca' and a.cn_type='$stationvalue'") or die(mysql_error()); 
+	
+		if (! mysql_num_rows($result)){      // if (false)
+			$result= mysql_query("SELECT a.cn_name FROM cn a, vd b, jj_volnet c WHERE  c.jj_net_flag='C' and c.jj_net_id=a.cn_id and c.vd_id=b.vd_id and b.vd_name='$volca' and a.cn_type='$stationvalue'")or die(mysql_error());
+		}
+*/
 		$result= mysql_query("SELECT a.cn_name	FROM cn a, vd b	WHERE  a.vd_id=b.vd_id and b.vd_name='$volca' and a.cn_type='$stationvalue' union SELECT a.cn_name FROM cn a, vd b, jj_volnet c WHERE  c.jj_net_flag='C' and c.jj_net_id=a.cn_id and c.vd_id=b.vd_id and b.vd_name='$volca' and a.cn_type='$stationvalue'")or die(mysql_error());
 		
 	}
@@ -112,7 +128,7 @@ if($stationdis == 'check1' && $instrucomponent='noinstru1'){  // Get Network
 			
 		}
 		else{
-			echo "<h1 class='nonetworkerror2' style='text-align: left;color: #777777;font-size:12px;font-weight: bold;'>No Network for this instrument!<br/> Please create a network first <br/>from a drop down box !</h1>";		
+			echo "<h1 class='nonetworkerror2' style='width:300px;color: #777777;font-size:12px;font-weight: bold;font-family: lucida, sans-serif;'>No Network for this instrument!<br/> Please create a network first <br/>from a drop down box !</h1>";		
 		}
 		
 }
@@ -121,6 +137,22 @@ else if($stationdis == 'check2' && $instrucomponent='noinstru2'){  // Get Statio
 
 
 		if($stationdisplay == "SeismicInstrument" || $stationdisplay=="SeismicComponent"){  
+/*		
+			if($kilometer == "nokilometer"){
+				$result = mysql_query("select s.ss_name from ss as s,sn as n,vd where s.sn_id = n.sn_id and n.vd_id = vd.vd_id and vd.vd_name='$volca' and n.sn_name='$networkdisplay'") or die(mysql_error());
+			}
+			else{
+				if($kilometer != "all"){
+			
+					$sql= "select ss.ss_name FROM jj_volnet as j, ss, cc, vd_inf as vf, vd WHERE j.vd_id =vf.vd_id and j.jj_net_id = ss.sn_id and cc.cc_id=ss.cc_id and vd.vd_id=vf.vd_id and vd.vd_name= '$volca' and j.jj_net_flag = 'S'  and (sqrt(power(vf.vd_inf_slat - ss.ss_lat, 2) + power(vf.vd_inf_slon - ss.ss_lon, 2))*100)<= '$kilometer'";
+					
+					$result=mysql_query($sql);
+				}
+				else{
+					$result= mysql_query("select ss.ss_name FROM jj_volnet as j, ss, cc, vd_inf as vf, vd WHERE j.vd_id =vf.vd_id and j.jj_net_id = ss.sn_id and cc.cc_id=ss.cc_id and vd.vd_id=vf.vd_id and vd.vd_name= '$volca' and j.jj_net_flag = 'S'") or die(mysql_error());
+				}
+			}
+*/			
 
 			if($kilometer != "all"){
 		
@@ -134,6 +166,25 @@ else if($stationdis == 'check2' && $instrucomponent='noinstru2'){  // Get Statio
 		
 		}
 		else{
+
+/*		
+			if($kilometer == "nokilometer"){		
+				$result=mysql_query("select s.".$nettype."_name from $nettype as s, cn, vd where s.cn_id = cn.cn_id and cn.vd_id = vd.vd_id and vd.vd_name = '$volca' and cn.cn_type='$stationvalue' and cn.cn_name='$networkdisplay'");
+			}
+			else{
+				if($kilometer != "all"){
+					
+					$sql="select s.".$nettype."_name from $nettype as s, jj_volnet as j, vd, vd_inf as d where s.cn_id = j.jj_net_id and j.vd_id = vd.vd_id and vd.vd_id = d.vd_id and vd.vd_name = '$volca' and j.jj_net_flag='C' and (sqrt(power(d.vd_inf_slat - s.".$latlon."lat, 2) + power(d.vd_inf_slon - s.".$latlon."lon, 2))*100)< '$kilometer'";
+
+					$result=mysql_query($sql);
+				}
+				else{
+					$sql="select s.".$nettype."_name from $nettype as s, jj_volnet as j, vd, vd_inf as d where s.cn_id = j.jj_net_id and j.vd_id = vd.vd_id and vd.vd_id = d.vd_id and vd.vd_name = '$volca' and j.jj_net_flag='C'";
+					$result=mysql_query($sql);
+				
+				}
+			}
+*/		
 
 			if($kilometer != "all"){
 					
@@ -179,7 +230,7 @@ else if($stationdis == 'check2' && $instrucomponent='noinstru2'){  // Get Statio
 			}
 			echo "</select>";			
 		}else{  
-			echo "<h1 class='nostationerror' style='text-align: left;color: #777777;font-size:12px;font-weight: bold;'>No station for this network you have chosen!Please create station first to install new instrument!</h1>";	
+			echo "<h1 class='nostationerror' style='width:300px;color: #777777;font-size:12px;font-weight: bold;'>No station for this network you have chosen!Please create station first to install new instrument!</h1>";	
 		
 		}
 	
@@ -187,6 +238,25 @@ else if($stationdis == 'check2' && $instrucomponent='noinstru2'){  // Get Statio
 else if($instrucomponent='noinstru3'){    // Get Instrument
 
 	if($stationdisplay == 'SeismicComponent') {
+
+/*	
+		$result = mysql_query("select si.si_name from si,sn,ss,vd where si.ss_id = ss.ss_id and sn.sn_id = ss.sn_id and sn.vd_id = vd.vd_id and vd.vd_name= '$volca' and sn.sn_name= '$networkdisplay' and ss.ss_name = '$stationdis'") or die(mysql_error());
+			
+
+		if (! mysql_num_rows($result)){ 
+			if($kilometer != "all"){
+			
+				$result = mysql_query("select distinct si.si_name FROM jj_volnet as j, ss, si,cc, vd_inf as vf, vd 
+				WHERE j.vd_id =vf.vd_id and j.jj_net_id = ss.sn_id and cc.cc_id=ss.cc_id and vd.vd_id=vf.vd_id and ss.ss_id= si.ss_id and vd.vd_name= '$volca' and j.jj_net_flag = 'S' and (sqrt(power(vf.vd_inf_slat - ss.ss_lat, 2) + power(vf.vd_inf_slon - ss.ss_lon, 2))*100)<= '$kilometer'") or die(mysql_error());
+			
+			}
+			else{
+				$result = mysql_query("select distinct si.si_name FROM jj_volnet as j, ss, si,cc, vd_inf as vf, vd 
+				WHERE j.vd_id =vf.vd_id and j.jj_net_id = ss.sn_id and cc.cc_id=ss.cc_id and vd.vd_id=vf.vd_id and ss.ss_id= si.ss_id and vd.vd_name= '$volca' and j.jj_net_flag = 'S'") or die(mysql_error());
+		
+			}
+		}
+*/
 
 		if($kilometer != "all"){
 		
@@ -229,7 +299,7 @@ else if($instrucomponent='noinstru3'){    // Get Instrument
 			}	
 			echo "</select>";
 		}else{
-			echo "<h1 class='noinstrumenterror' style='text-align: left;color: #777777;font-size:12px;font-weight: bold;'>No Instrument for this station! Please upload instrument first to upload component!</h1>";	
+			echo "<h1 class='noinstrumenterror' style='width:300px;color: #777777;font-size:12px;font-weight: bold;'>No Instrument for this station you have chosen! Please upload instrument first to upload component!</h1>";	
 		}
 	}
 }

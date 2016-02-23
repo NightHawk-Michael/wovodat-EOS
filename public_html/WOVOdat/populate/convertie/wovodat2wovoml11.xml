@@ -4,33 +4,33 @@
 		<ed_name>name</ed_name>
 		<ed_nar>narrative</ed_nar>
 		<ed_stime>startTime</ed_stime>
-		<ed_stime_bc>startTimeBC</ed_stime_bc>       
+		<ed_stime_bc>startTimeBC</ed_stime_bc>        <!--  Nang added on 27-Sep-2012  -->  
 		<ed_stime_unc>startTimeUnc</ed_stime_unc>
 		<ed_etime>endTime</ed_etime>
-		<ed_etime_bc>endTimeBC</ed_etime_bc>         
+		<ed_etime_bc>endTimeBC</ed_etime_bc>          <!--  Nang added on 27-Sep-2012  -->  
 		<ed_etime_unc>endTimeUnc</ed_etime_unc>
 		<ed_climax>climaxTime</ed_climax>
-		<ed_climax_bc>climaxTimeBC</ed_climax_bc>    
+		<ed_climax_bc>climaxTimeBC</ed_climax_bc>     <!--  Nang added on 27-Sep-2012  -->  
 		<ed_climax_unc>climaxTimeUnc</ed_climax_unc>
-		<ed_vei>eruptVei</ed_vei>                     
+		<ed_vei>eruptVei</ed_vei>                  <!-- Nang added on 6-Mar-2015  -->	
 		<ed_com>comments</ed_com>                      
 	</ed>
 	<ed_phs>
 		<ed_phs_phsnum>phaseNumber</ed_phs_phsnum>
 		<ed_phs_stime>startTime</ed_phs_stime>
-		<ed_phs_stime_bc>startTimeBC</ed_phs_stime_bc>             
+		<ed_phs_stime_bc>startTimeBC</ed_phs_stime_bc>             <!--  Nang added on 27-Sep-2012  -->  
 		<ed_phs_stime_unc>startTimeUnc</ed_phs_stime_unc>
 		<ed_phs_etime>endTime</ed_phs_etime>
-		<ed_phs_etime_bc>endTimeBC</ed_phs_etime_bc>               
+		<ed_phs_etime_bc>endTimeBC</ed_phs_etime_bc>               <!--  Nang added on 27-Sep-2012  -->  
 		<ed_phs_etime_unc>endTimeUnc</ed_phs_etime_unc>
-		<ed_phs_type>phaseType</ed_phs_type>                       
+		<ed_phs_type>phaseType</ed_phs_type>                       <!-- Nang added on 6-Mar-2015  -->
 		<ed_phs_desc>description</ed_phs_desc>
 		<ed_phs_vei>vei</ed_phs_vei>
 		<ed_phs_max_lext>maxLavaExtru</ed_phs_max_lext>  
 		<ed_phs_max_expdis>maxExpMassDis</ed_phs_max_expdis>   
-		<ed_phs_dre_tot>dreTot</ed_phs_dre_tot>                   
-		<ed_phs_dre_lav>dreLav</ed_phs_dre_lav>                   
-		<ed_phs_dre_tep>dreTep</ed_phs_dre_tep>                   
+		<ed_phs_dre_tot>dreTot</ed_phs_dre_tot>                   <!-- Nang added on 6-Mar-2015  -->
+		<ed_phs_dre_lav>dreLav</ed_phs_dre_lav>                   <!-- Nang added on 6-Mar-2015  -->
+		<ed_phs_dre_tep>dreTep</ed_phs_dre_tep>                   <!-- Nang added on 6-Mar-2015  -->
 		<ed_phs_mix>magmaMix</ed_phs_mix>
 		<ed_phs_col>maxColHeight</ed_phs_col>
 		<ed_phs_coldet>colHeightDet</ed_phs_coldet>
@@ -63,17 +63,17 @@
 		<ed_for_time_unc>issueTimeUnc</ed_for_time_unc>
 		<ed_for_tsucc>timeSuccess</ed_for_tsucc>
 		<ed_for_msucc>magniSuccess</ed_for_msucc>
-		<ed_for_astime>alertStartTime</ed_for_astime>              
-		<ed_for_aetime>alertEndTime</ed_for_aetime>               
-		<ed_for_alevel>alertLevel</ed_for_alevel>                  
+		<ed_for_astime>alertStartTime</ed_for_astime>              <!-- Nang added on 6-Mar-2015  -->
+		<ed_for_aetime>alertEndTime</ed_for_aetime>                <!-- Nang added on 6-Mar-2015  -->
+		<ed_for_alevel>alertLevel</ed_for_alevel>                  <!-- Nang added on 6-Mar-2015  -->
 		<ed_for_com>comments</ed_for_com>
 	</ed_for>
 	<sd_evn>
 		<sd_evn_arch>seismoArchive</sd_evn_arch>
 		<sd_evn_time>originTime</sd_evn_time>
-		<sd_evn_timecsec>originTimeCsec</sd_evn_timecsec>           
+		<sd_evn_timecsec>originTimeCsec</sd_evn_timecsec>           <!--  Nang added on 18-Sep-2012  -->  
 		<sd_evn_time_unc>OriginTimeUnc</sd_evn_time_unc>
-		<sd_evn_timecsec_unc>originTimeCsecUnc</sd_evn_timecsec_unc> 
+		<sd_evn_timecsec_unc>originTimeCsecUnc</sd_evn_timecsec_unc><!--  Nang added on 18-Sep-2012  -->  
 		<sd_evn_dur>duration</sd_evn_dur>
 		<sd_evn_dur_unc>durationUnc</sd_evn_dur_unc>
 		<sd_evn_tech>locaTechnique</sd_evn_tech>
@@ -97,13 +97,13 @@
 		<sd_evn_smag>secMagnitude</sd_evn_smag>
 		<sd_evn_smag_type>secMagnitudeType</sd_evn_smag_type>
 		<sd_evn_eqtype>earthquakeType</sd_evn_eqtype>
-		<sd_evn_mtscale>momentTensorScale</sd_evn_mtscale>  
-		<sd_evn_mxx>momentTensorXX</sd_evn_mxx>             
-		<sd_evn_mxy>momentTensorXY</sd_evn_mxy>             
-		<sd_evn_mxz>momentTensorXZ</sd_evn_mxz>            
-		<sd_evn_myy>momentTensorYY</sd_evn_myy>              
-		<sd_evn_myz>momentTensorYZ</sd_evn_myz>
-		<sd_evn_mzz>momentTensorZZ</sd_evn_mzz>  
+		<sd_evn_mtscale>momentTensorScale</sd_evn_mtscale>  <!--  Nang added on 18-Sep-2012  -->  
+		<sd_evn_mxx>momentTensorXX</sd_evn_mxx>             <!--  Nang added on 18-Sep-2012  -->  
+		<sd_evn_mxy>momentTensorXY</sd_evn_mxy>             <!--  Nang added on 18-Sep-2012  -->  
+		<sd_evn_mxz>momentTensorXZ</sd_evn_mxz>             <!--  Nang added on 18-Sep-2012  -->  
+		<sd_evn_myy>momentTensorYY</sd_evn_myy>             <!--  Nang added on 18-Sep-2012  -->  
+		<sd_evn_myz>momentTensorYZ</sd_evn_myz><!--  Nang added on 18-Sep-2012  -->  
+		<sd_evn_mzz>momentTensorZZ</sd_evn_mzz><!--  Nang added on 18-Sep-2012  -->  
 		<sd_evn_strk1>strike1</sd_evn_strk1>
 		<sd_evn_strk1_err>strike1Unc</sd_evn_strk1_err>
 		<sd_evn_dip1>dip1</sd_evn_dip1>
@@ -116,16 +116,16 @@
 		<sd_evn_dip2_err>dip2Unc</sd_evn_dip2_err>
 		<sd_evn_rak2>rake2</sd_evn_rak2>
 		<sd_evn_rak2_err>rake2Unc</sd_evn_rak2_err>
-		<sd_evn_foc>focalPlaneSol</sd_evn_foc>               
+		<sd_evn_foc>focalPlaneSol</sd_evn_foc>                <!--  Nang added on 18-Sep-2012  -->  
 		<sd_evn_samp>sampleRate</sd_evn_samp>
-		<sd_evn_ori>orgDigitize</sd_evn_ori>                
+		<sd_evn_ori>orgDigitize</sd_evn_ori>                 <!--  Nang added on 18-Sep-2012  -->  
 		<sd_evn_com>comments</sd_evn_com>
 	</sd_evn>
 	<sd_evs>
 		<sd_evs_time>startTime</sd_evs_time>  
-		<sd_evs_time_ms>startTimeCsec</sd_evs_time_ms>              
+		<sd_evs_time_ms>startTimeCsec</sd_evs_time_ms>              <!--  Nang added on 19-Sep-2012  -->  
 		<sd_evs_time_unc>startTimeUnc</sd_evs_time_unc>
-		<sd_evs_time_unc_ms>startTimeCsecUnc</sd_evs_time_unc_ms>   
+		<sd_evs_time_unc_ms>startTimeCsecUnc</sd_evs_time_unc_ms>   <!--  Nang added on 19-Sep-2012  -->  
 		<sd_evs_picks>picksDetermination</sd_evs_picks>
 		<sd_evs_spint>SPInterval</sd_evs_spint>		
 		<sd_evs_dur>duration</sd_evs_dur>
@@ -133,13 +133,13 @@
 		<sd_evs_dist_actven>distActiveVent</sd_evs_dist_actven>
 		<sd_evs_maxamptrac>maxAmplitude</sd_evs_maxamptrac>
 		<sd_evs_samp>sampleRate</sd_evs_samp>
-		<sd_evs_eqtype>earthquakeType</sd_evs_eqtype>                
-		<sd_evs_domFre>domFrequency</sd_evs_domFre>		            
-		<sd_evs_firMotion>firstMotion</sd_evs_firMotion>		     
-		<sd_evs_mag>magnitude</sd_evs_mag>                          
-		<sd_evs_energy>energy</sd_evs_energy>                        
-		<sd_evs_ori>orgDigitize</sd_evs_ori>                         
-		<sd_evs_com>comments</sd_evs_com>                             			
+		<sd_evs_eqtype>earthquakeType</sd_evs_eqtype>                <!--Nang Added on 08-Feb-2012 -->
+		<sd_evs_domFre>domFrequency</sd_evs_domFre>		             <!--Nang Added on 09-Sep-2013 -->
+		<sd_evs_firMotion>firstMotion</sd_evs_firMotion>		     <!--Nang Added on 09-Sep-2013 -->
+		<sd_evs_mag>magnitude</sd_evs_mag>                           <!--Nang Added on 29-Aug-2013 -->
+		<sd_evs_energy>energy</sd_evs_energy>                        <!--Nang Added on 29-Aug-2013 -->
+		<sd_evs_ori>orgDigitize</sd_evs_ori>                         <!--Nang added on 19-Sep-2012  -->  
+		<sd_evs_com>comments</sd_evs_com>                            <!--Nang added on 19-Sep-2012  -->  	
 	</sd_evs>
 	<sd_int>
 		<sd_int_time>time</sd_int_time>
@@ -148,8 +148,8 @@
 		<sd_int_maxdist>maxDistance</sd_int_maxdist>
 		<sd_int_maxrint>maxReported</sd_int_maxrint>
 		<sd_int_maxrint_dist>distMaxReported</sd_int_maxrint_dist>
-		<sd_int_ori>orgDigitize</sd_int_ori>                        
-		<sd_int_com>comments</sd_int_com>                             
+		<sd_int_ori>orgDigitize</sd_int_ori>                        <!--  Nang added on 19-Sep-2012  -->  
+		<sd_int_com>comments</sd_int_com>                           <!--  Nang added on 19-Sep-2012  -->  
 	</sd_int>
 	<sd_trm>
 		<sd_trm_stime>startTime</sd_trm_stime>
@@ -167,8 +167,8 @@
 		<sd_trm_reddis>reducedDisp</sd_trm_reddis>
 		<sd_trm_rderr>reducedDispUnc</sd_trm_rderr>
 		<sd_trm_visact>visibleActivity</sd_trm_visact>
-		<sd_trm_ori>orgDigitize</sd_trm_ori>                      
-		<sd_trm_com>comments</sd_trm_com>                        
+		<sd_trm_ori>orgDigitize</sd_trm_ori>                       <!--  Nang added on 19-Sep-2012  -->  
+		<sd_trm_com>comments</sd_trm_com>                          <!--  Nang added on 19-Sep-2012  -->  
 	</sd_trm>
 	<sd_ivl>
 		<sd_ivl_eqtype>earthquakeType</sd_ivl_eqtype>
@@ -195,13 +195,13 @@
 		<sd_ivl_etot_etime>energyMeasEndTime</sd_ivl_etot_etime>
 		<sd_ivl_etot_etime_unc>energyMeasEndTimeUnc</sd_ivl_etot_etime_unc>
         <sd_ivl_etot>energyRelease</sd_ivl_etot> 
-		<sd_ivl_fmin>minFrequency</sd_ivl_fmin>    
-		<sd_ivl_fmax>maxFrequency</sd_ivl_fmax>    
-		<sd_ivl_amin>minAmplitude</sd_ivl_amin>   
-		<sd_ivl_amax>maxAmplitude</sd_ivl_amax>    
+		<sd_ivl_fmin>minFrequency</sd_ivl_fmin>    <!-- Nang added on 19-Sep-2012  -->
+		<sd_ivl_fmax>maxFrequency</sd_ivl_fmax>    <!-- Nang added on 19-Sep-2012  -->
+		<sd_ivl_amin>minAmplitude</sd_ivl_amin>    <!-- Nang added on 19-Sep-2012  -->
+		<sd_ivl_amax>maxAmplitude</sd_ivl_amax>    <!-- Nang added on 19-Sep-2012  -->
         <sd_ivl_desc>description</sd_ivl_desc>
-		<sd_ivl_ori>orgDigitize</sd_ivl_ori>       
-		<sd_ivl_com>comments</sd_ivl_com>          
+		<sd_ivl_ori>orgDigitize</sd_ivl_ori>       <!-- Nang added on 19-Sep-2012  -->
+		<sd_ivl_com>comments</sd_ivl_com>          <!-- Nang added on 19-Sep-2012  -->
 	</sd_ivl>
 	<sd_sam>
 		<sd_sam_stime>startTime</sd_sam_stime>
@@ -210,15 +210,15 @@
 		<sd_sam_etime_unc>endTmeUnc</sd_sam_etime_unc>
 		<sd_sam_int>cntInterval</sd_sam_int>
 		<sd_sam_int_unc>cntIntervalUnc </sd_sam_int_unc>
-		<sd_sam_ori>orgDigitize</sd_sam_ori>        
-		<sd_sam_com>comments</sd_sam_com>           
+		<sd_sam_ori>orgDigitize</sd_sam_ori>         <!-- Nang added on 19-Sep-2012  -->
+		<sd_sam_com>comments</sd_sam_com>            <!-- Nang added on 19-Sep-2012  -->     
 	</sd_sam>
 	<sd_rsm>
 		<sd_rsm_stime>startTime</sd_rsm_stime>
 		<sd_rsm_stime_unc>startTimeUnc</sd_rsm_stime_unc>	
 		<sd_rsm_count>cnt</sd_rsm_count>
 		<sd_rsm_calib>calibration</sd_rsm_calib>
-		<sd_rsm_com>comments</sd_rsm_com>          
+		<sd_rsm_com>comments</sd_rsm_com>           <!-- Nang added on 19-Sep-2012  -->
 	</sd_rsm>
 	<sd_ssm>
 		<sd_ssm_stime>startTime</sd_ssm_stime>
@@ -227,7 +227,7 @@
 		<sd_ssm_highf>highFreq</sd_ssm_highf>
 		<sd_ssm_count>cnt</sd_ssm_count>
 		<sd_ssm_calib>calibration</sd_ssm_calib>
-		<sd_ssm_com>comments</sd_ssm_com>           
+		<sd_ssm_com>comments</sd_ssm_com>           <!-- Nang added on 19-Sep-2012  -->
 	</sd_ssm>
 	<sd_wav>
 		<sd_wav_arch>archive</sd_wav_arch>
@@ -236,16 +236,16 @@
 		<sd_wav_img>image</sd_wav_img>
 		<sd_wav_info>information</sd_wav_info>
 		<sd_wav_desc>description</sd_wav_desc>
-		<sd_wav_ori>orgDigitize</sd_wav_ori>      
-		<sd_wav_com>comments</sd_wav_com>         
+		<sd_wav_ori>orgDigitize</sd_wav_ori>      <!-- Nang added on 19-Sep-2012  -->
+		<sd_wav_com>comments</sd_wav_com>         <!-- Nang added on 19-Sep-2012  -->
 	</sd_wav>
 	<sn>	
 		<sn_name>name</sn_name>
 		<sn_vmodel>velocityModel</sn_vmodel>
-		<sn_vmodel_detail>velocityModelDetail</sn_vmodel_detail> 
+		<sn_vmodel_detail>velocityModelDetail</sn_vmodel_detail> <!--Nang Added on 06/FEb/2012 -->
 		<sn_zerokm>zeroDepth</sn_zerokm>
-		<sn_fdepth_flag>fixedDepth</sn_fdepth_flag>		
-		<sn_fdepth>fixedDepthDesc</sn_fdepth>           	
+		<sn_fdepth_flag>fixedDepth</sn_fdepth_flag>		<!--Nang Amended on 06/FEb/2012 -->
+		<sn_fdepth>fixedDepthDesc</sn_fdepth>           <!--Nang Amended on 06/FEb/2012 -->		
 		<sn_stime>startTime</sn_stime>
 		<sn_stime_unc>startTimeUnc</sn_stime_unc>
 		<sn_etime>endTime</sn_etime>
@@ -259,15 +259,15 @@
 		<sn_micro>numberOfMicro</sn_micro>
 	    <sn_desc>description</sn_desc>
 		<sn_utc>diffUTC</sn_utc>
-		<sn_ori>orgDigitize</sn_ori>                  
-		<sn_com>comments</sn_com>	                  
+		<sn_ori>orgDigitize</sn_ori>                   <!-- Nang added on 20-Sep-2012  -->
+		<sn_com>comments</sn_com>	                   <!-- Nang added on 20-Sep-2012  -->
 	</sn>
 	<ss>		
 		<ss_name>name</ss_name>
 		<ss_lat>lat</ss_lat>
 		<ss_lon>lon</ss_lon>
 		<ss_elev>elev</ss_elev>
-	    <ss_depth>instDepth</ss_depth>                
+	    <ss_depth>instDepth</ss_depth>                <!-- Nang changed from instdepth to instDepth on 26-Feb-2013  -->
 		<ss_stime>startTime</ss_stime>
 		<ss_stime_unc>startTimeUnc</ss_stime_unc>
 		<ss_etime>endTime</ss_etime>
@@ -276,7 +276,7 @@
 		<ss_instr_type>instType</ss_instr_type>
 		<ss_sgain>systemGain</ss_sgain>
 		<ss_desc>description</ss_desc>
-		<ss_ori>orgDigitize</ss_ori>              
+		<ss_ori>orgDigitize</ss_ori>               <!-- Nang added on 20-Sep-2012  -->
 		<ss_com>comments</ss_com>
 	</ss>
 	<si>	
@@ -287,12 +287,12 @@
 		<si_filter>filters</si_filter>
 		<si_ncomp>numberOfComp</si_ncomp>
 		<si_resp>respOverview</si_resp>
-		<si_resp_file>respFile</si_resp_file>  
+		<si_resp_file>respFile</si_resp_file>  <!--Nang added on 06/Feb/2012  -->
 		<si_stime>startTime</si_stime>
 		<si_stime_unc>startTimeUnc</si_stime_unc>
 		<si_etime>endTime</si_etime>
 		<si_etime_unc>endTimeUnc</si_etime_unc>
-		<si_ori>orgDigitize</si_ori>           
+		<si_ori>orgDigitize</si_ori>           <!-- Nang added on 19-Sep-2012  -->
 		<si_com>comments</si_com>             
 	</si>
 	<si_cmp>
@@ -305,26 +305,26 @@
 		<si_cmp_orient>seedOrientCode</si_cmp_orient>
 		<si_cmp_sens>sensitivity</si_cmp_sens>
 		<si_cmp_depth>depth</si_cmp_depth>
-		<si_cmp_stime>startTime</si_cmp_stime>     
-		<si_cmp_etime>endTime</si_cmp_etime>       
-		<si_cmp_ori>orgDigitize</si_cmp_ori>        
+		<si_cmp_ori>orgDigitize</si_cmp_ori>        <!-- Nang added on 19-Sep-2012  -->
 		<si_cmp_com>comments</si_cmp_com>		
+		<si_cmp_stime>startTime</si_cmp_stime>      <!--Nang get stime from instrument table using script -->
+		<si_cmp_etime>endTime</si_cmp_etime>        <!--Nang get etime from instrument table using script -->		
 	</si_cmp>
 	<dd_tlt>
 		<dd_tlt_time>measTime</dd_tlt_time>
-		<dd_tlt_timecsec>measTimeCsec</dd_tlt_timecsec>            
+		<dd_tlt_timecsec>measTimeCsec</dd_tlt_timecsec>            <!--Nang Added on 13-Sep-2012 -->
 		<dd_tlt_time_unc>measTimeUnc</dd_tlt_time_unc>
-		<dd_tlt_timecsec_unc>measTimeCsecUnc</dd_tlt_timecsec_unc>
+		<dd_tlt_timecsec_unc>measTimeCsecUnc</dd_tlt_timecsec_unc> <!--Nang Added on 13-Sep-2012 -->
 		<dd_tlt_srate>sampleRate</dd_tlt_srate>
 		<dd_tlt1>tilt1</dd_tlt1>
 		<dd_tlt2>tilt2</dd_tlt2>
 		<dd_tlt_err1>tilt1Unc</dd_tlt_err1>
 		<dd_tlt_err2>tilt2Unc</dd_tlt_err2>
 		<dd_tlt_proc_flg>processed</dd_tlt_proc_flg>
-		<dd_tlt_temp>temperature</dd_tlt_temp>    
-		<dd_tlt_bat>battery</dd_tlt_bat>         
-		<dd_tlt_ori>orgDigitize</dd_tlt_ori>      
-		<dd_tlt_com>comments</dd_tlt_com>        
+		<dd_tlt_temp>temperature</dd_tlt_temp>    <!--Nang Added on 13-Sep-2012 -->
+		<dd_tlt_bat>battery</dd_tlt_bat>          <!--Nang Added on 13-Sep-2012 -->
+		<dd_tlt_ori>orgDigitize</dd_tlt_ori>      <!--Nang Added on 13-Sep-2012 -->
+		<dd_tlt_com>comments</dd_tlt_com>         <!--Nang Added on 13-Sep-2012 -->
 	</dd_tlt>
 	<dd_tlv>	
 		<dd_tlv_stime>startTime</dd_tlv_stime>
@@ -335,7 +335,7 @@
 		<dd_tlv_azi>azimuth</dd_tlv_azi>
 		<dd_tlv_magerr>magnitudeUnc</dd_tlv_magerr>
 		<dd_tlv_azierr>azimuthUnc</dd_tlv_azierr>
-		<dd_tlv_ori>orgDigitize</dd_tlv_ori>       
+		<dd_tlv_ori>orgDigitize</dd_tlv_ori>        <!--Nang Added on 13-Sep-2012 -->
 		<dd_tlv_com>comments</dd_tlv_com>
 	</dd_tlv>
 	<dd_str>
@@ -368,8 +368,8 @@
 		<dd_str_pmax_direrr>maxPrincipalStrainDirUnc</dd_str_pmax_direrr>
 		<dd_str_pmin_dir>minPrincipalStrainDir</dd_str_pmin_dir>
 		<dd_str_pmin_direrr>minPrincipalStrainDirUnc</dd_str_pmin_direrr>
-		<dd_str_bpres>barPress</dd_str_bpres>                   
-		<dd_str_ori>orgDigitize</dd_str_ori>                     
+		<dd_str_bpres>barPress</dd_str_bpres> 			 <!--Nang Added on 17-Feb-2014 -->
+		<dd_str_ori>orgDigitize</dd_str_ori>             <!--Nang Added on 12-Sep-2012 -->
 		<dd_str_com>comments</dd_str_com>
 	</dd_str>
 	<dd_edm>
@@ -378,8 +378,8 @@
 		<dd_edm_line>lineLength</dd_edm_line>
 		<dd_edm_cerr>constantErr</dd_edm_cerr>
 		<dd_edm_serr>scaleErr</dd_edm_serr>
-		<dd_edm_ori>orgDigitize</dd_edm_ori>  
-		<dd_edm_com>comments</dd_edm_com>  
+		<dd_edm_ori>orgDigitize</dd_edm_ori>  <!--Nang Added on 05-Jun-2012 -->
+		<dd_edm_com>comments</dd_edm_com>  <!--Nang Added on 05-Jun-2012 -->
 	</dd_edm>
 	<dd_ang>
 		<dd_ang_time>measTime</dd_ang_time>
@@ -392,7 +392,7 @@
 		<dd_ang_herr2>hAngle2Unc</dd_ang_herr2>
 		<dd_ang_verr1>vAngle1Unc</dd_ang_verr1>
 		<dd_ang_verr2>vAngle2Unc</dd_ang_verr2>
-		<dd_ang_ori>orgDigitize</dd_ang_ori>      
+		<dd_ang_ori>orgDigitize</dd_ang_ori>      <!--Nang Added on 05-Jun-2012 -->
 		<dd_ang_com>comments</dd_ang_com>
 	</dd_ang>
 	<dd_gps>
@@ -403,15 +403,15 @@
 		<dd_gps_elev>elev</dd_gps_elev>
 		<dd_gps_nserr>N-SErr</dd_gps_nserr>
 		<dd_gps_ewerr>E-WErr</dd_gps_ewerr>
-		<dd_gps_verr>verticalErr</dd_gps_verr>    
+		<dd_gps_verr>verticalErr</dd_gps_verr>       <!--Nang Changed verticalUnc=>verticalErr  on 05-Jun-2012 -->
 		<dd_gps_software>software</dd_gps_software>
 		<dd_gps_orbits>orbits</dd_gps_orbits>
 		<dd_gps_dur>duration</dd_gps_dur>
-		<dd_gps_qual>quality</dd_gps_qual>
-		<dd_gps_slope>slope</dd_gps_slope>           
-		<dd_gps_errslope>errSlope</dd_gps_errslope> 	
-		<dd_gps_ori>orgDigitize</dd_gps_ori>        
-		<dd_gps_com>comments</dd_gps_com>           
+		<dd_gps_qual>quality</dd_gps_qual>      
+		<dd_gps_slope>slope</dd_gps_slope>           <!--Nang Added on 29-Aug-2013 -->
+		<dd_gps_errslope>errSlope</dd_gps_errslope>  <!--Nang Added on 29-Aug-2013 -->
+		<dd_gps_ori>orgDigitize</dd_gps_ori>         <!--Nang Added on 05-Jun-2012 -->
+		<dd_gps_com>comments</dd_gps_com>            <!--Nang Added on 05-Jun-2012 -->
 	</dd_gps>
 	<dd_gpv>
 		<dd_gpv_stime>startTime</dd_gpv_stime>
@@ -428,23 +428,23 @@
 		<dd_gpv_dnerr>northDisplErr</dd_gpv_dnerr>
 		<dd_gpv_deerr>eastDisplErr</dd_gpv_deerr>
 	    <dd_gpv_dverr>vertDisplErr</dd_gpv_dverr>
-		<dd_gpv_refFrame>refFrame</dd_gpv_refFrame>                      
-		<dd_gpv_projection>projection</dd_gpv_projection>                
-		<dd_gpv_ellipsoid>ellipsoid</dd_gpv_ellipsoid>                   
-		<dd_gpv_datum>datum</dd_gpv_datum>                                
-		<dd_gpv_refPosLat>refPosLat</dd_gpv_refPosLat>                   	
-		<dd_gpv_refPosLon>refPosLon</dd_gpv_refPosLon>                    
-		<dd_gpv_refPosElev>refPosElev</dd_gpv_refPosElev>                	
-		<dd_gpv_staVelNorth>staVelNorth</dd_gpv_staVelNorth>             
-		<dd_gpv_staVelNorthErr>staVelNorthErr</dd_gpv_staVelNorthErr>     
-		<dd_gpv_staVelEast>staVelEast</dd_gpv_staVelEast> 				 
-		<dd_gpv_staVelEastErr>staVelEastErr</dd_gpv_staVelEastErr>        
-		<dd_gpv_staVelVert>staVelVert</dd_gpv_staVelVert>                 
-		<dd_gpv_staVelVertErr>staVelVertErr</dd_gpv_staVelVertErr>       
-		<dd_gpv_dataType>gpvDataType</dd_gpv_dataType>                   
-		<dd_gpv_arch>gpvArchive</dd_gpv_arch>                             
-		<dd_gpv_software>gpvSoftware</dd_gpv_software>                    
-		<dd_gpv_ori>orgDigitize</dd_gpv_ori>            				 
+		<dd_gpv_refFrame>refFrame</dd_gpv_refFrame>                       <!--Nang Added on 11-Nov-2013 -->	
+		<dd_gpv_projection>projection</dd_gpv_projection>                 <!--Nang Added on 11-Nov-2013 -->	
+		<dd_gpv_ellipsoid>ellipsoid</dd_gpv_ellipsoid>                    <!--Nang Added on 11-Nov-2013 -->	
+		<dd_gpv_datum>datum</dd_gpv_datum>                                 <!--Nang Added on 11-Nov-2013 -->	 
+		<dd_gpv_refPosLat>refPosLat</dd_gpv_refPosLat>                    <!--Nang Added on 11-Nov-2013 -->	
+		<dd_gpv_refPosLon>refPosLon</dd_gpv_refPosLon>                    <!--Nang Added on 11-Nov-2013 -->	
+		<dd_gpv_refPosElev>refPosElev</dd_gpv_refPosElev>                 <!--Nang Added on 11-Nov-2013 -->	
+		<dd_gpv_staVelNorth>staVelNorth</dd_gpv_staVelNorth>              <!--Nang Added on 11-Nov-2013 -->	
+		<dd_gpv_staVelNorthErr>staVelNorthErr</dd_gpv_staVelNorthErr>     <!--Nang Added on 11-Nov-2013 -->	
+		<dd_gpv_staVelEast>staVelEast</dd_gpv_staVelEast> 				  <!--Nang Added on 11-Nov-2013 -->	
+		<dd_gpv_staVelEastErr>staVelEastErr</dd_gpv_staVelEastErr>        <!--Nang Added on 11-Nov-2013 -->	
+		<dd_gpv_staVelVert>staVelVert</dd_gpv_staVelVert>                 <!--Nang Added on 11-Nov-2013 -->	
+		<dd_gpv_staVelVertErr>staVelVertErr</dd_gpv_staVelVertErr>        <!--Nang Added on 11-Nov-2013 -->	
+		<dd_gpv_dataType>gpvDataType</dd_gpv_dataType>                    <!--Nang Added on 11-Nov-2013 -->	
+		<dd_gpv_arch>gpvArchive</dd_gpv_arch>                             <!--Nang Added on 11-Nov-2013 -->	
+		<dd_gpv_software>gpvSoftware</dd_gpv_software>                    <!--Nang Added on 11-Nov-2013 -->	
+		<dd_gpv_ori>orgDigitize</dd_gpv_ori>            				  <!--Nang Added on 05-Jun-2012 -->
 		<dd_gpv_com>comments</dd_gpv_com>
 	</dd_gpv>
 	<dd_lev>
@@ -454,7 +454,7 @@
 		<dd_lev_time_unc>measTimeUnc</dd_lev_time_unc>
 		<dd_lev_delev>elevChange</dd_lev_delev>
 		<dd_lev_herr>elevChangeUnc</dd_lev_herr>
-		<dd_lev_ori>orgDigitize</dd_lev_ori>  
+		<dd_lev_ori>orgDigitize</dd_lev_ori>  <!--Nang Added on 05-Jun-2012 -->
 		<dd_lev_com>comments</dd_lev_com>
 	</dd_lev>
 	<dd_sar>
@@ -479,17 +479,17 @@
 		<dd_sar_spacing>degreesPixelSize</dd_sar_spacing>
 		<dd_sar_lookang>lookAngle</dd_sar_lookang>
 		<dd_sar_limb>limb</dd_sar_limb>
-		<dd_sar_img_path>imagepath</dd_sar_img_path> 
+		<dd_sar_img_path>imagepath</dd_sar_img_path> <!-- Changed form "dd_sar_jpg" to "dd_sar_img_path" on 11Sep2012 -->	
 		<dd_sar_geotiff>geotiff</dd_sar_geotiff>
 		<dd_sar_prometh>processMethod</dd_sar_prometh>	
 		<dd_sar_softwr>software</dd_sar_softwr>
 		<dd_sar_dem_qual>DEMQuality</dd_sar_dem_qual>
-		<dd_sar_ori>orgDigitize</dd_sar_ori>               		
-		<dd_sar_com>comments</dd_sar_com>	               
+		<dd_sar_ori>orgDigitize</dd_sar_ori>               <!-- nang add on 11-Sep-2012  -->		
+		<dd_sar_com>comments</dd_sar_com>	               <!-- nang add on 11-Sep-2012  -->	
 	</dd_sar>
 	<dd_srd>
 		<dd_srd_dchange>rangeOfChange</dd_srd_dchange>
-		<dd_srd_com>comments</dd_srd_com>	              
+		<dd_srd_com>comments</dd_srd_com>	               <!-- nang add on 11-Sep-2012  -->	
 	</dd_srd>
 	<ds>
 		<ds_name>name</ds_name>
@@ -505,8 +505,8 @@
 		<ds_utc>diffUTC</ds_utc>
 		<ds_rflag>refStation</ds_rflag>
 		<ds_desc>description</ds_desc>
-		<ds_ori>orgDigitize</ds_ori> 		
-		<ds_com>comments</ds_com>    		
+		<ds_ori>orgDigitize</ds_ori> 		<!-- Nang added on 13-Sep-2012  -->	
+		<ds_com>comments</ds_com>    		<!-- Nang added on 13-Sep-2012  -->	
 	</ds>
 	<di_gen>
 		<di_gen_name>name</di_gen_name>
@@ -518,8 +518,8 @@
 		<di_gen_stime_unc>startTimeUnc</di_gen_stime_unc>
 		<di_gen_etime>endTime</di_gen_etime>
 		<di_gen_etime_unc>endTimeUnc</di_gen_etime_unc>	
-		<di_gen_ori>orgDigitize</di_gen_ori>   
-		<di_gen_com>comments</di_gen_com>	
+		<di_gen_ori>orgDigitize</di_gen_ori>   <!-- Nang added on 13-Sep-2012  -->	
+		<di_gen_com>comments</di_gen_com>      <!-- Nang added on 13-Sep-2012  -->	
 	</di_gen>
 	<di_tlt>	
 		<di_tlt_name>name</di_tlt_name>
@@ -539,7 +539,7 @@
 		<di_tlt_stime_unc>startTimeUnc</di_tlt_stime_unc>
 		<di_tlt_etime>endTime</di_tlt_etime>
 		<di_tlt_etime_unc>endTimeUnc</di_tlt_etime_unc>
-		<di_tlt_ori>orgDigitize</di_tlt_ori>   
+		<di_tlt_ori>orgDigitize</di_tlt_ori>   <!-- Nang added on 13-Sep-2012  -->		
 		<di_tlt_com>comments</di_tlt_com>
 	</di_tlt>	
 	<gd>
@@ -550,7 +550,7 @@
 		<gd_flow>emissionRate</gd_flow>
 		<gd_envir>environFactors</gd_envir>
 		<gd_submin>sublimateMinerals</gd_submin>
-		<gd_ori>orgDigitize</gd_ori>   
+		<gd_ori>orgDigitize</gd_ori>    <!-- Nang added on 09-May-2012  -->
 		<gd_com>comments</gd_com>
 	</gd>
 	<gd_sol>
@@ -563,40 +563,40 @@
 		<gd_sol_area>area</gd_sol_area>
 		<gd_sol_high>highestFlux</gd_sol_high>
 		<gd_sol_htemp>highestTemp</gd_sol_htemp>
-		<gd_sol_units>reportedUnits</gd_sol_units> 
-		<gd_sol_ori>orgDigitize</gd_sol_ori>       
+		<gd_sol_units>reportedUnits</gd_sol_units>  <!-- Nang added on 17-Sep-2012  -->
+		<gd_sol_ori>orgDigitize</gd_sol_ori>        <!-- Nang added on 09-May-2012  -->
 		<gd_sol_com>comments</gd_sol_com>
 	</gd_sol>
 	<gd_plu>
-		<gd_plu_volc1>volc1</gd_plu_volc1>              
-		<gd_plu_volc2>volc2</gd_plu_volc2>             
+		<gd_plu_volc1>volc1</gd_plu_volc1>  <!-- Nang added on 03-Dec-2014 -->
+		<gd_plu_volc2>volc2</gd_plu_volc2>  <!-- Nang added on 03-Dec-2014 -->
 		<gd_plu_lat>lat</gd_plu_lat>
 		<gd_plu_lon>lon</gd_plu_lon>
-		<gd_plu_minboxlat>minBoxLat</gd_plu_minboxlat>  
-		<gd_plu_maxboxlat>maxBoxLat</gd_plu_maxboxlat> 
-		<gd_plu_minboxlon>minBoxLon</gd_plu_minboxlon>  
-		<gd_plu_maxboxlon>maxBoxLon</gd_plu_maxboxlon>  
-		<gd_plu_image>image</gd_plu_image>              
-		<gd_plu_image_path>imagepath</gd_plu_image_path>
-		<gd_plu_inter>interference</gd_plu_inter>       
+		<gd_plu_minboxlat>minBoxLat</gd_plu_minboxlat>  <!-- Nang added on 03-Dec-2014 -->
+		<gd_plu_maxboxlat>maxBoxLat</gd_plu_maxboxlat>  <!-- Nang added on 03-Dec-2014 -->
+		<gd_plu_minboxlon>minBoxLon</gd_plu_minboxlon>  <!-- Nang added on 03-Dec-2014 -->
+		<gd_plu_maxboxlon>maxBoxLon</gd_plu_maxboxlon>  <!-- Nang added on 03-Dec-2014 -->
+		<gd_plu_image>image</gd_plu_image>   <!-- Nang added on 03-Dec-2014 -->
+		<gd_plu_image_path>imagepath</gd_plu_image_path>   <!-- Nang added on 18-Dec-2014 -->
+		<gd_plu_inter>interference</gd_plu_inter>  <!-- Nang added on 03-Dec-2014 -->
 		<gd_plu_height>height</gd_plu_height>
 		<gd_plu_hdet>heightDetermination</gd_plu_hdet>
-		<gd_plu_colheight>colHeight</gd_plu_colheight>    
+		<gd_plu_colheight>colHeight</gd_plu_colheight>  <!-- Nang added on 03-Dec-2014 -->
 		<gd_plu_time>measTime</gd_plu_time>
 		<gd_plu_time_unc>measTimeUnc</gd_plu_time_unc>
-		<gd_plu_area>coverageArea</gd_plu_area>            
-		<gd_plu_dist>maxDistance</gd_plu_dist>           
-		<gd_plu_dir>maxDirection</gd_plu_dir>               
-		<gd_plu_minwave>minWaveLength</gd_plu_minwave>     
-		<gd_plu_maxwave>maxWaveLength</gd_plu_maxwave>     
-		<gd_plu_spect>spectral</gd_plu_spect>            		
-		<gd_plu_tech>technique</gd_plu_tech>             		
+		<gd_plu_area>coverageArea</gd_plu_area>            <!-- Nang added on 03-Dec-2014 -->
+		<gd_plu_dist>maxDistance</gd_plu_dist>             <!-- Nang added on 03-Dec-2014 -->
+		<gd_plu_dir>maxDirection</gd_plu_dir>               <!-- Nang added on 03-Dec-2014 -->
+		<gd_plu_minwave>minWaveLength</gd_plu_minwave>     <!-- Nang added on 03-Dec-2014 -->
+		<gd_plu_maxwave>maxWaveLength</gd_plu_maxwave>     <!-- Nang added on 03-Dec-2014 -->
+		<gd_plu_spect>spectral</gd_plu_spect>        <!-- Nang added on 03-Dec-2014 -->		
+		<gd_plu_tech>technique</gd_plu_tech>       <!-- Nang added on 03-Dec-2014 -->		
 		<gd_plu_wind>windSpeed</gd_plu_wind>
-		<gd_plu_wsmin>minWindSpeed</gd_plu_wsmin>       
-		<gd_plu_wsmax>maxWindSpeed</gd_plu_wsmax>        
-		<gd_plu_wdir>windDirection</gd_plu_wdir>        	
+		<gd_plu_wsmin>minWindSpeed</gd_plu_wsmin>        <!-- Nang added on 17-Sep-2012  -->
+		<gd_plu_wsmax>maxWindSpeed</gd_plu_wsmax>        <!-- Nang added on 17-Sep-2012  --> 
+		<gd_plu_wdir>windDirection</gd_plu_wdir>         <!-- Nang added on 09-May-2012  -->		
 		<gd_plu_weth>weatherNotes</gd_plu_weth>
-		<gd_plu_ori>orgDigitize</gd_plu_ori>            
+		<gd_plu_ori>orgDigitize</gd_plu_ori>             <!-- Nang added on 09-May-2012  -->
 		<gd_plu_com>comments</gd_plu_com>
 	</gd_plu>
 	<gs>
@@ -612,8 +612,8 @@
 		<gs_etime>endTime</gs_etime>
 		<gs_etime_unc>endTimeUnc</gs_etime_unc>
 		<gs_desc>description</gs_desc>
-		<gs_ori>orgDigitize</gs_ori>    
-		<gs_com>comments</gs_com>      
+		<gs_ori>orgDigitize</gs_ori>    <!-- Nang added on 09-May-2012  -->
+		<gs_com>comments</gs_com>       <!-- Nang added on 17-Sep-2012  -->
 	</gs>
 	<gi>
 		<gi_type>type</gi_type>		
@@ -626,14 +626,14 @@
 		<gi_stime_unc>startTimeUnc</gi_stime_unc>
 		<gi_etime>endTime</gi_etime>
 		<gi_etime_unc>endTimeUnc</gi_etime_unc>
-		<gi_spatres>spatRes</gi_spatres>            
-		<gi_ctsize>crossTSize</gi_ctsize>           
-		<gi_atsize>alongTSize</gi_atsize>            
-		<gi_swidth>swathWidth</gi_swidth>           
-		<gi_tempres>tempRes</gi_tempres>             
-		<gi_rtime>returnTime</gi_rtime>              
-		<gi_vangle>viewAngle</gi_vangle>	        
-		<gi_ori>orgDigitize</gi_ori>                 
+		<gi_spatres>spatRes</gi_spatres>             <!--Nang Added on 02-Dec-2014 -->	
+		<gi_ctsize>crossTSize</gi_ctsize>            <!--Nang Added on 02-Dec-2014 -->	
+		<gi_atsize>alongTSize</gi_atsize>            <!--Nang Added on 02-Dec-2014 -->	
+		<gi_swidth>swathWidth</gi_swidth>            <!--Nang Added on 02-Dec-2014 -->	
+		<gi_tempres>tempRes</gi_tempres>             <!--Nang Added on 02-Dec-2014 -->	
+		<gi_rtime>returnTime</gi_rtime>              <!--Nang Added on 02-Dec-2014 -->	
+		<gi_vangle>viewAngle</gi_vangle>	         <!--Nang Added on 02-Dec-2014 -->	
+		<gi_ori>orgDigitize</gi_ori>                 <!-- Nang added on 09-May-2012  -->
 		<gi_com>comments</gi_com>
 	</gi>
 	<hd>
@@ -652,9 +652,9 @@
 		<hd_ph_err>pHUnc</hd_ph_err>
 		<hd_cond>conductivity</hd_cond>
 		<hd_cond_err>conductivityUnc</hd_cond_err>
-		<hd_atemp>airTemp</hd_atemp>               
-		<hd_tds>totalDisolvedSolid</hd_tds>        
-		<hd_ori>orgDigitize</hd_ori>               
+		<hd_atemp>airTemp</hd_atemp>               <!-- Nang added on 17-Sep-2012  -->
+		<hd_tds>totalDisolvedSolid</hd_tds>        <!-- Nang added on 17-Sep-2012  -->
+		<hd_ori>orgDigitize</hd_ori>               <!-- Nang added on 17-Sep-2012  --> 
 		<hd_com>comments</hd_com>
 	</hd>
 	<hs>
@@ -673,8 +673,8 @@
 		<hs_etime>endTime</hs_etime>
 		<hs_etime_unc>endTimeUnc</hs_etime_unc>
 		<hs_desc>description</hs_desc>
-		<hs_ori>orgDigitize</hs_ori>                
-		<hs_com>comments</hs_com>                 
+		<hs_ori>orgDigitize</hs_ori>                <!-- Nang added on 17-Sep-2012  --> 
+		<hs_com>comments</hs_com>                   <!-- Nang added on 17-Sep-2012  --> 
 	</hs>
 	<hi>
 		<hi_name>name</hi_name>
@@ -686,9 +686,9 @@
 		<hi_stime_unc>startTimeUnc</hi_stime_unc>
 		<hi_etime>endTime</hi_etime>
 		<hi_etime_unc>endTimeUnc</hi_etime_unc>
-		<hi_desc>description</hi_desc>	        
-		<hi_ori>orgDigitize</hi_ori>            
-		<hi_com>comments</hi_com>             
+		<hi_desc>description</hi_desc>	        <!-- Nang added on 17-Sep-2012  -->
+		<hi_ori>orgDigitize</hi_ori>            <!-- Nang added on 17-Sep-2012  -->
+		<hi_com>comments</hi_com>               <!-- Nang added on 17-Sep-2012  -->
 	</hi>
 	<fd_mag>
 		<fd_mag_time>measTime</fd_mag_time>
@@ -703,7 +703,7 @@
 		<fd_mag_errz>ZUnc</fd_mag_errz>
 		<fd_mag_highpass>highPass</fd_mag_highpass>
 		<fd_mag_lowpass>lowPass</fd_mag_lowpass>
-		<fd_mag_ori>orgDigitize</fd_mag_ori>           
+		<fd_mag_ori>orgDigitize</fd_mag_ori>           <!-- Nang added on 14-Sep-2012  -->	
 		<fd_mag_com>comments</fd_mag_com>	
 	</fd_mag>
 	<fd_mgv>
@@ -711,7 +711,7 @@
 		<fd_mgv_time_unc>measTimeUnc</fd_mgv_time_unc>
 		<fd_mgv_dec>declination</fd_mgv_dec>
 		<fd_mgv_incl>inclination</fd_mgv_incl>
-		<fd_mgv_ori>orgDigitize</fd_mgv_ori>          	
+		<fd_mgv_ori>orgDigitize</fd_mgv_ori>           <!-- Nang added on 14-Sep-2012  -->		
 		<fd_mgv_com>comments</fd_mgv_com>
 	</fd_mgv>
 	<fd_ele>
@@ -728,7 +728,7 @@
 		<fd_ele_ares_err>apparentResistivityUnc</fd_ele_ares_err>
 		<fd_ele_dres>directResistivity</fd_ele_dres>
 		<fd_ele_dres_err>directResistivityUnc</fd_ele_dres_err>
-		<fd_ele_ori>orgDigitize</fd_ele_ori>           
+		<fd_ele_ori>orgDigitize</fd_ele_ori>           <!-- Nang added on 14-Sep-2012  -->
 		<fd_ele_com>comments</fd_ele_com>	
 	</fd_ele>
 	<fd_gra>
@@ -738,7 +738,7 @@
 		<fd_gra_ferr>fieldStrengthUnc</fd_gra_ferr>
 		<fd_gra_vdisp>assocVertDispl</fd_gra_vdisp>
 		<fd_gra_gwater>assocGWaterLevel</fd_gra_gwater>
-		<fd_gra_ori>orgDigitize</fd_gra_ori>   
+		<fd_gra_ori>orgDigitize</fd_gra_ori>    <!-- Nang added on 14-Sep-2012  -->
 		<fd_gra_com>comments</fd_gra_com>
 	</fd_gra>
 	<fs>
@@ -753,8 +753,8 @@
 		<fs_etime>endTime</fs_etime>
 		<fs_etime_unc>endTimeUnc</fs_etime_unc>
 		<fs_desc>description</fs_desc>
-		<fs_ori>orgDigitize</fs_ori>         
-		<fs_com>comments</fs_com>            
+		<fs_ori>orgDigitize</fs_ori>         <!-- Nang added on 14-Sep-2012  -->
+		<fs_com>comments</fs_com>            <!-- Nang added on 14-Sep-2012  -->
 	</fs>
 	<fi>
 		<fi_name>name</fi_name>
@@ -769,7 +769,7 @@
 		<fi_stime_unc>startTimeUnc</fi_stime_unc>
 		<fi_etime>endTime</fi_etime>
 		<fi_etime_unc>endTimeUnc</fi_etime_unc>
-		<fi_ori>orgDigitize</fi_ori>                
+		<fi_ori>orgDigitize</fi_ori>                <!-- Nang added on 14-Sep-2012  -->	
 		<fi_com>comments</fi_com>
 	</fi>
 	<td>
@@ -786,7 +786,7 @@
 		<td_ferr>heatFluxUnc</td_ferr>
 		<td_bkgg>bgGeothermGradient</td_bkgg>
 		<td_tcond>conductivity</td_tcond>
-		<td_ori>orgDigitize</td_ori>                  
+		<td_ori>orgDigitize</td_ori>                  <!-- Nang added on 20-Sep-2012  -->	 
 		<td_com>comments</td_com>                       
 	</td>
 	<td_img>
@@ -801,7 +801,8 @@
 		<td_img_bname>bandName</td_img_bname>
 		<td_img_hbwave>highBandWavelength</td_img_hbwave>
 		<td_img_lbwave>lowBandWavelength</td_img_lbwave>
-		<td_img_path>imagePath</td_img_path>             
+		<td_img_img>imageName</td_img_img>                <!-- Nang added on 21-Apr-2014  -->
+		<td_img_path>imagePath</td_img_path>              <!-- Nang added on 20-Sep-2012  -->
 		<td_img_psize>pixelSize</td_img_psize>
 		<td_img_maxrad>maxRadiance</td_img_maxrad>
 		<td_img_maxrrad>maxRelativeRadiance</td_img_maxrrad>
@@ -812,7 +813,7 @@
 		<td_img_atmcorr>atmosCorrection</td_img_atmcorr>
 		<td_img_thmcorr>thermCorrection</td_img_thmcorr>
 		<td_img_ortho>orthorecProc</td_img_ortho>
-		<td_img_ori>orgDigitize</td_img_ori>               
+		<td_img_ori>orgDigitize</td_img_ori>               <!-- Nang added on 20-Sep-2012  -->
 		<td_img_com>comments</td_img_com>
 	</td_img>
 	<td_pix>
@@ -822,7 +823,7 @@
 		<td_pix_rad>radiance</td_pix_rad>
 		<td_pix_flux>heatFlux</td_pix_flux>
 		<td_pix_temp>temperature</td_pix_temp>
-		<td_pix_com>comments</td_pix_com>              
+		<td_pix_com>comments</td_pix_com>                 <!-- Nang added on 20-Sep-2012  -->
 	</td_pix>
 	<ts>
 		<ts_name>name</ts_name>
@@ -838,8 +839,8 @@
 		<ts_etime>endTime</ts_etime>
 		<ts_etime_unc>endTimeUnc</ts_etime_unc>
 		<ts_desc>description</ts_desc>
-		<ts_ori>orgDigitize</ts_ori>                
-	    <ts_com>comments</ts_com>	            
+		<ts_ori>orgDigitize</ts_ori>                <!-- Nang added on 20-Sep-2012  -->
+	    <ts_com>comments</ts_com>	                <!-- Nang added on 20-Sep-2012  -->
 	</ts>
 	<ti>
 		<ti_type>type</ti_type>
@@ -851,7 +852,7 @@
 		<ti_stime_unc>startTimeUnc</ti_stime_unc>
 		<ti_etime>endTime</ti_etime>
 		<ti_etime_unc>endTimeUnc</ti_etime_unc>
-		<ti_ori>orgDigitize</ti_ori>                     
+		<ti_ori>orgDigitize</ti_ori>                     <!-- Nang added on 20-Sep-2012  -->
 		<ti_com>comments</ti_com>
 	</ti>
 	<ip_mag>
@@ -869,7 +870,7 @@
 		<ip_mag_dike>dikeIntru</ip_mag_dike>
 		<ip_mag_pipe>pipeIntru</ip_mag_pipe>
 		<ip_mag_sill>sillIntru</ip_mag_sill>
-		<ip_mag_ori>orgDigitize</ip_mag_ori>       
+		<ip_mag_ori>orgDigitize</ip_mag_ori>        <!-- Nang added on 27-Sep-2012  -->	
 		<ip_mag_com>comments</ip_mag_com>
 	</ip_mag>
 	<ip_sat>
@@ -888,7 +889,7 @@
 		<ip_sat_ves>vesicul</ip_sat_ves>
 		<ip_sat_deves>devesicul</ip_sat_deves>
 		<ip_sat_degas>degas</ip_sat_degas>
-		<ip_sat_ori>orgDigitize</ip_sat_ori>        
+		<ip_sat_ori>orgDigitize</ip_sat_ori>        <!-- Nang added on 27-Sep-2012  -->	
 		<ip_sat_com>comments</ip_sat_com>
 	</ip_sat>
 	<ip_pres>
@@ -900,7 +901,7 @@
 		<ip_pres_end_unc>endTimeUnc</ip_pres_end_unc>
 		<ip_pres_gas>gasInduced</ip_pres_gas>
 		<ip_pres_tec>tectInduced</ip_pres_tec>
-		<ip_pres_ori>orgDigitize</ip_pres_ori>        	
+		<ip_pres_ori>orgDigitize</ip_pres_ori>        <!-- Nang added on 27-Sep-2012  -->	
 		<ip_pres_com>comments</ip_pres_com>
 	</ip_pres>
 	<ip_hyd>
@@ -918,7 +919,7 @@
 		<ip_hyd_abgas>absorSolGas</ip_hyd_abgas>
 		<ip_hyd_species>speciesEqbChange</ip_hyd_species>
 		<ip_hyd_chim>boilDryChimneys</ip_hyd_chim>
-		<ip_hyd_ori>orgDigitize</ip_hyd_ori>        
+		<ip_hyd_ori>orgDigitize</ip_hyd_ori>        <!-- Nang added on 27-Sep-2012  -->	
 		<ip_hyd_com>comments</ip_hyd_com>
 	</ip_hyd>
 	<ip_tec>
@@ -938,20 +939,20 @@
 		<ip_tec_hppress>hydrothermalLubrication</ip_tec_hppress>
 		<ip_tec_etide>earthTide</ip_tec_etide>
 		<ip_tec_atmp>atmosInfluence</ip_tec_atmp>
-		<ip_tec_ori>orgDigitize</ip_tec_ori>        
+		<ip_tec_ori>orgDigitize</ip_tec_ori>        <!-- Nang added on 27-Sep-2012  -->	
 		<ip_tec_com>comments</ip_tec_com>
 	</ip_tec>
 	<cn>
 		<cn_name>name</cn_name>
 		<cn_area>area</cn_area>
-		<cn_map>commonNetMap</cn_map>   
+		<cn_map>commonNetMap</cn_map>   <!--Nang Added on 03-Sep-2012 -->
 		<cn_stime>startTime</cn_stime>
 		<cn_stime_unc>startTimeUnc</cn_stime_unc>
 		<cn_etime>endTime</cn_etime>
 		<cn_etime_unc>endTimeUnc</cn_etime_unc>
 		<cn_utc>diffUTC</cn_utc>
 		<cn_desc>description</cn_desc>
-		<cn_ori>orgDigitize</cn_ori>    
+		<cn_ori>orgDigitize</cn_ori>    <!-- Nang added on 09-May-2012  -->
 		<cn_com>comments</cn_com>
 	</cn>
 	<cs>
@@ -960,11 +961,11 @@
 		<cs_stime_unc>startTimeUnc</cs_stime_unc>
 		<cs_etime>endTime</cs_etime>
 		<cs_etime_unc>endTimeUnc</cs_etime_unc>
-		<cs_otype>oType</cs_otype>		    
-		<cs_oheight>oHeight</cs_oheight>    
-		<cs_ori>orgDigitize</cs_ori>        
+		<cs_otype>oType</cs_otype>		    <!--Nang Added on 02-Dec-2014 --> 
+		<cs_oheight>oHeight</cs_oheight>    <!--Nang Added on 02-Dec-2014 --> 
+		<cs_ori>orgDigitize</cs_ori>        <!--Nang Added on 03-Sep-2012 --> 
 		<cs_desc>description</cs_desc>
-		<cs_com>comments</cs_com>           
+		<cs_com>comments</cs_com>           <!--Nang Added on 03-Sep-2012 -->
 	</cs>	
 	<co>
 		<co_observe>description</co_observe>
@@ -972,15 +973,15 @@
 		<co_stime_unc>startTimeUnc</co_stime_unc>
 		<co_etime>endTime</co_etime>
 		<co_etime_unc>endTimeUnc</co_etime_unc>
-		<co_com>comments</co_com>                 
+		<co_com>comments</co_com>                 <!--Nang Added on 27-Sep-2012 -->
 	</co>
-	<ms>   
+	<ms>   <!-- Nang added on 17-Sep-2012 -->
 		<ms_name>name</ms_name>
 		<ms_lat>lat</ms_lat>	
 		<ms_lon>lon</ms_lon>	
 		<ms_elev>elev</ms_elev>	
 		<ms_perm>permInst</ms_perm>	
-		<ms_type>type</ms_type>	
+		<ms_type>waterBodyType</ms_type>	
 		<ms_stime>startTime</ms_stime>	
 		<ms_stime_unc>startTimeUnc</ms_stime_unc>	
 		<ms_etime>endTime</ms_etime>	
@@ -990,7 +991,7 @@
 		<ms_ori>orgDigitize</ms_ori>	
 		<ms_com>comments</ms_com>		
 	</ms>
-	<mi>   
+	<mi>   <!-- Nang added on 17-Sep-2012 -->
 		<mi_name>name</mi_name>
 		<mi_type>type</mi_type>
 		<mi_units>units</mi_units>
@@ -1003,7 +1004,7 @@
 		<mi_ori>orgDigitize</mi_ori>
 		<mi_com>comments</mi_com>
 	</mi>
-	<med>   
+	<med>   <!-- Nang added on 17-Sep-2012 -->
 		<med_time>measTime</med_time>
 		<med_time_unc>measTimeUnc</med_time_unc>
 		<med_temp>airTemp</med_temp>
@@ -1013,8 +1014,8 @@
 		<med_tprec>precipitationType</med_tprec>
 		<med_hd>humidity</med_hd>	
 		<med_wind>windSpeed</med_wind>
-		<med_wsmin>minWindSpeed</med_wsmin>     
-		<med_wsmax>maxWindSpeed</med_wsmax>   
+		<med_wsmin>minWindSpeed</med_wsmin>     <!-- Nang added on 17-Sep-2012  -->
+		<med_wsmax>maxWindSpeed</med_wsmax>     <!-- Nang added on 17-Sep-2012  -->
 		<med_wdir>windDirection</med_wdir>
 		<med_clc>cloudCoverage</med_clc>     
 		<med_ori>orgDigitize</med_ori>

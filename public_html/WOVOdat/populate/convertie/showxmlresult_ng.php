@@ -33,6 +33,38 @@ if(!isset($filename)){
 	
 	<script src="/js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="/js/jquery.validate.js"></script>
+	
+
+<!--<script language='javascript' type='text/javascript'>
+	
+jQuery(document).ready(function () {
+    jQuery("#uploadimage").validate({
+        rules: {
+            imagefile: {
+                required: true              
+            }
+        },
+        messages: {
+            imagefile: {
+                required: "This field is required."
+                
+            }
+        }
+    });
+
+    jQuery("input[type=file]").each(function() {
+        jQuery(this).rules("add", {
+            accept: "gif|png|jpe?g",
+            messages: {
+                accept: "Only gif,jpeg, jpg or png images"
+            }
+        });
+    });
+	
+});
+
+</script> 
+-->
 
 </head>
 
@@ -64,7 +96,7 @@ if(!isset($filename)){
 									
 									echo "<div id='downloadXml' style='display:none;'>";	 
 								}
-							}  
+							}
 							else{
 								echo "<div id='downloadXml' style='display:block;'>";	 
 							}

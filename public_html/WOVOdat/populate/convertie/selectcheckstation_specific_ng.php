@@ -1,8 +1,10 @@
 <?php
+//require_once "php/include/login_check.php";  // Check login   Nang Commented on 25-Feb-2013
 require_once "php/include/get_root.php";    // Get root url
 include "php/include/db_connect.php";  // Changed on 29-feb-2012
 	
-		
+	
+	
 $volca=trim($_GET['volcan']);  			    	   // Get valcano name
 $stationdisplay=trim($_GET['stationdisplay']);    //get ElectronicTiltData or TiltVectorData, etc..
 

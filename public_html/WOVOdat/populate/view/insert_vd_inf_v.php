@@ -13,11 +13,10 @@ $type=array('Caldera','Cinder cone','Complex volcano','Compound volcano','Cone',
 $rtype=array('Andesite/Basaltic Andesite','Basalt','Basalt/Picro-Basalt','Dacite','Foidite','Phonolite','Phonotephrite','Phono-tephrite/Tephri-phonolite',' Trachyte/Trachyandesite','Trachybasalt/Tephrite Basanite','Trachyandesite/Basaltic trachy-andesite','Trachyandesite','Trachyte','Rhyolite','Unknown');
 
 echo <<<HTMLBLOCK
-<!-- Page content -->
- 
-<div class="container" id="content">
-		
-	<div class="content" style="overflow:auto;">
+		<!-- Content -->
+
+		<div id="content" style="overflow:auto;">
+		<!-- Page content -->
 		
 		<h2 style="text-align:center;">Upload form for Volcano Information.  Table : vd_inf </h2> <br/>
 
@@ -224,8 +223,7 @@ echo <<<HTMLBLOCK
 			</div>
 		</form>  
 		 
-	</div>  <!-- end page content div -->
-</div>  <!-- end page container div -->
+		</div>  <!-- end page content div -->
 HTMLBLOCK;
 }
 

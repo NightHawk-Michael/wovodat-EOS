@@ -20,10 +20,10 @@ abstract class CustomCsvConverter {
     // start time of convertion
     protected $startTime;
     const DEFAULT_SAMPLE_RATE = 10;// 10 minutes
-//  const TRANSLATION_FOLDER = "C:/xampp/htdocs/home/wovodat/incoming/";
+//  const TRANSLATION_FOLDER = "/var/wovo/incoming/";
+  
+    const TRANSLATION_FOLDER = "C:/xampp/htdocs/home/wovodat/incoming/";
 	
-	const TRANSLATION_FOLDER = "../../../../../incoming/";
-	 
 	//each record take about 325 bytes. To achieve 300kb output file, we can store
     //about 900 records for each file.
     const MAX_XML_OUTPUT_SIZE = 900;

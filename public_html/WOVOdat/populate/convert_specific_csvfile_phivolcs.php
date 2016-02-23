@@ -1,13 +1,28 @@
 <?php
-if (!isset($_SESSION))  	 
-    session_start();  
-	
+if (!isset($_SESSION))   // Added on 21-Mar-2013	 
+    session_start();  // Start session
+
+/* Nang commented on 25-Feb-2013
+session_regenerate_id(true);// Regenerate session ID
+$uname="";
+$ccd="";
+
+if(isset($_SESSION['login'])) {
+	$uname=$_SESSION['login']['cr_uname'];
+	$ccd=$_SESSION['login']['cc_id'];
+}
+else{
+header('Location: '.$url_root.'login_required.php');// Session was not yet started.... Redirect to login required page
+exit();
+}
+*/
+
 if(!isset($_GET['obs'])){
 header('Location: '.$url_root.'home_populate.php');
 exit();
 }
 
-$ccd=$_SESSION['login']['cc_id'];  
+$ccd=$_SESSION['login']['cc_id'];   // Added on 21-Mar-2013	 
 ?>
 <html>
 <script src="/js/jquery-1.4.2.min.js"></script>
@@ -33,7 +48,7 @@ $ccd=$_SESSION['login']['cc_id'];
 		}); 
 		
 		
-		function checkvolcano(){   
+		function checkvolcano(){    // if nothing select in volcano box, then don't load convert value..
 			
 			var dataType = $("select#conv").val();
 			var institute = $("select#observ").val();
@@ -117,9 +132,9 @@ $ccd=$_SESSION['login']['cc_id'];
 
 		$("select#vol2").live('click', function() {	
 		
-			var stationvalue=$('#conv').attr('value');       //get File content to convert value 
+			var stationvalue=$('#conv').attr('value');   //get File content to convert value 
 	
-			resetall();		 
+			resetall();		 // Reset all like first time page starts loading		
 		
 			changeFormActionSubmit(stationvalue);            //change form action
 		
@@ -173,20 +188,20 @@ $ccd=$_SESSION['login']['cc_id'];
 		
 		}			
 				
-		$("select#station").live('click',function() {  
+		$("select#station").live('click',function() {   // click station dropdown
 			
 			$('select#instrument').remove();
 			$('#id_inst_text').remove();
 			
 			var stationname=$("#station option:selected").text();  //get station name		
 			
-			var sg = document.form1.vol2.selectedIndex;            // get volcano index 
-			var sgu = document.form1.vol2.options[sg].value;       //get volcano value		
+			var sg = document.form1.vol2.selectedIndex;   // get volcano index 
+			var sgu = document.form1.vol2.options[sg].value;  //get volcano value		
 
-			var contypevalue=$('#conv').attr('value');             //get File content to convert value 
+			var contypevalue=$('#conv').attr('value');   //get File content to convert value 
 			var stationdisplay=$("#conv option:selected").text();  //get station "display" value
 		
-			var station_value=$('#station').attr('value');         // get station value 
+			var station_value=$('#station').attr('value');    // Get station value 
 			
 			if(contypevalue == "ElectronicTiltData") {
 			
@@ -305,7 +320,7 @@ $ccd=$_SESSION['login']['cc_id'];
 		
 		<div style="width:10%;">&nbsp;</div>
 		<div id="convertid" style="width:45%;padding-left:90px;">
-			<p1>Conversion Data Type: </p1><br>
+			<p1>File content to convert: </p1><br>
 			<div id="convertblock">
 				<select name='conv' id='conv' style="width:180px;">
 				<option value=''> ... </option>

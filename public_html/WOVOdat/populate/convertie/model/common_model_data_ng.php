@@ -1,5 +1,6 @@
 <?php
-include "php/include/db_connect.php";       
+include "php/include/db_connect.php";        // Changed on 29-feb-2012
+
 
 function getvollist($obs){
 	global $link;

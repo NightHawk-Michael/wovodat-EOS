@@ -4,11 +4,10 @@ function showUpdateTableList($vol,$obs,$cbs){
 $i="";
 
 echo <<<HTMLBLOCK
-<!-- Page content -->
- 
-<div class="container" id="content">
-		
-	<div class="content" style="overflow:auto;">
+		<!-- Content -->
+
+		<div id="content" style="overflow:visible;">
+		<!-- Page content -->
 		
 		<h2 style="text-align:center;">Upload form for Hydrologic System Interaction Information.  Table : ip_hyd</h2>
 		
@@ -233,9 +232,7 @@ echo <<<HTMLBLOCK
 			</div>
 		</form>
 		 
-	</div>  <!-- end page content div -->
-</div>  <!-- end page container div -->
-
+		</div>  <!-- end page content div -->
 HTMLBLOCK;
 }
 

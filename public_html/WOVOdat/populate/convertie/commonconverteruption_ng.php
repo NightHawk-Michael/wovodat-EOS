@@ -52,12 +52,9 @@ $phaseCode=getEruptionPhaseCode($edPhsId);  // Get station code from DB
 $filename=$_FILES['fname']['name'];
 $filesize=$_FILES['fname']['size'];
 
+$infile="C:/xampp/htdocs/home/wovodat/incoming/to_be_translated/".$filename;//prepare the name of inputfile
 
-//prepare the directory of output file
-$infile="../../../../incoming/to_be_translated/".$filename;       //prepare the name of inputfile
-$outputfilepath="../../../../incoming/translated/";              //prepare the directory of output file
-
-
+$outputfilepath="C:/xampp/htdocs/home/wovodat/incoming/translated/";     //prepare the directory of output file
 $outputfilename=substr($filename,0,-4).".xml"; 
 $outfile=$outputfilepath.$outputfilename;
 

@@ -52,7 +52,7 @@ if (isset($_SESSION['login'])) {
                 
 			<!-- Footer -->
 				<?php include 'php/include/footer_main_beta.php'; ?>
-            
+           
         </div> <!--end of wrapborder-->
 
     </body>

@@ -1,4 +1,5 @@
 <?php
+//require_once "php/include/login_check.php";  // Check login    Commented on 25-Feb-2013
 require_once "php/include/get_root.php";	 // Get root url
 include "php/include/db_connect.php";        // Changed on 29-feb-2012
 
@@ -35,13 +36,28 @@ else if($stationdisplay == "MeteorologicalNetwork" || $stationdisplay == "Meteor
 
 if($stationdisplay=="SeismicStation"){
 	
-	$result= mysql_query("SELECT a.sn_name	FROM sn a, vd b	WHERE  a.vd_id=b.vd_id and b.vd_name='$volca' union SELECT a.sn_name FROM sn a, vd b, jj_volnet c WHERE  c.jj_net_flag='S' and c.jj_net_id=a.sn_id and c.vd_id=b.vd_id and b.vd_name='$volca'")or die(mysql_error());
+/*	
+	$result = mysql_query("SELECT a.sn_name	FROM sn a, vd b	WHERE  a.vd_id=b.vd_id and b.vd_name='$volca'") or die(mysql_error());
+
+	if (! mysql_num_rows($result)){      // if (false)
+		$result= mysql_query("SELECT a.sn_name	FROM sn a, vd b, jj_volnet c WHERE  c.jj_net_flag='S' and c.jj_net_id=a.sn_id and c.vd_id=b.vd_id and b.vd_name='$volca'")or die(mysql_error());
+	}
+*/
+	$result= mysql_query("SELECT a.sn_name	FROM sn a, vd b	WHERE  a.vd_id=b.vd_id and b.vd_name='$volca' union SELECT a.sn_name	FROM sn a, vd b, jj_volnet c WHERE  c.jj_net_flag='S' and c.jj_net_id=a.sn_id and c.vd_id=b.vd_id and b.vd_name='$volca'")or die(mysql_error());
 
 }
 else if($stationdisplay=="DeformationStation" || $stationdisplay=="GasStation" || $stationdisplay=="HydrologicStation" || $stationdisplay=="ThermalStation" || $stationdisplay=="FieldsStation" || $stationdisplay == "MeteorologicalStation") {
+/*	
+	$result = mysql_query("SELECT a.cn_name	FROM cn a, vd b	WHERE  a.vd_id=b.vd_id and b.vd_name='$volca' and a.cn_type='$stationvalue'") or die(mysql_error()); 
+	
+	if (! mysql_num_rows($result)){      // if (false)
+		$result= mysql_query("SELECT a.cn_name	FROM cn a, vd b, jj_volnet c WHERE  c.jj_net_flag='C' and c.jj_net_id=a.cn_id and c.vd_id=b.vd_id and b.vd_name='$volca' and a.cn_type='$stationvalue'")or die(mysql_error());
+	}	
+*/
 
 	$result= mysql_query("SELECT a.cn_name FROM cn a, vd b	WHERE  a.vd_id=b.vd_id and b.vd_name='$volca' and a.cn_type='$stationvalue' union SELECT a.cn_name	FROM cn a, vd b, jj_volnet c WHERE  c.jj_net_flag='C' and c.jj_net_id=a.cn_id and c.vd_id=b.vd_id and b.vd_name='$volca' and a.cn_type='$stationvalue'")or die(mysql_error());	
 }
+
 
 	$data=array('Choose Network'); // creat array with value first
 
@@ -73,7 +89,7 @@ else if($stationdisplay=="DeformationStation" || $stationdisplay=="GasStation" |
 	}
 	else{
 	
-		echo "<h1 class='nonetworkerror' style='text-align: left;color: #777777;font-size:12px;font-weight: bold;'>No Network for this Station!<br/> Please create a network first <br/>from a drop down box !</h1>";
+		echo "<h1 class='nonetworkerror' style='width:300px;color: #777777;font-size:12px;font-weight: bold;font-family: lucida, sans-serif;'>No Network for this Station!<br/> Please create a network first <br/>from a drop down box !</h1>";
 	}
 	
 ?>

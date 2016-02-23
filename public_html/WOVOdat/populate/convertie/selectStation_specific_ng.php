@@ -1,6 +1,7 @@
 <?php
+//require_once "php/include/login_check.php";  // Check login   Nang Commented on 25-Feb-2013
 require_once "php/include/get_root.php";    // Get root url
-include "php/include/db_connect.php";  
+include "php/include/db_connect.php";  // Changed on 29-feb-2012
 
 	
 $volca=trim($_GET['volcan']);  			    	   // Get valcano name
@@ -115,7 +116,7 @@ else if($stationdisplay == "ElectronicTiltData" || $stationdisplay == "PostElect
 
 	}
 	else{
-		echo "<h1 id='nostation' class='nostationerror' style='text-align: left;color: #777777;font-size:12px;font-weight: bold;'>No station for this volcano!<br/> Please create a station first!</h1>";	
+		echo "<h1 id='nostation' class='nostationerror' style='width:300px;color: #777777;font-size:12px;font-weight: bold;font-family: lucida, sans-serif;'>No station for this volcano you have chosen!<br/> Please create a station first!</h1>";	
 	}
 	
 	

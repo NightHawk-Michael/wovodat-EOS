@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION))      
+if (!isset($_SESSION))      // Nang added 21-Mar-2013
     session_start();
 	
 include "php/include/db_connect.php";       

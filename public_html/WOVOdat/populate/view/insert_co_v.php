@@ -4,11 +4,10 @@ function showUpdateTableList($vol,$obs,$cbs){
 $i="";
 
 echo <<<HTMLBLOCK
-<!-- Page content -->
- 
-<div class="container" id="content">
-		
-	<div class="content">
+		<!-- Content -->
+
+		<div id="content">
+		<!-- Page content -->
 		
 		<h2 style="text-align:center;">Upload form for Volcano Activity Information.  Table : co </h2> <br/>
 		
@@ -148,8 +147,8 @@ echo <<<HTMLBLOCK
 			<input type="submit" name="confirm" value="Confirm" />
 			</div>
 		</form>
-	</div>  <!-- end page content div -->
-</div>  <!-- end page container div -->
+		 
+		</div>  <!-- end page content div -->
 HTMLBLOCK;
 }
 

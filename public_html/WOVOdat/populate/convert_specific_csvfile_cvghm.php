@@ -41,6 +41,7 @@ exit();
 					}
 				}
 			})
+			//$("#volcano").load('./convertie/selectVolOfInstitute2_ng.php',"kode=" + observatory); 
 		}		
 					
 		$("#data_type").change(function() {
@@ -269,7 +270,7 @@ exit();
 	});	
 	</script>
 
-<div id="whole_div">
+<div id = "whole_div">
 
 	<h2>Conversion of Customary-format Data </h2>
 	<p><blockquote>Input: monitoring data, following a specific format which already listed in the WOVOdat </blockquote></p>

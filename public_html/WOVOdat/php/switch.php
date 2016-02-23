@@ -121,18 +121,6 @@ if (isset($_GET['get']) || isset($_POST['get'])) {
             $o = $wovodat->getEquakeTypeList();
             echo json_encode($o);
             break;
-        case 'EquakeType':
-            include_once 'Wovodat.php';
-            $wovodat = new Wovodat();
-            $o = $wovodat->getEquakeType();
-            echo json_encode($o);
-            break;
-        case 'CatalogOwner':
-            include_once 'Wovodat.php';
-            $wovodat = new Wovodat();
-            $o = $wovodat->getCatalogOwner();
-            echo json_encode($o);
-            break;
         default:
             break;
     }

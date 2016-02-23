@@ -34,65 +34,79 @@ if (isset($_GET['attempt']) == 1) {
         <meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
         <meta name="keywords" content="Volcano, Vulcano, Volcanoes">
         <link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
+        <link href="/css/styles_beta.css" rel="stylesheet">
     </head>
 
     <body>
-        <div class="body">
+        <div id="wrapborder_x">
             <!-- Header -->
-            <?php include 'php/include/header.php'; ?>               
- 			<div class="container">
-				<div id="content"><br/>
-					<p>For new user, please <a href="regist_form.php">register</a> first.</p>
-					<!-- Registration / Login -->
-					<table id="regisLogin">
-						<!-- Steps -->
-						<tr>
-							<!-- Registration -->
-							<td rowspan="5" id="regisLoginC1"><a href="regist_form.php">Register</a></td>
-							<!-- Login -->
-							<td colspan="3" id="regisLoginC2">Log in</td>
-						</tr>
-						
-						<!-- Login form -->
-
-						
-					<form method="post" action="home_populate.php" name="form1"> 
-							<!-- Username -->
+            <div id="wrap_x">
+                <?php include 'php/include/header_beta.php'; ?>               
+ 
+				<div id="contentlmain">
+ 						<p>For new user, please <a href="regist_form.php">register</a> first.</p>
+						<!-- Registration / Login -->
+						<table id="regisLogin">
+							<!-- Steps -->
 							<tr>
-								<th id="regisLoginUname">&nbsp;Username:</th>
-								<td>
-									<input type="text" name="uname" />
+								<!-- Registration -->
+								<td rowspan="5" id="regisLoginC1"><a href="regist_form.php">Register</a></td>
+								<!-- Login -->
+								<td colspan="3" id="regisLoginC2">Log in</td>
+							</tr>
+							
+							<!-- Login form -->
+							
+<?php /* 
+	if(isset($_GET['pre'])){
+		echo"<form method='post' action='/precursor/index_unrest_devel_v5.php' name='form1'>";
+	}  */
+?>						
+							
+						<form method="post" action="home_populate.php" name="form1"> 
+								<!-- Username -->
+								<tr>
+									<th id="regisLoginUname">Username:</th>
+									<td>
+										<input type="text" name="uname" />
+									</td>
+								</tr>
+								<!-- Password -->
+								<tr>
+									<th id="regisLoginpw">Password:</th>
+									<td id="regisLoginpw">
+										<input type="password" name="password" />
+									</td>
+									<td colspan="2" id="regisLoginSubmitButton">
+										<input type="submit" name="login_submit" value="Log In" />
+									</td>
+								</tr>
+							</form>
+							
+							
+							<!-- Login errors -->
+							<tr>
+								<td colspan="3" id="regisLoginError">
+									<span><?php	print $login_error; ?></span>
 								</td>
 							</tr>
-							<!-- Password -->
+							<!-- Forgot password -->
 							<tr>
-								<th id="regisLoginpw">&nbsp;Password:</th>
-								<td id="regisLoginpw">
-									<input type="password" name="password" />
-								</td>
-								<td colspan="2" id="regisLoginSubmitButton">
-									<input type="submit" name="login_submit" value="Log In" />
-								</td>
+								<td colspan="3" id="forgotPW"><a href="forgot_password.php">Forgot password</a></td>
 							</tr>
-						</form>
-						
-						
-						<!-- Login errors -->
-						<tr>
-							<td colspan="3" id="regisLoginError">
-								<span><?php	print $login_error; ?></span>
-							</td>
-						</tr>
-						<!-- Forgot password -->
-						<tr>
-							<td colspan="3" id="forgotPW"><a href="forgot_password.php">Forgot password</a></td>
-						</tr>
-					</table>
+						</table>
 
-				</div>  <!-- end of content-->
- 			</div> <!-- end of container -->  
-        </div> <!-- end of body -->  
-    <!-- Footer -->
-    <?php include 'php/include/footer.php'; ?>  
+                </div>   <!-- end contentlmain -->
+			
+            </div>  <!-- end wrap_x -->
+			
+            <div style="height: 20px"></div>
+            <div class="reservedSpace">
+            </div>
+        </div>   <!-- end wrapborder_x -->
+		
+        <div class="wrapborder_x">
+            <?php include 'php/include/footer_main_beta.php'; ?>
+        </div>
     </body>
 </html>

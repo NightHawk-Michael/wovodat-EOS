@@ -1,20 +1,3 @@
-<?php
-
-// Start session
-session_start();
-
-// Get root url
-require_once "php/include/get_root.php";
-
-// If session was already started
-if (isset($_SESSION['login'])) {
-	// Redirect to home page
-	header('Location: '.$url_root.'home_populate.php');
-	exit();
-}
-
-?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,21 +6,33 @@ if (isset($_SESSION['login'])) {
 	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
 	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
 	<meta name="keywords" content="Volcano, Vulcano, Volcanoes">
+	<link href="/css/styles_beta.css" rel="stylesheet">
 	<link href="/gif/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
+	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
 </head>
-   <body>
-        <div class="body">
-            <!-- Header -->
-            <?php include 'php/include/header.php'; ?>               
- 			<div class="container">
-				<div id="content"><br/>
-					<br>
-					<br>
-					<p><blockquote>Please <a href="/populate/index.php"><b>LOGIN</b></a> first.</blockquote></p>
-				</div>  <!-- end of content-->
- 			</div> <!-- end of container -->  
-        </div> <!-- end of body -->  
-    <!-- Footer -->
-    <?php include 'php/include/footer.php'; ?>  
-    </body>
+<body>
+
+	<div id="wrapborder">
+	<div id="wrap">
+		<?php include 'php/include/header_beta.php'; ?>
+		<!-- Content -->
+		<div id="content">	
+			<div id="contentl">
+				<!-- Page content -->
+				<!-- Text -->
+				<br>
+				<br>
+				<p><blockquote>Please <a href="/populate/index.php"><b>LOGIN</b></a> first.</blockquote></p>
+			</div>
+			<div id="contentr">
+			</div>
+		</div>
+		
+		<!-- Footer -->
+		<div id="footer">
+			<?php include 'php/include/footer_beta.php'; ?>
+		</div>
+		
+	</div>
+</body>
 </html>
