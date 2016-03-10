@@ -1,4 +1,4 @@
-/*
+/**
 * Store every javaScript functions to draw Earthquakes for php file
 /*Created by Luis Ngo - 21/2/2016
 */
@@ -17,12 +17,6 @@ var equakeGraphs = [];
 equakeGraphs[1] = {};
 // right graphs
 equakeGraphs[2] = {};
-// this is the list of available station type for each volcano,
-// this list will be initialize when the volcano is selected and 
-// it will be deleted when this volcano is deselected.
-//var stationTypeList = [];
-// this list of available time series list
-var timeSeriesList = [];
 // the google maps (for both Time Series view and Compare Volcano view
 var map=[];
 // the list of station for each station type
@@ -31,19 +25,12 @@ var stationsDatabase = {};
 var compStationsDatabase = {};
 // the markers and infowindows for volcano stations
 var markers = [],infoWindows = [];
-//the markers for volcanoes
-//var volMarkers  = [];
-//the markers for neighbors
-//var neighMarkers=[], neighInfoWindows = [];
-// this inforWindow is for the volcano
-//var infowindowVolcano=[];
+
 //All information of the loaded volcano
 var volcanoInfo = {};
 // this link to all the plotted graph
 var graphs = [];
-// this link to all the plot data for each graph
-var graphData = []; 
-var cloneData = [];
+
 // the variable store the reference to the overview graph
 var overviewGraph;
 // these marks will show the eruption start time 
@@ -53,21 +40,15 @@ eruptionsData.compEruptions = [];
 // reference data to since between various graphs
 var referenceTime = null;
 // full details scaled data
-var detailedData = [];
 
-// Equake type
-var equakeType = [];
 
 var totalGraph = [];
-var limitTotalGraph = 5;
 var graphCount = [];
-
-var ownerURL = [];
 
 var ccMap = new Map();
 var eqMap = new Map();
 
- /*
+ /**
  * Draw the equake graphs under the equake panels
  */
   
@@ -88,7 +69,7 @@ function drawEquake(o){
 	map[o.mapUsed].setCenter(map[o.mapUsed].centerPoint);
 }
 
-/*
+/**
  * Help function to draw equake in 2 dimensions using Flot
  */
 function drawEquake2D(o){
@@ -108,7 +89,7 @@ function drawEquake2D(o){
 	}  
 }
 
-/*
+/**
  * Draw the earthquakes around the volcano displayed in the
  * map in two dimensions. This function is using GMT to draw the map in case
  * the user don't have access to googel map
@@ -122,7 +103,7 @@ function drawEquake2DGMT(o){
 	var vlon = volcanoInfo[mapUsed].lon;                         //Nang added               
 
 	var id = o.source.id;
-	var placeholder = document.getElementById('2DGMTEquakeGraph' + mapUsed);   
+	var placeholder = document.getElementById('2DGMTEquakeGraph' + mapUsed);
 
 	if(gmt2DData[cavw] == undefined){
 		Wovodat.get2DGMTMap({
@@ -164,7 +145,7 @@ function drawEquake2DGMT(o){
 	}
 }
 
-/*
+/**
 *
 */
 function show2DGMT(ar){
@@ -177,7 +158,7 @@ function show2DGMT(ar){
 		placeholder.style.display = 'block';
 }
 
-/*
+/**
  * Draw the earthquakes around the volcano displayed in the
  * map in three dimensions. This function is using GMT to draw the map in case
  * the user don't have access to googel map.
@@ -227,7 +208,7 @@ function drawEquake3DGMT(o){
 	}
 }
 
-/*
+/**
  * Private function to help putting the 3D images and information
  * on the equake panel
  * This function will set the image , add the function for the 
@@ -279,7 +260,7 @@ function show3DGMT(ar){
 		placeholder.show();
 }
 
- /*
+ /**
  * Insert markers for earthquakes
  * This function will also show the marker of earthquake event in the
  * Google map of either mapUsed
@@ -380,7 +361,7 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 	}   
 }
 
-/*
+/**
 *Display Element
 */
  function displayElement(set,mapUsed,element){
@@ -407,137 +388,8 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 	});
 }
 
-/*
- * set filter to avaiable data that we have, especially the start time and 
- *end time of all earthquake event
- */
-function initializeFilter(data,mapUsed){
-	var i, item, startTime, endTime, timestamp;
-	for(i in data){
-		item = data[i];
-		timestamp = item['timestamp'];
-		if(startTime == undefined) startTime = timestamp;
-		else{
-			if(startTime > timestamp) startTime = timestamp;
-		}
-		if(endTime == undefined) endTime = timestamp;
-		else{
-			if(endTime < timestamp) endTime = timestamp;
-		}
-	}
-	if(startTime == undefined || endTime == undefined)
-		return;
-	// no need to reset
-	if($("#SDate" + mapUsed ).datepicker( "option", "yearRange" ) == (startTime.getUTCFullYear() + ":" + endTime.getUTCFullYear()))
-		return;
-	var maxValue = Math.floor(endTime.getTime()-startTime.getTime())/86400000;
 
-
-	var startTimeString = startTime.getUTCMonth() + 1 + "/" + startTime.getUTCDate() + "/" + startTime.getUTCFullYear();
-	$("#SDate" + mapUsed).val(startTimeString);
-	var endTimeString = endTime.getUTCMonth() + 1 + "/" + endTime.getUTCDate() + "/" + endTime.getUTCFullYear();
-	$("#EDate" + mapUsed).val(endTimeString);
-
-	$("#SDate" + mapUsed).datepicker("option", "yearRange", startTime.getUTCFullYear() + ":" + endTime.getUTCFullYear());
-	$("#EDate" + mapUsed).datepicker("option", "yearRange", startTime.getUTCFullYear() + ":" + endTime.getUTCFullYear());
-
-	$("#DateRange" + mapUsed).slider({
-		range: true,
-		max: maxValue,
-		values : [0, maxValue],
-		slide: function(event,ui){
-			var date = new Date(startTime.getTime());
-			date.setDate(date.getDate() + ui.values[0]);
-			$("#SDate" + mapUsed).val($.datepicker.formatDate('mm/dd/yy',date));
-			date = new Date(startTime.getTime());
-			date.setDate(date.getDate() + ui.values[1]);
-			$("#EDate" + mapUsed).val($.datepicker.formatDate('mm/dd/yy',date));
-		}
-	});
-}
-
-/*
-* Filter Data
-*/
-function filterData(cavw,panelUsed){
-
-	// data is not available for filtering
-	if(!earthquakes[cavw]) 
-		return;
-
-	// Just modified here
-	var nEvent = $("#Evn"+panelUsed).val();
-	var sDate = parseDateVal($("#SDate"+panelUsed).val());
-
-	if(sDate == undefined || sDate == "")
-		sDate = 0;
-	var eDate = parseDateVal($("#EDate"+panelUsed).val());
-
-	// set the end time to be at the end of the end date, not the start of the
-	// end date
-	if(eDate == undefined || eDate == "")
-		eDate = new Date().getTime();
-	eDate += Wovodat.ONE_DAY - 1000;// in milliseconds
-	
-	// Just modified here
-	// Debug
-	var dhigh = parseFloat($("#DepthHigh"+panelUsed).val());
-	var dlow = parseFloat($("#DepthLow"+panelUsed).val());
-	var wkm = parseFloat(document.getElementById("wkm"+panelUsed).value);
-	var mhigh = parseFloat($("#MagnitudeHigh"+panelUsed).val());
-	var mlow = parseFloat($("#MagnitudeLow"+panelUsed).val());        
-	// type = type.options[type.selectedIndex].value;
-	var count = 0;
-	var vlat = earthquakes[cavw]['vlat'], vlon = earthquakes[cavw]['vlon'];
-	// some error here, what if i is 'vlat' or 'vlon'
-	for (var i in earthquakes[cavw]){
-		if(i == 'vlat' || i == 'vlon')
-			continue;
-		// if we already have enough earthquakes event, the rest of event is 
-		// ignored even though they satisfy the filter
-		if (count > nEvent){
-			earthquakes[cavw][i]['available'] = false;
-			continue;
-		}
-		if (earthquakes[cavw][i]['time'] != "" && typeof earthquakes[cavw][i]['time'] != "undefined"){
-			var eDepth = parseFloat(earthquakes[cavw][i]['depth']);
-
-			var eTime = Wovodat.convertDate(earthquakes[cavw][i]['time']);
-
-			var elat = earthquakes[cavw][i]['lat'], elon = earthquakes[cavw][i]['lon'];
-			var distanceFromVolcano = Wovodat.calculateD(vlat,vlon,elat,elon,2);
-			if(distanceFromVolcano > wkm + 0.1){
-				earthquakes[cavw][i]['available'] = false;  
-				continue;
-			}
-		
-			eTime = eTime.getTime();
-	
-			earthquakes[cavw][i]['available'] = false;
-			// equake below the dlow
-			if(eDepth < dlow){
-				continue;
-			}
-			// equake above the dhigh
-			if(eDepth > dhigh){
-				continue;
-			}
-			// event happened after the end date
-			if(eTime > eDate){
-				continue;
-			}
-			// event happned before the start date
-			if (eTime < sDate){
-				continue;
-			}
-			count++;
-			earthquakes[cavw][i]['available'] = true;
-
-		}
-	}
-}
-
-/*
+/**
 * Create maker
 */
 function createMarker(equakeObj,mapUsed){
@@ -641,10 +493,10 @@ function getSelectedEquakesButton(mapUsed){
 	return i + 1;
 }
 
-/*
+/**
 vutuan added to display info of earthquake events.
 */
- function displayEvent(cavw,mapUsed){
+function displayEvent(cavw,mapUsed){
 	var nEvent = $('#Evn'+mapUsed).val();
 	var actualEvent = computeEquakeEvents(cavw,mapUsed);
 	if(parseInt(nEvent) > parseInt(actualEvent)){
@@ -657,7 +509,7 @@ vutuan added to display info of earthquake events.
 }
 
 
-/*
+/**
  * Plot the equake data
  * The volcano to draw the earthquake data is determined using the cavw and
  * mapUsed parameter
@@ -1214,7 +1066,7 @@ $(document).ready(function(){
 	});
 });
 
- function setupSwitchButton(){
+function setupSwitchButton(){
 	var button = document.getElementById('switchView');
 	var panel = document.getElementById('volcanoPanel2');
 	$(button).click(switchView);
@@ -1473,29 +1325,7 @@ function hideEquakePanel(o){
 	$("#EquakePanel" + o.mapUsed).hide();
 }
 
-/*
- */
-function clearEquakedrawingData(o){
-	var mapUsed = o.mapUsed;
-	var placeholder = $("#equakeGraphs" + mapUsed);
-	var tmp = $("#twoDEquakeFlotGraph" + mapUsed,placeholder)
-	tmp.hide();
-	$("#FlotDisplayLat" + mapUsed).html('');
-	$("#FlotDisplayLon" + mapUsed).html('');
-	$("#FlotDisplayTime" + mapUsed).html('');
-	tmp = $("#2DGMTEquakeGraph" + mapUsed,placeholder);
-	tmp.hide()
-	$("#imageLink",tmp).attr('href','');
-	$("#image",tmp).attr('src','');
-	$("#gifImage",tmp).attr('href','');
-	$("#gmtScriptFile",tmp).attr('href','');
-	tmp = $("#3DGMTEquakeGraph" + mapUsed,placeholder);
-	tmp.hide()
-	$("#imageLink",tmp).attr('href','');
-	$("#image",tmp).attr('src','');
-	$("#gifImage",tmp).attr('href','');
-	$("#gmtScriptFile",tmp).attr('href','');
-} 
+
 function removeElement(mapUsed,element){
 	var table = document.getElementById(element+mapUsed);
 	var tableRows = table.getElementsByTagName('tr');
@@ -1525,91 +1355,10 @@ function cachingElement(set,cavw,mapUsed,element){
 	}
 }      
 
-/*
-* when user select a specific eruption, all the graphs will move to 
-* the volcano in the time series
-*/
-function moveGraphsToEruptionTime(tableId){
-	// get time of the eruption
-	if(!tableId){
-		if ($("#Map2").css("display") != "none"){
-			tableId = 1;
-		}else{
-			tableId = '';
-		}
-	}
-	var value = this.value;
-	if(value == "") return;
-	value = value.split(' ');
-	if(value.length <= 1) {
-		return;
-	}
-	// convert the time to javascript data object
-	var time = Wovodat.toDate(this.value).getTime();
-	var range = 0;
-	// since we have synchronized all the graphs, all of them must have
-	// the same range
-	for(var i in graphs){
-		var temp = side(i);
-		if(temp != tableId) continue;
-		var temp = graphs[i].getAxes().xaxis;
-		range = temp.max - temp.min;
-		break;
-	}
-	// get the duration of the displayed graph
-	if(range == '0' ) {
-		return;
-	}
-	// the eruption will be displayed at the center of the time series.
-	var minRange;
-	var maxRange;
-	range = range / 2;
-	minRange = time - range;
-	maxRange = time + range;
-	var data;
-	var placeholder;
-	var options,newOptions;
-	var tempGraph;
-	for(var i in graphs){
-		var temp = side(i);
-		if(temp != tableId) continue;
-		tempGraph = graphs[i];
-		data = tempGraph.getData();
-		placeholder = tempGraph.getPlaceholder();
-		data = {
-			data: data[0].data,
-			label: data[0].label,
-			xaxis:{
-				max: maxRange,
-				min: minRange
-			}
-		};
-		options = tempGraph.getOptions();
-		newOptions = {
-			series: options.series,
-			grid: options.grid,
-			yaxis:options.yaxis,
-			zoom:{
-				interactive: true
-			},
-			pan: {
-				interactive: true
-			}
-		};
-		newOptions.xaxis = options.xaxis;
-		newOptions.xaxis.max = maxRange;
-		newOptions.xaxis.min = minRange;
-		placeholder.empty();
-		delete(graphs[i]);
-		if(temp == '2')
-			graphs[i] = $.plot(placeholder,[data,eruptionsData.compEruptions],newOptions);
-		else
-			graphs[i] = $.plot(placeholder,[data,eruptionsData],newOptions);
-	}
-}
 
 
-/* 
+
+/**
  show the button to hide/show earthquake markers in the graph
  the function only show the button when we have any marker
 */
@@ -1641,4 +1390,76 @@ function showHideEquakeButton(mapUsed){
 	button.css('display','none');
 }
 
+function insertMarkersForNeighbors(cavw, list, panelUsed){
+	//remove all neighMarkers
+	for (var i in neighMarkers[panelUsed])
+		neighMarkers[panelUsed][i].setMap(null);
+	neighMarkers[panelUsed]=[];
+	if (list[list.length]=="")
+		list.length--;
+	for (var index in list){
+		var info_split = list[index].split(";");
+		var neighCavw = info_split[0];
+		var name = info_split[1];
+		var lat = info_split[2];
+		var lon = info_split[3];
+		var marker = new google.maps.Marker({
+			position:new google.maps.LatLng(lat,lon)
+		});
+		marker.setIcon("/img/pin.png");
+		marker.setMap(map[panelUsed]);
+		marker.setTitle(name+"_"+neighCavw);
+		neighMarkers[panelUsed].push(marker);
+		google.maps.event.addListener(marker,"click",function(){
+			var selectDom;
+			var selectj;
+			if (panelUsed==1){
+				selectDom = document.getElementById("VolcanoList");
+				selectj = $("#VolcanoList");
+			}
+			else{
+				selectDom = document.getElementById("CompVolcanoList");
+				selectj = $("#CompVolcanoList");
+			}
+			var title = this.getTitle();
+			title = title.split('_');
+			title = Wovodat.trim(title[1]);
+			var l = selectDom.options.length;
+			for (var i = 0 ; i < l ; i++){
+				if(selectDom.options[i].text == undefined)
+					continue;
+				if ((selectDom.options[i].text).indexOf(title) > -1){
+					selectDom.selectedIndex = i;
+					selectj.change();
+					break;
+				}
+			}
 
+		});
+	}
+}
+
+/**
+ * Clear all data of Earth Quake
+ */
+function clearEquakedrawingData(o){
+	var mapUsed = o.mapUsed;
+	var placeholder = $("#equakeGraphs" + mapUsed);
+	var tmp = $("#twoDEquakeFlotGraph" + mapUsed,placeholder)
+	tmp.hide();
+	$("#FlotDisplayLat" + mapUsed).html('');
+	$("#FlotDisplayLon" + mapUsed).html('');
+	$("#FlotDisplayTime" + mapUsed).html('');
+	tmp = $("#2DGMTEquakeGraph" + mapUsed,placeholder);
+	tmp.hide()
+	$("#imageLink",tmp).attr('href','');
+	$("#image",tmp).attr('src','');
+	$("#gifImage",tmp).attr('href','');
+	$("#gmtScriptFile",tmp).attr('href','');
+	tmp = $("#3DGMTEquakeGraph" + mapUsed,placeholder);
+	tmp.hide()
+	$("#imageLink",tmp).attr('href','');
+	$("#image",tmp).attr('src','');
+	$("#gifImage",tmp).attr('href','');
+	$("#gmtScriptFile",tmp).attr('href','');
+}

@@ -1,36 +1,17 @@
-/*
+/**
 * Store every javaScript functions to draw Graph for php file
-/*Created by Luis Ngo - 21/2/2016			
-*/	
+*Created by Luis Ngo - 21/2/2016
+*/
 // this is the list of available station type for each volcano,
 // this list will be initialize when the volcano is selected and 
 // it will be deleted when this volcano is deselected.
-var stationTypeList = [];
-// this list of available time series list
-var timeSeriesList = [];
-// the google maps (for both Time Series view and Compare Volcano view
-var map=[];
-// the list of station for each station type
-var stationsDatabase = {};
-// the list of station for each station type - The second volcano - in Compare Volcano view
-var compStationsDatabase = {};
-// the markers and infowindows for volcano stations
-var markers = [],infoWindows = [];
-//the markers for volcanoes
-var volMarkers  = [];
-//the markers for neighbors
-var neighMarkers=[], neighInfoWindows = [];
-// this inforWindow is for the volcano
-var infowindowVolcano=[];
-//All information of the loaded volcano
-var volcanoInfo = {};
+
 // this link to all the plotted graph
 var graphs = [];
 // this link to all the plot data for each graph
 var graphData = []; 
 var cloneData = [];
-// the variable store the reference to the overview graph
-var overviewGraph;
+
 // these marks will show the eruption start time 
 // eruptions data
 var eruptionsData = {};
@@ -39,22 +20,17 @@ eruptionsData.compEruptions = [];
 var referenceTime = null;
 // full details scaled data
 var detailedData = [];
-
-// Equake type
-var equakeType = [];
-
 var totalGraph = [];
 var limitTotalGraph = 5;
 var graphCount = [];
 
 var ownerURL = [];
 
-var ccMap = new Map();
-var eqMap = new Map();	
-/* main function to draw the time series graph
-* data has the format [[[x1,y1],[x2,y2],[x3,y3]]]
-*
-* id is the string to specify the type of the data
+/**
+ *  main function to draw the time series graph
+ * data has the format [[[x1,y1],[x2,y2],[x3,y3]]]
+ *
+ * id is the string to specify the type of the data
 */
 function drawGraph(args) {
 	function getDisplayLabel(id,tableId) {
@@ -220,7 +196,7 @@ function drawGraph(args) {
 	}
 }
 
-/*
+/**
 Plot graph
 */
 function plotGraph(id,tableId,options,data) {
@@ -243,10 +219,10 @@ function plotGraph(id,tableId,options,data) {
 	});                
 }
 
-/*
-Redraw graph
-redraw other graphs
-need to consider the end character of the id
+/**
+ *Redraw graph
+ * redraw other graphs
+ * need to consider the end character of the id
 */
 function redrawOtherGraph(id,tableId,options) {
 
@@ -286,111 +262,9 @@ function redrawOtherGraph(id,tableId,options) {
 	}
 }
 
-/*
- showing the tooltip of information for the graphs when
- user hovers mouse over a point on the graph.
-*/
-function setOnHoverForGraph(id,tableId,label,equakeType) {
-	
-	var previousPoint = null;
 
-	$("[id='" + id + "Graph" + tableId + "']").bind('plothover',function(event,pos,item){
-		if(item){
-			if(previousPoint != item.dataIndex){
-				previousPoint = item.dataIndex;
-				$("#tooltip").remove();
-				var x = new Date(item.datapoint[0]);
-				var currentTime = item.datapoint[0];
-				var index = 0;
-				x = x.getUTCDate() + "/" + (x.getUTCMonth() + 1) + "/" + x.getUTCFullYear() + " " + x.getUTCHours() + ":" + x.getUTCMinutes() + ":" + x.getUTCSeconds();
-				var content = "Time: " + x + " UTC";
-				var id = this.id;
-				index = id.indexOf("Graph");
-				id = id.substr(0,index);
-				for(index in graphs){
-					if(tableId){
-						var j = index.length;
-						j = parseInt(index.substring(j-1,j));
-						if(j != tableId){
-							continue;
-						}
-					}
-					graphs[index].unhighlight();
-				}
-				for(index in graphs){
-					if(tableId){
-						var j = index.length;
-						j = parseInt(index.substring(j-1,j));
-						if(j != tableId){
-							continue;
-						}
-					}
-					var data = graphs[index].getData();
-					data = data[0].data;
-					var currentIndex = -1;
-					if(index == id){
-						graphs[index].highlight(0,item.dataIndex);
-						currentIndex = item.dataIndex;
-					}
-					else{
-						// searching for the value at the position x of 
-						// graphs[index] using binary search
-						var start = 0, end = data.length - 1;
-						var mid = Math.floor((start + end) / 2);
-						if(currentTime < data[end][0] || currentTime > data[start][0]){
-							end = start - 1;
-							currentIndex = -1;
-						}
-						while(start <= end){
-							if(currentTime == data[mid][0]){
-								graphs[index].highlight(0,mid);
-								currentIndex = mid;
-								break;
-							}else{
-								if(currentTime > data[mid][0]){
-									end = mid - 1;
-								}else{
-									start = mid + 1;
-								}
-							}
-							mid = Math.floor((start + end) / 2);
-							if(end < start){
-								currentIndex = -1;
-							}
-						}
-					}
-					if(currentIndex > 0){
-						var m = side(index);
-						index = index.substring(0,index.length-1);
 
-						//var k = document.getElementById(index + 'Row' + m).getElementsByTagName('td')[0];
-						// the text of the graph is the second child node of the row
-						content += "<br/>" + label + ": " + data[currentIndex][1];
-						if(equakeType) {
-							content += "<br/>" + "Earthquake type: " + equakeType;
-						}
-					}
-				}
-				Wovodat.showTooltip(pos.pageX, pos.pageY,content);
-			}
-		}else{
-			for(index in graphs){
-				if(tableId){
-					var j = index.length;
-					j = parseInt(index.substring(j-1,j));
-					if(j != tableId){
-						continue;
-					}
-				}
-				graphs[index].unhighlight();
-			}
-			$("#tooltip").remove();
-			previousPoint = null;
-		}
-	});
-}
-
-/* 
+/**
 *draw overview graph
 *
 */
@@ -497,67 +371,9 @@ function drawOverviewGraph(tableId){
 	});
 }
 
-/* 
- *make the graph moves together when user manipulate one graph
- *
- */
-function synchronizeGraph(i,j){
-	var temp = side(i);
-	if(temp != side(j)) return;
-	var i1 = i.replace(/&/g,"\\&").replace(/=/g,"\\=");
-	var j1 = j.replace(/&/g,"\\&").replace(/=/g,"\\=");
-	var i2,j2;
-	if(temp == '1' || temp == '2'){
-		var t = i.length;
-		i2 = i.substring(0,t-1);
-		t = j.length;
-		j2 = j.substring(0,t-1);
-		var t = i1.length;
-		i1 = i1.substring(0,t-1);
-		t = j1.length;
-		j1 = j1.substring(0,t-1);
-	}else{
-		i2 = i;
-		j2 = j;
-	}
-	$("#" + i1 + "Graph" + temp).bind('plotzoom',function(event,plot,args){
-		if(graphs[j] == undefined) return;
-		if(args[j] && args[j] == true)
-			return;
-		args[j] = true;
-		args.preventEvent = true;
-		graphs[j].zoom(args);
-		Wovodat.redraw(graphs[j],graphData[j2],detailedData[j2],graphs,true);
-	});
-	$("#" + i1 + "Graph"  + temp).bind('plotpan',function(event,plot,args){
-		if(graphs[j] == undefined) return;
-		if(args[j] && args[j] == true)
-			return;
-		args[j] = true;
-		args.preventEvent = true;
-		graphs[j].pan(args);
-		Wovodat.redraw(graphs[j],graphData[j2],detailedData[j2],graphs);
-	});
-	$("#" + j1 + "Graph" + temp).bind('plotzoom',function(event,plot,args){
-		if(graphs[i] == undefined) return;
-		if(args[i] && args[i] == true)
-			return;
-		args[i] = true;
-		graphs[i].zoom(args);
-		Wovodat.redraw(graphs[i],graphData[i2],detailedData[i2],graphs,true);
-	});
-	$("#" + j1 + "Graph" + temp).bind('plotpan',function(event,plot,args){
-		if(graphs[i] == undefined) return;
-		if(args[i] && args[i] == true)
-			return;
-		args[i] = true;
-		args.preventEvent = true;
-		graphs[i].pan(args);
-		Wovodat.redraw(graphs[i],graphData[i2],detailedData[i2],graphs);
-	});
-}
 
-/*
+
+/**
 Draw Time Series
 */
 function drawTimeSeries(obj,tableId){
@@ -603,8 +419,8 @@ function drawTimeSeries(obj,tableId){
 	}
 }
 
-/*
-Delete Graph
+/**
+ * Delete Graph
 */
 function deleteGraph(args){
 	var id = args.id;
@@ -637,62 +453,15 @@ function deleteGraph(args){
 }
 
 
-function updateTimeSeriesandStations(args,stationsDatabaseUsed,mapUsed){
-	var action = args.action;
-	switch(action){
-		case 'delete':
-			var type = args.type;
-			var index = '';// delete the available markers for this specific type
-			for(var i in stationsDatabaseUsed[type]){
-				index = stationsDatabaseUsed[type][i];
-				markers[index].setMap(null);
-			}
-			deleteTimeSeriesList(type);
-			break;
-		case 'updateNewData':
-			var type =args.type;
-			var data = args.data;
-			data = data.split(";");
-			data.length--;
-			stationsDatabaseUsed[type] = data;
-			// udpate the list of station nad the markers on the custom google map 
-			updateTimeSeriesList(data);
-			insertMarkersForStations(data,mapUsed);
-			break;
-		case 'updateOldData':
-			var type = args.type;
-			var data = stationsDatabaseUsed[type];
-			// update the list of station and the markers on the google map
-			updateTimeSeriesList(data);
-			insertMarkersForStations(data,mapUsed);
-			break;
-		default:
-			break;
-	}
-}
-
-function deleteTimeSeriesList(type){
-	var value;
-	var id;
-	var element;
-	for(var t in stationsDatabase[type]){
-		value = stationsDatabase[type][t];
-		value = value.split("&");
-		id = value[0] + '&' + value[1] + '&' + value[2];
-		id = id + '&' + value[5];
-		deleteGraph({id:id});
-		element = document.getElementById(id + 'Tr');
-		element.parentNode.removeChild(element);
-	}
-}
-
-
-//synchronize slide with textbox
+/**
+ *
+ *synchronize slide with textbox
+ */
 function adjustSlider(id){
 	$("#DepthRange"+id).slider("values",[$("#DepthLow"+id).val(),$("#DepthHigh"+id).val()]);
 }
 
-/*
+/**
 * when user select a specific eruption, all the graphs will move to 
 * the volcano in the time series
 */
@@ -758,20 +527,12 @@ function updateTimeSeriesList(data,tableId){
 		}
 
 		display+=")";
-		
-
-		//display+= " (" + value[2].replace(/___/g, " - ") + ")";
-
 		value = value[0] + "&" + value[1] + "&" + value[2] + '&' + value[5] + '&' + value[6];
-
-
 		t = document.createElement('tr');
 		if(tableId == null)
 			t.id = value + 'Tr';
 		else
 			t.id = value + 'Tr' + tableId;
-
-		
 		timeSeriesList.appendChild(t);
 		$("[id='" + t.id + "']").html("<td><input type='checkbox' id='" +value +  "' value='" + value + "' onclick='drawTimeSeries(this," + tableId + ")'></td><td>" + display + "</td>");          
 	
@@ -793,7 +554,71 @@ function getTotalGraph(tableId) {
 	return res;
 }
 
+function appendFilter(args) {
+	var filterForm = $(document.createElement('form')).addClass("FormFilter");
+	var pointer = $(document.createElement('div')).addClass("pointer1").appendTo(filterForm);
+	var filterButton = $(document.createElement('div')).addClass("ShowHideFilterButton1");
 
+	if($(filterForm).css("display")=="none") {
+		$(filterButton).html("Show filter");
+	} else {
+		$(filterButton).html("Hide filter");
+	}
+
+	$(filterButton).click(function() {
+		if($(filterForm).css("display")=="none") {
+			$(filterForm).css("display","block");
+			$(filterButton).html("Hide filter");
+		} else {
+			$(filterForm).css("display","none");
+			$(filterButton).html("Show filter");
+		}
+	});
+
+	$(args.td).append(filterButton);
+	$(args.td).append(filterForm);
+
+	args.filterForm=filterForm;
+
+	if(args.id.indexOf("Seismic")!=-1) {
+		if(args.id.indexOf("Interval")!=-1 || args.id.indexOf("EVS")!=-1) {
+			addOptionForFilterEQType(args);
+			return;
+		} else if(args.id.indexOf("TRM")!=-1) {
+			addOptionForFitlerTRM(args);
+			return;
+		}
+	}
+
+	if(args.id.indexOf("Gas")!=-1) {
+		if(args.id.indexOf("gd_concentration")!=-1 || args.id.indexOf("gd_sol_tflux")!=-1 || args.id.indexOf("gd_plu_emit")!=-1) {
+			addOptionForFilterGasSpecies(args);
+			return;
+		}
+	}
+
+	if(args.id.indexOf("Meteo")!=-1) {
+		if(args.id.indexOf("prec")!=-1) {
+			addOptionForFilterPrec(args);
+			return;
+		}
+	}
+
+	filterForm.css("display","none");
+	filterButton.css("display","none");
+	args.td.html("");
+
+	args.container=$("<div></div>").appendTo(args.td);
+	drawGraph2(args);
+}
+
+/**
+ * Get option of the graph
+ * @param id
+ * @param tableId
+ * @param data
+ * @returns {{series: {points: {show: boolean}, color: string}, grid: {hoverable: boolean, clickable: boolean, backgroundColor: {colors: string[]}}, xaxis: {max: Number, min: (number|*), panRange: *[], zoomRange: *[], ticks: tickGenerator, labelWidth: number, show: boolean}, yaxis: {panRange: *[], zoomRange: *[], max: *, min: *, color: string}, zoom: {interactive: boolean}, pan: {interactive: boolean}}}
+ */
 function getGraphOptions(id,tableId,data) {
 	var minValue ,maxValue;
 	var maxXValue = Number.MIN_VALUE;
@@ -802,25 +627,25 @@ function getGraphOptions(id,tableId,data) {
 	var i;
 	var length = data[0].length;
 	maxXValue = data[0][0][0];
-	
+
 	minValue = data[0][0][1];
 	maxValue = minValue;
-	
+
 	xRangeMin = data[0][length-1][0];
-	
+
 	// get the min and max of y for current graph
 	for(i = 0 ; i < length; i++){
-		if(data[0][i][1] == null) 
+		if(data[0][i][1] == null)
 			continue;
 		if(data[0][i][1] > maxValue) maxValue = data[0][i][1];
 		if(data[0][i][1] < minValue) minValue = data[0][i][1];
 	}
-	
+
 	// get the maxXValue of every graph that is currently displayed
 	for(var b in graphs){
 		// do not consider the graph that is not in the same side
 		if(tableId != side(b)) continue;
-		
+
 		for(var a in graphData){
 			if (b.indexOf(a) >= 0){
 				var temp = graphData[a][0][0][0];
@@ -833,10 +658,10 @@ function getGraphOptions(id,tableId,data) {
 	}
 	minXValue = maxXValue - sixMonths;
 	minXValue = minXValue > data[0][length-1][0]? minXValue : data[0][length-1][0];
-	
+
 	for(var a in graphData){
 		if(tableId != side(a)) continue;
-		
+
 		for(var b in graphs){
 			if( b.indexOf(a) >= 0){
 				var temp = graphData[a][0][graphData[a][0].length -1][0];
@@ -848,7 +673,7 @@ function getGraphOptions(id,tableId,data) {
 	if(maxValue == minValue){
 		minValue = minValue - 1;
 		maxValue = maxValue + 1;
-	}                
+	}
 
 	var options = {
 		series:{
@@ -872,7 +697,7 @@ function getGraphOptions(id,tableId,data) {
 			show: true
 		},
 		yaxis:{
-			panRange:[minValue,maxValue],  
+			panRange:[minValue,maxValue],
 			zoomRange:[maxValue-minValue,maxValue-minValue],
 			max: maxValue,
 			min: minValue,
@@ -896,4 +721,64 @@ function getGraphOptions(id,tableId,data) {
 	}
 
 	return options;
+}
+
+/**
+ *make the graph moves together when user manipulate one graph
+ *
+ */
+function synchronizeGraph(i,j){
+	var temp = side(i);
+	if(temp != side(j)) return;
+	var i1 = i.replace(/&/g,"\\&").replace(/=/g,"\\=");
+	var j1 = j.replace(/&/g,"\\&").replace(/=/g,"\\=");
+	var i2,j2;
+	if(temp == '1' || temp == '2'){
+		var t = i.length;
+		i2 = i.substring(0,t-1);
+		t = j.length;
+		j2 = j.substring(0,t-1);
+		var t = i1.length;
+		i1 = i1.substring(0,t-1);
+		t = j1.length;
+		j1 = j1.substring(0,t-1);
+	}else{
+		i2 = i;
+		j2 = j;
+	}
+	$("#" + i1 + "Graph" + temp).bind('plotzoom',function(event,plot,args){
+		if(graphs[j] == undefined) return;
+		if(args[j] && args[j] == true)
+			return;
+		args[j] = true;
+		args.preventEvent = true;
+		graphs[j].zoom(args);
+		Wovodat.redraw(graphs[j],graphData[j2],detailedData[j2],graphs,true);
+	});
+	$("#" + i1 + "Graph"  + temp).bind('plotpan',function(event,plot,args){
+		if(graphs[j] == undefined) return;
+		if(args[j] && args[j] == true)
+			return;
+		args[j] = true;
+		args.preventEvent = true;
+		graphs[j].pan(args);
+		Wovodat.redraw(graphs[j],graphData[j2],detailedData[j2],graphs);
+	});
+	$("#" + j1 + "Graph" + temp).bind('plotzoom',function(event,plot,args){
+		if(graphs[i] == undefined) return;
+		if(args[i] && args[i] == true)
+			return;
+		args[i] = true;
+		graphs[i].zoom(args);
+		Wovodat.redraw(graphs[i],graphData[i2],detailedData[i2],graphs,true);
+	});
+	$("#" + j1 + "Graph" + temp).bind('plotpan',function(event,plot,args){
+		if(graphs[i] == undefined) return;
+		if(args[i] && args[i] == true)
+			return;
+		args[i] = true;
+		args.preventEvent = true;
+		graphs[i].pan(args);
+		Wovodat.redraw(graphs[i],graphData[i2],detailedData[i2],graphs);
+	});
 }

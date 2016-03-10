@@ -1,4 +1,4 @@
-/*
+/**
 Store all function for handle action of Earth Quake event
 Store all function to handle the data controller of earthquake
 Created by Luis Ngo - 21/2/2016
@@ -45,11 +45,6 @@ Created by Luis Ngo - 21/2/2016
  * this earthquake happens
  */
 var earthquakes = {};
-/*
- * Object to store the queried array of data for the 3D display
- */
-var gmt3DData = {};
-var gmt2DData = {};
 // store reference to the plotted graphs in the equake section
 // this variable will help us when we need to do the printing
 var equakeGraphs = [];
@@ -68,18 +63,18 @@ equakeGraphs[2] = {};
  * setting the available variable to false.
  */
  // parse the data in the start-date and end-date box
-	function parseDateVal(date){
-		date = date.split("/");
-		if(date.length != 3)
-			return "";
-		for(var i = 0 ; i < date.length; i++){
-			date[i] = parseInt(date[i]);
-		}
-		var result = new Date();
-		result.setUTCFullYear(date[2], date[0]-1, date[1]);
-		result.setUTCHours(0, 0, 0, 0);
-		return result.getTime();
+function parseDateVal(date){
+	date = date.split("/");
+	if(date.length != 3)
+		return "";
+	for(var i = 0 ; i < date.length; i++){
+		date[i] = parseInt(date[i]);
 	}
+	var result = new Date();
+	result.setUTCFullYear(date[2], date[0]-1, date[1]);
+	result.setUTCHours(0, 0, 0, 0);
+	return result.getTime();
+}
 /*
 Create Marker Icon
 */
@@ -143,7 +138,7 @@ $(function(){
 	*/
 	(function(list){
 		var l = list.length;
-		var i = 0;
+		var i;
 		for(i = 0 ; i < l ; i++){
 			var j = list[i];
 			$("#TimeSeriesHeader" + j).click([j],function(e){
@@ -246,7 +241,7 @@ function minYAxis(data){
 }
 
 
-/* Get earthquakes from server */
+/** Get earthquakes from server */
 /*function getEarthquakes(quantity, cavw, lat, lon, startDate, endDate, startDepth, endDepth, elev, width){
 
 	//var baseUrl = "http://localhost/precursor/api/v1/earthquakes";
@@ -310,9 +305,6 @@ function getSizeOfEquake(mag){
 		size = 14;
 	return size;
 }
-function getCssClassForEquakeMarker(){
-	return "earthquakeTooltip";
-}
 
 /*
 	Author: Pham Vu Tuan
@@ -371,7 +363,7 @@ function filter(cavw,mapUsed,i){
 	}
 	return true;
 }
-/*
+/**
 	Author: Pham Vu Tuan
 	This function will display all the cc_id and
 	Eqtype mapping with the earthquakes in filter options
@@ -384,17 +376,133 @@ function nameConverter(value, element){
 	}
 }
 
+/**
+ * set filter to avaiable data that we have, especially the start time and
+ *end time of all earthquake event
+ */
+function initializeFilter(data,mapUsed){
+	var i, item, startTime, endTime, timestamp;
+	for(i in data){
+		item = data[i];
+		timestamp = item['timestamp'];
+		if(startTime == undefined) startTime = timestamp;
+		else{
+			if(startTime > timestamp) startTime = timestamp;
+		}
+		if(endTime == undefined) endTime = timestamp;
+		else{
+			if(endTime < timestamp) endTime = timestamp;
+		}
+	}
+	if(startTime == undefined || endTime == undefined)
+		return;
+	// no need to reset
+	if($("#SDate" + mapUsed ).datepicker( "option", "yearRange" ) == (startTime.getUTCFullYear() + ":" + endTime.getUTCFullYear()))
+		return;
+	var maxValue = Math.floor(endTime.getTime()-startTime.getTime())/86400000;
 
 
-   
+	var startTimeString = startTime.getUTCMonth() + 1 + "/" + startTime.getUTCDate() + "/" + startTime.getUTCFullYear();
+	$("#SDate" + mapUsed).val(startTimeString);
+	var endTimeString = endTime.getUTCMonth() + 1 + "/" + endTime.getUTCDate() + "/" + endTime.getUTCFullYear();
+	$("#EDate" + mapUsed).val(endTimeString);
 
+	$("#SDate" + mapUsed).datepicker("option", "yearRange", startTime.getUTCFullYear() + ":" + endTime.getUTCFullYear());
+	$("#EDate" + mapUsed).datepicker("option", "yearRange", startTime.getUTCFullYear() + ":" + endTime.getUTCFullYear());
 
-function calculateLatDistance(vlat, vlon, lat, lon){
-
-	// Use 0    
+	$("#DateRange" + mapUsed).slider({
+		range: true,
+		max: maxValue,
+		values : [0, maxValue],
+		slide: function(event,ui){
+			var date = new Date(startTime.getTime());
+			date.setDate(date.getDate() + ui.values[0]);
+			$("#SDate" + mapUsed).val($.datepicker.formatDate('mm/dd/yy',date));
+			date = new Date(startTime.getTime());
+			date.setDate(date.getDate() + ui.values[1]);
+			$("#EDate" + mapUsed).val($.datepicker.formatDate('mm/dd/yy',date));
+		}
+	});
 }
 
-function calculateLonDistance(vlat, vlon, lat, lon){
+/**
+ * Filter Data
+ */
+function filterData(cavw,panelUsed){
 
-	// Use 1
+	// data is not available for filtering
+	if(!earthquakes[cavw])
+		return;
+
+	// Just modified here
+	var nEvent = $("#Evn"+panelUsed).val();
+	var sDate = parseDateVal($("#SDate"+panelUsed).val());
+
+	if(sDate == undefined || sDate == "")
+		sDate = 0;
+	var eDate = parseDateVal($("#EDate"+panelUsed).val());
+
+	// set the end time to be at the end of the end date, not the start of the
+	// end date
+	if(eDate == undefined || eDate == "")
+		eDate = new Date().getTime();
+	eDate += Wovodat.ONE_DAY - 1000;// in milliseconds
+
+	// Just modified here
+	// Debug
+	var dhigh = parseFloat($("#DepthHigh"+panelUsed).val());
+	var dlow = parseFloat($("#DepthLow"+panelUsed).val());
+	var wkm = parseFloat(document.getElementById("wkm"+panelUsed).value);
+	var mhigh = parseFloat($("#MagnitudeHigh"+panelUsed).val());
+	var mlow = parseFloat($("#MagnitudeLow"+panelUsed).val());
+	// type = type.options[type.selectedIndex].value;
+	var count = 0;
+	var vlat = earthquakes[cavw]['vlat'], vlon = earthquakes[cavw]['vlon'];
+	// some error here, what if i is 'vlat' or 'vlon'
+	for (var i in earthquakes[cavw]){
+		if(i == 'vlat' || i == 'vlon')
+			continue;
+		// if we already have enough earthquakes event, the rest of event is
+		// ignored even though they satisfy the filter
+		if (count > nEvent){
+			earthquakes[cavw][i]['available'] = false;
+			continue;
+		}
+		if (earthquakes[cavw][i]['time'] != "" && typeof earthquakes[cavw][i]['time'] != "undefined"){
+			var eDepth = parseFloat(earthquakes[cavw][i]['depth']);
+
+			var eTime = Wovodat.convertDate(earthquakes[cavw][i]['time']);
+
+			var elat = earthquakes[cavw][i]['lat'], elon = earthquakes[cavw][i]['lon'];
+			var distanceFromVolcano = Wovodat.calculateD(vlat,vlon,elat,elon,2);
+			if(distanceFromVolcano > wkm + 0.1){
+				earthquakes[cavw][i]['available'] = false;
+				continue;
+			}
+
+			eTime = eTime.getTime();
+
+			earthquakes[cavw][i]['available'] = false;
+			// equake below the dlow
+			if(eDepth < dlow){
+				continue;
+			}
+			// equake above the dhigh
+			if(eDepth > dhigh){
+				continue;
+			}
+			// event happened after the end date
+			if(eTime > eDate){
+				continue;
+			}
+			// event happned before the start date
+			if (eTime < sDate){
+				continue;
+			}
+			count++;
+			earthquakes[cavw][i]['available'] = true;
+
+		}
+	}
 }
+

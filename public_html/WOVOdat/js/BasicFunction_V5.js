@@ -916,3 +916,37 @@ function insertDataOwnerandStatus(o){
 
 }
 
+function updateTimeSeriesandStations(args,stationsDatabaseUsed,mapUsed){
+	var action = args.action;
+	switch(action){
+		case 'delete':
+			var type = args.type;
+			var index = '';// delete the available markers for this specific type
+			for(var i in stationsDatabaseUsed[type]){
+				index = stationsDatabaseUsed[type][i];
+				markers[index].setMap(null);
+			}
+			deleteTimeSeriesList(type);
+			break;
+		case 'updateNewData':
+			var type =args.type;
+			var data = args.data;
+			data = data.split(";");
+			data.length--;
+			stationsDatabaseUsed[type] = data;
+			// udpate the list of station nad the markers on the custom google map
+			updateTimeSeriesList(data);
+			insertMarkersForStations(data,mapUsed);
+			break;
+		case 'updateOldData':
+			var type = args.type;
+			var data = stationsDatabaseUsed[type];
+			// update the list of station and the markers on the google map
+			updateTimeSeriesList(data);
+			insertMarkersForStations(data,mapUsed);
+			break;
+		default:
+			break;
+	}
+}
+
