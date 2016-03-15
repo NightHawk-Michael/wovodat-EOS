@@ -366,6 +366,7 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 *Display Element
 */
  function displayElement(set,mapUsed,element){
+ 	var catalogString = "";
 	var html="";
 	var tableName = element+mapUsed;
 	var table = document.getElementById(tableName);
@@ -376,7 +377,6 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 	if(element === 'cc_id') tableId = 1;
 	else tableId = 2;
 	set.forEach(function(value){
-		if(tableId == 2)
 		var checkBoxId = tableName + 'CheckBox' + i;
 		var row = table.insertRow(numberOfRows);
 		var cell1 = row.insertCell(0);
@@ -384,10 +384,18 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 		var clickString = "onClick='untoggle(this,"+tableId+","+mapUsed+")'";
 		cell1.innerHTML = "<input type='checkbox'"+ clickString +
 		" name='" + tableName +"' value='" + value + "' id='" + checkBoxId + "' checked/>";
-		cell2.innerHTML = nameConverter(value,element);
+		var name = nameConverter(value,element);
+		cell2.innerHTML = name;
+		if(element === 'cc_id'){
+			catalogString += name;
+			catalogString += ", ";
+		}
 		numberOfRows++;
 		i++;
 	});
+	var owners = document.getElementById('owner'+mapUsed);
+	if(owners.innerHTML.length < 1) // prevent caching
+		owners.innerHTML = "Catalog owners: " + catalogString;
 }
 
 

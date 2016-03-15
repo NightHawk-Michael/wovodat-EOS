@@ -58,11 +58,11 @@ $cache = time();
                         $vcavw = $_POST["vcavw"];
                         $vname = $_POST["vname"];
                     } else {
-                        $link = mysql_connect("localhost", "root", "1234567") or die(mysql_error());
-                        mysql_query("SET CHARACTER SET utf8", $link);
-                        mysql_query("SET NAMES utf8", $link);
-                        mysql_select_db("wovodat") or die(mysql_error());
-                        //include 'php/include/db_connect_view.php';/*connect to database*/
+                        // $link = mysql_connect("localhost", "root", "1234567") or die(mysql_error());
+                        // mysql_query("SET CHARACTER SET utf8", $link);
+                        // mysql_query("SET NAMES utf8", $link);
+                        // mysql_select_db("wovodat") or die(mysql_error());
+                        include 'php/include/db_connect_view.php';/*connect to database*/
 
                         $str = "SELECT vd_name, vd_cavw, vd_num FROM vd WHERE vd_num = " . $vnum;
                         $result = mysql_query($str);
@@ -78,7 +78,8 @@ $cache = time();
             echo "<input type='hidden' id='vnum' name='vnum' value='" . $vnum . "'>";
             echo "</form>";
             ?>
-				<?php include 'php/include/header.php'; ?>
+					<?php include 'php/include/header.php'; ?>
+<!-- 				<?php //include 'php/include/header_beta.php'; ?> -->
 				<div class = "container" id = "wrap_x">
 					<div class = "content">
 						<div id="switchViewPanel">
@@ -338,6 +339,7 @@ $cache = time();
 												<div id="twoDEquakeFlotGraph1" class="twoDEquakeFlotGraph">
                                                     <div class="row">
                                                         <div class="leftPanel" id="eqEvent1"></div>
+                                                        <div class="leftPanel" id="owner1"></div>
                                                     </div>
 													<div class="plot-label">
 														<b>E-W</b>
@@ -355,6 +357,7 @@ $cache = time();
 													</div>
 													<div id="FlotDisplayTime1" class="equakeGraphPlaceholder">
 													</div>
+													<div class="PrintButton" style="text-align:center">Image</div>
 													<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TWOD_EQUAKE,element:document.getElementById('equakeGraphs1'),mapUsed:1,equakeGraph:equakeGraphs[1],info:document.getElementById('VolcanoList').value})" >
 														<a title="Print this graphs" href="#" >
 															<span class="app-icon light print-icon"></span>
@@ -395,6 +398,7 @@ $cache = time();
 
 													<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.THREED_GMT_EQUAKE,link:$('#image',document.getElementById('3DGMTEquakeGraph1'))[0].src,info:document.getElementById('VolcanoList').value})">
 														<a title="Print this graphs" href="#" >
+															<span class="app-button-text">Image</span>
 															<span class="app-icon light print-icon"></span>
 															<span class="app-button-text">Print</span>
 														</a>
@@ -423,7 +427,16 @@ $cache = time();
 										</table>
 									</div>
 									<div id="TimeSeriesView1" class="timeSeriesView">
-										<div id="OptionList1">
+										<iframe></iframe>
+										<!-- <div>Hello World</div> -->
+										<!-- <div id="" class="blue lighten-4 main" >
+											<div id="main" class="container_eruption">
+												<div class="progress">
+													<div class="indeterminate"></div>
+												</div>
+											</div>
+										</div> -->
+			<!-- 							<div id="OptionList1">
 											<b>Available time series data (max. 3):</b> 
 											<div id="OptionList1-1">
 												<table id="TimeSeriesList1" class="timeSeriesList">
@@ -447,7 +460,7 @@ $cache = time();
 												<span class="app-icon light print-icon"></span>
 												<span class="app-button-text">Print</span>
 											</a>
-										</div>
+										</div> -->
 									</div>
 								</div>
 							</td>
@@ -578,7 +591,7 @@ $cache = time();
                                                 <div class="row">
                                                     <div class="leftPanel">Catalog Owner:</div>
                                                     <div class="rightPanel">
-                                                        <table id="cc_id2">
+											          <table id="cc_id2">
                                                             <tr>
                                                                 <td><input type='checkbox' onClick="toggle(this,'cc_id2')" value="" id="cc_id2CheckBox0" checked/></td>
                                                                 <td>All catalog owners</td>
@@ -704,6 +717,7 @@ $cache = time();
 										<div id="twoDEquakeFlotGraph2" class="twoDEquakeFlotGraph">
 											<div class="row">
                                                 <div class="leftPanel" id="eqEvent2"></div>
+                                                <div class="leftPanel" id="owner2"></div>
                                             </div>
 											<div class="plot-label">
 												<b>E-W</b>
@@ -823,9 +837,10 @@ $cache = time();
             <div class = "push" style = "height:100px"></div>
             <!-- Footer-->
             <div id = "wrapborder_x">
-                <?php include 'php/include/footer.php'; ?>
+                <!-- <?php //include 'php/include/footer.php'; ?> -->
+                <?php include 'php/include/footer_main_beta.php'; ?>
             </div>
         </div>
-
+        <!-- // <script type="text/javascript" src="js/vendor/requirejs/require.js" data-main="js/main"></script> -->
     </body>
 </html>

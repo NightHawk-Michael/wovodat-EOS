@@ -13,7 +13,7 @@ CSS file for V5
                 width: 50px;
                 text-align: right;
             }
-            #eqEvent1,#eqEvent2,#SDate1,#EDate1,#cc_id1,#MinLat,#MaxLat,#MinLon,#MaxLon,#MagnitudeLow1,#MagnitudeHigh1,#Evn1,#DepthLow1, #DepthHigh1, #EqType1, #Evn2, #SDate2, #EDate2, #DepthLow2, #DepthHigh2, #EqType2{
+            #owner1, #owner2, #eqEvent1,#eqEvent2,#SDate1,#EDate1,#cc_id1,#MinLat,#MaxLat,#MinLon,#MaxLon,#MagnitudeLow1,#MagnitudeHigh1,#Evn1,#DepthLow1, #DepthHigh1, #EqType1, #Evn2, #SDate2, #EDate2, #DepthLow2, #DepthHigh2, #EqType2{
                 font-size:13px;
             }
             #GraphList{
@@ -93,7 +93,7 @@ CSS file for V5
             }
             #Map, #Map2{
                 width:100%;
-                height:210px;
+                height:470px;
                 float:left;
                 margin-top:10px;
             }
