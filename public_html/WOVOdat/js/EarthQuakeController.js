@@ -331,7 +331,6 @@ function filter(cavw,mapUsed,i){
 		var checkboxes = document.getElementsByName('cc_id'+mapUsed);
 		for(var i = 0;i<checkboxes.length;i++){
 			if(!checkboxes[i].checked&&checkboxes[i].value == id){
-				// console.log(1);
 				return false;
 			}
 		}
@@ -341,7 +340,6 @@ function filter(cavw,mapUsed,i){
 		var checkboxes = document.getElementsByName('EqType'+mapUsed);
 		for(var i = 0;i<checkboxes.length;i++){
 			if(!checkboxes[i].checked&&checkboxes[i].value == eqType){
-				// console.log(2);
 				return false;
 			}
 		}
@@ -372,7 +370,9 @@ function nameConverter(value, element){
 	switch(element){
 	case 'cc_id': return ccMap.get(value);
 
-	case 'EqType': return eqMap.get(value);
+	case 'EqType':
+		if(value == "") return 'X'; 
+		return eqMap.get(value);
 	}
 }
 

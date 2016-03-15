@@ -33,6 +33,7 @@ var ownerURL = [];
  * id is the string to specify the type of the data
 */
 function drawGraph(args) {
+	alert(args);
 	function getDisplayLabel(id,tableId) {
 		var display = id.split("&");
 
@@ -83,118 +84,118 @@ function drawGraph(args) {
 /*
 *
 */
- function drawGraph2(args){
-	var td = args.container;
-	td.html("");
-	if(!args.data[0].length) {
-		$(td).append('<span style="color:red;"> Sorry, no data is available.</span>');
-		return;
-	}
+//  function drawGraph2(args){
+// 	var td = args.container;
+// 	td.html("");
+// 	if(!args.data[0].length) {
+// 		$(td).append('<span style="color:red;"> Sorry, no data is available.</span>');
+// 		return;
+// 	}
 
-	var id = args.id;
-	// the map used
-	var tableId = args.tableId;
+// 	var id = args.id;
+// 	// the map used
+// 	var tableId = args.tableId;
 	
-	// get the label from the list of available time series
-	//var label = document.getElementById(id + 'Tr' + tableId).getElementsByTagName('td')[1].innerHTML;
+// 	// get the label from the list of available time series
+// 	//var label = document.getElementById(id + 'Tr' + tableId).getElementsByTagName('td')[1].innerHTML;
 
-	var label = args.label;
-	var data = args.data;
-	if(graphData[id] == undefined) {
-		graphData[id] = data;
-		cloneData[id] = data;
-	}
+// 	var label = args.label;
+// 	var data = args.data;
+// 	if(graphData[id] == undefined) {
+// 		graphData[id] = data;
+// 		cloneData[id] = data;
+// 	}
 	
-	// delete the link between data that are too long from each other
-	//if(label.indexOf("Leveling") == -1)
-	//    data = Wovodat.highlightNoDataRange(data);
+// 	// delete the link between data that are too long from each other
+// 	//if(label.indexOf("Leveling") == -1)
+// 	//    data = Wovodat.highlightNoDataRange(data);
 	
-	// delete the data that are too big compare to its neighbor
-	//data = Wovodat.fixBigData(data);
+// 	// delete the data that are too big compare to its neighbor
+// 	//data = Wovodat.fixBigData(data);
 	
-	// set up the reference time
-	if(referenceTime == null){
-		referenceTime = data[0][0][0];
-	}
-	// get detailed scaled data for the graph 
-	// the data is divied into two scale: minimized scale and full scale
-	// full scale contains resampling version of entire data in 12 hours period
-	// minimized scale contains all data without any resampling.
-	// the minimized scale will be used when the graph have to draw data 
-	// with a range of less than month. This will efficiently improve then
-	// running time of the javascript when perform drawing.
+// 	// set up the reference time
+// 	if(referenceTime == null){
+// 		referenceTime = data[0][0][0];
+// 	}
+// 	// get detailed scaled data for the graph 
+// 	// the data is divied into two scale: minimized scale and full scale
+// 	// full scale contains resampling version of entire data in 12 hours period
+// 	// minimized scale contains all data without any resampling.
+// 	// the minimized scale will be used when the graph have to draw data 
+// 	// with a range of less than month. This will efficiently improve then
+// 	// running time of the javascript when perform drawing.
 
 	
-	var isDetailedDataAvailable = false;
-	if(detailedData[id] == null){
-		Wovodat.getDetailedStationData({
-			id: id,
-			referenceTime: referenceTime,
-			handler: function(e){
-				detailedData[id] = e.data;
-				// set the graphs to appropriate dataset when 
-				if(graphs[id+tableId]){
+// 	var isDetailedDataAvailable = false;
+// 	if(detailedData[id] == null){
+// 		Wovodat.getDetailedStationData({
+// 			id: id,
+// 			referenceTime: referenceTime,
+// 			handler: function(e){
+// 				detailedData[id] = e.data;
+// 				// set the graphs to appropriate dataset when 
+// 				if(graphs[id+tableId]){
 						
-					graphs[id + tableId].getPlaceholder().bind('plotpan',function(event,plot){
-						Wovodat.redraw(graphs[id + tableId],graphData[id],e.data,graphs);
-					});
-					graphs[id + tableId].getPlaceholder().bind('plotzoom',function(event,plot){
-						Wovodat.redraw(graphs[id + tableId],graphData[id],e.data,graphs,true);
-					});
-				}
-				Wovodat.showNotification({message:"Updated detailed data for " + label + " graph.",duration: 10});
-			}
-		});
-	}else{
-		isDetailedDataAvailable = true;
-	}
-	// dynamically create the table row for drawing the time series graph
+// 					graphs[id + tableId].getPlaceholder().bind('plotpan',function(event,plot){
+// 						Wovodat.redraw(graphs[id + tableId],graphData[id],e.data,graphs);
+// 					});
+// 					graphs[id + tableId].getPlaceholder().bind('plotzoom',function(event,plot){
+// 						Wovodat.redraw(graphs[id + tableId],graphData[id],e.data,graphs,true);
+// 					});
+// 				}
+// 				Wovodat.showNotification({message:"Updated detailed data for " + label + " graph.",duration: 10});
+// 			}
+// 		});
+// 	}else{
+// 		isDetailedDataAvailable = true;
+// 	}
+// 	// dynamically create the table row for drawing the time series graph
 
-	// dynamically create the table row for drawing the time series graph
-	if(args.label) {
-		td.append("<div>" + args.label + "</div>");
-	}
-	if(args.equakeType) {
-		td.append(" - Earthquake type: " + args.equakeType);
-	}
-	// div element to draw the graph into
-	var div = document.createElement('div');
-	div.id = id + "Graph" + tableId;
-	div.style.width = '440px';
-	div.style.height = '150px';
-	div.oncontextmenu=function() {
-		if(ownerURL && ownerURL[args.tableId] && "href" in ownerURL[args.tableId])
-			$.jGrowl("Please contact <a target='_blank' href='"+ownerURL[args.tableId]["href"]+"''>"+ownerURL[args.tableId]["text"]+"</a> to use the data",{ position: "bottom-right", closer:false });
-		return false;
-	};
-	$(td).append(div);
-	if (ownerURL && ownerURL[args.tableId] && "href" in ownerURL[args.tableId]) {
-		var authorDiv = $("<div></div>").css("float","right").append("Data owner: <a target='_blank' href='"+ownerURL[args.tableId]["href"]+"'>"+ownerURL[args.tableId]["text"]+"</a>").appendTo(td);
+// 	// dynamically create the table row for drawing the time series graph
+// 	if(args.label) {
+// 		td.append("<div>" + args.label + "</div>");
+// 	}
+// 	if(args.equakeType) {
+// 		td.append(" - Earthquake type: " + args.equakeType);
+// 	}
+// 	// div element to draw the graph into
+// 	var div = document.createElement('div');
+// 	div.id = id + "Graph" + tableId;
+// 	div.style.width = '440px';
+// 	div.style.height = '150px';
+// 	div.oncontextmenu=function() {
+// 		if(ownerURL && ownerURL[args.tableId] && "href" in ownerURL[args.tableId])
+// 			$.jGrowl("Please contact <a target='_blank' href='"+ownerURL[args.tableId]["href"]+"''>"+ownerURL[args.tableId]["text"]+"</a> to use the data",{ position: "bottom-right", closer:false });
+// 		return false;
+// 	};
+// 	$(td).append(div);
+// 	if (ownerURL && ownerURL[args.tableId] && "href" in ownerURL[args.tableId]) {
+// 		var authorDiv = $("<div></div>").css("float","right").append("Data owner: <a target='_blank' href='"+ownerURL[args.tableId]["href"]+"'>"+ownerURL[args.tableId]["text"]+"</a>").appendTo(td);
 
-		if(data[0][0]["author_info"]) {
-			var name = data[0][0]["author_info"]["name"];
-			var year = data[0][0]["author_info"]["year"];
-			$(authorDiv).append("<br/>Author: "+name+", "+year);
-		}
-	}  
-	var options=getGraphOptions(id,tableId,data);   
-	plotGraph(id,tableId,options,data);
-	redrawOtherGraph(id,tableId,options);
-	setOnHoverForGraph(id,tableId,label,args.equakeType);
-	$("#overviewPanel" + tableId).css('display','block');
-	drawOverviewGraph(tableId);
-	// making the overview shown
+// 		if(data[0][0]["author_info"]) {
+// 			var name = data[0][0]["author_info"]["name"];
+// 			var year = data[0][0]["author_info"]["year"];
+// 			$(authorDiv).append("<br/>Author: "+name+", "+year);
+// 		}
+// 	}  
+// 	var options=getGraphOptions(id,tableId,data);   
+// 	plotGraph(id,tableId,options,data);
+// 	redrawOtherGraph(id,tableId,options);
+// 	setOnHoverForGraph(id,tableId,label,args.equakeType);
+// 	// $("#overviewPanel" + tableId).css('display','block');
+// 	drawOverviewGraph(tableId);
+// 	// making the overview shown
 	
 	
-	if(isDetailedDataAvailable){
-		graphs[id + tableId].getPlaceholder().bind('plotpan',function(event,plot){
-			Wovodat.redraw(graphs[id + tableId],graphData[id],detailedData[id],graphs);
-		});
-		graphs[id + tableId].getPlaceholder().bind('plotzoom',function(event,plot){
-			Wovodat.redraw(graphs[id + tableId],graphData[id],detailedData[id],graphs,true);
-		});
-	}
-}
+// 	if(isDetailedDataAvailable){
+// 		graphs[id + tableId].getPlaceholder().bind('plotpan',function(event,plot){
+// 			Wovodat.redraw(graphs[id + tableId],graphData[id],detailedData[id],graphs);
+// 		});
+// 		graphs[id + tableId].getPlaceholder().bind('plotzoom',function(event,plot){
+// 			Wovodat.redraw(graphs[id + tableId],graphData[id],detailedData[id],graphs,true);
+// 		});
+// 	}
+// }
 
 /**
 Plot graph
@@ -268,189 +269,189 @@ function redrawOtherGraph(id,tableId,options) {
 *draw overview graph
 *
 */
-function drawOverviewGraph(tableId){
-	//setPrintButtonVisibility(tableId,true);
-	if(!tableId) {
-		return; 
-	}
-	var placeholder= document.getElementById('overview' + tableId);
-	placeholder.innerHTML = '';
-	$(placeholder).show();
-	var id;
-	var data = [];
+// function drawOverviewGraph(tableId){
+// 	//setPrintButtonVisibility(tableId,true);
+// 	if(!tableId) {
+// 		return; 
+// 	}
+// 	var placeholder= document.getElementById('overview' + tableId);
+// 	placeholder.innerHTML = '';
+// 	$(placeholder).show();
+// 	var id;
+// 	var data = [];
 	
-	// consider two case when we are in comparison view or in single view
-	// get the correct id for the graph data, this is different with the graphs id
-	for(id in graphs){
-		var j = id.length;
-		j = parseInt(id.substring(j-1,j));
-		if( j != tableId) continue;
-		else id = id.substring(0,id.length -1 );
-		data.push(graphData[id][0]);
-	}
+// 	// consider two case when we are in comparison view or in single view
+// 	// get the correct id for the graph data, this is different with the graphs id
+// 	for(id in graphs){
+// 		var j = id.length;
+// 		j = parseInt(id.substring(j-1,j));
+// 		if( j != tableId) continue;
+// 		else id = id.substring(0,id.length -1 );
+// 		data.push(graphData[id][0]);
+// 	}
 	
-	var options = {
-		series: {
-			lines: { show: true},
-			shadowSize: 0
-		},
-		xaxis: { mode:'time'},
-		yaxis: { ticks: []}, // no tick for the yaxis
-		selection: { mode: "x", color: '#451A2B' }
-	};
-	$.plot(placeholder,data,options);
-	/*
-	 * This section of code allow the user to see the updated version
-	 * of every graph below the overview graph when user selecs a 
-	 * portion of the overview graph.
-	 */
-	// clear previous handler
-	$("#overview" + tableId).unbind('plotselected');
-	// draw other main graphs when user select a portion of this graph
-	$("#overview" + tableId).bind('plotselected',function(event,ranges){
-		var id;
-		var plot;
-		var options,data,placeholder,newOptions;
-		var to = ranges.xaxis.to;
-		var from = ranges.xaxis.from;
-		for(id in graphs){
-			if(tableId){
-				var j = id.length;
-				j = parseInt(id.substring(j-1,j));
-				if(j != tableId) continue;
-				else id = id.substring(0,id.length-1);
-			}
-			plot = graphs[id + tableId];
-			if(plot == undefined) continue;
-			placeholder = plot.getPlaceholder();
-			placeholder.empty();
-			// this is for the label
-			var data = plot.getData();
-			// when user select a section on the overview graph, the data
-			// will reset to the initial data which is 12 hours re-sampling data
-			data = {
-				data: graphData[id][0],
-				label: data[0].label
-			};
-			var o = Wovodat.getLocalMaxMin(data.data,from,to);
-			var maxY,minY;
-			maxY = o.max;
-			minY = o.min;
+// 	var options = {
+// 		series: {
+// 			lines: { show: true},
+// 			shadowSize: 0
+// 		},
+// 		xaxis: { mode:'time'},
+// 		yaxis: { ticks: []}, // no tick for the yaxis
+// 		selection: { mode: "x", color: '#451A2B' }
+// 	};
+// 	$.plot(placeholder,data,options);
+// 	/*
+// 	 * This section of code allow the user to see the updated version
+// 	 * of every graph below the overview graph when user selecs a 
+// 	 * portion of the overview graph.
+// 	 */
+// 	// clear previous handler
+// 	$("#overview" + tableId).unbind('plotselected');
+// 	// draw other main graphs when user select a portion of this graph
+// 	$("#overview" + tableId).bind('plotselected',function(event,ranges){
+// 		var id;
+// 		var plot;
+// 		var options,data,placeholder,newOptions;
+// 		var to = ranges.xaxis.to;
+// 		var from = ranges.xaxis.from;
+// 		for(id in graphs){
+// 			if(tableId){
+// 				var j = id.length;
+// 				j = parseInt(id.substring(j-1,j));
+// 				if(j != tableId) continue;
+// 				else id = id.substring(0,id.length-1);
+// 			}
+// 			plot = graphs[id + tableId];
+// 			if(plot == undefined) continue;
+// 			placeholder = plot.getPlaceholder();
+// 			placeholder.empty();
+// 			// this is for the label
+// 			var data = plot.getData();
+// 			// when user select a section on the overview graph, the data
+// 			// will reset to the initial data which is 12 hours re-sampling data
+// 			data = {
+// 				data: graphData[id][0],
+// 				label: data[0].label
+// 			};
+// 			var o = Wovodat.getLocalMaxMin(data.data,from,to);
+// 			var maxY,minY;
+// 			maxY = o.max;
+// 			minY = o.min;
 
-			options = plot.getOptions();
-			newOptions = {
-				series: options.series,
-				grid: options.grid,
-				yaxis:{
-					ylabel: options.yaxis.ylabel,
-					panRange: options.yaxis.panRange,
-					zoomRange: options.yaxis.zoomRange,
-					max: maxY,
-					min: minY,
-					color: 'rgb(123,1,100)',
-					//labelWidth: 40,// in pixel
-					labelHeigth: 25,// in pixel
-					//tickDecimals:1
-				},
-				zoom:{
-					interactive: true
-				},
-				pan: {
-					interactive: true
-				}
-			}
-			newOptions.xaxis = options.xaxis;
-			newOptions.xaxis.max = to;
-			newOptions.xaxis.min = from;
-			if(tableId == '2')
-				graphs[id + tableId] = $.plot(placeholder,[data,eruptionsData.compEruptions],newOptions);
-			else
-				graphs[id + tableId] = $.plot(placeholder,[data,eruptionsData],newOptions);
-			Wovodat.redraw(graphs[id + tableId],graphData[id],detailedData[id],graphs,true);
-		}
-	});
-}
+// 			options = plot.getOptions();
+// 			newOptions = {
+// 				series: options.series,
+// 				grid: options.grid,
+// 				yaxis:{
+// 					ylabel: options.yaxis.ylabel,
+// 					panRange: options.yaxis.panRange,
+// 					zoomRange: options.yaxis.zoomRange,
+// 					max: maxY,
+// 					min: minY,
+// 					color: 'rgb(123,1,100)',
+// 					//labelWidth: 40,// in pixel
+// 					labelHeigth: 25,// in pixel
+// 					//tickDecimals:1
+// 				},
+// 				zoom:{
+// 					interactive: true
+// 				},
+// 				pan: {
+// 					interactive: true
+// 				}
+// 			}
+// 			newOptions.xaxis = options.xaxis;
+// 			newOptions.xaxis.max = to;
+// 			newOptions.xaxis.min = from;
+// 			if(tableId == '2')
+// 				graphs[id + tableId] = $.plot(placeholder,[data,eruptionsData.compEruptions],newOptions);
+// 			else
+// 				graphs[id + tableId] = $.plot(placeholder,[data,eruptionsData],newOptions);
+// 			Wovodat.redraw(graphs[id + tableId],graphData[id],detailedData[id],graphs,true);
+// 		}
+// 	});
+// }
 
 
 
 /**
 Draw Time Series
 */
-function drawTimeSeries(obj,tableId){
-	var value = obj.value;
-	var index = value;
-	value = value.split("&");
+// function drawTimeSeries(obj,tableId){
+// 	var value = obj.value;
+// 	var index = value;
+// 	value = value.split("&");
 
-	var type = value[0];
-	var table = value[1];
-	var code = value[2];
+// 	var type = value[0];
+// 	var table = value[1];
+// 	var code = value[2];
 
 	
-	var component = value[3];
-	if(obj.checked){
-		if(totalGraph[tableId]>=limitTotalGraph) {
-			alert('Please choose at most '+limitTotalGraph+' series to draw');
-			obj.checked = false;
-			return;
-		}
+// 	var component = value[3];
+// 	if(obj.checked){
+// 		if(totalGraph[tableId]>=limitTotalGraph) {
+// 			alert('Please choose at most '+limitTotalGraph+' series to draw');
+// 			obj.checked = false;
+// 			return;
+// 		}
 
-		graphCount[tableId][index]=0;
+// 		graphCount[tableId][index]=0;
 
-		if(graphData[index] != undefined){
-			drawGraph({
-				id: index,
-				data: graphData[index],
-				tableId:tableId
-			});
-		}else{
-			Wovodat.getStationData({
-				type:type,
-				table:table,
-				code:code,
-				component: component,
-				id: index,
-				handler:drawGraph,
-				tableId:tableId
-			});
+// 		if(graphData[index] != undefined){
+// 			drawGraph({
+// 				id: index,
+// 				data: graphData[index],
+// 				tableId:tableId
+// 			});
+// 		}else{
+// 			Wovodat.getStationData({
+// 				type:type,
+// 				table:table,
+// 				code:code,
+// 				component: component,
+// 				id: index,
+// 				handler:drawGraph,
+// 				tableId:tableId
+// 			});
 			
-		}
-	}else{
-		deleteGraph({id:obj.value,tableId:tableId});
-	}
-}
+// 		}
+// 	}else{
+// 		deleteGraph({id:obj.value,tableId:tableId});
+// 	}
+// }
 
-/**
- * Delete Graph
-*/
-function deleteGraph(args){
-	var id = args.id;
-	var tableId = args.tableId;
+// /**
+//  * Delete Graph
+// */
+// function deleteGraph(args){
+// 	var id = args.id;
+// 	var tableId = args.tableId;
 
-	totalGraph[tableId]-=graphCount[tableId][id];
-	graphCount[tableId][id]=0;
+// 	totalGraph[tableId]-=graphCount[tableId][id];
+// 	graphCount[tableId][id]=0;
 
-	if(tableId == undefined) tableId = "";
-	delete(graphs[id + tableId]);
-	var tr = document.getElementById(id +'Row'  + tableId);
-	if(tr)
-		tr.parentNode.removeChild(tr);
-	var hideOverview = true;
-	for(id in graphs){
-		if(tableId){
-			var j = id.length;
-			j = parseInt(id.substring(j-1,j));
-			if(j!= tableId) continue;
-		}
-		hideOverview = false;
-		break;
-	}
-	if(hideOverview){
-		$("#overviewPanel" + tableId).css('display','none');
-		//setPrintButtonVisibility(tableId,false);
-	}else{
-		drawOverviewGraph(tableId);
-	}
-}
+// 	if(tableId == undefined) tableId = "";
+// 	delete(graphs[id + tableId]);
+// 	var tr = document.getElementById(id +'Row'  + tableId);
+// 	if(tr)
+// 		tr.parentNode.removeChild(tr);
+// 	var hideOverview = true;
+// 	for(id in graphs){
+// 		if(tableId){
+// 			var j = id.length;
+// 			j = parseInt(id.substring(j-1,j));
+// 			if(j!= tableId) continue;
+// 		}
+// 		hideOverview = false;
+// 		break;
+// 	}
+// 	if(hideOverview){
+// 		$("#overviewPanel" + tableId).css('display','none');
+// 		//setPrintButtonVisibility(tableId,false);
+// 	}else{
+// 		drawOverviewGraph(tableId);
+// 	}
+// }
 
 
 /**
@@ -465,86 +466,86 @@ function adjustSlider(id){
 * when user select a specific eruption, all the graphs will move to 
 * the volcano in the time series
 */
-function updateTimeSeriesList(data,tableId){
-	var timeSeriesList;
-	var optionList = document.getElementById('OptionList' + tableId + '-1');
-	if(tableId == null){
-		timeSeriesList = document.getElementById('TimeSeriesList');
-	}
-	else{
-		data = data.split(';');
-		data.length = data.length - 1;
-		timeSeriesList = document.getElementById('TimeSeriesList' + tableId);
-		timeSeriesList.innerHTML = '';
-		// delete all the graph and the overview of tableId side
-		$('#overviewPanel' + tableId).css('display','none');
-		$('#overview' + tableId).html('');
-	// get the min and max of 
-		$('#GraphList' + tableId).html('');
-		for(var k in graphs){
-			var m = side(k);
-			if(m == tableId){
-				delete graphs[m];
-			}
-		}
-	}
+// function updateTimeSeriesList(data,tableId){
+// 	var timeSeriesList;
+// 	var optionList = document.getElementById('OptionList' + tableId + '-1');
+// 	if(tableId == null){
+// 		timeSeriesList = document.getElementById('TimeSeriesList');
+// 	}
+// 	else{
+// 		data = data.split(';');
+// 		data.length = data.length - 1;
+// 		timeSeriesList = document.getElementById('TimeSeriesList' + tableId);
+// 		timeSeriesList.innerHTML = '';
+// 		// delete all the graph and the overview of tableId side
+// 		$('#overviewPanel' + tableId).css('display','none');
+// 		$('#overview' + tableId).html('');
+// 	// get the min and max of 
+// 		$('#GraphList' + tableId).html('');
+// 		for(var k in graphs){
+// 			var m = side(k);
+// 			if(m == tableId){
+// 				delete graphs[m];
+// 			}
+// 		}
+// 	}
 
-	if(timeSeriesList == null) return;
-	var count = 0;
-	var t;
-	var value;
-	var display;
-	for(var i in data){
-		count++;
-		value = Wovodat.trim(data[i]);
-		value = value.split('&');
+// 	if(timeSeriesList == null) return;
+// 	var count = 0;
+// 	var t;
+// 	var value;
+// 	var display;
+// 	for(var i in data){
+// 		count++;
+// 		value = Wovodat.trim(data[i]);
+// 		value = value.split('&');
 
 		
-		//display = value[0] + '_' + value[1] + '_' + value[2];
-		display = value[1];
+// 		//display = value[0] + '_' + value[1] + '_' + value[2];
+// 		display = value[1];
 		
 		
-		if(value[5] != "undefined" && value[5]!=undefined) {
-			display = display + '-' + value[5];
-		}
+// 		if(value[5] != "undefined" && value[5]!=undefined) {
+// 			display = display + '-' + value[5];
+// 		}
 
-		display+=" (";
+// 		display+=" (";
 
-		var code=value[2].split("___");
-		var first=true;
+// 		var code=value[2].split("___");
+// 		var first=true;
 
-		for(var j in code) {
-			var k=code[j].indexOf('-');
-			if(k==0) k=-1;
-			var val=code[j].substring(k+1,code[j].length);
+// 		for(var j in code) {
+// 			var k=code[j].indexOf('-');
+// 			if(k==0) k=-1;
+// 			var val=code[j].substring(k+1,code[j].length);
 
-			if(val!="null" && val!=null && val!=undefined) {
-				if(first) first=false;
-				else display+=" - ";
-				display+=val;
-			}
+// 			if(val!="null" && val!=null && val!=undefined) {
+// 				if(first) first=false;
+// 				else display+=" - ";
+// 				display+=val;
+// 			}
 
-		}
+// 		}
 
-		display+=")";
-		value = value[0] + "&" + value[1] + "&" + value[2] + '&' + value[5] + '&' + value[6];
-		t = document.createElement('tr');
-		if(tableId == null)
-			t.id = value + 'Tr';
-		else
-			t.id = value + 'Tr' + tableId;
-		timeSeriesList.appendChild(t);
-		$("[id='" + t.id + "']").html("<td><input type='checkbox' id='" +value +  "' value='" + value + "' onclick='drawTimeSeries(this," + tableId + ")'></td><td>" + display + "</td>");          
+// 		display+=")";
+// 		value = value[0] + "&" + value[1] + "&" + value[2] + '&' + value[5] + '&' + value[6];
+// 		t = document.createElement('tr');
+// 		if(tableId == null)
+// 			t.id = value + 'Tr';
+// 		else
+// 			t.id = value + 'Tr' + tableId;
+// 		timeSeriesList.appendChild(t);
+// 		$("[id='" + t.id + "']").html("<td><input type='checkbox' id='" +value +  "' value='" + value + "' onclick='drawTimeSeries(this," + tableId + ")'></td><td>" + display + "</td>");          
 	
-	}
-	if(count == 0){                    
-		$(timeSeriesList).html("<tr><td>No data is available yet.</td></tr>");
-		optionList.style.height = '30px';
-	}else{
-		if(count > 3) count = 3;
-		optionList.style.height  = 40 + (count-1)*17 + 'px';
-	}
-}
+// 	}
+// 	if(count == 0){                    
+// 		$(timeSeriesList).html("<tr><td>No data is available yet.</td></tr>");
+// 		optionList.style.height = '30px';
+// 	}else{
+// 		if(count > 3) count = 3;
+// 		optionList.style.height  = 40 + (count-1)*17 + 'px';
+// 	}
+// }
 
 function getTotalGraph(tableId) {
 	var res=0;

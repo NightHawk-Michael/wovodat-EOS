@@ -6,6 +6,11 @@
 	margin-left: auto;
 	margin-right:auto;
 }
+.container_main {
+	width:960px;
+	margin-left: auto;
+	margin-right:auto;
+}
 /* Nhat changed on 22-May-2015*/
 a {
 	text-decoration: none;
@@ -271,7 +276,9 @@ a {
 	color:white;
 	padding-top: 5px;
 	padding-bottom: 5px;
+	padding-left: 40px;
 	font-size: 14px;
+
 	position: relative;
 }
 /* Nhat changed on 22-May-2015*/

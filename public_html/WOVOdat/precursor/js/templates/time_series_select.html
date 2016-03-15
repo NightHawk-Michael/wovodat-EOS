@@ -1,0 +1,15 @@
+{{#list timeserie}}
+<div class="input-field col s12 ">
+
+  <select class="time-serie-select {{category}} " multiple>
+    <option value="" disabled selected>Choose your {{category}} data</option>
+    {{#list data}}
+      <option class="time-serie-select-option" value="{{sr_id}}">{{showingName}} </option>
+    {{/list}}
+  </select>
+  <label>{{category}} Data</label>
+  
+</div>
+<div class="input-field col s12 container filter-field {{category}}">   
+</div>
+{{/list}}

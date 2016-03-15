@@ -51,7 +51,7 @@ var ownerURL = [];
 var ccMap = new Map();
 var eqMap = new Map();
 
-/*
+/**
 Switch between single view with comparison View
 */
 function switchView(){
@@ -63,7 +63,7 @@ function switchView(){
 	
 }
 
-/*
+/**
 Show Single View.
 Display 1 map only
 */
@@ -86,7 +86,7 @@ function showSingleView(){
 	// $("#image").css('width','459px');
 }
 
-/*
+/**
 Show two view per page
 */
 function showComparisionView(){
@@ -805,7 +805,7 @@ function insertEruptionList(obj,selectId){
 //changed by Nam
 //insert parameter: selectId - id of the "select" option where the list of Volcano is inserted into
 function insertVolcanoList(obj, selectId) {
-	console.log(obj);
+	// console.log(obj);
 	var ids = selectId;
 	for (var j = 0; j < ids.length; j++) {
 		selectId = ids[j];
@@ -813,6 +813,7 @@ function insertVolcanoList(obj, selectId) {
 		var list = obj;
 		// get the volcano select list tag
 		var volcanos = document.getElementById(selectId);
+		console.log(volcanos);
 		// reset the volcano list
 		volcanos.options = [];
 		// assign new list
@@ -832,7 +833,7 @@ function insertVolcanoList(obj, selectId) {
 		}
 
 		if (document.getElementById("vnum").value == " " || selectId != "VolcanoList"){
-			// randomly select one volcano	
+			// randomly select one volcano
 			randomSelectVolcano(selectId);
 		} else {
 			var selectedVd = document.getElementById("vname").value;
