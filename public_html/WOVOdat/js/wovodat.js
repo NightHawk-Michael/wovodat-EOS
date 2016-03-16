@@ -1032,7 +1032,7 @@ Wovodat.Printer = {
             var t;
             t = window.document.createElement('div');
             t.style.margin = '0px 0px 0px 20px';
-            t.innerHTML = '<b>www.wovodat.org</b>: Database of Volcanic Unrest<br/> Brought to you by the Earth Observatory of Singapore <br/><br/>';
+            t.innerHTML = "<b id='start'>www.wovodat.org</b>: Database of Volcanic Unrest<br/> Brought to you by the Earth Observatory of Singapore <br/><br/>";
             t.innerHTML += obj.info;
             w.document.body.appendChild(t);    
             
@@ -1066,13 +1066,37 @@ Wovodat.Printer = {
             $.plot(lonDiv,equakeGraph.lonGraph.getData(),equakeGraph.lonGraph.getOptions());
             $.plot(timeDiv,equakeGraph.timeGraph.getData(),equakeGraph.timeGraph.getOptions());
             
-            // delete the print button in the print page
+            //delete the print button in the print page
             var divs = w.document.getElementsByTagName('div');
             for(i in divs){
                 if(divs[i].className == 'PrintButton'){
                     divs[i].innerHTML = '';
                 }
             }
+            var btn = w.document.createElement("BUTTON");        // Create a <button> element
+            var t = w.document.createTextNode("Print PDF");       // Create a text node
+            btn.appendChild(t);                                // Append the text to <button>
+            w.document.body.appendChild(btn);
+            btn.id = 'button';
+            // console.log($('#start'));
+            // console.log(btn);
+            // var doc = new jsPDF();
+            // // We'll make our own renderer to skip this editor
+            // var specialElementHandlers = {
+            //     '#editor': function(element, renderer){
+            //         return true;
+            //     }
+            // };
+
+            // // All units are in the set measurement for the document
+            // // This can be changed to "pt" (points), "mm" (Default), "cm", "in"
+            // $('#button').click(function () {
+            //     doc.fromHTML($('#start'), 15, 15, {
+            //         'width': 170, 
+            //         'elementHandlers': specialElementHandlers
+            //     });
+            //     doc.save('out.pdf');
+            // });
         }
         function printGMTEquake(obj){
             var link = obj.link;

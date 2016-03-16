@@ -39,11 +39,15 @@ $cache = time();
         <script type="text/javascript" src="/js/EarthQuakeController.js"></script>
 		<script type="text/javascript" src="/js/EarthQuakeUI.js"></script>
 		<script type="text/javascript" src="/js/GraphUI.js"></script>
+		<script src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
 
         <!-- Don't relate -->
         
     </head>
     <body>
+    	<script>
+    		
+    	</script>
         <!-- Nhat changed 30 May, 2015 -->
         <div class="body" style ="font-size:12px;" id="wrapborder_x">
             <div id="loading" class="loadingPanel" style ="display:none">Loading ...</div>
