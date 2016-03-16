@@ -991,6 +991,27 @@ Wovodat.get2DGMTMap = function(o){
     });
 }
 
+var source;
+
+function printPDF(){
+    var doc = new jsPDF();
+    // // We'll make our own renderer to skip this editor
+    var specialElementHandlers = {
+        '#editor': function(element, renderer){
+            return true;
+        }
+    };
+    
+    doc.fromHTML(
+        source, // HTML string or DOM elem ref.
+        0.5,    // x coord
+        0.5,    // y coord
+        {
+            'width': 200, // max width of content on PDF
+            'elementHandlers': specialElementHandlers
+        });
+    doc.save('out.pdf');
+}
 
 /*
  * a printer class to have us print a specific html element
@@ -1010,6 +1031,7 @@ Wovodat.Printer = {
             var w = window.open();
             w.document.write(element.innerHTML);
         }
+
         function print2DEquake(obj){
             function setStyleForGraphHolder(panel){
                 panel.style.cssText = "width: 450px;height: 130px;font-size: 9px;margin-top: 15px;position: relative;";
@@ -1073,30 +1095,14 @@ Wovodat.Printer = {
                     divs[i].innerHTML = '';
                 }
             }
+            var elements = w.document.getElementsByTagName('body');
+            source = elements[0].innerHTML;
             var btn = w.document.createElement("BUTTON");        // Create a <button> element
             var t = w.document.createTextNode("Print PDF");       // Create a text node
             btn.appendChild(t);                                // Append the text to <button>
             w.document.body.appendChild(btn);
             btn.id = 'button';
-            // console.log($('#start'));
-            // console.log(btn);
-            // var doc = new jsPDF();
-            // // We'll make our own renderer to skip this editor
-            // var specialElementHandlers = {
-            //     '#editor': function(element, renderer){
-            //         return true;
-            //     }
-            // };
-
-            // // All units are in the set measurement for the document
-            // // This can be changed to "pt" (points), "mm" (Default), "cm", "in"
-            // $('#button').click(function () {
-            //     doc.fromHTML($('#start'), 15, 15, {
-            //         'width': 170, 
-            //         'elementHandlers': specialElementHandlers
-            //     });
-            //     doc.save('out.pdf');
-            // });
+            btn.onclick = printPDF;
         }
         function printGMTEquake(obj){
             var link = obj.link;

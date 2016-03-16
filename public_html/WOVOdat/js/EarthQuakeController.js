@@ -171,9 +171,10 @@ function computeEquakeEvents(cavw,mapUsed){
 		}
 
 		// skip this event when it is not supposed to be displayed
-		if(earthquakes[cavw][i]['available'] == 'undefined' || earthquakes[cavw][i]['available'] == false){
+		if(earthquakes[cavw][i]['available'] == 'undefined'){
 			continue;
 		}
+		 // || earthquakes[cavw][i]['available'] == false
 		
 		if(!filter(cavw,mapUsed,i)){
 			continue;

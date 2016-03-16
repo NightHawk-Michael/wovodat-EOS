@@ -361,11 +361,10 @@ $cache = time();
 													</div>
 													<div id="FlotDisplayTime1" class="equakeGraphPlaceholder">
 													</div>
-													<div class="PrintButton" style="text-align:center">Image</div>
 													<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TWOD_EQUAKE,element:document.getElementById('equakeGraphs1'),mapUsed:1,equakeGraph:equakeGraphs[1],info:document.getElementById('VolcanoList').value})" >
 														<a title="Print this graphs" href="#" >
 															<span class="app-icon light print-icon"></span>
-															<span class="app-button-text">Print</span>
+															<span class="app-button-text">Image</span>
 														</a>
 													</div>
 												</div>
