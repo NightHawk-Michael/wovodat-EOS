@@ -1,57 +1,36 @@
-#main {
-  background-color: #FFF;
-  margin-top: -10px;
-  margin-bottom: -50px;
-  padding: 10px;
-  min-height: 50px;
+.main {
+  min-height: 900px;
 }
 
-.serie-graph {
-  position: relative;
-  width: 800px;
-  height: 200px;
-}
-
-.tooltip {
+.graph-tooltip {
+  padding: 10px 8px;
+  font-size: 1rem;
+  z-index: 2000;
+  background-color: #e3f2fd;
+  box-shadow: 2px 2px 1px #888888;
+  border-radius: 2px;
+  min-height: 36px;
+  line-height: 120%;
+  opacity: 100;
   position: absolute;
-  border: 1px solid #fdd;
-  padding: 2px;
-  background-color: #fee;
-  opacity: 0.8;
+  text-align: center;
+  max-width: calc(100% - 4px);
+  overflow: hidden;
+  left: 0;
+  top: 0;
+  will-change: top, left;
 }
-
-.time-series-selection-container {
-  width: 770px;
-  height: 100px;
-  padding: 6px;
-  margin: 10px;
-  overflow: auto;
-  border: 1px solid #575757;
+div.overview-graph div.flot-text div.yAxis div.tickLabel
+{    
+    color: transparent;
+    
 }
-
-.filter-selection-container {
-  width: 200px;
-  height: 40;
-  padding: 6px;
-  margin: 5px;
-  overflow: auto;
-  border: 1px solid #575757;
-  margin-left: 20px;
+div.eruption-forecasts-graph div.flot-text div.yAxis div.tickLabel
+{    
+    color: transparent;
+    
 }
-
-.mgt20 {
-  margin-top: 20px;
-}
-
-.volcano-select {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.eruption-select {
-  display: inline-block;
-}
-
-.mgt15 {
-  margin-top: 15px;
+label {
+    font-size: 0.8rem;
+    color: #9e9e9e
 }

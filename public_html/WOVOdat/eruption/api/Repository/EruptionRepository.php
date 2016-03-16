@@ -30,7 +30,7 @@
 		*/
 		public static function getEruptionIdList($vd_id) {
 			global $db;
-			$query = "select ed_id from ed where ed.vd_id = %d and ed.ed_etime IS NOT NULL ORDER BY ed.ed_etime DESC" ;
+			$query = "select ed_id from ed where ed.vd_id = %d ORDER BY ed.ed_stime DESC" ;
 			$db->query($query, $vd_id);
 			return $db->getList();
 		}
@@ -86,8 +86,13 @@
 					ed_phs_dre_lav, ed_phs_dre_tep, ed_phs_col from ed_phs where ed_phs.ed_phs_id = %d";
 			$db->query($query, $ed_phs_id);
 			$result = $db->getRow();
-			$result['ed_phs_stime'] = TimeFormatter::getJavascriptTimestamp($result['ed_phs_stime']);
-			$result['ed_phs_etime'] = TimeFormatter::getJavascriptTimestamp($result['ed_phs_etime']);
+			// var_dump($result);
+			if(array_key_exists('ed_phs_stime', $result)){
+				$result['ed_phs_stime'] = TimeFormatter::getJavascriptTimestamp($result['ed_phs_stime']);
+			}
+			if(array_key_exists('ed_phs_etime', $result)){
+				$result['ed_phs_etime'] = TimeFormatter::getJavascriptTimestamp($result['ed_phs_etime']);
+			}
 			return $result;
 		}
 
