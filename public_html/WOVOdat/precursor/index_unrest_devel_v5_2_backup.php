@@ -431,7 +431,7 @@ $cache = time();
 										</table>
 									</div>
 									<div id="TimeSeriesView1" class="timeSeriesView">
-										<iframe></iframe>
+										<iframe src="/eruption/index.php" frameborder="0", width="480" height="960"> </iframe>
 										<!-- <div>Hello World</div> -->
 										<!-- <div id="" class="blue lighten-4 main" >
 											<div id="main" class="container_eruption">
