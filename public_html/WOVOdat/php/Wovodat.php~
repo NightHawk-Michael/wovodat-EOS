@@ -91,53 +91,31 @@ class Wovodat {
         }
     }
 
-    public function getCatalogOwner(){
-        $result = mysql_query("select cc_id, cc_code from cc");
-        $list = Array();
-        while($row=mysql_fetch_array($result)){
-            $object = "";
-            $object['value'] = $row[0];
-            $object['name'] = $row[1];
-            array_push($list,$object);
-        }
-        return $list;
-    }
     /*
-     * Return the list of Earthquake Type to store in the client - added by vutuan
+     * Return the list of Earthquake Type
      */
 
-    public function getEquakeType(){
-        $result = mysql_query("select st_eqt_org,st_eqt_name from st_eqt");
-        $list=Array();
+    public function getEquakeTypeList() {
+        session_start();
+        $uname=$_SESSION['login']['cr_uname'];
+        
+        $result="select e.st_eqt_org,e.st_eqt_name from st_eqt as e, cc where e.cc_id = cc.cc_id and e.cc_id =(select cc.cc_id from cc where cc.cc_code=(select cc.cc_obs from cc, cr where cc.cc_id = cr.cc_id and cr.cr_uname= '$uname'))";
+
+        $list=array();
         while($row=mysql_fetch_array($result)) {
-            $object = "";
-            $object['value'] = $row[0];
-            $object['name'] = $row[1];
-            array_push($list,$object);
+            array_push($list,$row);
         }
+   
         return $list;
     }
-
-    // public function getEquakeTypeList() {
-    //     session_start();
-    //     $uname=$_SESSION['login']['cr_uname'];
-        
-    //     $result="select e.st_eqt_org,e.st_eqt_name from st_eqt as e, cc where e.cc_id = cc.cc_id and e.cc_id =(select cc.cc_id from cc where cc.cc_code=(select cc.cc_obs from cc, cr where cc.cc_id = cr.cc_id and cr.cr_uname= '$uname'))";
-
-    //     $list=array();
-    //     while($row=mysql_fetch_array($result)) {
-    //         array_push($list,$row);
-    //     }
-   
-    //     return $list;
-    // }
 
     /*
      * Return the list of all available volcano in our database
      */
+
     public function getVolcanoList() {
         mysql_query("set character_set_results='utf8'");
-        $result = mysql_query("select vd_name, vd_cavw, vd_num FROM vd  ORDER BY vd_name");
+        $result = mysql_query("select vd_name, vd_cavw FROM vd  ORDER BY vd_name");
         $row = mysql_fetch_array($result);
         if ($row === false)
             return;
@@ -147,7 +125,6 @@ class Wovodat {
             $object = "";
             $object[1] = $row[0];
             $object[2] = $row[1];
-            $object[3] = $row[2];
             array_push($results, $object);
             $row = mysql_fetch_array($result);
             if ($row == false)
@@ -155,7 +132,6 @@ class Wovodat {
         }
         echo json_encode($results);
     }
-
 
     /*
      * Return the list of all eruption of one specifci volcano
@@ -213,21 +189,13 @@ class Wovodat {
         $result1 = mysql_fetch_array($query1);
         if ($result1 !== false) {
             $cc_id = $result1[0];
-            $object['cc_id1'] = $cc_id;
             $query1_2 = mysql_query("select cc_url from cc where cc_id='" . $cc_id . "'");
             $result1_2 = mysql_fetch_array($query1_2);
-            // retrieve the cc_code based on cc_id - vutuan added
-            $query1_3 = mysql_query("select cc_code from cc where cc_id='". $cc_id . "'");
-            $result1_3 = mysql_fetch_array($query1_3);
 
             if ($result1_2 !== false)
                 $object['owner1'] = $result1_2[0];
             else
                 $object['owner1'] = "";
-            if($result1_3 !== false)
-                $object['cc_code1'] = $result1_3[0];
-            else
-                $object['cc_code1'] = "";
         }
 
         // second cc_id
@@ -235,20 +203,12 @@ class Wovodat {
         $result1 = mysql_fetch_array($query1);
         if ($result1 !== false) {
             $cc_id = $result1[0];
-            $object['cc_id2'] = $cc_id;
             $query1_2 = mysql_query("select cc_url from cc where cc_id='" . $cc_id . "'");
             $result1_2 = mysql_fetch_array($query1_2);
-            // retrieve the cc_code based on cc_id - vutuan added
-            $query1_3 = mysql_query("select cc_code from cc where cc_id='". $cc_id . "'");
-            $result1_3 = mysql_fetch_array($query1_3);
             if ($result1_2 !== false)
                 $object['owner2'] = $result1_2[0];
             else
                 $object['owner2'] = "";
-            if($result1_3 !== false)
-                $object['cc_code2'] = $result1_3[0];
-            else
-                $object['cc_code2'] = "";
         }
 
         $query2 = mysql_query("select vd_inf_status, vd_inf_type from vd_inf where vd_inf_cavw='" . $cavw . "'");
@@ -2131,7 +2091,7 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
         if (is_numeric($startDepth) && is_numeric($endDepth)) {
             
         } else {
-            $startDepth = -0;
+            $startDepth = 0;
             $endDepth = 40;
         }
         
@@ -2139,8 +2099,7 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
         if ($quantity)
             $quakeQuery .= "sd_evn_code, ";
 
-        // changed sn_id to cc_id by vutuan
-        $quakeQuery .= " sd_evn_elat, sd_evn_elon, sd_evn_edep, sd_evn_pmag, sd_evn_time, sd_evn_eqtype, cc_id, (0.15 * (unix_timestamp(sd_evn_time)/unix_timestamp(now())) + 0.2 * (rand() * sd_evn_edep/$endDepth)  + 0.65 * rand()) as id FROM sd_evn ";
+        $quakeQuery .= " sd_evn_elat, sd_evn_elon, sd_evn_edep, sd_evn_pmag, sd_evn_time, sd_evn_eqtype, sn_id, (0.15 * (unix_timestamp(sd_evn_time)/unix_timestamp(now())) + 0.2 * (rand() * sd_evn_edep/$endDepth)  + 0.65 * rand()) as id FROM sd_evn ";
 
 
         $quakeQuery .= " WHERE ABS($latitude - sd_evn_elat) < 1 AND ABS($longitude - sd_evn_elon) < 6 ";
@@ -2150,7 +2109,9 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
 
         $quakeQuery .= " AND SQRT(POW(($latitude - sd_evn_elat)*110, 2) + POW(($longitude - sd_evn_elon) * 111.32 * COS($latitude/57.32), 2))<  " . $wkm / 2;
 
+
         $quakeQuery .= " AND sd_evn_pubdate <= now() ";
+
 
         if ($startDate && $endDate) {
             $startDate = preg_split('/\//', $startDate);
@@ -2161,8 +2122,8 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
 
         
         
-        $depth = " and sd_evn_edep BETWEEN $startDepth AND $endDepth ";
-        $quakeQuery .= $depth;
+            $depth = " and sd_evn_edep BETWEEN $startDepth AND $endDepth ";
+            $quakeQuery .= $depth;
             
         if ($eqtype) {
             $quaketype = " and sd_evn_eqtype = $eqtype ";
@@ -2184,13 +2145,12 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
     }
 
     public function getEarthquakes($qty, $cavw, $lat, $lon, $elev) {
-        //$quakeQuery .= " sd_evn_elat, sd_evn_elon, sd_evn_edep, sd_evn_pmag, sd_evn_time, sd_evn_eqtype, sn_id, (0.15 * (unix_timestamp(sd_evn_time)/unix_timestamp(now())) + 0.2 * (rand() * sd_evn_edep/$endDepth)  + 0.65 * rand()) as id FROM sd_evn ";
+
         $quakeQuery = $this->getEarthquakeQuery("", $lat, $lon, "", "", "", "", "", "");
         $getQuakes = mysql_query($quakeQuery) or die(mysql_error());
         $count = 0;
         while ($row = mysql_fetch_array($getQuakes)) {
-            // change from sn_id to cc_id by vutuan
-            echo $row['sd_evn_elat'] . "," . $row['sd_evn_elon'] . "," . $row['sd_evn_edep'] . "," . $row['sd_evn_pmag'] . "," . $row['sd_evn_time'] . "," . $row['sd_evn_eqtype'] . "," . $row['cc_id'] . ";";
+            echo $row['sd_evn_elat'] . "," . $row['sd_evn_elon'] . "," . $row['sd_evn_edep'] . "," . $row['sd_evn_pmag'] . "," . $row['sd_evn_time'] . "," . $row['sd_evn_eqtype'] . "," . $row['sn_id'] . ";";
             $count++;
         }
     }
@@ -2558,9 +2518,13 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
         // Draw the magnitude scale. 
         fwrite($fh, "pslegend -Dx2i/-1.8i/6.0i/0.575i/TC -J -R -O -F gmt.legend -Glightyellow >> $tmp.ps\n");
 
-        // Convert ps to tif.
-        fwrite($fh, "ps2raster $tmp.ps -Tj -E$dpi\n");
-        fwrite($fh, "mv $tmp.jpg \$file.jpg\n");
+        // Convert ps to jpg.
+
+        //fwrite($fh, "ps2raster $tmp.ps -Tj -E$dpi\n");
+       // fwrite($fh, "mv $tmp.jpg \$file.jpg\n");
+
+
+fwrite($fh, "convert $tmp.ps \$file.png\n");
 
         fwrite($fh, "frame=`gmt_set_framenext \$frame`\n");
         fwrite($fh, "((azim += $updatedAzim))\n");
@@ -2577,7 +2541,8 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
         $delay = ($displaytime * $updatedAzim / 360);
 
         // makes tif from gif file
-        fwrite($fh, "convert -delay $delay  *.jpg $tmp.gif\n");
+//        fwrite($fh, "convert -delay $delay  *.jpg $tmp.gif\n");
+ fwrite($fh, "convert -delay $delay -loop 0 *.png $tmp.gif\n");
 
         fclose($fh);
         // execute the script

@@ -936,14 +936,14 @@ function updateTimeSeriesandStations(args,stationsDatabaseUsed,mapUsed){
 			data.length--;
 			stationsDatabaseUsed[type] = data;
 			// udpate the list of station nad the markers on the custom google map
-			updateTimeSeriesList(data);
+			// updateTimeSeriesList(data);
 			insertMarkersForStations(data,mapUsed);
 			break;
 		case 'updateOldData':
 			var type = args.type;
 			var data = stationsDatabaseUsed[type];
 			// update the list of station and the markers on the google map
-			updateTimeSeriesList(data);
+			// updateTimeSeriesList(data);
 			insertMarkersForStations(data,mapUsed);
 			break;
 		default:

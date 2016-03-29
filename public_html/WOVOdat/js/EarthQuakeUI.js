@@ -790,8 +790,8 @@ $(document).ready(function(){
 	*parameter is the list of Volcano, and the second parameter is the ID of the dropdown menu
 	*to which data is populated
 	*/
-	// Wovodat.getVolcanoList(insertVolcanoList,["VolcanoList","CompVolcanoList"]);
-	Wovodat.getVolcanoList(insertVolcanoList,["VolcanoList"]);
+	Wovodat.getVolcanoList(insertVolcanoList,["VolcanoList","CompVolcanoList"]);
+	// Wovodat.getVolcanoList(insertVolcanoList,["VolcanoList"]);
    	Wovodat.getEquakeType(setupEquakeType);
 	Wovodat.getCatalogOwner(setupCatalogOwner);
 	// store the eruption data for later use
