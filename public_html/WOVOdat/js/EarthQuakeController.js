@@ -174,7 +174,6 @@ function computeEquakeEvents(cavw,mapUsed){
 		if(earthquakes[cavw][i]['available'] == 'undefined'){
 			continue;
 		}
-		 // || earthquakes[cavw][i]['available'] == false
 		
 		if(!filter(cavw,mapUsed,i)){
 			continue;
@@ -430,8 +429,8 @@ function initializeFilter(data,mapUsed){
  * Filter Data
  */
 function filterData(cavw,panelUsed){
-
 	// data is not available for filtering
+	// console.log(earthquakes[cavw]);
 	if(!earthquakes[cavw])
 		return;
 
@@ -461,6 +460,8 @@ function filterData(cavw,panelUsed){
 	var vlat = earthquakes[cavw]['vlat'], vlon = earthquakes[cavw]['vlon'];
 	// some error here, what if i is 'vlat' or 'vlon'
 	for (var i in earthquakes[cavw]){
+
+		// console.log(i);
 		if(i == 'vlat' || i == 'vlon')
 			continue;
 		// if we already have enough earthquakes event, the rest of event is
@@ -476,6 +477,8 @@ function filterData(cavw,panelUsed){
 
 			var elat = earthquakes[cavw][i]['lat'], elon = earthquakes[cavw][i]['lon'];
 			var distanceFromVolcano = Wovodat.calculateD(vlat,vlon,elat,elon,2);
+			if(distanceFromVolcano > 50)
+				console.log(distanceFromVolcano);
 			if(distanceFromVolcano > wkm + 0.1){
 				earthquakes[cavw][i]['available'] = false;
 				continue;

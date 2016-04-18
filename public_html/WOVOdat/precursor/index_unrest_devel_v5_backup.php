@@ -429,12 +429,17 @@ $cache = time();
 											</tr>
 										</table>
 									</div>
-									<div id="TimeSeriesView1" class="timeSeriesView" style = "margin-left: 0px;">
-										<iframe src="/eruption/index.php" frameborder="0", width="470" height="960"> </iframe>
-
-									</div>
-									<!-- <div id="TimeSeriesView1" class="timeSeriesView">
-										<div id="OptionList1">
+									<div id="TimeSeriesView1" class="timeSeriesView">
+										<iframe src="/eruption/index.php" frameborder="0", width="480" height="960"> </iframe>
+										<!-- <div>Hello World</div> -->
+										<!-- <div id="" class="blue lighten-4 main" >
+											<div id="main" class="container_eruption">
+												<div class="progress">
+													<div class="indeterminate"></div>
+												</div>
+											</div>
+										</div> -->
+			<!-- 							<div id="OptionList1">
 											<b>Available time series data (max. 3):</b> 
 											<div id="OptionList1-1">
 												<table id="TimeSeriesList1" class="timeSeriesList">
@@ -458,8 +463,8 @@ $cache = time();
 												<span class="app-icon light print-icon"></span>
 												<span class="app-button-text">Print</span>
 											</a>
-										</div>
-									</div> -->
+										</div> -->
+									</div>
 								</div>
 							</td>
 							<td><div class="separator"></div></td>
@@ -796,11 +801,8 @@ $cache = time();
 										</tr>
 									</table>
 								</div>
-								<div id="TimeSeriesView2" class="timeSeriesView" style = "margin-left: 0px;">
-									<iframe src="/eruption/index.php" frameborder="0", width="470" height="960"> </iframe>
 
-								</div>
-<!-- 								<div id="TimeSeriesView2" class="timeSeriesView">
+								<div id="TimeSeriesView2" class="timeSeriesView">
 									<div id="OptionList2">
 										<b>Available time series data (max. 3):</b>
 										<div id="OptionList2-1">
@@ -827,7 +829,7 @@ $cache = time();
 											<span class="app-button-text">Print</span>
 										</a>
 									</div>
-								</div> -->
+								</div>
 							</td>
 						</tr>
 

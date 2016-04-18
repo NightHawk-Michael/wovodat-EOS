@@ -2170,7 +2170,7 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
         }
 
         //$quakeQuery .= " group by sd_evn_elat, sd_evn_elon order by sd_evn_time desc ";
-        $quakeQuery .= " order by id desc ";
+        $quakeQuery .= " order by sd_evn_time desc ";
 
 
         if ($quantity) {

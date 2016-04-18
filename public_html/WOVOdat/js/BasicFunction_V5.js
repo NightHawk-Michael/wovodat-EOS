@@ -56,10 +56,12 @@ Switch between single view with comparison View
 */
 function switchView(){
 	var panel = document.getElementById('volcanoPanel2');
-	if($(panel).css('display') == 'block')
+	if($(panel).css('display') == 'block'){
 		showSingleView();
-	else 
+	}
+	else{
 		showComparisionView();
+	}
 	
 }
 
