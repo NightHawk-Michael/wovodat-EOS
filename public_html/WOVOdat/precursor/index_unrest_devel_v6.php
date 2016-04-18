@@ -42,6 +42,7 @@ $cache = time();
         <script> 
         $(document).ready(function(){
             $("#switchView").click();
+            $("#HideTimeSeriesPanel1").click();
         }); 
         </script>
     </head>
@@ -420,14 +421,14 @@ $cache = time();
                                         <table>
                                             <tr>
                                                 <td valign="middle">
-                                                    <span id="TimeSeriesHeader1" class="TimeSeriesHeader">
-                                                        <a href="" onclick="return false;">Data Plots</a>
-                                                    </span>
+													<span id="TimeSeriesHeader1" class="TimeSeriesHeader">
+														<a href="" onclick="return false;">Data Plots</a>
+													</span>
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
-                                    <div id="TimeSeriesView1" class="timeSeriesView" style = "margin-left: 0px;">
+                                    <div id="TimeSeriesView1" class="timeSeriesView" style = "margin-left: 0px; display: none">
                                         <iframe src="/eruption/index.php" frameborder="0", width="470" height="960"> </iframe>
 
                                     </div>
