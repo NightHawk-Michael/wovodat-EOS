@@ -161,11 +161,17 @@ $(function(){
  * Author : Pham Vu Tuan
  * Function to compute the number of earthquake events of a volcano
  */
-function computeEquakeEvents(cavw,mapUsed){
+function computeEquakeEvents(cavw,mapUsed, radius=30){
 	var count = 0;
+	var vlat = earthquakes[cavw]['vlat'];
+	var vlon = earthquakes[cavw]['vlon'];
+
 	for(var i in earthquakes[cavw]){
+		var lat = earthquakes[cavw][i]['lat'];
+		var lon = earthquakes[cavw][i]['lon'];
 		// skip this value when there is no latitude or longitude value 
 		// for them
+
 		if(typeof lat == 'undefined' || typeof lon == 'undefined'){
 			continue;
 		}
@@ -176,6 +182,11 @@ function computeEquakeEvents(cavw,mapUsed){
 		}
 		
 		if(!filter(cavw,mapUsed,i)){
+			continue;
+		}
+
+		// only count earthquakes within the radius given
+		if(Wovodat.calculateD(lat, lon, vlat, vlon, 2) > radius){
 			continue;
 		}
 		count++;

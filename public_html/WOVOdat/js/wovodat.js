@@ -1324,6 +1324,10 @@ Wovodat.calculateD = function(lat,lon,vlat,vlon,option){
     return d;
 }
 
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
+}
+
 Wovodat.htmlUnit = function (unit) {
     switch(unit) {
         case 'microradians':

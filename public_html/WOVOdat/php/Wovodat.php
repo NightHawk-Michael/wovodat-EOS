@@ -2146,7 +2146,7 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
         $quakeQuery .= " WHERE ABS($latitude - sd_evn_elat) < 1 AND ABS($longitude - sd_evn_elon) < 6 ";
 
         if ($wkm == "")
-            $wkm = 60;
+            $wkm = 200;
 
         $quakeQuery .= " AND SQRT(POW(($latitude - sd_evn_elat)*110, 2) + POW(($longitude - sd_evn_elon) * 111.32 * COS($latitude/57.32), 2))<  " . $wkm / 2;
 

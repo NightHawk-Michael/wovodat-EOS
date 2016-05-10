@@ -508,7 +508,8 @@ vutuan added to display info of earthquake events.
 */
 function displayEvent(cavw,mapUsed){
 	var nEvent = $('#Evn'+mapUsed).val();
-	var actualEvent = computeEquakeEvents(cavw,mapUsed);
+	var radius = $('#wkm'+mapUsed).val();
+	var actualEvent = computeEquakeEvents(cavw,mapUsed, radius);
 	if(parseInt(nEvent) > parseInt(actualEvent)){
 		document.getElementById("eqEvent" + mapUsed).innerHTML 
 		= 'Earthquake events: ' + actualEvent + ' of ' + actualEvent;
