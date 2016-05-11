@@ -17,9 +17,9 @@ $cache = time();
         <meta name="keywords" content="Volcano, Vulcano, Volcanoes">
         <link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">     
         <link href="/css/jquery.jgrowl.css" rel="stylesheet">
-        <link href="/css/index.css" rel="stylesheet" type="text/css">
-        <link href="/css/normalize.css" rel="stylesheet" type="text/css">
-        <link href="/css/volcano.css" rel="stylesheet" type="text/css">     
+        <!--<link href="/css/index.css" rel="stylesheet" type="text/css">-->
+        <link href="/css/styles_beta.css" rel="stylesheet" type="text/css">
+        <!--<link href="/css/volcano.css" rel="stylesheet" type="text/css"> -->    
         <link href="/css/tooltip.css" rel="stylesheet">
         <link href="/css/css_v5.css" rel="stylesheet">
         <link type="text/css" href="/js/jqueryui/css/custom-theme/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
@@ -85,7 +85,7 @@ $cache = time();
 <!--                <?php //include 'php/include/header_beta.php'; ?> -->
                 <div class = "container" id = "wrap_x">
                     <div class = "content">
-                        <div id="switchViewPanel">
+                        <div id="switchViewPanel" style = "visibility: hidden">
                             <button id="switchView" class="switchViewButton">Single View</button>
                         </div>
 
@@ -93,7 +93,7 @@ $cache = time();
                             <tr>
                                 <td id="volcanoPanel1" class="volcanoPanel">
 
-                                    <div class="button white" id="mapBar1" style="margin-top:0px">
+                                    <div class="button white" id="mapBar1" style="width:900px;margin-top:0px">
                                         <div class="CloseButton" id="HideMap1"></div>
                                         <table>
                                             <tr>
@@ -126,7 +126,7 @@ $cache = time();
 
 
                                     <div id="fixSwitch">
-                                        <div class="button white">
+                                        <div class="button white" style = "width:900px;">
                                             <div class="CloseButton" id="HideVolcanoInformation1"></div>
                                             <div style="float:right;padding-right: 10px;">
                                                 <select id="VolcanoList" class="">
@@ -166,13 +166,16 @@ $cache = time();
                                             </table>
                                         </div>
                                         <!-- END MAP, START GRAPH -->
+										
                                         <div>
                                             <table>
                                                 <tr>
+												<!--
                                                     <td valign="top"style="text-align:left;height:5px;width:180px;"><b>Eruption:</b><br/>
                                                         <select id="EruptionList" class="eruptionList" >
                                                         </select>
                                                     </td>
+													-->
                                                     <td colspan="2" style="height:20px;width:250px">
                                                         <div class="viewStationPanel">
                                                             <button id="HideStationButton1" style="float:right;display:none">Hide Stations</button>
@@ -183,7 +186,8 @@ $cache = time();
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div class="button white">
+										
+                                        <div class="button white" style = "width:900px;">
                                             <div class="CloseButton" id="HideEquake1"></div>
                                             <table>
                                                 <tr>
@@ -339,7 +343,7 @@ $cache = time();
                                             <!-- place holders for the Flot graphs and GMT images-->
 
                                             <div id="equakeGraphs1">
-                                                <div id="twoDEquakeFlotGraph1" class="twoDEquakeFlotGraph">
+                                                <div id="twoDEquakeFlotGraph1" class="twoDEquakeFlotGraph" style = "width:500px; background-color: white;">
                                                     <div class="row">
                                                         <div class="leftPanel" id="eqEvent1"></div>
                                                         <div class="leftPanel" id="owner1"></div>
@@ -415,7 +419,7 @@ $cache = time();
                                         </div>
                                     </div>
                                 <div class="flowElement">
-                                    <div class="button white" >
+                                    <div class="button white" style = "width:900px; " >
 
                                         <div class="CloseButton" id="HideTimeSeriesPanel1"></div>
                                         <table>
@@ -428,15 +432,15 @@ $cache = time();
                                             </tr>
                                         </table>
                                     </div>
-                                    <div id="TimeSeriesView1" class="timeSeriesView" style = "margin-left: 0px; display: none">
-                                        <iframe src="/eruption/index.php" frameborder="0", width="470" height="960"> </iframe>
+                                    <div id="TimeSeriesView1" class="timeSeriesView" style = "overflow: hidden;width:960px; height: 960px; margin-left: 0px; display: none">
+
 
                                     </div>
                                 </div>
                             </td>
                             <td><div class="separator"></div></td>
                             <td id="volcanoPanel2" class="volcanoPanel">
-                                <div class="button white" id = "mapBar2"style="margin-top:0px">
+                                <div class="button white" id = "mapBar2"style=" width:900px;margin-top:0px">
                                     <div class="CloseButton" id="HideMap2"></div>
                                     <table>
                                         <tr>
@@ -769,7 +773,6 @@ $cache = time();
                                     </table>
                                 </div>
                                 <div id="TimeSeriesView2" class="timeSeriesView" style = "margin-left: 0px;">
-                                    <iframe src="/eruption/index.php" frameborder="0", width="470" height="960"> </iframe>
 
                                 </div>
 <!--                                <div id="TimeSeriesView2" class="timeSeriesView">-->

@@ -103,7 +103,7 @@ td#regisLoginSubmitButton{text-align:right; vertical-align:top; height:40px;}
 #forgotPW{text-align:center; font-size:10pt; border-left-width:1px; border-left-color:#505050; border-left-style:solid;}
 
 .button {
-    width:460px;
+    width:430px;
     display: inline-block;
     outline: none;
     text-align: left;

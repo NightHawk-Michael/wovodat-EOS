@@ -854,116 +854,118 @@ $(document).ready(function(){
 
 	Wovodat.showProcessingIcon($("#loading"));
 	// when the volcano option is changed
-	$("#VolcanoList").change(function(){
-		totalGraph[1]=0;
-		graphCount[1]=[];
-
-		hideEarthquakeMarkerButton(1);
-		uncheckAllEquakeButton(1);
-		//setPrintButtonVisibility(1,false);
-		var volcano = $("#VolcanoList").val();
-		//alert("VNUM = " + volcano);
-
-		volcano = volcano.split("&");
-		var cavw = volcano[1];
-		var cavw_new = volcano[2];//vnum
-
-		if(cavw_new == $("#vnum").val() || $("#vnum").val() == " "){
-			Wovodat.getLatLon({handler:drawMap,cavw:cavw,mapUsed:1},"VolcanoList", "Map");
-			//initialise value for Number of Events textbox
-			resetFilter(1);
-			$("#FormFilter1").hide();
-			$("#FilterSwitch1").html("Show Filter");
-			$("#FlotDisplayLat1").html("");
-			$("#FlotDisplayLon1").html("");
-			//get the list of neightbors
-			//and position them in the map
-			Wovodat.getNeighbors(cavw,1,insertMarkersForNeighbors);
-			// get the eruption list for that specific volcano
-			Wovodat.getEruptionList({
-				volcano: $("#VolcanoList").val(),
-				handler: insertEruptionList,
-				selectId:"EruptionList"
-			});
-			//get data owner of the volcano
-			Wovodat.getCcUrl("1",cavw,insertDataOwnerandStatus);
-			// get the location of that volcano and position to it in the
-			// google map
-			// update the list of available station
-			// time-series view
-			//compare volcano view
-			Wovodat.getAllStationsList({
-				cavw:cavw,
-				handler:updateAllStationsList,
-				tableId:"StationList",
-				mapId:"Map",
-				stationsDatabaseUsed: stationsDatabase,
-				mapUsed:1
-			});
-			// Insert the list of available data in available time series
-			// to the list in the comparison view
-			// Wovodat.getListOfTimeSeriesForVolcano({
-			// 	cavw:cavw,
-			// 	handler:updateTimeSeriesList,
-			// 	tableId:1
-			// });
-			// delete all the drawn graphs and the time series list
-			if ($("#CompVolc").css("display")=="none"){
-				for(var i in graphs){
-					delete(graphs[i]);
-					var div = document.getElementById(i + 'Row');
-					div.parentNode.removeChild(div);
-				}
-				// document.getElementById('overviewPanel').style.display = 'none';
-
-				// document.getElementById('TimeSeriesList').innerHTML = '';
-			}else{
-				for(var i in graphs){
-					var j = side(i);
-					if(j == 1){
-						delete graphs[i];
-						var div = document.getElementById(i.substring(0,i.length-1) + 'Row' + j);
-						div.parentNode.removeChild(div);
-					}
-				}
-				// document.getElementById('overviewPanel1').style.display = 'none';
-				// document.getElementById('TimeSeriesList1').innerHTML = '';
-			}
-			// reset the local list of available stations for each data type
-			delete(stationsDatabase);
-			stationsDatabase = {};
-
-			hideEquakePanel({mapUsed:1});
-			hideMarkers({mapUsed:1});
-			clearEquakedrawingData({mapUsed:1});
-			if ($("#vnum").val() == " ") {
-				var selectedVd = $("#VolcanoList").val();
-				selectedVd = selectedVd.split("&");
-				document.getElementById("vname").value = selectedVd[0];
-				document.getElementById("vcavw").value = selectedVd[1];
-				document.getElementById("vnum").value = selectedVd[2];
-				console.log($("#VolcanoList").val());
-			}
-		}else{
-			var selectedVd = $("#VolcanoList").val();
-			selectedVd = selectedVd.split("&");
-			document.getElementById("vname").value = selectedVd[0];
-			document.getElementById("vcavw").value = selectedVd[1];
-			document.getElementById("vnum").value = selectedVd[2];
-			var currentUrl = window.location.href;
-			currentUrl = currentUrl.split("?");
-			$("#volcanoForm").attr("action", currentUrl[0] + "?vnum=" + cavw_new);
-			$("#volcanoForm").submit();
-		}
-		removeElement(1,'cc_id');
-		removeElement(1,'EqType');
-		if(earthquakes[cavw]){
-			var catalogOwner = new Set();
-			var eqTypeSet = new Set();
-			cachingElement(catalogOwner,cavw,1,'cc_id');
-			cachingElement(eqTypeSet,cavw,1,'EqType');
-		}
-	});
+	//$("#VolcanoList").change(function(){
+	//	totalGraph[1]=0;
+	//	graphCount[1]=[];
+    //
+	//	hideEarthquakeMarkerButton(1);
+	//	uncheckAllEquakeButton(1);
+	//	//setPrintButtonVisibility(1,false);
+	//	var volcano = $("#VolcanoList").val();
+	//	//alert("VNUM = " + volcano);
+    //
+	//	volcano = volcano.split("&");
+	//	var cavw = volcano[1];
+	//	var cavw_new = volcano[2];//vnum
+	//	var inner = "\<iframe src=\"/eruption2/#vnum=" + cavw_new +  "\" frameborder=\" 0 \" style=\"overflow:hidden;height:100%;width:100%\" height=\"100%\" width=\"100%\",width=\"100%\" height=\"100%\"\> </iframe>";
+	//	//console.log(inner);
+	//	$("#TimeSeriesView1").html(inner);
+	//	if(cavw_new == $("#vnum").val() || $("#vnum").val() == " "){
+	//		Wovodat.getLatLon({handler:drawMap,cavw:cavw,mapUsed:1},"VolcanoList", "Map");
+	//		//initialise value for Number of Events textbox
+	//		resetFilter(1);
+	//		$("#FormFilter1").hide();
+	//		$("#FilterSwitch1").html("Show Filter");
+	//		$("#FlotDisplayLat1").html("");
+	//		$("#FlotDisplayLon1").html("");
+	//		//get the list of neightbors
+	//		//and position them in the map
+	//		Wovodat.getNeighbors(cavw,1,insertMarkersForNeighbors);
+	//		// get the eruption list for that specific volcano
+	//		Wovodat.getEruptionList({
+	//			volcano: $("#VolcanoList").val(),
+	//			handler: insertEruptionList,
+	//			selectId:"EruptionList"
+	//		});
+	//		//get data owner of the volcano
+	//		Wovodat.getCcUrl("1",cavw,insertDataOwnerandStatus);
+	//		// get the location of that volcano and position to it in the
+	//		// google map
+	//		// update the list of available station
+	//		// time-series view
+	//		//compare volcano view
+	//		Wovodat.getAllStationsList({
+	//			cavw:cavw,
+	//			handler:updateAllStationsList,
+	//			tableId:"StationList",
+	//			mapId:"Map",
+	//			stationsDatabaseUsed: stationsDatabase,
+	//			mapUsed:1
+	//		});
+	//		// Insert the list of available data in available time series
+	//		// to the list in the comparison view
+	//		// Wovodat.getListOfTimeSeriesForVolcano({
+	//		// 	cavw:cavw,
+	//		// 	handler:updateTimeSeriesList,
+	//		// 	tableId:1
+	//		// });
+	//		// delete all the drawn graphs and the time series list
+	//		if ($("#CompVolc").css("display")=="none"){
+	//			for(var i in graphs){
+	//				delete(graphs[i]);
+	//				var div = document.getElementById(i + 'Row');
+	//				div.parentNode.removeChild(div);
+	//			}
+	//			// document.getElementById('overviewPanel').style.display = 'none';
+    //
+	//			// document.getElementById('TimeSeriesList').innerHTML = '';
+	//		}else{
+	//			for(var i in graphs){
+	//				var j = side(i);
+	//				if(j == 1){
+	//					delete graphs[i];
+	//					var div = document.getElementById(i.substring(0,i.length-1) + 'Row' + j);
+	//					div.parentNode.removeChild(div);
+	//				}
+	//			}
+	//			// document.getElementById('overviewPanel1').style.display = 'none';
+	//			// document.getElementById('TimeSeriesList1').innerHTML = '';
+	//		}
+	//		// reset the local list of available stations for each data type
+	//		delete(stationsDatabase);
+	//		stationsDatabase = {};
+    //
+	//		hideEquakePanel({mapUsed:1});
+	//		hideMarkers({mapUsed:1});
+	//		clearEquakedrawingData({mapUsed:1});
+	//		if ($("#vnum").val() == " ") {
+	//			var selectedVd = $("#VolcanoList").val();
+	//			selectedVd = selectedVd.split("&");
+	//			document.getElementById("vname").value = selectedVd[0];
+	//			document.getElementById("vcavw").value = selectedVd[1];
+	//			document.getElementById("vnum").value = selectedVd[2];
+	//			//console.log($("#VolcanoList").val());
+	//		}
+	//	}else{
+	//		var selectedVd = $("#VolcanoList").val();
+	//		selectedVd = selectedVd.split("&");
+	//		document.getElementById("vname").value = selectedVd[0];
+	//		document.getElementById("vcavw").value = selectedVd[1];
+	//		document.getElementById("vnum").value = selectedVd[2];
+	//		var currentUrl = window.location.href;
+	//		currentUrl = currentUrl.split("?");
+	//		$("#volcanoForm").attr("action", currentUrl[0] + "?vnum=" + cavw_new);
+	//		//$("#volcanoForm").submit();
+	//	}
+	//	removeElement(1,'cc_id');
+	//	removeElement(1,'EqType');
+	//	if(earthquakes[cavw]){
+	//		var catalogOwner = new Set();
+	//		var eqTypeSet = new Set();
+	//		cachingElement(catalogOwner,cavw,1,'cc_id');
+	//		cachingElement(eqTypeSet,cavw,1,'EqType');
+	//	}
+	//});
 
 	$("#HideVolcanoInformation1").click(function(){
 		$("#VolcanoPanel1").hide();
@@ -990,9 +992,19 @@ $(document).ready(function(){
 		uncheckAllEquakeButton(2);
 		//setPrintButtonVisibility(2,false);
 		var volcano = $("#CompVolcanoList").val();
+		//console.log("DEBUG " + volcano);
 		volcano = volcano.split("&");
 		var cavw = volcano[1];
-		Wovodat.getLatLon({cavw:cavw,handler:drawMap,mapUsed:2},"CompVolcanoList", "Map2");
+		/*
+		 iframe erupton
+		 */
+		var vnum = volcano[2];
+		//console.log(vnum);
+		var inner = "\<iframe src=\"/eruption2/#vnum=" + vnum +  "\" frameborder=\" 0 \", width=\"470\" height=\"960\"\> </iframe>";
+		//console.log(inner);
+		$("#TimeSeriesView2").html(inner);
+
+		Wovodat.getLatLon({cavw:cavw,handler:drawMap,mapUsed:2},"VolcanoList", "Map2");
 		resetFilter(2);
 		$("#FormFilter2").hide();
 		$("#FilterSwitch2").html("Show Filter");
@@ -1050,6 +1062,85 @@ $(document).ready(function(){
 		}
 	});
 
+	$("#VolcanoList").change(function(){
+		totalGraph[2]=0;
+		graphCount[2]=[];
+
+		hideEarthquakeMarkerButton(2);
+		uncheckAllEquakeButton(2);
+		//setPrintButtonVisibility(2,false);
+		var volcano = $("#VolcanoList").val();
+		//console.log("DEBUG " + volcano);
+		volcano = volcano.split("&");
+		var cavw = volcano[1];
+		/*
+		 iframe erupton
+		 */
+		var vnum = volcano[2];
+		//console.log(vnum);
+		var inner = "\<iframe src=\"/eruption2/#vnum=" + vnum +  "\" frameborder=\" 0 \", width=\"470\" height=\"960\"\> </iframe>";
+		//console.log(inner);
+		$("#TimeSeriesView1").html(inner);
+
+		Wovodat.getLatLon({cavw:cavw,handler:drawMap,mapUsed:1},"VolcanoList", "Map");
+		resetFilter(1);
+		$("#FormFilter1").hide();
+		$("#FilterSwitch1").html("Show Filter");
+		$("#FlotDisplayLat1").html("");
+		$("#FlotDisplayLon1").html("");
+
+		Wovodat.getEruptionList({
+			volcano: $("#VolcanoList").val(),
+			handler: insertEruptionList,
+			selectId:"EruptionList"
+		});
+		//get list of neighbors
+		Wovodat.getNeighbors(cavw,1,insertMarkersForNeighbors);
+		//get data owner of the volcano
+		Wovodat.getCcUrl("1",cavw,insertDataOwnerandStatus);
+		Wovodat.getAllStationsList({
+			cavw: cavw,
+			handler: updateAllStationsList,
+			tableId:"StationList",
+			mapId:"Map",
+			stationsDatabaseUsed:stationsDatabase,
+			mapUsed:1
+		});
+		// Wovodat.getListOfTimeSeriesForVolcano({
+		// 	cavw:cavw,
+		// 	handler:updateTimeSeriesList,
+		// 	tableId:2
+		// });
+		for(var i in graphs){
+			var j = side(i);
+			if(j == 2){
+				delete graphs[i];
+				var div = document.getElementById(i.substring(0,i.length-1) + 'Row' + j);
+				div.parentNode.removeChild(div);
+			}
+		}
+		// document.getElementById('overviewPanel2').style.display = 'none';
+		// document.getElementById('TimeSeriesList2').innerHTML = '';
+		// reset the local list of available stations for each data type
+		delete(stationsDatabase);
+		stationsDatabase = {};
+
+
+		hideEquakePanel({mapUsed:1});
+		hideMarkers({mapUsed:1});
+		clearEquakedrawingData({mapUsed:1});
+
+		removeElement(1,'cc_id');
+		removeElement(1,'EqType');
+		if(earthquakes[cavw]){
+			var catalogOwner = new Set();
+			var eqTypeSet = new Set();
+			cachingElement(catalogOwner,cavw,1,'cc_id');
+			cachingElement(eqTypeSet,cavw,1,'EqType');
+		}
+	});
+
+
 	// get all the available graph move to the eruption
 	$("#EruptionList").change(function(){
 		moveGraphsToEruptionTime.apply(this);
@@ -1078,6 +1169,10 @@ $(document).ready(function(){
 		$("#Map2").hide();
 		$("#map_legend2").hide();
 	});
+
+
+
+
 });
 
 function setupSwitchButton(){
@@ -1435,6 +1530,7 @@ function insertMarkersForNeighbors(cavw, list, panelUsed){
 				selectDom = document.getElementById("CompVolcanoList");
 				selectj = $("#CompVolcanoList");
 			}
+
 			var title = this.getTitle();
 			title = title.split('_');
 			title = Wovodat.trim(title[1]);
@@ -1493,6 +1589,7 @@ function updateGoogleMap(location_id){
 	volcano = volcano.split("&");
 	var cavw = volcano[1];
 	var cavw_new = volcano[2];//vnum
+
 
 	if(cavw_new == $("#vnum").val() || $("#vnum").val() == " "){
 		Wovodat.getLatLon({handler:drawMap,cavw:cavw,mapUsed:1},"VolcanoList", "Map");
@@ -1568,7 +1665,7 @@ function updateGoogleMap(location_id){
 			document.getElementById("vname").value = selectedVd[0];
 			document.getElementById("vcavw").value = selectedVd[1];
 			document.getElementById("vnum").value = selectedVd[2];
-			console.log($("#VolcanoList").val());
+			//console.log($("#VolcanoList").val());
 		}
 	}else{
 		var selectedVd = $("#VolcanoList").val();
@@ -1578,6 +1675,7 @@ function updateGoogleMap(location_id){
 		document.getElementById("vnum").value = selectedVd[2];
 		var currentUrl = window.location.href;
 		currentUrl = currentUrl.split("?");
+		console.log(currentUrl);
 		$("#volcanoForm").attr("action", currentUrl[0] + "?vnum=" + cavw_new);
 		$("#volcanoForm").submit();
 	}

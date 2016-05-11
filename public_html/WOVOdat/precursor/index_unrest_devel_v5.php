@@ -18,9 +18,9 @@ $cache = time();
         <meta name="keywords" content="Volcano, Vulcano, Volcanoes">
         <link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">		
         <link href="/css/jquery.jgrowl.css" rel="stylesheet">
-		<link href="/css/index.css" rel="stylesheet" type="text/css">
-        <link href="/css/normalize.css" rel="stylesheet" type="text/css">
-        <link href="/css/volcano.css" rel="stylesheet" type="text/css">		
+		<!--<link href="/css/index.css" rel="stylesheet" type="text/css">-->
+        <link href="/css/styles_beta.css" rel="stylesheet" type="text/css">
+        <!--<link href="/css/volcano.css" rel="stylesheet" type="text/css">	-->	
         <link href="/css/tooltip.css" rel="stylesheet">
 		<link href="/css/css_v5.css" rel="stylesheet">
         <link type="text/css" href="/js/jqueryui/css/custom-theme/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
@@ -50,7 +50,7 @@ $cache = time();
     	</script>
         <!-- Nhat changed 30 May, 2015 -->
         <div class="body" style ="font-size:12px;" id="wrapborder_x">
-            <div id="loading" class="loadingPanel" style ="display:none">Loading ...</div>
+<!--            <div id="loading" class="loadingPanel" style ="display:none">Loading ...</div>-->
             <?php
             $vnum = " ";
             $vcavw = " ";
@@ -82,8 +82,8 @@ $cache = time();
             echo "<input type='hidden' id='vnum' name='vnum' value='" . $vnum . "'>";
             echo "</form>";
             ?>
-					<?php include 'php/include/header.php'; ?>
-<!-- 				<?php //include 'php/include/header_beta.php'; ?> -->
+					<?php //include 'php/include/header.php'; ?>
+				<?php include 'php/include/header_beta.php'; ?>
 				<div class = "container" id = "wrap_x">
 					<div class = "content">
 						<div id="switchViewPanel">
@@ -170,10 +170,12 @@ $cache = time();
 										<div>
 											<table>
 												<tr>
+                                                    <!--
 													<td valign="top"style="text-align:left;height:5px;width:180px;"><b>Eruption:</b><br/>
 														<select id="EruptionList" class="eruptionList" >
 														</select>
 													</td>
+													-->
 													<td colspan="2" style="height:20px;width:250px">
 														<div class="viewStationPanel">
 															<button id="HideStationButton1" style="float:right;display:none">Hide Stations</button>
@@ -429,8 +431,8 @@ $cache = time();
 											</tr>
 										</table>
 									</div>
-									<div id="TimeSeriesView1" class="timeSeriesView" style = "margin-left: 0px;">
-										<iframe src="/eruption/index.php" frameborder="0", width="470" height="960"> </iframe>
+									<div id="TimeSeriesView1" class="timeSeriesView" style = "width:470px; height:960px; margin-left: 0px;">
+
 
 									</div>
 									<!-- <div id="TimeSeriesView1" class="timeSeriesView">
@@ -538,11 +540,11 @@ $cache = time();
 											<td colspan="2">
 												<table>
 													<tr>
-														<td valign="top"style="text-align:left;height:5px;width:180px;"><b>Eruption:</b><br/>
+<!--														<td valign="top"style="text-align:left;height:5px;width:180px; "><b>Eruption:</b><br/>-->
 
-															<select id="CompEruptionList"  class="eruptionList">
-															</select>
-														</td>
+<!--															<select id="CompEruptionList"  class="eruptionList">-->
+<!--															</select>-->
+<!--														</td>-->
 														<td colspan="2" style="height:20px;width:250px">
 															<div class="viewStationPanel">
 																<button id="HideStationButton2" style="float:right;display:none">Hide Stations</button>
@@ -796,8 +798,8 @@ $cache = time();
 										</tr>
 									</table>
 								</div>
-								<div id="TimeSeriesView2" class="timeSeriesView" style = "margin-left: 0px;">
-									<iframe src="/eruption/index.php" frameborder="0", width="470" height="960"> </iframe>
+								<div id="TimeSeriesView2" class="timeSeriesView" style = "height:960px; width:470px;margin-left: 0px;">
+
 
 								</div>
 <!-- 								<div id="TimeSeriesView2" class="timeSeriesView">

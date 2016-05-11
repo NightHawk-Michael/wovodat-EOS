@@ -180,7 +180,7 @@ function computeEquakeEvents(cavw,mapUsed, radius=30){
 		if(earthquakes[cavw][i]['available'] == 'undefined'){
 			continue;
 		}
-		
+
 		if(!filter(cavw,mapUsed,i)){
 			continue;
 		}
@@ -440,8 +440,8 @@ function initializeFilter(data,mapUsed){
  * Filter Data
  */
 function filterData(cavw,panelUsed){
+
 	// data is not available for filtering
-	// console.log(earthquakes[cavw]);
 	if(!earthquakes[cavw])
 		return;
 
@@ -471,8 +471,6 @@ function filterData(cavw,panelUsed){
 	var vlat = earthquakes[cavw]['vlat'], vlon = earthquakes[cavw]['vlon'];
 	// some error here, what if i is 'vlat' or 'vlon'
 	for (var i in earthquakes[cavw]){
-
-		// console.log(i);
 		if(i == 'vlat' || i == 'vlon')
 			continue;
 		// if we already have enough earthquakes event, the rest of event is

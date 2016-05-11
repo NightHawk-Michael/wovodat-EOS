@@ -56,12 +56,10 @@ Switch between single view with comparison View
 */
 function switchView(){
 	var panel = document.getElementById('volcanoPanel2');
-	if($(panel).css('display') == 'block'){
+	if($(panel).css('display') == 'block')
 		showSingleView();
-	}
-	else{
+	else
 		showComparisionView();
-	}
 	
 }
 
@@ -79,7 +77,7 @@ function showSingleView(){
 	panel = document.getElementById('fixSwitch');
 	panel.className = "fixSwitch";
 	 $(panel).css('width','470px').css('marginRight','10px');
-	$("#Map").css('height','300px');
+	$("#Map").css('height','910px');
 	google.maps.event.trigger(map[1], "resize");
 	$("#switchView").html("Comparision View");
 	$("#TimeSeriesView1").show();
@@ -122,6 +120,7 @@ function setupCatalogOwner(list){
 
 
 function getCavw(mapUsed){
+	//alert("A");
 	if(mapUsed == undefined || (mapUsed !=1 && mapUsed != 2))
 		return ;
 	var dropdownList;
@@ -137,6 +136,7 @@ function getCavw(mapUsed){
 	if(list.length != 2)
 		return;
 	var cavw = list[1];
+	//alert(cavw);
 	return cavw;
 }
 
@@ -950,6 +950,10 @@ function updateTimeSeriesandStations(args,stationsDatabaseUsed,mapUsed){
 			break;
 		default:
 			break;
+	}
+
+	function getVnum(){
+
 	}
 }
 
