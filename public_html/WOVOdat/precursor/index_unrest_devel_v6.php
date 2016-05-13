@@ -49,7 +49,7 @@ $cache = time();
     <body>
 
         <div class="body" style ="font-size:12px;" id="wrapborder_x">
-            <div id="loading" class="loadingPanel" style ="display:none">Loading ...</div>
+            <!-- <div id="loading" class="loadingPanel" style ="display:none">Loading ...</div> -->
             <?php
             $vnum = " ";
             $vcavw = " ";
@@ -166,7 +166,6 @@ $cache = time();
                                             </table>
                                         </div>
                                         <!-- END MAP, START GRAPH -->
-										
                                         <div>
                                             <table>
                                                 <tr>
@@ -367,7 +366,13 @@ $cache = time();
                                                     <div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TWOD_EQUAKE,element:document.getElementById('equakeGraphs1'),mapUsed:1,equakeGraph:equakeGraphs[1],info:document.getElementById('VolcanoList').value})" >
                                                         <a title="Print this graphs" href="#" >
                                                             <span class="app-icon light print-icon"></span>
-                                                            <span class="app-button-text">Image</span>
+                                                            <span class="app-button-text">Print Graph</span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="PrintButton" onclick="javascript:downloadCSV({cavw:document.getElementById('VolcanoList').value})" >
+                                                        <a title="Print this graphs" href="#" >
+                                                            <span class="app-icon light print-icon"></span>
+                                                            <span class="app-button-text">Download CSV</span>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -379,7 +384,13 @@ $cache = time();
                                                     <div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TWOD_GMT_EQUAKE,link:$('#image',document.getElementById('equakeGraphs1'))[0].src,info:document.getElementById('VolcanoList').value})">
                                                         <a title="Print this graphs" href="#" >
                                                             <span class="app-icon light print-icon"></span>
-                                                            <span class="app-button-text">Print</span>
+                                                            <span class="app-button-text">Print Graph</span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="PrintButton" onclick="javascript:downloadCSV({cavw:document.getElementById('VolcanoList').value})" >
+                                                        <a title="Print this graphs" href="#" >
+                                                            <span class="app-icon light print-icon"></span>
+                                                            <span class="app-button-text">Download CSV</span>
                                                         </a>
                                                     </div>
                                                     <div id="additionalInfomation">
@@ -406,7 +417,13 @@ $cache = time();
                                                         <a title="Print this graphs" href="#" >
                                                             <span class="app-button-text">Image</span>
                                                             <span class="app-icon light print-icon"></span>
-                                                            <span class="app-button-text">Print</span>
+                                                            <span class="app-button-text">Print Graph</span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="PrintButton" onclick="javascript:downloadCSV({cavw:document.getElementById('VolcanoList').value})" >
+                                                        <a title="Print this graphs" href="#" >
+                                                            <span class="app-icon light print-icon"></span>
+                                                            <span class="app-button-text">Download CSV</span>
                                                         </a>
                                                     </div>
                                                     <div id="additionalInfomation">
@@ -432,8 +449,8 @@ $cache = time();
                                             </tr>
                                         </table>
                                     </div>
-                                    <div id="TimeSeriesView1" class="timeSeriesView" style = "overflow: hidden;width:960px; height: 960px; margin-left: 0px; display: none">
-
+                                    <div id="TimeSeriesView1" class="timeSeriesView" style = "margin-left: 0px; display: none">
+                                        <iframe src="/eruption/index.php" frameborder="0", width="960" height="960"> </iframe>
 
                                     </div>
                                 </div>
@@ -773,6 +790,7 @@ $cache = time();
                                     </table>
                                 </div>
                                 <div id="TimeSeriesView2" class="timeSeriesView" style = "margin-left: 0px;">
+                                    <iframe src="/eruption/index.php" frameborder="0", width="470" height="960"> </iframe>
 
                                 </div>
 <!--                                <div id="TimeSeriesView2" class="timeSeriesView">-->

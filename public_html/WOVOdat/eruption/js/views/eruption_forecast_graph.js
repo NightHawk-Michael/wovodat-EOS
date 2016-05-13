@@ -133,40 +133,40 @@ define(function(require) {
       }
     },
     render: function(options) {
-      var el = this.$el,
-          data = this.data.ed_forData,
-          option = {
-            grid: {
-              hoverable: true
-            },
-            xaxis: {
-              min: this.startTime,
-              max: this.endTime,
-              autoscale: true,
-              mode: 'time',
-              timeformat: '%d-%b-%Y'
-            },
-            yaxis: {
-              show:true,
-              canvas: false,
-              ticks: [0,1],
-              min:0,
-              max:1,
-              labelWidth: 60,
-              panRange: false
-            }
-          };
-      var graph_pram_data = [];
-      
-      graph_pram_data.push(this.gernerateBarChartFlotData(data,'#F44336','Alert Level','ed_for',""));
-        
-      
-      el.width('auto');
-      el.height(150);
-      el.addClass("eruption-forecasts-graph card-panel");
-
-      $.plot(el, graph_pram_data, option);
-      el.bind('plothover', this.onHover);
+      //var el = this.$el,
+      //    data = this.data.ed_forData,
+      //    option = {
+      //      grid: {
+      //        hoverable: true
+      //      },
+      //      xaxis: {
+      //        min: this.startTime,
+      //        max: this.endTime,
+      //        autoscale: true,
+      //        mode: 'time',
+      //        timeformat: '%d-%b-%Y'
+      //      },
+      //      yaxis: {
+      //        show:true,
+      //        canvas: false,
+      //        ticks: [0,1],
+      //        min:0,
+      //        max:1,
+      //        labelWidth: 60,
+      //        panRange: false
+      //      }
+      //    };
+      //var graph_pram_data = [];
+      //
+      ////graph_pram_data.push(this.gernerateBarChartFlotData(data,'#F44336','Alert Level','ed_for',""));
+      //
+      //
+      //el.width('auto');
+      //el.height(150);
+      //el.addClass("eruption-forecasts-graph card-panel");
+      //
+      //$.plot(el, graph_pram_data, option);
+      //el.bind('plothover', this.onHover);
     },
   });
 });

@@ -17,7 +17,7 @@ define(function(require) {
       this.fetch().done(handler);
     },
     getAvailableEruptions: function(timeRange){
-      
+      //console.log("GET ERUPTIONS " + timeRange);
       
       if(timeRange == undefined){
         return this.models;
@@ -30,6 +30,7 @@ define(function(require) {
             result.push(this.models[i]);
           }
         }
+
         return result;
       }
     }

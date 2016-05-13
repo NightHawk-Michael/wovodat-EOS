@@ -8,8 +8,6 @@ define(function(require) {
       materialize = require('material');
           
   return Backbone.View.extend({
-    el: '',
-
     template: _.template(template),
 
     events: {
@@ -41,23 +39,30 @@ define(function(require) {
       this.availableEruptions = this.eruptions.getAvailableEruptions(timeRange);
       this.show();
     },
-   
+
+    /**
+    Uncomment to enable select eruption
+     Luis Ngo : 19.4.2016
+     */
     render: function() {
-      var selectingEruption = this.selectingEruptions.models[0];
-      
-      
-      // console.log(this.availableEruptions);
-      this.$el.html(this.template({
-        eruptions: this.availableEruptions,
-        selectingEruption: selectingEruption
-      }));
-      $('.eruption-select').material_select();
+      //this.$el.html("");
+      //
+      //var selectingEruption = this.selectingEruptions.models[0];
+      //
+      //
+      //// console.log(this.availableEruptions);
+      //this.$el.html(this.template({
+      //  eruptions: this.availableEruptions,
+      //  selectingEruption: selectingEruption
+      //}));
+      //$('.eruption-select').material_select();
     },
 
     onChangeEruption: function() {
       var ed_id = this.$el.find('select').val();
       // if(ed_id)
       // var startTime = this.collection.get(ed_id).get('ed_stime');
+      //console.log(ed_id);
       this.selectingEruptions.reset();
       if(ed_id == -1){
         this.selectingEruptions.add(new Eruption({'ed_id':-1})); // select ----
@@ -90,6 +95,7 @@ define(function(require) {
     //when no filter select, eruption not appear
     selectingFiltersChanged: function(selectingFilters) {
       this.availableEruptions = this.eruptions.getAvailableEruptions();
+      //console.log(this.availableEruptions);
       if (selectingFilters.length == 0) {
         this.hide();
       }else{

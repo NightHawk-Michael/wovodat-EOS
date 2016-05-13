@@ -442,6 +442,7 @@ function initializeFilter(data,mapUsed){
 function filterData(cavw,panelUsed){
 
 	// data is not available for filtering
+	// console.log(earthquakes[cavw]);
 	if(!earthquakes[cavw])
 		return;
 
@@ -470,7 +471,10 @@ function filterData(cavw,panelUsed){
 	var count = 0;
 	var vlat = earthquakes[cavw]['vlat'], vlon = earthquakes[cavw]['vlon'];
 	// some error here, what if i is 'vlat' or 'vlon'
+	console.log(earthquakes[cavw]);
 	for (var i in earthquakes[cavw]){
+
+		console.log(earthquakes[cavw][i]);
 		if(i == 'vlat' || i == 'vlon')
 			continue;
 		// if we already have enough earthquakes event, the rest of event is
@@ -517,5 +521,70 @@ function filterData(cavw,panelUsed){
 
 		}
 	}
+}
+
+function downloadCSV(o){
+	var volc = o.cavw.split("&");
+	var name = volc[0];
+	var cavw = volc[1];
+	var data = earthquakes[cavw];
+
+	var csvContent = "data:text/csv;charset=utf-8,";
+	var headers = ['Date-time', 'Latitude', 'Longtitude', 'Depth (km)', 'Magnitude',
+					'Magnitude type', 'Earthquake type', 'Distance (km)', 'Data Owner'];
+	csvContent += "Volcano: " + name + " \n";
+	csvContent += "CAVW: " + cavw + " \n";
+	
+	var dataString = "";
+	var total = 0;
+	if (data != null){
+		for(var i in earthquakes[cavw]){
+			var lat = earthquakes[cavw][i]['lat'];
+			var lon = earthquakes[cavw][i]['lon'];
+			// skip this value when there is no latitude or longitude value 
+			// for them
+			var latDistance = earthquakes[cavw][i]['latDistance'];
+			var lonDistance = earthquakes[cavw][i]['lonDistance'];
+
+			var distance = Math.sqrt(latDistance * latDistance + lonDistance * lonDistance).toFixed(2);
+
+			
+
+
+			if(typeof lat == 'undefined' || typeof lon == 'undefined'){
+				continue;
+			}
+
+			// skip this event when it is not supposed to be displayed
+			if(earthquakes[cavw][i]['available'] == 'undefined'){
+				continue;
+			}
+			var cc_id = earthquakes[cavw][i]['cc_id'];
+			var data_owner = nameConverter(cc_id, 'cc_id');
+
+			dataString += earthquakes[cavw][i]['time'] + ",";
+			dataString += earthquakes[cavw][i]['lat'] + ",";
+			dataString += earthquakes[cavw][i]['lon'] + ",";
+			dataString += parseFloat(earthquakes[cavw][i]['depth']).toFixed(1)	 + ",";
+			dataString += earthquakes[cavw][i]['mag'] + ",";
+			dataString += "null,"
+			dataString += earthquakes[cavw][i]['eqtype'] + ",";
+			dataString += distance + ","
+			dataString += data_owner + "\n";
+
+			total += 1;
+		}
+	}
+	
+	csvContent += "Total number of earthquakes: " + total + " \n";
+	csvContent += "(100 km from volcanic vent)\n";
+	csvContent += headers.join(",") + "\n";
+	csvContent += dataString + "\n";
+	var encodedUri = encodeURI(csvContent);
+	var link = document.createElement("a");
+	link.setAttribute("href", encodedUri);
+	link.setAttribute("download", "my_data.csv");
+
+	link.click(); 
 }
 

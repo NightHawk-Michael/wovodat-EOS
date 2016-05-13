@@ -339,7 +339,7 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 		var marker,count = 1;
 		filterData(cavw,mapUsed);
 		var nEvent = $('#Evn' + mapUsed).val();
-
+		console.log(earthquakes[cavw]);
 		for (var i in earthquakes[cavw]){
 			if(count > nEvent) break;
 			if(earthquakes[cavw][i]!=undefined){
@@ -1000,7 +1000,7 @@ $(document).ready(function(){
 		 */
 		var vnum = volcano[2];
 		//console.log(vnum);
-		var inner = "\<iframe src=\"/eruption2/#vnum=" + vnum +  "\" frameborder=\" 0 \", width=\"470\" height=\"960\"\> </iframe>";
+		var inner = "\<iframe src=\"/eruption/#vnum=" + vnum +  "\" frameborder=\" 0 \", width=\"470\" height=\"960\"\> </iframe>";
 		//console.log(inner);
 		$("#TimeSeriesView2").html(inner);
 
@@ -1078,7 +1078,7 @@ $(document).ready(function(){
 		 */
 		var vnum = volcano[2];
 		//console.log(vnum);
-		var inner = "\<iframe src=\"/eruption2/#vnum=" + vnum +  "\" frameborder=\" 0 \", width=\"470\" height=\"960\"\> </iframe>";
+		var inner = "\<iframe src=\"/eruption/#vnum=" + vnum +  "\" frameborder=\" 0 \", width=\"470\" height=\"960\"\> </iframe>";
 		//console.log(inner);
 		$("#TimeSeriesView1").html(inner);
 
@@ -1169,9 +1169,6 @@ $(document).ready(function(){
 		$("#Map2").hide();
 		$("#map_legend2").hide();
 	});
-
-
-
 
 });
 
@@ -1530,7 +1527,6 @@ function insertMarkersForNeighbors(cavw, list, panelUsed){
 				selectDom = document.getElementById("CompVolcanoList");
 				selectj = $("#CompVolcanoList");
 			}
-
 			var title = this.getTitle();
 			title = title.split('_');
 			title = Wovodat.trim(title[1]);
@@ -1589,7 +1585,6 @@ function updateGoogleMap(location_id){
 	volcano = volcano.split("&");
 	var cavw = volcano[1];
 	var cavw_new = volcano[2];//vnum
-
 
 	if(cavw_new == $("#vnum").val() || $("#vnum").val() == " "){
 		Wovodat.getLatLon({handler:drawMap,cavw:cavw,mapUsed:1},"VolcanoList", "Map");
@@ -1665,7 +1660,7 @@ function updateGoogleMap(location_id){
 			document.getElementById("vname").value = selectedVd[0];
 			document.getElementById("vcavw").value = selectedVd[1];
 			document.getElementById("vnum").value = selectedVd[2];
-			//console.log($("#VolcanoList").val());
+			console.log($("#VolcanoList").val());
 		}
 	}else{
 		var selectedVd = $("#VolcanoList").val();

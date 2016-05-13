@@ -7,92 +7,92 @@ session_start();
 
 // if this code run on server then we need to cache the wovodat.js file on the 
 // client code. Otherwise, we do not cache it for the purpose of development
-$cache = time();
-?> 
-<html>
-    <head>
-        <title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-        <meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-        <meta http-equiv="cache-control" content="no-cache, must-revalidate">
-        <meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-        <meta name="keywords" content="Volcano, Vulcano, Volcanoes">
-        <link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">		
-        <link href="/css/jquery.jgrowl.css" rel="stylesheet">
+	$cache = time();
+	?> 
+	<html>
+	<head>
+		<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
+		<meta name="keywords" content="Volcano, Vulcano, Volcanoes">
+		<link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">		
+		<link href="/css/jquery.jgrowl.css" rel="stylesheet">
 		<!--<link href="/css/index.css" rel="stylesheet" type="text/css">-->
-        <link href="/css/styles_beta.css" rel="stylesheet" type="text/css">
-        <!--<link href="/css/volcano.css" rel="stylesheet" type="text/css">	-->	
-        <link href="/css/tooltip.css" rel="stylesheet">
+		<link href="/css/styles_beta.css" rel="stylesheet" type="text/css">
+		<!--<link href="/css/volcano.css" rel="stylesheet" type="text/css">	-->	
+		<link href="/css/tooltip.css" rel="stylesheet">
 		<link href="/css/css_v5.css" rel="stylesheet">
-        <link type="text/css" href="/js/jqueryui/css/custom-theme/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
-        <script type="text/javascript" src="/js/jqueryui/js/jquery-1.6.4.min.js"></script>
-        <script type="text/javascript" src="/js/jqueryui/js/jquery-ui-1.8.21.custom.min.js"></script>
-        <script type="text/javascript" src="/js/flot/jquery.flot.tuan.js"></script>
-        <script type="text/javascript" src="/js/flot/jquery.flot.navigate.tuan.js"></script> 
-        <script type="text/javascript" src="/js/flot/jquery.flot.selection.js"></script>
-        <script type="text/javascript" src="/js/flot/jquery.flot.marks.js"></script>
-        <script type="text/javascript" src="/js/wovodat.js?<?php echo $cache; ?>"></script>
-        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCQ9kUvUtmawmFJ62hWVsigWFTh3CKUzzM&sensor=false"></script>
-        <script type="text/javascript" src="/js/Tooltip_v3.js"></script>
-        <script type="text/javascript" src="/js/jquery.jgrowl.js"></script>
-        <script type="text/javascript" src="/js/GraphController.js"></script>
-        <script type="text/javascript" src="/js/BasicFunction_V5.js"></script>
-        <script type="text/javascript" src="/js/EarthQuakeController.js"></script>
+		<link type="text/css" href="/js/jqueryui/css/custom-theme/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
+		<script type="text/javascript" src="/js/jqueryui/js/jquery-1.6.4.min.js"></script>
+		<script type="text/javascript" src="/js/jqueryui/js/jquery-ui-1.8.21.custom.min.js"></script>
+		<script type="text/javascript" src="/js/flot/jquery.flot.tuan.js"></script>
+		<script type="text/javascript" src="/js/flot/jquery.flot.navigate.tuan.js"></script> 
+		<script type="text/javascript" src="/js/flot/jquery.flot.selection.js"></script>
+		<script type="text/javascript" src="/js/flot/jquery.flot.marks.js"></script>
+		<script type="text/javascript" src="/js/wovodat.js?<?php echo $cache; ?>"></script>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCQ9kUvUtmawmFJ62hWVsigWFTh3CKUzzM&sensor=false"></script>
+		<script type="text/javascript" src="/js/Tooltip_v3.js"></script>
+		<script type="text/javascript" src="/js/jquery.jgrowl.js"></script>
+		<script type="text/javascript" src="/js/GraphController.js"></script>
+		<script type="text/javascript" src="/js/BasicFunction_V5.js"></script>
+		<script type="text/javascript" src="/js/EarthQuakeController.js"></script>
 		<script type="text/javascript" src="/js/EarthQuakeUI.js"></script>
 		<script type="text/javascript" src="/js/GraphUI.js"></script>
 		<script src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
 
-        <!-- Don't relate -->
-        
-    </head>
-    <body>
-    	<script>
-    		
-    	</script>
-        <!-- Nhat changed 30 May, 2015 -->
-        <div class="body" style ="font-size:12px;" id="wrapborder_x">
-<!--            <div id="loading" class="loadingPanel" style ="display:none">Loading ...</div>-->
-            <?php
-            $vnum = " ";
-            $vcavw = " ";
-            $vname = " ";
-            if (isset($_GET["vnum"])) {
-                if ($_GET["vnum"] != "") {
-                    $vnum = $_GET["vnum"];
-                        if (isset($_POST["vcavw"])) {
-                        $vcavw = $_POST["vcavw"];
-                        $vname = $_POST["vname"];
-                    } else {
+		<!-- Don't relate -->
+		
+	</head>
+	<body>
+		<script>
+		
+		</script>
+		<!-- Nhat changed 30 May, 2015 -->
+		<div class="body" style ="font-size:12px;" id="wrapborder_x">
+			<!--            <div id="loading" class="loadingPanel" style ="display:none">Loading ...</div>-->
+			<?php
+			$vnum = " ";
+			$vcavw = " ";
+			$vname = " ";
+			if (isset($_GET["vnum"])) {
+				if ($_GET["vnum"] != "") {
+					$vnum = $_GET["vnum"];
+					if (isset($_POST["vcavw"])) {
+						$vcavw = $_POST["vcavw"];
+						$vname = $_POST["vname"];
+					} else {
                         // $link = mysql_connect("localhost", "root", "1234567") or die(mysql_error());
                         // mysql_query("SET CHARACTER SET utf8", $link);
                         // mysql_query("SET NAMES utf8", $link);
                         // mysql_select_db("wovodat") or die(mysql_error());
-                        include 'php/include/db_connect_view.php';/*connect to database*/
+						include 'php/include/db_connect_view.php';/*connect to database*/
 
-                        $str = "SELECT vd_name, vd_cavw, vd_num FROM vd WHERE vd_num = " . $vnum;
-                        $result = mysql_query($str);
-                        $row = mysql_fetch_array($result);
-                        $vname = $row[0];
-                        $vcavw = $row[1];
-                    }
-                }
-            }
-            echo "<form id='volcanoForm' method='post'>";
-            echo "<input type='hidden' id='vname' name='vname' value='" . $vname . "'>";
-            echo "<input type='hidden' id='vcavw' name='vcavw' value='" . $vcavw . "'>";
-            echo "<input type='hidden' id='vnum' name='vnum' value='" . $vnum . "'>";
-            echo "</form>";
-            ?>
-					<?php //include 'php/include/header.php'; ?>
-				<?php include 'php/include/header_beta.php'; ?>
-				<div class = "container" id = "wrap_x">
-					<div class = "content">
-						<div id="switchViewPanel">
-							<button id="switchView" class="switchViewButton">Single View</button>
-						</div>
+						$str = "SELECT vd_name, vd_cavw, vd_num FROM vd WHERE vd_num = " . $vnum;
+						$result = mysql_query($str);
+						$row = mysql_fetch_array($result);
+						$vname = $row[0];
+						$vcavw = $row[1];
+					}
+				}
+			}
+			echo "<form id='volcanoForm' method='post'>";
+			echo "<input type='hidden' id='vname' name='vname' value='" . $vname . "'>";
+			echo "<input type='hidden' id='vcavw' name='vcavw' value='" . $vcavw . "'>";
+			echo "<input type='hidden' id='vnum' name='vnum' value='" . $vnum . "'>";
+			echo "</form>";
+			?>
+			<?php //include 'php/include/header.php'; ?>
+			<?php include 'php/include/header_beta.php'; ?>
+			<div class = "container" id = "wrap_x">
+				<div class = "content">
+					<div id="switchViewPanel">
+						<button id="switchView" class="switchViewButton">Single View</button>
+					</div>
 
-						<table style="border-collapse: collapse;width: 960px;">
-							<tr>
-								<td id="volcanoPanel1" class="volcanoPanel">
+					<table style="border-collapse: collapse;width: 960px;">
+						<tr>
+							<td id="volcanoPanel1" class="volcanoPanel">
 
 									<div class="button white" id="mapBar1" style="margin-top:0px">
 										<div class="CloseButton" id="HideMap1"></div>
@@ -366,9 +366,15 @@ $cache = time();
 													<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TWOD_EQUAKE,element:document.getElementById('equakeGraphs1'),mapUsed:1,equakeGraph:equakeGraphs[1],info:document.getElementById('VolcanoList').value})" >
 														<a title="Print this graphs" href="#" >
 															<span class="app-icon light print-icon"></span>
-															<span class="app-button-text">Image</span>
+															<span class="app-button-text">Print Graph</span>
 														</a>
 													</div>
+                                                    <div class="PrintButton" onclick="javascript:downloadCSV({cavw:document.getElementById('VolcanoList').value})" >
+                                                        <a title="Print this graphs" href="#" >
+                                                            <span class="app-icon light print-icon"></span>
+                                                            <span class="app-button-text">Download CSV</span>
+                                                        </a>
+                                                    </div>
 												</div>
 												<div id="2DGMTEquakeGraph1" class="twoDGMTEquakeFlotGraph">
 													<b class="pointer"></b>
@@ -378,9 +384,15 @@ $cache = time();
 													<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TWOD_GMT_EQUAKE,link:$('#image',document.getElementById('equakeGraphs1'))[0].src,info:document.getElementById('VolcanoList').value})">
 														<a title="Print this graphs" href="#" >
 															<span class="app-icon light print-icon"></span>
-															<span class="app-button-text">Print</span>
+															<span class="app-button-text">Print Graph</span>
 														</a>
 													</div>
+                                                    <div class="PrintButton" onclick="javascript:downloadCSV({cavw:document.getElementById('VolcanoList').value})" >
+                                                        <a title="Print this graphs" href="#" >
+                                                            <span class="app-icon light print-icon"></span>
+                                                            <span class="app-button-text">Download CSV</span>
+                                                        </a>
+                                                    </div>
 													<div id="additionalInfomation">
 														Additional data:
 														<a id="gifImage" href="" target="_blank">Image file</a>, 
@@ -403,11 +415,16 @@ $cache = time();
 
 													<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.THREED_GMT_EQUAKE,link:$('#image',document.getElementById('3DGMTEquakeGraph1'))[0].src,info:document.getElementById('VolcanoList').value})">
 														<a title="Print this graphs" href="#" >
-															<span class="app-button-text">Image</span>
 															<span class="app-icon light print-icon"></span>
-															<span class="app-button-text">Print</span>
+															<span class="app-button-text">Print Graph</span>
 														</a>
 													</div>
+                                                    <div class="PrintButton" onclick="javascript:downloadCSV({cavw:document.getElementById('VolcanoList').value})" >
+                                                        <a title="Print this graphs" href="#" >
+                                                            <span class="app-icon light print-icon"></span>
+                                                            <span class="app-button-text">Download CSV</span>
+                                                        </a>
+                                                    </div>
 													<div id="additionalInfomation">
 														Additional data:
 														<a id="gifImage" href=""  target="_blank">GIF image file</a>, 
@@ -431,8 +448,8 @@ $cache = time();
 											</tr>
 										</table>
 									</div>
-									<div id="TimeSeriesView1" class="timeSeriesView" style = "width:470px; height:960px; margin-left: 0px;">
-
+									<div id="TimeSeriesView1" class="timeSeriesView" style = "margin-left: 0px;">
+										<iframe src="/eruption/index.php" frameborder="0", width="470" height="960"> </iframe>
 
 									</div>
 									<!-- <div id="TimeSeriesView1" class="timeSeriesView">
@@ -738,9 +755,15 @@ $cache = time();
 											<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TWOD_EQUAKE,element:document.getElementById('equakeGraphs2'),mapUsed:2,equakeGraph:equakeGraphs[2],info:document.getElementById('CompVolcanoList').value})">
 												<a title="Print this graphs" href="#" >
 													<span class="app-icon light print-icon"></span>
-													<span class="app-button-text">Print</span>
+													<span class="app-button-text">Print Graph</span>
 												</a>
 											</div>
+                                            <div class="PrintButton" onclick="javascript:downloadCSV({cavw:document.getElementById('CompVolcanoList').value})" >
+                                                <a title="Print this graphs" href="#" >
+                                                    <span class="app-icon light print-icon"></span>
+                                                    <span class="app-button-text">Download CSV</span>
+                                                </a>
+                                            </div>
 										</div>
 										<div id="2DGMTEquakeGraph2" class="twoDGMTEquakeFlotGraph">
 											<b class="pointer"></b>
@@ -750,9 +773,15 @@ $cache = time();
 											<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TWOD_GMT_EQUAKE,link:$('#image',document.getElementById('equakeGraphs2'))[0].src,info:document.getElementById('CompVolcanoList').value})">
 												<a title="Print this graphs" href="#" >
 													<span class="app-icon light print-icon"></span>
-													<span class="app-button-text">Print</span>
+													<span class="app-button-text">Print Graph</span>
 												</a>
 											</div>
+                                            <div class="PrintButton" onclick="javascript:downloadCSV({cavw:document.getElementById('CompVolcanoList').value})" >
+                                                <a title="Print this graphs" href="#" >
+                                                    <span class="app-icon light print-icon"></span>
+                                                    <span class="app-button-text">Download CSV</span>
+                                                </a>
+                                            </div>
 											<div id="additionalInfomation">
 												Additional data:
 												<a id="gifImage" href="" target="_blank">Image file</a>, 
@@ -775,9 +804,15 @@ $cache = time();
 											<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.THREED_GMT_EQUAKE,link:$('#image',document.getElementById('3DGMTEquakeGraph2'))[0].src,info:document.getElementById('CompVolcanoList').value})">
 												<a title="Print this graphs" href="#" >
 													<span class="app-icon light print-icon"></span>
-													<span class="app-button-text">Print</span>
+													<span class="app-button-text">Print Graph</span>
 												</a>
 											</div>
+                                            <div class="PrintButton" onclick="javascript:downloadCSV({cavw:document.getElementById('CompVolcanoList').value})" >
+                                                <a title="Print this graphs" href="#" >
+                                                    <span class="app-icon light print-icon"></span>
+                                                    <span class="app-button-text">Download CSV</span>
+                                                </a>
+                                            </div>
 											<div id="additionalInfomation">
 												Additional data:
 												<a id="gifImage" href="" target="_blank">GIF image file</a>, 
@@ -798,8 +833,8 @@ $cache = time();
 										</tr>
 									</table>
 								</div>
-								<div id="TimeSeriesView2" class="timeSeriesView" style = "height:960px; width:470px;margin-left: 0px;">
-
+								<div id="TimeSeriesView2" class="timeSeriesView" style = "margin-left: 0px;">
+									<iframe src="/eruption/index.php" frameborder="0", width="470" height="960"> </iframe>
 
 								</div>
 <!-- 								<div id="TimeSeriesView2" class="timeSeriesView">

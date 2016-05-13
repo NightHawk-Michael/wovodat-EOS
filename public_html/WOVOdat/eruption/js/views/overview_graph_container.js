@@ -35,6 +35,7 @@ define(function(require) {
     },
     selectingFiltersChanged: function(selectingFilters) {
       this.selectingFilters = selectingFilters;
+     // console.log("DEBUG " + this.selectingFilters.);
       if (this.selectingFilters.empty) {
         this.hide();
       }else{
@@ -43,7 +44,7 @@ define(function(require) {
     },
 
     render: function() {
-      
+
       this.overviewGraph.$el.appendTo(this.$el);
     }
   });
