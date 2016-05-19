@@ -1270,7 +1270,7 @@ class Wovodat {
             $row0 = mysql_fetch_array($result0);
             $volcLat = $row0[0];
             $volcLon = $row0[1];
-            $query = "select a.vd_cavw, a.vd_name, b.vd_inf_slat, b.vd_inf_slon from vd a, vd_inf b where SUBSTR(a.vd_name,1,7)!='Unnamed' and a.vd_cavw!='$cavw' and a.vd_id = b.vd_id order by sqrt(pow(($volcLat - b.vd_inf_slat)*110, 2) + pow(($volcLon - b.vd_inf_slon)*111.32*cos($volcLat/57.32), 2)) limit 15";
+            $query = "select a.vd_cavw, a.vd_name, b.vd_inf_slat, b.vd_inf_slon from vd a, vd_inf b where SUBSTR(a.vd_name,1,7)!='Unnamed' and a.vd_cavw!='$cavw' and a.vd_id = b.vd_id order by sqrt(pow(($volcLat - b.vd_inf_slat)*110, 2) + pow(($volcLon - b.vd_inf_slon)*111.32*cos($volcLat/57.32), 2))";
             $result = mysql_query($query) or die("Cannot connect to server");
             while (($row = mysql_fetch_array($result)) !== FALSE) {
                 echo $row[0] . ";" . $row[1] . ";" . $row[2] . ";" . $row[3] . "&";

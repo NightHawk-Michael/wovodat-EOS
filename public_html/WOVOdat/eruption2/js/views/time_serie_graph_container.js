@@ -14,6 +14,7 @@ define(function(require) {
       this.eruptionTimeRange = options.eruptionTimeRange;
       this.forecastsGraphTimeRange = options.forecastsGraphTimeRange;
   		this.filterObserver = options.filterObserver;
+      this.eruptions =  options.eruptions;
   		// this.listenTo( this.selectingFilter, "add", this.addGraph );
   		// this.listenTo( this.selectingFilter, "remove", this.removeGraph );
       this.categories = options.categories;
@@ -51,6 +52,7 @@ define(function(require) {
         eruptionTimeRange: this.eruptionTimeRange,
         serieGraphTimeRange: this.serieGraphTimeRange,
         forecastsGraphTimeRange: this.forecastsGraphTimeRange,
+        eruptions : this.eruptions,
       });
       this.graphs.push(timeSerieGraph);
       // this.show();

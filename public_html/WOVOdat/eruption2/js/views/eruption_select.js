@@ -45,17 +45,23 @@ define(function(require) {
      Luis Ngo : 19.4.2016
      */
     render: function() {
-      //this.$el.html("");
-      //
-      //var selectingEruption = this.selectingEruptions.models[0];
-      //
-      //
-      //// console.log(this.availableEruptions);
-      //this.$el.html(this.template({
-      //  eruptions: this.availableEruptions,
-      //  selectingEruption: selectingEruption
-      //}));
-      //$('.eruption-select').material_select();
+      this.$el.html("");
+
+      var selectingEruption = this.selectingEruptions.models[0];
+
+
+      /*
+      Draw eruption on graph
+       */
+      //console.log("test " + this.availableEruptions.length);
+
+
+        //
+        //this.$el.html(this.template({
+        //  eruptions: this.availableEruptions,
+        //  selectingEruption: selectingEruption
+        //}));
+        //$('.eruption-select').material_select();
     },
 
     onChangeEruption: function() {
@@ -63,12 +69,12 @@ define(function(require) {
       // if(ed_id)
       // var startTime = this.collection.get(ed_id).get('ed_stime');
       //console.log(ed_id);
-      this.selectingEruptions.reset();
-      if(ed_id == -1){
-        this.selectingEruptions.add(new Eruption({'ed_id':-1})); // select ----
-      }else{
-        this.selectingEruptions.add(this.eruptions.get(ed_id));  
-      }
+      //this.selectingEruptions.reset();
+      //if(ed_id == -1){
+      //  this.selectingEruptions.add(new Eruption({'ed_id':-1})); // select ----
+      //}else{
+      //  this.selectingEruptions.add(this.eruptions.get(ed_id));
+      //}
       
       // this.selectingEruption.set('ed_id', ed_id);
       // this.selectingEruption.trigger('change');

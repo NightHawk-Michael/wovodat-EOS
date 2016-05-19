@@ -128,6 +128,7 @@ define(function(require) {
             eruptionTimeRange: eruptionTimeRange,
             serieGraphTimeRange: serieGraphTimeRange,
             forecastsGraphTimeRange: forecastsGraphTimeRange,
+            eruptions : eruptions
             // timeRange: timeRange
 
           }),

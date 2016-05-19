@@ -34,11 +34,11 @@ session_start();
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCQ9kUvUtmawmFJ62hWVsigWFTh3CKUzzM&sensor=false"></script>
 		<script type="text/javascript" src="/js/Tooltip_v3.js"></script>
 		<script type="text/javascript" src="/js/jquery.jgrowl.js"></script>
-		<script type="text/javascript" src="/js/GraphController.js"></script>
+<!--		<script type="text/javascript" src="/js/GraphController.js"></script>-->
 		<script type="text/javascript" src="/js/BasicFunction_V5.js"></script>
 		<script type="text/javascript" src="/js/EarthQuakeController.js"></script>
 		<script type="text/javascript" src="/js/EarthQuakeUI.js"></script>
-		<script type="text/javascript" src="/js/GraphUI.js"></script>
+<!--		<script type="text/javascript" src="/js/GraphUI.js"></script>-->
 		<script src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
 
 		<!-- Don't relate -->
@@ -448,7 +448,7 @@ session_start();
 											</tr>
 										</table>
 									</div>
-									<div id="TimeSeriesView1" class="timeSeriesView" style = "margin-left: 0px;">
+									<div id="TimeSeriesView1" class="timeSeriesView" style = "height: 960px; margin-left: 0px;">
 										<iframe src="/eruption/index.php" frameborder="0", width="470" height="960"> </iframe>
 
 									</div>
@@ -833,7 +833,7 @@ session_start();
 										</tr>
 									</table>
 								</div>
-								<div id="TimeSeriesView2" class="timeSeriesView" style = "margin-left: 0px;">
+								<div id="TimeSeriesView2" class="timeSeriesView" style = "height:960px; margin-left: 0px;">
 									<iframe src="/eruption/index.php" frameborder="0", width="470" height="960"> </iframe>
 
 								</div>

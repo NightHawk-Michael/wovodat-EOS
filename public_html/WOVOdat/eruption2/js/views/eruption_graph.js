@@ -56,13 +56,17 @@ define(function(require) {
     },
 
     changeEruption: function(selectingEruption){
-      if(selectingEruption.get('ed_id') == -1){
-        this.hide();
-      }else{
-        this.selectingEruption = selectingEruption;
-        this.show();
-      }
-
+    //  //console.log(selectingEruption.get('ed_id'));
+    //  //if(selectingEruption.get('ed_id') == -1){
+    //  //  this.hide();
+    //  //}else{
+    //  //  this.selectingEruption = selectingEruption;
+    //  //  this.show();
+    //  //}
+    //  //this.selectingEruption = selectingEruption;
+    //  //console.log(this.selectingEruption);
+    //  //this.show();
+    //
     },
     //show eruption graph
     show: function(){
@@ -177,6 +181,7 @@ define(function(require) {
       var self = event.data.self;
       var minX = Math.min(self.startTime,self.overviewGraphTimeRange.get('startTime'));
       var maxX = Math.max(self.endTime,self.overviewGraphTimeRange.get('endTime'));
+      //console.log(minX + "\t" + maxX);
       if(xaxis.min<minX){
         option.xaxis.min = minX;
         option.xaxis.max = minX+Const.ONE_YEAR;
@@ -216,6 +221,7 @@ define(function(require) {
     },
 
     setUpTimeranges: function(startTime, endTime){
+      //console.log(startTime + "\t" + endTime);
       this.serieGraphTimeRange.set({
         'startTime': startTime,
         'endTime': endTime,

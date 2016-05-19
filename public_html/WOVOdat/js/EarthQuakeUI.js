@@ -73,6 +73,7 @@ function drawEquake(o){
  * Help function to draw equake in 2 dimensions using Flot
  */
 function drawEquake2D(o){
+	//console.log("DRAW 2D");
 	var cavw = volcanoInfo[o.mapUsed].cavw;
 	var mapUsed = o.mapUsed;
 	if (!earthquakes[cavw]){
@@ -268,6 +269,7 @@ function show3DGMT(ar){
  * 2012-07-19
  */
 function insertMarkersForEarthquakes(data,cavw,mapUsed){
+	 //console.log(data);
 	// the function will initialize the earthquake variable when 
 	// there is no equake data stored at the client side for a
 	// specific volcano.
@@ -339,7 +341,7 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 		var marker,count = 1;
 		filterData(cavw,mapUsed);
 		var nEvent = $('#Evn' + mapUsed).val();
-		console.log(earthquakes[cavw]);
+		//console.log(earthquakes[cavw]);
 		for (var i in earthquakes[cavw]){
 			if(count > nEvent) break;
 			if(earthquakes[cavw][i]!=undefined){
@@ -1000,7 +1002,7 @@ $(document).ready(function(){
 		 */
 		var vnum = volcano[2];
 		//console.log(vnum);
-		var inner = "\<iframe src=\"/eruption/#vnum=" + vnum +  "\" frameborder=\" 0 \", width=\"470\" height=\"960\"\> </iframe>";
+		var inner = "\<iframe src=\"/eruption2/#vnum=" + vnum +  "\" frameborder=\" 0 \", width=\"100%\" height=\"100%\"\> </iframe>";
 		//console.log(inner);
 		$("#TimeSeriesView2").html(inner);
 
@@ -1078,7 +1080,7 @@ $(document).ready(function(){
 		 */
 		var vnum = volcano[2];
 		//console.log(vnum);
-		var inner = "\<iframe src=\"/eruption/#vnum=" + vnum +  "\" frameborder=\" 0 \", width=\"470\" height=\"960\"\> </iframe>";
+		var inner = "\<iframe src=\"/eruption2/#vnum=" + vnum +  "\" frameborder=\" 0 \", width=\"100%\" height=\"100%\"\> </iframe>";
 		//console.log(inner);
 		$("#TimeSeriesView1").html(inner);
 
@@ -1660,7 +1662,7 @@ function updateGoogleMap(location_id){
 			document.getElementById("vname").value = selectedVd[0];
 			document.getElementById("vcavw").value = selectedVd[1];
 			document.getElementById("vnum").value = selectedVd[2];
-			console.log($("#VolcanoList").val());
+			//console.log($("#VolcanoList").val());
 		}
 	}else{
 		var selectedVd = $("#VolcanoList").val();
@@ -1670,7 +1672,7 @@ function updateGoogleMap(location_id){
 		document.getElementById("vnum").value = selectedVd[2];
 		var currentUrl = window.location.href;
 		currentUrl = currentUrl.split("?");
-		console.log(currentUrl);
+		//console.log(currentUrl);
 		$("#volcanoForm").attr("action", currentUrl[0] + "?vnum=" + cavw_new);
 		$("#volcanoForm").submit();
 	}

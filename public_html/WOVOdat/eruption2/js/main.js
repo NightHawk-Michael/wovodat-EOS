@@ -17,6 +17,7 @@ require.config({
     'jquery.resize' : 'vendor/jquery-flot/lib/jquery.resize',
     'jquery.flot.navigate': 'vendor/jquery-flot/src/plugins/jquery.flot.navigate',
     'jquery.flot.selection': 'vendor/jquery-flot/src/plugins/jquery.flot.selection',
+    'jquery.flot.symbol': 'vendor/jquery-flot/src/plugins/jquery.flot.symbol',
     'jquery.flot.time': 'vendor/jquery-flot/src/plugins/jquery.flot.time',
     'excanvas' : 'vendor/jquery-flot/lib/excanvas.min',
     'jquery.flot.tickrotor': 'vendor/jquery-flot/src/plugins/jquery.flot.tickrotor',
@@ -61,9 +62,13 @@ require.config({
     'jquery.flot.errorbars': {
       deps: ['jquery.flot']
     },
+    'jquery.flot.symbol': {
+      deps: ['jquery.flot']
+    },
     'jquery.flot.axislabels': {
       deps: ['jquery.flot']
     },
+
     'jquery.flot.legendoncanvas': {
       deps: ['jquery.flot']
     },

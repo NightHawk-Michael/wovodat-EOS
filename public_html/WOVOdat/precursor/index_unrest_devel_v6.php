@@ -449,7 +449,7 @@ $cache = time();
                                             </tr>
                                         </table>
                                     </div>
-                                    <div id="TimeSeriesView1" class="timeSeriesView" style = "margin-left: 0px; display: none">
+                                    <div id="TimeSeriesView1" class="timeSeriesView" style = "width : 960px; height: 960px; margin-left: 0px; display: none">
                                         <iframe src="/eruption/index.php" frameborder="0", width="960" height="960"> </iframe>
 
                                     </div>

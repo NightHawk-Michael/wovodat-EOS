@@ -856,7 +856,7 @@ Wovodat.toggleEarthquakePanel = function(o){
 }
 
 Wovodat.get3DMap = function(o){
-	
+	//console.log("DRAW 3D");
     var cavw = isEmpty(o.cavw);
 	
     var init_azim = isEmpty(o.init_azim);
@@ -939,7 +939,7 @@ Wovodat.get2DGMTMap = function(o){
     //   var degree = isEmpty(o.degree);
     //   if (!degree) degree = 30; 
     //    var map_width = isEmpty(o.map_width);
-
+    //console.log("Draw 2D");
     var cavw = isEmpty(o.cavw);
     var visual_type = '2D';
     var vname = isEmpty(o.vname);

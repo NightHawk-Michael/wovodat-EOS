@@ -19,6 +19,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       this.eruptionTimeRange = options.eruptionTimeRange;
       this.serieGraphTimeRange = options.serieGraphTimeRange;
       this.forecastsGraphTimeRange = options.forecastsGraphTimeRange;
+      this.eruptions =  options.eruptions;
       this.timeRange = new TimeRange();
       // console.log(Tooltip);
       this.tooltip = new Tooltip({
@@ -172,7 +173,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
         this.$el.html('');
         return;
       }
-      // console.log(this.data);
+
       this.$el.width('auto');
       this.$el.height(200);
       this.$el.addClass('time-serie-graph card-panel');
@@ -180,6 +181,10 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       // config graph theme colors
       options.colors = ["#000000", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"];
       //console.log(this.data);
+      //console.log(eruptionsData);
+      //Push data eruption
+
+      //this.data.push
       this.graph = $.plot(this.$el, this.data, options);
       this.$el.bind('plothover', this.tooltip,this.onHover);
       var eventData = {
@@ -241,8 +246,12 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       var allowErrorbar = true;
       var allowAxisLabel =true;
       var limitNumberOfData =false;
+      var eruptions =  this.eruptions;
       //formatData: function(graph,filters,allowErrorbar,allowAxisLabel,limitNumberOfData)
-      GraphHelper.formatData(this,filters,allowErrorbar,allowAxisLabel,limitNumberOfData); 
+      //console.log(this.filters);
+      //console.log(eruptions);
+      //GraphHelper.formatDataEruption(this,this.eruptions);
+      GraphHelper.formatData(this,filters,allowErrorbar,allowAxisLabel,limitNumberOfData, eruptions);
     },
     
     destroy: function() {
