@@ -54,6 +54,7 @@ define(function(require) {
         forecastsGraphTimeRange: this.forecastsGraphTimeRange,
         eruptions : this.eruptions,
       });
+
       this.graphs.push(timeSerieGraph);
       // this.show();
 
@@ -78,6 +79,7 @@ define(function(require) {
       for (var i = 0; i < this.graphs.length; i++) {
         this.graphs[i].timeRangeChanged(timeRange);
       };
+
       this.show();
     },
     selectingFiltersChanged: function(selectingFilters){
@@ -103,12 +105,17 @@ define(function(require) {
     show: function(){
       this.$el.html("");
       this.$el.addClass("time-series-graph-container");
+      this.$el.append("<div style = \"color : black; background-color:white; padding-left: 50px; \">Individual graph display</div>");
+
       for (var i = 0; i < this.graphs.length; i++) {
         this.$el.append(this.graphs[i].$el);
+
         this.graphs[i].show();
+       // this.graphs[i].draw();
         
       };
     },
+
     destroy: function() {
       // From StackOverflow with love.
       //console.log("destroy");

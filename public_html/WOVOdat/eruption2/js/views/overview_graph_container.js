@@ -18,6 +18,7 @@ define(function(require) {
     initialize: function(options) {
       /** Variable declaration **/
       this.overviewSelectingTimeRange = new TimeRange();
+
       this.observer = options.observer;
       this.overviewSelectingTimeSeries = options.selectingTimeSeries;
       this.overviewGraph = options.graph;
@@ -26,6 +27,7 @@ define(function(require) {
     hide: function(){
       this.$el.html("");
       this.$el.addClass("overview-graph-container");
+      this.$el.append("<div id = \"overview-title\" style = \"color : black;background-color:white;padding-left: 50px;visibility: hidden;\">Overview Graph. Highlight selected time range using mouse</div>");
       this.trigger('hide');
     },
 

@@ -12,8 +12,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       TimeRange = require('models/time_range'),
       GraphHelper = require('helper/graph');
        // materialize = require('material');
-
-  return Backbone.View.extend({    
+  return Backbone.View.extend({
     initialize: function(options) {
       this.filters = options.filters;
       this.eruptionTimeRange = options.eruptionTimeRange;
@@ -35,6 +34,17 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       }
       this.minX = TimeRange.get('startTime');
       this.maxX = TimeRange.get('endTime');
+
+      //this.overviewGraphMinX = TimeRange.get('overviewGraphMinX');
+      //this.overviewGraphMaxX = TimeRange.get('overviewGraphMaxX');
+
+      /*
+      Start and end time which is selected in overview graph
+      cannot zoom out of this range
+       */
+      this.startSelectTime = this.minX;
+      this.endSelectTime = this.maxX;
+      //console.log(TimeRange);
       //this.render();
       //console.log(this.filters);
       // put this new time range into filter as attributes. 
@@ -137,7 +147,8 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
 
               autoscale: true,
               canvas: true,
-              ticks: 6
+              ticks: 6,
+              zoomRange: [30000000],
             },
             yaxis: {
               show: true,
@@ -177,6 +188,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       this.$el.width('auto');
       this.$el.height(200);
       this.$el.addClass('time-serie-graph card-panel');
+      //this.$el.append(' Individual graph display </br>');
       // plot the time series graph after being selected (eg. onSelect in OverViewGraph).
       // config graph theme colors
       options.colors = ["#000000", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"];
@@ -187,15 +199,20 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       //this.data.push
       this.graph = $.plot(this.$el, this.data, options);
       this.$el.bind('plothover', this.tooltip,this.onHover);
+      //console.log(this.startSelectTime);
       var eventData = {
         startTime: this.minX,
         endTime: this.maxX,
+        startSelectTime: this.startSelectTime,
+        endSelectTime: this.endSelectTime,
         data: this.data,
         graph: this.graph,
         el: this.$el,
         self: this,
-        original_option: options
+        original_option: options,
+        timeRange: this.serieGraphTimeRange
       }
+
       this.$el.bind('plotzoom',eventData, this.onZoom);
       
     },
@@ -204,30 +221,38 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       var xaxis = plot.getXAxes()[0];
       var data = event.data.data;
       var self = event.data.self;
-      /* The zooming range cannot wider than the original range */
-      if(xaxis.min<event.data.startTime || xaxis.max > event.data.endTime){
-        option.xaxis.min = event.data.startTime;
-        option.xaxis.max = event.data.endTime;
+      /* The zooming range cannot wider than the selected range */
+      //console.log(event);
+      if(xaxis.min<event.data.startSelectTime || xaxis.max > event.data.endSelectTime){
+        option.xaxis.min = event.data.startSelectTime;
+        option.xaxis.max = event.data.endSelectTime;
 
         event.data.graph = $.plot(event.data.el,data,option);
-        self.setUpTimeranges(option.xaxis.min,option.xaxis.max);
+        //console.log(1);
+        self.setUpTimeranges(option.xaxis.min,option.xaxis.max, event.data.startSelectTime,event.data.endSelectTime );
       }else{
-        self.setUpTimeranges(xaxis.min,xaxis.max);
+       // console.log(2);
+        self.setUpTimeranges(xaxis.min,xaxis.max,event.data.startSelectTime,event.data.endSelectTime );
       }
 
     },
-    setUpTimeranges: function(startTime, endTime){
-      // this.serieGraphTimeRange.set({
-      //   'startTime': startTime,
-      //   'endTime': endTime,
-      // });
-      // // console.log(this.serieGraphTimeRange);
+    setUpTimeranges: function(startTime, endTime, startSelectTime, endSelectTime){
+      //console.log(startTime);
+       this.serieGraphTimeRange.set({
+         'startTime': startTime,
+         'endTime': endTime,
+         'startSelectTime' : startSelectTime,
+         'endSelectTime' : endSelectTime
+
+
+       });
+       // console.log(this.serieGraphTimeRange);
       
-      // this.serieGraphTimeRange.trigger('update',this.serieGraphTimeRange);
-      // this.forecastsGraphTimeRange.set({
-      //   'startTime': startTime,
-      //   'endTime': endTime,
-      // });
+       //this.serieGraphTimeRange.trigger('update',this.serieGraphTimeRange);
+       //this.forecastsGraphTimeRange.set({
+       //  'startTime': startTime,
+       //  'endTime': endTime,
+       //});
       // this.forecastsGraphTimeRange.trigger('update',this.forecastsGraphTimeRange);
       // this.eruptionTimeRange.set({
       //   'startTime': startTime,

@@ -156,6 +156,30 @@ class Wovodat {
         echo json_encode($results);
     }
 
+    /*
+     * Return the list of all available volcano with data in our database
+     */
+    public function getVolcanoListHasData() {
+        mysql_query("set character_set_results='utf8'");
+        $result = mysql_query("select vd_name, vd_cavw, vd_num FROM vd vd1 WHERE  EXISTS (select * from vd vd2, ed where vd2.vd_cavw = vd1.vd_cavw and vd2.vd_id = ed.vd_id) ORDER BY vd_name ");
+        $row = mysql_fetch_array($result);
+        if ($row === false)
+            return;
+        $results = Array();
+        $object;
+        while (true) {
+            $object = "";
+            $object[1] = $row[0];
+            $object[2] = $row[1];
+            $object[3] = $row[2];
+            array_push($results, $object);
+            $row = mysql_fetch_array($result);
+            if ($row == false)
+                break;
+        }
+        echo json_encode($results);
+    }
+
 
     /*
      * Return the list of all eruption of one specifci volcano

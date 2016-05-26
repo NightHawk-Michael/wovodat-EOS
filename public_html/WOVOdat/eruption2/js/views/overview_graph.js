@@ -38,7 +38,10 @@ define(function(require) {
       event.data.set({
         'startTime': startTime,
         'endTime': endTime,
+        'startSelectTime':startTime,
+        'endSelectTime' : endTime
       });
+
       event.data.trigger('update');
     },
     hide: function(){
@@ -114,6 +117,8 @@ define(function(require) {
       //limit data to be rendered
       
        //console.log(this.data);
+      document.getElementById('overview-title').style.visibility = 'visible';
+
       this.graph = $.plot(this.$el, this.data, options);
       //To edit the series object, go to GraphHelper used for data in the prepareData method below.
       this.$el.bind('plotselected', this.selectingTimeRange, this.onSelect);

@@ -48,6 +48,11 @@ if (isset($_GET['get']) || isset($_POST['get'])) {
             $wovodat = new Wovodat();
             $wovodat->getVolcanoList();
             break;
+        case 'VolcanoListHasData':
+            include_once 'Wovodat.php';
+            $wovodat = new Wovodat();
+            $wovodat->getVolcanoListHasData();
+            break;
         case 'EruptionList':
             include_once 'Wovodat.php';
             $wovodat = new Wovodat();

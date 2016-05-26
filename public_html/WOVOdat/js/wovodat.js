@@ -97,6 +97,22 @@ Wovodat.getVolcanoList = function(callBackFunction,selectId){
         }
     });
 };
+
+/*
+ * Get the list of all available volcanoes with data using ajax
+ */
+Wovodat.getVolcanoListHasData = function(callBackFunction,selectId){
+    $.ajax({
+        method: "get",
+        url: "/php/switch.php",
+        data: "get=VolcanoListHasData",
+        dataType: "json",
+        success: function(html){
+            if(html.indexOf('Can\'t') >= 0) return;
+            callBackFunction(html,selectId);
+        }
+    });
+};
 /*
  * Get the eruption list of the current volcanos
  */

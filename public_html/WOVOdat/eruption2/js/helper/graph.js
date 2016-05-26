@@ -178,13 +178,14 @@ define(function(require) {
           var tempEruption = [];
 
           //tempEruption.push(675890001000,(maxY + minY) / 2);
-          tempEruption.push(ed_stime,(maxY + minY) / 2);
+          //
+          tempEruption.push(675890001000,(maxY+minY)/2);
           //console.log("test");
            //console.log(tempEruption);
           listEruption.push(tempEruption);
           //break;
         }
-        console.log(list);
+        //console.log(list);
         data.push(this.formatGraphEruptionAppearance(listEruption));
       }
       graph.minX = minX-86400000;
@@ -216,7 +217,7 @@ define(function(require) {
       // graph.timeRange.trigger('change');
       graph.data = data;
 
-       console.log(data);
+       //console.log(data);
     },
 
     /** setup effect for the graph
@@ -271,7 +272,7 @@ define(function(require) {
         dataParam.points.errorbars = "y";
         dataParam.points.yerr = {
             show: true,
-            color: "#D50000",
+            color: "#000000",
             upperCap: "-",
             lowerCap: "-",
             radius:2,
@@ -307,7 +308,7 @@ define(function(require) {
         // Have not accounted for the case horizontal bar with no start time and end time
 
       }
-      console.log(dataParam);
+      //console.log(dataParam);
            // parameter to enable error-bar presentation.
       return dataParam;
     },
@@ -330,7 +331,7 @@ define(function(require) {
           lineWidth: 2, // in pixels
           fill: false,
           fillColor: null,
-          symbol: "circle",
+          symbol: "volcano",
 
         },
         bars: {
@@ -350,7 +351,7 @@ define(function(require) {
       // Set up for special earthquake type Colors
         dataParam.color = "#FF0000";
         dataParam.points.show = true;
-        dataParam.points.fill = true;
+
         dataParam.points.fillColor = "#FF0000";
       //  // console.log(dataParam);
       //}

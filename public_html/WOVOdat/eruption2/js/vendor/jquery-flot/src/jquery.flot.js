@@ -1454,7 +1454,7 @@ Licensed under the MIT license.
 
                         s.datapoints.format = format;
                     }else{
-                    
+
                         format = [];
                         // find out how to copy
                         format.push({ x: true, number: true, required: true });
@@ -1475,7 +1475,7 @@ Licensed under the MIT license.
                         }
 
                         s.datapoints.format = format;
-                    
+
                     }
                 }
 
@@ -3045,9 +3045,25 @@ Licensed under the MIT license.
                     ctx.beginPath();
                     x = axisx.p2c(x);
                     y = axisy.p2c(y) + offset;
+
                     if (symbol === "circle") {
                         ctx.arc(x, y, radius, 0, shadow ? Math.PI : Math.PI * 2, false);
-                    } else {
+                    } else if (symbol === "triangle") {
+                        ctx.moveTo(x,y-radius);
+                        ctx.lineTo(x+radius*(Math.sqrt(3)/2),y+radius/2);
+                        ctx.lineTo(x- radius*(Math.sqrt(3)/2),y+radius/2);
+                    }else if (symbol === "volcano") {
+                        //draw triangle
+                        ctx.moveTo(x,y-radius);
+                        ctx.lineTo(x+radius*(Math.sqrt(3)/2),y+radius/2);
+                        ctx.lineTo(x- radius*(Math.sqrt(3)/2),y+radius/2);
+                        //draw smoke
+
+                        for (var k = 0; k < radius; k++ ){
+  
+                            ctx.lineTo(x+ 3*Math.sin(k),y-radius-k);
+                        }
+                    }else{
                         symbol(ctx, x, y, radius, shadow);
                     }
                     ctx.closePath();
@@ -3214,9 +3230,9 @@ Licensed under the MIT license.
             // in horizontal mode, we start the bar from the left
             // instead of from the bottom so it appears to be
             // horizontal rather than vertical
-            
+
             drawBottom = drawLeft = drawRight = drawTop = true;
-            
+
 
             left = x1;
             right = x2;
@@ -3588,13 +3604,13 @@ Licensed under the MIT license.
                             var b = points[j + 2];
                             if (x == null) {
                                 continue;
-                            }    
+                            }
                         }
-                        
+
 
                         // for a bar graph, the cursor must be inside the bar
                         if(series[i].bars.fullparams){
-                            
+
                             if(mx > left && mx <right && my>bottom && my<top){
                                 item = [i,j/ps];
                             }
@@ -3607,7 +3623,7 @@ Licensed under the MIT license.
                                 item = [i, j / ps];
                             }
                         }
-                        
+
                     }
                 }
             }

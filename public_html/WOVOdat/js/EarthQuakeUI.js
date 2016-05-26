@@ -793,7 +793,7 @@ $(document).ready(function(){
 	*parameter is the list of Volcano, and the second parameter is the ID of the dropdown menu
 	*to which data is populated
 	*/
-	Wovodat.getVolcanoList(insertVolcanoList,["VolcanoList","CompVolcanoList"]);
+	Wovodat.getVolcanoListHasData(insertVolcanoList,["VolcanoList","CompVolcanoList"]);
 	// Wovodat.getVolcanoList(insertVolcanoList,["VolcanoList"]);
    	Wovodat.getEquakeType(setupEquakeType);
 	Wovodat.getCatalogOwner(setupCatalogOwner);
@@ -1500,6 +1500,16 @@ function showHideEquakeButton(mapUsed){
 
 function insertMarkersForNeighbors(cavw, list, panelUsed){
 	//remove all neighMarkers
+	vocalnoHasData = [];
+	var tlist;
+		tlist = document.getElementById("VolcanoList");
+	//console.log(tlist);
+	for (var i = 0 ; i <tlist.length; i++){
+
+		var tName = ((tlist[i].text).split("_"))[0];
+		//var tName = (($('#VolcanoList')[i]).split("_"))[0];
+		vocalnoHasData.push(tName);
+	}
 	for (var i in neighMarkers[panelUsed])
 		neighMarkers[panelUsed][i].setMap(null);
 	neighMarkers[panelUsed]=[];
@@ -1514,7 +1524,12 @@ function insertMarkersForNeighbors(cavw, list, panelUsed){
 		var marker = new google.maps.Marker({
 			position:new google.maps.LatLng(lat,lon)
 		});
-		marker.setIcon("/img/pin.png");
+		if (vocalnoHasData.indexOf(name) < 0 ){
+			marker.setIcon("/img/pin_grey.png");
+		}else{
+			marker.setIcon("/img/pin.png");
+		}
+
 		marker.setMap(map[panelUsed]);
 		marker.setTitle(name+"_"+neighCavw);
 		neighMarkers[panelUsed].push(marker);

@@ -29,7 +29,7 @@ define(function(require) {
       this.categories = options.categories;
       this.selectingFilters = options.selectingFilters;
       this.selectingTimeSeries.reachLimit = function(){
-        return (this.length >= 5);
+        return (this.length >= 10005);
       }
     },
     showLoading: function(){
@@ -53,6 +53,8 @@ define(function(require) {
       this.$el.html("");
       var container =$("<div></div>");
       container.addClass("time_series_select_container card-panel");
+      this.$el.append("<div id = \"timeseries-select-title\" style = \"color : black;background-color:white;padding-left: 50px;visibility: hidden;\">Available time series data: </div>");
+
       this.$el.append(container);
       
       // console.log(timeSeries);
@@ -64,6 +66,8 @@ define(function(require) {
         }
         if(ret == ""){
           ret = "No data";
+        }else{
+          document.getElementById('timeseries-select-title').style.visibility = 'visible';
         }
         return ret;
       });
@@ -72,6 +76,7 @@ define(function(require) {
         timeserie: this.generateCategories(timeSeries)
       }
       var html = temp(options);
+
       $('.time_series_select_container').append(html);
       $('.time-serie-select').material_select();
       
