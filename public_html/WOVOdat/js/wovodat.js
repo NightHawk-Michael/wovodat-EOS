@@ -459,10 +459,10 @@ Wovodat.loadEarthquakes = function(o){
     $.ajax({
         method: "get",
         url: "/php/switch.php",
-        data: "get=Earthquakes&qty="+numberOfEvents
-        +"&cavw="+volInfo.cavw+"&lat="+volInfo.lat
-        +"&lon="+volInfo.lon+"&elev="+volInfo.elev,
+        data: "get=Earthquakes&lat="+volInfo.lat
+        +"&lon="+volInfo.lon,
         success:function(html){
+            console.log(html);
             if(html.indexOf('Can\'t') >= 0) 
                 return;
             if(handlers[0])
@@ -1050,12 +1050,12 @@ Wovodat.Printer = {
 
         function print2DEquake(obj){
             function setStyleForGraphHolder(panel){
-                panel.style.cssText = "width: 450px;height: 130px;font-size: 9px;margin-top: 15px;position: relative;";
+                panel.style.cssText = "width: 900px;height: 130px;font-size: 9px;margin-top: 15px;position: relative;";
             }
             var w = window.open();
             var element;
             var style = w.document.createElement('style');
-            var css = ".equakeGraphPlaceholder{width: 450px;height: 130px;font-size: 9px;margin-top: 15px;position: relative;}";
+            var css = ".equakeGraphPlaceholder{width: 900px;height: 130px;font-size: 9px;margin-top: 15px;position: relative;}";
             var head = w.document.getElementsByTagName('head')[0]
             
             style.type = 'text/css';
@@ -1080,7 +1080,7 @@ Wovodat.Printer = {
             var lonDiv1 = $('#FlotDisplayLon' + side,element);
             var timeDiv1 = $('#FlotDisplayTime' + side,element);
             element = element.cloneNode(true);
-            element.style.width = "506px";
+            element.style.width = "1012px";
             w.document.body.appendChild(element);
             
             var latDiv = w.document.getElementById('FlotDisplayLat' + side);
@@ -1133,11 +1133,11 @@ Wovodat.Printer = {
             t = window.document.createElement('div');
             var img = window.document.createElement('img');
             if(obj.type == Wovodat.Printer.Printing.Type.TWOD_GMT_EQUAKE){
-                img.height = 707;
-                img.width = 500;
+                img.height = 1414;
+                img.width = 1000;
             }else if(obj.type == Wovodat.Printer.Printing.Type.THREED_GMT_EQUAKE){
-                img.height = 500;
-                img.width = 500;
+                img.height = 1000;
+                img.width = 1000;
             }
             img.src = link;
             t.appendChild(img);
@@ -1304,40 +1304,30 @@ Wovodat.convertDate = function(time){
      * 0: latitude
      * 1: longitude
      */
-Wovodat.calculateD = function(lat,lon,vlat,vlon,option){
+Wovodat.calculateD = function(lat,lon,vlat,vlon){
     var R = 6371; //earth radius in kilometer
     // 
     if (typeof lat=="undefined" || typeof lon=="undefined" || typeof vlat=="undefined" || typeof vlon=="undefined"){
         return 0;
     }
     var dLat, dLon, diff, tlat1, tlat2;
-    switch (option){
-        case 0:
-            dLat = 0;
-            dLon = toRad(lon-vlon);
-            tlat1 = toRad(vlat);
-            tlat2 = toRad(vlat);
-            diff = lon - vlon;
-            break;
-        case 1:
-            dLon = 0;
-            dLat = toRad(lat-vlat);
-            diff = lat - vlat;
-            tlat1 = toRad(vlat);
-            tlat2 = toRad(lat);
-            break;
-        case 2:
-            var xDistance = Wovodat.calculateD(lat,lon,vlat,vlon,0);
-            var yDistance = Wovodat.calculateD(lat,lon,vlat,vlon,1);
-            return Math.sqrt(xDistance * xDistance + yDistance * yDistance);
-    }
-    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(tlat1) * Math.cos(tlat2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    tlat1 = toRad(vlat).toFixed(15);
+    tlat2 = toRad(lat).toFixed(15);
+    dLat = toRad(lat - vlat).toFixed(15);
+    dLon = toRad(lon - vlon).toFixed(15);
+
+    var a = (Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(tlat1) * Math.cos(tlat2)).toFixed(15);
+
+    var c = (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))).toFixed(15);
     var d = R * c;
-    if ((diff<0&&diff>-180)||diff>90)
-        d = -d;
-    return d;
+
+    var xDistance = (lon - vlon) * Math.cos(lat/57.32) * 111.321;
+    var yDistance = (lat - vlat) * 111;
+
+    var result = [parseFloat(d.toFixed(3)), parseFloat(xDistance.toFixed(15)), parseFloat(yDistance.toFixed(15))];
+    return result;
 }
 
 function deg2rad(deg) {

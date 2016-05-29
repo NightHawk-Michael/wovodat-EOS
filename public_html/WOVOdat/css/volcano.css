@@ -293,7 +293,7 @@
     width: 100%;
 }
 .equakeGraphPlaceholder{
-    width: 450px;
+    width: 900px;
     height: 130px;
     font-size: 9px;
     margin-top: 15px;
@@ -327,7 +327,7 @@
     display: none;
 }
 .volcanoPanel{
-    width:470px;
+    width:960px;
     vertical-align: top;
     display: block;
 }
@@ -348,7 +348,7 @@
     display:inline-block;
 }
 .flowElement{
-    width: 470px;
+    width: 960px;
     display: inline-block;
 }
 .switchViewButton:hover{

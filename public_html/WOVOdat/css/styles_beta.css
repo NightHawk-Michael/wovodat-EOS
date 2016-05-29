@@ -760,6 +760,14 @@ a.active.trigger {
     position: relative;
 }
 
+.equakeGraphPlaceholder_v6{
+    width: 900px;
+    height: 260px;
+    font-size: 9px;
+    margin-top: 15px;
+    position: relative;
+}
+
 .viewStationPanel{
     height: 18px;
 }

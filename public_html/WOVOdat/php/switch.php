@@ -86,7 +86,7 @@ if (isset($_GET['get']) || isset($_POST['get'])) {
         case 'Earthquakes':
             include_once "Wovodat.php";
             $wovodat = new Wovodat();
-            $wovodat->getEarthquakes($_GET['qty'], $_GET['cavw'], $_GET['lat'], $_GET['lon'], $_GET['elev']);
+            $wovodat->getEarthquakes($_GET['lat'], $_GET['lon']);
             break;
         case 'getCcUrl':
             include_once "Wovodat.php";

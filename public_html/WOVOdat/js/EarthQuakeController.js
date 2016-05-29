@@ -161,36 +161,44 @@ $(function(){
  * Author : Pham Vu Tuan
  * Function to compute the number of earthquake events of a volcano
  */
-function computeEquakeEvents(cavw,mapUsed, radius=30){
+function computeEquakeEvents(cavw, mapUsed, radius=30){
 	var count = 0;
 	var vlat = earthquakes[cavw]['vlat'];
 	var vlon = earthquakes[cavw]['vlon'];
+	var total = 0;
 
 	for(var i in earthquakes[cavw]){
+		if (i == 'vlat' || i == 'vlon') continue;
+		total++;
 		var lat = earthquakes[cavw][i]['lat'];
 		var lon = earthquakes[cavw][i]['lon'];
 		// skip this value when there is no latitude or longitude value 
 		// for them
 
-		if(typeof lat == 'undefined' || typeof lon == 'undefined'){
-			continue;
-		}
+		//if(typeof lat == 'undefined' || typeof lon == 'undefined'){
+		//	console.log("lat lon undefined: " + i);
+		//	continue;
+		//}
 
 		// skip this event when it is not supposed to be displayed
-		if(earthquakes[cavw][i]['available'] == 'undefined'){
-			continue;
-		}
+		//if(earthquakes[cavw][i]['available'] == 'undefined'){
+		//	console.log(earthquakes[cavw][i]);
+		//	continue;
+		//}
 
-		if(!filter(cavw,mapUsed,i)){
-			continue;
-		}
+		//if(!filter(cavw,mapUsed,i)){
+		//	console.log("lat lon undefined: " + i);
+		//	continue;
+		//}
 
 		// only count earthquakes within the radius given
-		if(Wovodat.calculateD(lat, lon, vlat, vlon, 2) > radius){
-			continue;
+		var result = Wovodat.calculateD(lat, lon, vlat, vlon);
+		if(result[0] < radius){
+			count++;
 		}
-		count++;
+		
 	}
+	console.log("event computed total " + total);
 	return count;
 }
 
@@ -342,6 +350,7 @@ function filter(cavw,mapUsed,i){
 		var checkboxes = document.getElementsByName('cc_id'+mapUsed);
 		for(var i = 0;i<checkboxes.length;i++){
 			if(!checkboxes[i].checked&&checkboxes[i].value == id){
+				console.log(1);
 				return false;
 			}
 		}
@@ -357,17 +366,17 @@ function filter(cavw,mapUsed,i){
 	}
 
 	if(time < sDate || time > eDate){
-		// console.log(3);
+		console.log(3);
 		return false;
 	}
 
 	if(depth < dLow || depth > dHigh){
-		// console.log(4);
+		console.log(4);
 		return false;
 	}
 
 	if(mag < mLow || mag > mHigh){
-		// console.log(mag);
+		console.log(5);
 		return false;
 	}
 	return true;
@@ -380,7 +389,6 @@ function filter(cavw,mapUsed,i){
 function nameConverter(value, element){
 	switch(element){
 	case 'cc_id': return ccMap.get(value);
-
 	case 'EqType':
 		if(value == "") return 'X'; 
 		return eqMap.get(value);
@@ -392,6 +400,7 @@ function nameConverter(value, element){
  *end time of all earthquake event
  */
 function initializeFilter(data,mapUsed){
+	console.log("initialize filter");
 	var i, item, startTime, endTime, timestamp;
 	for(i in data){
 		item = data[i];
@@ -471,10 +480,7 @@ function filterData(cavw,panelUsed){
 	var count = 0;
 	var vlat = earthquakes[cavw]['vlat'], vlon = earthquakes[cavw]['vlon'];
 	// some error here, what if i is 'vlat' or 'vlon'
-	console.log(earthquakes[cavw]);
 	for (var i in earthquakes[cavw]){
-
-		console.log(earthquakes[cavw][i]);
 		if(i == 'vlat' || i == 'vlon')
 			continue;
 		// if we already have enough earthquakes event, the rest of event is
@@ -489,10 +495,9 @@ function filterData(cavw,panelUsed){
 			var eTime = Wovodat.convertDate(earthquakes[cavw][i]['time']);
 
 			var elat = earthquakes[cavw][i]['lat'], elon = earthquakes[cavw][i]['lon'];
-			var distanceFromVolcano = Wovodat.calculateD(vlat,vlon,elat,elon,2);
-			if(distanceFromVolcano > 50)
-				console.log(distanceFromVolcano);
-			if(distanceFromVolcano > wkm + 0.1){
+			var result = Wovodat.calculateD(elat, elon, vlat, vlon);
+			var distanceFromVolcano = result[0];
+			if(distanceFromVolcano >= wkm){
 				earthquakes[cavw][i]['available'] = false;
 				continue;
 			}
@@ -518,7 +523,6 @@ function filterData(cavw,panelUsed){
 			}
 			count++;
 			earthquakes[cavw][i]['available'] = true;
-
 		}
 	}
 }

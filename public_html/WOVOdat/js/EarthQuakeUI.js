@@ -104,7 +104,6 @@ function drawEquake2DGMT(o){
 	var vlon = volcanoInfo[mapUsed].lon;                         //Nang added               
 
 	var id = o.source.id;
-	var placeholder = document.getElementById('2DGMTEquakeGraph' + mapUsed);
 
 	if(gmt2DData[cavw] == undefined){
 		Wovodat.get2DGMTMap({
@@ -125,12 +124,12 @@ function drawEquake2DGMT(o){
 
 			handler: function(ar){
 				gmt2DData[cavw] = ar; 
-				show2DGMT(ar);
+				show2DGMT(ar, mapUsed);
 			}
 		});
 	
 	}else{
-		show2DGMT(gmt2DData[cavw]);
+		show2DGMT(gmt2DData[cavw], mapUsed);
 	}
 	
 	if (!earthquakes[cavw]){
@@ -151,12 +150,13 @@ function drawEquake2DGMT(o){
 */
 function show2DGMT(ar){
 	var directory = ar['directory'];
+	var placeholder = document.getElementById('2DGMTEquakeGraph' + mapUsed);
 	$("#imageLink",placeholder).attr('href',directory + "/" + ar['imageSrc']);
 	$("#image",placeholder).attr('src',directory + "/" + ar['imageSrc']);
 	$("#gifImage",placeholder).attr('href',directory + "/" + ar['imageSrc']);
 	$("#gmtScriptFile",placeholder).attr('href',ar['gmtScriptFile']);
 	if(getSelectedEquakesButton(mapUsed) == 2)
-		placeholder.style.display = 'block';
+		placeholder.style.display = "block";
 }
 
 /**
@@ -190,11 +190,11 @@ function drawEquake3DGMT(o){
 			init_azim: document.getElementById('azim' + mapUsed).value,
 			handler: function(ar){
 				gmt3DData[cavw] = ar; 
-				show3DGMT(ar);
+				show3DGMT(ar, mapUsed);
 			}
 		});
 	}else{
-		show3DGMT(gmt3DData[cavw]);
+		show3DGMT(gmt3DData[cavw], mapUsed);
 	}
 	if (!earthquakes[cavw]){
 		Wovodat.loadEarthquakes({
@@ -214,7 +214,7 @@ function drawEquake3DGMT(o){
  * on the equake panel
  * This function will set the image , add the function for the 
  */
-function show3DGMT(ar){
+function show3DGMT(ar, mapUsed){
 	function padding(value){
 		value = value + "";
 		var l = value.length;
@@ -269,7 +269,6 @@ function show3DGMT(ar){
  * 2012-07-19
  */
 function insertMarkersForEarthquakes(data,cavw,mapUsed){
-	 //console.log(data);
 	// the function will initialize the earthquake variable when 
 	// there is no equake data stored at the client side for a
 	// specific volcano.
@@ -290,9 +289,15 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 			equakeSet.length--;
 
 		var index,nextQuake,lat,lon,depth,mag,time,type,id;
+		var total1 = 0;
+		var total2 = 0;
 
 		for (var i in equakeSet){
+			total1++;
 			index = Wovodat.trim(equakeSet[i]);
+			if (earthquakes[cavw][index] != undefined){
+				console.log(earthquakes[cavw][index] + " " + index);
+			}
 			nextQuake = index.split(",");
 			lat = nextQuake[0];
 			lon = nextQuake[1];
@@ -303,20 +308,26 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 			id = nextQuake[6]; // Catalog owner cc_id
 			
 			// ignore earthquakes that have no information on depth and/or magnitude
-			if (depth == "" || typeof depth=="undefined" || mag=="" || typeof mag=="undefined")
+			if (depth == "" || typeof depth=="undefined" || mag=="" || typeof mag=="undefined"){
+				console.log("problem event " + index)
 				continue;
-
+			}
+				
 			// ignore earthquakes that have no information on type and/or the owner
 			// if (type == "" || typeof type=="undefined" || id=="" || typeof id=="undefined")
-			if (id=="" || typeof id=="undefined")
+			if (id=="" || typeof id=="undefined"){
+				console.log("problem event " + index)
 				continue;
-
+			}
+				
 			// //vutuan added
 			if(id != undefined && id != "")
 				catalogOwner.add(id);
 			// if(type != undefined && type != "")
 				eqTypeSet.add(type);
 			// store the quake data in the earthquakes[cavw] object
+			var result = Wovodat.calculateD(lat, lon, vlat, vlon);
+
 			earthquakes[cavw][index]=[];
 			earthquakes[cavw][index]['eqtype'] = type;
 			earthquakes[cavw][index]['lat']=lat;
@@ -325,11 +336,20 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 			earthquakes[cavw][index]['available'] = true;
 			earthquakes[cavw][index]['mag']=mag;
 			earthquakes[cavw][index]['depth']=depth;
-			earthquakes[cavw][index]['latDistance'] = Wovodat.calculateD(lat,lon,vlat,vlon,0);
-			earthquakes[cavw][index]['lonDistance'] = Wovodat.calculateD(lat,lon,vlat,vlon,1);
+			earthquakes[cavw][index]['latDistance'] = result[2];
+			earthquakes[cavw][index]['lonDistance'] = result[1];
 			earthquakes[cavw][index]['timestamp'] = Wovodat.convertDate(time);
 			earthquakes[cavw][index]['cc_id'] = id; // add cc_id attribute to earthquakes object - vutuan
+			total2++;
 		}
+		console.log('total1 ' + total1);
+		console.log('total2 ' + total2);
+		var counter = 0;
+		for (var i in earthquakes[cavw]) {
+			counter += 1;
+		}
+		counter -= 2;
+		console.log(counter);
 		displayElement(catalogOwner,mapUsed,'cc_id');
 		displayElement(eqTypeSet,mapUsed,'EqType');
 		insertMarkersForEarthquakes(null,cavw,mapUsed);
@@ -341,7 +361,7 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 		var marker,count = 1;
 		filterData(cavw,mapUsed);
 		var nEvent = $('#Evn' + mapUsed).val();
-		//console.log(earthquakes[cavw]);
+		console.log(earthquakes[cavw]);
 		for (var i in earthquakes[cavw]){
 			if(count > nEvent) break;
 			if(earthquakes[cavw][i]!=undefined){
@@ -511,7 +531,8 @@ vutuan added to display info of earthquake events.
 function displayEvent(cavw,mapUsed){
 	var nEvent = $('#Evn'+mapUsed).val();
 	var radius = $('#wkm'+mapUsed).val();
-	var actualEvent = computeEquakeEvents(cavw,mapUsed, radius);
+	console.log("radius: " + radius);
+	var actualEvent = computeEquakeEvents(cavw, mapUsed, radius);
 	if(parseInt(nEvent) > parseInt(actualEvent)){
 		document.getElementById("eqEvent" + mapUsed).innerHTML 
 		= 'Earthquake events: ' + actualEvent + ' of ' + actualEvent;
@@ -785,7 +806,7 @@ function generateColorCode(depth){
 READY FUNCTION
 */
 $(document).ready(function(){
-	$("#image").css('width','459px');
+	//$("#image_v5").css('width','459px');
 	setupSwitchButton();
 	/* get the list of all volcano in our database and insert it into
 	* the dropdown list
@@ -1273,7 +1294,7 @@ function resetFilter(mapUsed){
 	
 	$("#cc_id" + mapUsed).val("");
 	$("#EqType" + mapUsed).val("");
-	$("#wkm" + mapUsed).val(10);
+	$("#wkm" + mapUsed).val(30);
 	$("#azim" + mapUsed).val(175);
 	$("#degree" + mapUsed).val(30);
 	
@@ -1292,7 +1313,7 @@ function resetFilter(mapUsed){
 		}
 	});
 	// range of max and min depth
-	$("#DepthLow" + mapUsed).val(0);
+	$("#DepthLow" + mapUsed).val(-10);
 	$("#DepthHigh" + mapUsed).val(40);
 	$("#MagnitudeLow" + mapUsed).val(0); // vutuan added
 	$("#MagnitudeHigh" + mapUsed).val(9); //vutuan added

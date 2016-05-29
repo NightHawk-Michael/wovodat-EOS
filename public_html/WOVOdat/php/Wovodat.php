@@ -2155,7 +2155,7 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
         if (is_numeric($startDepth) && is_numeric($endDepth)) {
             
         } else {
-            $startDepth = -0;
+            $startDepth = -10;
             $endDepth = 40;
         }
         
@@ -2165,14 +2165,15 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
 
         // changed sn_id to cc_id by vutuan
         $quakeQuery .= " sd_evn_elat, sd_evn_elon, sd_evn_edep, sd_evn_pmag, sd_evn_time, sd_evn_eqtype, cc_id, (0.15 * (unix_timestamp(sd_evn_time)/unix_timestamp(now())) + 0.2 * (rand() * sd_evn_edep/$endDepth)  + 0.65 * rand()) as id FROM sd_evn ";
-
-
-        $quakeQuery .= " WHERE ABS($latitude - sd_evn_elat) < 1 AND ABS($longitude - sd_evn_elon) < 6 ";
-
+        
         if ($wkm == "")
-            $wkm = 200;
+            $wkm = 100;
 
-        $quakeQuery .= " AND SQRT(POW(($latitude - sd_evn_elat)*110, 2) + POW(($longitude - sd_evn_elon) * 111.32 * COS($latitude/57.32), 2))<  " . $wkm / 2;
+        $quakeQuery .= " WHERE ABS($latitude - sd_evn_elat) < 1 AND ABS($longitude - sd_evn_elon) < 6";
+
+        $quakeQuery .= " AND `haversine` ($latitude, $longitude, sd_evn_elat, sd_evn_elon) < $wkm";
+
+        $quakeQuery .= " AND sd_evn_pmag IS NOT NULL ";
 
         $quakeQuery .= " AND sd_evn_pubdate <= now() ";
 
@@ -2207,9 +2208,9 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
         return $quakeQuery;
     }
 
-    public function getEarthquakes($qty, $cavw, $lat, $lon, $elev) {
+    public function getEarthquakes($vlat, $vlon) {
         //$quakeQuery .= " sd_evn_elat, sd_evn_elon, sd_evn_edep, sd_evn_pmag, sd_evn_time, sd_evn_eqtype, sn_id, (0.15 * (unix_timestamp(sd_evn_time)/unix_timestamp(now())) + 0.2 * (rand() * sd_evn_edep/$endDepth)  + 0.65 * rand()) as id FROM sd_evn ";
-        $quakeQuery = $this->getEarthquakeQuery("", $lat, $lon, "", "", "", "", "", "");
+        $quakeQuery = $this->getEarthquakeQuery("", $vlat, $vlon, "", "", "", "", "", 100);
         $getQuakes = mysql_query($quakeQuery) or die(mysql_error());
         $count = 0;
         while ($row = mysql_fetch_array($getQuakes)) {
@@ -2264,20 +2265,26 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
         $eqtype = $o['eqtype'];
 
         $sql_statement = $this->getEarthquakeQuery($qty, $vlat, $vlon, $date_start, $date_end, $dr_start, $dr_end, $eqtype, $wkm);
-        $query = mysql_query($sql_statement);
+        // to count the actual number of event without qty limit
+        $sql_statement2 = $this->getEarthquakeQuery("", $vlat, $vlon, "", "", "", "", "", $wkm);
 
+        $query = mysql_query($sql_statement);
+        $query2 = mysql_query($sql_statement2);
         # writes the data into a single file
         $nb = 0;
-
+        $actual_nb = 0;
         $fh = fopen("$tmpdir/$tmp.txt", 'w') or die("can't open file for writing txt file <br/>");
+
+        // skip those earthquakes that don't have their magnitude recorded, to be consistent compared to the 
+        // client side where earthquakes with no pmag are not being used
         while ($row = mysql_fetch_assoc($query)) {
-
             $data[] = $row['sd_evn_time'];
-
             fwrite($fh, join(',', $row) . "\n");
             $nb++;
         }
-
+        while ($row = mysql_fetch_assoc($query2)) {
+            $actual_nb++;
+        }
 
         $equakeFirstValue = substr($data[0], 0, 4);
 
@@ -2300,8 +2307,9 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
         $J = 74 * 20 / $wkm; # Jm scale (normalized with map width)
         $ldep = 20; # max depth for profiles (km)
 
-        $title = $vname . "($nb events)";
-        $kmlat = 6370 * deg2rad(1); # length of a latitude degree (in km)
+        $title = $vname . "($nb out of $actual_nb events)";
+
+        $kmlat = 6371 * deg2rad(1); # length of a latitude degree (in km)
         $kmlon = $kmlat * cos(deg2rad($vlat)); # length of a longitude degree at the volcano latitude (in km)
         $lon1 = ($vlon - 0.5 * $wkm / $kmlon);
         $lon2 = ($vlon + 0.5 * $wkm / $kmlon);
@@ -2328,7 +2336,7 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
 
 
         // makes colormap
-        fwrite($fh, "makecpt -Cno_green -I -T0/$ldep/1 > $tmp.cpt\n");
+        fwrite($fh, "makecpt -Cno_green -I -T5/$ldep/1 > $tmp.cpt\n");
 
         // plan view
         //Nang.. To adjust $wkm number showing on the top on graph =>  changed from  "-Ba9mf5mg5m" to "-Ba5mf5mg5m"
@@ -2350,6 +2358,7 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
         fwrite($fh, "psscale -D16c/2c/-4c/0.3c -C$tmp.cpt -B10f10/:\"Depth (km)\": -O -K >> $tmp.ps\n");
         // depth vs time
         fwrite($fh, "cat $tmp.txt | sed s/\\ /T/g | awk -F , {'print \$6,-\$4,\$4'} > $tmp.xyz\n");
+        // create R
         fwrite($fh, "R=`minmax -fT -I5 $tmp.xyz`\n");
         fwrite($fh, "echo 'testing'\n");
 

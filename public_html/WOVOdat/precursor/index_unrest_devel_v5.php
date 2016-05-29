@@ -253,7 +253,7 @@ session_start();
 															<table>
 																<tr>
 																	<td>
-																		Start: <input type="text" id="DepthLow1" class="numberInput" value="0" size=4/>
+																		Start: <input type="text" id="DepthLow1" class="numberInput" value="-10" size=4/>
 																	</td>
 																	<td>
 																		End: <input type="text" id="DepthHigh1" class="numberInput" value="40" size=4/>
@@ -303,6 +303,7 @@ session_start();
 														<select id="wkm1">
 															<option value="10">10</option>
 															<option value="20">20</option>
+                                                            <option value="30">30</option>
 															<option value="50">50</option>
 															<option value="100">100</option>
 														</select>
@@ -643,7 +644,7 @@ session_start();
                                                             <table>
                                                                 <tr>
                                                                     <td>
-                                                                        Start: <input type="text" id="DepthLow2" class="numberInput" value="0" size=4/>
+                                                                        Start: <input type="text" id="DepthLow2" class="numberInput" value="-10" size=4/>
                                                                     </td>
                                                                     <td>
                                                                         End: <input type="text" id="DepthHigh2" class="numberInput" value="40" size=4/>
@@ -693,6 +694,7 @@ session_start();
                                                         <select id="wkm2">
                                                             <option value="10">10</option>
                                                             <option value="20">20</option>
+                                                            <option value="30">30</option>
                                                             <option value="50">50</option>
                                                             <option value="100">100</option>
                                                         </select>
