@@ -1,3 +1,4 @@
+
 /**
 * Store every javaScript functions to draw Earthquakes for php file
 /*Created by Luis Ngo - 21/2/2016
@@ -148,7 +149,7 @@ function drawEquake2DGMT(o){
 /**
 *
 */
-function show2DGMT(ar){
+function show2DGMT(ar, mapUsed){
 	var directory = ar['directory'];
 	var placeholder = document.getElementById('2DGMTEquakeGraph' + mapUsed);
 	$("#imageLink",placeholder).attr('href',directory + "/" + ar['imageSrc']);
@@ -1721,3 +1722,4 @@ function updateGoogleMap(location_id){
 		cachingElement(eqTypeSet,cavw,1,'EqType');
 	}
 }
+
