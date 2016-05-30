@@ -179,8 +179,8 @@ define(function(require) {
 
           //tempEruption.push(675890001000,(maxY + minY) / 2);
           //
-          tempEruption.push(675890001000,(maxY+minY)/2);
-          //console.log("test");
+          tempEruption.push(ed_stime,(maxY+minY)/2);
+
            //console.log(tempEruption);
           listEruption.push(tempEruption);
           //break;

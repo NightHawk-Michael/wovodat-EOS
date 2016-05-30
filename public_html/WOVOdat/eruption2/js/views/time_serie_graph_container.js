@@ -56,6 +56,7 @@ define(function(require) {
       });
 
       this.graphs.push(timeSerieGraph);
+      //console.log(this.graphs);
       // this.show();
 
       // this.graphs[val].filter.trigger("change");
@@ -105,7 +106,7 @@ define(function(require) {
     show: function(){
       this.$el.html("");
       this.$el.addClass("time-series-graph-container");
-      this.$el.append("<div style = \"color : black; background-color:white; padding-left: 50px; \">Individual graph display</div>");
+      this.$el.append("<div style = \"font-weight: bold; color : black; background-color:white; padding-left: 50px; \">Individual graph display</div>");
 
       for (var i = 0; i < this.graphs.length; i++) {
         this.$el.append(this.graphs[i].$el);

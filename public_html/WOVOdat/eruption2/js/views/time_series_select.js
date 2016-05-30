@@ -53,7 +53,7 @@ define(function(require) {
       this.$el.html("");
       var container =$("<div></div>");
       container.addClass("time_series_select_container card-panel");
-      this.$el.append("<div id = \"timeseries-select-title\" style = \"color : black;background-color:white;padding-left: 50px;visibility: hidden;\">Available time series data: </div>");
+      this.$el.append("<div id = \"timeseries-select-title\" style = \"font-weight: bold; color : black;background-color:white;padding-left: 50px;visibility: hidden;\">Available time series data: </div>");
 
       this.$el.append(container);
       

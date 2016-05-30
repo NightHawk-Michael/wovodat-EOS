@@ -161,7 +161,40 @@ class Wovodat {
      */
     public function getVolcanoListHasData() {
         mysql_query("set character_set_results='utf8'");
-        $result = mysql_query("select vd_name, vd_cavw, vd_num FROM vd vd1 WHERE  EXISTS (select * from vd vd2, ed where vd2.vd_cavw = vd1.vd_cavw and vd2.vd_id = ed.vd_id) ORDER BY vd_name ");
+        $result = mysql_query("select vd_name, vd_cavw, vd_num from vd
+WHERE
+(EXISTS (select * from ed WHERE ed_etime > 0 AND ed_stime > 0 AND vd.vd_id = ed.vd_id))
+AND
+(vd.vd_id IN (select vd_id from es_dd_ang
+				UNION select vd_id from es_dd_edm
+				UNION select vd_id from es_dd_gps
+				UNION select vd_id from es_dd_gpv
+				UNION select vd_id from es_dd_lev
+				UNION select vd_id from es_dd_str
+				UNION select vd_id from es_dd_tlt
+				UNION select vd_id from es_fd_ele
+				UNION select vd_id from es_fd_gra
+				UNION select vd_id from es_fd_mag
+				UNION select vd_id from es_fd_mgv
+				UNION select vd_id from es_gd
+				UNION select vd_id from es_gd_plu
+				UNION select vd_id from es_gd_sol
+				UNION select vd_id from es_hd
+				UNION select vd_id from es_med
+				UNION select vd_id from es_sd_evn
+				UNION select vd_id from es_sd_evs
+				UNION select vd_id from es_sd_int
+				UNION select vd_id from es_sd_ivl
+				UNION select vd_id from es_sd_rsm
+                UNION select vd_id from es_sd_ssm
+                UNION select vd_id from es_sd_trm
+                UNION select vd_id from es_td
+			  )
+)
+AND
+(vd.vd_id IN (select vd_id from jj_volnet UNION select vd_id from vd_inf))
+order by vd_name");
+        //"select vd_name, vd_cavw, vd_num from vd WHERE EXISTS (select * from ed WHERE ed_etime > 0 AND ed_stime > 0 AND vd.vd_id = ed.vd_id) order by vd_name
         $row = mysql_fetch_array($result);
         if ($row === false)
             return;

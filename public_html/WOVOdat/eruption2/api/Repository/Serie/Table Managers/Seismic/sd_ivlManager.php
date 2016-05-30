@@ -65,11 +65,11 @@ class sd_ivlManager extends TableManager {
 			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
 		}else if($component == 'Total Seismic Energy'){
 			$unit = "counts";
-			$attribute = "sd_ivl_nfelt";
+			$attribute = "sd_ivl_etot";
 			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
 		}else if($component == 'Felt Earthquake Counts'){
 			$unit = "Erg";
-			$attribute = "sd_ivl_etot";
+			$attribute = "sd_ivl_nfelt";
 			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
 		}else if($component == 'Earthquake Min-frequency'){
 			$unit = "Hz";

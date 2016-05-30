@@ -1,5 +1,5 @@
 <?php 
-class DeformationManager extends MonitoryTypeManager{
+class 	DeformationManager extends MonitoryTypeManager{
 
 	protected function setTableManagers(){
 		$result = array();

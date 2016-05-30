@@ -246,8 +246,17 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
 
 
        });
-       // console.log(this.serieGraphTimeRange);
-      
+
+      //  var test =  document.getElementsByClassName('flot-overlay');
+      //var event = new MouseEvent('dblclick', {
+      //  'view': window,
+      //  'bubbles': true,
+      //  'cancelable': true
+      //});
+      // for (var i = 0 ; i <  test.length; i++){
+      //   console.log(test[i]);
+      //  // test[i].dispatchEvent(event);
+      // }
        //this.serieGraphTimeRange.trigger('update',this.serieGraphTimeRange);
        //this.forecastsGraphTimeRange.set({
        //  'startTime': startTime,
@@ -273,7 +282,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       var limitNumberOfData =false;
       var eruptions =  this.eruptions;
       //formatData: function(graph,filters,allowErrorbar,allowAxisLabel,limitNumberOfData)
-      //console.log(this.filters);
+      console.log(this.filters);
       //console.log(eruptions);
       //GraphHelper.formatDataEruption(this,this.eruptions);
       GraphHelper.formatData(this,filters,allowErrorbar,allowAxisLabel,limitNumberOfData, eruptions);

@@ -82,6 +82,7 @@ abstract class TableManager implements TableManagerInterface {
 		$stationDataParams = $this->setStationDataParams($stations['component']);
 		$errorbar = $stationDataParams["errorbar"];
 		$query = $stationDataParams["query"];
+		//echo($query);
 		$db->query($query, $id1,$id2);
 		// echo($query);
 		// var_dump($this);

@@ -27,7 +27,9 @@ define(function(require) {
     hide: function(){
       this.$el.html("");
       this.$el.addClass("overview-graph-container");
-      this.$el.append("<div id = \"overview-title\" style = \"color : black;background-color:white;padding-left: 50px;visibility: hidden;\">Overview Graph. Highlight selected time range using mouse</div>");
+      this.$el.append("<div id = \"overview-title\" style = \"background-color:white;padding-left: 50px;visibility: hidden;\">" +
+          "<a style = \" font-weight: bold; color : black;\">Overview Graph.</a> <br>" +
+          "<a style = \" padding-left : 10px;color : black; \">Highlight selected time range using mouse</a></div>");
       this.trigger('hide');
     },
 
