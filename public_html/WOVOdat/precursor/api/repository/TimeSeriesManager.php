@@ -31,7 +31,7 @@ class TimeSeriesManager {
 
   private function saveSerie($series) {
     file_put_contents('Serie/Series.json', json_encode($series), FILE_USE_INCLUDE_PATH);
-  }C:\xampp2\htdocs\home\wovodat\public_html\WOVOdat\precursor\api\repository\TimeSeriesManager.php
+  }
 
   private function getSerieInfo($sr_id) {
     $series = json_decode(file_get_contents('Serie/Series.json', true), true);
