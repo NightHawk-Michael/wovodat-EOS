@@ -84,6 +84,8 @@ define(function(require) {
       this.listenTo(this.eruptionGraph,'hide',this.eruptionGraphHidden);
       this.listenTo(this.eruptionGraph,'show',this.eruptionGraphShown);
 
+      this.listenTo(this.serieGraphTimeRange,'nav', this.syncTimeSerie);
+
 
       // this.listenTo(this.selectingEruptions, 'reset', this.resetSelectingEruptions);
 
@@ -92,6 +94,11 @@ define(function(require) {
     //   this.volcanoSelect.onSelectChanged(this.selectingVolcano);
     // },
 
+    syncTimeSerie : function(e){
+      var currentID = e.attributes.serieID;
+      this.timeSeriesGraphContainer.updateTimeSerie(currentID);
+
+    },
     changeVolcano: function(e) {
       var vd_id = this.selectingVolcano.get('vd_id');
       this.volcanoSelect.changeSelection(vd_id);
@@ -101,9 +108,9 @@ define(function(require) {
       this.selectingTimeSeries.reset();
       this.selectingTimeSeriesChanged();
     },
-    timeSeriesChanged: function(e){
-      this.timeSeriesSelect.timeSeriesChanged(this.timeSeries);
-    },
+    //timeSeriesChanged: function(e){
+    //  this.timeSeriesSelect.timeSeriesChanged(this.timeSeries);
+    //},
    
     // updateTimeSeriesData: function(e){
     //   var vd_id = this.selectingVolcano.get('vd_id');
@@ -207,7 +214,7 @@ define(function(require) {
       // this.timeSeriesGraphContainer.selectingTimeRangeChanged(e);
     },
     destroy: function() {
-      
+
     }
   });
 });

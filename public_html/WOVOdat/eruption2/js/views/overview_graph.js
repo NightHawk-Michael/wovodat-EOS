@@ -35,11 +35,11 @@ define(function(require) {
 
       var startTime = ranges.xaxis.from,
           endTime = ranges.xaxis.to;
+
       event.data.set({
         'startTime': startTime,
         'endTime': endTime,
-        'startSelectTime':startTime,
-        'endSelectTime' : endTime
+
       });
 
       event.data.trigger('update');
@@ -48,6 +48,8 @@ define(function(require) {
       this.$el.html("");
       this.$el.width(0);
       this.$el.height(0);
+      (document.getElementsByClassName('overview-graph-container'))[0].style.padding = '0px';
+
       this.trigger('hide');
     },
     showLoading: function(){
@@ -112,12 +114,16 @@ define(function(require) {
 
       this.$el.width('auto');
       this.$el.height(200);
-      this.$el.addClass("overview-graph card-panel");
+
+      this.$el.addClass("overview-graph");
+
 
       //limit data to be rendered
       
        //console.log(this.data);
-      document.getElementById('overview-title').style.visibility = 'visible';
+
+      document.getElementById('overview-title').style.display = 'block';
+      (document.getElementsByClassName('overview-graph-container'))[0].style.padding = '20px';
 
       this.graph = $.plot(this.$el, this.data, options);
       //To edit the series object, go to GraphHelper used for data in the prepareData method below.

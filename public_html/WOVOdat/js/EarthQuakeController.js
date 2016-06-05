@@ -198,7 +198,7 @@ function computeEquakeEvents(cavw, mapUsed, radius=30){
 		}
 		
 	}
-	console.log("event computed total " + total);
+	//console.log("event computed total " + total);
 	return count;
 }
 
@@ -350,7 +350,7 @@ function filter(cavw,mapUsed,i){
 		var checkboxes = document.getElementsByName('cc_id'+mapUsed);
 		for(var i = 0;i<checkboxes.length;i++){
 			if(!checkboxes[i].checked&&checkboxes[i].value == id){
-				console.log(1);
+				//console.log(1);
 				return false;
 			}
 		}
@@ -366,17 +366,17 @@ function filter(cavw,mapUsed,i){
 	}
 
 	if(time < sDate || time > eDate){
-		console.log(3);
+		//console.log(3);
 		return false;
 	}
 
 	if(depth < dLow || depth > dHigh){
-		console.log(4);
+		//console.log(4);
 		return false;
 	}
 
 	if(mag < mLow || mag > mHigh){
-		console.log(5);
+		//console.log(5);
 		return false;
 	}
 	return true;

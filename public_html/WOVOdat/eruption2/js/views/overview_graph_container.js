@@ -26,8 +26,8 @@ define(function(require) {
      //hide overview graph from page
     hide: function(){
       this.$el.html("");
-      this.$el.addClass("overview-graph-container");
-      this.$el.append("<div id = \"overview-title\" style = \"background-color:white;padding-left: 50px;visibility: hidden;\">" +
+      this.$el.addClass("overview-graph-container card-panel");
+      this.$el.append("<div id = \"overview-title\" style = \"padding-left: 50px;display:none;\">" +
           "<a style = \" font-weight: bold; color : black;\">Overview Graph.</a> <br>" +
           "<a style = \" padding-left : 10px;color : black; \">Highlight selected time range using mouse</a></div>");
       this.trigger('hide');

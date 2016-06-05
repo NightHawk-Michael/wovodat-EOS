@@ -26,6 +26,7 @@ define(function(require) {
       TimeRange = require('models/time_range'),
       TimeSeries = require('collections/series'),
       TimeSeriesContainer = require('views/time_series_container'),
+      TimeRangeSelect = require('views/time_range_select'),
       Tooltip = require('views/series_tooltip'),
       TimeSeriesGraphContainer = require('views/time_serie_graph_container'),
       EventHandler = require('handler/event_handler');
@@ -58,6 +59,7 @@ define(function(require) {
           selectingTimeRange = new TimeRange(),
           eruptionTimeRange = new TimeRange(),
           overviewGraphTimeRange = new TimeRange(),
+
 
 
           volcanoSelect = new VolcanoSelect({
@@ -132,7 +134,11 @@ define(function(require) {
             // timeRange: timeRange
 
           }),
-
+          timeRangeSelect = new TimeRangeSelect({
+            categories: categories,
+            selectings: selectingTimeSeries,
+            selectingFilters: selectingFilters
+          }),
           // urlLoader = new UrlLoader({
           //   observer: observer,
           //   volcanoes: volcanoes,
@@ -181,6 +187,7 @@ define(function(require) {
       eruptionGraph.$el.appendTo(this.$el);
       eruptionForecastsGraph.$el.appendTo(this.$el);
       timeSeriesGraphContainer.$el.appendTo(this.$el);
+
       // urlLoader.$el.appendTo(this.$el);
 
       // new EruptionForecastGraph({

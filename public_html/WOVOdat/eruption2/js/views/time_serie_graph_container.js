@@ -56,7 +56,6 @@ define(function(require) {
       });
 
       this.graphs.push(timeSerieGraph);
-      //console.log(this.graphs);
       // this.show();
 
       // this.graphs[val].filter.trigger("change");
@@ -78,9 +77,12 @@ define(function(require) {
   	// },
     serieGraphTimeRangeChanged: function(timeRange){
       for (var i = 0; i < this.graphs.length; i++) {
+      //     console.log(this.graphs[i]);
+        var attributes = this.graphs[i].serieGraphTimeRange.attributes;
+        attributes.serieID = this.graphs[i].timeRange.cid;
         this.graphs[i].timeRangeChanged(timeRange);
       };
-
+      //console.log(this.graphs);
       this.show();
     },
     selectingFiltersChanged: function(selectingFilters){
@@ -105,10 +107,13 @@ define(function(require) {
     },
     show: function(){
       this.$el.html("");
-      this.$el.addClass("time-series-graph-container");
+      this.$el.addClass("time-series-graph-container card-panel");
       this.$el.append("<div style = \"font-weight: bold; color : black; background-color:white; padding-left: 50px; \">Individual graph display</div>");
 
+
       for (var i = 0; i < this.graphs.length; i++) {
+        var select = "<a class=\"\" style = \"padding-left:75px;\" onclick='selectGraph()'><span><input type=\"checkbox\"><label></label> </span></a>";
+        this.$el.append(select);
         this.$el.append(this.graphs[i].$el);
 
         this.graphs[i].show();
@@ -129,6 +134,26 @@ define(function(require) {
       this.$el.removeData().unbind(); 
       this.remove();  
       Backbone.View.prototype.remove.call(this);
+    },
+    updateTimeSerie: function(currentID){
+      var graphs = this.graphs;
+      var currentTimeSerie = null;
+      for (var i = 0 ; i < graphs.length; i++){
+        if (graphs[i].timeRange.cid == currentID){
+          currentTimeSerie = graphs[i].serieGraphTimeRange.attributes;
+          break;
+        }
+      }
+      for (var i = 0 ; i < graphs.length; i++){
+        if (graphs[i].timeRange.cid != currentID){
+          graphs[i].maxX = currentTimeSerie.endTime;
+          graphs[i].minX = currentTimeSerie.startTime;
+
+          graphs[i].update();
+
+        }
+      }
+
     }
 
   });

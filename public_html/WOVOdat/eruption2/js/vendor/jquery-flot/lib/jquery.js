@@ -6693,6 +6693,7 @@ jQuery.extend({
 		"widows": true,
 		"zIndex": true,
 		"zoom": true
+
 	},
 
 	// Add in properties whose names you wish to fix before

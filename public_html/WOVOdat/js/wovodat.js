@@ -462,7 +462,7 @@ Wovodat.loadEarthquakes = function(o){
         data: "get=Earthquakes&lat="+volInfo.lat
         +"&lon="+volInfo.lon,
         success:function(html){
-            console.log(html);
+            //console.log(html);
             if(html.indexOf('Can\'t') >= 0) 
                 return;
             if(handlers[0])

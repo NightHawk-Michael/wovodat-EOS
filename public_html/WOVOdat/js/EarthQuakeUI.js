@@ -297,7 +297,7 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 			total1++;
 			index = Wovodat.trim(equakeSet[i]);
 			if (earthquakes[cavw][index] != undefined){
-				console.log(earthquakes[cavw][index] + " " + index);
+				//console.log(earthquakes[cavw][index] + " " + index);
 			}
 			nextQuake = index.split(",");
 			lat = nextQuake[0];
