@@ -2198,13 +2198,17 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
 
         // changed sn_id to cc_id by vutuan
         $quakeQuery .= " sd_evn_elat, sd_evn_elon, sd_evn_edep, sd_evn_pmag, sd_evn_time, sd_evn_eqtype, cc_id, (0.15 * (unix_timestamp(sd_evn_time)/unix_timestamp(now())) + 0.2 * (rand() * sd_evn_edep/$endDepth)  + 0.65 * rand()) as id FROM sd_evn ";
-        
+
         if ($wkm == "")
             $wkm = 100;
 
+        $R = 6371;
+
         $quakeQuery .= " WHERE ABS($latitude - sd_evn_elat) < 1 AND ABS($longitude - sd_evn_elon) < 6";
 
-        $quakeQuery .= " AND `haversine` ($latitude, $longitude, sd_evn_elat, sd_evn_elon) < $wkm";
+        //$quakeQuery .= " AND `haversine` ($latitude, $longitude, sd_evn_elat, sd_evn_elon) < $wkm";
+
+        $quakeQuery .= " AND ($R*2*ATAN2(SQRT(SIN((RADIANS(sd_evn_elat)-RADIANS($latitude))/2)*SIN((RADIANS(sd_evn_elat)-RADIANS($latitude))/2)+SIN((RADIANS(sd_evn_elon)-RADIANS($longitude))/2)*SIN((RADIANS(sd_evn_elon)-RADIANS($longitude))/2)*COS(RADIANS($latitude))*COS(RADIANS(sd_evn_elat))),SQRT(1-(SIN((RADIANS(sd_evn_elat)-RADIANS($latitude))/2)*SIN((RADIANS(sd_evn_elat)-RADIANS($latitude))/2)+SIN((RADIANS(sd_evn_elon)-RADIANS($longitude))/2)*SIN((RADIANS(sd_evn_elon)-RADIANS($longitude))/2)*COS(RADIANS($latitude))*COS(RADIANS(sd_evn_elat)))))) < $wkm";
 
         $quakeQuery .= " AND sd_evn_pmag IS NOT NULL ";
 
@@ -2216,8 +2220,6 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
             $dates = " and sd_evn_time BETWEEN '$startDate[2]/$startDate[0]/$startDate[1]' AND '$endDate[2]/$endDate[0]/$endDate[1]' ";
             $quakeQuery .= $dates;
         }
-
-        
         
         $depth = " and sd_evn_edep BETWEEN $startDepth AND $endDepth ";
         $quakeQuery .= $depth;
