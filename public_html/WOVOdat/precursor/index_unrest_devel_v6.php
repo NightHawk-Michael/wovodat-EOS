@@ -29,6 +29,7 @@ $cache = time();
   <script type="text/javascript" src="/js/flot/jquery.flot.navigate.tuan.js"></script> 
   <script type="text/javascript" src="/js/flot/jquery.flot.selection.js"></script>
   <script type="text/javascript" src="/js/flot/jquery.flot.marks.js"></script>
+  <script type="text/javascript" src="/js/flot/jquery.flot.errorbars.js"></script>
   <script type="text/javascript" src="/js/wovodat.js?<?php echo $cache; ?>"></script>
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCQ9kUvUtmawmFJ62hWVsigWFTh3CKUzzM&sensor=false"></script>
   <script type="text/javascript" src="/js/Tooltip_v3.js"></script>

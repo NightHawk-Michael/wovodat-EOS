@@ -472,16 +472,14 @@
                 if (d[i].data != null) {
                     s.data = d[i].data; // move the data instead of deep-copy
                     delete d[i].data;
-
                     $.extend(true, s, d[i]);
-
                     d[i].data = s.data;
                 }
-                else
+                else {
                     s.data = d[i];
+                }
                 res.push(s);
             }
-
             return res;
         }
         
@@ -572,7 +570,6 @@
 
         function fillInSeriesOptions() {
             var i;
-            
             // collect what we already got of colors
             var neededColors = series.length,
             usedColors = [],
@@ -670,22 +667,18 @@
                 axis.datamax = bottomSentry;
                 axis.used = false;
             });
-            
             for (i = 0; i < series.length; ++i) {
                 s = series[i];
                 s.datapoints = {
                     points: []
                 };
-                
                 executeHooks(hooks.processRawData, [ s, s.data, s.datapoints ]);
             }
-            
             // first pass: clean and copy data
             for (i = 0; i < series.length; ++i) {
                 s = series[i];
 
                 var data = s.data, format = s.datapoints.format;
-
                 if (!format) {
                     format = [];
                     // find out how to copy
@@ -739,11 +732,14 @@
                 insertSteps = s.lines.show && s.lines.steps;
                 s.xaxis.used = s.yaxis.used = true;
                 
+                //j count data index, k count points index
                 for (j = k = 0; j < data.length; ++j, k += ps) {
-                    p = data[j];
 
+                    p = data[j];
+                    // p is one point
                     var nullify = p == null;
                     if (!nullify) {
+                        // m is counter to copy
                         for (m = 0; m < ps; ++m) {
                             val = p[m];
                             f = format[m];
@@ -767,9 +763,7 @@
                                         val = f.defaultValue;
                                 }
                             }
-                            
-                            if(m==3) points[k+m] = data[j]['etime'];
-                            else points[k + m] = val;
+                            points[k + m] = val;
                         }
                     }
                     
@@ -2216,7 +2210,6 @@
                 var strokeStyle = ctx.strokeStyle;
                 for (var i = 0; i < points.length; i += ps) {
                     var x = points[i], y = points[i + 1];
-                    
                     if (x == null || x < axisx.min || x > axisx.max || y < axisy.min || y > axisy.max)
                         continue;
                     ctx.beginPath();
