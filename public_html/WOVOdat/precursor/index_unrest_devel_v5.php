@@ -30,7 +30,9 @@ session_start();
 		<script type="text/javascript" src="/js/flot/jquery.flot.navigate.tuan.js"></script> 
 		<script type="text/javascript" src="/js/flot/jquery.flot.selection.js"></script>
 		<script type="text/javascript" src="/js/flot/jquery.flot.marks.js"></script>
-		<script type="text/javascript" src="/js/flot/jquery.flot.errorbars.js"></script>		
+		<script type="text/javascript" src="/js/flot/jquery.flot.errorbars.js"></script>	
+		<script type="text/javascript" src="/js/flot/jquery.flot.labels.js"></script>
+		<script type="text/javascript" src="/js/flot/jquery.flot.symbol.js"></script>	
 		<script type="text/javascript" src="/js/wovodat.js?<?php echo $cache; ?>"></script>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCQ9kUvUtmawmFJ62hWVsigWFTh3CKUzzM&sensor=false"></script>
 		<script type="text/javascript" src="/js/Tooltip_v3.js"></script>
@@ -208,11 +210,11 @@ session_start();
 													<div class="rightPanel">
 														<select id="Evn1">
 															<option value="500">500</option>
-                                                            <option value="1000">1000</option>
-                                                            <option value="1500">1500</option>
-                                                            <option value="2000">2000</option>
-                                                            <option value="2500">2500</option>
-                                                            <option value="3000">3000</option>
+															<option value="1000">1000</option>
+															<option value="2000">2000</option>
+															<option value="3000">3000</option>
+															<option value="4000">4000</option>
+															<option value="5000">5000</option>
 														</select>
 													</div>
 												</div>
@@ -598,12 +600,12 @@ session_start();
                                                     <div class="leftPanel">No of events:</div>
                                                     <div class="rightPanel">
                                                         <select id="Evn2">
-                                                            <option value="500">500</option>
-                                                            <option value="1000">1000</option>
-                                                            <option value="1500">1500</option>
-                                                            <option value="2000">2000</option>
-                                                            <option value="2500">2500</option>
-                                                            <option value="3000">3000</option>
+															<option value="500">500</option>
+															<option value="1000">1000</option>
+															<option value="1500">1500</option>
+															<option value="2000">2000</option>
+															<option value="2500">2500</option>
+															<option value="3000">3000</option>
                                                         </select>
                                                     </div>
                                                 </div>

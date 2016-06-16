@@ -473,6 +473,21 @@ Wovodat.loadEarthquakes = function(o){
         }
     });
 };
+
+Wovodat.loadEruptions = function(o){
+    var vd_id = o.vd_id;
+    var handlers = o.handlers;
+    $.ajax({
+        method: "get",
+        url: "/php/switch.php",
+        data: "get=EruptionList&cavw="+vd_id,
+        success:function(html){
+            if(html.indexOf('Can\'t') >= 0) 
+                return;
+            handlers(html,vd_id);
+        }
+    });
+};
 /*
  * Return data may contain many range taht does not have the available data
  * The code needs to identify that region.
@@ -805,10 +820,13 @@ Wovodat.enableTooltip = function(o){
     if (type == 'single'){
         var id = o.id;
         var xValueType = o.xValueType;
+        var timeSeries = o.timeSeries;
         var firstValueFront = o.firstValueFront || "";
         var firstValueBack = o.firstValueBack || "";
         var secondValueFront = o.secondValueFront || "";
         var secondValueBack = o.secondValueBack || "";
+        var thirdValueFront = o.thirdValueFront || "";
+        var thirdValueBack = o.thirdValueBack || "";
         var placeholder = document.getElementById(id);
         var previousPoint = null;
         $(placeholder).bind('plothover',function(event,pos,item){
@@ -816,15 +834,22 @@ Wovodat.enableTooltip = function(o){
                 if(previousPoint != item.dataIndex){
                     previousPoint = item.dataIndex;
                     $("#tooltip").remove();
-                    var x;
-                    if(xValueType == 'time'){
-                        x = new Date(item.datapoint[0]);
-                        x = x.getUTCDate() + "/" + (x.getUTCMonth() + 1) + "/" + x.getUTCFullYear() + " " + x.getUTCHours() + ":" + x.getUTCMinutes() + ":" + x.getUTCSeconds();
-                    }else{
-                        x = item.datapoint[0].toFixed(2);
+                    var time, distance, depth;
+                    console.log(item.datapoint);
+                    // if it is time series, format is : time, -depth, rms, derr, distance
+                    // else the format is : distance(lat/lon), -depth, err, derr, time
+                    if (timeSeries == 'true'){
+                        time = new Date(item.datapoint[0]);
+                        distance = item.datapoint[4].toFixed(2);
+                    } else {
+                        time = new Date(item.datapoint[4]);
+                        distance = item.datapoint[0].toFixed(2);
                     }
-                    var content = firstValueFront + ": " + x + " " + firstValueBack;
-                    content += "<br/>" + secondValueFront + ": " + item.datapoint[1].toFixed(2) + " " + secondValueBack;
+                    time = time.getUTCDate() + "/" + (time.getUTCMonth() + 1) + "/" + time.getUTCFullYear() + " " + time.getUTCHours() + ":" + time.getUTCMinutes() + ":" + time.getUTCSeconds();
+                    depth = item.datapoint[1].toFixed(2);
+                    var content = firstValueFront + ": " + time + " " + firstValueBack;
+                    content += "<br/>" + secondValueFront + ": " + distance + " " + secondValueBack;
+                    content += "<br/>" + thirdValueFront + ": " + depth + " " + thirdValueBack;
                     Wovodat.showTooltip(item.pageX, item.pageY,content);
                 }
             }else{

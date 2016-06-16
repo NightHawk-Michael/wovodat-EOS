@@ -101,8 +101,10 @@ shadowSize and lineWidth are derived as well from the points series.
             } else
                 format.push({ y: true, number: true, required: true });
         }
+        format.push({ number: true, required: true }); 
+        // format : x, y, x_error, y_error, fifth_point 
+        // fifth point is for flot 2d, time for lat/lon flot, distance for time-series flot
         datapoints.format = format;
-        console.log("format " + format);
     }
 
     function parseErrors(series, i){

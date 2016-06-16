@@ -6,6 +6,7 @@
 
  
  var earthquakes = {};
+ var eruptions = {};
 /*
  * Object to store the queried array of data for the 3D display
  */
@@ -89,6 +90,13 @@ function drawEquake2D(o){
 		insertMarkersForEarthquakes("",cavw,mapUsed);
 		plotEarthquakeData(cavw,mapUsed);
 	}  
+
+	if (!eruptions[cavw]){
+		Wovodat.loadEruptions({
+			vd_id: cavw,
+			handlers: insertEruptionsForEarthquakes
+		});
+	}
 }
 
 /**
@@ -341,9 +349,10 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 			earthquakes[cavw][index]['lat']=lat;
 			earthquakes[cavw][index]['lon']=lon;
 			earthquakes[cavw][index]['time']=time;
-			earthquakes[cavw][index]['available'] = true;
+			earthquakes[cavw][index]['available'] = 0;
 			earthquakes[cavw][index]['mag']=mag;
 			earthquakes[cavw][index]['depth']=depth;
+			earthquakes[cavw][index]['distance'] = result[0];
 			earthquakes[cavw][index]['latDistance'] = result[2];
 			earthquakes[cavw][index]['lonDistance'] = result[1];
 			earthquakes[cavw][index]['timestamp'] = Wovodat.convertDate(time);
@@ -380,7 +389,7 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 		for (var i in earthquakes[cavw]){
 			if(count > nEvent) break;
 			if(earthquakes[cavw][i]!=undefined){
-				if (earthquakes[cavw][i]['available'] && filter(cavw,mapUsed,i)){
+				if (earthquakes[cavw][i]['available'] == 2 && filter(cavw,mapUsed,i)){
 					marker = createMarker(earthquakes[cavw][i],mapUsed);
 					earthquakes[cavw][i]['marker' + mapUsed] = marker;
 				}
@@ -397,6 +406,36 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 			hideMarkers({mapUsed:mapUsed,button:a}); 
 		});
 	}   
+}
+
+function insertEruptionsForEarthquakes(data,cavw){	
+	if (!eruptions[cavw]){
+		eruptions[cavw]={};
+
+		var eruptionSet = {};
+		eruptionSet = data.split(";");
+		//eliminate the empty elements at the end of the ajax data
+		while (eruptionSet[eruptionSet.length-1] == " ")
+			eruptionSet.length--;
+
+		var nextEruption, index, code, stime;
+
+		for (var i in eruptionSet){
+			index = Wovodat.trim(eruptionSet[i]);
+			if (eruptions[cavw][index] != undefined){
+				//console.log(earthquakes[cavw][index] + " " + index);
+			}
+			nextEruption = index.split("&");
+			code = nextEruption[0];
+			stime = nextEruption[1];
+
+			if (stime != "" && stime != undefined){
+				eruptions[cavw][index]=[];
+				eruptions[cavw][index]['code'] = code;
+				eruptions[cavw][index]['stime']= stime;
+			}						
+		}
+	}
 }
 
 /**
@@ -546,15 +585,22 @@ vutuan added to display info of earthquake events.
 function displayEvent(cavw,mapUsed){
 	var nEvent = $('#Evn'+mapUsed).val();
 	var radius = $('#wkm'+mapUsed).val();
-	console.log("radius: " + radius);
-	var actualEvent = computeEquakeEvents(cavw, mapUsed, radius);
-	if(parseInt(nEvent) > parseInt(actualEvent)){
-		document.getElementById("eqEvent" + mapUsed).innerHTML 
-		= 'Earthquake events: ' + actualEvent + ' of ' + actualEvent;
+
+
+	var result = computeEquakeEvents(cavw, mapUsed);
+	var totalEvent = result[0];
+	var filteredEvent = result[1];
+
+	var dataString = '<p>Total available earthquake data: ' + totalEvent + '</p></br>';
+
+	dataString += '<p>Total number of earthquakes after filter: ' + filteredEvent + '</p></br>';
+
+	if(parseInt(nEvent) > parseInt(filteredEvent)){
+		dataString += '<p>Currently showing: ' + filteredEvent + ' of ' + filteredEvent+ '</p></br>';
 	}else{
-		document.getElementById("eqEvent" + mapUsed).innerHTML 
-		= 'Earthquake events: ' + nEvent + ' of ' + actualEvent;
+		dataString += '<p>Currently showing:: ' + nEvent + ' of ' + filteredEvent + '</p></br>';
 	}
+	document.getElementById("eqEvent" + mapUsed).innerHTML = dataString;
 }
 
 
@@ -567,6 +613,7 @@ function plotEarthquakeData(cavw, mapUsed){
 	var numberOfEarthquakes = parseInt(document.getElementById('Evn' + mapUsed).value);
 	var dHigh = parseFloat($("#DepthHigh"+mapUsed).val());
 	var dLow = parseFloat($("#DepthLow"+mapUsed).val());
+
 	var width = parseFloat($('#wkm' + mapUsed).val());
 	// skip this function if we can not find the data to draw
 	if(!earthquakes[cavw]) 
@@ -580,7 +627,6 @@ function plotEarthquakeData(cavw, mapUsed){
 	//getEarthquakes(quantity, cavw, lat, lon, startDate, endDate, startDepth, endDepth, elev, width)
 	//var object = getEarthquakes(20, "", "", "", "1980/08/09", "1999/09/08", "-10", "40", "", "60");
 	
-
 	filterData(cavw,mapUsed);
 	// This is the height and width for the 
 	// flot graph. Flot is for 2D javascript drawing
@@ -602,7 +648,11 @@ function plotEarthquakeData(cavw, mapUsed){
 
 
 	// Arrays that store data for the 3 graphs that we are about to draw.
-	var latArray = new Array(), lonArray = new Array(), timeArray = new Array();
+	var latArray = new Array(), 
+		lonArray = new Array(), 
+		timeArray = new Array(), 
+		eruptionArray = new Array(),
+		eruptionLineArray = new Array();
 	// The latitude and longitude of the volcano
 	var time, latPlot, lonPlot, timePlot;
 	
@@ -623,7 +673,7 @@ function plotEarthquakeData(cavw, mapUsed){
 			continue;
 
 		// skip this event when it is not supposed to be displayed
-		if(earthquakes[cavw][i]['available'] == 'undefined' || earthquakes[cavw][i]['available'] == false)
+		if(earthquakes[cavw][i]['available'] == 'undefined' || earthquakes[cavw][i]['available'] != 2)
 			continue;
 		
 		if(!filter(cavw,mapUsed,i)){
@@ -654,8 +704,10 @@ function plotEarthquakeData(cavw, mapUsed){
 		sizeOfEquakeDot *= 1.2;
 
 		depth = parseFloat(earthquakes[cavw][i]['depth']);
+		distance = parseFloat(earthquakes[cavw][i]['distance']);
 		latDistance = parseFloat(earthquakes[cavw][i]['latDistance']);
 		lonDistance = parseFloat(earthquakes[cavw][i]['lonDistance']);
+
 		color = generateColorCode(depth);
 
 		sd_evn_herr = earthquakes[cavw][i]['herr'];
@@ -702,12 +754,6 @@ function plotEarthquakeData(cavw, mapUsed){
 		if (rms > max_rms) {
 			max_rms = rms;
 		}
-
-		// set lat, lon coordination
-		// latArray.push([earthquakes[cavw][i]['latDistance'],-earthquakes[cavw][i]['depth'],,,,,sizeOfEquakeDot,color]);
-		latArray.push([latDistance,-depth,xerr,derr,,,sizeOfEquakeDot,color]);
-		lonArray.push([lonDistance,-depth,yerr,derr,,,sizeOfEquakeDot,color]);
-
 		// set time coordination
 		//if time is not convertible by javascript native functions
 		//then use own-created function
@@ -725,17 +771,25 @@ function plotEarthquakeData(cavw, mapUsed){
 			min_time = time;
 		} 
 
-		timeArray.push([time,-depth,rms,derr,,,sizeOfEquakeDot,color]);
+		// set lat, lon coordination with format
+		// distance, -depth, x error, y error, time
+		latArray.push([latDistance,-depth,xerr,derr,time,,sizeOfEquakeDot,color]);
+		lonArray.push([lonDistance,-depth,yerr,derr,time,,sizeOfEquakeDot,color]);
+
+		// set time-series coordination with format
+		// time, -depth, x error, y error, distance
+		timeArray.push([time,-depth,rms,derr,distance,,sizeOfEquakeDot,color]);
 
 	}
 	var time_range = max_time - min_time;
 	var rms_normalization_multiplier = 0;
 	if (max_rms > 0){
 		// scaling the max error to be 1/10 of the max range
-		rms_normalization_multiplier = 0.1 * time_range / max_rms
+		rms_normalization_multiplier = 0.01 * time_range / max_rms
 	}
 
 	for (var i in timeArray){
+		//scale the rms
 		console.log(timeArray[i]);
 		timeArray[i][2] *= rms_normalization_multiplier;
 	}
@@ -747,6 +801,64 @@ function plotEarthquakeData(cavw, mapUsed){
 	console.log(max_time);
 	displayEvent(cavw,mapUsed);
 
+	//testing the data
+	for(var i in eruptions[cavw]){
+		//skip BC
+		if (eruptions[cavw][i]['stime'].substring(0,2) == 'BC'){
+			continue;
+		}
+
+		//convert time
+		var currentEruption = new Date(eruptions[cavw][i]['stime']);
+		console.log(currentEruption);
+
+		// compare range to limit the number of eruption drawn on graph
+		// if (currentEruption > min_time && currentEruption < max_time){
+		// 	console.log("within range");
+		// 	eruptionArray.push([currentEruption,10,0,0,0,,,,]);
+		// }
+
+		// for testing purpose, draw all eruptions A.D.
+		eruptionArray.push([currentEruption,10,0,0,0,,,,]);
+	}
+
+	var timeSeriesPoint = {
+		symbol: drawMagnitude,
+		fill: false,
+		errorbars: 'xy', //should be 'x', 'y' or 'xy'
+		xerr: { 
+			show: true, 
+			asymmetric: false, 
+			upperCap: "-", 
+			lowerCap: "-", 
+			color: 'grey', 
+			radius: 3
+		},
+		yerr: { 
+			show: true, 
+			asymmetric: false, 
+			upperCap: "-", 
+			lowerCap: "-", 
+			color: 'grey', 
+			radius: 3
+		}
+	}
+
+	var timeSeriesEruptionPoint = {
+		symbol:"triangle",
+		radius:7,
+		fill:true, 
+		fillColor: 'red'
+	}
+
+	var eruptionMarkings = new Array();
+	var eruptionPointLabels = new Array();
+	// vertical grid line for each of the eruptions, this is used in grid option for flot
+	for (var i in eruptionArray){
+		var time = eruptionArray[i][0];
+		eruptionMarkings.push({ color:"red", lineWidth: 2, xaxis: {from: time, to: time} });
+		eruptionPointLabels.push(time.toLocaleDateString());
+	}
 
 	// prepare the data object for the plot functions
 	latPlot = [{
@@ -755,40 +867,31 @@ function plotEarthquakeData(cavw, mapUsed){
 	lonPlot = [{
 		data:lonArray
 	}];
-	timePlot = [{
-		data:timeArray
-	}];
+	timePlot = [
+		{ data:timeArray, points:timeSeriesPoint },
+		{ color:'red', data:eruptionArray, points:timeSeriesEruptionPoint, 
+			showLabels: true, labels: eruptionPointLabels, labelPlacement: "right", 
+			canvasRender: true, cColor: "red" }
+	];
+
+	console.log('time-series plot');
+
+	console.log(timePlot);
+
+
 	var minY = minYAxis(latArray);
-	console.log(latArray);
 	// Options for drawing time view. 
 	var timeOptions = {
 		series:{
 			points:{
 				show:true,
-				lineWidth: 0,
-				symbol: drawMagnitude,
-				fill: false,
-				errorbars: 'xy', //should be 'x', 'y' or 'xy'
-	            xerr: { 
-	            	show: true, 
-	            	asymmetric: false, 
-	            	upperCap: "-", 
-	            	lowerCap: "-", 
-	            	color: 'yellow', 
-	            	radius: 3
-	            },
-	            yerr: { 
-	            	show: true, 
-	            	asymmetric: false, 
-	            	upperCap: "-", 
-	            	lowerCap: "-", 
-	            	color: 'orange', 
-	            	radius: 3
-	            },
-	        }
+				lineWidth: 0
+	        },
 		},
 		colors:["#3a4cb2"],
 		grid:{
+			// draw additional grid lines for eruptions
+			markings: eruptionMarkings,
 			// this option is for changing the color of the border
 			borderColor: "#9C9C9C",
 			clickable:true,
@@ -816,6 +919,7 @@ function plotEarthquakeData(cavw, mapUsed){
 		shadowSize: 0
 	}
 
+
 	// Options for drawing lat-lon plot. Please refer to the documentation
 	// of Flot to see the meaning of the each value
 	var plotOptions = {
@@ -831,7 +935,7 @@ function plotEarthquakeData(cavw, mapUsed){
 	            	asymmetric: false, 
 	            	upperCap: "-", 
 	            	lowerCap: "-", 
-	            	color: 'yellow', 
+	            	color: 'grey', 
 	            	radius: 3
 	            },
 	            yerr: { 
@@ -839,7 +943,7 @@ function plotEarthquakeData(cavw, mapUsed){
 	            	asymmetric: false, 
 	            	upperCap: "-", 
 	            	lowerCap: "-", 
-	            	color: 'orange', 
+	            	color: 'grey', 
 	            	radius: 3
 	            },
 			}
@@ -881,10 +985,12 @@ function plotEarthquakeData(cavw, mapUsed){
 	equakeGraphs[mapUsed].latGraph = $.plot(latitudePlotArea,latPlot,plotOptions);
 	Wovodat.enableTooltip({type:'single',
 		id:"FlotDisplayLat"+mapUsed,
-		firstValueFront:'Distance from volcano',
-		firstValueBack:'km',
-		secondValueFront:'Depth',
-		secondValueBack:'km'
+		firstValueFront:'Time',
+		firstValueBack:'UTC',
+		secondValueFront:'Distance from volcano',
+		secondValueBack:'km',
+		thirdValueFront:'Depth',
+		thirdValueBack:'km'
 	});
 
 	// draw the longitude map
@@ -892,21 +998,27 @@ function plotEarthquakeData(cavw, mapUsed){
 	equakeGraphs[mapUsed].lonGraph = $.plot(longitudePlotArea,lonPlot,plotOptions);
 	Wovodat.enableTooltip({type:'single',
 		id:"FlotDisplayLon"+mapUsed,
-		firstValueFront:'Distance from volcano',
-		firstValueBack:'km',
-		secondValueFront:'Depth',
-		secondValueBack:'km'
+		firstValueFront:'Time',
+		firstValueBack:'UTC',
+		secondValueFront:'Distance from volcano',
+		secondValueBack:'km',
+		thirdValueFront:'Depth',
+		thirdValueBack:'km'
 	});
 
 	// draw the time series map        
 	var timePlotArea =$("#FlotDisplayTime"+mapUsed);
 	equakeGraphs[mapUsed].timeGraph = $.plot(timePlotArea,timePlot,timeOptions);
-	Wovodat.enableTooltip({type:'single',id:"FlotDisplayTime"+mapUsed,
+
+	Wovodat.enableTooltip({type:'single',
+		timeSeries:'true',
+		id:"FlotDisplayTime"+mapUsed,
 		firstValueFront:'Time',
 		firstValueBack:'UTC',
-		secondValueFront:'Depth',
+		secondValueFront:'Distance from volcano',
 		secondValueBack:'km',
-		xValueType: 'time'
+		thirdValueFront:'Depth',
+		thirdValueBack:'km'
 	});
 	
 	// adjust the flot label for all the graph ('E-W','N-S','Time')
@@ -1421,7 +1533,7 @@ function hideStation(tableId){
 function resetFilter(mapUsed){
                 
 	var dateString = "";
-	$("#Evn" + mapUsed).val(500);
+	$("#Evn" + mapUsed).val(1000);
 	var startDate = new Date(1940, 0, 2, 0, 0, 0, 0);
 	dateString = (startDate.getUTCMonth() + 1) + "/" + startDate.getUTCDate() + "/" + startDate.getUTCFullYear();
 	$("#SDate" + mapUsed).val(dateString);
@@ -1613,7 +1725,7 @@ function cachingElement(set,cavw,mapUsed,element){
 	var id;
 	if(numberOfRows < 2){
 		for (var i in earthquakes[cavw]){
-			if(earthquakes[cavw][i]['available']){
+			if(earthquakes[cavw][i]['available'] != 'undefined'){
 				if(element === 'EqType') id = earthquakes[cavw][i]['eqtype'];
 				else id = earthquakes[cavw][i]['cc_id'];
 				if(id != undefined && id != "")

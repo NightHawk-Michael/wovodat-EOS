@@ -161,45 +161,22 @@ $(function(){
  * Author : Pham Vu Tuan
  * Function to compute the number of earthquake events of a volcano
  */
-function computeEquakeEvents(cavw, mapUsed, radius=30){
+function computeEquakeEvents(cavw, mapUsed){
 	var count = 0;
 	var vlat = earthquakes[cavw]['vlat'];
 	var vlon = earthquakes[cavw]['vlon'];
 	var total = 0;
+	var filtered = 0;
 
 	for(var i in earthquakes[cavw]){
 		if (i == 'vlat' || i == 'vlon') continue;
 		total++;
-		var lat = earthquakes[cavw][i]['lat'];
-		var lon = earthquakes[cavw][i]['lon'];
-		// skip this value when there is no latitude or longitude value 
-		// for them
-
-		//if(typeof lat == 'undefined' || typeof lon == 'undefined'){
-		//	console.log("lat lon undefined: " + i);
-		//	continue;
-		//}
-
-		// skip this event when it is not supposed to be displayed
-		//if(earthquakes[cavw][i]['available'] == 'undefined'){
-		//	console.log(earthquakes[cavw][i]);
-		//	continue;
-		//}
-
-		//if(!filter(cavw,mapUsed,i)){
-		//	console.log("lat lon undefined: " + i);
-		//	continue;
-		//}
-
-		// only count earthquakes within the radius given
-		var result = Wovodat.calculateD(lat, lon, vlat, vlon);
-		if(result[0] < radius){
-			count++;
+		if (earthquakes[cavw][i]['available'] == 1 || earthquakes[cavw][i]['available'] == 2){
+			filtered++;
 		}
-		
 	}
-	//console.log("event computed total " + total);
-	return count;
+	console.log("event computed total " + total + " and " + filtered);
+	return [total, filtered];
 }
 
 
@@ -486,7 +463,7 @@ function filterData(cavw,panelUsed){
 		// if we already have enough earthquakes event, the rest of event is
 		// ignored even though they satisfy the filter
 		if (count > nEvent){
-			earthquakes[cavw][i]['available'] = false;
+			earthquakes[cavw][i]['available'] = 1;
 			continue;
 		}
 		if (earthquakes[cavw][i]['time'] != "" && typeof earthquakes[cavw][i]['time'] != "undefined"){
@@ -498,13 +475,13 @@ function filterData(cavw,panelUsed){
 			var result = Wovodat.calculateD(elat, elon, vlat, vlon);
 			var distanceFromVolcano = result[0];
 			if(distanceFromVolcano >= wkm){
-				earthquakes[cavw][i]['available'] = false;
+				earthquakes[cavw][i]['available'] = 0;
 				continue;
 			}
 
 			eTime = eTime.getTime();
 
-			earthquakes[cavw][i]['available'] = false;
+			earthquakes[cavw][i]['available'] = 0;
 			// equake below the dlow
 			if(eDepth < dlow){
 				continue;
@@ -522,7 +499,7 @@ function filterData(cavw,panelUsed){
 				continue;
 			}
 			count++;
-			earthquakes[cavw][i]['available'] = true;
+			earthquakes[cavw][i]['available'] = 2;
 		}
 	}
 }
@@ -534,7 +511,8 @@ function downloadCSV(o){
 	var data = earthquakes[cavw];
 
 	var csvContent = "data:text/csv;charset=utf-8,";
-	var headers = ['Date-time', 'Latitude', 'Longtitude', 'Depth (km)', 'Magnitude',
+	var headers = ['Date-time', 'Latitude', 'Latitude Error (km)', 'Longtitude', 
+					'Longitude Error (km)','Depth (km)', 'Depth Error (km)', 'Magnitude',
 					'Magnitude type', 'Earthquake type', 'Distance (km)', 'Data Owner'];
 	csvContent += "Volcano: " + name + " \n";
 	csvContent += "CAVW: " + cavw + " \n";
@@ -568,8 +546,39 @@ function downloadCSV(o){
 
 			dataString += earthquakes[cavw][i]['time'] + ",";
 			dataString += earthquakes[cavw][i]['lat'] + ",";
+
+			// lat error
+			if(earthquakes[cavw][i]['yerr'] != "" && earthquakes[cavw][i]['yerr'] != 'undefined'){
+				dataString += earthquakes[cavw][i]['yerr'];
+			} else if (earthquakes[cavw][i]['herr'] != "" && earthquakes[cavw][i]['herr'] != 'undefined'){
+				dataString += earthquakes[cavw][i]['herr'];
+			} else {
+				dataString += "0";
+			}
+			dataString += ",";
+
 			dataString += earthquakes[cavw][i]['lon'] + ",";
+
+			// lon error
+			if(earthquakes[cavw][i]['xerr'] != "" && earthquakes[cavw][i]['xerr'] != 'undefined'){
+				dataString += earthquakes[cavw][i]['xerr'];
+			} else if (earthquakes[cavw][i]['herr'] != "" && earthquakes[cavw][i]['herr'] != 'undefined'){
+				dataString += earthquakes[cavw][i]['herr'];
+			} else {
+				dataString += "0";
+			}
+			dataString += ",";
+
 			dataString += parseFloat(earthquakes[cavw][i]['depth']).toFixed(1)	 + ",";
+
+			// depth error
+			if(earthquakes[cavw][i]['derr'] != "" && earthquakes[cavw][i]['derr'] != 'undefined'){
+				dataString += earthquakes[cavw][i]['derr'];
+			} else {
+				dataString += "0";
+			}
+			dataString += ",";
+
 			dataString += earthquakes[cavw][i]['mag'] + ",";
 			dataString += "null,"
 			dataString += earthquakes[cavw][i]['eqtype'] + ",";

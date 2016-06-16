@@ -781,29 +781,30 @@ function drawMap(args, volcId, mapId, mapUsed){
 }
 
 function insertEruptionList(obj,selectId){
-	//var data = [];
-	//var list = obj.list;
-	//list = list.split(";");
-	//var eruptions = document.getElementById(selectId);
-	////eruptions.options.length = 0;
-	////eruptions.options = [];
-	//var i = 0;
-	//var t;
-	//for(;i < list.length;i++){
-	//	list[i] = Wovodat.trim(list[i]);
-	//	if(list[i].length == 0) continue;
-	//	t = list[i].split("&");
-	//	if(t[2] != undefined){
-	//		var temp = t[1];
-	//		t[1] = t[1] + " " + t[2];
-	//		data.push({label:'<div style="text-align:center"><img src="/img/SmallEruptionIcon.png"/><br/><b >' + temp + '</b></div>',position:Wovodat.toDate(t[1]).getTime()});
-	//	}
-	//	eruptions.options[eruptions.options.length] = new Option(temp,t[1]);
-	//}
-	//if(selectId == 'CompEruptionList')
-	//	eruptionsData.compEruptions.markdata = data;
-	//else
-	//	eruptionsData.markdata = data;
+	// var data = [];
+	// var list = obj.list;
+	// list = list.split(";");
+	// console.log(list);
+	// var eruptions = document.getElementById(selectId);
+	// //eruptions.options.length = 0;
+	// //eruptions.options = [];
+	// var i = 0;
+	// var t;
+	// for(;i < list.length;i++){
+	// 	list[i] = Wovodat.trim(list[i]);
+	// 	if(list[i].length == 0) continue;
+	// 	t = list[i].split("&");
+	// 	if(t[2] != undefined){
+	// 		var temp = t[1];
+	// 		t[1] = t[1] + " " + t[2];
+	// 		data.push({label:'<div style="text-align:center"><img src="/img/SmallEruptionIcon.png"/><br/><b >' + temp + '</b></div>',position:Wovodat.toDate(t[1]).getTime()});
+	// 	}
+	// 	eruptions.options[eruptions.options.length] = new Option(temp,t[1]);
+	// }
+	// if(selectId == 'CompEruptionList')
+	// 	eruptionsData.compEruptions.markdata = data;
+	// else
+	// 	eruptionsData.markdata = data;
 }
 
 //changed by Nam

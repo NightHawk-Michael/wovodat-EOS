@@ -677,7 +677,6 @@
             // first pass: clean and copy data
             for (i = 0; i < series.length; ++i) {
                 s = series[i];
-
                 var data = s.data, format = s.datapoints.format;
                 if (!format) {
                     format = [];
@@ -694,7 +693,6 @@
                     });
 
                     if (s.bars.show || (s.lines.show && s.lines.fill)) {
-
                         format.push({
                             y: true, 
                             number: true, 
@@ -717,6 +715,12 @@
                             format[format.length - 1].x = true;
                         }
                     }
+
+                    format.push({
+                        x: true, 
+                        number: true, 
+                        required: true
+                    });
                     
                     s.datapoints.format = format;
                 }
@@ -725,7 +729,7 @@
                     continue; // already filled in
 
                 s.datapoints.pointsize = format.length;
-                
+
                 ps = s.datapoints.pointsize;
                 points = s.datapoints.points;
 
