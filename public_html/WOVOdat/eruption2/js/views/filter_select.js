@@ -189,7 +189,11 @@ define(function(require) {
       this.trigger('hide');
 
     },
-    
+
+      /**
+       * Show graph which is selected
+       * @param event
+       */
     showGraph: function(event) {
         
         
@@ -200,12 +204,15 @@ define(function(require) {
       this.selectingFilters.empty = true;
       var checkboxes = $('.filter-select-option');
       // for(var i = 0; i<selects.length;i++){
+
       for(var i = 0;i<checkboxes.length;i++){
         var checkbox = checkboxes[i];
         if(checkbox.checked){
           var temp = checkbox.id.split(".");
           this.selectingFilters.empty = false;
           this.selectingFilters.push(this.selectingTimeSeries.get(temp[0]),temp[1]);
+
+
         }
       
       }

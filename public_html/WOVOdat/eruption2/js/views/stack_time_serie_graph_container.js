@@ -2,18 +2,15 @@ define(function(require) {
 	'use strict';
 	var $ = require('jquery'),
   Backbone = require('backbone'),
-        template = require('text!templates/time_serie_graph.html'),
+        //template = require('text!templates/stack_time_serie_graph.html'),
   _ = require('underscore');
 
-  var TimeSerieGraph = require("views/time_serie_graph");
-  var StackTimeSerieGraphContainer = require("views/stack_time_serie_graph_container")
+  var StackTimeSerieGraph = require("views/stack_time_serie");
 
   return Backbone.View.extend({
   	el: '',
-    template: _.template(template),
-    events: {
-      'click .select_time_range': 'updateSelectingTimeRange'
-    },
+
+
   	initialize : function(options) {
   		this.selectingTimeSeries = options.selectingTimeSeries;
   		this.serieGraphTimeRange = options.serieGraphTimeRange;
@@ -21,8 +18,6 @@ define(function(require) {
       this.forecastsGraphTimeRange = options.forecastsGraphTimeRange;
   		this.filterObserver = options.filterObserver;
       this.eruptions =  options.eruptions;
-      this.stackTimeSeriesGraphContainer = options.stackTimeSeriesGraphContainer;
-      this.compositeGraphContainer = options.compositeGraphContainer;
   		// this.listenTo( this.selectingFilter, "add", this.addGraph );
   		// this.listenTo( this.selectingFilter, "remove", this.removeGraph );
       this.categories = options.categories;
@@ -30,45 +25,32 @@ define(function(require) {
   		this.graphs = [];
   	},
 
-    updateSelectingTimeRange: function(){
-      /* remove timeseries which are no longer selected*/
-      //console.log("Update Time Range");
-      var checkboxes = [];
-      var checkedTimeRangeFilter = [];
-      $('.select_time_range').each(function() {
-        if (($(this).context.checked == true)){
-          checkboxes.push($(this).context.id);
-        }
 
-      });
+  	// addGraph : function( filter ) {
+  	// 	var val = filter.get("filter");
 
-      if(checkboxes.length == 0){
-        this.stackTimeSeriesGraphContainer.hide();
-      }
-      var data = [];
-      for (var i = 0 ; i < this.graphs.length; i++){
+  	// 	this.graphs[val] = new TimeSerieGraph( {
+  	// 		timeRange : this.timeRange,
+  	// 		model : this.model,
+  	// 		filter : filter
+  	// 	});
+  	// 	this.$el.append(this.graphs[val].$el);
 
-          if (checkboxes.indexOf(this.graphs[i].serieId) >=0) {
-              //console.log (this.graphs[i])
-              data.push(this.graphs[i].data[0]);
-            data.push(this.graphs[i].data[1]);
-              checkedTimeRangeFilter.push(this.graphs[i].filters);
-          }
-      }
-      //console.log(checkedTimeRange);
-      var timeRange = this.graphs[0].serieGraphTimeRange;
-      //this.stackTimeSeriesGraphContainer.selectingFiltersChanged(checkedTimeRangeFilter, timeRange);
-     // this.compositeGraphContainer.selectingFiltersChanged(this.selectingFilters);
-     // this.compositeGraph.selectingFiltersChanged(this.selectingFilters);
-      this.compositeGraphContainer.selectingFiltersChanged(data);
-      //console.log(data);
-      //this.trigger('update_composite');
+  	// 	this.graphs[val].filter.trigger("change");
 
-    },
-
+  	// 	this.filterObserver.trigger("filter-change");
+  	// },
     addGraph : function( filters ) {
+      // var val = filter.get("filter");
+      // selectingTimeSeries.
+      // timeSerie.fetch({
+      //   success: function(collection, response) {
+      //     // console.log(e);
+      //     console.log(response);
 
-      var timeSerieGraph = new TimeSerieGraph( {
+      //   }
+      // });
+      var timeSerieGraph = new StackTimeSerieGraph( {
         // timeRange : this.timeRange,
         filters: filters,
         eruptionTimeRange: this.eruptionTimeRange,
@@ -97,48 +79,53 @@ define(function(require) {
    //    };
   	// 	// this.filterObserver.trigger("filter-change");
   	// },
-    serieGraphTimeRangeChanged: function(timeRange){
+    stackSerieGraphTimeRangeChanged: function(timeRange){
       for (var i = 0; i < this.graphs.length; i++) {
-      //     console.log(this.graphs[i]);
+        //     console.log(this.graphs[i]);
         var attributes = this.graphs[i].serieGraphTimeRange.attributes;
         attributes.serieID = this.graphs[i].timeRange.cid;
         this.graphs[i].timeRangeChanged(timeRange);
       };
       //console.log(this.graphs);
+
+
       this.show();
     },
-    selectingFiltersChanged: function(selectingFilters){
+    selectingFiltersChanged: function(filters,timeRange){
       this.graphs.length =0;
       this.$el.html("");
-      var filters =[];
-      var categories=this.categories;
-      for(var i=0;i<categories.length;i++){
-        if(selectingFilters[categories[i]]!=undefined){
-          filters = filters.concat(selectingFilters.getAllFilters(categories[i]));   
-        }
-      }
+
       for (var i = 0; i < filters.length; i++) {
         this.addGraph(filters[i]);
       };
+
+      this.stackSerieGraphTimeRangeChanged(timeRange)
     },
     // render: function(selectingTimeSeries) {
     //   this.overviewGraph.$el.appendTo(this.$el);
     // },
     hide: function(){
 
+
       this.$el.html("");
+
+      //console.log ("HIDE");
+      //this.$el.context.children
+
+
+
     },
-    show: function(){
+    show: function(time){
+
       this.$el.html("");
-      this.$el.addClass("time-series-graph-container card-panel");
-      this.$el.append("<div class = \"individual-graph-title\" style = \"font-weight: bold; color : black; background-color:white; padding-left: 50px; \">Individual graph display</div>");
+      this.$el.addClass("stack-time-series-graph-container card-panel");
+
+      this.$el.append("<div class = \"stack-graph-title\" style = \"font-weight: bold; color : black; background-color:white; padding-left: 50px; \">Stack graph display</div>");
 
       //var temp = "<ul id=\"select-options-db1b710c-f8a1-9f8a-19a7-ed5afcfe7c60\" class=\"dropdown-content select-dropdown multiple-select-dropdown active\" style=\"width: 1026px; position: absolute; top: 0px; left: 0px; opacity: 1; display: block;\"><li class=\"active\"><span><input type=\"checkbox\"><label></label>Pinatubo0703-083SeisNet(Earthquake Depth) </span></li><li class=\"active\"><span><input type=\"checkbox\"><label></label>Pinatubo0703-083SeisNet(Earthquake Magnitude) </span></li><li class=\"\"><span><input type=\"checkbox\"><label></label>UBO(Felt Earthquake Counts) </span></li><li class=\"\"><span><input type=\"checkbox\"><label></label>CAB(Earthquake Counts) </span></li><li class=\"\"><span><input type=\"checkbox\"><label></label>CRA(Earthquake Counts) </span></li></ul>";
       //this.$el.append("<ul id=\"select-options-e90cc158-e580-29c7-f252-ab6c6b42c2ad\" class=\"dropdown-content select-dropdown multiple-select-dropdown active\" style=\"width: 1026px; position: absolute; top: 0px; left: 0px; opacity: 1; display: block;\">");
       for (var i = 0; i < this.graphs.length; i++) {
-        var checkboxid = this.graphs[i].timeRange.cid;
-       // var select = "<a style = \"padding-left: 75px;\"> <input class = \"select_time_range\"  type=\"checkbox\" id=\"" +checkboxid +"\" /> <label for=\"" + checkboxid+ "\"></label> </a>";
-        //this.$el.append(select);
+
         this.$el.append(this.graphs[i].$el);
 
         this.graphs[i].show();

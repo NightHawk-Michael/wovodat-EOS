@@ -163,6 +163,14 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
         this.minY = zoomedDataMinY*1.05;
         this.maxY = zoomedDataMaxY*1.05;
       }
+      /*
+      Config Y-value of eruption
+       */
+      var eruptionData = this.data[1].data;
+      for (var i = 0 ; i < eruptionData.length;i++){
+        eruptionData[i][1] = this.maxY;
+      }
+      this.data.minY = this.minY;
 
       var options = {
             grid:{
@@ -210,7 +218,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
 
             },
             tooltip:{
-              show: true,
+              show: false,
             },
             
           }; 
@@ -221,6 +229,9 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
 
       this.$el.width('auto');
       this.$el.height(200);
+      //var checkboxid = "cb" + this.serieId;
+      //var select = "<a style = \"padding-left: 75px;\"> <input onclick='handleTimeSerie();' type=\"checkbox\" id=\"" +checkboxid +"\" /> <label for=\"" + checkboxid+ "\"></label> </a>";
+      //this.$el.append(select);
       this.$el.addClass('time-serie-graph');
       //this.$el.append(' Individual graph display </br>');
       // plot the time series graph after being selected (eg. onSelect in OverViewGraph).
@@ -230,7 +241,11 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       //Push data eruption
 
       //this.data.push
+
+
       this.graph = $.plot(this.$el, this.data, options);
+      //console.log(this.$el);
+
       //this.$el.append("<div><input type=\"checkbox\" >aaa</div>");
       this.$el.bind('plothover', this.tooltip,this.onHover);
 
@@ -247,7 +262,6 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
         timeRange: this.serieGraphTimeRange,
        // isTrigger : this.isTrigger,
       }
-     // console.log(eventData);
     // this.eventData =  eventData;
 
 

@@ -73,6 +73,11 @@ if (isset($_GET['get']) || isset($_POST['get'])) {
             $wovodat = new Wovodat();
             $wovodat->getAvailableStations($_GET['cavw']);
             break;
+        case 'getStationsWithDataList':
+            include_once 'Wovodat.php';
+            $wovodat = new Wovodat();
+            $wovodat->getStationsWithDataList($_GET['vd_id']);
+            break;
         case 'Stations':
             include_once 'Wovodat.php';
             $wovodat = new Wovodat();
@@ -138,6 +143,7 @@ if (isset($_GET['get']) || isset($_POST['get'])) {
             $o = $wovodat->getCatalogOwner();
             echo json_encode($o);
             break;
+
         default:
             break;
     }

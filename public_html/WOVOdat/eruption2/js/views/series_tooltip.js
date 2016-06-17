@@ -45,7 +45,7 @@ define(function(require) {
     },
 
     update: function(pos, item) {
-      //console.log(item);
+
       if (item) {
         if (JSON.stringify(this.previous.item) === JSON.stringify(item) ) {
           this.move(pos.pageX, pos.pageY);
@@ -62,8 +62,10 @@ define(function(require) {
               })
               break;
             case 3: case 2:
+              var symbol = item.series.points.symbol;
               this.html = this.template({
                 type: "point",
+                symbol : symbol,
                 time: DateHelper.formatDate(item.datapoint[0]),
                 value: item.datapoint[1],
                 error: item.datapoint[2]

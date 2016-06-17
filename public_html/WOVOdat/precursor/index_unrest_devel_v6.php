@@ -446,7 +446,7 @@ $cache = time();
                       </tr>
                     </table>
                   </div>
-                  <div id="TimeSeriesView1" class="timeSeriesView" style = "margin-left: 0px; display: none">
+                  <div id="TimeSeriesView1" class="timeSeriesView" style = "margin-left: 0px; display: none; width:960px; height: 960px;">
                     <iframe src="/eruption/index.php" frameborder="0", width="960" height="960"> </iframe>
 
                   </div>
@@ -787,37 +787,10 @@ $cache = time();
                     </table>
                   </div>
                   <div id="TimeSeriesView2" class="timeSeriesView" style = "margin-left: 0px;">
-                    <iframe src="/eruption/index.php" frameborder="0", width="470" height="960"> </iframe>
+                    <iframe src="/eruption/index.php" frameborder="0", width="960" height="960"> </iframe>
 
                   </div>
-                  <!--                                <div id="TimeSeriesView2" class="timeSeriesView">-->
-                  <!--                                    <div id="OptionList2">-->
-                  <!--                                        <b>Available time series data (max. 3):</b>-->
-                  <!--                                        <div id="OptionList2-1">-->
-                  <!--                                            <table id="TimeSeriesList2" class="timeSeriesList">-->
-                  <!---->
-                  <!--                                            </table>-->
-                  <!--                                        </div>-->
-                  <!--                                    </div>-->
-                  <!--                                    <br/>-->
-                  <!--                                    <div id="overviewPanel2" class="overviewPanel">-->
-                  <!--                                        <b>Overview (select a range to redraw the graph): </b>-->
-                  <!--                                        <div id="overview2"  class="overviewGraph">-->
-                  <!---->
-                  <!--                                        </div>-->
-                  <!--                                        <br/>-->
-                  <!--                                    </div>-->
-                  <!--                                    <div style="clear:both;" id="PlotArea2">-->
-                  <!--                                        <table id="GraphList2">-->
-                  <!--                                        </table>-->
-                  <!--                                    </div>-->
-                  <!--                                    <div class="PrintButton" id="printButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TIME_SERIES,graphsTable: document.getElementById('GraphList2'),graphsPlot:graphs,info:document.getElementById('CompVolcanoList').value})">-->
-                  <!--                                        <a title="Print this graphs" href="#" >-->
-                  <!--                                            <span class="app-icon light print-icon"></span>-->
-                  <!--                                            <span class="app-button-text">Print</span>-->
-                  <!--                                        </a>-->
-                  <!--                                    </div>-->
-                  <!--                                </div>-->
+
                 </td>
               </tr>
 

@@ -3,9 +3,9 @@ define(function(require) {
   var $ = require('jquery'),
       Backbone = require('backbone'),
       _ = require('underscore'),
-      // Serie = require('models/serie'),
-      // TimeSerieGraph = require('views/time_serie_graph'),
-      
+  // Serie = require('models/serie'),
+  // TimeSerieGraph = require('views/time_serie_graph'),
+
       TimeRange = require('models/time_range'),
       Eruption = require('models/eruption'),
       Eruptions = require('collections/eruptions'),
@@ -14,22 +14,22 @@ define(function(require) {
 
   return Backbone.View.extend({
     el: '',
-    
+
     initialize: function(options) {
       /** Variable declaration **/
       this.overviewSelectingTimeRange = new TimeRange();
 
       this.observer = options.observer;
       this.overviewSelectingTimeSeries = options.selectingTimeSeries;
-      this.overviewGraph = options.graph;
+      this.compositeGraph = options.graph;
     },
-     //hide overview graph from page
+    //hide overview graph from page
     hide: function(){
       this.$el.html("");
-      this.$el.addClass("overview-graph-container card-panel");
-      this.$el.append("<div id = \"overview-title\" style = \"padding-left: 50px;display:none;\">" +
-          "<a style = \" font-weight: bold; color : black;\">Overview Graph.</a> <br>" +
-          "<a style = \" padding-left : 10px;color : black; \">Highlight selected time range using mouse</a></div>");
+      this.$el.addClass("composite-graph-container card-panel");
+      this.$el.append("<div id = \"composite-title\" style = \"padding-left: 50px;display:none;\">" +
+          "<a style = \" font-weight: bold; color : black;\">Composite Graph.</a> <br>" +
+          "</div>");
       this.trigger('hide');
     },
 
@@ -37,10 +37,11 @@ define(function(require) {
     show: function(){
       this.render();
     },
-    selectingFiltersChanged: function(selectingFilters) {
-      this.selectingFilters = selectingFilters;
-     // console.log("DEBUG " + this.selectingFilters.);
-      if (this.selectingFilters.empty) {
+    selectingFiltersChanged: function(data) {
+      this.data = data;
+      this.compositeGraph.data = data;
+      // console.log("DEBUG " + this.selectingFilters.);
+      if (this.data.empty) {
         this.hide();
       }else{
         this.show();
@@ -49,8 +50,8 @@ define(function(require) {
 
     render: function() {
       //console.log(this.overviewGraph);
-
-      this.overviewGraph.$el.appendTo(this.$el);
+      this.compositeGraph.update();
+      this.compositeGraph.$el.appendTo(this.$el);
     }
   });
 });

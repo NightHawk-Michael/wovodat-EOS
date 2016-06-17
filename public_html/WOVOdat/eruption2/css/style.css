@@ -20,12 +20,12 @@
   top: 0;
   will-change: top, left;
 }
-div.overview-graph div.flot-text div.yAxis div.tickLabel
+div.composite-graph div.overview-graph div.flot-text div.yAxis div.tickLabel
 {    
     color: transparent;
     
 }
-div.overview-graph-container{
+div.overview-graph-container div.composite-graph-containter{
   padding : 0px;
 
 

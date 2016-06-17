@@ -5,7 +5,7 @@ define(function(require) {
       _ = require('underscore'),
       Filter = require('models/filter'),
       Filters = require('collections/filters'),
-      template = require('text!templates/filter.html'),
+      template = require('text!templates/time_serie_graph.html'),
       loading = require('text!templates/loading.html'),
       Handlebars = require('handlebars'),
       materialize = require('material');
@@ -13,6 +13,11 @@ define(function(require) {
   return Backbone.View.extend({
     el: '',
 
+    template: _.template(template),
+
+    //events: {
+    //  'click .select_time_range': 'updateSelectingTimeRange'
+    //},
     initialize: function(options) {
       
       this.observer = options.observer;
@@ -45,28 +50,29 @@ define(function(require) {
         this.filters.push(timeSerie,data[i].filter);
       }
     },
-    
-    updateSelectingFilters: function(){
+
+    updateSelectingTimeRange: function(){
       /* remove timeseries which are no longer selected*/
-      var filters =[];
+      console.log("Update Time Range");
+      var checkboxes =[];
       var categories=this.categories;
       for(var i=0;i<categories.length;i++){
         if(this.selectingFilters[categories[i]]!=undefined){
-          filters = filters.concat(this.selectingFilters[categories[i]]);   
+          checkboxes = checkboxes.concat(this.selectingFilters[categories[i]]);
         }
       }
-      for(var i = 0;i<filters.length;i++){
+      for(var i = 0;i<checkboxes.length;i++){
         var pos = -1;
         for(var j = 0;j<this.selectingTimeSeries.length;j++){
           
-          if(this.selectingTimeSeries.models[j].get('sr_id') == filters[i].timeSerie.get('sr_id')){
+          if(this.selectingTimeSeries.models[j].get('sr_id') == checkboxes[i].timeSerie.get('sr_id')){
             pos = j;
             break;
           }
           
         }
         if(pos == -1){
-          this.selectingFilters.removeFilter(filters[i]);
+          this.selectingFilters.removeFilter(checkboxes[i]);
         }
       }
       //add timeseries have no filter
