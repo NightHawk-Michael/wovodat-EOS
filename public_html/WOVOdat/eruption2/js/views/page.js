@@ -20,6 +20,8 @@ define(function(require) {
       // TimeSeriesSelect = require('views/time_series_select'),
       OverviewGraphContainer = require('views/overview_graph_container'),
       OverviewGraph = require('views/overview_graph'),
+      CompositeGraphContainer = require('views/composite_graph_container'),
+      CompositeGraph = require('views/composite_graph'),
       Filter = require('models/filter'),
       FilterSelect = require('views/filter_select'),
       Filters = require('collections/filters'),
@@ -29,6 +31,8 @@ define(function(require) {
       TimeRangeSelect = require('views/time_range_select'),
       Tooltip = require('views/series_tooltip'),
       TimeSeriesGraphContainer = require('views/time_serie_graph_container'),
+      StackTimeSeriesGraphContainer = require('views/stack_time_serie_graph_container'),
+
       EventHandler = require('handler/event_handler');
 
   return Backbone.View.extend({
@@ -59,6 +63,7 @@ define(function(require) {
           selectingTimeRange = new TimeRange(),
           eruptionTimeRange = new TimeRange(),
           overviewGraphTimeRange = new TimeRange(),
+          compositeGraphTimeRange = new TimeRange(),
 
 
 
@@ -89,6 +94,13 @@ define(function(require) {
             overviewGraphTimeRange: overviewGraphTimeRange,
             // collection: filterColorCollection
           }),
+          compositeGraph = new CompositeGraph({
+            selectingTimeSeries: this.overviewSelectingTimeSeries,
+            serieGraphTimeRange: serieGraphTimeRange,
+            selectingTimeRange: selectingTimeRange,
+            compositeGraphTimeRange: compositeGraphTimeRange,
+            // collection: filterColorCollection
+          }),
 
           overviewGraphContainer = new OverviewGraphContainer({
             categories: categories,
@@ -96,6 +108,13 @@ define(function(require) {
             serieGraphTimeRange: serieGraphTimeRange,
             observer: observer,
             graph: overviewGraph
+          }),
+          compositeGraphContainer = new CompositeGraphContainer({
+            categories: categories,
+            selectingTimeSeries: selectingTimeSeries,
+            serieGraphTimeRange: serieGraphTimeRange,
+            observer: observer,
+            graph: compositeGraph
           }),
 
           eruptionSelect = new EruptionSelect({
@@ -123,7 +142,7 @@ define(function(require) {
             eruptionForecasts: eruptionForecasts
 
           }),
-          timeSeriesGraphContainer = new TimeSeriesGraphContainer({
+          stackTimeSeriesGraphContainer = new StackTimeSeriesGraphContainer({
             observer: observer,
             categories: categories,
             selectingTimeSeries: selectingTimeSeries,
@@ -134,6 +153,20 @@ define(function(require) {
             // timeRange: timeRange
 
           }),
+          timeSeriesGraphContainer = new TimeSeriesGraphContainer({
+            observer: observer,
+            categories: categories,
+            selectingTimeSeries: selectingTimeSeries,
+            eruptionTimeRange: eruptionTimeRange,
+            serieGraphTimeRange: serieGraphTimeRange,
+            forecastsGraphTimeRange: forecastsGraphTimeRange,
+            eruptions : eruptions,
+            stackTimeSeriesGraphContainer :stackTimeSeriesGraphContainer,
+            compositeGraphContainer :compositeGraphContainer
+            // timeRange: timeRange
+
+          }),
+
           timeRangeSelect = new TimeRangeSelect({
             categories: categories,
             selectings: selectingTimeSeries,
@@ -163,11 +196,14 @@ define(function(require) {
             eruptionGraph: eruptionGraph,
             eruptionTimeRange: eruptionTimeRange,
             timeSeriesGraphContainer: timeSeriesGraphContainer,
+            stackTimeSeriesGraphContainer :stackTimeSeriesGraphContainer,
             serieGraphTimeRange: serieGraphTimeRange,
             forecastsGraphTimeRange: forecastsGraphTimeRange,
             selectingTimeRange: selectingTimeRange,
             selectingFilters: selectingFilters,
-            eruptionForecastsGraph: eruptionForecastsGraph
+            eruptionForecastsGraph: eruptionForecastsGraph,
+            compositeGraph : compositeGraph,
+            compositeGraphContainer : compositeGraphContainer
           });
           //console.log(volcanoes);
           // console.log(filterColorCollection);
@@ -187,6 +223,9 @@ define(function(require) {
       eruptionGraph.$el.appendTo(this.$el);
       eruptionForecastsGraph.$el.appendTo(this.$el);
       timeSeriesGraphContainer.$el.appendTo(this.$el);
+      stackTimeSeriesGraphContainer.$el.appendTo(this.$el);
+      compositeGraphContainer.$el.appendTo(this.$el);
+
 
       // urlLoader.$el.appendTo(this.$el);
 

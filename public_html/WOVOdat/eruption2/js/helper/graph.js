@@ -171,6 +171,7 @@ define(function(require) {
         var models =  eruptions.models;
 
         var listEruption = [];
+
         for (var k = 0; k < models.length; k++) {
           var ed_stime = models[k].attributes.ed_stime;
           if (ed_stime < 0 ) continue;
@@ -179,19 +180,20 @@ define(function(require) {
 
           //tempEruption.push(675890001000,(maxY + minY) / 2);
           //
-          tempEruption.push(ed_stime,(maxY+minY)/2);
+          //console.log (models[k]);
+          tempEruption.push(ed_stime,(maxY)*0.9);
 
            //console.log(tempEruption);
           listEruption.push(tempEruption);
           //break;
         }
-        //console.log(list);
-        data.push(this.formatGraphEruptionAppearance(listEruption));
+        //console.log(minY);
+        data.push(this.formatGraphEruptionAppearance(listEruption, minY,maxY));
       }
       graph.minX = minX-86400000;
       graph.maxX = maxX+86400000;
-      
-      
+
+
       /** setup y-axis tick **/
       if(maxY != undefined && minY != undefined){
         maxY = maxY*1.1;//1.1
@@ -208,6 +210,7 @@ define(function(require) {
         graph.ticks = this.generateTick(minY,maxY);
         graph.minY = graph.ticks[0];
         graph.maxY = graph.ticks[graph.ticks.length-1]
+        //console.log (graph);
         graph.ticks.push();
       }
       graph.timeRange.set({
@@ -319,7 +322,10 @@ define(function(require) {
         //label: filterName + ":"+timeSerieName,
         color: null,
         lines: {
-          show: false
+          show: false,
+          radius: 10,
+          lineWidth:2,
+          symbol: "line",
         },
         yaxis: {
           axisLabel: ""

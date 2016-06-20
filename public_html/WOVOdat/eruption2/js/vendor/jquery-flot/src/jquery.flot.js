@@ -3033,7 +3033,7 @@ Licensed under the MIT license.
         }
 
         function drawSeriesPoints(series) {
-            function plotPoints(datapoints, radius, fillStyle, offset, shadow, axisx, axisy, symbol) {
+            function plotPoints(datapoints, radius,fillStyle, offset, shadow, axisx, axisy, symbol) {
                 var points = datapoints.points, ps = datapoints.pointsize;
 
                 for (var i = 0; i < points.length; i += ps) {
@@ -3048,6 +3048,7 @@ Licensed under the MIT license.
 
                     if (symbol === "circle") {
                         ctx.arc(x, y, radius, 0, shadow ? Math.PI : Math.PI * 2, false);
+                        ctx.closePath();
                     } else if (symbol === "triangle") {
                         ctx.moveTo(x,y-radius);
                         ctx.lineTo(x+radius*(Math.sqrt(3)/2),y+radius/2);
@@ -3060,13 +3061,25 @@ Licensed under the MIT license.
                         //draw smoke
 
                         for (var k = 0; k < radius; k++ ){
-  
+
                             ctx.lineTo(x+ 3*Math.sin(k),y-radius-k);
                         }
+                        ctx.moveTo(x,y+radius/2);
+                        ctx.lineTo(x,135);
+                    }else if (symbol === "line") {
+                        //draw triangle
+                        ctx.moveTo(x,y);
+                        ctx.lineTo(x + radius*50);
+                       // ctx.lineTo(x- radius*(Math.sqrt(3)/2),y+radius/2);
+                        //draw smoke
+
+                        //for (var k = 0; k < radius; k++ ){
+                        //
+                        //    ctx.lineTo(x+ 3*Math.sin(k),y-radius-k);
+                        //}
                     }else{
                         symbol(ctx, x, y, radius, shadow);
                     }
-                    ctx.closePath();
 
                     if (fillStyle) {
                         ctx.fillStyle = fillStyle;
@@ -3813,6 +3826,7 @@ Licensed under the MIT license.
                 pointRadius = series.points.radius;
                 radius = 0.5 * pointRadius;
             }
+            var height = series.points.height;
             octx.lineWidth = pointRadius;
             octx.strokeStyle = highlightColor;
             x = axisx.p2c(x);
@@ -3821,7 +3835,18 @@ Licensed under the MIT license.
             octx.beginPath();
             if (series.points.symbol === "circle") {
                 octx.arc(x, y, radius, 0, 2 * Math.PI, false);
-            } else {
+            } else if (series.points.symbol === "volcano") {
+                //draw triangle
+                octx.moveTo(x,y-radius);
+                octx.lineTo(x+radius*(Math.sqrt(3)/2),y+radius/2);
+                octx.lineTo(x- radius*(Math.sqrt(3)/2),y+radius/2);
+                //draw smoke
+
+                for (var k = 0; k < radius; k++ ){
+
+                    octx.lineTo(x+ 3*Math.sin(k),y-radius-k);
+                }
+            }else {
                 series.points.symbol(octx, x, y, radius, false);
             }
             octx.closePath();

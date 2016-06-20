@@ -161,55 +161,41 @@ class Wovodat {
      */
     public function getVolcanoListHasData() {
         mysql_query("set character_set_results='utf8'");
-        $result = mysql_query("select vd_name, vd_cavw, vd_num from vd
-WHERE
-(EXISTS (select * from ed WHERE ed_etime > 0 AND ed_stime > 0 AND vd.vd_id = ed.vd_id))
-AND
-(vd.vd_id IN (select vd_id from es_dd_ang
-				UNION select vd_id from es_dd_edm
-				UNION select vd_id from es_dd_gps
-				UNION select vd_id from es_dd_gpv
-				UNION select vd_id from es_dd_lev
-				UNION select vd_id from es_dd_str
-				UNION select vd_id from es_dd_tlt
-				UNION select vd_id from es_fd_ele
-				UNION select vd_id from es_fd_gra
-				UNION select vd_id from es_fd_mag
-				UNION select vd_id from es_fd_mgv
-				UNION select vd_id from es_gd
-				UNION select vd_id from es_gd_plu
-				UNION select vd_id from es_gd_sol
-				UNION select vd_id from es_hd
-				UNION select vd_id from es_med
-				UNION select vd_id from es_sd_evn
-				UNION select vd_id from es_sd_evs
-				UNION select vd_id from es_sd_int
-				UNION select vd_id from es_sd_ivl
-				UNION select vd_id from es_sd_rsm
-                UNION select vd_id from es_sd_ssm
-                UNION select vd_id from es_sd_trm
-                UNION select vd_id from es_td
-			  )
-)
-AND
-(vd.vd_id IN (select vd_id from jj_volnet UNION select vd_id from vd_inf))
-order by vd_name");
+            $result = mysql_query("select vd_name, vd_cavw, vd_num, vd_id from vd
+    WHERE
+    (EXISTS (select * from ed WHERE ed_etime > 0 AND ed_stime > 0 AND vd.vd_id = ed.vd_id))
+    AND
+    (vd.vd_id IN (SELECT DISTINCT jj_volnet.vd_id FROM `sn`, jj_volnet WHERE sn.sn_id IN (SELECT DISTINCT jj_volnet.jj_net_id from jj_volnet as jj) AND sn.vd_id IS NULL
+					UNION
+					SELECT DISTINCT vd_id FROM `sn` WHERE sn_id IN (SELECT DISTINCT sn_id from sd_evn) AND vd_id IS NOT NULL)
+    )
+    AND
+    (vd.vd_id IN (select vd_id from jj_volnet UNION select vd_id from vd_inf))
+    order by vd_name");
         //"select vd_name, vd_cavw, vd_num from vd WHERE EXISTS (select * from ed WHERE ed_etime > 0 AND ed_stime > 0 AND vd.vd_id = ed.vd_id) order by vd_name
         $row = mysql_fetch_array($result);
+
         if ($row === false)
             return;
         $results = Array();
-        $object;
+        $object = [];
         while (true) {
             $object = "";
-            $object[1] = $row[0];
-            $object[2] = $row[1];
-            $object[3] = $row[2];
-            array_push($results, $object);
+            $object[1] = $row[0];                   //vd_name
+            $object[2] = $row[1];                   //vd_cavw
+            $object[3] = $row[2];                   //vd_num
+
+
+            $temp = $this->getStationsWithDataList($row[3]);
+            if(!empty($temp)){
+                array_push($results, $object);
+            }
+
             $row = mysql_fetch_array($result);
             if ($row == false)
                 break;
         }
+       // echo (count($results)."_");
         echo json_encode($results);
     }
 
@@ -676,63 +662,63 @@ order by vd_name");
                 }
           
         }
-        $deformationStations = mysql_query("(select  c.ds_code FROM cn a, ds c  where a.vd_id = '$volcanoId' and a.cn_id = c.cn_id and a.cn_pubdate <= now() and c.cn_pubdate <= now() order by c.ds_code) UNION (select c.ds_code FROM jj_volnet a, ds c,vd_inf d WHERE a.vd_id = '$volcanoId' and a.vd_id=d.vd_id   and a.jj_net_flag = 'C' and a.jj_net_id = c.cn_id and (sqrt(power(d.vd_inf_slat - c.ds_nlat, 2) + power(d.vd_inf_slon - c.ds_nlon, 2))*100)<20 and c.ds_pubdate <= now() ORDER BY c.ds_code)") or die(mysql_error());
+        $deformationStations = mysql_query("(select c.ds_code FROM cn a, ds c where a.vd_id = '$volcanoId' and a.cn_id = c.cn_id and a.cn_pubdate <= now() and c.ds_pubdate <= now() order by c.ds_code) UNION (select c.ds_code FROM jj_volnet a, ds c,vd_inf d WHERE a.vd_id = '$volcanoId' and a.vd_id=d.vd_id   and a.jj_net_flag = 'C' and a.jj_net_id = c.cn_id and (sqrt(power(d.vd_inf_slat - c.ds_nlat, 2) + power(d.vd_inf_slon - c.ds_nlon, 2))*100)<20 and c.ds_pubdate <= now() ORDER BY c.ds_code)") or die(mysql_error());
         while ($temp = mysql_fetch_array($deformationStations)) {
 // get the station code
             $temp = $temp[0];
 // dd_tlt
             $value = mysql_query("select b.ds_id from ds a, dd_tlt b where a.ds_code = '$temp' and a.ds_id = b.ds_id and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now()  limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "deformation;";
+               // echo "deformation;";
                 break;
             }
 // dd_tlv
             $value = mysql_query("select b.ds_id from ds a, dd_tlv b where a.ds_code = '$temp' and a.ds_id = b.ds_id and a.ds_pubdate <= now() and b.dd_tlv_pubdate <= now() limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "deformation;";
+               // echo "deformation;";
                 break;
             }
 // dd_str
             $value = mysql_query("select b.ds_id from ds a, dd_str b where a.ds_code = '$temp' and a.ds_id = b.ds_id and a.ds_pubdate <= now() and b.dd_str_pubdate <= now() limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "deformation;";
+               // echo "deformation;";
                 break;
             }
 // dd_edm
             $value = mysql_query("select b.ds_id from ds a, dd_edm b where a.ds_code = '$temp' and (a.ds_id = b.ds_id1 or a.ds_id = b.ds_id2) and a.ds_pubdate <= now() and b.dd_edm_pubdate <= now()  limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "deformation;";
+               // echo "deformation;";
                 break;
             }
 // dd_ang
             $value = mysql_query("select b.ds_id from ds a, dd_ang b where a.ds_code = '$temp' and a.ds_id = b.ds_id and a.ds_pubdate <= now() and b.dd_ang_pubdate <= now() limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "deformation;";
+               // echo "deformation;";
                 break;
             }
 // dd_gps
             $value = mysql_query("select b.ds_id from ds a, dd_gps b where a.ds_code = '$temp' and a.ds_id = b.ds_id and a.ds_pubdate <= now() and b.dd_gps_pubdate <= now() limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "deformation;";
+               // echo "deformation;";
                 break;
             }
 // dd_gpv
             $value = mysql_query("select b.ds_id from ds a, dd_gpv b where a.ds_code = '$temp' and a.ds_id = b.ds_id and a.ds_pubdate <= now() and b.dd_gpv_pubdate <= now() limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "deformation;";
+               // echo "deformation;";
                 break;
             }
 // dd_lev
             $value = mysql_query("select b.ds_id from ds a, dd_lev b where a.ds_code = '$temp' and (a.ds_id = b.ds_id1) and a.ds_pubdate <= now() and b.dd_lev_pubdate <= now() limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "deformation;";
+              //  echo "deformation;";
                 break;
             }
 // dd_sar: no station? , how to display the data
 // use volcano id instead
             $value = mysql_query("select vd_id from dd_sar where vd_id = '$volcanoId' and dd_sar_pubdate <= now() limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "deformation;";
+               // echo "deformation;";
                 break;
             }
         }
@@ -742,53 +728,53 @@ order by vd_name");
             $temp = $temp[0];
             $value = mysql_query("select fd_ele_id from fs, fd_ele where fs_code = '$temp' and (fs_id = fs_id1 or fs_id = fs_id2) and fs.fs_pubdate <= now() and fd_ele.fd_ele_pubdate <= now()  limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "field;";
+               // echo "field;";
                 break;
             }
 // fd_gra
             $value = mysql_query("select fd_gra_id from fs , fd_gra where fs.fs_code = '$temp' and fs.fs_id = fd_gra.fs_id and fs.fs_pubdate <= now() and fd_gra.fd_gra_pubdate <= now()   limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "field;";
+              //  echo "field;";
                 break;
             }
 // fd_mag
             $value = mysql_query("select fd_mag_id from fs , fd_mag where fs.fs_code = '$temp' and fs.fs_id = fd_mag.fs_id and fs.fs_pubdate <= now() and fd_mag.fd_mag_pubdate <= now()   limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "field;";
+               // echo "field;";
                 break;
             }
 // fd_mgv
             $value = mysql_query("select fd_mgv_id from fs , fd_mgv where fs.fs_code = '$temp' and fs.fs_id = fd_mgv.fs_id and fs.fs_pubdate <= now() and fd_mgv.fd_mgv_pubdate <= now()   limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "field;";
+               // echo "field;";
                 break;
             }
         }
-        $gasStations = mysql_query("(select  c.gs_code FROM cn a, gs c where a.vd_id = '$volcanoId' and a.cn_id = c.cn_id and a.cn_pubdate <= now() and c.gs_pubdate <= now) UNION (select c.gs_code FROM jj_volnet a, gs c,vd_inf d WHERE a.vd_id = '$volcanoId' and a.vd_id=d.vd_id   and a.jj_net_flag = 'C' and a.jj_net_id = c.cn_id and (sqrt(power(d.vd_inf_slat - c.gs_lat, 2) + power(d.vd_inf_slon - c.gs_lon, 2))*100)<20 c.gs_pubdate <= now() ORDER BY c.gs_code)") or die(mysql_error());
+        $gasStations = mysql_query("(select  c.gs_code FROM cn a, gs c where a.vd_id = '$volcanoId' and a.cn_id = c.cn_id and a.cn_pubdate <= now() and c.gs_pubdate <= now()) UNION (select c.gs_code FROM jj_volnet a, gs c,vd_inf d WHERE a.vd_id = '$volcanoId' and a.vd_id=d.vd_id   and a.jj_net_flag = 'C' and a.jj_net_id = c.cn_id and (sqrt(power(d.vd_inf_slat - c.gs_lat, 2) + power(d.vd_inf_slon - c.gs_lon, 2))*100)<20 AND c.gs_pubdate <= now() ORDER BY c.gs_code)") or die(mysql_error());
         while ($temp = mysql_fetch_array($gasStations)) {
             $temp = $temp[0];
 // gd
             $value = mysql_query("select gd_id from gs , gd where gs.gs_code = '$temp' and gs.gs_id = gd.gs_id and gs.gs_pubdate <= now() and gd.gd_pubdate <= now()   limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "gas;";
+               // echo "gas;";
                 break;
             }
 // gd_plu
             $value = mysql_query("select gd_plu_id from gs , gd_plu where gs.gs_code = '$temp' and gs.gs_id = gd_plu.gs_id and gs.gs_pubdate <= now() and gd_plu.gd_plu_pubdate <= now()  limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "gas;";
+                //echo "gas;";
                 break;
             }
 // gd_plu in the air
             $value = mysql_query("select gd_plu_time from gd_plu a, cs c where a.vd_id = '$volcanoId' and c.cs_id = a.cs_id and a.gd_plu_pubdate <= now() limit 0 ,1");
             if ($value && mysql_num_rows($value)) {
-                echo "gas;";
+                //echo "gas;";
                 break;
             }
 // gd_sol
             $value = mysql_query("select gd_sol_id from gs , gd_sol where gs.gs_code = '$temp' and gs.gs_id = gd_sol.gs_id and gs.gs_pubdate <= now() and gd_sol.gd_sol_pubdate <= now()   limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "gas;";
+               // echo "gas;";
                 break;
             }
         }
@@ -798,7 +784,7 @@ order by vd_name");
 // hd
             $value = mysql_query("select hd_id from hs, hd where hs_code = '$temp' and hs.hs_id = hd.hs_id and hs.hs_pubdate <= now() and hd.hd_pubdate <= now() limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "hydrologic;";
+               // echo "hydrologic;";
                 break;
             }
         }
@@ -808,7 +794,7 @@ order by vd_name");
 // td
             $value = mysql_query("select td_id from ts,td where ts_code = '$temp' and ts.ts_id = td.ts_id and ts_pubdate <= now() and td_pubdate <= now() limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "thermal;";
+               // echo "thermal;";
                 break;
             }
         }
@@ -819,7 +805,7 @@ order by vd_name");
             // med
             $value = mysql_query("select med_id from ms,med where ms_code = '$temp' and ms.ms_id = med.ms_id and ms_pubdate <= now() and med_pubdate <= now() limit 0 , 1");
             if ($value && mysql_num_rows($value)) {
-                echo "meteo;";
+               // echo "meteo;";
                 break;
             }
         }
@@ -2712,6 +2698,227 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
             $row = mysql_fetch_array($resources);
         }
         echo json_encode($results);
+    }
+
+
+    /**
+     * @param $cavw
+     * @return array
+     * Return the list of station with data
+     */
+    function getStationsWithDataList($volcanoId) {
+        $list = Array();
+
+        // get the seismic stations that locate near the current volcano
+        $seismicStations = mysql_query("(select c.ss_code FROM sn a, ss c  where a.sn_pubdate <= now() and c.ss_pubdate <= now() and a.vd_id = '$volcanoId'  and a.sn_id = c.sn_id ) UNION (select c.ss_code FROM jj_volnet a, ss c , vd_inf d  WHERE a.vd_id = '$volcanoId' and a.vd_id=d.vd_id  and a.jj_net_flag = 'S' and a.jj_net_id = c.sn_id and (sqrt(power(d.vd_inf_slat - c.ss_lat, 2) + power(d.vd_inf_slon - c.ss_lon, 2))*100)<20 and c.ss_pubdate <= now())") or die(mysql_error());
+
+
+        while ($temp = mysql_fetch_array($seismicStations)) {
+// get the station code
+            $temp = $temp[0];
+
+// sd_ivl
+            $value = mysql_query("select b.ss_id from ss a, sd_ivl b where a.ss_code = '$temp' and a.ss_id = b.ss_id and a.ss_pubdate <= now() and b.sd_ivl_pubdate <= now()  limit 0 , 1");
+
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "seismic");
+                break;
+            }
+// sd_rsm
+            $value = mysql_query("select c.sd_rsm_id from ss a, sd_sam b, sd_rsm c where a.ss_code = '$temp' and a.ss_id = b.ss_id and b.sd_sam_id = c.sd_sam_id and a.ss_pubdate <= now() and b.sd_sam_pubdate <= now() limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "seismic");
+                break;
+            }
+
+// sd_evs
+            $value = mysql_query("select b.ss_id from ss a, sd_evs b where a.ss_code = '$temp' and a.ss_id = b.ss_id and a.ss_pubdate <= now() and b.sd_evs_pubdate <= now()  limit 0 , 1");
+
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "seismic");
+                break;
+            }
+
+// sd_int
+            $value = mysql_query("select c.ss_id from ss a, sd_int b, sd_evs c where a.ss_code = '$temp' and a.ss_id = c.ss_id and a.ss_pubdate <= now() and b.sd_int_pubdate <= now() and c.sd_evs_pubdate <= now()  limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "seismic");
+                break;
+            }
+
+// sd_trm
+            $que="select c.sn_id from ss a, sn b, sd_trm c where a.ss_code='$temp' and a.sn_id=b.sn_id and  b.sn_id=c.sn_id and a.ss_pubdate<=now() and b.sn_pubdate<=now() and c.sd_trm_pubdate<=now() limit 0, 1";
+            $value = mysql_query($que);
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "seismic");
+                break;
+            }
+            $value = mysql_query("select b.ss_id from ss a, sd_trm b where a.ss_code='$temp' and a.ss_id=b.ss_id and a.ss_pubdate<=now() and b.sd_trm_pubdate<=now() limit 0, 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "seismic");
+                break;
+            }
+
+
+
+        }
+        $deformationStations = mysql_query("(select  c.ds_code FROM cn a, ds c  where a.vd_id = '$volcanoId' and a.cn_id = c.cn_id and a.cn_pubdate <= now() and c.ds_pubdate <= now()  order by c.ds_code) UNION (select c.ds_code FROM jj_volnet a, ds c,vd_inf d WHERE a.vd_id = '$volcanoId' and a.vd_id=d.vd_id   and a.jj_net_flag = 'C' and a.jj_net_id = c.cn_id and (sqrt(power(d.vd_inf_slat - c.ds_nlat, 2) + power(d.vd_inf_slon - c.ds_nlon, 2))*100)<20 and c.ds_pubdate <= now() ORDER BY c.ds_code)") or die(mysql_error());
+        while ($temp = mysql_fetch_array($deformationStations)) {
+// get the station code
+            $temp = $temp[0];
+// dd_tlt
+            $value = mysql_query("select b.ds_id from ds a, dd_tlt b where a.ds_code = '$temp' and a.ds_id = b.ds_id and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now()  limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "deformation");
+                break;
+            }
+// dd_tlv
+            $value = mysql_query("select b.ds_id from ds a, dd_tlv b where a.ds_code = '$temp' and a.ds_id = b.ds_id and a.ds_pubdate <= now() and b.dd_tlv_pubdate <= now() limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "deformation");
+                break;
+            }
+// dd_str
+            $value = mysql_query("select b.ds_id from ds a, dd_str b where a.ds_code = '$temp' and a.ds_id = b.ds_id and a.ds_pubdate <= now() and b.dd_str_pubdate <= now() limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "deformation");
+                break;
+            }
+// dd_edm
+            $value = mysql_query("select a.ds_id from ds a, dd_edm b where a.ds_code = '$temp' and (a.ds_id = b.ds_id1 or a.ds_id = b.ds_id2) and a.ds_pubdate <= now() and b.dd_edm_pubdate <= now()  limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "deformation");
+                break;
+            }
+// dd_ang
+            $value = mysql_query("select b.ds_id from ds a, dd_ang b where a.ds_code = '$temp' and a.ds_id = b.ds_id and a.ds_pubdate <= now() and b.dd_ang_pubdate <= now() limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "deformation");
+                break;
+            }
+// dd_gps
+            $value = mysql_query("select b.ds_id from ds a, dd_gps b where a.ds_code = '$temp' and a.ds_id = b.ds_id and a.ds_pubdate <= now() and b.dd_gps_pubdate <= now() limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "deformation");
+                break;
+            }
+// dd_gpv
+            $value = mysql_query("select b.ds_id from ds a, dd_gpv b where a.ds_code = '$temp' and a.ds_id = b.ds_id and a.ds_pubdate <= now() and b.dd_gpv_pubdate <= now() limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "deformation");
+                break;
+            }
+// dd_lev
+            $query = "select b.ds_id_ref from ds a, dd_lev b where a.ds_code = '$temp' and (a.ds_id = b.ds_id1) and a.ds_pubdate <= now() and b.dd_lev_pubdate <= now() limit 0 , 1";
+
+            $value = mysql_query($query);
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "deformation");
+                break;
+            }
+// dd_sar: no station? , how to display the data
+// use volcano id instead
+            $value = mysql_query("select vd_id from dd_sar where vd_id = '$volcanoId' and dd_sar.dd_sar_pubdate <= now() limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "deformation");
+                break;
+            }
+        }
+        $fieldStations = mysql_query("(select  c.fs_code FROM cn a, fs c where a.vd_id = '$volcanoId' and a.cn_id = c.cn_id and a.cn_pubdate <= now() and c.fs_pubdate <= now() order by c.fs_code) UNION (select c.fs_code FROM jj_volnet a, fs c,vd_inf d WHERE a.vd_id = '$volcanoId' and a.vd_id=d.vd_id   and a.jj_net_flag = 'C' and a.jj_net_id = c.cn_id and (sqrt(power(d.vd_inf_slat - c.fs_lat, 2) + power(d.vd_inf_slon - c.fs_lon, 2))*100)<20 and c.fs_pubdate <= now() ORDER BY c.fs_code)") or die(mysql_error());
+//fd_ele
+        while ($temp = mysql_fetch_array($fieldStations)) {
+            $temp = $temp[0];
+            $value = mysql_query("select fd_ele_id from fs, fd_ele where fs_code = '$temp' and (fs_id = fs_id1 or fs_id = fs_id2) and fs.fs_pubdate <= now() and fd_ele.fd_ele_pubdate <= now()  limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "field");
+                break;
+            }
+// fd_gra
+            $value = mysql_query("select fd_gra_id from fs , fd_gra where fs.fs_code = '$temp' and fs.fs_id = fd_gra.fs_id and fs.fs_pubdate <= now() and fd_gra.fd_gra_pubdate <= now() limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "field");
+                break;
+            }
+// fd_mag
+            $value = mysql_query("select fd_mag_id from fs , fd_mag where fs.fs_code = '$temp' and fs.fs_id = fd_mag.fs_id and fs.fs_pubdate <= now() fd_mag.and fd_mag_pubdate <= now()  limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "field");
+                break;
+            }
+// fd_mgv
+            $value = mysql_query("select fd_mgv_id from fs , fd_gra where fs.fs_code = '$temp' and fs.fs_id = fd_mgv.fs_id and fs.fs_pubdate <= now() and fd_gra.fd_gra_pubdate <= now()  limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "field");
+                break;
+            }
+        }
+
+
+        $gasStations = mysql_query("(select  c.gs_code FROM cn a, gs c where a.vd_id = '$volcanoId'
+                and a.cn_id = c.cn_id and a.cn_pubdate <=now() and c.gs_pubdate <= now()) UNION (select c.gs_code FROM jj_volnet a, gs c,vd_inf d
+                WHERE a.vd_id = '$volcanoId' and a.vd_id=d.vd_id
+                and a.jj_net_flag = 'C'
+                and a.jj_net_id = c.cn_id
+                and (sqrt(power(d.vd_inf_slat - c.gs_lat, 2) + power(d.vd_inf_slon - c.gs_lon, 2))*100)<20 and c.gs_pubdate <= now() ORDER BY c.gs_code)") or die(mysql_error());
+        while ($temp = mysql_fetch_array($gasStations)) {
+            $temp = $temp[0];
+// gd
+            $value = mysql_query("select gd_id from gs , gd where gs.gs_code = '$temp' and gs.gs_id = gd.gs_id and gs.gs_pubdate <= now() and gd.gd_pubdate <= now()  limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "gas");
+                break;
+            }
+// gd_plu
+            $value = mysql_query("select gd_plu_id from gs , gd_plu where gs.gs_code = '$temp' and gs.gs_id = gd_plu.gs_id and gs.gs_pubdate <= now() and gd_plu.gd_plu_pubdate <= now()  limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "gas");
+                break;
+            }
+// gd_plu in the air
+            $value = mysql_query("select gd_plu_time from gd_plu a, cs c where a.vd_id = '$volcanoId' and c.cs_id = a.cs_id and a.gd_plu_pubdate <= now() limit 0 ,1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "gas");
+                break;
+            }
+// gd_sol
+            $value = mysql_query("select gd_sol_id from gs , gd_sol where gs.gs_code = '$temp' and gs.gs_id = gd_sol.gs_id and gs.gs_pubdate <= now() and gd_sol.gd_sol_pubdate <= now() limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "gas");
+                break;
+            }
+        }
+        $hydrologicStations = mysql_query("(select  c.hs_code FROM cn a, hs c where a.vd_id = '$volcanoId' and a.cn_id = c.cn_id and a.cn_pubdate <= now() and c.hs_pubdate <= now()) UNION (select c.hs_code FROM jj_volnet a, hs c,vd_inf d WHERE a.vd_id = '$volcanoId' and a.vd_id=d.vd_id   and a.jj_net_flag = 'C' and a.jj_net_id = c.cn_id and (sqrt(power(d.vd_inf_slat - c.hs_lat, 2) + power(d.vd_inf_slon - c.hs_lon, 2))*100)<30 and c.hs_pubdate <= now() ORDER BY c.hs_code)") or die(mysql_error());
+        while ($temp = mysql_fetch_array($hydrologicStations)) {
+            $temp = $temp[0];
+// hd
+            $value = mysql_query("select hd_id from hs, hd where hs_code = '$temp' and hs.hs_id = hd.hs_id and hs.hs_pubdate <= now() and hd.hd_pubdate <= now()  limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "hydrologic");
+                break;
+            }
+        }
+        $thermalStations = mysql_query("(select  c.ts_code FROM cn a, ts c where a.vd_id = '$volcanoId' and a.cn_id = c.cn_id and a.cn_pubdate <= now() and c.ts_pubdate <= now()) UNION (select c.ts_code FROM jj_volnet a, ts c,vd_inf d WHERE a.vd_id = '$volcanoId' and a.vd_id=d.vd_id   and a.jj_net_flag = 'C' and a.jj_net_id = c.cn_id and (sqrt(power(d.vd_inf_slat - c.ts_lat, 2) + power(d.vd_inf_slon - c.ts_lon, 2))*100)<20 and c.ts_pubdate <= now() ORDER BY c.ts_code)") or die(mysql_error());
+        while ($temp = mysql_fetch_array($thermalStations)) {
+            $temp = $temp[0];
+// td
+            $value = mysql_query("select td_id from ts,td where ts_code = '$temp' and ts.ts_id = td.ts_id and ts.ts_pubdate <= now() and td.td_pubdate <= now() limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "thermal");
+                break;
+            }
+        }
+        $meteoStations = mysql_query("(select  c.ms_code FROM cn a, ms c where a.vd_id = '$volcanoId' and a.cn_id = c.cn_id and a.cn_pubdate <= now() and c.ms_pubdate <= now()) UNION (select c.ms_code FROM jj_volnet a, ms c,vd_inf d WHERE a.vd_id = '$volcanoId' and a.vd_id=d.vd_id   and a.jj_net_flag = 'C' and a.jj_net_id = c.cn_id and (sqrt(power(d.vd_inf_slat - c.ms_lat, 2) + power(d.vd_inf_slon - c.ms_lon, 2))*100)<20 and c.ms_pubdate <= now() ORDER BY c.ms_code)") or die(mysql_error());
+        while ($temp = mysql_fetch_array($meteoStations)) {
+            $temp = $temp[0];
+// td
+            $value = mysql_query("select med_id from ms,med where ms_code = '$temp' and ms.ms_id = med.ms_id and ms.ms_pubdate <= now() and med.med_pubdate <= now() limit 0 , 1");
+            if ($value && mysql_num_rows($value)) {
+                array_push($list, "meteo");
+                break;
+            }
+        }
+       // echo count($list);
+        return $list;
     }
 
 }
