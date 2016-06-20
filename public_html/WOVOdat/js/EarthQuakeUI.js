@@ -591,14 +591,14 @@ function displayEvent(cavw,mapUsed){
 	var totalEvent = result[0];
 	var filteredEvent = result[1];
 
-	var dataString = '<p>Total available earthquake data: ' + totalEvent + '</p></br>';
+	var dataString = '<p>Total available earthquake data: ' + totalEvent + '</p>';
 
-	dataString += '<p>Total number of earthquakes after filter: ' + filteredEvent + '</p></br>';
+	dataString += '<p>Total number of earthquakes after filter: ' + filteredEvent + '</p>';
 
 	if(parseInt(nEvent) > parseInt(filteredEvent)){
-		dataString += '<p>Currently showing: ' + filteredEvent + ' of ' + filteredEvent+ '</p></br>';
+		dataString += '<p>Currently showing: ' + filteredEvent + ' of ' + filteredEvent+ '</p>';
 	}else{
-		dataString += '<p>Currently showing:: ' + nEvent + ' of ' + filteredEvent + '</p></br>';
+		dataString += '<p>Currently showing:: ' + nEvent + ' of ' + filteredEvent + '</p>';
 	}
 	document.getElementById("eqEvent" + mapUsed).innerHTML = dataString;
 }
@@ -615,6 +615,9 @@ function plotEarthquakeData(cavw, mapUsed){
 	var dLow = parseFloat($("#DepthLow"+mapUsed).val());
 
 	var width = parseFloat($('#wkm' + mapUsed).val());
+
+	var errorbars = document.getElementById('errorbars'+mapUsed).checked;
+
 	// skip this function if we can not find the data to draw
 	if(!earthquakes[cavw]) 
 		return;
@@ -771,14 +774,22 @@ function plotEarthquakeData(cavw, mapUsed){
 			min_time = time;
 		} 
 
-		// set lat, lon coordination with format
-		// distance, -depth, x error, y error, time
-		latArray.push([latDistance,-depth,xerr,derr,time,,sizeOfEquakeDot,color]);
-		lonArray.push([lonDistance,-depth,yerr,derr,time,,sizeOfEquakeDot,color]);
+		// if no error bars needed, the 2 error values will be 0
+		if (errorbars){
+			// set lat, lon coordination with format
+			// distance, -depth, x error, y error, time
+			latArray.push([latDistance,-depth,xerr,derr,time,,sizeOfEquakeDot,color]);
+			lonArray.push([lonDistance,-depth,yerr,derr,time,,sizeOfEquakeDot,color]);
 
-		// set time-series coordination with format
-		// time, -depth, x error, y error, distance
-		timeArray.push([time,-depth,rms,derr,distance,,sizeOfEquakeDot,color]);
+			// set time-series coordination with format
+			// time, -depth, x error, y error, distance
+			timeArray.push([time,-depth,rms,derr,distance,,sizeOfEquakeDot,color]);
+		} else {
+			latArray.push([latDistance,-depth,0,0,time,,sizeOfEquakeDot,color]);
+			lonArray.push([lonDistance,-depth,0,0,time,,sizeOfEquakeDot,color]);
+			timeArray.push([time,-depth,0,0,distance,,sizeOfEquakeDot,color]);
+		}
+
 
 	}
 	var time_range = max_time - min_time;
@@ -857,7 +868,12 @@ function plotEarthquakeData(cavw, mapUsed){
 	for (var i in eruptionArray){
 		var time = eruptionArray[i][0];
 		eruptionMarkings.push({ color:"red", lineWidth: 2, xaxis: {from: time, to: time} });
-		eruptionPointLabels.push(time.toLocaleDateString());
+		var year = time.getFullYear();
+		var month = time.getMonth();
+		var date = time.getDate();
+		if (month < 10) month = '0' + month;
+		if (date < 10) date = '0' + date;
+		eruptionPointLabels.push(year + "-" + month + "-" + date);
 	}
 
 	// prepare the data object for the plot functions

@@ -290,6 +290,18 @@ session_start();
                                                     </div>
                                                 </div>
 												<div class="row">
+													<div class="leftPanel">Errorbars:</div>
+													<div class="rightPanel">
+														<div class="subrow">
+															<table>
+																<tr>
+																	<td><input type='checkbox' id='errorbars1' checked/></td>
+																</tr>
+															</table>
+														</div>
+													</div>
+												</div>
+												<div class="row">
 													<div class="leftPanel">Type:</div>
 													<div class="rightPanel">
                                                         <table id="EqType1">
@@ -680,6 +692,18 @@ session_start();
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="row">
+													<div class="leftPanel">Errorbars:</div>
+													<div class="rightPanel">
+														<div class="subrow">
+															<table>
+																<tr>
+																	<td><input type='checkbox' id='errorbars2' checked/></td>
+																</tr>
+															</table>
+														</div>
+													</div>
+												</div>
                                                 <div class="row">
                                                     <div class="leftPanel">Type:</div>
                                                     <div class="rightPanel">

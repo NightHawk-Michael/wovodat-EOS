@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<!--
+LUIS RE-ORGANIZED STRUCTURE - 21/2/2016-->
 <?php
 // Start session
 session_start();
@@ -9,46 +10,44 @@ session_start();
 $cache = time();
 ?> 
 <html>
-<head>
-  <title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-  <meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-  <meta http-equiv="cache-control" content="no-cache, must-revalidate">
-  <meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-  <meta name="keywords" content="Volcano, Vulcano, Volcanoes">
-  <link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">     
-  <link href="/css/jquery.jgrowl.css" rel="stylesheet">
-  <!--<link href="/css/index.css" rel="stylesheet" type="text/css">-->
-  <link href="/css/styles_beta.css" rel="stylesheet" type="text/css">
-  <!--<link href="/css/volcano.css" rel="stylesheet" type="text/css"> -->    
-  <link href="/css/tooltip.css" rel="stylesheet">
-  <link href="/css/css_v5.css" rel="stylesheet">
-  <link type="text/css" href="/js/jqueryui/css/custom-theme/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
-  <script type="text/javascript" src="/js/jqueryui/js/jquery-1.6.4.min.js"></script>
-  <script type="text/javascript" src="/js/jqueryui/js/jquery-ui-1.8.21.custom.min.js"></script>
-  <script type="text/javascript" src="/js/flot/jquery.flot.tuan.js"></script>
-  <script type="text/javascript" src="/js/flot/jquery.flot.navigate.tuan.js"></script> 
-  <script type="text/javascript" src="/js/flot/jquery.flot.selection.js"></script>
-  <script type="text/javascript" src="/js/flot/jquery.flot.marks.js"></script>
-  <script type="text/javascript" src="/js/flot/jquery.flot.errorbars.js"></script>
-  <script type="text/javascript" src="/js/flot/jquery.flot.labels.js"></script>
-  <script type="text/javascript" src="/js/flot/jquery.flot.symbol.js"></script>
-  <script type="text/javascript" src="/js/wovodat.js?<?php echo $cache; ?>"></script>
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCQ9kUvUtmawmFJ62hWVsigWFTh3CKUzzM&sensor=false"></script>
-  <script type="text/javascript" src="/js/Tooltip_v3.js"></script>
-  <script type="text/javascript" src="/js/jquery.jgrowl.js"></script>
-  <script type="text/javascript" src="/js/GraphController.js"></script>
-  <script type="text/javascript" src="/js/BasicFunction_V5.js"></script>
-  <script type="text/javascript" src="/js/EarthQuakeController.js"></script>
-  <script type="text/javascript" src="/js/EarthQuakeUI.js"></script>
-  <script type="text/javascript" src="/js/GraphUI.js"></script>
-  <script src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
-  <script> 
-  $(document).ready(function(){
-    $("#switchView").click();
-    $("#HideTimeSeriesPanel1").click();
-  }); 
-  </script>
-</head>
+  <head>
+    <title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
+    <meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate">
+    <meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
+    <meta name="keywords" content="Volcano, Vulcano, Volcanoes">
+    <link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">   
+    <link href="/css/jquery.jgrowl.css" rel="stylesheet">
+    <!--<link href="/css/index.css" rel="stylesheet" type="text/css">-->
+    <link href="/css/styles_beta.css" rel="stylesheet" type="text/css">
+    <!--<link href="/css/volcano.css" rel="stylesheet" type="text/css"> --> 
+    <link href="/css/tooltip.css" rel="stylesheet">
+    <link href="/css/css_v5.css" rel="stylesheet">
+    <link type="text/css" href="/js/jqueryui/css/custom-theme/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
+    <script type="text/javascript" src="/js/jqueryui/js/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="/js/jqueryui/js/jquery-ui-1.8.21.custom.min.js"></script>
+    <script type="text/javascript" src="/js/flot/jquery.flot.tuan.js"></script>
+    <script type="text/javascript" src="/js/flot/jquery.flot.navigate.tuan.js"></script> 
+    <script type="text/javascript" src="/js/flot/jquery.flot.selection.js"></script>
+    <script type="text/javascript" src="/js/flot/jquery.flot.marks.js"></script>
+    <script type="text/javascript" src="/js/flot/jquery.flot.errorbars.js"></script>  
+    <script type="text/javascript" src="/js/flot/jquery.flot.labels.js"></script>
+    <script type="text/javascript" src="/js/flot/jquery.flot.symbol.js"></script> 
+    <script type="text/javascript" src="/js/wovodat.js?<?php echo $cache; ?>"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCQ9kUvUtmawmFJ62hWVsigWFTh3CKUzzM&sensor=false"></script>
+    <script type="text/javascript" src="/js/Tooltip_v3.js"></script>
+    <script type="text/javascript" src="/js/jquery.jgrowl.js"></script>
+    <script type="text/javascript" src="/js/BasicFunction_V5.js"></script>
+    <script type="text/javascript" src="/js/EarthQuakeController.js"></script>
+    <script type="text/javascript" src="/js/EarthQuakeUI.js"></script>
+    <script src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
+    <script> 
+    $(document).ready(function(){
+      $("#switchView").click();
+      $("#HideTimeSeriesPanel1").click();
+    }); 
+    </script>
+  </head>
 <body>
 
   <div class="body" style ="font-size:12px;" id="wrapborder_x">
@@ -84,8 +83,8 @@ $cache = time();
     echo "<input type='hidden' id='vnum' name='vnum' value='" . $vnum . "'>";
     echo "</form>";
     ?>
-    <?php include 'php/include/header.php'; ?>
-    <!--                <?php //include 'php/include/header_beta.php'; ?> -->
+	<?php //include 'php/include/header.php'; ?>
+	<?php include 'php/include/header_beta.php'; ?>
     <div class = "container" id = "wrap_x">
       <div class = "content">
         <div id="switchViewPanel" style = "visibility: hidden">
@@ -280,6 +279,18 @@ $cache = time();
                             </div>
                             <div>
                               <div id="MagnitudeRange1"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="leftPanel">Errorbars:</div>
+                          <div class="rightPanel">
+                            <div class="subrow">
+                              <table>
+                                <tr>
+                                  <td><input type='checkbox' id='errorbars1' checked/></td>
+                                </tr>
+                              </table>
                             </div>
                           </div>
                         </div>
