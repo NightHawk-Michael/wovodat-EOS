@@ -56,11 +56,17 @@ define(function(require) {
           }
       }
       //console.log(checkedTimeRange);
-      var timeRange = this.graphs[0].serieGraphTimeRange;
       //this.stackTimeSeriesGraphContainer.selectingFiltersChanged(checkedTimeRangeFilter, timeRange);
      // this.compositeGraphContainer.selectingFiltersChanged(this.selectingFilters);
      // this.compositeGraph.selectingFiltersChanged(this.selectingFilters);
-      this.compositeGraphContainer.selectingFiltersChanged(data);
+      document.getElementById('composite-title').style.display = "block";
+      (document.getElementsByClassName("composite-graph-container")[0]).style.display = "block";
+      if (data.length >0){
+        this.compositeGraphContainer.show(data);
+      }else{
+        this.compositeGraphContainer.hide();
+      }
+
       //console.log(data);
       //this.trigger('update_composite');
 
@@ -104,7 +110,8 @@ define(function(require) {
         attributes.serieID = this.graphs[i].timeRange.cid;
         this.graphs[i].timeRangeChanged(timeRange);
       };
-      //console.log(this.graphs);
+      this.compositeGraphContainer.timeRange = timeRange;
+
       this.show();
     },
     selectingFiltersChanged: function(selectingFilters){
@@ -137,7 +144,7 @@ define(function(require) {
       //this.$el.append("<ul id=\"select-options-e90cc158-e580-29c7-f252-ab6c6b42c2ad\" class=\"dropdown-content select-dropdown multiple-select-dropdown active\" style=\"width: 1026px; position: absolute; top: 0px; left: 0px; opacity: 1; display: block;\">");
       for (var i = 0; i < this.graphs.length; i++) {
         var checkboxid = this.graphs[i].timeRange.cid;
-       // var select = "<a style = \"padding-left: 75px;\"> <input class = \"select_time_range\"  type=\"checkbox\" id=\"" +checkboxid +"\" /> <label for=\"" + checkboxid+ "\"></label> </a>";
+        var select = "<a style = \"padding-left: 75px;\"> <input class = \"select_time_range\"  type=\"checkbox\" id=\"" +checkboxid +"\" /> <label for=\"" + checkboxid+ "\"></label> </a>";
         //this.$el.append(select);
         this.$el.append(this.graphs[i].$el);
 

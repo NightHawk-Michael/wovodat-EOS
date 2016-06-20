@@ -79,6 +79,8 @@ define(function(require) {
       this.listenTo(this.selectingFilters,'update',this.selectingFiltersChanged);
       this.listenTo(this.eruptionTimeRange,'update',this.eruptionTimeRangeChanged);
       this.listenTo(this.timeSeriesGraphContainer,'update_composite',this.compositeGraphUpdate);
+      this.listenTo(this.time,'update_composite',this.compositeGraphUpdate);
+
 
       /**
       * Events when some part is hidden
@@ -165,6 +167,8 @@ define(function(require) {
 
       this.overviewGraphContainer.selectingFiltersChanged(this.selectingFilters);
       this.overviewGraph.selectingFiltersChanged(this.selectingFilters);
+      this.compositeGraphContainer.selectingFiltersChanged(this.selectingFilters);
+      this.compositeGraph.selectingFiltersChanged(this.selectingFilters);
 
       this.timeSeriesGraphContainer.selectingFiltersChanged(this.selectingFilters);
       this.eruptionSelect.selectingFiltersChanged(this.selectingFilters);
@@ -197,7 +201,8 @@ define(function(require) {
 
     },
     compositeGraphHidden: function(e){
-      this.eruptionSelect.hide();
+      //this.eruptionSelect.hide();
+      this.compositeGraphContainer.hide();
 
     },
     eruptionGraphHidden: function(e){

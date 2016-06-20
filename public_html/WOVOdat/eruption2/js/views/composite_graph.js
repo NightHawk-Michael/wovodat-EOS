@@ -3,7 +3,7 @@ define(function(require) {
   var $ = require('jquery'),
       Backbone = require('backbone'),
       _ = require('underscore'),
-      flot = require(['jquery.flot', 'jquery.flot.time', 'jquery.flot.navigate', 'jquery.flot.selection','excanvas','jquery.flot.errorbars','jquery.flot.legendoncanvas','jquery.flot.axislabels']),
+      flot = require(['jquery.flot', 'jquery.flot.time', 'jquery.flot.navigate', 'jquery.flot.selection','excanvas','jquery.flot.legendoncanvas','jquery.flot.axislabels']),
       TimeRange = require('models/time_range'),
       GraphHelper = require('helper/graph'),
   //Filter Color for each earthquake type configuration
@@ -31,19 +31,19 @@ define(function(require) {
       }
       this.update();
     },
-    onSelect: function(event, ranges) {
-
-      var startTime = ranges.xaxis.from,
-          endTime = ranges.xaxis.to;
-
-      event.data.set({
-        'startTime': startTime,
-        'endTime': endTime,
-
-      });
-
-      event.data.trigger('update');
-    },
+    //onSelect: function(event, ranges) {
+    //
+    //  var startTime = ranges.xaxis.from,
+    //      endTime = ranges.xaxis.to;
+    //
+    //  event.data.set({
+    //    'startTime': startTime,
+    //    'endTime': endTime,
+    //
+    //  });
+    //
+    //  event.data.trigger('update');
+    //},
     hide: function(){
       this.$el.html("");
       this.$el.width(0);
@@ -56,7 +56,6 @@ define(function(require) {
       this.$el.html(this.loading);
     },
     render: function() {
-
       // this.showLoading();
       var options = {
         grid:{
@@ -91,13 +90,11 @@ define(function(require) {
           max: this.maxY,
           //axisLabelUseCanvas: true,
           autoscaleMargin: 5,
-          ticks: this.ticks,
+          ticks: 6,
+          errorbar : 0,
           labelWidth: 40
         },
-        selection: {
-          mode: 'x',
-          color: '#451A2B'
-        },
+
         zoom: {
           interactive: false,
         },
@@ -106,6 +103,7 @@ define(function(require) {
         },
       };
       //pass color into options
+      console.log(options);
       options.colors = ["#000000", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"];
 
       if (!this.data || !this.data.length) {
@@ -113,20 +111,12 @@ define(function(require) {
         return;
       };
 
-      this.$el.width('auto');
+      this.$el.width('auto' );
       this.$el.height(200);
 
       this.$el.addClass("composite-graph");
 
-
-      //limit data to be rendered
-
-
-      //document.getElementById('composite-title').style.display = 'block';
-      //(document.getElementsByClassName('composite-graph-container'))[0].style.padding = '20px';
-
       this.graph = $.plot(this.$el, this.data, options);
-      console.log(this.$el);
       //To edit the series object, go to GraphHelper used for data in the prepareData method below.
       //this.$el.bind('plotselected', this.selectingTimeRange, this.onSelect);
 
@@ -134,65 +124,55 @@ define(function(require) {
 
     update: function() {
       this.showLoading();
-     // this.prepareData();
+      this.prepareData();
       this.render();
     },
 
 
     prepareData: function() {
+      if (this.timeRange != undefined && this.data != undefined && this.data.length > 0){
+          var minY = 100000;
+          var maxY = -500000;
+        this.minX = this.timeRange.attributes.startTime;
+        this.maxX = this.timeRange.attributes.endTime;
+          console.log (this.data);
+          for (var p = 0; p < this.data.length; p++) {
+            var eventData = this.data[p].data;
 
+            for (var i = 0; i < eventData.length; i++) {
+              var eData = eventData[i];
+              /*
+              Make the y-value of eruption out of range for not displaying in graph
+               */
+              if (p %2 == 1) {
+                eData[1] = 1000000;
+                continue;
+              }
+              if (eData[0] < this.timeRange.attributes.startTime || eData[0] > this.timeRange.attributes.endTime) continue;
+              /*
+              Remove error bar
+               */
+              if (eData.length == 3){
+                eData[2] = 0;
+                if (eData[1] < minY) minY = eData[1];
+                if (eData[1] > maxY) maxY = eData[1];
+              }else{
+                if (eData[eData.length - 1] < minY) minY = eData[eData.length - 1];
+                if (eData[eData.length - 1] > maxY) maxY = eData[eData.length - 1];
+              }
 
-      var filters =[];
-      var categories=this.categories;
-      for(var i=0;i<categories.length;i++){
-        if(this.selectingFilters[categories[i]]!=undefined){
-          filters = filters.concat(this.selectingFilters[categories[i]]);
-        }
-      }
-      //console.log(filters);
-      // this variable helps to set color for each earthquake type
-      var earthquakeTypeColor = this.filterColorCollection;
-      // Preset color for each filter data to achieve color coherence in between overview and time series graph.
-      var presetColorArray = ["#000000", "#396ab1", "#cb4b4b", "#4da74d", "#9440ed", "#948b3d", "#da7c30", "#cb1480", "#85004e", "#19d1d6"];
-      // ensure the color will not be repeated unless it has reached the end of the presetColorArray
-      var counter = 0;
-      for(var i=0;i<filters.length;i++){
-        var currentFilter = filters[i];
-        for(var k=0;k<currentFilter.filterAttributes.length;k++){
-          var currentFilterAttributes = currentFilter.filterAttributes[k];
-          // Checking whether the filterAtribute name is an earthquake type (eg.R,v,...).
-          // If yes, then use the pre-assigned color in the database.
-          // Else use the color from the presetColorArray above.
-          var graphColorForEarthquakeType = null;
-          for(var j=0;j<earthquakeTypeColor.length;j++){
-            if(currentFilterAttributes.name == earthquakeTypeColor.models[j].id){
-              graphColorForEarthquakeType = earthquakeTypeColor.models[j].attributes.color;
-              break;
             }
+
           }
-          //console.log(currentFilterAttributes.color);
-          if(graphColorForEarthquakeType == null){
-            var colorPos = counter%(presetColorArray.length);
-            currentFilterAttributes.color = presetColorArray[colorPos];
-            counter++;
-          }
-          else{
-            currentFilterAttributes.color = graphColorForEarthquakeType;
-          }
-          //console.log(counter);
-        }
+        if (maxY > 0)this.maxY = maxY * 1.1;
+        else this.maxY = maxY * 0.9;
+        if (minY > 0)this.minY = minY * 0.9;
+        else this.minY = minY * 1.1;
+
+          //console.log (maxY + "\t" + minY);
+
       }
-
-
-      var allowErrorbar = false;
-      var allowAxisLabel =false;
-      var limitNumberOfData =true;
-      //var adjustTimeRange = false;
-      //formatData: function(graph,filters,allowErrorbar,allowAxisLabel,limitNumberOfData)
-      GraphHelper.formatData(this,filters,allowErrorbar,allowAxisLabel,limitNumberOfData);
-
     },
-
 
     destroy: function() {
       // From StackOverflow with love.

@@ -37,7 +37,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       this.maxX = TimeRange.get('endTime');
       this.serieId = TimeRange.get('serieID');
       this.isTrigger = true;
-
+      //  this.trigger("update_time-range-composite");
 
       //this.overviewGraphMinX = TimeRange.get('overviewGraphMinX');
       //this.overviewGraphMaxX = TimeRange.get('overviewGraphMaxX');
@@ -229,9 +229,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
 
       this.$el.width('auto');
       this.$el.height(200);
-      //var checkboxid = "cb" + this.serieId;
-      //var select = "<a style = \"padding-left: 75px;\"> <input onclick='handleTimeSerie();' type=\"checkbox\" id=\"" +checkboxid +"\" /> <label for=\"" + checkboxid+ "\"></label> </a>";
-      //this.$el.append(select);
+
       this.$el.addClass('time-serie-graph');
       //this.$el.append(' Individual graph display </br>');
       // plot the time series graph after being selected (eg. onSelect in OverViewGraph).
@@ -401,6 +399,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
         return;
       }
       var filters = [this.filters];
+      console.log(this.filters);
       var allowErrorbar = true;
       var allowAxisLabel =true;
       var limitNumberOfData =false;

@@ -25,23 +25,28 @@ define(function(require) {
     },
     //hide overview graph from page
     hide: function(){
-      this.$el.html("");
+      //this.$el.html("");
       this.$el.addClass("composite-graph-container card-panel");
       this.$el.append("<div id = \"composite-title\" style = \"padding-left: 50px;display:none;\">" +
           "<a style = \" font-weight: bold; color : black;\">Composite Graph.</a> <br>" +
           "</div>");
-      this.trigger('hide');
+      (document.getElementsByClassName("composite-graph-container")[0]).style.display = "none";
+      //this.trigger('hide');
     },
 
     //show overview graph on page
-    show: function(){
-      this.render();
-    },
-    selectingFiltersChanged: function(data) {
+    show: function(data){
+
       this.data = data;
       this.compositeGraph.data = data;
+      this.compositeGraph.timeRange = this.timeRange;
+      console.log(this.timeRange);
+      this.render();
+    },
+    selectingFiltersChanged: function(selectingFilters) {
+      this.selectingFilters = selectingFilters;
       // console.log("DEBUG " + this.selectingFilters.);
-      if (this.data.empty) {
+      if (this.selectingFilters.empty) {
         this.hide();
       }else{
         this.show();
