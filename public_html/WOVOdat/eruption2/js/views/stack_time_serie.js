@@ -31,7 +31,12 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
                 // console.log(this.serieGraphTimeRange);
                 this.prepareData();
             },
-
+            hide: function(){
+                this.$el.html("");
+                this.$el.width(0);
+                this.$el.height(0);
+                (document.getElementsByClassName('composite-graph-container'))[0].style.padding = '0px';
+            },
             timeRangeChanged: function(TimeRange){
                 if(TimeRange == undefined){
                     return;
@@ -94,78 +99,82 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
                 //this.timeRangeChanged(this.timeRange);
                 this.render();
             },
+            showLoading: function(){
+                this.$el.html(this.loading);
+            },
             render: function() {
 
-                if(this.data==undefined){
-                    return;
-                }
-                this.$el.html("");
-                var unit = undefined;
-                for(var i=0;i<this.data.length;i++){
-                    if(this.data[i].yaxis.axisLabel != undefined){
-                        unit = this.data[i].yaxis.axisLabel;
-                    }
-                };
-                // change yaxix according to zoomed in data
-                // PROBLEM FOR Fluctuate Data maxY or minY may not be MaxX or MinX they can lie in between
-                var zoomedDataMinY = undefined;
-                var zoomedDataMaxY = undefined;
-                for(var j=0;j<this.data.length;j++){
-                    for(var k=0;k<this.data[j].data.length;k++){
-                        var currentData = this.data[j].data[k];
-                        var previousData = this.data[j].data[k-1];
-                        if(this.data[j].points.show){
-                            if(currentData[0]>=this.minX&&currentData[0]<=this.maxX){
-                                if(zoomedDataMinY == undefined){
-                                    zoomedDataMinY = currentData[1]-currentData[2];
-                                }
-                                else if(currentData[1]-currentData[2]<zoomedDataMinY){
-                                    zoomedDataMinY = currentData[1]-currentData[2];
-                                };
-                            }
-
-                            if(currentData[0]<=this.maxX&&currentData[0]>=this.minX){
-                                if(zoomedDataMaxY == undefined){
-                                    zoomedDataMaxY = currentData[1]+currentData[2];
-                                }
-                                else if(currentData[1]+currentData[2]>zoomedDataMaxY){
-                                    zoomedDataMaxY = currentData[1]+currentData[2];
-                                };
-                            }
-                        }
-                        else if(this.data[j].bars.show){
-                            if(currentData[0]>=this.minX&&currentData[1]<=this.maxX){
-                                if(zoomedDataMinY == undefined){
-                                    zoomedDataMinY = currentData[3]-currentData[4];
-                                }
-                                else if((currentData[3]-currentData[4])<zoomedDataMinY){
-                                    zoomedDataMinY = currentData[3]-currentData[4];
-                                };
-                            }
-
-                            if(currentData[1]<=this.maxX&&currentData[0]>=this.minX){
-                                if(zoomedDataMaxY == undefined){
-                                    zoomedDataMaxY = currentData[2]+currentData[4];
-                                }
-                                else if((currentData[2]+currentData[4])>zoomedDataMaxY){
-                                    zoomedDataMaxY = currentData[2]+currentData[4];
-                                };
-                            }
-                        }
-                    }
-                };
-                if(zoomedDataMaxY>=0&&zoomedDataMinY>=0){
-                    this.minY = zoomedDataMinY*0.95;
-                    this.maxY = zoomedDataMaxY*1.05;
-                }
-                else if(zoomedDataMaxY<0&&zoomedDataMinY<0){
-                    this.minY = zoomedDataMinY*1.05;
-                    this.maxY = zoomedDataMaxY*0.95;
-                }
-                else if(zoomedDataMaxY>0&&zoomedDataMinY<0){
-                    this.minY = zoomedDataMinY*1.05;
-                    this.maxY = zoomedDataMaxY*1.05;
-                }
+                console.log(this.$el);
+                //if(this.data==undefined){
+                //    return;
+                //}
+                //this.$el.html("");
+                //var unit = undefined;
+                //for(var i=0;i<this.data.length;i++){
+                //    if(this.data[i].yaxis.axisLabel != undefined){
+                //        unit = this.data[i].yaxis.axisLabel;
+                //    }
+                //};
+                //// change yaxix according to zoomed in data
+                //// PROBLEM FOR Fluctuate Data maxY or minY may not be MaxX or MinX they can lie in between
+                //var zoomedDataMinY = undefined;
+                //var zoomedDataMaxY = undefined;
+                //for(var j=0;j<this.data.length;j++){
+                //    for(var k=0;k<this.data[j].data.length;k++){
+                //        var currentData = this.data[j].data[k];
+                //        var previousData = this.data[j].data[k-1];
+                //        if(this.data[j].points.show){
+                //            if(currentData[0]>=this.minX&&currentData[0]<=this.maxX){
+                //                if(zoomedDataMinY == undefined){
+                //                    zoomedDataMinY = currentData[1]-currentData[2];
+                //                }
+                //                else if(currentData[1]-currentData[2]<zoomedDataMinY){
+                //                    zoomedDataMinY = currentData[1]-currentData[2];
+                //                };
+                //            }
+                //
+                //            if(currentData[0]<=this.maxX&&currentData[0]>=this.minX){
+                //                if(zoomedDataMaxY == undefined){
+                //                    zoomedDataMaxY = currentData[1]+currentData[2];
+                //                }
+                //                else if(currentData[1]+currentData[2]>zoomedDataMaxY){
+                //                    zoomedDataMaxY = currentData[1]+currentData[2];
+                //                };
+                //            }
+                //        }
+                //        else if(this.data[j].bars.show){
+                //            if(currentData[0]>=this.minX&&currentData[1]<=this.maxX){
+                //                if(zoomedDataMinY == undefined){
+                //                    zoomedDataMinY = currentData[3]-currentData[4];
+                //                }
+                //                else if((currentData[3]-currentData[4])<zoomedDataMinY){
+                //                    zoomedDataMinY = currentData[3]-currentData[4];
+                //                };
+                //            }
+                //
+                //            if(currentData[1]<=this.maxX&&currentData[0]>=this.minX){
+                //                if(zoomedDataMaxY == undefined){
+                //                    zoomedDataMaxY = currentData[2]+currentData[4];
+                //                }
+                //                else if((currentData[2]+currentData[4])>zoomedDataMaxY){
+                //                    zoomedDataMaxY = currentData[2]+currentData[4];
+                //                };
+                //            }
+                //        }
+                //    }
+                //};
+                //if(zoomedDataMaxY>=0&&zoomedDataMinY>=0){
+                //    this.minY = zoomedDataMinY*0.95;
+                //    this.maxY = zoomedDataMaxY*1.05;
+                //}
+                //else if(zoomedDataMaxY<0&&zoomedDataMinY<0){
+                //    this.minY = zoomedDataMinY*1.05;
+                //    this.maxY = zoomedDataMaxY*0.95;
+                //}
+                //else if(zoomedDataMaxY>0&&zoomedDataMinY<0){
+                //    this.minY = zoomedDataMinY*1.05;
+                //    this.maxY = zoomedDataMaxY*1.05;
+                //}
 
                 var options = {
                     grid:{
@@ -197,7 +206,6 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
                         },
                         zoomRange: false,
                         panRange: false,
-                        axisLabel: unit,
                         canvas: true,
                         autoscaleMargin: 5,
                     },
@@ -224,10 +232,11 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
 
                 this.$el.width('auto');
                 this.$el.height(200);
+                document.getElementById('stack-graph-title').style.visibility = "visible";
                 //var checkboxid = "cb" + this.serieId;
                 //var select = "<a style = \"padding-left: 75px;\"> <input onclick='handleTimeSerie();' type=\"checkbox\" id=\"" +checkboxid +"\" /> <label for=\"" + checkboxid+ "\"></label> </a>";
                 //this.$el.append(select);
-                this.$el.addClass('stack-time-serie-graph');
+                this.$el.addClass('stack-graph');
                 //this.$el.append(' Individual graph display </br>');
                 // plot the time series graph after being selected (eg. onSelect in OverViewGraph).
                 // config graph theme colors
@@ -267,7 +276,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
              Same as render but remove binding
              remove checking pf value of minX,maxX, minY, maxY because the input is checked before
              */
-            update: function() {
+            updateState: function() {
 
                 if(this.data==undefined){
                     return;
@@ -338,7 +347,11 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
 
                 this.$el.width('auto');
                 this.$el.height(200);
-                this.$el.addClass('stack-time-serie-graph');
+
+
+                this.$el.addClass('stack-graph');
+                document.getElementById('stack-graph-title').style.visibility = "visible";
+                (document.getElementsByClassName("stack-graph-container")[0]).style.display = "block";
                 //this.$el.append(' Individual graph display </br>');
                 // plot the time series graph after being selected (eg. onSelect in OverViewGraph).
                 // config graph theme colors
@@ -350,6 +363,12 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
                 this.graph = $.plot(this.$el, this.data, options);
 
 
+            },
+            update: function() {
+
+                this.showLoading();
+                this.prepareData();
+                this.render();
             },
             onZoom: function(event,plot){
                 // console.log("zoom");
@@ -379,30 +398,64 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
                     'endTime': endTime,
                     'serieID' : this.serieId,
                 });
-
-
                 this.serieGraphTimeRange.trigger('nav_stack',this.serieGraphTimeRange);
-
-
 
 
             },
 
             prepareData: function() {
-                if(this.filters == undefined){
-                    this.data = undefined;
-                    return;
+                if (this.timeRange != undefined && this.data != undefined && this.data.length > 0){
+                    var minY = 100000;
+                    var maxY = -500000;
+                    this.minX = this.timeRange.attributes.startTime;
+                    this.maxX = this.timeRange.attributes.endTime;
+                    for (var p = 0; p < this.data.length; p++) {
+                        var eventData = this.data[p].data;
+
+                        for (var i = 0; i < eventData.length; i++) {
+                            var eData = eventData[i];
+                            /*
+                             Make the y-value of eruption out of range for not displaying in graph
+                             */
+                            if (p > 1 && p %2 == 1) {
+                                eData[1] = 1000000;
+                                continue;
+                            }
+                            if (eData[0] < this.timeRange.attributes.startTime || eData[0] > this.timeRange.attributes.endTime) continue;
+                            /*
+                             Remove error bar
+                             */
+                            if (eData.length == 3){
+                                eData[2] = 0;
+                                if (eData[1] < minY) minY = eData[1];
+                                if (eData[1] > maxY) maxY = eData[1];
+                            }else{
+                                if (eData[eData.length - 1] < minY) minY = eData[eData.length - 1];
+                                if (eData[eData.length - 1] > maxY) maxY = eData[eData.length - 1];
+                            }
+
+                        }
+
+                    }
+                    if (maxY > 0)this.maxY = maxY * 1.1;
+                    else this.maxY = maxY * 0.9;
+                    if (minY > 0)this.minY = minY * 0.9;
+                    else this.minY = minY * 1.1;
+                    this.data[1][1] = maxY;
+
+                    /*
+                     Config eruption marker
+                     */
+                    var eventData = this.data[1].data;
+                    for (var i = 0; i < eventData.length; i++) {
+                        var eData = eventData[i];
+                        eData[1] = maxY;
+
+
+                    }
+                    //  console.log(eventData);
+
                 }
-                var filters = [this.filters];
-                var allowErrorbar = true;
-                var allowAxisLabel =true;
-                var limitNumberOfData =false;
-                var eruptions =  this.eruptions;
-                //formatData: function(graph,filters,allowErrorbar,allowAxisLabel,limitNumberOfData)
-                // console.log(this.filters);
-                //console.log(eruptions);
-                //GraphHelper.formatDataEruption(this,this.eruptions);
-                GraphHelper.formatData(this,filters,allowErrorbar,allowAxisLabel,limitNumberOfData, eruptions);
             },
 
             destroy: function() {

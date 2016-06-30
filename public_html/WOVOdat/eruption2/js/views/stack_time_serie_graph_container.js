@@ -23,6 +23,7 @@ define(function(require) {
       this.categories = options.categories;
       this.beingShown = false;
   		this.graphs = [];
+      this.stackGraph = options.stackGraph;
   	},
 
 
@@ -40,32 +41,32 @@ define(function(require) {
 
   	// 	this.filterObserver.trigger("filter-change");
   	// },
-    addGraph : function( filters ) {
-      // var val = filter.get("filter");
-      // selectingTimeSeries.
-      // timeSerie.fetch({
-      //   success: function(collection, response) {
-      //     // console.log(e);
-      //     console.log(response);
-
-      //   }
-      // });
-      var timeSerieGraph = new StackTimeSerieGraph( {
-        // timeRange : this.timeRange,
-        filters: filters,
-        eruptionTimeRange: this.eruptionTimeRange,
-        serieGraphTimeRange: this.serieGraphTimeRange,
-        forecastsGraphTimeRange: this.forecastsGraphTimeRange,
-        eruptions : this.eruptions,
-      });
-
-      this.graphs.push(timeSerieGraph);
-      // this.show();
-
-      // this.graphs[val].filter.trigger("change");
-
-      // this.filterObserver.trigger("filter-change");
-    },
+    //addGraph : function( filters ) {
+    //  // var val = filter.get("filter");
+    //  // selectingTimeSeries.
+    //  // timeSerie.fetch({
+    //  //   success: function(collection, response) {
+    //  //     // console.log(e);
+    //  //     console.log(response);
+    //
+    //  //   }
+    //  // });
+    //  var timeSerieGraph = new StackTimeSerieGraph( {
+    //    // timeRange : this.timeRange,
+    //    filters: filters,
+    //    eruptionTimeRange: this.eruptionTimeRange,
+    //    serieGraphTimeRange: this.serieGraphTimeRange,
+    //    forecastsGraphTimeRange: this.forecastsGraphTimeRange,
+    //    eruptions : this.eruptions,
+    //  });
+    //
+    //  this.graphs.push(timeSerieGraph);
+    //  // this.show();
+    //
+    //  // this.graphs[val].filter.trigger("change");
+    //
+    //  // this.filterObserver.trigger("filter-change");
+    //},
 
   	// removeGraph : function( timeSerie ) {
   	// 	// var val = filter.get("filter");
@@ -79,59 +80,45 @@ define(function(require) {
    //    };
   	// 	// this.filterObserver.trigger("filter-change");
   	// },
-    stackSerieGraphTimeRangeChanged: function(timeRange){
-      for (var i = 0; i < this.graphs.length; i++) {
-        //     console.log(this.graphs[i]);
-        var attributes = this.graphs[i].serieGraphTimeRange.attributes;
-        attributes.serieID = this.graphs[i].timeRange.cid;
-        this.graphs[i].timeRangeChanged(timeRange);
-      };
-      //console.log(this.graphs);
 
+    selectingFiltersChanged: function(selectingFilters){
+      this.selectingFilters = selectingFilters;
+      if (this.selectingFilters.empty) {
+        this.hide();
+      }else{
 
-      this.show();
-    },
-    selectingFiltersChanged: function(filters,timeRange){
-      this.graphs.length =0;
-      this.$el.html("");
-
-      for (var i = 0; i < filters.length; i++) {
-        this.addGraph(filters[i]);
-      };
-
-      this.stackSerieGraphTimeRangeChanged(timeRange)
+        this.show();
+      }
     },
     // render: function(selectingTimeSeries) {
     //   this.overviewGraph.$el.appendTo(this.$el);
     // },
     hide: function(){
 
-
       this.$el.html("");
+      this.$el.addClass("stack-graph-container card-panel");
 
-      //console.log ("HIDE");
-      //this.$el.context.children
+      this.$el.append("<div id = \"stack-graph-title\" style = \"font-weight: bold; color : black; background-color:white; padding-left: 50px; \">Stack graph display</div>");
+      //this.selectingFiltersChanged();
 
 
-
+      //for (var i = 0; i < this.graphs.length; i++) {
+      //
+      //  this.$el.append(this.graphs[i].$el);
+      //
+      //  this.graphs[i].show();
+      //
+      //}
+      (document.getElementsByClassName("stack-graph-container")[0]).style.display = "none";
+      document.getElementById('stack-graph-title').style.visibility = "collapse";
     },
-    show: function(time){
-
-      this.$el.html("");
-      this.$el.addClass("stack-time-series-graph-container card-panel");
-
-      this.$el.append("<div class = \"stack-graph-title\" style = \"font-weight: bold; color : black; background-color:white; padding-left: 50px; \">Stack graph display</div>");
-
-      for (var i = 0; i < this.graphs.length; i++) {
-
-        this.$el.append(this.graphs[i].$el);
-
-        this.graphs[i].show();
-       // this.graphs[i].draw();
-
-      }
-      //this.$el.append("</ul>");
-      //this.$el.append(temp);
+    show: function(){
+      this.stackGraph.data = this.data;
+      this.stackGraph.timeRange = this.timeRange;
+      this.render();
+    },
+    update : function(){
+      this.show();
     },
 
     destroy: function() {
@@ -169,6 +156,17 @@ define(function(require) {
         }
       }
 
+    },
+
+    render: function() {
+      //console.log(this.overviewGraph);
+
+      this.stackGraph.render();
+      this.stackGraph.$el.appendTo(this.$el);
+      var button = "<a > <input style = \"margin-left:50px;pading:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light btn gen-pdf\"  type=\"button\" value = \"Print PDF\"/> <label ></label> </a>";
+      if (this.data != undefined && this.$el.context.childNodes.length <=2) this.$el.append(button);
+      //var button = "<a style = \"right:0px; \"> <input class = \"waves-effect waves-light btn\"  type=\"button\" id=\"\"  value = \"Print PDF\"/> <label for=\"\"></label> </a>";
+      //this.$el.append(button);
     }
 
 

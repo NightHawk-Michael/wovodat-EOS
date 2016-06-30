@@ -48,7 +48,7 @@ define(function(require) {
       this.$el.html("");
       this.$el.width(0);
       this.$el.height(0);
-      (document.getElementsByClassName('composite-graph-container'))[0].style.padding = '0px';
+      (document.getElementsByClassName('composite-graph-container'))[0].style.display = 'none';
 
       this.trigger('hide');
     },
@@ -56,9 +56,66 @@ define(function(require) {
       this.$el.html(this.loading);
     },
     render: function() {
+      //console.log(this.$el);
+      /*
+      Config verical axes
+       */
+      var yaxes = [];
+      if (this.data != undefined){
+        console.log(this.data);
+        for (var p  = 0 ; p < this.data.length; p = p+2){
+        //  console.log(this.data[p]);
+          var minY = 100000;
+          var maxY = -500000
+          var eventData = this.data[p].data;
+
+          for (var i = 0; i < eventData.length; i++) {
+            var eData = eventData[i];
+
+            if (eData[0] < this.timeRange.attributes.startTime || eData[0] > this.timeRange.attributes.endTime) continue;
+            /*
+             Remove error bar
+             */
+            if (eData.length == 3){
+              eData[2] = 0;
+              if (eData[1] < minY) minY = eData[1];
+              if (eData[1] > maxY) maxY = eData[1];
+            }else{
+              if (eData[eData.length - 1] < minY) minY = eData[eData.length - 1];
+              if (eData[eData.length - 1] > maxY) maxY = eData[eData.length - 1];
+            }
+
+          }
+          if (maxY > 0)maxY = maxY * 1.1;
+          else maxY = maxY * 0.9;
+          if (minY > 0)minY = minY * 0.9;
+          else minY = minY * 1.1;
+          var position;
+          if (i%2 == 1) position  = "right";
+          else position =  "left";
+          var option = {
+              font :{
+                color:  this.data[p].color,
+              },
+              max : maxY ,
+              min : minY,
+            alignTicksWithAxis: position == "right" ? 1 : null,
+            position: position,
+
+          }
+          yaxes.push(option);
+          this.data[p].yaxis = yaxes.length;
+
+        }
+      }
+
       // this.showLoading();
       var options = {
+        series :{
+          scale : true,
+        },
         grid:{
+
           // margin: 20,
           minBorderMargin : 10
         },
@@ -75,7 +132,6 @@ define(function(require) {
         },
         yaxis: {
           show: true,
-          color: '#00000000',
           canvas: false,
           // tickFormatter: function(val, axis) {
           //   // console.log(val);
@@ -86,15 +142,15 @@ define(function(require) {
           //   }
           //   return val;
           // },
-          min: this.minY,
-          max: this.maxY,
-          //axisLabelUseCanvas: true,
-          autoscaleMargin: 5,
-          ticks: 6,
-          errorbar : 0,
-          labelWidth: 40
+          //min: this.minY,
+          //max: this.maxY,
+          ////axisLabelUseCanvas: true,
+          //autoscaleMargin: 5,
+          //ticks: 6,
+          //errorbar : 0,
+          //labelWidth: 40
         },
-
+        yaxes: yaxes,
         zoom: {
           interactive: false,
         },
@@ -103,26 +159,32 @@ define(function(require) {
         },
       };
       //pass color into options
-      console.log(options);
       options.colors = ["#000000", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"];
 
       if (!this.data || !this.data.length) {
         this.$el.html(''); //$(this) = this.$el
+        (document.getElementsByClassName('composite-graph-container'))[0].style.display = 'none';
+
         return;
       };
 
+
       this.$el.width('auto' );
-      this.$el.height(200);
+      this.$el.height(400);
 
       this.$el.addClass("composite-graph");
+      document.getElementById('composite-title').style.visibility = "visible";
 
+      (document.getElementsByClassName("composite-graph-container")[0]).style.display = "block";
       this.graph = $.plot(this.$el, this.data, options);
+
       //To edit the series object, go to GraphHelper used for data in the prepareData method below.
       //this.$el.bind('plotselected', this.selectingTimeRange, this.onSelect);
 
     },
 
     update: function() {
+
       this.showLoading();
       this.prepareData();
       this.render();
@@ -135,41 +197,9 @@ define(function(require) {
           var maxY = -500000;
         this.minX = this.timeRange.attributes.startTime;
         this.maxX = this.timeRange.attributes.endTime;
-          console.log (this.data);
-          for (var p = 0; p < this.data.length; p++) {
-            var eventData = this.data[p].data;
 
-            for (var i = 0; i < eventData.length; i++) {
-              var eData = eventData[i];
-              /*
-              Make the y-value of eruption out of range for not displaying in graph
-               */
-              if (p %2 == 1) {
-                eData[1] = 1000000;
-                continue;
-              }
-              if (eData[0] < this.timeRange.attributes.startTime || eData[0] > this.timeRange.attributes.endTime) continue;
-              /*
-              Remove error bar
-               */
-              if (eData.length == 3){
-                eData[2] = 0;
-                if (eData[1] < minY) minY = eData[1];
-                if (eData[1] > maxY) maxY = eData[1];
-              }else{
-                if (eData[eData.length - 1] < minY) minY = eData[eData.length - 1];
-                if (eData[eData.length - 1] > maxY) maxY = eData[eData.length - 1];
-              }
 
-            }
-
-          }
-        if (maxY > 0)this.maxY = maxY * 1.1;
-        else this.maxY = maxY * 0.9;
-        if (minY > 0)this.minY = minY * 0.9;
-        else this.minY = minY * 1.1;
-
-          //console.log (maxY + "\t" + minY);
+      //  console.log(eventData);
 
       }
     },

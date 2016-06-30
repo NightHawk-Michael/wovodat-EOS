@@ -59,20 +59,21 @@ define(function(require) {
                 etime: DateHelper.formatDate(item.datapoint[1]),
                 value: (item.datapoint[2] + item.datapoint[3])/2,
                 error: item.datapoint[4]
+
               })
-              break;
+            this.render(pos.pageX, pos.pageY, this.html);
+            break;
             case 3: case 2:
-              var symbol = item.series.points.symbol;
-              this.html = this.template({
-                type: "point",
-                symbol : symbol,
-                time: DateHelper.formatDate(item.datapoint[0]),
-                value: item.datapoint[1],
-                error: item.datapoint[2]
-              })
+              //var symbol = item.series.points.symbol;
+              //this.html = this.template({
+              //  type: "point",
+              //  symbol : symbol,
+              //  //time: DateHelper.formatDate(item.datapoint[0]),
+              //  value: item.datapoint[1],
+              //  error: item.datapoint[2]
+              //})
           }
           
-          this.render(pos.pageX, pos.pageY, this.html);
         }
       } else {
         this.hide();

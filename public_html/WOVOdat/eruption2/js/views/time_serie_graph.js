@@ -82,7 +82,9 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
     onHover: function(event, pos, item) {
       // if(item!=null){
         var tooltip = event.data;
-      tooltip.update(pos, item);  
+      tooltip.update(pos, item);
+
+      //console.log(item);
       // }
       
     },
@@ -246,6 +248,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
 
       //this.$el.append("<div><input type=\"checkbox\" >aaa</div>");
       this.$el.bind('plothover', this.tooltip,this.onHover);
+      //this.tooltip.update()
 
       var   eventData = {
         startTime: this.minX,
@@ -399,7 +402,6 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
         return;
       }
       var filters = [this.filters];
-      console.log(this.filters);
       var allowErrorbar = true;
       var allowAxisLabel =true;
       var limitNumberOfData =false;

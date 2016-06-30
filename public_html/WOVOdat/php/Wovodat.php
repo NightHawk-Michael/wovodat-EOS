@@ -161,17 +161,32 @@ class Wovodat {
      */
     public function getVolcanoListHasData() {
         mysql_query("set character_set_results='utf8'");
-            $result = mysql_query("select vd_name, vd_cavw, vd_num, vd_id from vd
-    WHERE
-    (EXISTS (select * from ed WHERE ed_etime > 0 AND ed_stime > 0 AND vd.vd_id = ed.vd_id))
-    AND
-    (vd.vd_id IN (SELECT DISTINCT jj_volnet.vd_id FROM `sn`, jj_volnet WHERE sn.sn_id IN (SELECT DISTINCT jj_volnet.jj_net_id from jj_volnet as jj) AND sn.vd_id IS NULL
-					UNION
-					SELECT DISTINCT vd_id FROM `sn` WHERE sn_id IN (SELECT DISTINCT sn_id from sd_evn) AND vd_id IS NOT NULL)
-    )
-    AND
-    (vd.vd_id IN (select vd_id from jj_volnet UNION select vd_id from vd_inf))
-    order by vd_name");
+        $result = mysql_query("select vd_name, vd_cavw, vd_num from vd where vd_id IN
+				(select vd_id from es_dd_ang
+				UNION select vd_id from es_dd_edm
+				UNION select vd_id from es_dd_gps
+				UNION select vd_id from es_dd_gpv
+				UNION select vd_id from es_dd_lev
+				UNION select vd_id from es_dd_str
+				UNION select vd_id from es_dd_tlt
+				UNION select vd_id from es_fd_ele
+				UNION select vd_id from es_fd_gra
+				UNION select vd_id from es_fd_mag
+				UNION select vd_id from es_fd_mgv
+				UNION select vd_id from es_gd
+				UNION select vd_id from es_gd_plu
+				UNION select vd_id from es_gd_sol
+				UNION select vd_id from es_hd
+				UNION select vd_id from es_med
+				UNION select vd_id from es_sd_evn
+				UNION select vd_id from es_sd_evs
+				UNION select vd_id from es_sd_int
+				UNION select vd_id from es_sd_ivl
+				UNION select vd_id from es_sd_rsm
+				UNION select vd_id from es_sd_ssm
+				UNION select vd_id from es_sd_trm
+				UNION select vd_id from es_td) order by vd_name");
+
         //"select vd_name, vd_cavw, vd_num from vd WHERE EXISTS (select * from ed WHERE ed_etime > 0 AND ed_stime > 0 AND vd.vd_id = ed.vd_id) order by vd_name
         $row = mysql_fetch_array($result);
 
@@ -186,10 +201,10 @@ class Wovodat {
             $object[3] = $row[2];                   //vd_num
 
 
-            $temp = $this->getStationsWithDataList($row[3]);
-            if(!empty($temp)){
+            //$temp = $this->getStationsWithDataList($row[3]);
+            //if(!empty($temp)){
                 array_push($results, $object);
-            }
+            //}
 
             $row = mysql_fetch_array($result);
             if ($row == false)

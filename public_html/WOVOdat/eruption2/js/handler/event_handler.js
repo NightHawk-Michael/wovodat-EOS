@@ -50,8 +50,7 @@ define(function(require) {
 
       this.eruptionGraph = options.eruptionGraph;
       this.timeSeriesGraphContainer = options.timeSeriesGraphContainer;
-      this.compositeGraphContainer = options.compositeGraphContainer;
-      this.stackTimeSeriesGraphContainer = options.stackTimeSeriesGraphContainer;
+      this.stackGraphContainer = options.stackGraphContainer;
       this.serieGraphTimeRange = options.serieGraphTimeRange;
       this.eruptionTimeRange = options.eruptionTimeRange;
       this.forecastsGraphTimeRange = options.forecastsGraphTimeRange;
@@ -78,8 +77,9 @@ define(function(require) {
       this.listenTo(this.selectingTimeRange,'update',this.selectingTimeRangeChanged);
       this.listenTo(this.selectingFilters,'update',this.selectingFiltersChanged);
       this.listenTo(this.eruptionTimeRange,'update',this.eruptionTimeRangeChanged);
-      this.listenTo(this.timeSeriesGraphContainer,'update_composite',this.compositeGraphUpdate);
-      this.listenTo(this.time,'update_composite',this.compositeGraphUpdate);
+      this.listenTo(this.timeSeriesGraphContainer,'update-composite',this.compositeGraphUpdate);
+      this.listenTo(this.timeSeriesGraphContainer,'update-stack',this.stackGraphUpdate);
+
 
 
       /**
@@ -96,7 +96,7 @@ define(function(require) {
       this.listenTo(this.eruptionGraph,'show',this.eruptionGraphShown);
 
       this.listenTo(this.serieGraphTimeRange,'nav', this.syncTimeSerie);
-      this.listenTo(this.stackTimeSeriesGraphContainer,'nav_stack', this.syncTimeSerieStack);
+      this.listenTo(this.stackGraphContainer,'nav_stack', this.syncTimeSerieStack);
 
 
       // this.listenTo(this.selectingEruptions, 'reset', this.resetSelectingEruptions);
@@ -113,10 +113,20 @@ define(function(require) {
     },
     syncTimeSerieStack : function(e){
       var currentID = e.attributes.serieID;
-      this.stackTimeSeriesGraphContainer.updateTimeSerie(currentID);
+      this.stackGraphContainer.updateTimeSerie(currentID);
 
     },
     compositeGraphUpdate : function(e){
+      this.timeSeriesGraphContainer.updateSelectingTimeRange();
+      this.compositeGraphContainer.update();
+      this.stackGraphContainer.hide();
+
+    },
+    stackGraphUpdate : function(e){
+      this.timeSeriesGraphContainer.updateSelectingTimeRange();
+
+      this.stackGraphContainer.update();
+      this.compositeGraphContainer.hide();
       //this.compositeGraphContainer.selectingFiltersChanged(this.selectingFilters);
       //this.compositeGraph.selectingFiltersChanged(this.selectingFilters);
     },
@@ -167,9 +177,10 @@ define(function(require) {
 
       this.overviewGraphContainer.selectingFiltersChanged(this.selectingFilters);
       this.overviewGraph.selectingFiltersChanged(this.selectingFilters);
-      this.compositeGraphContainer.selectingFiltersChanged(this.selectingFilters);
-      this.compositeGraph.selectingFiltersChanged(this.selectingFilters);
 
+      this.compositeGraphContainer.selectingFiltersChanged(this.selectingFilters);
+
+      //this.stackGraphContainer.selectingFiltersChanged(this.selectingFilters);
       this.timeSeriesGraphContainer.selectingFiltersChanged(this.selectingFilters);
       this.eruptionSelect.selectingFiltersChanged(this.selectingFilters);
       

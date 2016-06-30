@@ -134,6 +134,7 @@ define(function(require) {
       this.showLoading();
       this.prepareData();
       this.render();
+
     },
     
   

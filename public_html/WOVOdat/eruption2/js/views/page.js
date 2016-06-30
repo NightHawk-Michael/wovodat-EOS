@@ -31,7 +31,8 @@ define(function(require) {
       TimeRangeSelect = require('views/time_range_select'),
       Tooltip = require('views/series_tooltip'),
       TimeSeriesGraphContainer = require('views/time_serie_graph_container'),
-      StackTimeSeriesGraphContainer = require('views/stack_time_serie_graph_container'),
+      StackGraphContainer = require('views/stack_time_serie_graph_container'),
+      StackGraph = require('views/stack_time_serie'),
 
       EventHandler = require('handler/event_handler');
 
@@ -136,20 +137,28 @@ define(function(require) {
             eruptionTimeRange: eruptionTimeRange,
             overviewGraphTimeRange: overviewGraphTimeRange
           }),
+          stackGraph = new StackGraph({
+            //eruptions: eruptions,
+            selectingTimeSeries: this.overviewSelectingTimeSeries,
+            serieGraphTimeRange: serieGraphTimeRange,
+            selectingTimeRange: selectingTimeRange,
+            compositeGraphTimeRange: compositeGraphTimeRange,
+          }),
           eruptionForecastsGraph = new EruptionForecastsGraph({
             observer: observer,
             categories: categories,
             eruptionForecasts: eruptionForecasts
 
           }),
-          stackTimeSeriesGraphContainer = new StackTimeSeriesGraphContainer({
+          stackGraphContainer = new StackGraphContainer({
             observer: observer,
             categories: categories,
             selectingTimeSeries: selectingTimeSeries,
             eruptionTimeRange: eruptionTimeRange,
             serieGraphTimeRange: serieGraphTimeRange,
             forecastsGraphTimeRange: forecastsGraphTimeRange,
-            eruptions : eruptions
+            eruptions : eruptions,
+            stackGraph : stackGraph,
             // timeRange: timeRange
 
           }),
@@ -161,17 +170,13 @@ define(function(require) {
             serieGraphTimeRange: serieGraphTimeRange,
             forecastsGraphTimeRange: forecastsGraphTimeRange,
             eruptions : eruptions,
-            stackTimeSeriesGraphContainer :stackTimeSeriesGraphContainer,
+            stackGraphContainer :stackGraphContainer,
             compositeGraphContainer :compositeGraphContainer
             // timeRange: timeRange
 
           }),
 
-          timeRangeSelect = new TimeRangeSelect({
-            categories: categories,
-            selectings: selectingTimeSeries,
-            selectingFilters: selectingFilters
-          }),
+
           // urlLoader = new UrlLoader({
           //   observer: observer,
           //   volcanoes: volcanoes,
@@ -196,14 +201,15 @@ define(function(require) {
             eruptionGraph: eruptionGraph,
             eruptionTimeRange: eruptionTimeRange,
             timeSeriesGraphContainer: timeSeriesGraphContainer,
-            stackTimeSeriesGraphContainer :stackTimeSeriesGraphContainer,
+            stackGraphContainer :stackGraphContainer,
             serieGraphTimeRange: serieGraphTimeRange,
             forecastsGraphTimeRange: forecastsGraphTimeRange,
             selectingTimeRange: selectingTimeRange,
             selectingFilters: selectingFilters,
             eruptionForecastsGraph: eruptionForecastsGraph,
             compositeGraph : compositeGraph,
-            compositeGraphContainer : compositeGraphContainer
+            compositeGraphContainer : compositeGraphContainer,
+            stackGraph : stackGraph
           });
           //console.log(volcanoes);
           // console.log(filterColorCollection);
@@ -223,7 +229,7 @@ define(function(require) {
       eruptionGraph.$el.appendTo(this.$el);
       eruptionForecastsGraph.$el.appendTo(this.$el);
       timeSeriesGraphContainer.$el.appendTo(this.$el);
-      stackTimeSeriesGraphContainer.$el.appendTo(this.$el);
+      stackGraphContainer.$el.appendTo(this.$el);
       compositeGraphContainer.$el.appendTo(this.$el);
 
 

@@ -316,7 +316,7 @@ define(function(require) {
       return dataParam;
     },
     formatGraphEruptionAppearance: function(data){
-
+      //console.log(data);
       var dataParam = {
         data: data, //data is 3D array (y-error value is included in the data passed in)
         //label: filterName + ":"+timeSerieName,
@@ -335,9 +335,10 @@ define(function(require) {
           show: true,
           radius: 10,
           lineWidth: 2, // in pixels
-          fill: false,
-          fillColor: null,
+          fill: true,
+          fillColor:"#FF0000",
           symbol: "volcano",
+          //text: date,
 
         },
         bars: {

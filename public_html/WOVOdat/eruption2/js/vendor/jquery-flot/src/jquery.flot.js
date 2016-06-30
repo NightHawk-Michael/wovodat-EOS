@@ -2729,6 +2729,11 @@ Licensed under the MIT license.
         }
 
         function drawSeries(series) {
+            /*
+             Luis Ngo added 30/6
+             calculate scale
+             */
+
             if (series.lines.show) {
                 drawSeriesLines(series);
             }
@@ -3033,18 +3038,20 @@ Licensed under the MIT license.
         }
 
         function drawSeriesPoints(series) {
-            function plotPoints(datapoints, radius,fillStyle, offset, shadow, axisx, axisy, symbol) {
-                var points = datapoints.points, ps = datapoints.pointsize;
 
+            function plotPoints(datapoints, radius,fillStyle, offset, shadow, axisx, axisy, symbol) {
+                //var points = datapoints.points, ps = datapoints.pointsize;
+                var points = datapoints.points, ps = datapoints.pointsize;
                 for (var i = 0; i < points.length; i += ps) {
                     var x = points[i], y = points[i + 1];
                     if (x == null || x < axisx.min || x > axisx.max || y < axisy.min || y > axisy.max) {
                         continue;
                     }
-
                     ctx.beginPath();
+
                     x = axisx.p2c(x);
                     y = axisy.p2c(y) + offset;
+
 
                     if (symbol === "circle") {
                         ctx.arc(x, y, radius, 0, shadow ? Math.PI : Math.PI * 2, false);
@@ -3055,17 +3062,27 @@ Licensed under the MIT license.
                         ctx.lineTo(x- radius*(Math.sqrt(3)/2),y+radius/2);
                     }else if (symbol === "volcano") {
                         //draw triangle
-                        ctx.moveTo(x,y-radius);
-                        ctx.lineTo(x+radius*(Math.sqrt(3)/2),y+radius/2);
-                        ctx.lineTo(x- radius*(Math.sqrt(3)/2),y+radius/2);
+                        //console.log(points[i]);
+
+                        var d = new Date(points[i]);
+                        var yyyy = d.getFullYear().toString();
+                        var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
+                        var dd  = d.getDate().toString();
+
+                        var time =  "   " + yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]);
+
+                        ctx.moveTo(x,0);
+                        ctx.lineTo(x+radius*(Math.sqrt(3)/2),radius);
+                        ctx.lineTo(x- radius*(Math.sqrt(3)/2),radius);
                         //draw smoke
 
-                        for (var k = 0; k < radius; k++ ){
-
-                            ctx.lineTo(x+ 3*Math.sin(k),y-radius-k);
-                        }
-                        ctx.moveTo(x,y+radius/2);
-                        ctx.lineTo(x,135);
+                        ctx.moveTo(x,radius);
+                        ctx.lineTo(x,axisy.box.height-radius*2);
+                        ctx.moveTo(x,-2*radius);
+                        ctx.fillStyle = "black";
+                        ctx.textAlign = "left";
+                        ctx.font = "10px Arial";
+                        ctx.fillText(time,x,radius);
                     }else if (symbol === "line") {
                         //draw triangle
                         ctx.moveTo(x,y);
@@ -3235,7 +3252,7 @@ Licensed under the MIT license.
                 c.stroke();
             }
         }
-        function drawBar4params(x1,x2,y1,y2,fillStyleCallback, axisx, axisy, c, lineWidth, options){
+        function drawBar4params(x1,x2,y1,y2,fillStyleCallback, axisx, axisy, c, lineWidth, scale){
             var left, right, bottom, top,
                 drawLeft, drawRight, drawTop, drawBottom,
                 tmp;
@@ -3246,11 +3263,12 @@ Licensed under the MIT license.
 
             drawBottom = drawLeft = drawRight = drawTop = true;
 
-
             left = x1;
             right = x2;
             bottom = y1;
             top = y2;
+
+
 
 
             // clip
@@ -3327,6 +3345,7 @@ Licensed under the MIT license.
             }
             function plotBars4params(datapoints,fillStyleCallback,axisx,axisy){
                 var points = datapoints.points, ps = datapoints.pointsize;
+                //var points = datapoints.points, ps = datapoints.pointsize;
 
                 for (var i = 0; i < points.length; i += ps) {
                     if (points[i] == null)
@@ -3837,15 +3856,11 @@ Licensed under the MIT license.
                 octx.arc(x, y, radius, 0, 2 * Math.PI, false);
             } else if (series.points.symbol === "volcano") {
                 //draw triangle
-                octx.moveTo(x,y-radius);
-                octx.lineTo(x+radius*(Math.sqrt(3)/2),y+radius/2);
-                octx.lineTo(x- radius*(Math.sqrt(3)/2),y+radius/2);
+                //octx.moveTo(x,y-radius);
+                //octx.lineTo(x+radius*(Math.sqrt(3)/2),y+radius/2);
+                //octx.lineTo(x- radius*(Math.sqrt(3)/2),y+radius/2);
                 //draw smoke
 
-                for (var k = 0; k < radius; k++ ){
-
-                    octx.lineTo(x+ 3*Math.sin(k),y-radius-k);
-                }
             }else {
                 series.points.symbol(octx, x, y, radius, false);
             }
