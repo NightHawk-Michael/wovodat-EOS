@@ -61,8 +61,9 @@ define(function(require) {
       Config verical axes
        */
       var yaxes = [];
+
       if (this.data != undefined){
-        console.log(this.data);
+        //console.log(this.data);
         for (var p  = 0 ; p < this.data.length; p = p+2){
         //  console.log(this.data[p]);
           var minY = 100000;
@@ -169,8 +170,8 @@ define(function(require) {
       };
 
 
-      this.$el.width('auto' );
-      this.$el.height(400);
+      this.$el.width(this.width);
+        this.$el.height(300);
 
       this.$el.addClass("composite-graph");
       document.getElementById('composite-title').style.visibility = "visible";
@@ -180,7 +181,11 @@ define(function(require) {
 
       //To edit the series object, go to GraphHelper used for data in the prepareData method below.
       //this.$el.bind('plotselected', this.selectingTimeRange, this.onSelect);
+      //reset data
+      for (var p  = 0 ; p < this.data.length; p = p+2) {
+        this.data[p].yaxis = 1;
 
+      }
     },
 
     update: function() {
@@ -199,7 +204,7 @@ define(function(require) {
         this.maxX = this.timeRange.attributes.endTime;
 
 
-      //  console.log(eventData);
+        //console.log(this);
 
       }
     },

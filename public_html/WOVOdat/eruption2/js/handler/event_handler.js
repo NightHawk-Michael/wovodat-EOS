@@ -119,14 +119,14 @@ define(function(require) {
     compositeGraphUpdate : function(e){
       this.timeSeriesGraphContainer.updateSelectingTimeRange();
       this.compositeGraphContainer.update();
-      this.stackGraphContainer.hide();
+      this.stackGraphContainer.invi();
 
     },
     stackGraphUpdate : function(e){
       this.timeSeriesGraphContainer.updateSelectingTimeRange();
 
       this.stackGraphContainer.update();
-      this.compositeGraphContainer.hide();
+      this.compositeGraphContainer.invi();
       //this.compositeGraphContainer.selectingFiltersChanged(this.selectingFilters);
       //this.compositeGraph.selectingFiltersChanged(this.selectingFilters);
     },
@@ -178,11 +178,12 @@ define(function(require) {
       this.overviewGraphContainer.selectingFiltersChanged(this.selectingFilters);
       this.overviewGraph.selectingFiltersChanged(this.selectingFilters);
 
-      this.compositeGraphContainer.selectingFiltersChanged(this.selectingFilters);
 
-      //this.stackGraphContainer.selectingFiltersChanged(this.selectingFilters);
       this.timeSeriesGraphContainer.selectingFiltersChanged(this.selectingFilters);
       this.eruptionSelect.selectingFiltersChanged(this.selectingFilters);
+      this.compositeGraphContainer.selectingFiltersChanged(this.selectingFilters);
+
+      this.stackGraphContainer.selectingFiltersChanged(this.selectingFilters);
       
       
     },

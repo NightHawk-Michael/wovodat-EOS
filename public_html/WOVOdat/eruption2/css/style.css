@@ -35,8 +35,9 @@ div.eruption-forecasts-graph div.flot-text div.yAxis div.tickLabel
     color: transparent;
     
 }
-div.composite-graph{
-  position: relative;
+
+div.stack-graph{
+  margin-top: -40px;
 }
 label {
     font-size: 0.8rem;

@@ -138,11 +138,11 @@ define(function(require) {
             overviewGraphTimeRange: overviewGraphTimeRange
           }),
           stackGraph = new StackGraph({
-            //eruptions: eruptions,
             selectingTimeSeries: this.overviewSelectingTimeSeries,
             serieGraphTimeRange: serieGraphTimeRange,
             selectingTimeRange: selectingTimeRange,
             compositeGraphTimeRange: compositeGraphTimeRange,
+            // collection: filterColorCollection
           }),
           eruptionForecastsGraph = new EruptionForecastsGraph({
             observer: observer,

@@ -108,12 +108,13 @@ define(function(require) {
 
     },
     update : function(){
+      //this.hide();
       this.show();
     },
     selectingFiltersChanged: function(selectingFilters) {
       this.selectingFilters = selectingFilters;
       this.data = undefined;
-      console.log(selectingFilters);
+      //console.log(selectingFilters);
       if (this.selectingFilters.empty) {
         this.hide();
       }else{
@@ -121,9 +122,13 @@ define(function(require) {
         this.show();
       }
     },
-
+    invi : function (){
+      (document.getElementsByClassName("composite-graph-container")[0]).style.display = "none";
+    },
     render: function() {
+
       //console.log(this.overviewGraph);
+      this.compositeGraph.width = this.width;
 
       this.compositeGraph.update();
       this.compositeGraph.$el.appendTo(this.$el);

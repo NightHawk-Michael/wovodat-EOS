@@ -287,6 +287,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
           unit = this.data[i].yaxis.axisLabel;
         }
       };
+      //this.data.yaxis = 1;
 
 
       var options = {
@@ -321,7 +322,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
           panRange: false,
           axisLabel: unit,
           canvas: true,
-          autoscaleMargin: 5,
+          autoscaleMargin: 15,
         },
         grid: {
           hoverable: true,

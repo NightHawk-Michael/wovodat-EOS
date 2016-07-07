@@ -110,6 +110,7 @@ define(function(require) {
       //  this.stackGraphContainer.hide();
       //}
       var data = [];
+      var graphs = [];
       var count = 0;
       for (var i = 0 ; i < this.graphs.length; i++){
           if (count == 4) break;
@@ -117,6 +118,7 @@ define(function(require) {
               //console.log (this.graphs[i])
               data.push(this.graphs[i].data[0]);
               data.push(this.graphs[i].data[1]);
+            graphs.push(this.graphs[i]);
               checkedTimeRangeFilter.push(this.graphs[i].filters);
               count++;
           }
@@ -124,6 +126,11 @@ define(function(require) {
 
       this.compositeGraphContainer.data = data;
       this.stackGraphContainer.data = data;
+       this.stackGraphContainer.serieGraphTimeRange =  this.serieGraphTimeRange;
+      this.stackGraphContainer.filters =  this.filters;
+
+
+      //this.stackGraphContainer.graphs = graphs;
       //this.generateStackGraph();
       //this.generateCompositeGraph();
 
@@ -136,7 +143,7 @@ define(function(require) {
     generateCompositeGraph : function(){
       this.trigger("update-composite");
     },
-    addGraph : function( filters ) {
+      addGraph : function( filters ) {
 
       var timeSerieGraph = new TimeSerieGraph( {
         // timeRange : this.timeRange,
@@ -189,6 +196,8 @@ define(function(require) {
           filters = filters.concat(selectingFilters.getAllFilters(categories[i]));   
         }
       }
+      this.filters =  filters;
+      this.stackGraphContainer.filters = filters;
       for (var i = 0; i < filters.length; i++) {
         this.addGraph(filters[i]);
       };
@@ -223,11 +232,13 @@ define(function(require) {
        // this.graphs[i].draw();
 
       }
+
       var button = "<a > <input style = \"background-color:grey; padding:2px 10px 2px 10px; \" class = \"waves-effect waves-light stack-graph-btn btn \"  type=\"button\" value = \"Stacked Graph (no limit)\" /> <label ></label> </a>";
       button += "<a > <input style = \"  padding:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light composite-graph-btn btn\"  type=\"button\" value = \"Composite Graph (max 5 graphs)\"/> <label ></label> </a>";
       button += "<a > <input style = \" padding:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light btn gen-pdf\"  type=\"button\" value = \"Print PDF\"/> <label ></label> </a>";
       this.$el.append(button);
-
+      this.stackGraphContainer.width = this.$el.width();
+      this.compositeGraphContainer.width = this.$el.width();
       //this.$el.append("</ul>");
       //this.$el.append(temp);
     },
