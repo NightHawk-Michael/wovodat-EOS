@@ -67,8 +67,11 @@ function drawEquake(o){
 	else if(id.indexOf('2DGMT') >0)
 		drawEquake2DGMT(o);
 	else drawEquake2D(o);
-	map[o.mapUsed].setZoom(10);
-	map[o.mapUsed].setCenter(map[o.mapUsed].centerPoint);
+	if(document.getElementById("Map") != null){
+		map[o.mapUsed].setZoom(10);
+		map[o.mapUsed].setCenter(map[o.mapUsed].centerPoint);	
+	}
+	
 }
 
 /**
@@ -1295,7 +1298,7 @@ $(document).ready(function(){
 		//console.log(inner);
 		$("#TimeSeriesView2").html(inner);
 
-		Wovodat.getLatLon({cavw:cavw,handler:drawMap,mapUsed:2},"VolcanoList", "Map2");
+		Wovodat.getLatLon({cavw:cavw,handler:drawMap,mapUsed:2},"CompVolcanoList", "Map2");
 		resetFilter(2);
 		$("#FormFilter2").hide();
 		$("#FilterSwitch2").html("Show Filter");
