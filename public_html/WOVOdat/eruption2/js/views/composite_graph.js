@@ -62,8 +62,11 @@ define(function(require) {
        */
       var yaxes = [];
 
+      var backUpcolors = [];
       if (this.data != undefined){
         //console.log(this.data);
+        var colors = ["#000000", "#0072BB", "#FF4C3B", "#FFD034"];
+
         for (var p  = 0 ; p < this.data.length; p = p+2){
         //  console.log(this.data[p]);
           var minY = 100000;
@@ -94,6 +97,9 @@ define(function(require) {
           var position;
           if (i%2 == 1) position  = "right";
           else position =  "left";
+          backUpcolors.push(this.data[p].color);
+          this.data[p].color = colors[p/2];
+          this.data[p].fillColor = colors[p/2];
           var option = {
               font :{
                 color:  this.data[p].color,
@@ -160,7 +166,7 @@ define(function(require) {
         },
       };
       //pass color into options
-      options.colors = ["#000000", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"];
+      options.colors = ["#000000"];
 
       if (!this.data || !this.data.length) {
         this.$el.html(''); //$(this) = this.$el
@@ -181,10 +187,12 @@ define(function(require) {
 
       //To edit the series object, go to GraphHelper used for data in the prepareData method below.
       //this.$el.bind('plotselected', this.selectingTimeRange, this.onSelect);
+
       //reset data
       for (var p  = 0 ; p < this.data.length; p = p+2) {
         this.data[p].yaxis = 1;
-
+        this.data[p].color = backUpcolors[p/2];
+        this.data[p].fillColor = backUpcolors[p/2];
       }
     },
 

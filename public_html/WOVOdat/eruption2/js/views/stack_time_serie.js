@@ -157,9 +157,17 @@ define(function(require) {
                     var maxY = -500000;
                     if (this.data[p] == undefined) continue;
                     var eventData = this.data[p].data;
+                    console.log (this.minX + "\t" + this.maxX);
                     for (var i = 0 ; i < eventData.length; i++){
                         if (eventData[i][0] < this.minX || eventData[i][0] > this.maxX) continue;
-                        var y = eventData[i][eventData[i].length-1];
+                        console.log(eventData[i]);
+                        var y;
+                        if (eventData[i].length == 3){
+                            y = eventData[i][1];
+                        }else{
+                            y = eventData[i][eventData[i].length-1];
+                        }
+
                         if (y < minY) minY = y;
                         if (y > maxY) {
                             maxY = y;

@@ -14,6 +14,7 @@ define(function(require) {
     events: {
       'click .select_time_range': 'onCheckboxChanged',
       'click .gen-pdf' : 'generatePDF',
+      'click .gen-csv' : 'generateCSV',
       'click .stack-graph-btn' : 'generateStackGraph',
       'click .composite-graph-btn' : 'generateCompositeGraph'
     },
@@ -32,7 +33,112 @@ define(function(require) {
       this.beingShown = false;
   		this.graphs = [];
   	},
+    /*
+    volcano-name (vd_name),
+    station/seismic network name (ds/ss/sn_name),
+    date-time (dd_tlt_time),
+    code of data (dd_tlt_code, sd_ivl_code, etc.),
+    data (dd_tlt1),
+    data-uncertainty (dd_tlt_err1),
+    data owner (cc_code).
+     */
+    generateCSV : function (){
+      console.log (this.selectingTimeSeries);
 
+      if (this.data == undefined) return;
+      for (var i = 0 ; i <  this.data.length;i =   i+2){
+        console.log (this.data[i]);
+        //var stationName =
+      }
+      var csvContent = "data:text/csv;charset=utf-8,";
+      var headers = ['Volcano Name', 'Station/Seismic Network Name', 'Date time', 'Code of data',
+        'Data','Data-uncertainty', 'Data Owner'];
+      //csvContent += "Volcano: " + name + " \n";
+      //csvContent += "CAVW: " + cavw + " \n";
+      //
+      //var dataString = "";
+      //var total = 0;
+      //if (data != null){
+      //  for(var i in earthquakes[cavw]){
+      //    var lat = earthquakes[cavw][i]['lat'];
+      //    var lon = earthquakes[cavw][i]['lon'];
+      //    // skip this value when there is no latitude or longitude value
+      //    // for them
+      //    var latDistance = earthquakes[cavw][i]['latDistance'];
+      //    var lonDistance = earthquakes[cavw][i]['lonDistance'];
+      //
+      //    var distance = Math.sqrt(latDistance * latDistance + lonDistance * lonDistance).toFixed(2);
+      //
+      //
+      //
+      //
+      //    if(typeof lat == 'undefined' || typeof lon == 'undefined'){
+      //      continue;
+      //    }
+      //
+      //    // skip this event when it is not supposed to be displayed
+      //    if(earthquakes[cavw][i]['available'] == 'undefined'){
+      //      continue;
+      //    }
+      //    var cc_id = earthquakes[cavw][i]['cc_id'];
+      //    var data_owner = nameConverter(cc_id, 'cc_id');
+      //
+      //    dataString += earthquakes[cavw][i]['time'] + ",";
+      //    dataString += earthquakes[cavw][i]['lat'] + ",";
+      //
+      //    // lat error
+      //    if(earthquakes[cavw][i]['yerr'] != "" && earthquakes[cavw][i]['yerr'] != 'undefined'){
+      //      dataString += earthquakes[cavw][i]['yerr'];
+      //    } else if (earthquakes[cavw][i]['herr'] != "" && earthquakes[cavw][i]['herr'] != 'undefined'){
+      //      dataString += earthquakes[cavw][i]['herr'];
+      //    } else {
+      //      dataString += "0";
+      //    }
+      //    dataString += ",";
+      //
+      //    dataString += earthquakes[cavw][i]['lon'] + ",";
+      //
+      //    // lon error
+      //    if(earthquakes[cavw][i]['xerr'] != "" && earthquakes[cavw][i]['xerr'] != 'undefined'){
+      //      dataString += earthquakes[cavw][i]['xerr'];
+      //    } else if (earthquakes[cavw][i]['herr'] != "" && earthquakes[cavw][i]['herr'] != 'undefined'){
+      //      dataString += earthquakes[cavw][i]['herr'];
+      //    } else {
+      //      dataString += "0";
+      //    }
+      //    dataString += ",";
+      //
+      //    dataString += parseFloat(earthquakes[cavw][i]['depth']).toFixed(1)	 + ",";
+      //
+      //    // depth error
+      //    if(earthquakes[cavw][i]['derr'] != "" && earthquakes[cavw][i]['derr'] != 'undefined'){
+      //      dataString += earthquakes[cavw][i]['derr'];
+      //    } else {
+      //      dataString += "0";
+      //    }
+      //    dataString += ",";
+      //
+      //    dataString += earthquakes[cavw][i]['mag'] + ",";
+      //    dataString += "null,"
+      //    dataString += earthquakes[cavw][i]['eqtype'] + ",";
+      //    dataString += distance + ","
+      //    dataString += data_owner + "\n";
+      //
+      //    total += 1;
+      //  }
+      //}
+      //
+      //csvContent += "Total number of earthquakes: " + total + " \n";
+      //csvContent += "(100 km from volcanic vent)\n";
+      //csvContent += headers.join(",") + "\n";
+      //csvContent += dataString + "\n";
+      //var encodedUri = encodeURI(csvContent);
+      //var link = document.createElement("a");
+      //link.setAttribute("href", encodedUri);
+      //link.setAttribute("download", "my_data.csv");
+      //
+      //link.click();
+    },
     generatePDF :function(){
 
       var obj = document.getElementsByTagName("body")[0].innerHTML;
@@ -109,23 +215,23 @@ define(function(require) {
       //if(checkboxes.length == 0){
       //  this.stackGraphContainer.hide();
       //}
-      var data = [];
+      this.data = [];
       var graphs = [];
       var count = 0;
       for (var i = 0 ; i < this.graphs.length; i++){
           if (count == 4) break;
           if (checkboxes.indexOf(this.graphs[i].serieId) >=0) {
               //console.log (this.graphs[i])
-              data.push(this.graphs[i].data[0]);
-              data.push(this.graphs[i].data[1]);
+              this.data.push(this.graphs[i].data[0]);
+              this.data.push(this.graphs[i].data[1]);
             graphs.push(this.graphs[i]);
               checkedTimeRangeFilter.push(this.graphs[i].filters);
               count++;
           }
       }
 
-      this.compositeGraphContainer.data = data;
-      this.stackGraphContainer.data = data;
+      this.compositeGraphContainer.data = this.data;
+      this.stackGraphContainer.data = this.data;
        this.stackGraphContainer.serieGraphTimeRange =  this.serieGraphTimeRange;
       this.stackGraphContainer.filters =  this.filters;
 
@@ -234,8 +340,9 @@ define(function(require) {
       }
 
       var button = "<a > <input style = \"background-color:grey; padding:2px 10px 2px 10px; \" class = \"waves-effect waves-light stack-graph-btn btn \"  type=\"button\" value = \"Stacked Graph (no limit)\" /> <label ></label> </a>";
-      button += "<a > <input style = \"  padding:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light composite-graph-btn btn\"  type=\"button\" value = \"Composite Graph (max 5 graphs)\"/> <label ></label> </a>";
-      button += "<a > <input style = \" padding:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light btn gen-pdf\"  type=\"button\" value = \"Print PDF\"/> <label ></label> </a>";
+      button += "<a > <input style = \" background-color:grey; padding:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light composite-graph-btn btn\"  type=\"button\" value = \"Composite Graph (max 5 graphs)\"/> <label ></label> </a>";
+      button += "<a > <input style = \" background-color:grey; padding:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light btn gen-pdf\"  type=\"button\" value = \"Print PDF\"/> <label ></label> </a>";
+      button += "<a > <input style = \" background-color:grey; padding:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light btn gen-csv\"  type=\"button\" value = \"Print CSV\"/> <label ></label> </a>";
       this.$el.append(button);
       this.stackGraphContainer.width = this.$el.width();
       this.compositeGraphContainer.width = this.$el.width();
