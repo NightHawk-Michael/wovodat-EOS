@@ -6,6 +6,13 @@
             "request": "volcano_list",
             "method": "loadVolcanoList",
             "params": []
+        },
+        {
+            "request": "volcano_name",
+            "method": "getVolcanoName",
+            "params": [
+                "vd_id"
+            ]
         }
     ]
 }

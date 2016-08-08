@@ -25,7 +25,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       this.tooltip = new Tooltip({
         template: serieTooltipTemplate
       });
-      // console.log(this.serieGraphTimeRange);
+      console.log(this.filters);
       this.prepareData();
     },
 

@@ -2,6 +2,8 @@ define(function(require) {
 	'use strict';
 	var $ = require('jquery'),
   Backbone = require('backbone'),
+        JSZip = require('vendor/zip/dist/jszip'),
+        fs = require('vendor/zip/dist/FileSaver'),
         template = require('text!templates/time_serie_graph.html'),
   _ = require('underscore');
 
@@ -32,8 +34,11 @@ define(function(require) {
       this.categories = options.categories;
       this.beingShown = false;
   		this.graphs = [];
-  	},
-    /*
+      this.checkedTimeRangeFilter = [];
+
+    },
+    /**
+     *Generate CSV file when click CSV button
     volcano-name (vd_name),
     station/seismic network name (ds/ss/sn_name),
     date-time (dd_tlt_time),
@@ -43,101 +48,80 @@ define(function(require) {
     data owner (cc_code).
      */
     generateCSV : function (){
-      console.log (this.selectingTimeSeries);
+      var listContent = [];
+      if (this.checkedTimeRangeFilter.length == 0) return;
+      for (var i = 0; i < this.checkedTimeRangeFilter.length; i++){
+        var content =[];
+        var timeSerie = this.checkedTimeRangeFilter[i].timeSerie;
+        var url = timeSerie.collection.url;
+        var vd_id = url.split("vd_id=")[1];
+        var category = timeSerie.attributes.category;
+        var stationName =  timeSerie.attributes.station_code1;
+        var volcanoName = timeSerie.attributes.volcanoName;
+        var showingName = timeSerie.attributes.showingName;
+        var dataOwner =  timeSerie.attributes.data_owner.owner1;
+        if (timeSerie.attributes.data_owner.owner2 != ""){
+          dataOwner = dataOwner  + "-" + timeSerie.attributes.data_owner.owner2;
+        }
+
+        var data = timeSerie.attributes.data.data;
+        for (var p = 0 ; p  < data.length; p++){
+          var time =  data[p].time;
+          var value = data[p].value;
+          var dataCode = data[p].data_code;
+          var uncertainty = data[p].error;
+          if (uncertainty == undefined) uncertainty = "";
+          if (time >= this.serieGraphTimeRange.attributes.startTime && time <= this.serieGraphTimeRange.attributes.endTime){
+            //console.log (value);
+            var d = {
+              showName: showingName,
+              time: new Date(time),
+              value : value,
+              uncertainty : uncertainty,
+              stationName : stationName,
+              volcanoName : volcanoName,
+              dataOwner : dataOwner,
+              dataCode : dataCode,
+            }
+            content.push(d);
+          }
+
+        }
+        listContent.push(content);
+      }
 
       if (this.data == undefined) return;
-      for (var i = 0 ; i <  this.data.length;i =   i+2){
-        console.log (this.data[i]);
-        //var stationName =
-      }
-      var csvContent = "data:text/csv;charset=utf-8,";
+
       var headers = ['Volcano Name', 'Station/Seismic Network Name', 'Date time', 'Code of data',
         'Data','Data-uncertainty', 'Data Owner'];
-      //csvContent += "Volcano: " + name + " \n";
-      //csvContent += "CAVW: " + cavw + " \n";
-      //
-      //var dataString = "";
-      //var total = 0;
-      //if (data != null){
-      //  for(var i in earthquakes[cavw]){
-      //    var lat = earthquakes[cavw][i]['lat'];
-      //    var lon = earthquakes[cavw][i]['lon'];
-      //    // skip this value when there is no latitude or longitude value
-      //    // for them
-      //    var latDistance = earthquakes[cavw][i]['latDistance'];
-      //    var lonDistance = earthquakes[cavw][i]['lonDistance'];
-      //
-      //    var distance = Math.sqrt(latDistance * latDistance + lonDistance * lonDistance).toFixed(2);
-      //
-      //
-      //
-      //
-      //    if(typeof lat == 'undefined' || typeof lon == 'undefined'){
-      //      continue;
-      //    }
-      //
-      //    // skip this event when it is not supposed to be displayed
-      //    if(earthquakes[cavw][i]['available'] == 'undefined'){
-      //      continue;
-      //    }
-      //    var cc_id = earthquakes[cavw][i]['cc_id'];
-      //    var data_owner = nameConverter(cc_id, 'cc_id');
-      //
-      //    dataString += earthquakes[cavw][i]['time'] + ",";
-      //    dataString += earthquakes[cavw][i]['lat'] + ",";
-      //
-      //    // lat error
-      //    if(earthquakes[cavw][i]['yerr'] != "" && earthquakes[cavw][i]['yerr'] != 'undefined'){
-      //      dataString += earthquakes[cavw][i]['yerr'];
-      //    } else if (earthquakes[cavw][i]['herr'] != "" && earthquakes[cavw][i]['herr'] != 'undefined'){
-      //      dataString += earthquakes[cavw][i]['herr'];
-      //    } else {
-      //      dataString += "0";
-      //    }
-      //    dataString += ",";
-      //
-      //    dataString += earthquakes[cavw][i]['lon'] + ",";
-      //
-      //    // lon error
-      //    if(earthquakes[cavw][i]['xerr'] != "" && earthquakes[cavw][i]['xerr'] != 'undefined'){
-      //      dataString += earthquakes[cavw][i]['xerr'];
-      //    } else if (earthquakes[cavw][i]['herr'] != "" && earthquakes[cavw][i]['herr'] != 'undefined'){
-      //      dataString += earthquakes[cavw][i]['herr'];
-      //    } else {
-      //      dataString += "0";
-      //    }
-      //    dataString += ",";
-      //
-      //    dataString += parseFloat(earthquakes[cavw][i]['depth']).toFixed(1)	 + ",";
-      //
-      //    // depth error
-      //    if(earthquakes[cavw][i]['derr'] != "" && earthquakes[cavw][i]['derr'] != 'undefined'){
-      //      dataString += earthquakes[cavw][i]['derr'];
-      //    } else {
-      //      dataString += "0";
-      //    }
-      //    dataString += ",";
-      //
-      //    dataString += earthquakes[cavw][i]['mag'] + ",";
-      //    dataString += "null,"
-      //    dataString += earthquakes[cavw][i]['eqtype'] + ",";
-      //    dataString += distance + ","
-      //    dataString += data_owner + "\n";
-      //
-      //    total += 1;
-      //  }
-      //}
-      //
-      //csvContent += "Total number of earthquakes: " + total + " \n";
-      //csvContent += "(100 km from volcanic vent)\n";
-      //csvContent += headers.join(",") + "\n";
-      //csvContent += dataString + "\n";
-      //var encodedUri = encodeURI(csvContent);
-      //var link = document.createElement("a");
-      //link.setAttribute("href", encodedUri);
-      //link.setAttribute("download", "my_data.csv");
-      //
-      //link.click();
+      //var z = new Zip();
+      //console.log(z);
+      var zip =  new JSZip();
+      for (var i = 0 ; i < listContent.length; i++){
+        var csvContent = "data:text/csv;charset=utf-8,";
+        var total = 0;
+
+        var content = listContent[i];
+        var dataString = "";
+        for (var p = 0 ; p < content.length; p++){
+          total++;
+          var d = content[p];
+          dataString += d.volcanoName + ",\"" + d.stationName + "\",\"" + d.time + "\",\"" + d.dataCode + " \",\"" + d.value + "\",\""
+              + d.uncertainty + "\",\"" + d.dataOwner + " \"\n";
+        }
+
+        csvContent += "Total number of earthquakes: " + total + " \n";
+        csvContent += "(100 km from volcanic vent)\n";
+        csvContent += headers.join(",") + "\n";
+        csvContent += dataString + "\n";
+        zip.file(content[0].showName +".csv", csvContent);
+      }
+      zip.generateAsync({type:"blob"})
+          .then(function (blob) {
+            saveAs(blob, "data.zip");
+          });
+
+
     },
     generatePDF :function(){
 
@@ -204,7 +188,6 @@ define(function(require) {
     updateSelectingTimeRange: function(){
       /* remove timeseries which are no longer selected*/
       var checkboxes = [];
-      var checkedTimeRangeFilter = [];
       $('.select_time_range').each(function() {
         if (($(this).context.checked == true)){
           checkboxes.push($(this).context.id);
@@ -225,7 +208,7 @@ define(function(require) {
               this.data.push(this.graphs[i].data[0]);
               this.data.push(this.graphs[i].data[1]);
             graphs.push(this.graphs[i]);
-              checkedTimeRangeFilter.push(this.graphs[i].filters);
+              this.checkedTimeRangeFilter.push(this.graphs[i].filters);
               count++;
           }
       }

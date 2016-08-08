@@ -12,6 +12,7 @@ abstract class TableManager implements TableManagerInterface {
 	protected $dataType;
 	protected $stationId;
 	protected $stationCode;
+	protected $data_code;
 	public function TableManager(){
 		$this->cols_name = $this->setColumnsName();
 		$this->table_name = $this->setTableName();
@@ -19,6 +20,7 @@ abstract class TableManager implements TableManagerInterface {
 		$this->dataType = $this->setDataType();
 		$this->stationId = $this->setStationID();
 		$this->stationCode = $this->setStationCode();
+		$this->data_code =  $this->setDataCode();
 	}
 	abstract protected function setColumnsName(); // names of data columns
 	abstract protected function setTableName(); // name of es table
@@ -27,21 +29,27 @@ abstract class TableManager implements TableManagerInterface {
 	//if there is 1 station, station1 is the same as station2
 	abstract protected function setStationID(); // column names represent stationID1,station ID2
 	abstract protected function setStationCode(); // column name represent primary stationCode1, stationCode2.
+	protected function setDataCode(){
+		$code =  substr($this->table_name,3,strlen($this->table_name)-3) ."_code";
+		//$table_contain_code=
+		return $code;
+
+	} // Code of Data
+
 	abstract protected function setStationDataParams($component); // params to get data station [unit,flot_style,errorbar,attributes,query]
 	public function getTimeSeriesList($vd_id,$stations){
   		$result = array();
 		global $db;
-		$query_format = 'select a.%s as sta_id1,  a.%s as sta_code1,a.%s as sta_id2,a.%s as sta_code2 ';
+		$query_format = 'select a.%s as sta_id1,  a.%s as sta_code1,a.%s as sta_id2,a.%s as sta_code2, vd.vd_name ';
 		$query = sprintf($query_format,$this->stationId[0],$this->stationCode[0],$this->stationId[1],$this->stationCode[1]);
 		foreach ($this->cols_name as $name) {
 			$query = $query.",a.".$name;
 		}
-		$query = $query." from $this->table_name as a where a.vd_id=$vd_id";
-		// echo($query);
+		$query = $query." from $this->table_name as a, vd where a.vd_id=$vd_id AND vd.vd_id = $vd_id" ;
 		$db->query( $query);
 
-		// echo($this->monitoryType."   ".$query."\n");
 		$serie_list = $db->getList();
+		$cc_url =  $this->getCCUrl($vd_id);
 		// var_dump($serie_list);
 		foreach ($serie_list as $serie) {
 
@@ -56,9 +64,11 @@ abstract class TableManager implements TableManagerInterface {
 							   'station_id2' => $serie["sta_id2"],
 							   'station_code2' => $serie["sta_code2"],
 						       'component' => $serie[$col_name],
+								'volcanoName'  => $serie["vd_name"],
+								'data_owner' => $cc_url,
 						   		);
 
-					$x["sr_id"] = md5( $x["category"].$x["data_type"].$x["station_id1"].$x["station_id2"].$x["component"] );
+					$x["sr_id"] = md5( $x["category"].$x["data_type"].$x["station_id1"].$x["station_id2"].$x["component"].$x["volcanoName"] );
 					array_push($result,  $x );
 
 				}
@@ -82,11 +92,17 @@ abstract class TableManager implements TableManagerInterface {
 		$stationDataParams = $this->setStationDataParams($stations['component']);
 		$errorbar = $stationDataParams["errorbar"];
 		$query = $stationDataParams["query"];
+		//Add select data code from query. Add in this tableManager to apply all data.
+		$temp =  "select a." . $this->data_code ." as data_code,";
+		 $query = str_replace("select",$temp ,$query);
+
 		$db->query($query, $id1,$id2);
+
 		// echo($query);
 		// var_dump($this);
 		// // var_dump($this);
 		$res = $db->getList();
+
 		foreach ($res as $row) {
 			// var_dump($row);
 			//add value attributes
@@ -113,6 +129,7 @@ abstract class TableManager implements TableManagerInterface {
 			}
 			//add filter attribute
 			// var_dump($row);
+			$data_code = $row["data_code"];
 			if(array_key_exists("filter", $row)){
 				
 				$temp["filter"] = $row["filter"];
@@ -138,6 +155,7 @@ abstract class TableManager implements TableManagerInterface {
 					$temp["error"] = 0;
 				}
 			}
+			$temp["data_code"] = $row["data_code"];
 			array_push($data, $temp );			
 		}
 		$result["style"] = $stationDataParams["style"];
@@ -147,4 +165,60 @@ abstract class TableManager implements TableManagerInterface {
 		// var_dump($result);
 		return $result;
   	}
+	/*
+     * Get cc_url of a volcano
+     * of a specific cavw
+     */
+
+	private function getCCUrl($vd_id) {
+		$query1 = mysql_query("select cc_id from vd where vd_id='" . $vd_id . "'");
+		$object = "";
+		$result1 = mysql_fetch_array($query1);
+		if ($result1 !== false) {
+			$cc_id = $result1[0];
+			$object['cc_id1'] = $cc_id;
+			$query1_2 = mysql_query("select cc_url from cc where cc_id='" . $cc_id . "'");
+			$result1_2 = mysql_fetch_array($query1_2);
+			// retrieve the cc_code based on cc_id - vutuan added
+			$query1_3 = mysql_query("select cc_code from cc where cc_id='". $cc_id . "'");
+			$result1_3 = mysql_fetch_array($query1_3);
+
+			if ($result1_2 !== false)
+				$object['owner1'] = $result1_2[0];
+			else
+				$object['owner1'] = "";
+			if($result1_3 !== false)
+				$object['cc_code1'] = $result1_3[0];
+			else
+				$object['cc_code1'] = "";
+		}
+
+		// second cc_id
+		$query1 = mysql_query("select cc_id2 from vd where vd_id='" . $vd_id . "'");
+		$result1 = mysql_fetch_array($query1);
+		if ($result1 !== false) {
+			$cc_id = $result1[0];
+			$object['cc_id2'] = $cc_id;
+			$query1_2 = mysql_query("select cc_url from cc where cc_id='" . $cc_id . "'");
+			$result1_2 = mysql_fetch_array($query1_2);
+			// retrieve the cc_code based on cc_id - vutuan added
+			$query1_3 = mysql_query("select cc_code from cc where cc_id='". $cc_id . "'");
+			$result1_3 = mysql_fetch_array($query1_3);
+			if ($result1_2 !== false)
+				$object['owner2'] = $result1_2[0];
+			else
+				$object['owner2'] = "";
+			if($result1_3 !== false)
+				$object['cc_code2'] = $result1_3[0];
+			else
+				$object['cc_code2'] = "";
+		}
+
+		$query2 = mysql_query("select vd_inf_status, vd_inf_type from vd_inf where vd_id ='" . $vd_id . "'");
+		$result2 = mysql_fetch_array($query2);
+		if ($result2 !== false) {
+			$object['status'] = $result2[0] . " - " . $result2[1];
+		}
+		return $object;
+	}
 } 

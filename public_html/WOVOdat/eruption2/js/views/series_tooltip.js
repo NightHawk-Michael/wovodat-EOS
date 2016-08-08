@@ -76,8 +76,7 @@ define(function(require) {
             this.render(pos.pageX, pos.pageY, this.html);
 
           }
-          console.log(this.template);
-          
+
         }
       } else {
         this.hide();
