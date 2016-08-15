@@ -1,17 +1,17 @@
 <?php
 /**
- *	This class supports query the data from data table gd_sol 
+ *	This class supports query the data from data table dd_tlt 
  * 	
  */
 // DEFINE('HOST', 'localhost');
 // require_once '..//TableManager.php';
-class gd_solManager extends GasTablesManager {
+class gd_solManager extends TableManager {
 	
 	protected function setColumnsName(){
 		$result = array("gd_sol_tflux","gd_sol_high","gd_sol_htemp");
 		return $result;
 	}
-	protected function setTableName(){  
+	protected function setTableName(){
 		return "es_gd_sol";
 	}
 	protected function setMonitoryType(){
@@ -36,7 +36,7 @@ class gd_solManager extends GasTablesManager {
 		$table = "gd_sol";
 		$errorbar = false;
 		$style = "dot";
-		if($component == 'Total Gas Flux'){      
+		if($component == 'Total Gas Flux'){
 
 			$attribute = "gd_sol_tflux";
 			$errorbar = true;

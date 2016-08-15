@@ -35,10 +35,6 @@ define(function(require) {
       this.edphsTooltip = new Tooltip({
         template: edphsTemplate
       });
-      this.selecting_vd_num = options.selecting_vd_num;
-      this.ed_stime_num = options.ed_stime_num;
-      this.ed_etime_num = options.ed_etime_num;
-     
     },
     eruptionTimeRangeChanged: function(timeRange){
       this.startTime = timeRange.get('startTime');
@@ -60,13 +56,17 @@ define(function(require) {
     },
 
     changeEruption: function(selectingEruption){
-      if(selectingEruption.get('ed_id') == -1){
-        this.hide();
-      }else{
-        this.selectingEruption = selectingEruption;
-        this.show();
-      }
-
+    //  //console.log(selectingEruption.get('ed_id'));
+    //  //if(selectingEruption.get('ed_id') == -1){
+    //  //  this.hide();
+    //  //}else{
+    //  //  this.selectingEruption = selectingEruption;
+    //  //  this.show();
+    //  //}
+    //  //this.selectingEruption = selectingEruption;
+    //  //console.log(this.selectingEruption);
+    //  //this.show();
+    //
     },
     //show eruption graph
     show: function(){
@@ -99,80 +99,80 @@ define(function(require) {
       }
     },
     render: function() {
-      if(this.selectingEruption == undefined){
-        return;
-      }
-
-      var maxVEI = 7;
-      var self = this,
-          
-          el = this.$el,
-          data = this.prepareData(),
-          graph_pram_data = [],         
-          option = {
-            grid: {
-              hoverable: true,
-            },
-            xaxis: {
-              min: this.startTime,
-              max: this.endTime,
-              autoscale: true,
-              mode: 'time',
-              timeformat: "%d-%b-%Y",
-            },
-            yaxis: {
-              min: 0,
-              max: maxVEI +1,
-              tickSize: 1,
-              panRange: false,
-              zoomRange: false,
-              labelWidth: 60,
-              panRange: false
-            },
-            
-            pan: {
-              interactive: true
-            },
-            zoom: {
-              interactive: true
-            }
-          };
-      /** Eruption part **/
-      graph_pram_data.push(this.gernerateBarChartFlotData ([data.edData.data], 'Black','Eruption','ed',""));
-      /** Phreatic Eruption **/
-      var temp = data.ed_phs_data;
-      
-      graph_pram_data.push(this.gernerateBarChartFlotData(temp,'#F44336','Eruption Phase','ed_phs',""));
-        
-      
-      el.width('auto');
-      el.height(150);
-      el.addClass("eruption-graph card-panel");
-      this.graph = $.plot(el, graph_pram_data, option);
-      var eventDataZoom = {
-        startTime: this.startTime,
-        endTime: this.endTime,
-        data: graph_pram_data,
-        graph: this.graph,
-        el: this.$el,
-        self: this,
-        original_option: option
-      };
-      var eventDataPan = {
-        minX: Math.min(this.startTime,this.overviewGraphTimeRange.get('startTime')),
-        maxX: Math.max(this.endTime,this.overviewGraphTimeRange.get('endTime')),
-        data: graph_pram_data,
-        graph: this.graph,
-        el: this.$el,
-        self: this,
-        original_option: option
-      };
-      var eventDataHover = {
-        ed_phs_data_type:data.ed_phs_data_type
-      };
-      el.bind('plothover', eventDataHover, this.onHover);
-      el.bind('plotzoom', eventDataZoom,this.onZoom);
-      el.bind('plotpan', eventDataPan,this.onPan);
+      //if(this.selectingEruption == undefined){
+      //  return;
+      //}
+      //
+      //var maxVEI = 7;
+      //var self = this,
+      //
+      //    el = this.$el,
+      //    data = this.prepareData(),
+      //    graph_pram_data = [],
+      //    option = {
+      //      grid: {
+      //        hoverable: true,
+      //      },
+      //      xaxis: {
+      //        min: this.startTime,
+      //        max: this.endTime,
+      //        autoscale: true,
+      //        mode: 'time',
+      //        timeformat: "%d-%b-%Y",
+      //      },
+      //      yaxis: {
+      //        min: 0,
+      //        max: maxVEI +1,
+      //        tickSize: 1,
+      //        panRange: false,
+      //        zoomRange: false,
+      //        labelWidth: 60,
+      //        panRange: false
+      //      },
+      //
+      //      pan: {
+      //        interactive: true
+      //      },
+      //      zoom: {
+      //        interactive: true
+      //      }
+      //    };
+      ///** Eruption part **/
+      //graph_pram_data.push(this.gernerateBarChartFlotData ([data.edData.data], 'Black','Eruption','ed',""));
+      ///** Phreatic Eruption **/
+      //var temp = data.ed_phs_data;
+      //
+      //graph_pram_data.push(this.gernerateBarChartFlotData(temp,'#F44336','Eruption Phase','ed_phs',""));
+      //
+      //
+      //el.width('auto');
+      //el.height(150);
+      //el.addClass("eruption-graph card-panel");
+      //this.graph = $.plot(el, graph_pram_data, option);
+      //var eventDataZoom = {
+      //  startTime: this.startTime,
+      //  endTime: this.endTime,
+      //  data: graph_pram_data,
+      //  graph: this.graph,
+      //  el: this.$el,
+      //  self: this,
+      //  original_option: option
+      //};
+      //var eventDataPan = {
+      //  minX: Math.min(this.startTime,this.overviewGraphTimeRange.get('startTime')),
+      //  maxX: Math.max(this.endTime,this.overviewGraphTimeRange.get('endTime')),
+      //  data: graph_pram_data,
+      //  graph: this.graph,
+      //  el: this.$el,
+      //  self: this,
+      //  original_option: option
+      //};
+      //var eventDataHover = {
+      //  ed_phs_data_type:data.ed_phs_data_type
+      //};
+      //el.bind('plothover', eventDataHover, this.onHover);
+      //el.bind('plotzoom', eventDataZoom,this.onZoom);
+      //el.bind('plotpan', eventDataPan,this.onPan);
     },
     onPan: function(event,plot){
       var option = event.data.original_option;
@@ -181,6 +181,7 @@ define(function(require) {
       var self = event.data.self;
       var minX = Math.min(self.startTime,self.overviewGraphTimeRange.get('startTime'));
       var maxX = Math.max(self.endTime,self.overviewGraphTimeRange.get('endTime'));
+      //console.log(minX + "\t" + maxX);
       if(xaxis.min<minX){
         option.xaxis.min = minX;
         option.xaxis.max = minX+Const.ONE_YEAR;
@@ -220,6 +221,7 @@ define(function(require) {
     },
 
     setUpTimeranges: function(startTime, endTime){
+      //console.log(startTime + "\t" + endTime);
       this.serieGraphTimeRange.set({
         'startTime': startTime,
         'endTime': endTime,

@@ -39,13 +39,14 @@ define(function(require) {
       
       return ticks;
     },
-    formatData: function(graph,filters,allowErrorbar,allowAxisLabel,limitNumberOfData){
+    formatData: function(graph,filters,allowErrorbar,allowAxisLabel,limitNumberOfData, eruptions){
      var minX = undefined,
          maxX = undefined,
          minY = undefined,
          maxY = undefined,
          data = [],
          errorbars = undefined;
+
       for(var i=0;i<filters.length;i++){
         var filter = filters[i];
         //console.log(filter);
@@ -54,6 +55,7 @@ define(function(require) {
           //console.log(filter.filterAttributes[j]);
           var list = [];
           var filterData = filter.timeSerie.getDataFromFilter(filterName);
+
           var style = filter.timeSerie.get('data').style; // plot style [bar,circle,dot,horizontalbar]
           var errorbar;
           var axisLabel; // show unit on Y-axis
@@ -128,11 +130,13 @@ define(function(require) {
             
             var tempData =  [];
             // parameters for bar data: left, right,bottom, top,error
+
             if(style == 'bar'){
+
               tempData.push(d.stime,d.etime,0,d.value);
             }
             else if(style == 'horizontalbar'){
-              
+
               tempData.push(d.stime,d.etime,d.value + 0.5,d.value - 0.5); // add the upperBound and lowerBound to show the bar
               
             }
@@ -143,9 +147,12 @@ define(function(require) {
             if(errorbar){
               tempData.push(error);
             }
+
             list.push(tempData);
           });
-          //console.log(list.length);
+
+
+
 
           var styleParams = {
             style: style,
@@ -153,18 +160,40 @@ define(function(require) {
             axisLabel: axisLabel,
             filterColor: filterColor // Pre-coded color for certain earthquake type
           }
+
           data.push(this.formatGraphAppearance(list,filter.timeSerie.getName(),filterName,styleParams));
-          
           
         }
 
           
       }
-      
+      if (eruptions != undefined) {
+        var models =  eruptions.models;
+
+        var listEruption = [];
+
+        for (var k = 0; k < models.length; k++) {
+          var ed_stime = models[k].attributes.ed_stime;
+          if (ed_stime < 0 ) continue;
+
+          var tempEruption = [];
+
+          //tempEruption.push(675890001000,(maxY + minY) / 2);
+          //
+          //console.log (models[k]);
+          tempEruption.push(ed_stime,(maxY)*0.9);
+
+           //console.log(tempEruption);
+          listEruption.push(tempEruption);
+          //break;
+        }
+        //console.log(minY);
+        data.push(this.formatGraphEruptionAppearance(listEruption, minY,maxY));
+      }
       graph.minX = minX-86400000;
       graph.maxX = maxX+86400000;
-      
-      
+
+
       /** setup y-axis tick **/
       if(maxY != undefined && minY != undefined){
         maxY = maxY*1.1;//1.1
@@ -181,6 +210,7 @@ define(function(require) {
         graph.ticks = this.generateTick(minY,maxY);
         graph.minY = graph.ticks[0];
         graph.maxY = graph.ticks[graph.ticks.length-1]
+        //console.log (graph);
         graph.ticks.push();
       }
       graph.timeRange.set({
@@ -189,16 +219,20 @@ define(function(require) {
       });
       // graph.timeRange.trigger('change');
       graph.data = data;
-      // console.log(data);
+
+       //console.log(data);
     },
+
     /** setup effect for the graph
     *   data : data for floting
     *   filterName: filter name
     *   styleParams: params for styling graph {barwith,errorbar, y-axis unit....}
     **/
-    formatGraphAppearance: function(data,timeSerieName,filterName,styleParams){
-      
+      formatGraphAppearance: function(data,timeSerieName,filterName,styleParams){
+
+     // console.log(filterName);
       var dataParam = {
+
         data: data, //data is 3D array (y-error value is included in the data passed in)
         label: filterName + ":"+timeSerieName,
         color: null,
@@ -241,7 +275,7 @@ define(function(require) {
         dataParam.points.errorbars = "y";
         dataParam.points.yerr = {
             show: true,
-            color: "#D50000",
+            color: "#000000",
             upperCap: "-",
             lowerCap: "-",
             radius:2,
@@ -275,9 +309,69 @@ define(function(require) {
         dataParam.points.shadowSize = 0;
         
         // Have not accounted for the case horizontal bar with no start time and end time
-        // console.log(dataParam);
+
       }
+      //console.log(dataParam);
            // parameter to enable error-bar presentation.
+      return dataParam;
+    },
+    formatGraphEruptionAppearance: function(data){
+      //console.log(data);
+      var dataParam = {
+        data: data, //data is 3D array (y-error value is included in the data passed in)
+        //label: filterName + ":"+timeSerieName,
+        color: null,
+        lines: {
+          show: false,
+          radius: 10,
+          lineWidth:2,
+          symbol: "line",
+        },
+        yaxis: {
+          axisLabel: ""
+        },
+        shadowSize: 3,
+        points: {
+          show: true,
+          radius: 10,
+          lineWidth: 2, // in pixels
+          fill: true,
+          fillColor:"#FF0000",
+          symbol: "volcano",
+          //text: date,
+
+        },
+        bars: {
+          // wovodat: true;
+          show: false,
+          fullparams: true,
+          lineWidth: 2,
+          barWidth:0,
+          fill: false,
+          fillColor: 0,
+          align: "left", // "left", "right", or "center"
+          horizontal: false,
+          zero: true
+        }
+      };
+
+      // Set up for special earthquake type Colors
+        dataParam.color = "#FF0000";
+        dataParam.points.show = true;
+
+        dataParam.points.fillColor = "#FF0000";
+      //  // console.log(dataParam);
+      //}
+      //else if(styleParams.style == 'horizontalbar'||styleParams.style == 'bar'){
+      //  dataParam.bars.show = true;
+      //  dataParam.bars.horizontal = true;
+      //  dataParam.points.shadowSize = 0;
+      //
+      //  // Have not accounted for the case horizontal bar with no start time and end time
+      //console.log("dataParam");
+          // console.log(dataParam);
+      //}
+      // parameter to enable error-bar presentation.
       return dataParam;
     },
     decimalPlaces: function(value) {

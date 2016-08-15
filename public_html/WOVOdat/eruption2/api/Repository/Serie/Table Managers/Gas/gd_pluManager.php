@@ -1,11 +1,11 @@
 <?php
 /**
- *	This class supports query the data from data table gd_plu 
+ *	This class supports query the data from data table dd_tlt 
  * 	
  */
 // DEFINE('HOST', 'localhost');
 // require_once '..//TableManager.php';
-class gd_pluManager extends GasTablesManager {
+class gd_pluManager extends TableManager {
 	
 	protected function setColumnsName(){
 		$result = array("gd_plu_height","gd_plu_mass","gd_plu_etot","gd_plu_emit");
@@ -14,7 +14,9 @@ class gd_pluManager extends GasTablesManager {
 	protected function setTableName(){
 		return "es_gd_plu";
 	}
-
+	protected function setMonitoryType(){
+		return "Gas";
+	} // monitory type Deformation, Gas, ....
 	protected function setDataType(){
 		return "Gas Plume";
 	} // Data type for each data table
@@ -42,7 +44,7 @@ class gd_pluManager extends GasTablesManager {
 	
 		}else if($component == 'Gas Emission Rate'){
 
-			$attribute = "gd_plu_emit"; 	
+			$attribute = "gd_plu_emit";
 			$errorbar = true;
 			$style = 'dot';
 			$query = "select a.gd_plu_units as unit, a.gd_plu_species as filter, a.gd_plu_emit_err as err, a.gd_plu_time as time, a.$attribute as value from $table as a where (a.gs_id=%s or a.cs_id=%s) and a.$attribute IS NOT NULL";
