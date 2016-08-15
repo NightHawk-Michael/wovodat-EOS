@@ -1,22 +1,20 @@
 <?php
 /**
- *	This class supports query the data from data table dd_tlt 
+ *	This class supports query the data from data table dd_lev 
  * 	
  */
 // DEFINE('HOST', 'localhost');
 // require_once '..//TableManager.php';
-class dd_levManager extends TableManager {
+class dd_levManager extends DeformationTablesManager {
 	
 	protected function setColumnsName(){
 		$result = array("dd_lev_delev");
 		return $result;
 	}
 	protected function setTableName(){
-		return "es_dd_lev";
+		return "es_dd_lev";  
 	}
-	protected function setMonitoryType(){
-		return "Deformation";
-	} // monitory type Deformation, Gas, ....
+	
 	protected function setDataType(){
 		return "Leveling";
 	} // Data type for each data table
@@ -33,7 +31,7 @@ class dd_levManager extends TableManager {
 		$unit="";
 		$attribute = "";
 		$query = "";
-		$table = "dd_lev";
+		$table = "dd_lev";    
 		$errorbar = true;
 		$style = "dot";
 		if($component == 'Elevation Change'){
