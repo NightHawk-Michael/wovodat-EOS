@@ -5,7 +5,7 @@
  */
 // DEFINE('HOST', 'localhost');
 // require_once '..//TableManager.php';
-class dd_tltManager extends DeformationTablesManager {
+class dd_tltManager extends TableManager {
 	
 	protected function setColumnsName(){
 		$result = array("dd_tlt1","dd_tlt2","dd_tlt_temp");
@@ -14,7 +14,9 @@ class dd_tltManager extends DeformationTablesManager {
 	protected function setTableName(){
 		return "es_dd_tlt";
 	}
-	
+	protected function setMonitoryType(){
+		return "Deformation";
+	} // monitory type Deformation, Gas, ....
 	protected function setDataType(){
 		return "ElectronicTilt";
 	} // Data type for each data table
@@ -31,7 +33,7 @@ class dd_tltManager extends DeformationTablesManager {
 		$unit="";
 		$attribute = "";
 		$query = "";
-		$table = "dd_tlt"; 
+		$table = "dd_tlt";
 		$errorbar = true;
 		$style = "dot";
 		if($component == 'Radial/X-axis Tilt'){
@@ -43,7 +45,7 @@ class dd_tltManager extends DeformationTablesManager {
 			$unit = "urad";
 			$attribute = "dd_tlt2";
 			$query = "select a.dd_tlt_err2 as err ,a.dd_tlt_time as time, a.$attribute as value  from $table as a where a.ds_id=%s and a.$attribute IS NOT NULL";
-		}else if($component == 'Tilt Temperature'){
+		}else if($component == 'Temp'){
 			$unit = "oC";
 			$attribute = "dd_tlt_temp";
 			$errorbar = false;
