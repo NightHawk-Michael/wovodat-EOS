@@ -70,7 +70,9 @@ abstract class TableManager implements TableManagerInterface {
 		$temp = explode("_", $id);
 		return $temp[0];
 	}
+
 	public function getTimeSeriesList($vd_id){
+
   		$result = array();
 		global $db;
 		$query_format = 'select a.%s as sta_id1,  a.%s as sta_id2, vd.vd_name ';
@@ -78,7 +80,8 @@ abstract class TableManager implements TableManagerInterface {
 		foreach ($this->cols_name as $name) {
 			$query = $query.",a.".$name;
 		}
-		$query = $query." from $this->table_name as a, vd where a.vd_id=$vd_id AND vd.id = $vd_id group by a.vd_id, sta_id1, sta_id2 order by vd_id";
+		$query = $query." from $this->table_name as a, vd where a.vd_id=$vd_id AND vd.vd_id = $vd_id group by a.vd_id, sta_id1, sta_id2 order by a.vd_id";
+
 		$db->query( $query);
 
 		$serie_list = $db->getList();
@@ -119,6 +122,7 @@ abstract class TableManager implements TableManagerInterface {
 
 					}
 
+
 				}
 			}
 		}
@@ -148,6 +152,7 @@ abstract class TableManager implements TableManagerInterface {
 
 		foreach ($res as $row) {
 			//add value attributes
+
 			$temp = array("value" => floatval($row["value"]));
 			//add time value attributes (time or (etime, stime))
 			if(array_key_exists("time", $row)){
