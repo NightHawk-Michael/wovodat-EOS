@@ -18,7 +18,6 @@ define(function(require) {
     initialize: function(options) {
       /** Variable declaration **/
       this.overviewSelectingTimeRange = new TimeRange();
-
       this.observer = options.observer;
       this.overviewSelectingTimeSeries = options.selectingTimeSeries;
       this.overviewGraph = options.graph;
@@ -26,11 +25,7 @@ define(function(require) {
      //hide overview graph from page
     hide: function(){
       this.$el.html("");
-      this.$el.addClass("overview-graph-container card-panel");
-      this.$el.append("<div id = \"overview-title\" style = \"padding-left: 50px;display:none;\">" +
-          "<a style = \" font-weight: bold; color : black;\">Overview Graph.</a> <br>" +
-          "<a style = \" padding-left : 10px;color : black; \">Highlight selected time range using mouse</a></div>");
-
+      this.$el.addClass("overview-graph-container");
       this.trigger('hide');
     },
 
@@ -40,7 +35,6 @@ define(function(require) {
     },
     selectingFiltersChanged: function(selectingFilters) {
       this.selectingFilters = selectingFilters;
-     // console.log("DEBUG " + this.selectingFilters.);
       if (this.selectingFilters.empty) {
         this.hide();
       }else{
@@ -49,8 +43,7 @@ define(function(require) {
     },
 
     render: function() {
-      //console.log(this.overviewGraph);
-
+      
       this.overviewGraph.$el.appendTo(this.$el);
     }
   });
