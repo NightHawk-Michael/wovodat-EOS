@@ -24,9 +24,5 @@
 	Loader::loadController();
 
 	Loader::setJSONHeader();
-	$data = Routing::route();
-
 	
-	echo json_encode($data);	
-	
-	
+	echo json_encode(Routing::route());

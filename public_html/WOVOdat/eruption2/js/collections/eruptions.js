@@ -7,27 +7,19 @@ define(function(require) {
   return Backbone.Collection.extend({
     model: Eruption,
     
-    initialize: function(options) {
-      this.offline = options.offline;
+    initialize: function(vd_id) {
+      if (vd_id)
+        this.changeVolcano(vd_id);
     },
 
     changeVolcano: function(vd_id, handler) {
-      if(this.offline){
-        this.url = 'offline-data/eruption_list.json';
-      }else{
-        this.url = 'api/?data=eruption_list&vd_id=' + vd_id;
-      }
-      
-      this.fetch({
-        success: function(e){
-          e.trigger("fetched");
-        }
-      });
+      this.url = 'api/?data=eruption_list&vd_id=' + vd_id;
+      this.fetch().done(handler);
     },
     getAvailableEruptions: function(timeRange){
+      //console.log("GET ERUPTIONS " + timeRange);
       
       if(timeRange == undefined){
-        // console.log(this.models);
         return this.models;
       }else{
         var result = [];
@@ -38,7 +30,7 @@ define(function(require) {
             result.push(this.models[i]);
           }
         }
-        // console.log(this.models.length);
+
         return result;
       }
     }

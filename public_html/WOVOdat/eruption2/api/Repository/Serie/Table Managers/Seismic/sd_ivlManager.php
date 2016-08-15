@@ -5,7 +5,7 @@
  */
 // DEFINE('HOST', 'localhost');
 // require_once '..//TableManager.php';
-class sd_ivlManager extends SeismicTablesManager {
+class sd_ivlManager extends TableManager {
 	
 	protected function setColumnsName(){
 		$result = array(	"sd_ivl_hdist","sd_ivl_avgdepth","sd_ivl_vdispers",
@@ -17,7 +17,9 @@ class sd_ivlManager extends SeismicTablesManager {
 	protected function setTableName(){
 		return "es_sd_ivl";
 	}
-
+	protected function setMonitoryType(){
+		return "Seismic";
+	} // monitory type Deformation, Gas, ....
 	protected function setDataType(){
 		return "SeismicInterval";
 	} // Data type for each data table
@@ -49,11 +51,11 @@ class sd_ivlManager extends SeismicTablesManager {
 			$unit = "km";
 			$attribute = "sd_ivl_vdispers";
 			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
-		}else if($component == 'Hypocenter Horizontal Migration'){
+		}else if($component == 'Hypocenter Horiz-Migration'){
 			$unit = "km";
 			$attribute = "sd_ivl_hmigr_hyp";
 			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
-		}else if($component == 'Hypocenter Vertical Migration'){
+		}else if($component == 'Hypocenter Vert-Migration'){
 			$unit = "km";
 			$attribute = "sd_ivl_vmigr_hyp";
 			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
@@ -61,28 +63,27 @@ class sd_ivlManager extends SeismicTablesManager {
 			$unit = "counts";
 			$attribute = "sd_ivl_nrec";
 			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
-		}else if($component == 'Felt Earthquake Counts'){
+		}else if($component == 'Total Seismic Energy'){
 			$unit = "counts";
-			$attribute = "sd_ivl_nfelt";
-			$query = "select a.sd_ivl_eqtype as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
-		}
-		else if($component == 'Total Seismic Energy'){
-			$unit = "Erg";
 			$attribute = "sd_ivl_etot";
 			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
-		}else if($component == 'Earthquake Minimum Frequency'){
+		}else if($component == 'Felt Earthquake Counts'){
+			$unit = "Erg";
+			$attribute = "sd_ivl_nfelt";
+			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
+		}else if($component == 'Earthquake Min-frequency'){
 			$unit = "Hz";
 			$attribute = "sd_ivl_fmin";
 			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
-		}else if($component == 'Earthquake Maximum Frequency'){
+		}else if($component == 'Earthquake Max-frequency'){
 			$unit = "Hz";
 			$attribute = "sd_ivl_fmax";
 			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
-		}else if($component == 'Earthquake Minimum Amplitude'){
+		}else if($component == 'Earthquake Min-amplitude'){
 			$unit = "cm";
 			$attribute = "sd_ivl_amin";
 			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
-		}else if($component == 'Earthquake Maximum Amplitude'){
+		}else if($component == 'Earthquake Max-amplitude'){
 			$unit = "cm";
 			$attribute = "sd_ivl_amax";
 			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";

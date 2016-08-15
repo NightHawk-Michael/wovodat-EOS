@@ -14,9 +14,9 @@
 		}	
 
 
-		public static function loadTimeSerie($serie) {
+		public static function loadTimeSerie($sr_id) {
 			$instance = TimeSeriesManager::getInstance();
-			$result = $instance->getTimeSerie($serie);
+			$result = $instance->getTimeSerie($sr_id);
 			return $result;
 		}
 

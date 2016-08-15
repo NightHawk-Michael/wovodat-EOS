@@ -5,7 +5,7 @@
  */
 // DEFINE('HOST', 'localhost');
 // require_once '..//TableManager.php';
-class tdManager extends ThermalTablesManager {
+class tdManager extends TableManager {
 	
 	protected function setColumnsName(){
 		$result = array("td_temp","td_flux","td_bkgg","td_tcond");
@@ -14,6 +14,9 @@ class tdManager extends ThermalTablesManager {
 	protected function setTableName(){
 		return "es_td";
 	}
+	protected function setMonitoryType(){
+		return "Thermal";
+	} // monitory type Deformation, Gas, ....
 	protected function setDataType(){
 		return "Thermal";
 	} // Data type for each data table
@@ -41,7 +44,7 @@ class tdManager extends ThermalTablesManager {
 		}else if($component == 'Heat Flux'){
 			$attribute = "td_flux";
 			$unit ="W/m2";
-			$errorbar = true;  
+			$errorbar = true;
 			$query = "select a.td_time as time, a.td_ferr as err, a.$attribute as value  from $table as a where a.ts_id=%s and a.$attribute IS NOT NULL";
 		}else if($component == 'Gethermal Gradient'){
 			$attribute = "td_bkgg";
