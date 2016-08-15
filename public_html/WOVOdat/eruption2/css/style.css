@@ -20,24 +20,15 @@
   top: 0;
   will-change: top, left;
 }
-div.composite-graph div.overview-graph div.flot-text div.yAxis div.tickLabel
+div.overview-graph div.flot-text div.yAxis div.tickLabel
 {    
     color: transparent;
     
-}
-div.overview-graph-container div.composite-graph-containter{
-  padding : 0px;
-
-
 }
 div.eruption-forecasts-graph div.flot-text div.yAxis div.tickLabel
 {    
     color: transparent;
     
-}
-
-div.stack-graph{
-  margin-top: -40px;
 }
 label {
     font-size: 0.8rem;

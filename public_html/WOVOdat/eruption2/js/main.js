@@ -1,15 +1,16 @@
 require.config({
   paths: {
     // Vendors.
-    'jquery': 'vendor/jquery/jquery.min',
+    'jquery': 'vendor/jquery/jquery',
     'backbone': 'vendor/backbone/backbone-min',
     'underscore': 'vendor/underscore/underscore-min',
     'text': 'vendor/require-text/text.min',
     'moment': 'vendor/momentjs/moment.min',
     'material':'vendor/materialize/materialize.min',
     'hammer':'vendor/materialize/hammer.min',
+    'jszip' : 'vendor/jszip/jszip.min',
+    'FileSaver' : 'vendor/FileSaver/FileSaver.min',
     // 'velocity':'vendor/materialize/velocity.min',
-    //'JSZip' : 'vendor/zip/dist/jszip',
     'pace': 'vendor/pace/pace.min',
     'jquery.flot': 'vendor/jquery-flot/src/jquery.flot',
     'jquery.colorhelpers' : 'vendor/jquery-flot/lib/jquery.colorhelpers',
@@ -18,7 +19,6 @@ require.config({
     'jquery.resize' : 'vendor/jquery-flot/lib/jquery.resize',
     'jquery.flot.navigate': 'vendor/jquery-flot/src/plugins/jquery.flot.navigate',
     'jquery.flot.selection': 'vendor/jquery-flot/src/plugins/jquery.flot.selection',
-    'jquery.flot.symbol': 'vendor/jquery-flot/src/plugins/jquery.flot.symbol',
     'jquery.flot.time': 'vendor/jquery-flot/src/plugins/jquery.flot.time',
     'excanvas' : 'vendor/jquery-flot/lib/excanvas.min',
     'jquery.flot.tickrotor': 'vendor/jquery-flot/src/plugins/jquery.flot.tickrotor',
@@ -26,7 +26,6 @@ require.config({
     'jquery.flot.axislabels': 'vendor/jquery-flot/src/plugins/jquery.flot.axislabels',
     'jquery.flot.legendoncanvas' :'vendor/jquery-flot/src/plugins/jquery.flot.legendoncanvas',
     'handlebars' : 'vendor/handlebars/handlebars.amd.min',
-
   },
   shim: {
     'jquery' : {
@@ -64,17 +63,12 @@ require.config({
     'jquery.flot.errorbars': {
       deps: ['jquery.flot']
     },
-    'jquery.flot.symbol': {
-      deps: ['jquery.flot']
-    },
     'jquery.flot.axislabels': {
       deps: ['jquery.flot']
     },
-
     'jquery.flot.legendoncanvas': {
       deps: ['jquery.flot']
     },
-
   },
   config: {
       moment: {

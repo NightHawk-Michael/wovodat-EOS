@@ -28,15 +28,16 @@ define(function(require) {
       this.timeSeries = options.timeSeries;
       this.categories = options.categories;
       this.selectingFilters = options.selectingFilters;
+      this.selectedTimeSeries = options.selectedTimeSeries;
       this.selectingTimeSeries.reachLimit = function(){
-        return (this.length >= 10005);
+        return (this.length >= 5);
       }
     },
     showLoading: function(){
       this.$el.html(this.loading);
     },
     changeVolcano: function(vd_id,timeSeries) {
-        this.showLoading();
+      this.showLoading();
       if(vd_id == -1){ // when user select "Please select vocalno"
         this.$el.html(""); // no time serie appears
         this.trigger('hide');
@@ -53,8 +54,6 @@ define(function(require) {
       this.$el.html("");
       var container =$("<div></div>");
       container.addClass("time_series_select_container card-panel");
-      this.$el.append("<div id = \"timeseries-select-title\" style = \"font-weight: bold; color : black;background-color:white;padding-left: 50px;visibility: hidden;\">Available time series data: </div>");
-
       this.$el.append(container);
       
       // console.log(timeSeries);
@@ -66,8 +65,6 @@ define(function(require) {
         }
         if(ret == ""){
           ret = "No data";
-        }else{
-          document.getElementById('timeseries-select-title').style.visibility = 'visible';
         }
         return ret;
       });
@@ -76,9 +73,11 @@ define(function(require) {
         timeserie: this.generateCategories(timeSeries)
       }
       var html = temp(options);
-
       $('.time_series_select_container').append(html);
       $('.time-serie-select').material_select();
+      if(this.selectedTimeSeries != undefined){
+        this.showFilter();
+      }
       
     },
     //generate Categories for html template
@@ -133,15 +132,34 @@ define(function(require) {
       this.selectingTimeSeries.reset();
       
       var options = $('.time-serie-select-option');
+      var temp =[];
+      if(this.selectedTimeSeries!=undefined){
+        for(var i = 0; i<this.selectedTimeSeries.length;i++){
+          temp.push(this.timeSeries.get(this.selectedTimeSeries[i]));
+        }
+      }
       
       for(var i = 0;i<options.length;i++){
           var option = options[i];
-          if(option.selected){
-            this.selectingTimeSeries.add(this.timeSeries.get(option.value));
+          //check the timeseries selected from url
+          var pos = undefined;
+          for(var j = 0; j<temp.length;j++){
+            if(temp[j]!=undefined){
+              if(temp[j].get('sr_id') == option.value){
+                option.selected = true;
+                pos = j;
+              }
+            }
           }
-
-        
+          if(option.selected){
+            if(pos!=undefined){
+              this.selectingTimeSeries.add(temp[pos]);
+            }else{
+              this.selectingTimeSeries.add(this.timeSeries.get({sr_id:option.value}));
+            }
+          }
       }
+      
       // set limitation of 
       var groupItems = $('.multiple-select-dropdown');
       for(var i=0;i<groupItems.length;i++){
@@ -178,6 +196,8 @@ define(function(require) {
         // $('.time-serie-select').material_select();
       }
       this.selectingTimeSeries.trigger("change");
+      $('.time-serie-select').material_select('destroy');
+      $('.time-serie-select').material_select();
 
     },
     

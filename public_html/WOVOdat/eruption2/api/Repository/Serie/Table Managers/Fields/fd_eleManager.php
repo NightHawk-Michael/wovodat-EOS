@@ -1,11 +1,11 @@
 <?php
 /**
- *	This class supports query the data from data table dd_tlt 
+ *	This class supports query the data from data table fd_ele 
  * 	
  */
 // DEFINE('HOST', 'localhost');
 // require_once '..//TableManager.php';
-class fd_eleManager extends TableManager {
+class fd_eleManager extends FieldsTablesManager {
 	
 	protected function setColumnsName(){
 		$result = array("fd_ele_field","fd_ele_spot","fd_ele_ares","fd_ele_dres");
@@ -14,9 +14,7 @@ class fd_eleManager extends TableManager {
 	protected function setTableName(){
 		return "es_fd_ele";
 	}
-	protected function setMonitoryType(){
-		return "Fields";
-	} // monitory type Deformation, Gas, ....
+
 	protected function setDataType(){
 		return "Electric Fields";
 	} // Data type for each data table
@@ -35,8 +33,9 @@ class fd_eleManager extends TableManager {
 		$query = "";
 		$table = "fd_ele";
 		$errorbar = true;
-		$style = "dot";
-		if($component == 'Electric Fields'){
+		$style = "dot";  
+
+		if($component == 'Electric Field'){
 			$unit = "mV";
 			$attribute = "fd_ele_field";
 			$query = "select a.fd_ele_ferr as err ,a.fd_ele_time as time, a.$attribute as value  from $table as a where a.fs_id1=%s and a.fs_id2=%s and a.$attribute IS NOT NULL";

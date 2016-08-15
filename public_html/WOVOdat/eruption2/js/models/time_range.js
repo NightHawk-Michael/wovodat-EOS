@@ -8,7 +8,6 @@ define(['jquery', 'backbone'], function($, Backbone) {
       this.set({
         'startTime': options ? options.startTime : undefined,
         'endTime': options ? options.endTime : undefined,
-        'serieID' : options ? options.serieId : undefined,
       });
     }
   });

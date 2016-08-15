@@ -13,11 +13,9 @@
 <%}%>
 <%if(type == "point"){%>
 	<center>
-	<%if (symbol != "volcano"){%>
-		<%= time %><br/>
-		<%= value %>
-		<% if(error != undefined) %>
-			&plusmn <%= error %>
-	<%}%>
+	<%= time %><br/>
+	<%= value %>
+	<% if(error != undefined) %>
+		&plusmn <%= error %>
 	</center>
 <%}%>

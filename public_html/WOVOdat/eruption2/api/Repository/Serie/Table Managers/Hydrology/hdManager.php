@@ -1,22 +1,20 @@
 <?php
 /**
- *	This class supports query the data from data table dd_tlt 
+ *	This class supports query the data from data table hd 
  * 	
  */
 // DEFINE('HOST', 'localhost');
 // require_once '..//TableManager.php';
-class hdManager extends TableManager {
+class hdManager extends HydrologyTablesManager {
 	
 	protected function setColumnsName(){
-		$result = array("hd_temp","hd_wdepth","hd_bp","hd_sdisc","hd_prec","hd_ph","hd_cond","hd_comp_content","hd_atemp","hd_tds");
+		$result = array("hd_temp","hd_welev","hd_wdepth","hd_dwlev","hd_bp","hd_sdisc","hd_prec","hd_ph","hd_cond","hd_comp_content","hd_atemp","hd_tds");
 		return $result;
 	}
 	protected function setTableName(){
 		return "es_hd";
 	}
-	protected function setMonitoryType(){
-		return "Hydrology";
-	} // monitory type Deformation, Gas, ....
+	
 	protected function setDataType(){
 		return "Hydrology";
 	} // Data type for each data table
@@ -49,7 +47,7 @@ class hdManager extends TableManager {
 			$unit ="m";
 			$query = "select a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
 		}else if($component == 'Water Level Changes'){
-			$attribute = "hd_dwelev";
+			$attribute = "hd_dwlev";
 			$unit ="m";
 			$query = "select a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
 		}else if($component == 'Barometric Pressure'){
@@ -64,15 +62,15 @@ class hdManager extends TableManager {
 			$attribute = "hd_prec";
 			$unit ="mm";
 			$query = "select a.hd_tprec  as filter, a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
-		}else if($component == 'Water ph'){
+		}else if($component == 'Water PH'){
 			$errorbar = true;
 			$attribute = "hd_ph";
 			$query = "select a.hd_ph_err as err,a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
 		}else if($component == 'Conductivity'){
-			$errorbar = true;
+			$errorbar = true;  
 			$attribute = "hd_cond";
 			$query = "select a.hd_cond_err as err,a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
-		}else if($component == 'Content of Compound'){
+		}else if($component == 'Content Of Compound'){
 			$errorbar = true;
 			$attribute = "hd_comp_content";
 			$query = "select a.hd_comp_species  as filter,a.hd_comp_units as unit,a.hd_comp_content_err as err,a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
