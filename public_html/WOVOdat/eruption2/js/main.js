@@ -8,6 +8,8 @@ require.config({
     'moment': 'vendor/momentjs/moment.min',
     'material':'vendor/materialize/materialize.min',
     'hammer':'vendor/materialize/hammer.min',
+    'jszip' : 'vendor/zip/dist/jszip',
+    'FileSaver' : 'vendor/zip/dist/FileSaver',
     // 'velocity':'vendor/materialize/velocity.min',
     //'JSZip' : 'vendor/zip/dist/jszip',
     'pace': 'vendor/pace/pace.min',
@@ -26,7 +28,6 @@ require.config({
     'jquery.flot.axislabels': 'vendor/jquery-flot/src/plugins/jquery.flot.axislabels',
     'jquery.flot.legendoncanvas' :'vendor/jquery-flot/src/plugins/jquery.flot.legendoncanvas',
     'handlebars' : 'vendor/handlebars/handlebars.amd.min',
-
   },
   shim: {
     'jquery' : {
@@ -70,11 +71,9 @@ require.config({
     'jquery.flot.axislabels': {
       deps: ['jquery.flot']
     },
-
     'jquery.flot.legendoncanvas': {
       deps: ['jquery.flot']
     },
-
   },
   config: {
       moment: {

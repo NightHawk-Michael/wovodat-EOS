@@ -46,7 +46,6 @@ define(function(require) {
          maxY = undefined,
          data = [],
          errorbars = undefined;
-
       for(var i=0;i<filters.length;i++){
         var filter = filters[i];
         //console.log(filter);
@@ -55,7 +54,6 @@ define(function(require) {
           //console.log(filter.filterAttributes[j]);
           var list = [];
           var filterData = filter.timeSerie.getDataFromFilter(filterName);
-
           var style = filter.timeSerie.get('data').style; // plot style [bar,circle,dot,horizontalbar]
           var errorbar;
           var axisLabel; // show unit on Y-axis
@@ -130,9 +128,7 @@ define(function(require) {
             
             var tempData =  [];
             // parameters for bar data: left, right,bottom, top,error
-
             if(style == 'bar'){
-
               tempData.push(d.stime,d.etime,0,d.value);
             }
             else if(style == 'horizontalbar'){
@@ -147,7 +143,6 @@ define(function(require) {
             if(errorbar){
               tempData.push(error);
             }
-
             list.push(tempData);
           });
 
@@ -190,6 +185,7 @@ define(function(require) {
         //console.log(minY);
         data.push(this.formatGraphEruptionAppearance(listEruption, minY,maxY));
       }
+
       graph.minX = minX-86400000;
       graph.maxX = maxX+86400000;
 
@@ -219,10 +215,8 @@ define(function(require) {
       });
       // graph.timeRange.trigger('change');
       graph.data = data;
-
-       //console.log(data);
+      // console.log(data);
     },
-
     /** setup effect for the graph
     *   data : data for floting
     *   filterName: filter name
@@ -232,7 +226,6 @@ define(function(require) {
 
      // console.log(filterName);
       var dataParam = {
-
         data: data, //data is 3D array (y-error value is included in the data passed in)
         label: filterName + ":"+timeSerieName,
         color: null,

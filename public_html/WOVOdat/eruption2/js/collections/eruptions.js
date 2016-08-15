@@ -27,6 +27,7 @@ define(function(require) {
     getAvailableEruptions: function(timeRange){
       
       if(timeRange == undefined){
+        // console.log(this.models);
         return this.models;
       }else{
         var result = [];
@@ -37,7 +38,7 @@ define(function(require) {
             result.push(this.models[i]);
           }
         }
-
+        // console.log(this.models.length);
         return result;
       }
     }

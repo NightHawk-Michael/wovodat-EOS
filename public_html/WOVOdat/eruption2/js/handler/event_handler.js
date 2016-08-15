@@ -163,12 +163,14 @@ define(function(require) {
     selectingTimeSeriesChanged: function(e){
       
       this.filtersSelect.selectingTimeSeriesChanged(this.selectingTimeSeries); // filter is rendered out.
+
     },
     selectingTimeSeriesChangedCheck: function(e){
       // this.filtersSelect.showLoading();
       var allLoaded = true;
       // while(!allLoaded){
-        for(var i=0;i<this.selectingTimeSeries.models.length;i++){
+      console.log (this.selectingTimeSeries);
+      for(var i=0;i<this.selectingTimeSeries.models.length;i++){
           var model = this.selectingTimeSeries.models[i];
           if(model.get('data') == undefined){
             allLoaded = false;
@@ -215,16 +217,12 @@ define(function(require) {
     },
     filtersSelectHidden: function(e){
       this.overviewGraph.hide();
-      this.eruptionSelect.hide();
+      // this.eruptionSelect.hide();
+      // this.eruptionSelect.show();
     },
     overviewGraphHidden: function(e){
-      this.eruptionSelect.hide();
-
-    },
-    compositeGraphHidden: function(e){
-      //this.eruptionSelect.hide();
-      this.compositeGraphContainer.hide();
-
+      // this.eruptionSelect.hide();
+      // this.eruptionSelect.show();
     },
     eruptionGraphHidden: function(e){
       this.timeSeriesGraphContainer.hide();

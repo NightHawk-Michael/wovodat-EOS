@@ -2,8 +2,8 @@ define(function(require) {
 	'use strict';
 	var $ = require('jquery'),
   Backbone = require('backbone'),
-        JSZip = require('vendor/zip/dist/jszip'),
-        fs = require('vendor/zip/dist/FileSaver'),
+        JSZip = require('jszip'),
+        //fs = require('vendor/zip/dist/FileSaver'),
         template = require('text!templates/time_serie_graph.html'),
   _ = require('underscore');
 

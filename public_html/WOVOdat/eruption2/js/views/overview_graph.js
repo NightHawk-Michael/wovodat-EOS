@@ -17,8 +17,9 @@ define(function(require) {
       this.serieGraphTimeRange = options.serieGraphTimeRange;
       this.timeRange = options.overviewGraphTimeRange;
       this.selectingTimeRange = options.selectingTimeRange;
-      this.filterColorCollection = new FilterColorCollection;
-      this.filterColorCollection.fetch();
+      this.filterColorCollection = new FilterColorCollection({
+        offline: options.offline
+      });
       this.categories = options.categories;
       //console.log(this.filterColorCollection);
 
