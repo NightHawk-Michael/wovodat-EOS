@@ -166,7 +166,7 @@ define(function(require) {
             }
             serie.hasfilter = true;
             var object = {
-              value: groupFilters.timeSerie.sr_id+ "."+ filter,
+              value: groupFilters.timeSerie.get('sr_id')+ "."+ filter,
               showingName: filter,
             }
             object.isSelected  = this.isSelected(groupFilters.timeSerie,filter);
@@ -189,11 +189,7 @@ define(function(require) {
       this.trigger('hide');
 
     },
-
-      /**
-       * Show graph which is selected
-       * @param event
-       */
+    
     showGraph: function(event) {
         
         
@@ -204,21 +200,17 @@ define(function(require) {
       this.selectingFilters.empty = true;
       var checkboxes = $('.filter-select-option');
       // for(var i = 0; i<selects.length;i++){
-
       for(var i = 0;i<checkboxes.length;i++){
         var checkbox = checkboxes[i];
         if(checkbox.checked){
           var temp = checkbox.id.split(".");
           this.selectingFilters.empty = false;
-          this.selectingFilters.push(this.selectingTimeSeries.get(temp[0]),temp[1]);
-
-
+          this.selectingFilters.push(this.selectingTimeSeries.get({sr_id: temp[0]}),temp[1]);
         }
       
       }
 
       this.updateSelectingFilters();
-
       this.selectingFilters.trigger('update');
       
       
