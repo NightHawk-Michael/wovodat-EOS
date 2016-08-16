@@ -8,6 +8,6 @@
 		public static function loadVolcanoList() {
 			$result = VolcanoRepository::getVolcanoList();
 			return $result;
-		}
+		}	
 
 	}

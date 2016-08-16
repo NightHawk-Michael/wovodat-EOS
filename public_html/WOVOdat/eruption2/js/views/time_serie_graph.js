@@ -324,7 +324,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
           canvas: true,
           autoscaleMargin: 15,
         },
-       
+
         zoom: {
           interactive: true,
 
