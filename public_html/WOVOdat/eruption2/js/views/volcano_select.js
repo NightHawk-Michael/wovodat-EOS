@@ -68,7 +68,7 @@ define(function(require) {
       this.$el.html(html);
       $('.volcanoes_select').material_select();
       $('.search-sugesstion').dropdown();
-      
+      // $('.modal-trigger').leanModal();
       
     },
     makeItOffline: function(e){

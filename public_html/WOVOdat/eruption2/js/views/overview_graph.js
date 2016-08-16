@@ -36,15 +36,48 @@ define(function(require) {
 
       var startTime = ranges.xaxis.from,
           endTime = ranges.xaxis.to;
-
-      event.data.set({
+      event.data.data.set({
         'startTime': startTime,
         'endTime': endTime,
-
+        'overviewGraphMinX': event.data.graphMinX,
+        'overviewGraphMaxX': event.data.graphMaxX
       });
-
-      event.data.trigger('update');
+      // console.log(ranges.xaxis);
+      // console.log(event.data);
+      event.data.data.trigger('update');
     },
+    //selectingRegionChanged: function(selectingTimeRange){
+      //this.$el.bind('plotselected',this.selectingTimeRange,this.plotSelectingRegion);
+      //console.log(2);
+    //},
+    //plotSelectingRegion
+
+    selectingRegionChanged: function(selectingTimeRange){
+      // console.log(selectingTimeRange);
+      var selectedMinX = selectingTimeRange.get('selectedMinX');
+      var selectedMaxX = selectingTimeRange.get('selectedMaxX');
+      var minX;
+      var maxX;
+      //set the boundary for the selected region
+      if(selectedMinX<this.minX){
+        minX = this.minX;
+      }else{
+        minX = selectedMinX;
+      }
+      if(selectedMaxX>this.maxX){
+        maxX = this.maxX;
+      }else{
+        maxX = selectedMaxX;
+      }
+      // console.log(this.timeRange);
+      this.graph.setSelection({
+        xaxis: {
+          from: minX,
+          to: maxX,
+        }
+      })
+    },
+
     hide: function(){
       this.$el.html("");
       this.$el.width(0);
@@ -127,7 +160,14 @@ define(function(require) {
 
       this.graph = $.plot(this.$el, this.data, options);
       //To edit the series object, go to GraphHelper used for data in the prepareData method below.
-      this.$el.bind('plotselected', this.selectingTimeRange, this.onSelect);
+      var eventData = {
+        data: this.selectingTimeRange,
+        graphMinX: this.minX,
+        graphMaxX: this.maxX
+      };
+
+      //this.$el.bind('plotselected', this.selectingTimeRange, this.onSelect);
+      this.$el.bind('plotselected', eventData, this.onSelect);
 
     },
 
@@ -135,7 +175,6 @@ define(function(require) {
       this.showLoading();
       this.prepareData();
       this.render();
-
     },
     
   
