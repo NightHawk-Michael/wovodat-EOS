@@ -141,7 +141,6 @@ define(function(require) {
       var vd_id = this.selectingVolcano.get('vd_id');
       this.volcanoSelect.changeSelection(vd_id);
       this.timeSeriesSelect.changeVolcano(vd_id,this.timeSeries);
-      // this.selectingTimeSeries.reset();
       this.eruptionSelect.fetchEruptions(vd_id);
       this.selectingTimeSeries.reset();
       this.selectingTimeSeriesChanged();

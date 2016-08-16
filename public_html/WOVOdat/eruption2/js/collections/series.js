@@ -64,7 +64,6 @@ define(function(require) {
             collection[currentCategory].push(model);
             collection.length++;
           }
-          // console.log(collection);
           collection.trigger("loaded");
         }
       });
