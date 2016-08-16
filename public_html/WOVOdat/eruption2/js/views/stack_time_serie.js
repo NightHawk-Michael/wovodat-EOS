@@ -74,6 +74,8 @@ define(function(require) {
             var options = {
                 grid:{
                     margin: 50,
+                    hoverable: true,
+                    labelMargin:20,
                 },
                 xaxis: {
                     mode:'time',
@@ -94,10 +96,7 @@ define(function(require) {
 
       ,
                 },
-                grid: {
-                    hoverable: true,
-                    labelMargin:20,
-                },
+
                 zoom: {
                     interactive: false,
 

@@ -19,7 +19,7 @@ define(function(require) {
       }else{
         this.url = 'api/?data=time_series_list&vd_id=' + vd_id;
       }
-
+      
       var categories=["Seismic","Deformation","Gas","Hydrology","Thermal","Field","Meteology"];
       for(var i = 0; i<categories.length;i++){
         delete this[categories[i]];
@@ -77,20 +77,20 @@ define(function(require) {
       for(var i =0;i<this.models.length;i++){
         if(serie.sr_id != undefined){
           if(this.models[i].get('sr_id') == serie.sr_id){
-
+            
             if(!this.models[i].loaded){
               this.models[i].fetch({
                 success: function(model, response) {
 
-
+                  
                   model.loaded = true;
-
+                  
                 }
               })
-            }
-            return this.models[i];
-
-
+            }  
+            return this.models[i];           
+   
+            
           }
         }else{
           if(this.models[i].get('category') == serie.category
@@ -99,20 +99,20 @@ define(function(require) {
             && this.models[i].get('station_id2')== serie.sta_id1
             && this.models[i].get('station_id2') == serie.sta_id2
             ){
-
+            
             if(!this.models[i].loaded){
               this.models[i].fetch({
                 success: function(model, response) {
 
-
+                  
                   model.loaded = true;
-
+                  
                 }
               })
-            }
-            return this.models[i];
-
-
+            }  
+            return this.models[i];           
+   
+            
           }
         }
       }

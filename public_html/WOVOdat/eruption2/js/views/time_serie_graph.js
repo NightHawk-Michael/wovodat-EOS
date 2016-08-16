@@ -177,6 +177,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       var options = {
             grid:{
               margin: 50,
+              hoverable: true,
             },
             xaxis: { 
               mode:'time',
@@ -208,9 +209,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
               canvas: true,
               autoscaleMargin: 5,
             },
-            grid: {
-              hoverable: true,
-            },
+
             zoom: {
               interactive: true,
               
@@ -293,6 +292,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       var options = {
         grid:{
           margin: 50,
+          hoverable: true,
         },
         xaxis: {
           mode:'time',
@@ -324,9 +324,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
           canvas: true,
           autoscaleMargin: 15,
         },
-        grid: {
-          hoverable: true,
-        },
+       
         zoom: {
           interactive: true,
 

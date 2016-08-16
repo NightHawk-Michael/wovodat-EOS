@@ -95,7 +95,7 @@ define(function(require) {
       this.listenTo(this.timeSeriesSelect,'hide',this.timeSeriesSelectHidden);
       this.listenTo(this.filtersSelect,'hide',this.filtersSelectHidden);
       this.listenTo(this.overviewGraphContainer,'hide',this.overviewGraphHidden);
-      this.listenTo(this.compositeGraphContainer,'hide',this.compositeGraphHidden);
+     // this.listenTo(this.compositeGraphContainer,'hide',this.compositeGraphHidden);
 
 
       this.listenTo(this.eruptionSelect,'hide',this.eruptionSelectHidden);

@@ -17,7 +17,7 @@ define(function(require) {
       }else{
         this.url = 'api/?data=eruption_list&vd_id=' + vd_id;
       }
-
+      
       this.fetch({
         success: function(e){
           e.trigger("fetched");
