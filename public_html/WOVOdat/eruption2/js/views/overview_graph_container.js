@@ -18,7 +18,6 @@ define(function(require) {
     initialize: function(options) {
       /** Variable declaration **/
       this.overviewSelectingTimeRange = new TimeRange();
-
       this.observer = options.observer;
       this.overviewSelectingTimeSeries = options.selectingTimeSeries;
       this.overviewGraph = options.graph;
@@ -40,7 +39,6 @@ define(function(require) {
     },
     selectingFiltersChanged: function(selectingFilters) {
       this.selectingFilters = selectingFilters;
-     // console.log("DEBUG " + this.selectingFilters.);
       if (this.selectingFilters.empty) {
         this.hide();
       }else{
@@ -49,7 +47,6 @@ define(function(require) {
     },
 
     render: function() {
-      //console.log(this.overviewGraph);
 
       this.overviewGraph.$el.appendTo(this.$el);
     }
