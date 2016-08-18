@@ -73,7 +73,7 @@ define(function(require) {
 
             var options = {
                 grid:{
-                    margin: 50,
+                    //margin: 50,
                     hoverable: true,
                     labelMargin:20,
                 },
@@ -114,7 +114,6 @@ define(function(require) {
                 this.$el.html('');
                 return;
             }
-            console.log(this.data);
             this.$el.width(this.width);
             this.$el.height(300);
             this.$el.addClass('stack-graph');
@@ -181,7 +180,6 @@ define(function(require) {
                 /*
                 Config eruption marker
                  */
-                console.log (this.data);
                     if (this.data.length >=1){
                         var eventData = this.data[1].data;
                         for (var i = 0 ; i < eventData.length; i++){

@@ -74,7 +74,7 @@ define(function(require) {
           var minY = 100000;
           var maxY = -500000
           var eventData = this.data[p].data;
-
+          var positionLeft = true;
           for (var i = 0; i < eventData.length; i++) {
             var eData = eventData[i];
 
@@ -97,11 +97,16 @@ define(function(require) {
           if (minY > 0)minY = minY * 0.9;
           else minY = minY * 1.1;
           var position;
-          if (i%2 == 1) position  = "right";
-          else position =  "left";
+          if (positionLeft){
+            position =  "left";
+            positionLeft = false;
+          } else{
+            position =  "right";
+            positionLeft =  true;
+          }
           backUpcolors.push(this.data[p].color);
           this.data[p].color = colors[p/2];
-          this.data[p].fillColor = colors[p/2];
+          this.data[p].fillColor = this.data[p].color;
           var option = {
               font :{
                 color:  this.data[p].color,

@@ -11,8 +11,8 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       Tooltip = require('views/series_tooltip'),
       TimeRange = require('models/time_range'),
       GraphHelper = require('helper/graph');
-    //TimeSerieContainer = require('views/time_serie_graph_container');
        // materialize = require('material');
+
   return Backbone.View.extend({
     initialize: function(options) {
       this.filters = options.filters;
@@ -25,7 +25,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       this.tooltip = new Tooltip({
         template: serieTooltipTemplate
       });
-      console.log(this.filters);
+      // console.log(this.serieGraphTimeRange);
       this.prepareData();
     },
 
@@ -39,8 +39,8 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       this.isTrigger = true;
       //  this.trigger("update_time-range-composite");
 
-      //this.overviewGraphMinX = TimeRange.get('overviewGraphMinX');
-      //this.overviewGraphMaxX = TimeRange.get('overviewGraphMaxX');
+      this.overviewGraphMinX = TimeRange.get('overviewGraphMinX');
+      this.overviewGraphMaxX = TimeRange.get('overviewGraphMaxX');
 
       /*
       Start and end time which is selected in overview graph
@@ -83,8 +83,6 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       // if(item!=null){
         var tooltip = event.data;
       tooltip.update(pos, item);
-
-      //console.log(item);
       // }
       
     },
@@ -94,7 +92,6 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       this.render();
     },
     render: function() {
-
       if(this.data==undefined){
         return;
       }
@@ -105,8 +102,9 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
           unit = this.data[i].yaxis.axisLabel;
         }
       };
-      // change yaxix according to zoomed in data
-      // PROBLEM FOR Fluctuate Data maxY or minY may not be MaxX or MinX they can lie in between
+
+      // change yaxix of timeseriesgraph according to zoomed in data
+
       var zoomedDataMinY = undefined;
       var zoomedDataMaxY = undefined;
       for(var j=0;j<this.data.length;j++){
@@ -176,7 +174,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
 
       var options = {
             grid:{
-              margin: 50,
+             // margin: 50,
               hoverable: true,
             },
             xaxis: { 
@@ -291,7 +289,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
 
       var options = {
         grid:{
-          margin: 50,
+        //  margin: 50,
           hoverable: true,
         },
         xaxis: {
