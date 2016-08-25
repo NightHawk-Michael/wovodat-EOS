@@ -159,6 +159,9 @@ define(function(require) {
       w.document.getElementsByClassName("mgt20")[0].innerHTML = "";
       w.document.getElementsByClassName("mgt15")[0].innerHTML = "";
       w.document.getElementsByClassName("overview-graph-container")[0].style.display = "none";
+      w.document.getElementsByClassName("composite-graph-container")[0].style.display = "none";
+      w.document.getElementsByClassName("stack-graph-container")[0].style.display = "none";
+
       var checkboxes = w.document.getElementsByTagName("label");
       for (var t = 0 ; t < checkboxes.length; t++){
         checkboxes[t].style.display = "none";

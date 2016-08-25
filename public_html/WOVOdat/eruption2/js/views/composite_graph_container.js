@@ -132,7 +132,7 @@ define(function(require) {
 
       this.compositeGraph.update();
       this.compositeGraph.$el.appendTo(this.$el);
-      var button = "<a > <input style = \"margin-left:50px;pading:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light btn gen-pdf\"  type=\"button\" value = \"Print PDF\"/> <label ></label> </a>";
+      var button = "<a > <input style = \"margin-left:50px;background-color: grey;pading:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light btn gen-pdf\"  type=\"button\" value = \"Print PDF\"/> <label ></label> </a>";
       if (this.data == undefined) (document.getElementsByClassName("composite-graph-container")[0]).style.display = "none";
       if (this.data != undefined && this.$el.context.childNodes.length <=2) this.$el.append(button);
       //var button = "<a style = \"right:0px; \"> <input class = \"waves-effect waves-light btn\"  type=\"button\" id=\"\"  value = \"Print PDF\"/> <label for=\"\"></label> </a>";

@@ -174,6 +174,10 @@ define(function(require) {
 
                         }
                     }
+                    if (maxY - minY > 6){
+                        minY =  minY -3;
+                        maxY = maxY + 3;
+                    }
                     this.minY =  minY;
                     this.maxY =  maxY;
                 }

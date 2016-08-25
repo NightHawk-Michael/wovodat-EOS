@@ -68,13 +68,13 @@ define(function(require) {
       if (this.data != undefined){
         //console.log(this.data);
         var colors = ["#000000", "#0072BB", "#FF4C3B", "#FFD034"];
+        var positionLeft = true;
 
         for (var p  = 0 ; p < this.data.length; p = p+2){
         //  console.log(this.data[p]);
           var minY = 100000;
           var maxY = -500000
           var eventData = this.data[p].data;
-          var positionLeft = true;
           for (var i = 0; i < eventData.length; i++) {
             var eData = eventData[i];
 
@@ -113,12 +113,14 @@ define(function(require) {
               },
               max : maxY ,
               min : minY,
-            alignTicksWithAxis: position == "right" ? 1 : null,
-            position: position,
+              alignTicksWithAxis: position ,
+              position: position,
+
 
           }
           yaxes.push(option);
           this.data[p].yaxis = yaxes.length;
+          console.log (this.data[p]);
 
         }
       }
@@ -173,8 +175,8 @@ define(function(require) {
         },
       };
       //pass color into options
-      options.colors = ["#000000"];
-
+     // options.colors = ["#000000"];
+     // console.log (option);
       if (!this.data || !this.data.length) {
         this.$el.html(''); //$(this) = this.$el
         (document.getElementsByClassName('composite-graph-container'))[0].style.display = 'none';
