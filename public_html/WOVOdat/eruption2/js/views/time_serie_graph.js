@@ -171,7 +171,6 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
         eruptionData[i][1] = this.maxY;
       }
       this.data.minY = this.minY;
-
       var options = {
             grid:{
              // margin: 50,
@@ -399,7 +398,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
         return;
       }
       var filters = [this.filters];
-      var allowErrorbar = true;
+      var allowErrorbar = false;
       var allowAxisLabel =true;
       var limitNumberOfData =false;
       var eruptions =  this.eruptions;

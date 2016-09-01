@@ -1,30 +1,56 @@
-<div class="push" style="height:40px;clear:both"></div>
-<div style="height:50px; font-size:10px; background-color:#efefff; margin-top:10px;padding: 15px 5px 0px 40px"> 
- 
-<table>
-	<tr>
-	<td style="width:700px;">
-	<div align="left"  style="display: inline">
+<link href="/css/index.css" rel="stylesheet" type="text/css">
+<link href="/css/normalize.css" rel="stylesheet" type="text/css">
+<div class="footer">  <!-- footer -->
+    <div class="footer-container">
+        <div class="container">
+            <div class="upper">
+                <table>
+                    <tr>
+                        <td class="list">
+                            <span>Collaborations:</span></br>
+                            <span>WOVO observations, Smithsonian - GVP, GVM, IRIS, UNAVCO, G-Ever, ...<span></br>
+                                <span>WOVO observations, Smithsonian - GVP, GVM, IRIS, UNAVCO, G-Ever, ...<span></br>
+                                    <span>WOVO observations, Smithsonian - GVP, GVM, IRIS, UNAVCO, G-Ever, ...<span>
+                        </td>
 
-        &nbsp;Copyright &copy; 2000-<script type="text/javascript"> var d = new Date();
-		var n = d.getFullYear(); document.write(n)</script> <a style="text-decoration:none;color:#000;" href="http://www.wovo.org/" target="_blank"> The World Organization of Volcano Observatories </a>
-		
-		 | Website hosted by <a style="text-decoration:none;color:#000;" href="http://www.earthobservatory.org/">EOS&nbsp;</a> (Earth Observatory of Singapore)
+
+                        <td>
+                            <div class="space"></div>
+                        </td>
+                        <td class="right">
+                            <div>
+                                <a href="/populate/dataPolicy.php">Data Policy</a> 
+                                | 
+                                <a href="/">Sitemap</a>
+                            </div>
+                            <div class="social-network">
+                                <a href="https://www.facebook.com/pages/WOVOdat/223704361161625">
+                                    <img src="/gif2/wovodatFB.png" width="33" height="33" />
+                                </a>
+                                <a><img src="/gif2/wovodayYT.gif" width="28" height="28"></a>
+                            </div>
+                            <!-- Nang added on 2-Apr-2014 -->
+							<div style="padding-top:50px;padding-left:15px;"> 	
+								You are visitor number: 13192
+								<?php 
+								//include $_SERVER['DOCUMENT_ROOT']."/countMe/counter.php";
+								?>	
+							</div>
+				            <!-- Nang added on 2-Apr-2014 -->	
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="lower">
+                Copyright © 
+                <script>
+                    var n = new Date();
+                    document.write("2000-"+n.getFullYear());
+                </script>
+                <a href="http://www.wovo.org/">The World Organization of Volcano Observatories</a> | Website hosted by 
+                <a href="http://www.earthobservatory.org/">EOS</a>  (Earth Observatory of Singapore) 
+            </div>
+        </div>
     </div>
-
-	</td>
-	
-	<td >
-	<div align="left" >
-		<a style="text-decoration:none;color:#000;" href='/populate/dataPolicy.php' title="Terms & Conditions" target="_blank">Data Policy </a> 		
-		<a style="text-decoration:none;color:#000;" href="" title="Sitemap" > | Sitemap </a> 
-	</div>	
-	</td>
-	</tr>
-</table>	
 </div>
-	<?php 
-	error_reporting(0);
-	include $_SERVER['DOCUMENT_ROOT']."/countMe/keepTrackInDB.php";
-	?>	
-

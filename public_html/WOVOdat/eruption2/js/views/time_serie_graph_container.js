@@ -51,14 +51,16 @@ define(function(require) {
       var listContent = [];
       if (this.checkedTimeRangeFilter.length == 0) return;
       for (var i = 0; i < this.checkedTimeRangeFilter.length; i++){
+
         var content =[];
         var timeSerie = this.checkedTimeRangeFilter[i].timeSerie;
+        console.log (this.checkedTimeRangeFilter[i]);
         var url = timeSerie.collection.url;
         var vd_id = url.split("vd_id=")[1];
         var category = timeSerie.attributes.category;
         var stationName =  timeSerie.attributes.station_code1;
         var volcanoName = timeSerie.attributes.volcanoName;
-        var showingName = timeSerie.attributes.showingName;
+        var showingName = this.checkedTimeRangeFilter[i].filterAttributes[0].name + ":" + timeSerie.attributes.showingName ;
         var dataOwner =  timeSerie.attributes.data_owner.owner1;
         if (timeSerie.attributes.data_owner.owner2 != ""){
           dataOwner = dataOwner  + "-" + timeSerie.attributes.data_owner.owner2;
@@ -102,6 +104,7 @@ define(function(require) {
         var total = 0;
 
         var content = listContent[i];
+        if (content == undefined) continue;
         var dataString = "";
         for (var p = 0 ; p < content.length; p++){
           total++;

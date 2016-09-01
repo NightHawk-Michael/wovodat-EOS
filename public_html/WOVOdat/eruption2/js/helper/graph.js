@@ -63,11 +63,13 @@ define(function(require) {
           //console.log(filterColor);
 
 
+
           if(!allowErrorbar){
             errorbar = false;
           }else{
             errorbar = filter.timeSerie.get('data').errorbar; // has error bar or not [true,false]
           }
+
           
           if(!allowAxisLabel){
             axisLabel = undefined;

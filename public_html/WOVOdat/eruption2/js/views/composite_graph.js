@@ -120,7 +120,7 @@ define(function(require) {
           }
           yaxes.push(option);
           this.data[p].yaxis = yaxes.length;
-          console.log (this.data[p]);
+
 
         }
       }
