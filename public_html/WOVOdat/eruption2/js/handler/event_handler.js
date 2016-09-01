@@ -84,8 +84,10 @@ define(function(require) {
       this.listenTo(this.serieGraphTimeRange,'zoom',this.highlightOverViewGraphChanged);
       this.listenTo(this.selectingFilters,'update',this.selectingFiltersChanged);
       this.listenTo(this.eruptionTimeRange,'update',this.eruptionTimeRangeChanged);
+
       this.listenTo(this.timeSeriesGraphContainer,'update-composite',this.compositeGraphUpdate);
       this.listenTo(this.timeSeriesGraphContainer,'update-stack',this.stackGraphUpdate);
+      this.listenTo(this.timeSeriesGraphContainer,'toggle-error-bar', this.toggleErrorBar)
       this.listenTo(this.eruptions,'fetched',this.eruptionsFetched);
 
 
@@ -113,6 +115,9 @@ define(function(require) {
     //   this.volcanoSelect.onSelectChanged(this.selectingVolcano);
     // },
 
+    toggleErrorBar: function(e){
+      this.selectingFiltersChanged(e);
+    },
     syncTimeSerie : function(e){
       var currentID = e.attributes.serieID;
       this.timeSeriesGraphContainer.updateTimeSerie(currentID);

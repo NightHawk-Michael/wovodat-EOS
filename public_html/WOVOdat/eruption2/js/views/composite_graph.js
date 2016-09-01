@@ -105,8 +105,9 @@ define(function(require) {
             positionLeft =  true;
           }
           backUpcolors.push(this.data[p].color);
-          this.data[p].color = colors[p/2];
+          this.data[p].points.color = colors[p/2];
           this.data[p].fillColor = this.data[p].color;
+
           var option = {
               font :{
                 color:  this.data[p].color,

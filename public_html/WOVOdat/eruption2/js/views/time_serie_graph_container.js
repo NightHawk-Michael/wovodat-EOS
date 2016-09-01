@@ -18,7 +18,9 @@ define(function(require) {
       'click .gen-pdf' : 'generatePDF',
       'click .gen-csv' : 'generateCSV',
       'click .stack-graph-btn' : 'generateStackGraph',
-      'click .composite-graph-btn' : 'generateCompositeGraph'
+      'click .composite-graph-btn' : 'generateCompositeGraph',
+      'click .toggle-error-bar' : 'toggleErrorBar'
+
     },
   	initialize : function(options) {
   		this.selectingTimeSeries = options.selectingTimeSeries;
@@ -35,8 +37,17 @@ define(function(require) {
       this.beingShown = false;
   		this.graphs = [];
       this.checkedTimeRangeFilter = [];
+      this.isErrorBar = false;
 
     },
+
+      /**
+       * Toggle Error bar on individual graph
+       */
+    toggleErrorBar : function (){
+        this.isErrorBar = !this.isErrorBar;
+        this.trigger("toggle-error-bar");
+      },
     /**
      *Generate CSV file when click CSV button
     volcano-name (vd_name),
@@ -54,7 +65,6 @@ define(function(require) {
 
         var content =[];
         var timeSerie = this.checkedTimeRangeFilter[i].timeSerie;
-        console.log (this.checkedTimeRangeFilter[i]);
         var url = timeSerie.collection.url;
         var vd_id = url.split("vd_id=")[1];
         var category = timeSerie.attributes.category;
@@ -208,7 +218,10 @@ define(function(require) {
       var graphs = [];
       var count = 0;
       for (var i = 0 ; i < this.graphs.length; i++){
-          if (count == 4) break;
+          if (count == 4) {
+
+            break;
+          }
           if (checkboxes.indexOf(this.graphs[i].serieId) >=0) {
               //console.log (this.graphs[i])
               this.data.push(this.graphs[i].data[0]);
@@ -242,6 +255,7 @@ define(function(require) {
 
       var timeSerieGraph = new TimeSerieGraph( {
         // timeRange : this.timeRange,
+        allowErrorbar: this.isErrorBar,
         filters: filters,
         eruptionTimeRange: this.eruptionTimeRange,
         serieGraphTimeRange: this.serieGraphTimeRange,
@@ -309,6 +323,11 @@ define(function(require) {
       this.$el.html("");
       this.$el.addClass("time-series-graph-container card-panel");
       this.$el.append("<div class = \"individual-graph-title\" style = \"font-weight: bold; color : black; background-color:white; padding-left: 50px; \">INDIVIDUAL GRAPH<br>Select individual graph to display in \"stacked graph\" or \"composite graph\" by clicking the check box</div>");
+      var isChecked  = this.isErrorBar;
+      this.$el.append("<div><a style = \"padding-left: 20px; right:0px; \"> <input class = \"toggle-error-bar\"  type=\"checkbox\" id=\"1\" /> <label for=\"1\"></label> Toggle Error Bar</a></div>");
+      $(".toggle-error-bar").prop('checked',isChecked);
+
+
 
       //var temp = "<ul id=\"select-options-db1b710c-f8a1-9f8a-19a7-ed5afcfe7c60\" class=\"dropdown-content select-dropdown multiple-select-dropdown active\" style=\"width: 1026px; position: absolute; top: 0px; left: 0px; opacity: 1; display: block;\"><li class=\"active\"><span><input type=\"checkbox\"><label></label>Pinatubo0703-083SeisNet(Earthquake Depth) </span></li><li class=\"active\"><span><input type=\"checkbox\"><label></label>Pinatubo0703-083SeisNet(Earthquake Magnitude) </span></li><li class=\"\"><span><input type=\"checkbox\"><label></label>UBO(Felt Earthquake Counts) </span></li><li class=\"\"><span><input type=\"checkbox\"><label></label>CAB(Earthquake Counts) </span></li><li class=\"\"><span><input type=\"checkbox\"><label></label>CRA(Earthquake Counts) </span></li></ul>";
       //this.$el.append("<ul id=\"select-options-e90cc158-e580-29c7-f252-ab6c6b42c2ad\" class=\"dropdown-content select-dropdown multiple-select-dropdown active\" style=\"width: 1026px; position: absolute; top: 0px; left: 0px; opacity: 1; display: block;\">");
