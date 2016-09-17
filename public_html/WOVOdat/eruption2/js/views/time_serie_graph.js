@@ -21,6 +21,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       this.forecastsGraphTimeRange = options.forecastsGraphTimeRange;
       this.eruptions =  options.eruptions;
       this.timeRange = new TimeRange();
+      this.allowErrorbar = options.allowErrorbar;
       // console.log(Tooltip);
       this.tooltip = new Tooltip({
         template: serieTooltipTemplate
@@ -171,7 +172,6 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
         eruptionData[i][1] = this.maxY;
       }
       this.data.minY = this.minY;
-
       var options = {
             grid:{
              // margin: 50,
@@ -230,7 +230,6 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       this.$el.height(200);
 
       this.$el.addClass('time-serie-graph');
-      //this.$el.append(' Individual graph display </br>');
       // plot the time series graph after being selected (eg. onSelect in OverViewGraph).
       // config graph theme colors
       options.colors = ["#000000", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"];
@@ -399,7 +398,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
         return;
       }
       var filters = [this.filters];
-      var allowErrorbar = true;
+
       var allowAxisLabel =true;
       var limitNumberOfData =false;
       var eruptions =  this.eruptions;
@@ -407,7 +406,8 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
      // console.log(this.filters);
       //console.log(eruptions);
       //GraphHelper.formatDataEruption(this,this.eruptions);
-      GraphHelper.formatData(this,filters,allowErrorbar,allowAxisLabel,limitNumberOfData, eruptions);
+      console.log (this.allowErrorbar);
+      GraphHelper.formatData(this,filters,this.allowErrorbar,allowAxisLabel,limitNumberOfData, eruptions);
     },
     
     destroy: function() {
