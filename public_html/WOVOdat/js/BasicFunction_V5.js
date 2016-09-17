@@ -736,6 +736,16 @@ function drawLatLonOnMaps(pos,mapId,value){
 	}
 }
 
+function calcBounds(center,size){
+     var n=google.maps.geometry.spherical.computeOffset(center,size.height/2,0).lat(),
+         s=google.maps.geometry.spherical.computeOffset(center,size.height/2,180).lat(),
+         e=google.maps.geometry.spherical.computeOffset(center,size.width/2,90).lng(),
+         w=google.maps.geometry.spherical.computeOffset(center,size.width/2,270).lng();
+         return  new google.maps.LatLngBounds(new google.maps.LatLng(s,w),
+                                              new google.maps.LatLng(n,e))
+
+}
+
 function drawMap(args, volcId, mapId, mapUsed){
 	//remove volcano marker
 	if (volMarkers[mapUsed])
@@ -762,6 +772,7 @@ function drawMap(args, volcId, mapId, mapUsed){
 	}
 	map[mapUsed].setCenter(new google.maps.LatLng(lat,lon));
 	map[mapUsed].centerPoint = new google.maps.LatLng(lat,lon);
+
 	var marker = new google.maps.Marker({
 		position: new google.maps.LatLng(lat, lon), 
 		map: map[mapUsed],

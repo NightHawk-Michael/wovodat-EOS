@@ -428,7 +428,7 @@ function initializeFilter(data,mapUsed){
 function filterData(cavw,panelUsed){
 
 	// data is not available for filtering
-	// console.log(earthquakes[cavw]);
+	console.log(earthquakes[cavw]);
 	if(!earthquakes[cavw])
 		return;
 

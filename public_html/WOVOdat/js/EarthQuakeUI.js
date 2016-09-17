@@ -68,8 +68,11 @@ function drawEquake(o){
 		drawEquake2DGMT(o);
 	else drawEquake2D(o);
 	if(document.getElementById("Map") != null){
-		map[o.mapUsed].setZoom(10);
+		//map[o.mapUsed].setZoom(10);
 		map[o.mapUsed].setCenter(map[o.mapUsed].centerPoint);	
+		var size = parseInt($("#wkm"+o.mapUsed).val()*1000);
+		var bound = calcBounds(new google.maps.LatLng(map[o.mapUsed].centerPoint.lat(),map[o.mapUsed].centerPoint.lng()), {width: size * 2, height: size * 2});
+		map[o.mapUsed].fitBounds(bound);
 	}
 	
 }
@@ -129,7 +132,8 @@ function drawEquake2DGMT(o){
 			wkm: document.getElementById('wkm' + mapUsed).value,   // Nang added
 			vname:volName,                         // Nang added
 			vlat:vlat,                             //Nang added
-			vlon:vlon,                             //Nang added                 
+			vlon:vlon,                             //Nang added  
+			errorbar: document.getElementById('errorbars'+mapUsed).checked,               
 			//Only 3D GMT needs these two degree & init_azim.               
 			//  degree: document.getElementById('degree' + mapUsed).value, 
 			//  init_azim: document.getElementById('azim' + mapUsed).value,         
@@ -613,6 +617,7 @@ function displayEvent(cavw,mapUsed){
  * mapUsed parameter
  */
 function plotEarthquakeData(cavw, mapUsed){
+	var isFilter = $("#FormFilter" + mapUsed).css('display') != 'none';
 	var numberOfEarthquakes = parseInt(document.getElementById('Evn' + mapUsed).value);
 	var dHigh = parseFloat($("#DepthHigh"+mapUsed).val());
 	var dLow = parseFloat($("#DepthLow"+mapUsed).val());
@@ -804,7 +809,7 @@ function plotEarthquakeData(cavw, mapUsed){
 
 	for (var i in timeArray){
 		//scale the rms
-		console.log(timeArray[i]);
+		//console.log(timeArray[i]);
 		timeArray[i][2] *= rms_normalization_multiplier;
 	}
 	console.log("max_rms");
@@ -872,7 +877,7 @@ function plotEarthquakeData(cavw, mapUsed){
 		var time = eruptionArray[i][0];
 		eruptionMarkings.push({ color:"red", lineWidth: 2, xaxis: {from: time, to: time} });
 		var year = time.getFullYear();
-		var month = time.getMonth();
+		var month = time.getMonth() + 1;
 		var date = time.getDate();
 		if (month < 10) month = '0' + month;
 		if (date < 10) date = '0' + date;
@@ -926,7 +931,7 @@ function plotEarthquakeData(cavw, mapUsed){
 		},
 		xaxis:{
 			mode: "time",
-			min: min_time,
+			min: (isFilter ? parseDateVal($("#SDate"+mapUsed).val()) : min_time),
 			max: max_time		
 		},
 		zoom:{ 
@@ -978,15 +983,16 @@ function plotEarthquakeData(cavw, mapUsed){
 			tickFormatter : kmFormatter,
 			tickSize: (dHigh - dLow)/5.0,
 			min: -dHigh,
-			max: -dLow
-			//labelWidth: 40
+			max: -dLow,
+			labelWidth: 30
 		},
 		xaxis:{
 			position:"top",
 			tickSize: width/5.0,
 			max: width,
 			min: -width,
-			tickFormatter : kmFormatter
+			tickFormatter : kmFormatter,
+			labelHeight: 30
 		},
 		zoom:{ interactive: true},
 		pan: {interactive: true},
@@ -1000,7 +1006,8 @@ function plotEarthquakeData(cavw, mapUsed){
 
 
 	// draw the latitude map
-	var latitudePlotArea = document.getElementById("FlotDisplayLat"+mapUsed);
+	var latitudePlotArea = $("#FlotDisplayLat"+mapUsed);
+	latitudePlotArea.css("height", latitudePlotArea.width() * (dHigh - dLow) / (2*width));
 	equakeGraphs[mapUsed].latGraph = $.plot(latitudePlotArea,latPlot,plotOptions);
 	Wovodat.enableTooltip({type:'single',
 		id:"FlotDisplayLat"+mapUsed,
@@ -1014,6 +1021,7 @@ function plotEarthquakeData(cavw, mapUsed){
 
 	// draw the longitude map
 	var longitudePlotArea =$("#FlotDisplayLon"+mapUsed);
+	longitudePlotArea.css("height", longitudePlotArea.width() * (dHigh - dLow) / (2*width));
 	equakeGraphs[mapUsed].lonGraph = $.plot(longitudePlotArea,lonPlot,plotOptions);
 	Wovodat.enableTooltip({type:'single',
 		id:"FlotDisplayLon"+mapUsed,
@@ -1072,6 +1080,8 @@ function generateColorCode(depth){
 	g = parseInt(g);
 	return 'rgb(' + r + ',' + g + ',' + b + ')';
 }
+
+
 
 /*
 READY FUNCTION
@@ -1354,6 +1364,7 @@ $(document).ready(function(){
 			cachingElement(catalogOwner,cavw,2,'cc_id');
 			cachingElement(eqTypeSet,cavw,2,'EqType');
 		}
+
 	});
 
 	$("#VolcanoList").change(function(){
@@ -1582,7 +1593,7 @@ function resetFilter(mapUsed){
 			date.setDate(date.getDate() + ui.values[1]);
 			$("#EDate" + mapUsed).val($.datepicker.formatDate('mm/dd/yy',date));
 		}
-	});
+	});	
 	// range of max and min depth
 	$("#DepthLow" + mapUsed).val(-10);
 	$("#DepthHigh" + mapUsed).val(40);
@@ -1593,6 +1604,13 @@ function resetFilter(mapUsed){
 	
 }
 
+function adjustSlider(mapUsed){
+	var startDate = new Date(1940, 0, 2, 0, 0, 0, 0);
+	var startDateValue = $("#SDate" + mapUsed).datepicker( "getDate" );
+	var endDateValue = $("#EDate" + mapUsed).datepicker( "getDate" );
+	$("#DateRange" + mapUsed).slider({values: [Math.floor(startDateValue.getTime() - startDate.getTime())/86400000, Math.floor(endDateValue.getTime()-startDate.getTime())/86400000]});
+	$("#DateRange" + mapUsed).slider('refresh');
+}
 /*
 READY FUNCTION
 */
@@ -1644,7 +1662,6 @@ $(document).ready(function(){
 		registerFilter({mapUsed:2});
 	});
 	
-
 	// this function is trigger when the filter button is clicked.
 	function registerFilter(o){
 		var mapUsed = o.mapUsed;
