@@ -86,7 +86,8 @@ abstract class TableManager implements TableManagerInterface {
 
 		$serie_list = $db->getList();
 		$exsited = array();
-		$cc_url =  $this->getCCUrl($vd_id);
+		//$cc_url =  $this->getCCUrl($vd_id);
+		//echo $cc_url;
 		// var_dump($serie_list);
 		foreach ($serie_list as $serie) {
 
@@ -111,7 +112,7 @@ abstract class TableManager implements TableManagerInterface {
 							   'station_code2' => $this->sta_id_code_dictionary[1][$serie["sta_id2"]],
 						       'component' => $serie[$col_name],
 								'volcanoName'  => $serie["vd_name"],
-								'data_owner' => $cc_url,
+//								'data_owner' => $cc_url,
 						   		);
 
 					$x["sr_id"] = md5( $x["category"].$x["data_type"].$x["station_id1"].$x["station_id2"].$x["component"].$x["volcanoName"] );
@@ -143,7 +144,7 @@ abstract class TableManager implements TableManagerInterface {
 		$errorbar = $stationDataParams["errorbar"];
 		$query = $stationDataParams["query"];
 		//Add select data code from query. Add in this tableManager to apply all data.
-		$temp =  "select a." . $this->data_code ." as data_code,";
+		$temp =  "select a." . $this->data_code ." as data_code, cc_id, cc_id2, cc_id3,";
 		 $query = str_replace("select",$temp ,$query);
 
 		$db->query($query, $id1,$id2);
@@ -207,6 +208,16 @@ abstract class TableManager implements TableManagerInterface {
 				}
 			}
 			$temp["data_code"] = $row["data_code"];
+			$cc_ids = [];
+			$cc_ids[0] = $row["cc_id"];
+			$cc_ids[1] = $row["cc_id2"];
+			$cc_ids[2]= $row["cc_id3"];
+			//echo $cc_ids[2];
+			$dataOwner = $this->getCCUrl($cc_ids);
+			$temp["data_owner"] = $dataOwner;
+
+			$reference =  $this->getDataReference($cc_ids);
+			$temp["reference"] = $reference;
 			array_push($data, $temp );			
 		}
 		$result["style"] = $stationDataParams["style"];
@@ -217,59 +228,55 @@ abstract class TableManager implements TableManagerInterface {
 		return $result;
   	}
 	/*
-     * Get cc_url of a volcano
+     * Get cc_url/cc_email of a volcano
      * of a specific cavw
      */
 
-	private function getCCUrl($vd_id) {
-		$query1 = mysql_query("select cc_id from vd where vd_id='" . $vd_id . "'");
-		$object = "";
-		$result1 = mysql_fetch_array($query1);
-		if ($result1 !== false) {
-			$cc_id = $result1[0];
-			$object['cc_id1'] = $cc_id;
-			$query1_2 = mysql_query("select cc_url from cc where cc_id='" . $cc_id . "'");
-			$result1_2 = mysql_fetch_array($query1_2);
-			// retrieve the cc_code based on cc_id - vutuan added
-			$query1_3 = mysql_query("select cc_code from cc where cc_id='". $cc_id . "'");
-			$result1_3 = mysql_fetch_array($query1_3);
+	private function getCCUrl($cc_ids) {
+		$dataOwners = [];
+		foreach ($cc_ids as $cc_id) {
 
-			if ($result1_2 !== false)
-				$object['owner1'] = $result1_2[0];
-			else
-				$object['owner1'] = "";
-			if($result1_3 !== false)
-				$object['cc_code1'] = $result1_3[0];
-			else
-				$object['cc_code1'] = "";
+			if ($cc_id != null) {
+				$query1_2 = mysql_query("select cc_code,cc_url, cc_email from cc where cc_id='" . $cc_id . "'");
+				$result1_2 = mysql_fetch_array($query1_2);
+				if ($result1_2[0] != null) {
+					array_push($dataOwners, $result1_2[0]);
+					array_push($dataOwners, $result1_2[1]);
+				} else if ($result1_2[1] != null) {
+					array_push($dataOwners, $result1_2[0]);
+					array_push($dataOwners, $result1_2[2]);
+				}
+			}
+		}
+		return array_unique($dataOwners);
+	}
+
+	/**
+	 * Luis Ngo : 6/9/2016
+	 *
+	 * Get reference of data (cb)
+	 */
+	private function getDataReference($cc_ids) {
+
+
+		foreach ($cc_ids as $cc_id) {
+			if ($cc_id != null) {
+				$query1 = mysql_query("select cb_auth,cb_year from cb where cc_id_load='" . $cc_id . "'");
+				$object = "";
+				$result1 = mysql_fetch_array($query1);
+				if ($result1 !== false) {
+					$cb_auth = $result1[0];
+					$cb_year = $result1[1];
+					$cb_auths  = str_split($cb_auth,",");
+					if (str_length($cb_auths) > 1){
+						$cb_auth = $cb_auths[0] + ", et al.";
+					}
+					$object =  $cb_auth + "," + $cb_year;
+				}
+			}
 		}
 
-		// second cc_id
-		$query1 = mysql_query("select cc_id2 from vd where vd_id='" . $vd_id . "'");
-		$result1 = mysql_fetch_array($query1);
-		if ($result1 !== false) {
-			$cc_id = $result1[0];
-			$object['cc_id2'] = $cc_id;
-			$query1_2 = mysql_query("select cc_url from cc where cc_id='" . $cc_id . "'");
-			$result1_2 = mysql_fetch_array($query1_2);
-			// retrieve the cc_code based on cc_id - vutuan added
-			$query1_3 = mysql_query("select cc_code from cc where cc_id='". $cc_id . "'");
-			$result1_3 = mysql_fetch_array($query1_3);
-			if ($result1_2 !== false)
-				$object['owner2'] = $result1_2[0];
-			else
-				$object['owner2'] = "";
-			if($result1_3 !== false)
-				$object['cc_code2'] = $result1_3[0];
-			else
-				$object['cc_code2'] = "";
-		}
 
-		$query2 = mysql_query("select vd_inf_status, vd_inf_type from vd_inf where vd_id ='" . $vd_id . "'");
-		$result2 = mysql_fetch_array($query2);
-		if ($result2 !== false) {
-			$object['status'] = $result2[0] . " - " . $result2[1];
-		}
 		return $object;
 	}
 } 

@@ -39,7 +39,8 @@ class sd_evnManager extends SeismicTablesManager {
 			$style = "circle";
 			$errorbar = true;
 			$attribute = "sd_evn_edep";
-			$query = "select a.sd_evn_eqtype  as filter, a.sd_evn_derr as err ,a.sd_evn_time as time, 0-a.$attribute as value  from $table  as a where a.sn_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.sd_evn_eqtype  as filter, a.sd_evn_derr as err ,a.sd_evn_time as time,
+					0-a.$attribute as value  from $table  as a where a.sn_id=%s and a.$attribute IS NOT NULL";
 		}else if($component == 'Earthquake Magnitude'){
 			$style = "circle";
 			$errorbar = false;

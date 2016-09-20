@@ -61,33 +61,30 @@ define(function(require) {
     generateCSV : function (){
       var listContent = [];
       if (this.checkedTimeRangeFilter.length == 0) return;
+      console.log (this.checkedTimeRangeFilter);
       for (var i = 0; i < this.checkedTimeRangeFilter.length; i++){
-
         var content =[];
-        var timeSerie = this.checkedTimeRangeFilter[i].timeSerie;
-        var url = timeSerie.collection.url;
-        var vd_id = url.split("vd_id=")[1];
-        var category = timeSerie.attributes.category;
-        var stationName =  timeSerie.attributes.station_code1;
-        var volcanoName = timeSerie.attributes.volcanoName;
-        var showingName = this.checkedTimeRangeFilter[i].filterAttributes[0].name + ":" + timeSerie.attributes.showingName ;
-        var dataOwner =  timeSerie.attributes.data_owner.owner1;
-        if (timeSerie.attributes.data_owner.owner2 != ""){
-          dataOwner = dataOwner  + "-" + timeSerie.attributes.data_owner.owner2;
-        }
+        var stationName =  this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.station_code1;
+        var volcanoName = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.volcanoName;
+        var showingName = this.checkedTimeRangeFilter[i].data[0].label;
+        var filterName =  this.checkedTimeRangeFilter[i].filters.filterAttributes[0].name;
 
-        var data = timeSerie.attributes.data.data;
+        var data = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.data.data;
         for (var p = 0 ; p  < data.length; p++){
+          if (data[p].filter != filterName) continue;
           var time =  data[p].time;
           var value = data[p].value;
+          var dataOwner  =   data[p].data_owner.join(",");
           var dataCode = data[p].data_code;
           var uncertainty = data[p].error;
           if (uncertainty == undefined) uncertainty = "";
+          var dateTime = new Date(time);
+          var dateStr = dateTime.getDate() + "-" + dateTime.getMonth() + "-" + dateTime.getYear() + " " + dateTime.getHours() + ":" + dateTime.getMinutes() + ":" +  dateTime.getSeconds();
           if (time >= this.serieGraphTimeRange.attributes.startTime && time <= this.serieGraphTimeRange.attributes.endTime){
             //console.log (value);
             var d = {
               showName: showingName,
-              time: new Date(time),
+              time: dateStr,
               value : value,
               uncertainty : uncertainty,
               stationName : stationName,
@@ -217,6 +214,7 @@ define(function(require) {
       this.data = [];
       var graphs = [];
       var count = 0;
+      this.checkedTimeRangeFilter = [];
       for (var i = 0 ; i < this.graphs.length; i++){
           if (count == 4) {
 
@@ -226,8 +224,8 @@ define(function(require) {
               //console.log (this.graphs[i])
               this.data.push(this.graphs[i].data[0]);
               this.data.push(this.graphs[i].data[1]);
-            graphs.push(this.graphs[i]);
-              this.checkedTimeRangeFilter.push(this.graphs[i].filters);
+              graphs.push(this.graphs[i]);
+              this.checkedTimeRangeFilter.push(this.graphs[i]);
               count++;
           }
       }
@@ -343,7 +341,12 @@ define(function(require) {
         this.$el.append(this.graphs[i].$el);
 
         this.graphs[i].show();
-       // this.graphs[i].draw();
+        var cc_code = this.filters[i].timeSerie.attributes.data.data[0].data_owner[0];
+        var dataOwnerVal = this.filters[i].timeSerie.attributes.data.data[0].data_owner[1];
+        var dataOwner = "<div><a href = \"" + dataOwnerVal + "\"style = \"font-size: 10px;color: black;padding-left: " + padding_left/4*3 +"px; right:0px; \"> " + cc_code + "</a></div>";
+        this.$el.append(dataOwner);
+
+        // this.graphs[i].draw();
 
       }
 
