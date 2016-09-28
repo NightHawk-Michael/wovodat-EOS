@@ -6,6 +6,7 @@ class SeismicManager extends MonitoryTypeManager{
 		
 		$prefix = "sd_";
 		$result[$prefix."evn"] = new sd_evnManager;
+        $result[$prefix."evn_loc_eq_counts"] = new sd_evn_loc_eq_countsManager;
 		$result[$prefix."evs"] = new sd_evsManager;
 		$result[$prefix."int"] = new sd_intManager;
 		$result[$prefix."trm"] = new sd_trmManager;

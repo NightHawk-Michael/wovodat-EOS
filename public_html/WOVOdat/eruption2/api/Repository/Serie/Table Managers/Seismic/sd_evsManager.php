@@ -66,4 +66,10 @@ class sd_evsManager extends SeismicTablesManager {
 						);
 		return $result;
 	} // params to get data station [unit,flot_style,errorbar,query]
-} 
+
+    protected function setShortDataType()
+    {
+        // TODO: Implement setShortDataType() method.
+        return "Single Station Events";
+    }
+}
