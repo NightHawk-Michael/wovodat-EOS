@@ -2211,7 +2211,7 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
 
         $quakeQuery .= " AND ($R*2*ATAN2(SQRT(SIN((RADIANS(sd_evn_elat)-RADIANS($latitude))/2)*SIN((RADIANS(sd_evn_elat)-RADIANS($latitude))/2)+SIN((RADIANS(sd_evn_elon)-RADIANS($longitude))/2)*SIN((RADIANS(sd_evn_elon)-RADIANS($longitude))/2)*COS(RADIANS($latitude))*COS(RADIANS(sd_evn_elat))),SQRT(1-(SIN((RADIANS(sd_evn_elat)-RADIANS($latitude))/2)*SIN((RADIANS(sd_evn_elat)-RADIANS($latitude))/2)+SIN((RADIANS(sd_evn_elon)-RADIANS($longitude))/2)*SIN((RADIANS(sd_evn_elon)-RADIANS($longitude))/2)*COS(RADIANS($latitude))*COS(RADIANS(sd_evn_elat)))))) < $wkm";
 
-        //$quakeQuery .= " AND sd_evn_pmag IS NOT NULL ";
+        $quakeQuery .= " AND sd_evn_pmag IS NOT NULL ";
 
         $quakeQuery .= " AND sd_evn_pubdate <= now() ";
 
@@ -2250,12 +2250,8 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
         $getQuakes = mysql_query($quakeQuery) or die(mysql_error());
         $count = 0;
         while ($row = mysql_fetch_array($getQuakes)) {
-            if ($row['sd_evn_pmag'] === NULL or $row['sd_evn_pmag'] < 0){
-                echo $row['sd_evn_elat'].",".$row['sd_evn_elon'].",".$row['sd_evn_edep'].","."1".",".$row['sd_evn_time'].",".$row['sd_evn_eqtype'].",".$row['cc_id'].",".$row['sd_evn_herr'].",".$row['sd_evn_xerr'].",".$row['sd_evn_yerr'].",".$row['sd_evn_derr'].",".$row['sd_evn_rms'].";";
-            }else{
-                echo $row['sd_evn_elat'].",".$row['sd_evn_elon'].",".$row['sd_evn_edep'].",".$row['sd_evn_pmag'].",".$row['sd_evn_time'].",".$row['sd_evn_eqtype'].",".$row['cc_id'].",".$row['sd_evn_herr'].",".$row['sd_evn_xerr'].",".$row['sd_evn_yerr'].",".$row['sd_evn_derr'].",".$row['sd_evn_rms'].";";
-            }
             // change from sn_id to cc_id by vutuan
+            echo $row['sd_evn_elat'].",".$row['sd_evn_elon'].",".$row['sd_evn_edep'].",".$row['sd_evn_pmag'].",".$row['sd_evn_time'].",".$row['sd_evn_eqtype'].",".$row['cc_id'].",".$row['sd_evn_herr'].",".$row['sd_evn_xerr'].",".$row['sd_evn_yerr'].",".$row['sd_evn_derr'].",".$row['sd_evn_rms'].";";
             $count++;
         }
     }
@@ -2269,8 +2265,8 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
         $htmroot = dirname(__FILE__) . "/..";
 
         // This path is important for GMT to work, please change this path into where you put it in the main server
-        //putenv("PATH=/bin:/usr/bin:/usr/lib/gmt/bin:/usr/lib/gmt/share:/usr/lib/gmt/lib:/usr/lib/gmt/include");
-        //putenv("GMTHOME=/usr/lib/gmt");
+        putenv("PATH=/bin:/usr/bin:/usr/lib/gmt/bin:/usr/lib/gmt/share:/usr/lib/gmt/lib:/usr/lib/gmt/include");
+        putenv("GMTHOME=/usr/lib/gmt");
 
         # defines the public_html root directory (absolute path on the Apache server)
         # subdiretory name
@@ -2303,7 +2299,6 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
         $dr_start = $o['dr_start'];
         $dr_end = $o['dr_end'];
         $eqtype = $o['eqtype'];
-        $error_bar = $o['errorbar'];
 
         $sql_statement = $this->getEarthquakeQuery($qty, $vlat, $vlon, $date_start, $date_end, $dr_start, $dr_end, $eqtype, $wkm);
         // to count the actual number of event without qty limit
@@ -2386,26 +2381,15 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
 
         fwrite($fh, "pscoast -J -R -Df -W1p -S150/170/255 -N1/1.5p,black -N2/1p,50/50/50 -Tf178/-35/1i/2 -O -K >> $tmp.ps\n");
         fwrite($fh, "pscoast -J -R -Df -C0/169/223 -Lf$vlon/$slat/$vlat/10k+u -O -K >> $tmp.ps\n");
-        if($error_bar == "true"){
-            fwrite($fh, "awk -F , '{first_err = 0; second_err = 0; if (length(\$9) > 0) {first_err = \$9; second_err = \$9;} else { if (length(\$10) > 0) {fisrt_err = \$10;} if (length(\$11) > 0) {second_err = \$11;}} print \$3,\$2,\$4,first_err,second_err;}' $tmp.txt | psxy -J -R -Ex/+0.5p -Ey/+0.5p -Sc0.075i -C$tmp.cpt -G255 -W0.25\p -O -K >> $tmp.ps\n");
-        }else{
-            fwrite($fh, "awk -F , '{first_err = 0; second_err = 0; if (length(\$9) > 0) {first_err = \$9; second_err = \$9;} else { if (length(\$10) > 0) {fisrt_err = \$10;} if (length(\$11) > 0) {second_err = \$11;}} print \$3,\$2,\$4,first_err,second_err;}' $tmp.txt | psxy -J -R -Sc0.075i -C$tmp.cpt -G255 -W0.25\p -O -K >> $tmp.ps\n");
-        }
+        fwrite($fh, "awk -F , '{first_err = 0; second_err = 0; if (length(\$9) > 0) {first_err = \$9; second_err = \$9;} else { if (length(\$10) > 0) {fisrt_err = \$10;} if (length(\$11) > 0) {second_err = \$11;}} print \$3,\$2,\$4,first_err,second_err;}' $tmp.txt | psxy -J -R -Ex/+0.5p -Ey/+0.5p -Sc0.075i -C$tmp.cpt -G255 -W0.25p -O -K >> $tmp.ps\n");
 
         // N-S projection
         fwrite($fh, "printf $box | psxy -R-5/$ldep/$lat1/$lat2 -Jx0.17c/$Jlon -Ba5f5g0/a5f5g0::wesN -W1 -P -O -X14c -Y0 -K >> $tmp.ps\n");
-        if($error_bar == "true"){
             fwrite($fh, "awk -F , '{if (\$3>=$lon1 && \$3<=$lon2) {first_err = 0; second_err = 0; if (length(\$12) > 0) {first_err = \$12;} if (length(\$9) > 0) {second_err = \$9;} else if (length(\$11) > 0) {second_err = \$11;} print \$4,\$2,\$4,first_err,second_err;}}' $tmp.txt | psxy -R -J -Ex/+0.5p -Ey/+0.5p -Sc0.075i -C$tmp.cpt -W0.25p -O -K >> $tmp.ps\n");
-        }else{
-            fwrite($fh, "awk -F , '{if (\$3>=$lon1 && \$3<=$lon2) {first_err = 0; second_err = 0; if (length(\$12) > 0) {first_err = \$12;} if (length(\$9) > 0) {second_err = \$9;} else if (length(\$11) > 0) {second_err = \$11;} print \$4,\$2,\$4,first_err,second_err;}}' $tmp.txt | psxy -R -J -Sc0.075i -C$tmp.cpt -W0.25p -O -K >> $tmp.ps\n");
-        }
         // W-E projection
         fwrite($fh, "printf $box | psxy -R$lon1/$lon2/-$ldep/5 -Jx$Jlat/0.17c -Ba5f5g0/a5f5g0 -W1 -P -O -X-14c -Y-5c -K >> $tmp.ps\n");
-        if($error_bar == "true"){
-            fwrite($fh, "awk -F , '{if (\$2>=$lat1 && \$2<=$lat2) {first_err = 0; second_err = 0; if (length(\$9) > 0) {first_err = \$9;} else if (length(\$10) > 0) {fisrt_err = \$10;} if (length(\$12) > 0) {second_err = \$12;} print \$3,-\$4,\$4,first_err,second_err;}}' $tmp.txt | psxy -R -J -Ex/+0.5p -Ey/+0.5p -Sc0.075i -C$tmp.cpt -W0.25p -O -K >> $tmp.ps\n");    
-        }else{
-            fwrite($fh, "awk -F , '{if (\$2>=$lat1 && \$2<=$lat2) {first_err = 0; second_err = 0; if (length(\$9) > 0) {first_err = \$9;} else if (length(\$10) > 0) {fisrt_err = \$10;} if (length(\$12) > 0) {second_err = \$12;} print \$3,-\$4,\$4,first_err,second_err;}}' $tmp.txt | psxy -R -J -Sc0.075i -C$tmp.cpt -W0.25p -O -K >> $tmp.ps\n");
-        }
+
+            fwrite($fh, "awk -F , '{if (\$2>=$lat1 && \$2<=$lat2) {first_err = 0; second_err = 0; if (length(\$9) > 0) {first_err = \$9;} else if (length(\$10) > 0) {fisrt_err = \$10;} if (length(\$12) > 0) {second_err = \$12;} print \$3,-\$4,\$4,first_err,second_err;}}' $tmp.txt | psxy -R -J -Ex/+0.5p -Ey/+0.5p -Sc0.075i -C$tmp.cpt -W0.25p -O -K >> $tmp.ps\n");
         // depth scale
         fwrite($fh, "psscale -D16c/2c/-4c/0.3c -C$tmp.cpt -B10f10/:\"Depth (km)\": -O -K >> $tmp.ps\n");
         // depth vs time
@@ -2423,12 +2407,7 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
             fwrite($fh, "psbasemap \$R -JX17c/4c  -Bpa1d/a10f10g0 -Bsa1O/WESn -P  -Y-5c -U\"$stamp\" -O -K >> $tmp.ps\n");
         }
 
-        if($error_bar == "true"){
             fwrite($fh, "psxy $tmp.xyz -R -J -Ex/+0.5p -Ey/+0.5p -Sc0.075i -C$tmp.cpt  -W0.25p -V -O >> $tmp.ps\n");
-        }else{
-            fwrite($fh, "psxy $tmp.xyz -R -J -Sc0.075i -C$tmp.cpt  -W0.25p -V -O >> $tmp.ps\n");
-        }
-
         // makes PNG from PS file
         fwrite($fh, "convert $tmp.ps $tmp.png\n");
         fclose($fh);

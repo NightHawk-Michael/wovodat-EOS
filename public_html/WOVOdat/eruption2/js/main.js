@@ -8,10 +8,9 @@ require.config({
     'moment': 'vendor/momentjs/moment.min',
     'material':'vendor/materialize/materialize.min',
     'hammer':'vendor/materialize/hammer.min',
-    'jszip' : 'vendor/zip/dist/jszip',
-    'FileSaver' : 'vendor/zip/dist/FileSaver',
+    'jszip' : 'vendor/jszip/jszip.min',
+    'FileSaver' : 'vendor/FileSaver/FileSaver.min',
     // 'velocity':'vendor/materialize/velocity.min',
-    //'JSZip' : 'vendor/zip/dist/jszip',
     'pace': 'vendor/pace/pace.min',
     'jquery.flot': 'vendor/jquery-flot/src/jquery.flot',
     'jquery.colorhelpers' : 'vendor/jquery-flot/lib/jquery.colorhelpers',
@@ -20,7 +19,6 @@ require.config({
     'jquery.resize' : 'vendor/jquery-flot/lib/jquery.resize',
     'jquery.flot.navigate': 'vendor/jquery-flot/src/plugins/jquery.flot.navigate',
     'jquery.flot.selection': 'vendor/jquery-flot/src/plugins/jquery.flot.selection',
-    'jquery.flot.symbol': 'vendor/jquery-flot/src/plugins/jquery.flot.symbol',
     'jquery.flot.time': 'vendor/jquery-flot/src/plugins/jquery.flot.time',
     'excanvas' : 'vendor/jquery-flot/lib/excanvas.min',
     'jquery.flot.tickrotor': 'vendor/jquery-flot/src/plugins/jquery.flot.tickrotor',
@@ -63,9 +61,6 @@ require.config({
       deps: ['jquery.flot']
     },
     'jquery.flot.errorbars': {
-      deps: ['jquery.flot']
-    },
-    'jquery.flot.symbol': {
       deps: ['jquery.flot']
     },
     'jquery.flot.axislabels': {

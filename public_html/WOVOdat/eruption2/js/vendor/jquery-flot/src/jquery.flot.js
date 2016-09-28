@@ -3040,7 +3040,6 @@ Licensed under the MIT license.
         function drawSeriesPoints(series) {
 
             function plotPoints(datapoints, radius,fillStyle, offset, shadow, axisx, axisy, symbol) {
-                //var points = datapoints.points, ps = datapoints.pointsize;
                 var points = datapoints.points, ps = datapoints.pointsize;
                 for (var i = 0; i < points.length; i += ps) {
                     var x = points[i], y = points[i + 1];

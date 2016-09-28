@@ -4,11 +4,8 @@ define(function(require) {
       Backbone = require('backbone'),
       _ = require('underscore'),
       flot = require(['jquery.flot', 'jquery.flot.time', 'jquery.flot.navigate', 'jquery.flot.selection','excanvas','jquery.flot.errorbars','jquery.flot.legendoncanvas','jquery.flot.axislabels']),
-      TimeRange = require('models/time_range'),
       GraphHelper = require('helper/graph'),
-      //Filter Color for each earthquake type configuration
       loading = require('text!templates/loading.html'),
-      FilterColor = require('models/filter_color'),
       FilterColorCollection = require('collections/filter_colors');
   return Backbone.View.extend({
     loading: _.template(loading),
@@ -20,6 +17,8 @@ define(function(require) {
       this.filterColorCollection = new FilterColorCollection({
         offline: options.offline
       });
+      this.initialDataMaxTime = options.initialDataMaxTime;
+      this.initialDataMinTime = options.initialDataMinTime;
       this.categories = options.categories;
       //console.log(this.filterColorCollection);
 
@@ -27,7 +26,7 @@ define(function(require) {
     
     selectingFiltersChanged: function(selectingFilters) {
       this.selectingFilters = selectingFilters;
-      if(selectingFilters.length == 0){
+      if(selectingFilters.empty){
         this.hide();
       }
       this.update();

@@ -19,17 +19,16 @@ define(function(require) {
       this.observer = options.observer;
       this.selectingTimeSeries = options.selectingTimeSeries;
       this.selectingFilters = options.selectingFilters;
-      this.categories = options.categories
+            this.categories = options.categories;
+            this.selectedFilter = options.selectedFilters;
       this.filters = new Filters;
     },
     selectingTimeSeriesChanged: function(selectingTimeSeries){
       this.selectingTimeSeries = selectingTimeSeries;
       // this.filters.reset();
-      if(this.selectingTimeSeries.length == 0){ 
-        this.hide();
-      }else{
+
         this.render(this.filters);  
-      }
+
       
     },
     //this.filter is grouped by timeSerie and category
@@ -98,8 +97,9 @@ define(function(require) {
       for (var i = 0; i < models.length; i++) {
         this.getFilter(models[i]);
 
-      };
-      this.showGraph();
+            }
+            ;
+
       // var categories=["Seismic","Deformation","Gas","Hydrology","Thermal","Field","Meteology"];
       // var selectingFilters = [];
       // for(var i = 0;i<categories.length;i++){
@@ -133,7 +133,8 @@ define(function(require) {
 
       
       $('.filter-select').material_select(); 
-      
+            this.showGraph();
+            this.selectedFilter = undefined; // selectedFIlter only valid at the first time of loading
     },
     //generate data for html template
     /* {[{nodata,
@@ -185,7 +186,7 @@ define(function(require) {
         delete this.selectingFilters[categories[i]];
       }
       this.selectingFilters.empty = true;
-      this.render();
+            // this.render();
       this.trigger('hide');
 
     },
@@ -202,6 +203,9 @@ define(function(require) {
       // for(var i = 0; i<selects.length;i++){
       for(var i = 0;i<checkboxes.length;i++){
         var checkbox = checkboxes[i];
+                if (checkbox.id.split(".")[1] == this.selectedFilter) {
+                    checkbox.checked = true;
+                }
         if(checkbox.checked){
           var temp = checkbox.id.split(".");
           this.selectingFilters.empty = false;
@@ -223,7 +227,7 @@ define(function(require) {
       for(var i = 0;i<selectingFilters.length;i++){
         
         var model = selectingFilters[i];
-        if(timeSerie.sr_id == model.timeSerie.sr_id){
+                if (timeSerie.get('sr_id') == model.timeSerie.get('sr_id')) {
           for(var j = 0;j<model.filterAttributes.length;j++){
             if(filterName == model.filterAttributes[j].name){
               return true;

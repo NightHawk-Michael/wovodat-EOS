@@ -111,7 +111,7 @@ abstract class TableManager implements TableManagerInterface {
 				if (array_key_exists("vd_name",$serie)){
 					$v = $serie["vd_name"];
 				}else{
-				
+
 				}
 
 				if($serie[$col_name]!=""){
