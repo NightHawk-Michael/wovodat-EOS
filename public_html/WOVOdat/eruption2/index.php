@@ -1,4 +1,5 @@
 <?php
+  
   session_start();
 /*  if (!isset($_SESSION['login'])) {
     header('Location: /populate/index.php');
@@ -24,6 +25,8 @@
     <link href="/css/tooltip.css" rel="stylesheet">
   </head>
   <body>
+    
+    <div>
     <div id="" class="blue lighten-4 main" >
       
       

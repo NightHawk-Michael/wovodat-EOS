@@ -5,8 +5,8 @@
  */
 // DEFINE('HOST', 'localhost');
 // require_once '..//TableManager.php';
-class medManager extends TableManager {
-	
+class medManager extends MeteoTablesManager {
+
 	protected function setColumnsName(){
 		$result = array("med_temp","med_stemp","med_bp","med_hd","med_prec","med_wind","med_wsmin","med_wsmax","med_wdir","med_clc");
 		return $result;
@@ -14,9 +14,7 @@ class medManager extends TableManager {
 	protected function setTableName(){
 		return "es_med";
 	}
-	protected function setMonitoryType(){
-		return "Meteology";
-	} // monitory type Deformation, Gas, ....
+	
 	protected function setDataType(){
 		return "Meteo Data";
 	} // Data type for each data table
@@ -35,7 +33,8 @@ class medManager extends TableManager {
 		$query = "";
 		$table = "med";
 		$errorbar = false;
-		$style = "dot";
+		$style = "dot";  
+
 		if($component == 'Air Temperature'){
 			$attribute = "med_temp";
 			$unit ="oC";
@@ -53,22 +52,19 @@ class medManager extends TableManager {
 			$unit ="mm";
 			$query = "select a.med_tprec  as filter, a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL";
 		}else if($component == 'Humidity'){
-			
 			$unit = "%";
 			$attribute = "med_hd";
 			$query = "select a.med_ph_err as err,a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL";
 		}else if($component == 'Wind Speed'){
 			$unit ="m/s";
-			
 			$attribute = "med_wind";
 			$query = "select a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL";
-		}else if($component == 'Min Wind Speed'){
-			
+		}else if($component == 'Minimum Wind Speed'){
 			$unit ="m/s";
-			$attribute = "med_wsmin";
+			$attribute = "med_wsmin";  	
 			$query = "select a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL";
 
-		}else if($component == 'Max Wind Speed'){
+		}else if($component == 'Maximum Wind Speed'){
 			
 			$unit ="m/s";
 			$attribute = "med_wsmax";
@@ -91,4 +87,10 @@ class medManager extends TableManager {
 						);
 		return $result;
 	} // params to get data station [unit,flot_style,errorbar,query]
-} 
+
+    protected function setShortDataType()
+    {
+        // TODO: Implement setShortDataType() method.
+        return "Meteo";
+    }
+}

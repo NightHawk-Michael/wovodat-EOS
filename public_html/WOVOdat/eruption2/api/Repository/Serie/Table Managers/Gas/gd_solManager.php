@@ -1,17 +1,17 @@
 <?php
 /**
- *	This class supports query the data from data table dd_tlt 
+ *	This class supports query the data from data table gd_sol 
  * 	
  */
 // DEFINE('HOST', 'localhost');
 // require_once '..//TableManager.php';
-class gd_solManager extends TableManager {
+class gd_solManager extends GasTablesManager {
 	
 	protected function setColumnsName(){
 		$result = array("gd_sol_tflux","gd_sol_high","gd_sol_htemp");
 		return $result;
 	}
-	protected function setTableName(){
+	protected function setTableName(){  
 		return "es_gd_sol";
 	}
 	protected function setMonitoryType(){
@@ -36,7 +36,7 @@ class gd_solManager extends TableManager {
 		$table = "gd_sol";
 		$errorbar = false;
 		$style = "dot";
-		if($component == 'Total Gas Flux'){
+		if($component == 'Total Gas Flux'){      
 
 			$attribute = "gd_sol_tflux";
 			$errorbar = true;
@@ -59,4 +59,10 @@ class gd_solManager extends TableManager {
 						);
 		return $result;
 	} // params to get data station [unit,flot_style,errorbar,query]
-} 
+
+    protected function setShortDataType()
+    {
+        // TODO: Implement setShortDataType() method.
+        return "Soil Effux";
+    }
+}

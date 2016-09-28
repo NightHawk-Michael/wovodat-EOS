@@ -5,7 +5,7 @@
  */
 // DEFINE('HOST', 'localhost');
 // require_once '..//TableManager.php';
-class sd_rsmManager extends TableManager {
+class sd_rsmManager extends SeismicTablesManager {
 	
 	protected function setColumnsName(){
 		$result = array("sd_rsm_count");
@@ -14,9 +14,7 @@ class sd_rsmManager extends TableManager {
 	protected function setTableName(){
 		return "es_sd_rsm";
 	}
-	protected function setMonitoryType(){
-		return "Seismic";
-	} // monitory type Deformation, Gas, ....
+	
 	protected function setDataType(){
 		return "RSAM";
 	} // Data type for each data table
@@ -32,9 +30,7 @@ class sd_rsmManager extends TableManager {
 	protected function setStationDataParams($component){
 		global $db;
 		$unit="";
-		$attribute = "";
 		$query = "";
-		$table = "sd_rsm";
 		$errorbar = false;
 		$style = "bar";
 		$query1 = "select a.sd_sam_id from sd_rsm as a";
@@ -46,7 +42,6 @@ class sd_rsmManager extends TableManager {
 
 		if($component == 'RSAM Count'){
 			$unit = "counts";
-			$attribute = "sd_rsm_count";
 			$query = "select a.sd_rsm_stime as stime, a.sd_rsm_count as value from sd_rsm as a, sd_sam as b where a.sd_sam_id=b.sd_sam_id and b.ss_id=%s and a.sd_rsm_count IS NOT NULL";
 		}
 		$result = array("unit" => $unit,
@@ -56,4 +51,10 @@ class sd_rsmManager extends TableManager {
 						);
 		return $result;
 	} // params to get data station [unit,flot_style,errorbar,query]
-} 
+
+    protected function setShortDataType()
+    {
+        // TODO: Implement setShortDataType() method.
+        return "RSAM";
+    }
+}

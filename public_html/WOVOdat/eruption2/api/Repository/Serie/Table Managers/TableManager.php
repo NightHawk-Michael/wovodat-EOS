@@ -12,69 +12,131 @@ abstract class TableManager implements TableManagerInterface {
 	protected $dataType;
 	protected $stationId;
 	protected $stationCode;
+	protected $sta_table;
+	protected $sta_id_code_dictionary;
+	protected $vd_long;
+	protected $vd_lat;
 	public function TableManager(){
 		$this->cols_name = $this->setColumnsName();
 		$this->table_name = $this->setTableName();
 		$this->monitoryType = $this->setMonitoryType();
 		$this->dataType = $this->setDataType();
 		$this->stationId = $this->setStationID();
-		$this->stationCode = $this->setStationCode();
+		$this->sta_id_code_dictionary = $this->getStationIdCodeDictionary();
+		$this->shortDataType = $this->setShortDataType();
 	}
+	//must return 1 sta_code column
+	protected function getStationCodeQuery($sta_id){
+		$table_name = $this->getTableNameFromIdName($sta_id);
+		$sta_id_code_query = "SELECT DISTINCT ".$table_name."_id as sta_id, " . $table_name ."_code as sta_code FROM $table_name order by sta_id";
+		return $sta_id_code_query;
+	}
+	protected function getStationIdCodeDictionary(){
+		global $db;
+		$sta_id_codes = array();
+		foreach($this->stationId as $sta_id){
+			
+			$sta_id_code = array();
+			$sta_id_code_query = $this->getStationCodeQuery($sta_id);
+			// echo $sta_id_code_query."\n";
+			$db->query($sta_id_code_query);
+			$temp = $db->getList();
+			$sta_id_code[0] = "";
+			// print_r($temp);
+			foreach($temp as $tmp){
+				$sta_id_code[$tmp["sta_id"]]  = $tmp['sta_code'];
+			}
+
+			array_push($sta_id_codes,$sta_id_code);
+		}
+		
+		
+		return $sta_id_codes;
+	}
+	abstract protected function setStationTable(); // get the name of the station table which stores sta_id and sta_code
 	abstract protected function setColumnsName(); // names of data columns
 	abstract protected function setTableName(); // name of es table
 	abstract protected function setMonitoryType(); // monitory type Deformation, Gas, ....
 	abstract protected function setDataType(); // Data type for each data table
+    abstract protected function setShortDataType();
 	//if there is 1 station, station1 is the same as station2
 	abstract protected function setStationID(); // column names represent stationID1,station ID2
-	abstract protected function setStationCode(); // column name represent primary stationCode1, stationCode2.
+
+	abstract protected function setStationCode(); // column name represent primary stationCode1, stationCode2. (Deprecated)
 	abstract protected function setStationDataParams($component); // params to get data station [unit,flot_style,errorbar,attributes,query]
-	public function getTimeSeriesList($vd_id,$stations){
-  		$result = array();
-		global $db;
-		$query_format = 'select a.%s as sta_id1,  a.%s as sta_code1,a.%s as sta_id2,a.%s as sta_code2 ';
-		$query = sprintf($query_format,$this->stationId[0],$this->stationCode[0],$this->stationId[1],$this->stationCode[1]);
+	private function getTableNameFromIdName($id){
+		$temp = explode("_", $id);
+		return $temp[0];
+	}
+	protected function getTimeSeriesListQuery($vd_id){
+		$query_format = 'select b.vd_inf_slat as vd_lat, b.vd_inf_slon as vd_long, a.%s as sta_id1,  a.%s as sta_id2 ';
+		$query = sprintf($query_format,$this->stationId[0],$this->stationId[1]);
 		foreach ($this->cols_name as $name) {
 			$query = $query.",a.".$name;
 		}
-		$query = $query." from $this->table_name as a where a.vd_id=$vd_id";
-		// echo($query);
+		$query = $query." from $this->table_name as a, vd_inf as b where a.vd_id=$vd_id and b.vd_id = $vd_id group by a.vd_id, sta_id1, sta_id2 order by a.vd_id";
+		return $query;
+	}
+	public function getTimeSeriesList($vd_id){
+		
+  		$result = array();
+		global $db;
+		$query = $this->getTimeSeriesListQuery($vd_id);
 		$db->query( $query);
-
-		// echo($this->monitoryType."   ".$query."\n");
+		// echo $query."\n";
 		$serie_list = $db->getList();
-		// var_dump($serie_list);
+		$exsited = array();
 		foreach ($serie_list as $serie) {
-
+			// var_dump($serie);
 			foreach ($this->cols_name as $col_name) {
-
+				// print_r($this->table_name);
+				// print_r($this->stationId);
+				// print_r($this->sta_id_code_dictionary);
+				// echo ($this->getStationCodeQuery($this->stationId[0])."\n");
+				if(!array_key_exists($serie["sta_id1"], $this->sta_id_code_dictionary[0])){
+					continue;
+				}
+				if(!array_key_exists($serie["sta_id2"], $this->sta_id_code_dictionary[1])){
+					continue;
+				}
 				if($serie[$col_name]!=""){
-
 					$x = array('category' => $this->monitoryType ,
 							   'data_type' => $this->dataType,
+                                'short_data_type' => $this->shortDataType,
 							   'station_id1' => $serie["sta_id1"],
-							   'station_code1' => $serie["sta_code1"],
+							   'station_code1' => $this->sta_id_code_dictionary[0][$serie["sta_id1"]],
 							   'station_id2' => $serie["sta_id2"],
-							   'station_code2' => $serie["sta_code2"],
+							   'station_code2' => $this->sta_id_code_dictionary[1][$serie["sta_id2"]],
 						       'component' => $serie[$col_name],
+						       'vd_lat' => $serie["vd_lat"],
+						       'vd_long' => $serie["vd_long"],
+
 						   		);
 
 					$x["sr_id"] = md5( $x["category"].$x["data_type"].$x["station_id1"].$x["station_id2"].$x["component"] );
-					array_push($result,  $x );
+					if(!array_key_exists($x["sr_id"], $exsited)){
+						$exsited[$x["sr_id"]] = true;
+						array_push($result,  $x );
+					}else{
+						
+					}
+					
 
 				}
 			}
-		}		
-		// var_dump($result);
+		}
 		return $result;
 
  	}
 
   	public function getStationData($stations){
+  		// var_dump($this);
   		
+		$this->vd_long = $stations["vd_long"];
+		$this->vd_lat = $stations["vd_lat"];
   		$id1 = $stations["station_id1"];
   		$id2 = $stations["station_id2"];
 		global $db;
-		// $cc = ', a.cc_id, a.cc_id2, a.cc_id3 ';
 		$result = array();
 		$res = array();
 		$data = array();
@@ -82,14 +144,14 @@ abstract class TableManager implements TableManagerInterface {
 		$stationDataParams = $this->setStationDataParams($stations['component']);
 		$errorbar = $stationDataParams["errorbar"];
 		$query = $stationDataParams["query"];
+		
 		$db->query($query, $id1,$id2);
-		// echo($query);
-		// var_dump($this);
-		// // var_dump($this);
+
 		$res = $db->getList();
+		// var_dump($res);
 		foreach ($res as $row) {
-			// var_dump($row);
 			//add value attributes
+			
 			$temp = array("value" => floatval($row["value"]));
 			//add time value attributes (time or (etime, stime))
 			if(array_key_exists("time", $row)){
@@ -113,11 +175,16 @@ abstract class TableManager implements TableManagerInterface {
 			}
 			//add filter attribute
 			// var_dump($row);
+
 			if(array_key_exists("filter", $row)){
 				
 				$temp["filter"] = $row["filter"];
-				if($temp["filter"] == null){
+				if($temp["filter"] === null){
+					// echo("a\n");
 					$temp["filter"] = " ";
+				}
+				if($temp["filter"] == ""){
+					$temp["filter"] = "Others";
 				}
 			}else{
 				$temp["filter"] = " ";

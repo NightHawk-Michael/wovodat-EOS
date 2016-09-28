@@ -7,6 +7,7 @@
 		*/
 		public static function loadFilterColor() {
 			$result = FilterColorRepository::getFilterColorList();
+			
 			return $result;
 		}	
 

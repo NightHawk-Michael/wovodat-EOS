@@ -1,11 +1,11 @@
 <?php
 /**
- *	This class supports query the data from data table dd_tlt 
+ *	This class supports query the data from data table dd_edm 
  * 	
  */
 // DEFINE('HOST', 'localhost');
 // require_once '..//TableManager.php';
-class dd_edmManager extends TableManager {
+class dd_edmManager extends DeformationTablesManager {  
 	
 	protected function setColumnsName(){
 		$result = array("dd_edm_line");
@@ -14,9 +14,6 @@ class dd_edmManager extends TableManager {
 	protected function setTableName(){
 		return "es_dd_edm";
 	}
-	protected function setMonitoryType(){
-		return "Deformation";
-	} // monitory type Deformation, Gas, ....
 	protected function setDataType(){
 		return "EDM";
 	} // Data type for each data table
@@ -37,7 +34,7 @@ class dd_edmManager extends TableManager {
 		$errorbar = true;
 		$style = "dot";
 		// var_dump($component);
-		if($component == 'EDM Line Length'){
+		if($component == 'EDM Line Length'){    
 			$unit = "m";
 			$attribute = "dd_edm_line";
 			$query = "select a.dd_edm_cerr as err ,a.dd_edm_time as time, a.$attribute as value  from $table as a where a.ds_id1=%s and a.ds_id2=%s and a.$attribute IS NOT NULL";
@@ -49,4 +46,10 @@ class dd_edmManager extends TableManager {
 						);
 		return $result;
 	} // params to get data station [unit,flot_style,errorbar,query]
-} 
+
+    protected function setShortDataType()
+    {
+        // TODO: Implement setShortDataType() method.
+        return "EDM";
+    }
+}

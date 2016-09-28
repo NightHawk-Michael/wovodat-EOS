@@ -14,6 +14,7 @@ define(function(require) {
       _(this).bindAll(
         // 'onSelectVolcanoChanged',
         'changeVolcano',
+        'makeOffline',
         'timeSeriesChanged',
         // 'onAddSelectingTimeSeries',
         // 'onRemoveSelectingTimeSeries',
@@ -27,12 +28,14 @@ define(function(require) {
         'selectingTimeRangeChanged',
         'selectingFiltersChanged',
         'eruptionTimeRangeChanged',
+        'eruptionsFetched',
         'timeSeriesSelectHidden',
         'filtersSelectHidden',
         'overviewGraphHidden',
         'eruptionSelectHidden',
         'eruptionGraphHidden',
-        'eruptionGraphShown'
+        'eruptionGraphShown',
+        'highlightOverViewGraphChanged'
 
       );
       //Variable declaration
@@ -54,9 +57,12 @@ define(function(require) {
       this.filtersSelect = options.filtersSelect;
       this.selectingFilters = options.selectingFilters;
       this.eruptionForecastsGraph = options.eruptionForecastsGraph;
+      this.eruptions = options.eruptions,
+      this.offline = options.offline,
       //event listeners
       // this.listenTo(this.volcanoSelect,'change',this.onSelectVolcanoChanged)
       this.listenTo(this.selectingVolcano, 'update', this.changeVolcano);
+      this.listenTo(this.volcanoSelect,'make-offline', this.makeOffline);
       // this.listenTo(this.selectingTimeSeries, 'syncAll', this.onAddSelectingTimeSeries);
       // this.listenTo(this.selectingTimeSeries,'remove', this.onRemoveSelectingTimeSeries);
       this.listenTo(this.timeSeries,'loaded', this.timeSeriesChanged);
@@ -71,8 +77,10 @@ define(function(require) {
       this.listenTo(this.serieGraphTimeRange,'update',this.serieGraphTimeRangeChanged);
       this.listenTo(this.forecastsGraphTimeRange,'update',this.forecastsGraphTimeRangeChanged);
       this.listenTo(this.selectingTimeRange,'update',this.selectingTimeRangeChanged);
+      this.listenTo(this.serieGraphTimeRange,'zoom',this.highlightOverViewGraphChanged);
       this.listenTo(this.selectingFilters,'update',this.selectingFiltersChanged);
       this.listenTo(this.eruptionTimeRange,'update',this.eruptionTimeRangeChanged);
+      this.listenTo(this.eruptions,'fetched',this.eruptionsFetched);
       /**
       * Events when some part is hidden
       */
@@ -100,22 +108,23 @@ define(function(require) {
       this.eruptionSelect.fetchEruptions(vd_id);
       this.selectingTimeSeries.reset();
       this.selectingTimeSeriesChanged();
-    },
-    timeSeriesChanged: function(e){
-      this.timeSeriesSelect.timeSeriesChanged(this.timeSeries);
+      //this.eruptionSelect.show();
     },
    
     // updateTimeSeriesData: function(e){
     //   var vd_id = this.selectingVolcano.get('vd_id');
     //   this.timeSeriesSelect.updateVolcanoData(vd_id, this.timeSeries);
     // },
-    
+    makeOffline: function(e){
+      this.offline.makeOffline(this.selectingVolcano);
+    },
     filtersSelectChange : function(e){
       this.filtersSelect.showGraph();
     },
     selectingTimeSeriesChanged: function(e){
       
       this.filtersSelect.selectingTimeSeriesChanged(this.selectingTimeSeries); // filter is rendered out.
+
     },
     selectingTimeSeriesChangedCheck: function(e){
       // this.filtersSelect.showLoading();
@@ -136,13 +145,9 @@ define(function(require) {
       // }
     },
     selectingFiltersChanged: function(e){
-
       this.overviewGraphContainer.selectingFiltersChanged(this.selectingFilters);
       this.overviewGraph.selectingFiltersChanged(this.selectingFilters);
       this.timeSeriesGraphContainer.selectingFiltersChanged(this.selectingFilters);
-      this.eruptionSelect.selectingFiltersChanged(this.selectingFilters);
-      
-      
     },
     timeSeriesChanged: function(e){
       this.timeSeriesSelect.render(this.timeSeries);
@@ -159,15 +164,20 @@ define(function(require) {
     },
     timeSeriesSelectHidden: function(e){
       this.filtersSelect.hide();
+
       
     },
     filtersSelectHidden: function(e){
       this.overviewGraph.hide();
-      this.eruptionSelect.hide();
+      this.overviewGraphContainer.hide();
+      this.overviewGraph.hide();
+      this.timeSeriesGraphContainer.hide();
+      // this.eruptionSelect.hide();
+      // this.eruptionSelect.show();
     },
     overviewGraphHidden: function(e){
-      this.eruptionSelect.hide();
-
+      // this.eruptionSelect.hide();
+      // this.eruptionSelect.show();
     },
     eruptionGraphHidden: function(e){
       this.timeSeriesGraphContainer.hide();
@@ -199,12 +209,25 @@ define(function(require) {
       
       this.eruptionSelect.selectingTimeRangeChanged(this.selectingTimeRange);
       this.serieGraphTimeRange.set({
-        'startTime': this.selectingTimeRange.get('startTime'),
-        'endTime': this.selectingTimeRange.get('endTime'),
+        'minX': this.selectingTimeRange.get('minX'),
+        'maxX': this.selectingTimeRange.get('maxX'),
+        'overviewGraphMinX': this.selectingTimeRange.get('overviewGraphMinX'),
+        'overviewGraphMaxX': this.selectingTimeRange.get('overviewGraphMaxX'),
       });
       // this.selectingTimeRange.trigger('update');
       this.serieGraphTimeRangeChanged();
       // this.timeSeriesGraphContainer.selectingTimeRangeChanged(e);
+    },
+    highlightOverViewGraphChanged: function(e){
+      this.selectingTimeRange.set({
+        minX: this.serieGraphTimeRange.get('minX'),
+        maxX: this.serieGraphTimeRange.get('maxX')
+      })
+      // console.log(this.selectingTimeRange);
+      this.overviewGraph.selectingRegionChanged(this.selectingTimeRange);
+    },
+    eruptionsFetched : function(e){
+    	this.eruptionSelect.eruptionsFetched();
     },
     destroy: function() {
       

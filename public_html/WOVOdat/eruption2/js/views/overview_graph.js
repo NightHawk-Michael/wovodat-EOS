@@ -4,11 +4,8 @@ define(function(require) {
       Backbone = require('backbone'),
       _ = require('underscore'),
       flot = require(['jquery.flot', 'jquery.flot.time', 'jquery.flot.navigate', 'jquery.flot.selection','excanvas','jquery.flot.errorbars','jquery.flot.legendoncanvas','jquery.flot.axislabels']),
-      TimeRange = require('models/time_range'),
       GraphHelper = require('helper/graph'),
-      //Filter Color for each earthquake type configuration
       loading = require('text!templates/loading.html'),
-      FilterColor = require('models/filter_color'),
       FilterColorCollection = require('collections/filter_colors');
   return Backbone.View.extend({
     loading: _.template(loading),
@@ -17,8 +14,11 @@ define(function(require) {
       this.serieGraphTimeRange = options.serieGraphTimeRange;
       this.timeRange = options.overviewGraphTimeRange;
       this.selectingTimeRange = options.selectingTimeRange;
-      this.filterColorCollection = new FilterColorCollection;
-      this.filterColorCollection.fetch();
+      this.filterColorCollection = new FilterColorCollection({
+        offline: options.offline
+      });
+      this.initialDataMaxTime = options.initialDataMaxTime;
+      this.initialDataMinTime = options.initialDataMinTime;
       this.categories = options.categories;
       //console.log(this.filterColorCollection);
 
@@ -26,7 +26,7 @@ define(function(require) {
     
     selectingFiltersChanged: function(selectingFilters) {
       this.selectingFilters = selectingFilters;
-      if(selectingFilters.length == 0){
+      if(selectingFilters.empty){
         this.hide();
       }
       this.update();
@@ -35,12 +35,49 @@ define(function(require) {
 
       var startTime = ranges.xaxis.from,
           endTime = ranges.xaxis.to;
-      event.data.set({
-        'startTime': startTime,
-        'endTime': endTime,
+      event.data.data.set({
+        'minX': startTime,
+        'maxX': endTime,
+        'overviewGraphMinX': event.data.graphMinX,
+        'overviewGraphMaxX': event.data.graphMaxX
       });
-      event.data.trigger('update');
+      // console.log(ranges.xaxis);
+      // console.log(event.data);
+      event.data.data.trigger('update');
     },
+    //selectingRegionChanged: function(selectingTimeRange){
+      //this.$el.bind('plotselected',this.selectingTimeRange,this.plotSelectingRegion);
+      //console.log(2);
+    //},
+    //plotSelectingRegion
+
+    selectingRegionChanged: function(selectingTimeRange){
+      // console.log(selectingTimeRange);
+      var selectedMinX = selectingTimeRange.get('minX');
+      var selectedMaxX = selectingTimeRange.get('maxX');
+      // var minX;
+      // var maxX;
+      // //set the boundary for the selected region
+      // if(selectedMinX<this.minX){
+      //   minX = this.minX;
+      // }else{
+      //   minX = selectedMinX;
+      // }
+      // if(selectedMaxX>this.maxX){
+      //   maxX = this.maxX;
+      // }else{
+      //   maxX = selectedMaxX;
+      // }
+      // console.log(this.timeRange);
+      //   console.log(selectedMinX + " "+ selectedMaxX);
+      this.graph.setSelection({
+        xaxis: {
+          from: selectedMinX,
+          to: selectedMaxX,
+        }
+      },true)
+    },
+
     hide: function(){
       this.$el.html("");
       this.$el.width(0);
@@ -52,6 +89,13 @@ define(function(require) {
     },
     render: function() {
       // this.showLoading();
+      if(this.initialDataMinTime != undefined){
+        this.minX = this.initialDataMinTime;
+      }
+      if(this.initialDataMaxTime != undefined){
+        this.maxX = this.initialDataMaxTime;
+      }
+
       var options = {
         grid:{
           // margin: 20,
@@ -109,15 +153,22 @@ define(function(require) {
 
       this.$el.width('auto');
       this.$el.height(200);
-      this.$el.addClass("overview-graph card-panel");
+      this.$el.addClass("overview-graph");
 
       //limit data to be rendered
       
       // console.log(this.data);
       this.graph = $.plot(this.$el, this.data, options);
       //To edit the series object, go to GraphHelper used for data in the prepareData method below.
-      this.$el.bind('plotselected', this.selectingTimeRange, this.onSelect);
+      var eventData = {
+        data: this.selectingTimeRange,
+        graphMinX: this.minX,
+        graphMaxX: this.maxX
+      };
 
+      //this.$el.bind('plotselected', this.selectingTimeRange, this.onSelect);
+      this.$el.bind('plotselected', eventData, this.onSelect);
+      this.initialDataMinTime = this.initialDataMaxTime = undefined;
     },
 
     update: function() {

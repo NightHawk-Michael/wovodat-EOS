@@ -8,7 +8,8 @@
 		*		eruption list
 		*/
 		public static function loadEruptionForecastList($vd_id) {
-			return EruptionRepository::getEruptionForecastList($vd_id);
+			$data = EruptionRepository::getEruptionForecastList($vd_id);
+			return $data;
 		}
 
 		/**
@@ -19,6 +20,7 @@
 		*		eruption list
 		*/
 		public static function loadEruptionList($vd_id) {
-			return EruptionRepository::getEruptionList($vd_id);
+			$data =  EruptionRepository::getEruptionList($vd_id);
+			return $data;
 		}
 	}
