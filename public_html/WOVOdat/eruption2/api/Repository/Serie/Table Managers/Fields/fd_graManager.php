@@ -1,20 +1,22 @@
 <?php
 /**
- *	This class supports query the data from data table fd_gra 
+ *	This class supports query the data from data table dd_tlt 
  * 	
  */
 // DEFINE('HOST', 'localhost');
 // require_once '..//TableManager.php';
-class fd_graManager extends FieldsTablesManager {
+class fd_graManager extends TableManager {
 	
 	protected function setColumnsName(){
 		$result = array("fd_gra_fstr");
-		return $result;          
+		return $result;
 	}
-	protected function setTableName(){  
+	protected function setTableName(){
 		return "es_fd_gra";
 	}
-	
+	protected function setMonitoryType(){
+		return "Fields";
+	} // monitory type Deformation, Gas, ....
 	protected function setDataType(){
 		return "Gravity Fields";
 	} // Data type for each data table

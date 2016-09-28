@@ -28,18 +28,13 @@ define(function(require) {
       TimeSeriesContainer = require('views/time_series_container'),
       Tooltip = require('views/series_tooltip'),
       TimeSeriesGraphContainer = require('views/time_serie_graph_container'),
-      EventHandler = require('handler/event_handler'),
-      FilterColorCollection = require('collections/filter_colors'),
-      Offline = require('views/offline');
+      EventHandler = require('handler/event_handler');
 
   return Backbone.View.extend({
     el: '#main',
     
-    initialize: function(options) {
-      this.selecting_vd_num = options.vnum;
-      this.ed_stime_num = options.ed_stime;
-      this.ed_etime_num = options.ed_etime;
-      this.selectedTimeSeries = options.timeSeries;
+    initialize: function(selecting_vd_num) {
+      this.selecting_vd_num = selecting_vd_num;
       this.$el.html("");
       this.render();
     },
@@ -47,39 +42,17 @@ define(function(require) {
       /**
       * Variables declaration
       **/
-      //check offline mode
-      var offline = false;
-      if($('#offline').length > 0){
-        offline = true;
-      }else{
-        offline = false;
-      }
       var 
           observer = new (Backbone.Model.extend())(),
           categories=["Seismic","Deformation","Gas","Hydrology","Thermal","Fields","Meteology"],
-          selectingTimeSeries = new TimeSeries({
-            offline: offline
-          }),
-          filterColorCollection = new FilterColorCollection({
-            offline: offline
-          }),
+          selectingTimeSeries = new TimeSeries(),
           selectingFilters = new Filters(),
-          volcanoes = new Volcanoes({
-            offline: offline
-          }),
-          selectingEruptions = new Eruptions({
-            offline: offline
-          }),
-          eruptions = new Eruptions({
-            offline: offline
-          }),
-          eruptionForecasts = new EruptionForecasts({
-            offline: offline
-          }),
+          volcanoes = new Volcanoes(),
+          selectingEruptions = new Eruptions(),
+          eruptions = new Eruptions(),
+          eruptionForecasts = new EruptionForecasts,
           selectingVolcano = new Volcano(),
-          timeSeries = new TimeSeries({
-            offline: offline
-          }),
+          timeSeries = new TimeSeries(),
           serieGraphTimeRange = new TimeRange(),
           forecastsGraphTimeRange = new TimeRange(),
           selectingTimeRange = new TimeRange(),
@@ -90,7 +63,6 @@ define(function(require) {
           volcanoSelect = new VolcanoSelect({
             collection: volcanoes,
             categories: categories,
-            offline: offline,
             selectingVolcano: selectingVolcano,
             selecting_vd_num: this.selecting_vd_num
           }),
@@ -98,9 +70,7 @@ define(function(require) {
           timeSeriesSelect = new TimeSeriesSelect({
             categories: categories,
             volcano: selectingVolcano,
-            offline:offline,
             selectingTimeSeries: selectingTimeSeries,
-            selectedTimeSeries: this.selectedTimeSeries,
             timeSeries: timeSeries,
             selectingFilters: selectingFilters
           }),
@@ -115,8 +85,7 @@ define(function(require) {
             serieGraphTimeRange: serieGraphTimeRange,
             selectingTimeRange: selectingTimeRange,
             overviewGraphTimeRange: overviewGraphTimeRange,
-            offline: offline,
-            filterColorCollection: filterColorCollection
+            // collection: filterColorCollection
           }),
 
           overviewGraphContainer = new OverviewGraphContainer({
@@ -132,11 +101,7 @@ define(function(require) {
             eruptions: eruptions,
             eruptionForecasts: eruptionForecasts,
             observer: observer,
-            selectingEruptions: selectingEruptions,
-            selecting_vd_num: this.selecting_vd_num,
-            ed_stime_num: this.ed_stime_num,
-            ed_etime_num: this.ed_etime_num,
-            selectingTimeRange: selectingTimeRange,
+            selectingEruptions: selectingEruptions
           }),
 
           
@@ -148,12 +113,8 @@ define(function(require) {
             serieGraphTimeRange: serieGraphTimeRange,
             forecastsGraphTimeRange: forecastsGraphTimeRange,
             eruptionTimeRange: eruptionTimeRange,
-            overviewGraphTimeRange: overviewGraphTimeRange,
-            selecting_vd_num: this.selecting_vd_num,
-            ed_stime_num: this.ed_stime_num,
-            ed_etime_num: this.ed_etime_num
+            overviewGraphTimeRange: overviewGraphTimeRange
           }),
-
           eruptionForecastsGraph = new EruptionForecastsGraph({
             observer: observer,
             categories: categories,
@@ -177,14 +138,7 @@ define(function(require) {
           //   eruptions: eruptions,
           //   selectingEruptions: selectingEruptions
           // }),
-          offline = new Offline({
-            selectingVolcano : selectingVolcano,
-            volcanoes: volcanoes,
-            eruptions: eruptions,
-            timeSeries: timeSeries,
-            eruptionForecasts: eruptionForecasts,
-            filterColorCollection: filterColorCollection
-          }),
+
 
 
           eventHandler = new EventHandler({
@@ -206,9 +160,7 @@ define(function(require) {
             forecastsGraphTimeRange: forecastsGraphTimeRange,
             selectingTimeRange: selectingTimeRange,
             selectingFilters: selectingFilters,
-            eruptionForecastsGraph: eruptionForecastsGraph,
-            eruptions: eruptions,
-            offline: offline,
+            eruptionForecastsGraph: eruptionForecastsGraph
           });
           //console.log(volcanoes);
           // console.log(filterColorCollection);
@@ -221,7 +173,6 @@ define(function(require) {
       //   }
       // });
       volcanoSelect.$el.appendTo(this.$el);
-      offline.$el.appendTo(this.$el);
       timeSeriesSelect.$el.appendTo(this.$el);
       filtersSelect.$el.appendTo(this.$el);
       overviewGraphContainer.$el.appendTo(this.$el);

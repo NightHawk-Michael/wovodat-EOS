@@ -1,11 +1,11 @@
 <?php
 /**
- *	This class supports query the data from data table fd_mgv
+ *	This class supports query the data from data table dd_tlt 
  * 	
  */
 // DEFINE('HOST', 'localhost');
 // require_once '..//TableManager.php';
-class fd_mgvManager extends FieldsTablesManager {
+class fd_mgvManager extends TableManager {
 	
 	protected function setColumnsName(){
 		$result = array("fd_mgv_dec","fd_mgv_incl");
@@ -14,7 +14,9 @@ class fd_mgvManager extends FieldsTablesManager {
 	protected function setTableName(){
 		return "es_fd_mgv";
 	}
-	
+	protected function setMonitoryType(){
+		return "Fields";
+	} // monitory type Deformation, Gas, ....
 	protected function setDataType(){
 		return "Magnetic Vector";
 	} // Data type for each data table
@@ -31,7 +33,7 @@ class fd_mgvManager extends FieldsTablesManager {
 		$unit="";
 		$attribute = "";
 		$query = "";
-		$table = "fd_mgv";  
+		$table = "fd_mgv";
 		$errorbar = true;
 		$style = "dot";
 		if($component == 'Magnetic Declination'){

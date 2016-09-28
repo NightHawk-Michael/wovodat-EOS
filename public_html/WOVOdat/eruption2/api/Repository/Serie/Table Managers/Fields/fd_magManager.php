@@ -1,20 +1,22 @@
 <?php
 /**
- *	This class supports query the data from data table fd_mag 
+ *	This class supports query the data from data table dd_tlt 
  * 	
  */
 // DEFINE('HOST', 'localhost');
 // require_once '..//TableManager.php';
-class fd_magManager extends FieldsTablesManager {
+class fd_magManager extends TableManager {
 	
 	protected function setColumnsName(){
-		$result = array("fd_mag_f","fd_mag_compx","fd_mag_compy","fd_mag_compz");
+		$result = array("fd_mag_f");
 		return $result;
 	}
 	protected function setTableName(){
 		return "es_fd_mag";
 	}
-	
+	protected function setMonitoryType(){
+		return "Fields";
+	} // monitory type Deformation, Gas, ....
 	protected function setDataType(){
 		return "Magnetic Fields";
 	} // Data type for each data table
@@ -34,7 +36,7 @@ class fd_magManager extends FieldsTablesManager {
 		$table = "fd_mag";
 		$errorbar = true;
 		$style = "dot";
-		if($component == 'Magnetic F'){  
+		if($component == 'Magnetic'){
 			$unit = "nT";
 			$attribute = "fd_mag_f";
 			$query = "select a.fd_mag_ferr as err ,a.fd_mag_time as time, a.$attribute as value from $table as a where a.fs_id=%s and a.fs_id_ref=%s and a.$attribute IS NOT NULL";

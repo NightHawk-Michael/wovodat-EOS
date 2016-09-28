@@ -6,6 +6,6 @@
 // DEFINE('HOST', 'localhost');
 
 interface TableManagerInterface {
-  public function getTimeSeriesList($vd_id);
+  public function getTimeSeriesList($vd_id,$stations);
   public function getStationData($stations);
 } 

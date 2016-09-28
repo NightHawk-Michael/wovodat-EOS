@@ -1,15 +1,13 @@
 require.config({
   paths: {
     // Vendors.
-    'jquery': 'vendor/jquery/jquery',
+    'jquery': 'vendor/jquery/jquery.min',
     'backbone': 'vendor/backbone/backbone-min',
     'underscore': 'vendor/underscore/underscore-min',
     'text': 'vendor/require-text/text.min',
     'moment': 'vendor/momentjs/moment.min',
     'material':'vendor/materialize/materialize.min',
     'hammer':'vendor/materialize/hammer.min',
-    'jszip' : 'vendor/jszip/jszip.min',
-    'FileSaver' : 'vendor/FileSaver/FileSaver.min',
     // 'velocity':'vendor/materialize/velocity.min',
     'pace': 'vendor/pace/pace.min',
     'jquery.flot': 'vendor/jquery-flot/src/jquery.flot',
