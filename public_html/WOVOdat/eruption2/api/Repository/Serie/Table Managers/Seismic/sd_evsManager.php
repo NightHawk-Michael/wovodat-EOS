@@ -29,7 +29,6 @@ class sd_evsManager extends SeismicTablesManager {
 	} // column name represent primary stationCode1, stationCode2.
 	protected function setStationDataParams($component){
 		$unit="";
-		$attribute = "";
 		$query = "";
 		$table = "sd_evs";
 		$errorbar = false;

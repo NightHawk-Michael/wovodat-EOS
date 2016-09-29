@@ -14,6 +14,8 @@ abstract class TableManager implements TableManagerInterface {
 	protected $stationCode;
 	protected $sta_table;
 	protected $sta_id_code_dictionary;
+	protected $vd_long;
+	protected $vd_lat;
 	protected $data_code;
 	public function TableManager(){
 		$this->cols_name = $this->setColumnsName();
@@ -25,6 +27,7 @@ abstract class TableManager implements TableManagerInterface {
 		$this->shortDataType = $this->setShortDataType();
 
 		$this->data_code =  $this->setDataCode();
+
 	}
 	//must return 1 sta_code column
 	protected function getStationCodeQuery($sta_id){
@@ -64,6 +67,7 @@ abstract class TableManager implements TableManagerInterface {
 	abstract protected function setStationID(); // column names represent stationID1,station ID2
 	protected function setDataCode(){
 		$code =  substr($this->table_name,3,strlen($this->table_name)-3) ."_code";
+//		var_dump($code);
 		return $code;
 
 	}
@@ -87,20 +91,17 @@ abstract class TableManager implements TableManagerInterface {
   		$result = array();
 		global $db;
 		$query = $this->getTimeSeriesListQuery($vd_id);
-		//echo $query."\n";
 		$db->query( $query);
 		// echo $query."\n";
 		$serie_list = $db->getList();
 		$exsited = array();
 		$v = "";
+
 		foreach ($serie_list as $serie) {
 
-			// var_dump($serie);
+
 			foreach ($this->cols_name as $col_name) {
-				// print_r($this->table_name);
-				// print_r($this->stationId);
-				// print_r($this->sta_id_code_dictionary);
-				// echo ($this->getStationCodeQuery($this->stationId[0])."\n");
+
 				if(!array_key_exists($serie["sta_id1"], $this->sta_id_code_dictionary[0])){
 					continue;
 				}
@@ -152,6 +153,7 @@ abstract class TableManager implements TableManagerInterface {
 		$this->vd_lat = $stations["vd_lat"];
   		$id1 = $stations["station_id1"];
   		$id2 = $stations["station_id2"];
+
 		global $db;
 		$result = array();
 		$res = array();
@@ -162,6 +164,7 @@ abstract class TableManager implements TableManagerInterface {
 		$query = $stationDataParams["query"];
 		//Add select data code from query. Add in this tableManager to apply all data.
 		$temp =  "select a." . $this->data_code ." as data_code, cc_id, cc_id2, cc_id3,";
+
 		 $query = str_replace("select",$temp ,$query);
 
 		$db->query($query, $id1,$id2);
@@ -225,7 +228,7 @@ abstract class TableManager implements TableManagerInterface {
 				}
 			}
 			$temp["data_code"] = $row["data_code"];
-			$cc_ids = [];
+			$cc_ids = array();
 			$cc_ids[0] = $row["cc_id"];
 			$cc_ids[1] = $row["cc_id2"];
 			$cc_ids[2]= $row["cc_id3"];
@@ -250,7 +253,7 @@ abstract class TableManager implements TableManagerInterface {
      */
 
 	private function getCCUrl($cc_ids) {
-		$dataOwners = [];
+		$dataOwners = array();
 		foreach ($cc_ids as $cc_id) {
 
 			if ($cc_id != null) {

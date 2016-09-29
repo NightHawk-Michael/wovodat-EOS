@@ -50,6 +50,7 @@ class sd_evnManager extends SeismicTablesManager {
 		}
 
 		// echo $query;
+
 		$result = array("unit" => $unit,
 						"style" => $style,
 						"errorbar" => $errorbar,
