@@ -73,13 +73,14 @@ define(function(require) {
         for (var p = 0 ; p  < data.length; p++){
           if (data[p].filter != filterName) continue;
           var time =  data[p].time;
+          if (time == undefined) time = data[p].stime;
           var value = data[p].value;
           var dataOwner  =   data[p].data_owner.join(",");
           var dataCode = data[p].data_code;
           var uncertainty = data[p].error;
           if (uncertainty == undefined) uncertainty = "";
           var dateTime = new Date(time);
-          var dateStr = dateTime.getDate() + "-" + dateTime.getMonth() + "-" + dateTime.getYear() + " " + dateTime.getHours() + ":" + dateTime.getMinutes() + ":" +  dateTime.getSeconds();
+          var dateStr = dateTime.getDate() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getFullYear() + " " + dateTime.getHours() + ":" + dateTime.getMinutes() + ":" +  dateTime.getSeconds();
           if (time >= this.serieGraphTimeRange.attributes.startTime && time <= this.serieGraphTimeRange.attributes.endTime){
             //console.log (value);
             var d = {
@@ -124,7 +125,13 @@ define(function(require) {
         csvContent += "(100 km from volcanic vent)\n";
         csvContent += headers.join(",") + "\n";
         csvContent += dataString + "\n";
-        zip.file(content[0].showName +".csv", csvContent);
+        var filename = "";
+        if (content.length != 0){
+          filename = content[0].showName;
+        }else{
+          filename = "Blank"
+        }
+        zip.file(filename +".csv", csvContent);
       }
       zip.generateAsync({type:"blob"})
           .then(function (blob) {

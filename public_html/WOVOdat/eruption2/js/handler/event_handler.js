@@ -173,7 +173,6 @@ define(function(require) {
       // this.filtersSelect.showLoading();
       var allLoaded = true;
       // while(!allLoaded){
-      console.log (this.selectingTimeSeries);
       for(var i=0;i<this.selectingTimeSeries.models.length;i++){
           var model = this.selectingTimeSeries.models[i];
           if(model.get('data') == undefined){
@@ -221,6 +220,9 @@ define(function(require) {
     },
     filtersSelectHidden: function(e){
       this.overviewGraph.hide();
+      this.overviewGraphContainer.hide();
+      this.overviewGraph.hide();
+      this.timeSeriesGraphContainer.hide();
       // this.eruptionSelect.hide();
       // this.eruptionSelect.show();
     },

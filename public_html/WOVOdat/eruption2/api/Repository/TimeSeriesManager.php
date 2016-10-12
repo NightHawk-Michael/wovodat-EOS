@@ -66,9 +66,10 @@ class TimeSeriesManager {
     foreach ($this->timeSeriesManagers as $type => $class){
       if($type == $serie['category']){
         $temp = $class->getStationData($serie);
-        // var_dump($type);
+
         $data = array_merge($data,$temp);
-        // var_dump($temp);
+//        var_dump($data);
+
       }
     }
     $serie["data"] = $data;
