@@ -219,7 +219,6 @@ define(function(require) {
         graph.ticks = this.generateTick(minY,maxY);
         graph.minY = graph.ticks[0];
         graph.maxY = graph.ticks[graph.ticks.length-1]
-        //console.log (graph);
         graph.ticks.push();
       }
       graph.timeRange.set({
@@ -237,7 +236,6 @@ define(function(require) {
     **/
       formatGraphAppearance: function(data,timeSerieName,filterName,styleParams){
 
-     // console.log(filterName);
       var dataParam = {
         data: data, //data is 3D array (y-error value is included in the data passed in)
         label: filterName + ":"+timeSerieName,
@@ -248,10 +246,10 @@ define(function(require) {
         yaxis: {
           axisLabel: ""
         },
-        shadowSize: 3,
+        shadowSize: 2,
         points: {
           show: false,
-          radius: 3,
+          radius: 2,
           lineWidth: 2, // in pixels
           fill: false,
           fillColor: null,
@@ -334,7 +332,7 @@ define(function(require) {
           symbol: "line",
         },
         yaxis: {
-          axisLabel: ""
+
         },
         shadowSize: 3,
         points: {
@@ -399,7 +397,7 @@ define(function(require) {
       // }else{
      //    desCoe = 0;
      //  }
-        number = Math.round(number);
+            number = Math.ceil(number);
         return number*Math.pow(10,desExpDegree);
     },
     exponentialDegree: function(value){
@@ -415,6 +413,7 @@ define(function(require) {
         var coe = parseFloat(a);
         coe = Math.round(coe);
         return coe;
-    }
+        },
+
   };
 });

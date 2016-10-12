@@ -163,7 +163,7 @@ abstract class TableManager implements TableManagerInterface {
 		$errorbar = $stationDataParams["errorbar"];
 		$query = $stationDataParams["query"];
 		//Add select data code from query. Add in this tableManager to apply all data.
-		$temp =  "select a." . $this->data_code ." as data_code, cc_id, cc_id2, cc_id3,";
+		$temp =  "select a." . $this->data_code ." as data_code, cc_id, cc_id2, cc_id3, cb_ids,";
 
 		 $query = str_replace("select",$temp ,$query);
 
@@ -232,11 +232,12 @@ abstract class TableManager implements TableManagerInterface {
 			$cc_ids[0] = $row["cc_id"];
 			$cc_ids[1] = $row["cc_id2"];
 			$cc_ids[2]= $row["cc_id3"];
+			$cb_ids  = $row["cb_ids"];
 			//echo $cc_ids[2];
 			$dataOwner = $this->getCCUrl($cc_ids);
 			$temp["data_owner"] = $dataOwner;
 
-			$reference =  $this->getDataReference($cc_ids);
+			$reference =  $this->getDataReference($cb_ids);
 			$temp["reference"] = $reference;
 			array_push($data, $temp );			
 		}
@@ -257,7 +258,7 @@ abstract class TableManager implements TableManagerInterface {
 		foreach ($cc_ids as $cc_id) {
 
 			if ($cc_id != null) {
-				$query1_2 = mysql_query("select cc_code,cc_url, cc_email from cc where cc_id='" . $cc_id . "'");
+				$query1_2 = mysql_query("select cc_code,cc_url, cc_email from cc where cc_id=" . $cc_id);
 				$result1_2 = mysql_fetch_array($query1_2);
 				if ($result1_2[0] != null) {
 					array_push($dataOwners, $result1_2[0]);
@@ -276,27 +277,13 @@ abstract class TableManager implements TableManagerInterface {
 	 *
 	 * Get reference of data (cb)
 	 */
-	private function getDataReference($cc_ids) {
+	private function getDataReference($cb_ids) {
 
-
-		foreach ($cc_ids as $cc_id) {
-			if ($cc_id != null) {
-				$query1 = mysql_query("select cb_auth,cb_year from cb where cc_id_load='" . $cc_id . "'");
-				$object = "";
-				$result1 = mysql_fetch_array($query1);
-				if ($result1 !== false) {
-					$cb_auth = $result1[0];
-					$cb_year = $result1[1];
-					$cb_auths  = str_split($cb_auth,",");
-					if (str_length($cb_auths) > 1){
-						$cb_auth = $cb_auths[0] + ", et al.";
-					}
-					$object =  $cb_auth + "," + $cb_year;
-				}
+			if ($cb_ids != null) {
+				$query = mysql_query("select cb_auth,cb_url from cb where cb_id=" . $cb_ids);
+				$result = mysql_fetch_array($query);
+				return $result;
 			}
-		}
-
-
-		return $object;
+		return array();
 	}
 } 

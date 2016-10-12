@@ -55,24 +55,11 @@ define(function(require) {
       // console.log(selectingTimeRange);
       var selectedMinX = selectingTimeRange.get('selectedMinX');
       var selectedMaxX = selectingTimeRange.get('selectedMaxX');
-      var minX;
-      var maxX;
-      //set the boundary for the selected region
-      if(selectedMinX<this.minX){
-        minX = this.minX;
-      }else{
-        minX = selectedMinX;
-      }
-      if(selectedMaxX>this.maxX){
-        maxX = this.maxX;
-      }else{
-        maxX = selectedMaxX;
-      }
-      // console.log(this.timeRange);
+
       this.graph.setSelection({
         xaxis: {
-          from: minX,
-          to: maxX,
+          from: selectedMinX,
+          to: selectedMaxX,
         }
       })
     },
@@ -90,6 +77,13 @@ define(function(require) {
     },
     render: function() {
       // this.showLoading();
+      if(this.initialDataMinTime != undefined){
+        this.minX = this.initialDataMinTime;
+      }
+      if(this.initialDataMaxTime != undefined){
+        this.maxX = this.initialDataMaxTime;
+      }
+
       var options = {
         grid:{
           // margin: 20,
@@ -167,7 +161,7 @@ define(function(require) {
 
       //this.$el.bind('plotselected', this.selectingTimeRange, this.onSelect);
       this.$el.bind('plotselected', eventData, this.onSelect);
-
+      this.initialDataMinTime = this.initialDataMaxTime = undefined;
     },
 
     update: function() {

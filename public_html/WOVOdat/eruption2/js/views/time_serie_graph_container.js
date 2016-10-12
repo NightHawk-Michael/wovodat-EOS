@@ -16,7 +16,8 @@ define(function(require) {
     events: {
       'click .select_time_range': 'onCheckboxChanged',
       'click .gen-pdf' : 'generatePDF',
-      'click .gen-csv' : 'generateCSV',
+      'click .gen-csv' : 'popUpInfoForm',
+     // 'click .gen-csv' : 'generateCSV',
       'click .stack-graph-btn' : 'generateStackGraph',
       'click .composite-graph-btn' : 'generateCompositeGraph',
       'click .toggle-error-bar' : 'toggleErrorBar'
@@ -40,7 +41,113 @@ define(function(require) {
       this.isErrorBar = false;
 
     },
+    submitDownloadForm : function(id, element) {
+      var name = document.getElementById('name' + id).value.trim();
+      var email = document.getElementById('email_id' + id).value.trim();
+      var phone = document.getElementById('phone' + id).value.trim();
+      var rec = document.getElementById('requirement' + id).value.trim();
+      var atpos = email.indexOf("@");
+      var dotpos = email.lastIndexOf(".");
+      if (name === "") {
+        alert('Enter Your Name for Enquiry!');
+        document.getElementById('name' + id).focus();
+        hs.close(element);
+        return false;
+      }
+      if (email == "") {
+        alert('Enter Your Mail Id for Enquiry!');
+        document.getElementById('email_id' + id).focus();
+        hs.close(element);
+        return false;
+      }
+      if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length) {
+        alert("Not a valid e-mail address");
+        hs.close(element);
+        return false;
+      }
+      var form = document.createElement("form");
+      form.setAttribute("type", "hidden");
+      form.setAttribute("name", "download");
+      form.setAttribute("id", "download");
+      form.setAttribute("method", "post");
+      form.setAttribute("action", "download-single");
+      var input = document.createElement("input");
+      input2.setAttribute("type", "hidden");
+      input2.setAttribute("name", "id");
+      input2.setAttribute("value", id);
+      var input2 = document.createElement("input");
+      input2.setAttribute("type", "hidden");
+      input2.setAttribute("name", "name");
+      input2.setAttribute("value", name);
+      var input3 = document.createElement("input");
+      input3.setAttribute("type", "hidden");
+      input3.setAttribute("name", "email");
+      input3.setAttribute("value", email);
+      var input4 = document.createElement("input");
+      input4.setAttribute("type", "hidden");
+      input4.setAttribute("name", "phone");
+      input4.setAttribute("value", phone);
+      var input5 = document.createElement("input");
+      input5.setAttribute("type", "hidden");
+      input5.setAttribute("name", "rec");
+      input5.setAttribute("value", rec);
+      document.getElementById("download").appendChild(input);
+      document.getElementById("download").appendChild(input2);
+      document.getElementById("download").appendChild(input3);
+      document.getElementById("download").appendChild(input4);
+      document.getElementById("download").appendChild(input5);
+      document.getElementById("download").submit();
 
+    },
+    enquiry_submit_validate : function(id, element) {
+      var frm = document.getElementById('frm' + id);
+      var name = document.getElementById('name' + id).value.trim();
+      var email_id = document.getElementById('email_id' + id).value.trim();
+      var atpos = email_id.indexOf("@");
+      var dotpos = email_id.lastIndexOf(".");
+      if (name == "") {
+        alert('Enter Your Name for Enquiry!');
+        document.getElementById('name' + id).focus();
+        return false;
+      }
+
+      if (email_id == "") {
+        alert('Enter Your Mail Id for Enquiry!');
+        document.getElementById('email_id' + id).focus();
+        return false;
+      }
+      if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email_id.length) {
+        alert("Not a valid e-mail address");
+        return false;
+      }
+      hs.close(element);
+      return true;
+    },
+    /**
+     * Display a pop up to make user fill in their information
+     */
+    popUpInfoForm : function(){
+      return hs.htmlExpand(this)
+      var forTemplate = "<div class=\"highslide-maincontent\">" +
+          "<table style=\"width:100%; taxt-align:left;\">" +
+          "<tr style=\"display:none;\"><th></th></tr>" +
+          "<tbody><tr><td>"
+      "<table>"
+      "<tr style=\"\"><th><br></th></tr>" +
+      "<tr><td style=\"color:#333333; color:#333333; font-family:Oxygen-Bold,Verdana, Arial, Helvetica, sans-serif; font-size:14px; margin-bottom:10px; text-align:center;\" colspan=\"2\" >Please provide information before starting data download. </td></tr>" +
+      "<tr><td style=\"color:#333333; font-family:Oxygen-Bold,Verdana, Arial, Helvetica, sans-serif; font-size:12px;\">Name<span style=\"color:#FF0000\">*</span>  :</td><td><input name=\"name\"  maxlength=\"150\" style=\"width: 190px;margin-bottom:3px; margin-top: 5px;\" type=\"text\" title=\"Name\"></td></tr>" +
+      "<tr><td style=\"color:#333333; font-family:Oxygen-Bold, Verdana, Arial, Helvetica, sans-serif; font-size:12px;\">E-Mail<span style=\"color:#FF0000\">*</span>  :</td><td><input name=\"email_id\"  maxlength=\"250\" style=\"width: 190px; margin-bottom:3px;\" type=\"text\" title=\"Email\"></td></tr>" +
+      "<tr><td style=\"color:#333333; font-family:Oxygen-Bold, Verdana, Arial, Helvetica, sans-serif; font-size:12px;\">Institution/Observatory:</td><td><input  name=\"institute\" maxlength=\"150\" style=\"width: 190px; margin-bottom:3px;\" type=\"text\" title=\"Institution/Observatory\"></td></tr>" +
+      "<tr><td style=\"color:#333333; font-family:Oxygen-Bold,Verdana, Arial, Helvetica, sans-serif; font-size:12px;\">I agree to WOVOdat Data Policy</td><td><input type = \"checkbox\" name = \"agree\" value = \"acceptData\" style=\"width: 190px; margin-bottom:3px;\"</input></td></tr>" +
+      "<tr><td>&nbsp;</td>" +
+      "<td style=\"vertical-align:top;\">" +
+      "<table>"
+      "<tr style=\"display:none;\"><th></th></tr>" +
+      "<tr><td><input name=\"submit\" id=\"submit\" value=\"Submit\"  onclick=\"javascript:submitDownloadData(this);\" onkeypress=\"javascript:submitDownloadData(this);\" ></td></tr></tbody></table>" +
+      "</td></tr></tbody></table>" +
+      "</td></tr>" +
+      "</tbody></table></div>";
+    },
       /**
        * Toggle Error bar on individual graph
        */
@@ -61,7 +168,6 @@ define(function(require) {
     generateCSV : function (){
       var listContent = [];
       if (this.checkedTimeRangeFilter.length == 0) return;
-      console.log (this.checkedTimeRangeFilter);
       for (var i = 0; i < this.checkedTimeRangeFilter.length; i++){
         var content =[];
         var stationName =  this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.station_code1;
@@ -72,20 +178,32 @@ define(function(require) {
         var data = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.data.data;
         for (var p = 0 ; p  < data.length; p++){
           if (data[p].filter != filterName) continue;
-          var time =  data[p].time;
-          if (time == undefined) time = data[p].stime;
+          var stime =  data[p].time;
+          var etime = 0;
+          if (stime == undefined) {
+            stime = data[p].stime;
+            etime = data[p].etime;
+          }
           var value = data[p].value;
           var dataOwner  =   data[p].data_owner.join(",");
           var dataCode = data[p].data_code;
           var uncertainty = data[p].error;
           if (uncertainty == undefined) uncertainty = "";
-          var dateTime = new Date(time);
-          var dateStr = dateTime.getDate() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getFullYear() + " " + dateTime.getHours() + ":" + dateTime.getMinutes() + ":" +  dateTime.getSeconds();
-          if (time >= this.serieGraphTimeRange.attributes.startTime && time <= this.serieGraphTimeRange.attributes.endTime){
+          var startDateTime = new Date(stime);
+          var dateStartStr = startDateTime.getDate() + "-" + (startDateTime.getMonth()+1) + "-" + startDateTime.getFullYear() + " " + startDateTime.getHours() + ":" + startDateTime.getMinutes() + ":" +  startDateTime.getSeconds();
+          var dateEndStr = "";
+          if (etime != 0){
+            var endDateTime = new Date(etime);
+            dateEndStr = endDateTime.getDate() + "-" + (endDateTime.getMonth()+1) + "-" + endDateTime.getFullYear() + " " + endDateTime.getHours() + ":" + endDateTime.getMinutes() + ":" +  endDateTime.getSeconds();
+          }
+
+
+          if (stime >= this.serieGraphTimeRange.attributes.startTime && etime <= this.serieGraphTimeRange.attributes.endTime){
             //console.log (value);
             var d = {
               showName: showingName,
-              time: dateStr,
+              stime: dateStartStr,
+              etime: dateEndStr,
               value : value,
               uncertainty : uncertainty,
               stationName : stationName,
@@ -102,7 +220,7 @@ define(function(require) {
 
       if (this.data == undefined) return;
 
-      var headers = ['Volcano Name', 'Station/Seismic Network Name', 'Date time', 'Code of data',
+      var headers = ['Volcano Name', 'Station/Seismic Network Name', 'Start time','End time',  'Code of data',
         'Data','Data-uncertainty', 'Data Owner'];
       //var z = new Zip();
       //console.log(z);
@@ -117,7 +235,7 @@ define(function(require) {
         for (var p = 0 ; p < content.length; p++){
           total++;
           var d = content[p];
-          dataString += d.volcanoName + ",\"" + d.stationName + "\",\"" + d.time + "\",\"" + d.dataCode + " \",\"" + d.value + "\",\""
+          dataString += d.volcanoName + ",\"" + d.stationName + "\",\"" + d.stime + "\",\"" + d.etime + "\", \"" + d.dataCode + " \",\"" + d.value + "\",\""
               + d.uncertainty + "\",\"" + d.dataOwner + " \"\n";
         }
 
@@ -350,12 +468,23 @@ define(function(require) {
         this.graphs[i].show();
         var cc_code = this.filters[i].timeSerie.attributes.data.data[0].data_owner[0];
         var dataOwnerVal = this.filters[i].timeSerie.attributes.data.data[0].data_owner[1];
-        var dataOwner = "<div><a href = \"" + dataOwnerVal + "\"style = \"font-size: 10px;color: black;padding-left: " + padding_left/4*3 +"px; right:0px; \"> " + cc_code + "</a></div>";
+        var reference_code =  this.filters[i].timeSerie.attributes.data.data[0].reference[0];
+        var reference_val =  this.filters[i].timeSerie.attributes.data.data[0].reference[1];
+
+
+        var dataOwner = "<div>" +
+            "<a href = \"" + dataOwnerVal + "\" target=\"_blank\" style = \"font-size: 10px;color: black;padding-left: " + padding_left/4*3 +"px; right:0px; \"> " + cc_code + "</a> " +
+            "- <a href = \"" + reference_val + "\" target=\"_blank\" style = \"font-size: 10px;color: black; right:0px; \"> " + reference_code + "</a>" +
+            "</div>";
         this.$el.append(dataOwner);
 
         // this.graphs[i].draw();
 
       }
+
+      /*
+       * Add form for user to fill in when user want to download csv
+       */
 
       var button = "<a > <input style = \"background-color:grey; padding:2px 10px 2px 10px; \" class = \"waves-effect waves-light stack-graph-btn btn \"  type=\"button\" value = \"Stacked Graph (no limit)\" /> <label ></label> </a>";
       button += "<a > <input style = \" background-color:grey; padding:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light composite-graph-btn btn\"  type=\"button\" value = \"Composite Graph (max 5 graphs)\"/> <label ></label> </a>";
