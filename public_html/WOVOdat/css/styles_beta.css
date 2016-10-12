@@ -765,6 +765,7 @@ a.active.trigger {
     height: 260px;
     font-size: 9px;
     margin-top: 15px;
+    margin-left: 10px;
     position: relative;
 }
 
@@ -791,7 +792,7 @@ a.active.trigger {
     display: none;
 }
 .volcanoPanel{
-    width:513px;
+    width:540px;
     vertical-align: top;
     display: block;
 }

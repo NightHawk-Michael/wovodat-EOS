@@ -33,6 +33,7 @@ $cache = time();
     <script type="text/javascript" src="/js/flot/jquery.flot.errorbars.js"></script>  
     <script type="text/javascript" src="/js/flot/jquery.flot.labels.js"></script>
     <script type="text/javascript" src="/js/flot/jquery.flot.symbol.js"></script> 
+    <script type="text/javascript" src="/js/flot/jquery.flot.axislabels.js"></script> 
     <script type="text/javascript" src="/js/wovodat.js?<?php echo $cache; ?>"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCQ9kUvUtmawmFJ62hWVsigWFTh3CKUzzM&sensor=false"></script>
     <script type="text/javascript" src="/js/Tooltip_v3.js"></script>
@@ -208,6 +209,7 @@ $cache = time();
                               <option value="3000">3000</option>
                               <option value="4000">4000</option>
                               <option value="5000">5000</option>
+                              <option value="All">All</option>
                             </select>
                           </div>
                         </div>
@@ -356,14 +358,20 @@ $cache = time();
                             <div class="leftPanel" id="eqEvent1"></div>
                             <div class="leftPanel" id="owner1"></div>
                           </div>
+                          <div class="plot-label-left">
+                            <b>S</b>
+                          </div>
                           <div class="plot-label">
-                            <b>E-W</b>
+                            <b>N</b>
                           </div>
                           <div id="FlotDisplayLat1" class="equakeGraphPlaceholder_v6">
 
                           </div>
+                          <div class="plot-label-left">
+                            <b>W</b>
+                          </div>
                           <div class="plot-label">
-                            <b>N-S</b>
+                            <b>E</b>
                           </div>
                           <div id="FlotDisplayLon1" class="equakeGraphPlaceholder_v6">
                           </div>

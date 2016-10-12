@@ -341,7 +341,7 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 				eqTypeSet.add(type);
 			// store the quake data in the earthquakes[cavw] object
 			var result = Wovodat.calculateD(lat, lon, vlat, vlon);
-
+			console.log(result);
 			earthquakes[cavw][index]=[];
 			earthquakes[cavw][index]['eqtype'] = type;
 			earthquakes[cavw][index]['lat']=lat;
@@ -1371,7 +1371,7 @@ $(document).ready(function(){
 	$("#CompVolcanoList").change(function(){
 		totalGraph[2]=0;
 		graphCount[2]=[];
-
+		
 		delete(tooltips[2]);
 		tooltips[2] = [];
 
