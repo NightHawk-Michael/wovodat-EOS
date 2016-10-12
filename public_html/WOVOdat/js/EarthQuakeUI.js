@@ -394,7 +394,9 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 		var nEvent = $('#Evn' + mapUsed).val();
 		//console.log(earthquakes[cavw]);
 		for (var i in earthquakes[cavw]){
-			if(count > nEvent) break;
+			if(!isNaN(nEvent) && count > nEvent){
+				break;
+			} 
 			if(earthquakes[cavw][i]!=undefined){
 				if (earthquakes[cavw][i]['available'] == 2 && filter(cavw,mapUsed,i)){
 					marker = createMarker(earthquakes[cavw][i],mapUsed);
@@ -619,6 +621,7 @@ function displayEvent(cavw,mapUsed){
 function plotEarthquakeData(cavw, mapUsed){
 	var isFilter = $("#FormFilter" + mapUsed).css('display') != 'none';
 	var numberOfEarthquakes = parseInt(document.getElementById('Evn' + mapUsed).value);
+	console.log(numberOfEarthquakes);
 	var dHigh = parseFloat($("#DepthHigh"+mapUsed).val());
 	var dLow = parseFloat($("#DepthLow"+mapUsed).val());
 
@@ -643,6 +646,8 @@ function plotEarthquakeData(cavw, mapUsed){
 	// flot graph. Flot is for 2D javascript drawing
 
 	var CONSTANTS = {
+		'labelLeftWidth' : '10px',
+		graphMarginLeft: '10px',
 		fontSize: '9px',
 		labelHeight: '70px',
 		labelWidth: '45px',
@@ -895,7 +900,7 @@ function plotEarthquakeData(cavw, mapUsed){
 		{ data:timeArray, points:timeSeriesPoint },
 		{ color:'red', data:eruptionArray, points:timeSeriesEruptionPoint, 
 			showLabels: true, labels: eruptionPointLabels, labelPlacement: "right", 
-			canvasRender: true, cColor: "red" }
+			canvasRender: true, cColor: "red"}
 	];
 
 	console.log('time-series plot');
@@ -906,6 +911,9 @@ function plotEarthquakeData(cavw, mapUsed){
 	var minY = minYAxis(latArray);
 	// Options for drawing time view. 
 	var timeOptions = {
+		axisLabels: {
+            show: true
+        },
 		series:{
 			points:{
 				show:true,
@@ -923,6 +931,9 @@ function plotEarthquakeData(cavw, mapUsed){
 			autoHighlight:true
 		},
 		yaxis:{
+			axisLabel: 'depth(km)',
+            axisLabelUseCanvas: true,
+			axisLabelFontSizePixels : 11,
 			tickFormatter: kmFormatter,
 			tickSize: (dHigh - dLow)/5.0,
 			min: -dHigh,
@@ -930,6 +941,11 @@ function plotEarthquakeData(cavw, mapUsed){
 			//labelWidth:40
 		},
 		xaxis:{
+			axisLabel: 'time',
+			axisLabelPadding: 10,
+            axisLabelUseCanvas: true,
+			axisLabelFontSizePixels : 11,
+			labelWidth:40,
 			mode: "time",
 			min: (isFilter ? parseDateVal($("#SDate"+mapUsed).val()) : min_time),
 			max: max_time		
@@ -979,7 +995,13 @@ function plotEarthquakeData(cavw, mapUsed){
 			hoverable:true,
 			autoHighlight:true
 		},
+		axisLabels: {
+            show: true
+        },
 		yaxis:{
+			axisLabel: 'depth(km)',
+            axisLabelUseCanvas: true,
+			axisLabelFontSizePixels : 11,
 			tickFormatter : kmFormatter,
 			tickSize: (dHigh - dLow)/5.0,
 			min: -dHigh,
@@ -1036,6 +1058,24 @@ function plotEarthquakeData(cavw, mapUsed){
 	// draw the time series map        
 	var timePlotArea =$("#FlotDisplayTime"+mapUsed);
 	equakeGraphs[mapUsed].timeGraph = $.plot(timePlotArea,timePlot,timeOptions);
+	//Keep the label of markings always middle of y axis
+	$("#FlotDisplayTime" + mapUsed).bind("plotpan plotzoom", function(event){
+		var options = equakeGraphs[mapUsed].timeGraph.getOptions();
+		var max = options.yaxes[0].max;
+		var min = options.yaxes[0].min;
+		var yCoor = (max + min)/2;
+		var data = equakeGraphs[mapUsed].timeGraph.getData();
+		data.pop();
+		for(var i = 0; i < eruptionArray.length; i++){
+			eruptionArray[i][1] = yCoor;
+		}
+		data.push({ color:'red', data:eruptionArray, points:timeSeriesEruptionPoint, 
+			showLabels: true, labels: eruptionPointLabels, labelPlacement: "right", 
+			canvasRender: true, cColor: "red"})
+		equakeGraphs[mapUsed].timeGraph.setData(data);
+		equakeGraphs[mapUsed].timeGraph.setupGrid();  // if axis have changed
+ 		equakeGraphs[mapUsed].timeGraph.draw();
+	})
 
 	Wovodat.enableTooltip({type:'single',
 		timeSeries:'true',
@@ -1049,11 +1089,23 @@ function plotEarthquakeData(cavw, mapUsed){
 	});
 	
 	// adjust the flot label for all the graph ('E-W','N-S','Time')
+	$('.equakeGraphPlaceholder').css({
+		'margin-left' : CONSTANTS.graphMarginLeft
+	});
 	$('.plot-label').css({
 		'float': 'right',
 		'display': 'block-inline',
 		'height': CONSTANTS.labelHeight,
 		'width': CONSTANTS.labelWidth,
+		'font-size': CONSTANTS.labelFontSize,
+		'vertical-align': 'middle',
+		'padding-top': CONSTANTS.labelPaddingTop,
+	});
+	$('.plot-label-left').css({
+		'float': 'left',
+		'display': 'block-inline',
+		'height': CONSTANTS.labelHeight,
+		'width': CONSTANTS.labelLeftWidth,
 		'font-size': CONSTANTS.labelFontSize,
 		'vertical-align': 'middle',
 		'padding-top': CONSTANTS.labelPaddingTop

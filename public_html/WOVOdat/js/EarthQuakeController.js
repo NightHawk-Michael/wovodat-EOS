@@ -597,7 +597,11 @@ function downloadCSV(o){
 	var link = document.createElement("a");
 	link.setAttribute("href", encodedUri);
 	link.setAttribute("download", "my_data.csv");
-
-	link.click(); 
+	var clickEvent = new MouseEvent("click", {
+    	"view": window,
+    	"bubbles": true,
+    	"cancelable": false
+	});
+	link.dispatchEvent(clickEvent); 
 }
 

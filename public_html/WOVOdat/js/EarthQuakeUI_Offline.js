@@ -341,7 +341,7 @@ function insertMarkersForEarthquakes(data,cavw,mapUsed){
 				eqTypeSet.add(type);
 			// store the quake data in the earthquakes[cavw] object
 			var result = Wovodat.calculateD(lat, lon, vlat, vlon);
-
+			console.log(result);
 			earthquakes[cavw][index]=[];
 			earthquakes[cavw][index]['eqtype'] = type;
 			earthquakes[cavw][index]['lat']=lat;
@@ -1039,6 +1039,24 @@ function plotEarthquakeData(cavw, mapUsed){
 	// draw the time series map        
 	var timePlotArea =$("#FlotDisplayTime"+mapUsed);
 	equakeGraphs[mapUsed].timeGraph = $.plot(timePlotArea,timePlot,timeOptions);
+	//Keep the label of markings always middle of y axis
+	$("#FlotDisplayTime" + mapUsed).bind("plotpan plotzoom", function(event){
+		var options = equakeGraphs[mapUsed].timeGraph.getOptions();
+		var max = options.yaxes[0].max;
+		var min = options.yaxes[0].min;
+		var yCoor = (max + min)/2;
+		var data = equakeGraphs[mapUsed].timeGraph.getData();
+		data.pop();
+		for(var i = 0; i < eruptionArray.length; i++){
+			eruptionArray[i][1] = yCoor;
+		}
+		data.push({ color:'red', data:eruptionArray, points:timeSeriesEruptionPoint, 
+			showLabels: true, labels: eruptionPointLabels, labelPlacement: "right", 
+			canvasRender: true, cColor: "red"})
+		equakeGraphs[mapUsed].timeGraph.setData(data);
+		equakeGraphs[mapUsed].timeGraph.setupGrid();  // if axis have changed
+ 		equakeGraphs[mapUsed].timeGraph.draw();
+	})
 
 	Wovodat.enableTooltip({type:'single',
 		timeSeries:'true',
@@ -1371,7 +1389,7 @@ $(document).ready(function(){
 	$("#CompVolcanoList").change(function(){
 		totalGraph[2]=0;
 		graphCount[2]=[];
-
+		
 		delete(tooltips[2]);
 		tooltips[2] = [];
 

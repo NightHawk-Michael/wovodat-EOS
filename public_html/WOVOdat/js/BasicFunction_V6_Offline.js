@@ -942,7 +942,9 @@ function drawMap(args, volcId, mapId, mapUsed, zoom_level){
 		link += ",Wovodat:GSHHS_f_L1";
 	}
 
-	link += "&styles=&bbox="+min_lon+","+min_lat+","+max_lon+","+max_lat+"&width=950&height=950&srs=EPSG:404000&format=image/png";
+	var mapWidth = $("#mapCanvas" + mapUsed).width();
+	var mapHeight = $("#mapCanvas" + mapUsed).height();
+	link += "&styles=&bbox="+min_lon+","+min_lat+","+max_lon+","+max_lat+"&width=" + mapWidth + "&height=" + mapHeight + "&srs=EPSG:404000&format=image/png";
 
 	baseMap.src = link;
 	pin.src = "/img/pin_volcano_selected-org.png";
