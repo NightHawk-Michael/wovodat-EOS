@@ -1039,6 +1039,24 @@ function plotEarthquakeData(cavw, mapUsed){
 	// draw the time series map        
 	var timePlotArea =$("#FlotDisplayTime"+mapUsed);
 	equakeGraphs[mapUsed].timeGraph = $.plot(timePlotArea,timePlot,timeOptions);
+	//Keep the label of markings always middle of y axis
+	$("#FlotDisplayTime" + mapUsed).bind("plotpan plotzoom", function(event){
+		var options = equakeGraphs[mapUsed].timeGraph.getOptions();
+		var max = options.yaxes[0].max;
+		var min = options.yaxes[0].min;
+		var yCoor = (max + min)/2;
+		var data = equakeGraphs[mapUsed].timeGraph.getData();
+		data.pop();
+		for(var i = 0; i < eruptionArray.length; i++){
+			eruptionArray[i][1] = yCoor;
+		}
+		data.push({ color:'red', data:eruptionArray, points:timeSeriesEruptionPoint, 
+			showLabels: true, labels: eruptionPointLabels, labelPlacement: "right", 
+			canvasRender: true, cColor: "red"})
+		equakeGraphs[mapUsed].timeGraph.setData(data);
+		equakeGraphs[mapUsed].timeGraph.setupGrid();  // if axis have changed
+ 		equakeGraphs[mapUsed].timeGraph.draw();
+	})
 
 	Wovodat.enableTooltip({type:'single',
 		timeSeries:'true',
