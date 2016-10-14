@@ -3,8 +3,10 @@ define(function(require) {
 	var $ = require('jquery'),
   Backbone = require('backbone'),
         JSZip = require('jszip'),
+        hs  = require ('highslide'),
         //fs = require('vendor/zip/dist/FileSaver'),
         template = require('text!templates/time_serie_graph.html'),
+        form_submit = require('text!templates/submit_info_form.html'),
   _ = require('underscore');
 
   var TimeSerieGraph = require("views/time_serie_graph");
@@ -13,14 +15,15 @@ define(function(require) {
   return Backbone.View.extend({
   	el: '',
     template: _.template(template),
+    submitform: _.template(form_submit),
     events: {
       'click .select_time_range': 'onCheckboxChanged',
       'click .gen-pdf' : 'generatePDF',
       'click .gen-csv' : 'popUpInfoForm',
-     // 'click .gen-csv' : 'generateCSV',
       'click .stack-graph-btn' : 'generateStackGraph',
       'click .composite-graph-btn' : 'generateCompositeGraph',
-      'click .toggle-error-bar' : 'toggleErrorBar'
+      'click .toggle-error-bar' : 'toggleErrorBar',
+      'click .submit-form' : 'submitDownloadForm'
 
     },
   	initialize : function(options) {
@@ -39,115 +42,65 @@ define(function(require) {
   		this.graphs = [];
       this.checkedTimeRangeFilter = [];
       this.isErrorBar = false;
+      //hs.graphicsDir = '/highslide/graphics/';
 
     },
-    submitDownloadForm : function(id, element) {
-      var name = document.getElementById('name' + id).value.trim();
-      var email = document.getElementById('email_id' + id).value.trim();
-      var phone = document.getElementById('phone' + id).value.trim();
-      var rec = document.getElementById('requirement' + id).value.trim();
+    submitDownloadForm : function() {
+      var name = document.getElementById('name').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var institution = document.getElementById('institution').value.trim();
+      var filterName =  this.checkedTimeRangeFilter[0].filters.filterAttributes[0].name;
+      var volcanoName = this.checkedTimeRangeFilter[0].filters.timeSerie.attributes.volcanoName;
+      var dataType = this.checkedTimeRangeFilter[0].filters.timeSerie.attributes.component +" (" + filterName + ")";
+      var agreeTerm = $("#agree-term")[0].checked;
       var atpos = email.indexOf("@");
       var dotpos = email.lastIndexOf(".");
       if (name === "") {
-        alert('Enter Your Name for Enquiry!');
-        document.getElementById('name' + id).focus();
-        hs.close(element);
+        return false;
+      }
+      if (institution === "") {
         return false;
       }
       if (email == "") {
-        alert('Enter Your Mail Id for Enquiry!');
-        document.getElementById('email_id' + id).focus();
-        hs.close(element);
         return false;
       }
       if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length) {
-        alert("Not a valid e-mail address");
-        hs.close(element);
         return false;
       }
-      var form = document.createElement("form");
-      form.setAttribute("type", "hidden");
-      form.setAttribute("name", "download");
-      form.setAttribute("id", "download");
-      form.setAttribute("method", "post");
-      form.setAttribute("action", "download-single");
-      var input = document.createElement("input");
-      input2.setAttribute("type", "hidden");
-      input2.setAttribute("name", "id");
-      input2.setAttribute("value", id);
-      var input2 = document.createElement("input");
-      input2.setAttribute("type", "hidden");
-      input2.setAttribute("name", "name");
-      input2.setAttribute("value", name);
-      var input3 = document.createElement("input");
-      input3.setAttribute("type", "hidden");
-      input3.setAttribute("name", "email");
-      input3.setAttribute("value", email);
-      var input4 = document.createElement("input");
-      input4.setAttribute("type", "hidden");
-      input4.setAttribute("name", "phone");
-      input4.setAttribute("value", phone);
-      var input5 = document.createElement("input");
-      input5.setAttribute("type", "hidden");
-      input5.setAttribute("name", "rec");
-      input5.setAttribute("value", rec);
-      document.getElementById("download").appendChild(input);
-      document.getElementById("download").appendChild(input2);
-      document.getElementById("download").appendChild(input3);
-      document.getElementById("download").appendChild(input4);
-      document.getElementById("download").appendChild(input5);
-      document.getElementById("download").submit();
+      if (!agreeTerm){
+        return false;
+      }
+      var data = {
+        data : "add_user",
+        id : new Date(),
+        name : name,
+        email : email,
+        institution: institution,
+        vd_name : volcanoName,
+        dataType  : dataType
+
+      }
+      this.generateCSV();
+      $.get("/eruption2/api/?data=add_user", data );
+      $('#formPopup').closeModal();
+
+      //document.getElementById("download").appendChild(input);
+      //document.getElementById("download").submit();
 
     },
-    enquiry_submit_validate : function(id, element) {
-      var frm = document.getElementById('frm' + id);
-      var name = document.getElementById('name' + id).value.trim();
-      var email_id = document.getElementById('email_id' + id).value.trim();
-      var atpos = email_id.indexOf("@");
-      var dotpos = email_id.lastIndexOf(".");
-      if (name == "") {
-        alert('Enter Your Name for Enquiry!');
-        document.getElementById('name' + id).focus();
-        return false;
-      }
 
-      if (email_id == "") {
-        alert('Enter Your Mail Id for Enquiry!');
-        document.getElementById('email_id' + id).focus();
-        return false;
-      }
-      if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email_id.length) {
-        alert("Not a valid e-mail address");
-        return false;
-      }
-      hs.close(element);
-      return true;
-    },
+
+
+
+
     /**
      * Display a pop up to make user fill in their information
+     * If user have been keyed in information, just donwload, no popup
      */
     popUpInfoForm : function(){
-      return hs.htmlExpand(this)
-      var forTemplate = "<div class=\"highslide-maincontent\">" +
-          "<table style=\"width:100%; taxt-align:left;\">" +
-          "<tr style=\"display:none;\"><th></th></tr>" +
-          "<tbody><tr><td>"
-      "<table>"
-      "<tr style=\"\"><th><br></th></tr>" +
-      "<tr><td style=\"color:#333333; color:#333333; font-family:Oxygen-Bold,Verdana, Arial, Helvetica, sans-serif; font-size:14px; margin-bottom:10px; text-align:center;\" colspan=\"2\" >Please provide information before starting data download. </td></tr>" +
-      "<tr><td style=\"color:#333333; font-family:Oxygen-Bold,Verdana, Arial, Helvetica, sans-serif; font-size:12px;\">Name<span style=\"color:#FF0000\">*</span>  :</td><td><input name=\"name\"  maxlength=\"150\" style=\"width: 190px;margin-bottom:3px; margin-top: 5px;\" type=\"text\" title=\"Name\"></td></tr>" +
-      "<tr><td style=\"color:#333333; font-family:Oxygen-Bold, Verdana, Arial, Helvetica, sans-serif; font-size:12px;\">E-Mail<span style=\"color:#FF0000\">*</span>  :</td><td><input name=\"email_id\"  maxlength=\"250\" style=\"width: 190px; margin-bottom:3px;\" type=\"text\" title=\"Email\"></td></tr>" +
-      "<tr><td style=\"color:#333333; font-family:Oxygen-Bold, Verdana, Arial, Helvetica, sans-serif; font-size:12px;\">Institution/Observatory:</td><td><input  name=\"institute\" maxlength=\"150\" style=\"width: 190px; margin-bottom:3px;\" type=\"text\" title=\"Institution/Observatory\"></td></tr>" +
-      "<tr><td style=\"color:#333333; font-family:Oxygen-Bold,Verdana, Arial, Helvetica, sans-serif; font-size:12px;\">I agree to WOVOdat Data Policy</td><td><input type = \"checkbox\" name = \"agree\" value = \"acceptData\" style=\"width: 190px; margin-bottom:3px;\"</input></td></tr>" +
-      "<tr><td>&nbsp;</td>" +
-      "<td style=\"vertical-align:top;\">" +
-      "<table>"
-      "<tr style=\"display:none;\"><th></th></tr>" +
-      "<tr><td><input name=\"submit\" id=\"submit\" value=\"Submit\"  onclick=\"javascript:submitDownloadData(this);\" onkeypress=\"javascript:submitDownloadData(this);\" ></td></tr></tbody></table>" +
-      "</td></tr></tbody></table>" +
-      "</td></tr>" +
-      "</tbody></table></div>";
+      $('#formPopup').openModal();
     },
+
       /**
        * Toggle Error bar on individual graph
        */
@@ -174,42 +127,46 @@ define(function(require) {
         var volcanoName = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.volcanoName;
         var showingName = this.checkedTimeRangeFilter[i].data[0].label;
         var filterName =  this.checkedTimeRangeFilter[i].filters.filterAttributes[0].name;
+        var network =  this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.short_data_type;
+        var monitoringData = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.component +" (" + filterName + ")";
+
+
 
         var data = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.data.data;
         for (var p = 0 ; p  < data.length; p++){
           if (data[p].filter != filterName) continue;
-          var stime =  data[p].time;
-          var etime = 0;
-          if (stime == undefined) {
-            stime = data[p].stime;
-            etime = data[p].etime;
+          var startTimeStr;
+          var endTimeStr;
+          var startTime
+          var dateFormat = {year: "numeric", month: "short",
+            day: "numeric", hour: "2-digit", minute: "2-digit"}
+          if(data[p].time != undefined){
+            startTime = data[p].time;
+            startTimeStr = new Date(data[p].time).toDateString();
+            endTimeStr = "";
+          }else{
+            startTime = data[p].stime;
+            startTimeStr = new Date(data[p].stime).toLocaleTimeString();
+            endTimeStr = new Date(data[p].etime).toLocaleTimeString();
           }
+
           var value = data[p].value;
           var dataOwner  =   data[p].data_owner.join(",");
-          var dataCode = data[p].data_code;
           var uncertainty = data[p].error;
           if (uncertainty == undefined) uncertainty = "";
-          var startDateTime = new Date(stime);
-          var dateStartStr = startDateTime.getDate() + "-" + (startDateTime.getMonth()+1) + "-" + startDateTime.getFullYear() + " " + startDateTime.getHours() + ":" + startDateTime.getMinutes() + ":" +  startDateTime.getSeconds();
-          var dateEndStr = "";
-          if (etime != 0){
-            var endDateTime = new Date(etime);
-            dateEndStr = endDateTime.getDate() + "-" + (endDateTime.getMonth()+1) + "-" + endDateTime.getFullYear() + " " + endDateTime.getHours() + ":" + endDateTime.getMinutes() + ":" +  endDateTime.getSeconds();
-          }
-
-
-          if (stime >= this.serieGraphTimeRange.attributes.startTime && etime <= this.serieGraphTimeRange.attributes.endTime){
+          if (startTime >= this.serieGraphTimeRange.attributes.startTime && startTime <= this.serieGraphTimeRange.attributes.endTime){
             //console.log (value);
             var d = {
-              showName: showingName,
-              stime: dateStartStr,
-              etime: dateEndStr,
-              value : value,
+              volcano: volcanoName,
+              network: network,
+              station: stationName,
+              monitoringData: monitoringData,
+              data : value,
+              startTime: startTimeStr,
+              endTime: endTimeStr,
               uncertainty : uncertainty,
-              stationName : stationName,
-              volcanoName : volcanoName,
               dataOwner : dataOwner,
-              dataCode : dataCode,
+              showingName: showingName
             }
             content.push(d);
           }
@@ -220,24 +177,24 @@ define(function(require) {
 
       if (this.data == undefined) return;
 
-      var headers = ['Volcano Name', 'Station/Seismic Network Name', 'Start time','End time',  'Code of data',
-        'Data','Data-uncertainty', 'Data Owner'];
+      var headers = ['Volcano','Network', 'Station','Monitoring Data (Type)','Data','Start Time','End Time',
+        'Data Uncertainty','Data Owner'];
       //var z = new Zip();
       //console.log(z);
       var zip =  new JSZip();
-      for (var i = 0 ; i < listContent.length; i++){
-        var csvContent = "data:text/csv;charset=utf-8,";
-        var total = 0;
+      // for (var i = 0 ; i < listContent.length; i++){
+      var csvContent = "data:text/csv;charset=utf-8,";
+      var total = 0;
 
-        var content = listContent[i];
-        if (content == undefined) continue;
-        var dataString = "";
-        for (var p = 0 ; p < content.length; p++){
-          total++;
-          var d = content[p];
-          dataString += d.volcanoName + ",\"" + d.stationName + "\",\"" + d.stime + "\",\"" + d.etime + "\", \"" + d.dataCode + " \",\"" + d.value + "\",\""
-              + d.uncertainty + "\",\"" + d.dataOwner + " \"\n";
-        }
+      // var content = listContent[i];
+      // if (content == undefined) continue;
+      var dataString = "";
+      for (var p = 0 ; p < content.length; p++){
+        total++;
+        var d = content[p];
+        dataString += d.volcano + ",\"" + d.network + "\",\"" + d.station + "\",\"" + d.monitoringData + " \",\"" + d.data + "\",\""
+            + d.startTime + "\",\"" + d.endTime + " \",\"" + d.uncertainty + " \",\"" + d.dataOwner + " \"\n";
+      }
 
         csvContent += "Total number of earthquakes: " + total + " \n";
         csvContent += "(100 km from volcanic vent)\n";
@@ -245,12 +202,12 @@ define(function(require) {
         csvContent += dataString + "\n";
         var filename = "";
         if (content.length != 0){
-          filename = content[0].showName;
+          filename = content[0].showingName;
         }else{
           filename = "Blank"
         }
         zip.file(filename +".csv", csvContent);
-      }
+      //}
       zip.generateAsync({type:"blob"})
           .then(function (blob) {
             saveAs(blob, "data.zip");
@@ -489,8 +446,9 @@ define(function(require) {
       var button = "<a > <input style = \"background-color:grey; padding:2px 10px 2px 10px; \" class = \"waves-effect waves-light stack-graph-btn btn \"  type=\"button\" value = \"Stacked Graph (no limit)\" /> <label ></label> </a>";
       button += "<a > <input style = \" background-color:grey; padding:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light composite-graph-btn btn\"  type=\"button\" value = \"Composite Graph (max 5 graphs)\"/> <label ></label> </a>";
       button += "<a > <input style = \" background-color:grey; padding:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light btn gen-pdf\"  type=\"button\" value = \"Print PDF\"/> <label ></label> </a>";
-      button += "<a > <input style = \" background-color:grey; padding:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light btn gen-csv\"  type=\"button\" value = \"Print CSV\"/> <label ></label> </a>";
+      button += "<a  style = \" background-color:grey; padding:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light btn gen-csv modal-trigger\"  type=\"button\" >Print CSV </a>";
       this.$el.append(button);
+      this.$el.append(form_submit);
       this.stackGraphContainer.width = this.$el.width();
       this.compositeGraphContainer.width = this.$el.width();
       //this.$el.append("</ul>");

@@ -10,6 +10,7 @@ require.config({
     'hammer':'vendor/materialize/hammer.min',
     'jszip' : 'vendor/zip/dist/jszip',
     'FileSaver' : 'vendor/zip/dist/FileSaver',
+    'highslide' : 'vendor/highslide/highslide',
     // 'velocity':'vendor/materialize/velocity.min',
     //'JSZip' : 'vendor/zip/dist/jszip',
     'pace': 'vendor/pace/pace.min',
