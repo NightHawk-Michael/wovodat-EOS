@@ -42,6 +42,7 @@ define(function(require) {
   		this.graphs = [];
       this.checkedTimeRangeFilter = [];
       this.isErrorBar = false;
+      this.token = "a";
       //hs.graphicsDir = '/highslide/graphics/';
 
     },
@@ -70,6 +71,20 @@ define(function(require) {
       if (!agreeTerm){
         return false;
       }
+
+      var dataToken = {
+        data : "gen_token",
+        name : name,
+        email : email,
+      }
+      var URL = "/eruption2/api/";
+      var a = this;
+      $.getJSON(URL,dataToken, function(data){
+        a.token =  data.token;
+        $("#token").append(data);
+      });
+
+
       var data = {
         data : "add_user",
         id : new Date(),
@@ -79,9 +94,10 @@ define(function(require) {
         vd_name : volcanoName,
         dataType  : dataType
 
+
       }
+      $.get(URL, data );
       this.generateCSV();
-      $.get("/eruption2/api/?data=add_user", data );
       $('#formPopup').closeModal();
 
       //document.getElementById("download").appendChild(input);
@@ -91,14 +107,43 @@ define(function(require) {
 
 
 
-
-
     /**
      * Display a pop up to make user fill in their information
      * If user have been keyed in information, just donwload, no popup
      */
     popUpInfoForm : function(){
-      $('#formPopup').openModal();
+      var token = this.token;
+
+      var dataToken = {
+        data : "check_token",
+        token : token,
+      }
+
+      var volcanoName = this.checkedTimeRangeFilter[0].filters.timeSerie.attributes.volcanoName;
+      var filterName =  this.checkedTimeRangeFilter[0].filters.filterAttributes[0].name;
+      var dataType = this.checkedTimeRangeFilter[0].filters.timeSerie.attributes.component +" (" + filterName + ")";
+      var dataDownload = {
+        data : "add_user",
+        id : new Date(),
+        name : name,
+        email : "",
+        institution: "",
+        vd_name : volcanoName,
+        dataType  : dataType
+      }
+      var URL = "/eruption2/api/";
+      var tokenExists;
+      $.get(URL,dataToken,function(data,status,xhr){
+        tokenExists = data;
+        if (tokenExists){
+          $.get(URL, dataDownload );
+          this.generateCSV();
+        }else{
+          $('#formPopup').openModal();
+
+        }
+      },"json")
+
     },
 
       /**
@@ -131,30 +176,32 @@ define(function(require) {
         var monitoringData = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.component +" (" + filterName + ")";
 
 
-
         var data = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.data.data;
         for (var p = 0 ; p  < data.length; p++){
           if (data[p].filter != filterName) continue;
           var startTimeStr;
-          var endTimeStr;
+          var endTimeStr = "";
           var startTime
-          var dateFormat = {year: "numeric", month: "short",
-            day: "numeric", hour: "2-digit", minute: "2-digit"}
-          if(data[p].time != undefined){
-            startTime = data[p].time;
-            startTimeStr = new Date(data[p].time).toDateString();
-            endTimeStr = "";
-          }else{
-            startTime = data[p].stime;
-            startTimeStr = new Date(data[p].stime).toLocaleTimeString();
-            endTimeStr = new Date(data[p].etime).toLocaleTimeString();
+          var data = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.data.data;
+          var stime =  data[p].time;
+          var etime = 0;
+          if (stime == undefined) {
+            stime = data[p].stime;
+            etime = data[p].etime;
+          }
+
+          var startDateTime = new Date(stime);
+          var startTimeStr = startDateTime.getDate() + "-" + (startDateTime.getMonth()+1) + "-" + startDateTime.getFullYear() + " " + startDateTime.getHours() + ":" + startDateTime.getMinutes() + ":" +  startDateTime.getSeconds();
+          if (etime != 0){
+            var endDateTime = new Date(etime);
+            endTimeStr = endDateTime.getDate() + "-" + (endDateTime.getMonth()+1) + "-" + endDateTime.getFullYear() + " " + endDateTime.getHours() + ":" + endDateTime.getMinutes() + ":" +  endDateTime.getSeconds();
           }
 
           var value = data[p].value;
-          var dataOwner  =   data[p].data_owner.join(",");
+          var dataOwner  =   data[p].data_owner[0];
           var uncertainty = data[p].error;
           if (uncertainty == undefined) uncertainty = "";
-          if (startTime >= this.serieGraphTimeRange.attributes.startTime && startTime <= this.serieGraphTimeRange.attributes.endTime){
+          if (stime >= this.serieGraphTimeRange.attributes.startTime && stime <= this.serieGraphTimeRange.attributes.endTime){
             //console.log (value);
             var d = {
               volcano: volcanoName,

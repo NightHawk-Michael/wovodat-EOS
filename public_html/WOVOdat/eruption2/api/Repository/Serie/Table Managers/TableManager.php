@@ -260,10 +260,10 @@ abstract class TableManager implements TableManagerInterface {
 			if ($cc_id != null) {
 				$query1_2 = mysql_query("select cc_code,cc_url, cc_email from cc where cc_id=" . $cc_id);
 				$result1_2 = mysql_fetch_array($query1_2);
-				if ($result1_2[0] != null) {
+				if ($result1_2[1] != null) {
 					array_push($dataOwners, $result1_2[0]);
 					array_push($dataOwners, $result1_2[1]);
-				} else if ($result1_2[1] != null) {
+				} else if ($result1_2[2] != null) {
 					array_push($dataOwners, $result1_2[0]);
 					array_push($dataOwners, $result1_2[2]);
 				}

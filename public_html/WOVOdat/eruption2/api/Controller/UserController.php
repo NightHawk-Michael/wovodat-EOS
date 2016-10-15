@@ -5,17 +5,17 @@
  * Date: 12/10/2016
  * Time: 10:38 PM
  */
-include 'php/include/db_connect.php';
-global $link;
+
 
 
 	class UserController {
         public static function addUser($name,$email,$institution,$vdName,$dataType){
             session_start();
+            include 'php/include/db_connect.php';
+            global $link;
 
 
-
-            if(isset($_GET['downloadDataUsername'])) {
+            if(strcmp($name,"") || strcmp($email,"") || strcmp($institution,"")) {
                 $_SESSION['downloadDataUsername'] = $name;
                 $_SESSION['downloadDataUseremail'] = $email;
                 $_SESSION['downloadDataUserobs'] = $institution;
