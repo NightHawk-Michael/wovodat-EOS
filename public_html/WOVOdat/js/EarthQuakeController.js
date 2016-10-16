@@ -538,7 +538,7 @@ function downloadCSV(o){
 			}
 
 			// skip this event when it is not supposed to be displayed
-			if(earthquakes[cavw][i]['available'] == 'undefined'){
+			if(earthquakes[cavw][i]['available'] == 'undefined' || earthquakes[cavw][i]['available'] != 2){
 				continue;
 			}
 			var cc_id = earthquakes[cavw][i]['cc_id'];

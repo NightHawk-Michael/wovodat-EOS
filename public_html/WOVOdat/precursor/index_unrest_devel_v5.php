@@ -3,6 +3,12 @@
 LUIS RE-ORGANIZED STRUCTURE - 21/2/2016-->
 <?php
 // Start session
+$connected = @fsockopen("www.google.com", 80);
+if (! $connected){
+
+	header('Location: '.'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/'.basename(__FILE__, '.php').'_offline.php');
+}
+
 session_start();
 
 // if this code run on server then we need to cache the wovodat.js file on the 

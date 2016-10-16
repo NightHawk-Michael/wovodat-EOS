@@ -1077,12 +1077,12 @@ Wovodat.Printer = {
 
         function print2DEquake(obj){
             function setStyleForGraphHolder(panel){
-                panel.style.cssText = "width: 900px;height: 130px;font-size: 9px;margin-top: 15px;position: relative;";
+                panel.style.cssText = "width: 900px;height: 130px;font-size: 9px;margin-left: 10px; margin-top: 15px;position: relative;";
             }
             var w = window.open();
             var element;
             var style = w.document.createElement('style');
-            var css = ".equakeGraphPlaceholder{width: 900px;height: 130px;font-size: 9px;margin-top: 15px;position: relative;}";
+            var css = ".equakeGraphPlaceholder{width: 900px;height: 130px;font-size: 9px; margin-left: 10px; margin-top: 15px;position: relative;}";
             var head = w.document.getElementsByTagName('head')[0]
             
             style.type = 'text/css';
@@ -1146,6 +1146,7 @@ Wovodat.Printer = {
             // w.document.body.appendChild(btn);
             // btn.id = 'button';
             // btn.onclick = printPDF;
+            
             w.window.print();
         }
         function printGMTEquake(obj){
