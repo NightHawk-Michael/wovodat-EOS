@@ -2299,6 +2299,7 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
         $dr_start = $o['dr_start'];
         $dr_end = $o['dr_end'];
         $eqtype = $o['eqtype'];
+        $error_bar = $o['errorbar'];
 
         $sql_statement = $this->getEarthquakeQuery($qty, $vlat, $vlon, $date_start, $date_end, $dr_start, $dr_end, $eqtype, $wkm);
         // to count the actual number of event without qty limit
@@ -2394,7 +2395,7 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
         }else{
             fwrite($fh, "awk -F , '{if (\$3>=$lon1 && \$3<=$lon2) {first_err = 0; second_err = 0; if (length(\$12) > 0) {first_err = \$12;} if (length(\$9) > 0) {second_err = \$9;} else if (length(\$11) > 0) {second_err = \$11;} print \$4,\$2,\$4,first_err,second_err;}}' $tmp.txt | psxy -R -J -Sc0.075i -C$tmp.cpt -W0.25p -O -K >> $tmp.ps\n");
         }
-        // W-E projection
+        // W-E <projection></projection>
         fwrite($fh, "printf $box | psxy -R$lon1/$lon2/-$ldep/5 -Jx$Jlat/0.17c -Ba5f5g0/a5f5g0 -W1 -P -O -X-14c -Y-5c -K >> $tmp.ps\n");
         if($error_bar == "true"){
             fwrite($fh, "awk -F , '{if (\$2>=$lat1 && \$2<=$lat2) {first_err = 0; second_err = 0; if (length(\$9) > 0) {first_err = \$9;} else if (length(\$10) > 0) {fisrt_err = \$10;} if (length(\$12) > 0) {second_err = \$12;} print \$3,-\$4,\$4,first_err,second_err;}}' $tmp.txt | psxy -R -J -Ex/+0.5p -Ey/+0.5p -Sc0.075i -C$tmp.cpt -W0.25p -O -K >> $tmp.ps\n");    
@@ -2418,7 +2419,11 @@ where a.ds_code = '$code' and a.ds_pubdate <= now() and b.dd_tlt_pubdate <= now(
             fwrite($fh, "psbasemap \$R -JX17c/4c  -Bpa1d/a10f10g0 -Bsa1O/WESn -P  -Y-5c -U\"$stamp\" -O -K >> $tmp.ps\n");
         }
 
-            fwrite($fh, "psxy $tmp.xyz -R -J -Ex/+0.5p -Ey/+0.5p -Sc0.075i -C$tmp.cpt  -W0.25p -V -O >> $tmp.ps\n");
+        if($error_bar == "true"){
+            fwrite($fh, "psxy $tmp.xyz -R -J -Ex/+0.5p -Ey/+0.5p -Sc0.075i -C$tmp.cpt -W0.25p -V -O >> $tmp.ps\n");
+        }else{
+            fwrite($fh, "psxy $tmp.xyz -R -J -Sc0.075i -C$tmp.cpt -W0.25p -V -O >> $tmp.ps\n");
+        }
         // makes PNG from PS file
         fwrite($fh, "convert $tmp.ps $tmp.png\n");
         fclose($fh);
