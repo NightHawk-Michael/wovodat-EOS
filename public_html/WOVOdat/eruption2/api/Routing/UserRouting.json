@@ -7,12 +7,13 @@
       "method": "addUser",
       "params":
       [
-        "id",
         "name",
         "email",
         "institution",
         "vd_name",
-        "dataType"
+        "dataType",
+        "startTimeStr",
+        "endTimeStr"
       ]
 
     }

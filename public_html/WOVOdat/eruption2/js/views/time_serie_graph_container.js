@@ -81,24 +81,10 @@ define(function(require) {
       var a = this;
       $.getJSON(URL,dataToken, function(data){
         a.token =  data.token;
-        $("#token").append(data);
       });
-
-
-      var data = {
-        data : "add_user",
-        id : new Date(),
-        name : name,
-        email : email,
-        institution: institution,
-        vd_name : volcanoName,
-        dataType  : dataType
-
-
-      }
-      $.get(URL, data );
-      this.generateCSV();
+      this.getDataForSendingEmail(URL, email, name, institution);
       $('#formPopup').closeModal();
+      return false;
 
       //document.getElementById("download").appendChild(input);
       //document.getElementById("download").submit();
@@ -118,32 +104,78 @@ define(function(require) {
         data : "check_token",
         token : token,
       }
-
-      var volcanoName = this.checkedTimeRangeFilter[0].filters.timeSerie.attributes.volcanoName;
-      var filterName =  this.checkedTimeRangeFilter[0].filters.filterAttributes[0].name;
-      var dataType = this.checkedTimeRangeFilter[0].filters.timeSerie.attributes.component +" (" + filterName + ")";
-      var dataDownload = {
-        data : "add_user",
-        id : new Date(),
-        name : name,
-        email : "",
-        institution: "",
-        vd_name : volcanoName,
-        dataType  : dataType
-      }
       var URL = "/eruption2/api/";
       var tokenExists;
+      var self = this;
       $.get(URL,dataToken,function(data,status,xhr){
         tokenExists = data;
         if (tokenExists){
-          $.get(URL, dataDownload );
-          this.generateCSV();
+          self.getDataForSendingEmail(URL,"","","");
+
         }else{
           $('#formPopup').openModal();
 
         }
       },"json")
 
+    },
+
+      /**
+       * Prepare data for sending email and add to database
+       */
+    getDataForSendingEmail : function(URL,name,email,institution){
+      var dataType = [];
+      var startTimeStr = "";
+      var endTimeStr= "";
+        var volcanoName = this.checkedTimeRangeFilter[0].filters.timeSerie.attributes.volcanoName;
+
+        for (var i = 0; i < this.checkedTimeRangeFilter.length; i++) {
+        var filterName = this.checkedTimeRangeFilter[i].filters.filterAttributes[0].name;
+        var monitoringData = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.component + " (" + filterName + ")";
+        dataType.push(monitoringData);
+        var data = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.data.data;
+        for (var p = 0 ; p  < data.length; p++){
+          if (data[p].filter != filterName) continue;
+          var startTime
+          var data = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.data.data;
+          var stime =  data[p].time;
+          var etime = 0;
+          if (stime == undefined) {
+            stime = data[p].stime;
+            etime = data[p].etime;
+          }
+
+
+          if (stime >= this.serieGraphTimeRange.attributes.startTime && stime <= this.serieGraphTimeRange.attributes.endTime){
+            if (startTimeStr == ""){
+              var startDateTime = new Date(stime);
+              startTimeStr = startDateTime.getDate() + "-" + (startDateTime.getMonth()+1) + "-" + startDateTime.getFullYear() + " " + startDateTime.getHours() + ":" + startDateTime.getMinutes() + ":" +  startDateTime.getSeconds();
+
+            }
+            if (etime != 0 ){
+              var endDateTime = new Date(etime);
+              endTimeStr = endDateTime.getDate() + "-" + (endDateTime.getMonth()+1) + "-" + endDateTime.getFullYear() + " " + endDateTime.getHours() + ":" + endDateTime.getMinutes() + ":" +  endDateTime.getSeconds();
+            }
+          }
+
+        }
+      }
+      if (endTimeStr == "") endTimeStr = startTimeStr;
+
+      var volcanoName = this.checkedTimeRangeFilter[0].filters.timeSerie.attributes.volcanoName;
+        var dataTypeStr = dataType.join(",");
+      this.generateCSV();
+      var dataDownload = {
+        data : "add_user",
+        name : name,
+        email : email,
+        institution: institution,
+        vd_name : volcanoName,
+        dataType  : dataTypeStr,
+        startTimeStr: startTimeStr,
+        endTimeStr: endTimeStr
+      }
+      $.get(URL, dataDownload );
     },
 
       /**
@@ -198,7 +230,11 @@ define(function(require) {
           }
 
           var value = data[p].value;
-          var dataOwner  =   data[p].data_owner[0];
+          var dataOwner = [];
+          for (var ii = 0 ; ii < data[p].data_owner.length;ii = i+2){
+            dataOwner.push(data[p].data_owner[ii]);
+          }
+          var dataOwner  = dataOwner.join(",");
           var uncertainty = data[p].error;
           if (uncertainty == undefined) uncertainty = "";
           if (stime >= this.serieGraphTimeRange.attributes.startTime && stime <= this.serieGraphTimeRange.attributes.endTime){
@@ -231,17 +267,19 @@ define(function(require) {
       var zip =  new JSZip();
       // for (var i = 0 ; i < listContent.length; i++){
       var csvContent = "data:text/csv;charset=utf-8,";
-      var total = 0;
+      for (var ii = 0 ; ii < listContent.length; ii++){
+        var content = listContent[ii];
+        var total = 0;
 
-      // var content = listContent[i];
-      // if (content == undefined) continue;
-      var dataString = "";
-      for (var p = 0 ; p < content.length; p++){
-        total++;
-        var d = content[p];
-        dataString += d.volcano + ",\"" + d.network + "\",\"" + d.station + "\",\"" + d.monitoringData + " \",\"" + d.data + "\",\""
-            + d.startTime + "\",\"" + d.endTime + " \",\"" + d.uncertainty + " \",\"" + d.dataOwner + " \"\n";
-      }
+        // var content = listContent[i];
+        // if (content == undefined) continue;
+        var dataString = "";
+        for (var p = 0 ; p < content.length; p++){
+          total++;
+          var d = content[p];
+          dataString += d.volcano + ",\"" + d.network + "\",\"" + d.station + "\",\"" + d.monitoringData + " \",\"" + d.data + "\",\""
+              + d.startTime + "\",\"" + d.endTime + " \",\"" + d.uncertainty + " \",\"" + d.dataOwner + " \"\n";
+        }
 
         csvContent += "Total number of earthquakes: " + total + " \n";
         csvContent += "(100 km from volcanic vent)\n";
@@ -254,6 +292,8 @@ define(function(require) {
           filename = "Blank"
         }
         zip.file(filename +".csv", csvContent);
+      }
+
       //}
       zip.generateAsync({type:"blob"})
           .then(function (blob) {
@@ -470,16 +510,27 @@ define(function(require) {
         this.$el.append(this.graphs[i].$el);
 
         this.graphs[i].show();
-        var cc_code = this.filters[i].timeSerie.attributes.data.data[0].data_owner[0];
-        var dataOwnerVal = this.filters[i].timeSerie.attributes.data.data[0].data_owner[1];
-        var reference_code =  this.filters[i].timeSerie.attributes.data.data[0].reference[0];
-        var reference_val =  this.filters[i].timeSerie.attributes.data.data[0].reference[1];
+
+        /*
+        Add data Owner
+         */
+        var dataOwner = "<div>";
+        for (var ii = 0 ; ii < this.filters[i].timeSerie.attributes.data.data[0].data_owner.length; ii = ii+2){
+          var cc_code = this.filters[i].timeSerie.attributes.data.data[0].data_owner[ii];
+          var dataOwnerVal = this.filters[i].timeSerie.attributes.data.data[0].data_owner[ii+1];
+          dataOwner +="<a href = \"" + dataOwnerVal + "\" target=\"_blank\" style = \"font-size: 10px;color: black;padding-left: " + padding_left/4 +"px; right:0px; \"> " + cc_code + "</a> "
+        }
+
+        dataOwner += " - ";
+        for (var ii = 0 ; ii < this.filters[i].timeSerie.attributes.data.data[0].reference.length; ii = ii + 2){
+          var reference_code =  this.filters[i].timeSerie.attributes.data.data[0].reference[ii];
+          var reference_val =  this.filters[i].timeSerie.attributes.data.data[0].reference[ii+1];
+          dataOwner += "<a href = \"" + reference_val + "\" target=\"_blank\" style = \"font-size: 10px;color: black; right:0px; \"> " + reference_code + "</a>"
+        }
 
 
-        var dataOwner = "<div>" +
-            "<a href = \"" + dataOwnerVal + "\" target=\"_blank\" style = \"font-size: 10px;color: black;padding-left: " + padding_left/4*3 +"px; right:0px; \"> " + cc_code + "</a> " +
-            "- <a href = \"" + reference_val + "\" target=\"_blank\" style = \"font-size: 10px;color: black; right:0px; \"> " + reference_code + "</a>" +
-            "</div>";
+
+        dataOwner += "</div>";
         this.$el.append(dataOwner);
 
         // this.graphs[i].draw();
