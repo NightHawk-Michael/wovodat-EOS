@@ -125,18 +125,20 @@ define(function(require) {
        */
     getDataForSendingEmail : function(URL,name,email,institution){
       var dataType = [];
-      var startTimeStr = "";
-      var endTimeStr= "";
-        var volcanoName = this.checkedTimeRangeFilter[0].filters.timeSerie.attributes.volcanoName;
+      var startTimeList = [];
+      var endTimeList = [];
+      var volcanoName = this.checkedTimeRangeFilter[0].filters.timeSerie.attributes.volcanoName;
 
-        for (var i = 0; i < this.checkedTimeRangeFilter.length; i++) {
+      for (var i = 0; i < this.checkedTimeRangeFilter.length; i++) {
+        var startTimeStr = "";
+        var endTimeStr = "";
         var filterName = this.checkedTimeRangeFilter[i].filters.filterAttributes[0].name;
         var monitoringData = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.component + " (" + filterName + ")";
         dataType.push(monitoringData);
         var data = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.data.data;
         for (var p = 0 ; p  < data.length; p++){
+
           if (data[p].filter != filterName) continue;
-          var startTime
           var data = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.data.data;
           var stime =  data[p].time;
           var etime = 0;
@@ -159,11 +161,15 @@ define(function(require) {
           }
 
         }
+        if (endTimeStr == "") endTimeStr = startTimeStr;
+        startTimeList.push(startTimeStr);
+        endTimeList.push(endTimeStr);
+
       }
-      if (endTimeStr == "") endTimeStr = startTimeStr;
+
 
       var volcanoName = this.checkedTimeRangeFilter[0].filters.timeSerie.attributes.volcanoName;
-        var dataTypeStr = dataType.join(",");
+        //var dataTypeStr = dataType.join(",");
       this.generateCSV();
       var dataDownload = {
         data : "add_user",
@@ -171,9 +177,9 @@ define(function(require) {
         email : email,
         institution: institution,
         vd_name : volcanoName,
-        dataType  : dataTypeStr,
-        startTimeStr: startTimeStr,
-        endTimeStr: endTimeStr
+        dataType  : dataType,
+        startTimeStr: startTimeList,
+        endTimeStr: endTimeList
       }
       $.get(URL, dataDownload );
     },
