@@ -989,6 +989,7 @@ Wovodat.get2DGMTMap = function(o){
     var vlat = isEmpty(o.vlat);	
     var vlon = isEmpty(o.vlon);		
     var eqtype = isEmpty(o.eqtype);
+    var errorbar = o.errorbar;
 
     var wkm = isEmpty(o.wkm);
     var qty = isEmpty(o.qty);
@@ -1003,7 +1004,6 @@ Wovodat.get2DGMTMap = function(o){
     if(!dr_start) dr_start = 0;
     var dr_end = isEmpty(o.dr_end);
     if(!dr_end) dr_end = 40;
-
     var handler = o.handler;
     function isEmpty(e){
         if(e == undefined) return "";
@@ -1024,7 +1024,8 @@ Wovodat.get2DGMTMap = function(o){
         + "&dr_end=" + dr_end 
         + "&visual_type=" + visual_type
         + "&eqtype=" + eqtype
-        + "&wkm=" + wkm,
+        + "&wkm=" + wkm
+        + "&errorbar=" + errorbar,
         dataType:'json',		
         success: function(html){
             handler(html);
