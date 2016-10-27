@@ -156,7 +156,6 @@ abstract class TableManager implements TableManagerInterface {
 
 		global $db;
 		$result = array();
-		$res = array();
 		$data = array();
 		$unit = "";
 		$stationDataParams = $this->setStationDataParams($stations['component']);
@@ -165,7 +164,7 @@ abstract class TableManager implements TableManagerInterface {
 		//Add select data code from query. Add in this tableManager to apply all data.
 		$temp =  "select a." . $this->data_code ." as data_code, cc_id, cc_id2, cc_id3, cb_ids,";
 
-		 $query = str_replace("select",$temp ,$query);
+		$query = str_replace("select",$temp ,$query);
 
 		$db->query($query, $id1,$id2);
 
@@ -174,7 +173,8 @@ abstract class TableManager implements TableManagerInterface {
 		foreach ($res as $row) {
 			//add value attributes
 
-			$temp = array("value" => floatval($row["value"]));
+			$temp = array("value" => floatval(number_format($row["value"], 2, '.', ',')));
+
 			//add time value attributes (time or (etime, stime))
 			if(array_key_exists("time", $row)){
 				$time = strtotime($row["time"]);
@@ -255,17 +255,20 @@ abstract class TableManager implements TableManagerInterface {
 
 	private function getCCUrl($cc_ids) {
 		$dataOwners = array();
+		global $db;
 		foreach ($cc_ids as $cc_id) {
 
 			if ($cc_id != null) {
-				$query1_2 = mysql_query("select cc_code,cc_url, cc_email from cc where cc_id=" . $cc_id);
-				$result1_2 = mysql_fetch_array($query1_2);
-				if ($result1_2[1] != null) {
-					array_push($dataOwners, $result1_2[0]);
-					array_push($dataOwners, $result1_2[1]);
-				} else if ($result1_2[2] != null) {
-					array_push($dataOwners, $result1_2[0]);
-					array_push($dataOwners, $result1_2[2]);
+				$sql = "select cc_code,cc_url, cc_email from cc where cc_id=" . $cc_id;
+				$db->query($sql);
+				$result = $db->getList();
+				$result = $result[0];
+				if ($result["cc_url"] != null) {
+					array_push($dataOwners, $result["cc_code"]);
+					array_push($dataOwners, $result["cc_url"]);
+				} else if ($result["cc_url"] != null) {
+					array_push($dataOwners, $result["cc_code"]);
+					array_push($dataOwners, $result["cc_email"]);
 				}
 			}
 		}
@@ -278,12 +281,19 @@ abstract class TableManager implements TableManagerInterface {
 	 * Get reference of data (cb)
 	 */
 	private function getDataReference($cb_ids) {
-
-			if ($cb_ids != null) {
-				$query = mysql_query("select cb_auth,cb_url from cb where cb_id=" . $cb_ids);
-				$result = mysql_fetch_array($query);
-				return $result;
-			}
-		return array();
+		global $db;
+		$reference = array();
+		if ($cb_ids != null) {
+			$sql = "select cb_auth,cb_url from cb where cb_id=" . $cb_ids;
+			$db->query($sql);
+			$result = $db->getList();
+			$result = $result[0];
+			array_push($reference, $result["cb_auth"]);
+			array_push($reference, $result["cb_url"]);
+		}else{
+			array_push($reference,"");
+			array_push($reference, "");
+		}
+		return $reference;
 	}
 } 
