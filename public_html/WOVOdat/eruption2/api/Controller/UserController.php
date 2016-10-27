@@ -16,6 +16,9 @@ class UserController {
 //        var_dump($dataType);
 //        var_dump($startTime);
 //        var_dump($endTime);
+//        for ( $i = 0 ; $i < 3; $i++){
+//            echo "$dataType[$i] ','$startTime[$i] ', ' $endTime[$i]\n";
+//        }
 
 
         if(strcmp($name,"") != 0 && strcmp($email,"") != 0 && strcmp($institution,"") != 0) {
@@ -33,7 +36,7 @@ class UserController {
         $ipaddress = $temp->ip;
         $json = file_get_contents("http://ipinfo.io/$ipaddress");
 
-        var_dump($json);
+        //var_dump($json);
 
         $details = json_decode($json);
 

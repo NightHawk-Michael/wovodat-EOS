@@ -154,10 +154,11 @@ define(function(require) {
               startTimeStr = startDateTime.getDate() + "-" + (startDateTime.getMonth()+1) + "-" + startDateTime.getFullYear() + " " + startDateTime.getHours() + ":" + startDateTime.getMinutes() + ":" +  startDateTime.getSeconds();
 
             }
+            var endDateTime = new Date(stime)
             if (etime != 0 ){
-              var endDateTime = new Date(etime);
-              endTimeStr = endDateTime.getDate() + "-" + (endDateTime.getMonth()+1) + "-" + endDateTime.getFullYear() + " " + endDateTime.getHours() + ":" + endDateTime.getMinutes() + ":" +  endDateTime.getSeconds();
+              endDateTime = new Date(etime);
             }
+            endTimeStr = endDateTime.getDate() + "-" + (endDateTime.getMonth()+1) + "-" + endDateTime.getFullYear() + " " + endDateTime.getHours() + ":" + endDateTime.getMinutes() + ":" +  endDateTime.getSeconds();
           }
 
         }
