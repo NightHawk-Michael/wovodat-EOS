@@ -26,7 +26,7 @@ class UserController {
             $_SESSION['downloadDataUseremail'] = $email;
             $_SESSION['downloadDataUserobs'] = $institution;
         }
-
+       // var_dump($name .' '. $email . ' ' . $institution );
 //        $ipaddress= $_SERVER['REMOTE_ADDR'];
 
         $dateTime= date('Y-m-d h:i:s');
@@ -36,17 +36,21 @@ class UserController {
         $ipaddress = $temp->ip;
         $json = file_get_contents("http://ipinfo.io/$ipaddress");
 
-        //var_dump($json);
-
         $details = json_decode($json);
 
 
         $sql = "select distinct cc_id from vd where vd_name='$vdName'";  // Get data owner id
         $db->query($sql);
         $result = $db->getList();
-//            $result = mysql_query($sql, $link);
         $row = $result[0];
         for($i = 0 ; $i < count($dataType); $i++){
+
+            $sTime = date('Y-m-d h:i:s',$startTime[$i]/1000);
+            $eTime = date('Y-m-d h:i:s',$endTime[$i]/1000);
+//            var_dump($startTime[$i]);
+//            var_dump($endTime[$i]);
+            var_dump($sTime);
+            var_dump($eTime);
             if (isset($_SESSION['login'])) {
 
                 $ccId = $_SESSION['login']['cc_id'];
@@ -54,14 +58,14 @@ class UserController {
                 $db->query($sql);
                 $result = $db->getList();
                 $row1 = $result[0];
-                $sql="insert into ddu (cr_id,ddu_ip,ddu_time,ddu_country,ddu_city,vd_name,cc_id,ddu_dataType,ddu_dataStartTime,ddu_dataEndTime) values ({$row1['cr_id']},'$ipaddress','$dateTime','$details->country','$details->city','$vdName','{$row ['cc_id']}',' $dataType[$i] ','$startTime[$i] ', ' $endTime[$i] ' )";
+                $sql="insert into ddu (cr_id,ddu_ip,ddu_time,ddu_country,ddu_city,vd_name,cc_id,ddu_dataType,ddu_dataStartTime,ddu_dataEndTime) values ({$row1['cr_id']},'$ipaddress','$dateTime','$details->country','$details->city','$vdName','{$row ['cc_id']}',' $dataType[$i] ','$sTime ', ' $eTime ' )";
 
                 $db->query($sql);
 //                $db->getList();
 
             }else if(isset($_SESSION['downloadDataUsername'])){
 
-                $sql = "INSERT INTO ddu (ddu_name,ddu_email,ddu_obs,ddu_ip,ddu_time,ddu_country,ddu_city,vd_name,cc_id,ddu_dataType,ddu_dataStartTime,ddu_dataEndTime) values ('{$_SESSION['downloadDataUsername']}',' {$_SESSION['downloadDataUseremail']  }','{$_SESSION['downloadDataUserobs']}','$ipaddress','$dateTime','$details->country','$details->city','$vdName','{$row['cc_id']}','$dataType[$i] ',' $startTime[$i] ', '$endTime[$i]' )";
+                $sql = "INSERT INTO ddu (ddu_name,ddu_email,ddu_obs,ddu_ip,ddu_time,ddu_country,ddu_city,vd_name,cc_id,ddu_dataType,ddu_dataStartTime,ddu_dataEndTime) values ('{$_SESSION['downloadDataUsername']}',' {$_SESSION['downloadDataUseremail']  }','{$_SESSION['downloadDataUserobs']}','$ipaddress','$dateTime','$details->country','$details->city','$vdName','{$row['cc_id']}','$dataType[$i] ',' $sTime ', '$eTime' )";
                 $db->query($sql);
 //                $db->getList();
 
