@@ -1004,7 +1004,6 @@ Wovodat.get2DGMTMap = function(o){
     if(!dr_start) dr_start = 0;
     var dr_end = isEmpty(o.dr_end);
     if(!dr_end) dr_end = 40;
-
     var handler = o.handler;
     function isEmpty(e){
         if(e == undefined) return "";

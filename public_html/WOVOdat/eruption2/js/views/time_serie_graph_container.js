@@ -82,7 +82,7 @@ define(function(require) {
       $.getJSON(URL,dataToken, function(data){
         a.token =  data.token;
       });
-      this.getDataForSendingEmail(URL, email, name, institution);
+      this.getDataForSendingEmail(URL, name, email, institution);
       $('#formPopup').closeModal();
       return false;
 
@@ -125,18 +125,19 @@ define(function(require) {
        */
     getDataForSendingEmail : function(URL,name,email,institution){
       var dataType = [];
-      var startTimeStr = "";
-      var endTimeStr= "";
-        var volcanoName = this.checkedTimeRangeFilter[0].filters.timeSerie.attributes.volcanoName;
+      var startTimeList = [];
+      var endTimeList = [];
+      var volcanoName = this.checkedTimeRangeFilter[0].filters.timeSerie.attributes.volcanoName;
 
-        for (var i = 0; i < this.checkedTimeRangeFilter.length; i++) {
+      for (var i = 0; i < this.checkedTimeRangeFilter.length; i++) {
+        var startDateTime = 0;
+        var endDateTime = 0;
         var filterName = this.checkedTimeRangeFilter[i].filters.filterAttributes[0].name;
         var monitoringData = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.component + " (" + filterName + ")";
         dataType.push(monitoringData);
         var data = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.data.data;
         for (var p = 0 ; p  < data.length; p++){
           if (data[p].filter != filterName) continue;
-          var startTime
           var data = this.checkedTimeRangeFilter[i].filters.timeSerie.attributes.data.data;
           var stime =  data[p].time;
           var etime = 0;
@@ -144,26 +145,25 @@ define(function(require) {
             stime = data[p].stime;
             etime = data[p].etime;
           }
-
-
           if (stime >= this.serieGraphTimeRange.attributes.startTime && stime <= this.serieGraphTimeRange.attributes.endTime){
-            if (startTimeStr == ""){
-              var startDateTime = new Date(stime);
-              startTimeStr = startDateTime.getDate() + "-" + (startDateTime.getMonth()+1) + "-" + startDateTime.getFullYear() + " " + startDateTime.getHours() + ":" + startDateTime.getMinutes() + ":" +  startDateTime.getSeconds();
-
+            if (startDateTime == 0){
+              startDateTime = stime;
             }
+            endDateTime = stime
             if (etime != 0 ){
-              var endDateTime = new Date(etime);
-              endTimeStr = endDateTime.getDate() + "-" + (endDateTime.getMonth()+1) + "-" + endDateTime.getFullYear() + " " + endDateTime.getHours() + ":" + endDateTime.getMinutes() + ":" +  endDateTime.getSeconds();
+              endDateTime = etime;
             }
           }
-
         }
+
+        startTimeList.push(startDateTime);
+        endTimeList.push(endDateTime);
+
       }
-      if (endTimeStr == "") endTimeStr = startTimeStr;
+
 
       var volcanoName = this.checkedTimeRangeFilter[0].filters.timeSerie.attributes.volcanoName;
-        var dataTypeStr = dataType.join(",");
+        //var dataTypeStr = dataType.join(",");
       this.generateCSV();
       var dataDownload = {
         data : "add_user",
@@ -171,9 +171,9 @@ define(function(require) {
         email : email,
         institution: institution,
         vd_name : volcanoName,
-        dataType  : dataTypeStr,
-        startTimeStr: startTimeStr,
-        endTimeStr: endTimeStr
+        dataType  : dataType,
+        startTimeStr: startTimeList,
+        endTimeStr: endTimeList
       }
       $.get(URL, dataDownload );
     },
@@ -224,6 +224,7 @@ define(function(require) {
 
           var startDateTime = new Date(stime);
           var startTimeStr = startDateTime.getDate() + "-" + (startDateTime.getMonth()+1) + "-" + startDateTime.getFullYear() + " " + startDateTime.getHours() + ":" + startDateTime.getMinutes() + ":" +  startDateTime.getSeconds();
+          endTimeStr= startTimeStr;
           if (etime != 0){
             var endDateTime = new Date(etime);
             endTimeStr = endDateTime.getDate() + "-" + (endDateTime.getMonth()+1) + "-" + endDateTime.getFullYear() + " " + endDateTime.getHours() + ":" + endDateTime.getMinutes() + ":" +  endDateTime.getSeconds();
@@ -266,8 +267,8 @@ define(function(require) {
       //console.log(z);
       var zip =  new JSZip();
       // for (var i = 0 ; i < listContent.length; i++){
-      var csvContent = "data:text/csv;charset=utf-8,";
       for (var ii = 0 ; ii < listContent.length; ii++){
+        var csvContent = "data:text/csv;charset=utf-8,";
         var content = listContent[ii];
         var total = 0;
 
