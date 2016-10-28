@@ -124,7 +124,8 @@ function drawEquake2DGMT(o){
 			wkm: document.getElementById('wkm' + mapUsed).value,   // Nang added
 			vname:volName,                         // Nang added
 			vlat:vlat,                             //Nang added
-			vlon:vlon,                             //Nang added                 
+			vlon:vlon,                             //Nang added
+			errorbar: document.getElementById('errorbars'+mapUsed).checked,                  
 			//Only 3D GMT needs these two degree & init_azim.               
 			//  degree: document.getElementById('degree' + mapUsed).value, 
 			//  init_azim: document.getElementById('azim' + mapUsed).value,         
