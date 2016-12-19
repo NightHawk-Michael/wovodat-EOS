@@ -42,7 +42,7 @@ $cache = time();
     <script type="text/javascript" src="/js/flot/jquery.flot.symbol.js"></script> 
     <script type="text/javascript" src="/js/flot/jquery.flot.axislabels.js"></script> 
     <script type="text/javascript" src="/js/wovodat.js?<?php echo $cache; ?>"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCQ9kUvUtmawmFJ62hWVsigWFTh3CKUzzM&sensor=false"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCQ9kUvUtmawmFJ62hWVsigWFTh3CKUzzM&sensor=false&libraries=geometry"></script>
     <script type="text/javascript" src="/js/Tooltip_v3.js"></script>
     <script type="text/javascript" src="/js/jquery.jgrowl.js"></script>
     <script type="text/javascript" src="/js/BasicFunction_V5.js"></script>
