@@ -3,8 +3,7 @@
 <head> 
 	<title></title>
 	<link rel="stylesheet" href="/css/normalize.css">
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script type="text/javascript" src="/js/materialize.min.js"></script>
+
 	<script src="/js/jquery-1.11.1.min.js"></script>
 	<link rel="stylesheet" href="/js/jquery-ui-1.11.0.custom/jquery-ui.min.css">
 	<link rel="stylesheet" href="/css/jquery.multiselect.css">
@@ -20,9 +19,10 @@
 	<META HTTP-EQUIV="Expires" CONTENT="-1">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/nouislider.min.css">
+    <link rel="stylesheet prefetch" href="https://cdn.rawgit.com/chingyawhao/materialize-clockpicker/master/dist/css/materialize.clockpicker.css">
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/jquery.min.js"></script>
-	<script src="/js/locationpicker.jquery.js"></script>
 
 	<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -33,8 +33,13 @@
 	<script src="/js/jquery.multiselect.min.js"></script>
 	<script src="/js/jquery.cookie.js"></script>
     <script src="/js/boolean.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/js/nouislider.min.js"></script>
+    <script src="/js/locationpicker.jquery.js"></script>
+    <script src="https://cdn.rawgit.com/chingyawhao/materialize-clockpicker/master/dist/js/materialize.clockpicker.js"></script>
 
-	<!-- Google Map Api requires browser key to function! key used here key=AIzaSyCbWJuHGfa_2MzsOL2ARASmqV2JyCpdmm8 -->
+    <!-- Google Map Api requires browser key to function! key used here key=AIzaSyCbWJuHGfa_2MzsOL2ARASmqV2JyCpdmm8 -->
 	<!-- To upload to server, a modification of browser key may need to be done! -->
 	<script type="text/javascript" src='http://maps.google.com/maps/api/js?key=AIzaSyCbWJuHGfa_2MzsOL2ARASmqV2JyCpdmm8&sensor=false&libraries=places'></script>
 
@@ -56,48 +61,56 @@
                 </button>
                 <div id="Volcano_Inner_Group" class="innerData collapse col s10 offset-s2 ">
                     <!-- FEATURE -->
-                    <div id="feature_wrapper" class="hidden_data data-wrapper row" style="display: block;">
-                        <p class="data-header col s4">Feature:</p>
-                        <select id="featureSelect" name="feature[]" multiple="multiple">
-                            <optgroup id="feature" label="Feature"></optgroup>
-                        </select>
+                    <br/>
+                    <div id="feature_wrapper" class=" row">
+                        <p class="data-header col s3">Feature:</p>
+                        <div id = "feature_select" class="input-field col s5">
+                            <select id="feature" name="feature[]"  multiple >
+                                <option value="" disabled selected>Choose your option</option>
+                            </select>
+                        </div>
+                        <div class ="col s2">
+                            <input type="checkbox" id ="feature_checkAll"/><label style = "color:black" for="feature_checkAll">Check All</label>
+                        </div>
                     </div>
 
 
                     <!--ROCK TYPE-->
-                    <div id="rock_wrapper" class="data-wrapper row">
-                        <p class="data-header col s4">Rock Types: </p>
-                        <select class = "col s4" id="rockSelect" name="rock[]" multiple="multiple">
-                            <div id="rock" label="Rock">
-                                <optgroup label="Mafic">
+                    <div id="rock_wrapper" class="row">
+                        <p class="data-header col s3">Rock Types: </p>
+                        <div  id = "rock_select" class="input-field col s5">
+                            <select id="rock" name="rock[]" multiple>
+                                <option value=""  label = "Choose your option" disabled selected>Choose your option</option>
+                                <optgroup id = "Mafic" disabled label="Mafic">Mafic</optgroup>
                                     <option value="Basalt">Basalt</option>
                                     <option value="Tephrite Basanite">Tephrite Basanite</option>
                                     <option value="Foidite">Foidite</option>
                                     <option value="Trachybasalt">Trachybasalt</option>
                                     <option value="Picobrasalt">Picrobasalt</option>
-                                </optgroup>
-                                <optgroup label="Intermediate">
+                                <optgroup id = "Intermediate" label="Intermediate" disabled ></optgroup>
                                     <option value="Basaltic Andesite">Basaltic Andesite</option>
                                     <option value="Basaltic Trachyandesite">Basaltic Trachyandesite</option>
                                     <option value="Phonotephrite">Phonotephrite</option>
                                     <option value="Andesite">Andesite </option>
                                     <option value="Trachyandesite">Trachyandesite</option>
                                     <option value="Tephra-phonolite">Tephra-phonolite</option>
-                                </optgroup>
-                                <optgroup label="Felsic">
+                                <optgroup id = "Felsic" label="Felsic"></optgroup>
                                     <option value="Dacite">Dacite</option>
                                     <option value="Trachyte">Trachyte</option>
                                     <option value="Trachydacite ">Trachydacite</option>
                                     <option value="Phonolite ">Phonolite </option>
                                     <option value="Rhyolite ">Rhyolite</option>
-                                </optgroup>
-                            </div>
-                        </select>
+
+                            </select>
+                        </div>
+                        <div class ="col s2">
+                            <input type="checkbox" id ="rock_checkAll"/><label style = "color:black" for="rock_checkAll">Check All</label>
+                        </div>
                     </div>
 
                     <!-- GOOGLE MAP LOCATION -->
-                    <div id="location_wrapper" class=" data-wrapper row">
-                        <p class="data-header col s4">Location:</p>
+                    <div id="location_wrapper" class="row">
+                        <p class="data-header col s3">Location:</p>
                         <img cursor='pointer' id='map_location' src='/img/Maps-icon.png' width='10%' height='10%'>(Click map icon to set location)</img><br>
                         <div id="location"></div>
                     </div>
@@ -111,25 +124,26 @@
 				</button>
 				<div id="Eruption_Inner_Group" class="innerData collapse col s10 offset-s2">
                     <!-- ERUPTION PHASE TYPE -->
-					<div id="edPhase_wrapper" class=" data-wrapper row">
-						<p class="data-header col s4">Eruption Phase Type: </p>
-						<select class = "col s4" id="eruptionSelect" name="eruption[]" multiple="multiple">
-							<optgroup id="edPhase" label="Eruption Phase Type"></optgroup>
+                    <br/>
+					<div id="edPhase_wrapper" class=" row">
+						<p class="data-header col s3">Eruption Phase Type: </p>
+						<select id = "edPhase" class = "col s6" id="eruptionSelect" name="eruption[]" multiple >
+                            <option value=""  label = "Choose your option" disabled selected>Choose your option</option>
 						</select>
 					</div>
                     <!-- VEI -->
-					<div id="vei_wrapper" class=" data-wrapper row" style="display: block;">
-						<p class="data-header col s4">VEI:</p>
-                        <div class="input-field inline"><input class = "col s3 " type="text" name="veiMin" id="veiMin" style = 'font-size:inherit;' ></div>
+					<div id="vei_wrapper" class="row" style="display: block;">
+						<p class="data-header col s3">VEI:</p>
+                        <input class = "col s3 " type="text" name="veiMin" id="veiMin" style = 'font-size:inherit;width: 19%' >
 						<p class="col s2 " style = "width:11%">&lt;=Range&lt;=</p>
-                        <div class="input-field inline"><input class = "col s3" type="text" name="veiMax" id="veiMax" style = 'font-size:inherit;' ></div>
+                        <input class = "col s3" type="text" name="veiMax" id="veiMax" style = 'font-size:inherit;width: 19%' >
 
 					</div>
-					<div id="edTime_wrapper" class=" data-wrapper row">
-						<p class="data-header col s4">Eruption Time:</p>
-						<input class = "col s3" type="text" name="edTimeMin" id="edTimeMin"  style = 'font-size:inherit;'>
+					<div id="edTime_wrapper" class="row">
+						<p class="data-header col s3">Eruption Time:</p>
+						<input class = "col s3 timepicker datepicker" type="date" name="edTimeMin" id="edTimeMin"  style = 'font-size:inherit; width: 19%'>
 						<p class="col s2" style ="width:11%">&lt;=Range&lt;= </p>
-						<input class = "col s3" type="text" name="edTimeMax" id="edTimeMax"  style = 'font-size:inherit;'>
+						<input class = "col s3 datepicker" type="date" name="edTimeMax" id="edTimeMax"  style = 'font-size:inherit;width: 19%'>
 					</div>
 				</div>
 
@@ -141,7 +155,7 @@
                 </button>
 
 			    <div id="Collapse" class="innerData collapse col s10 offset-s1">
-				    <div id="Monitoring_Data_Lists" class="monitoring_data row">
+				    <div id="Monitoring_Data_Lists" class="monitoring_data row col s11">
 				    	<p class="seismic">
 				    		<input id="radioButton" type="radio" name="Seismic" checked>Seismic<br>
 				    		<input class="checkBox" type="checkbox" name="sd_evn" id="sd_evn">
@@ -223,16 +237,21 @@
 				    	</p>
 
 				    </div>
-                    <button class="btn btn-primary left-align col s3 row " type="button" data-toggle="collapse" data-target="#advSearchId">Advanced Search
-                        <i class="material-icons right">add</i>
-                    </button>
-                    <div class  = "col s3"></div>
+
+                    <div class  = "col s12">
+                        <button class="btn btn-primary left-align col s3 row " type="button" data-toggle="collapse" data-target="#advSearchId">Advanced Search
+                            <i class="material-icons right">add</i>
+                        </button>
+                    </div>
+                    <div class  = "col s12">
+
+                    </div>
+                    <br/>
 					<!-- <div id="wrapHiddenData" class="wrapper hidden_data"></div>
 					</div> -->
 					<div id="advSearchId" class=" innerData collapse row">
 						<div id="searchPeriod" class = "row">
-                            <br>
-                            <br>
+
                             <div class = "col s3">Priority Time Period: </div>
                             <div class = "col s1">Start:</div>
                             <input disabled class = "col s2 " type="datetime" name="timeMin" id="timeMin" style = "width:18%" >
