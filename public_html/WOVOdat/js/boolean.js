@@ -89,12 +89,12 @@ $(document).ready( function() {
 
     var slider = document.getElementById('slider-range');
     noUiSlider.create(slider, {
-        start: [minDate.getTime(), 0],
+        start: [minDate.getTime(), currentTime],
         connect: true,
         step: 1,
         range: {
             'min': minDate.getTime(),
-            'max': new Date().getTime(),
+            'max': currentTime,
         },
         //format: wNumb({
         //    decimals: 0
@@ -403,15 +403,19 @@ var addTimePicker = function(){
     $('.datepicker').pickadate({
         selectMonths: true, // Creates a dropdown to control month
         max: new Date(),
+        autoclose: true,
+        donetext: 'OK',
+        format: 'yyyy-mm-dd',
         selectYears: 100 // Creates a dropdown of 15 years to control year
     });
-    //$('.timepicker').pickatime({
-    //    default: 'now',
-    //    twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
-    //    donetext: 'OK',
-    //    autoclose: false,
-    //    vibrate: true // vibrate the device when dragging clock hand
-    //});
+    $('.timepicker').pickatime({
+        default: 'now',
+        twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
+        donetext: 'OK',
+        autoclose: true,
+        format: 'hh:mm:ss',
+        vibrate: true // vibrate the device when dragging clock hand
+    });
 
 
     //$("input[name$='TimeMin']").addClass("PriorityTime").datetimepicker(datetimepicker_option);
