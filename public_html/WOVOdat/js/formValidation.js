@@ -145,5 +145,52 @@ $(document).ready(function() {
 			
 		}
 	});
+
+	
+// For user particular form on download wovodat data page
+	$("#downloadDataForm").validate({
+		onkeyup: false,
+		rules: {
+			subject: {
+				required: true              
+			},
+			downloadDataUsername:{
+				required: true     
+			},
+			downloadDataUseremail: {
+				required: true,
+				email: true
+			},
+			downloadDataUserobs:{
+				required: true     
+			},
+			agree:{
+				required: true
+			}			
+		},
+		messages: {
+			subject: {
+				required: "*This field is required"
+				
+			},
+			downloadDataUsername: {
+				required: "*This field is required"
+			},
+			downloadDataUseremail:{
+				required: "*Please enter a valid email address"
+			},
+			downloadDataUserobs: {
+				required: "*This field is required"
+			},	
+			agree:{
+				required: "*Please agree to WOVOdat Privacy Policy"
+			}
+		},
+		// the errorPlacement has to take the table layout into account 
+		errorPlacement: function(error, element) { 
+			error.appendTo(element.parent().parent());
+		},
+	});		
+	
 });			
 					

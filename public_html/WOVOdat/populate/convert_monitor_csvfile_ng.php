@@ -1,28 +1,13 @@
 <?php
-if (!isset($_SESSION))    // Added on 21-Mar-2013	 
-    session_start();  // Start session
+if (!isset($_SESSION))   	 
+    session_start();  
 
-/*  Nang commented on 25-Feb-2013
-session_regenerate_id(true);// Regenerate session ID
-$uname="";
-$ccd="";
-
-if(isset($_SESSION['login'])) {
-	$uname=$_SESSION['login']['cr_uname'];
-	$ccd=$_SESSION['login']['cc_id'];
-}
-else{
-header('Location: '.$url_root.'login_required.php');// Session was not yet started.... Redirect to login required page
-exit();
-}
-*/
-
-if(!isset($_GET['tipedata'])){    // Added on 25-Apr-2012
+if(!isset($_GET['tipedata'])){    
 header('Location: '.$url_root.'home_populate.php');
 exit();
 }
 
-$ccd=$_SESSION['login']['cc_id'];  // Added on 21-Mar-2013	  
+$ccd=$_SESSION['login']['cc_id']; 
 ?>
 <html>
 
@@ -35,8 +20,7 @@ label.error {font-size:12px; display:block; float: none; color: red;}
 	<script language='javascript' type='text/javascript'>
 
 	$(document).ready(function(){
-
-//Changed line 39-78 coz of vol list on 18-Mar-2013 	
+	
 		$("#form1").validate();
 		
 		$("#observ").change(function(){
@@ -44,7 +28,7 @@ label.error {font-size:12px; display:block; float: none; color: red;}
 			$('select#vol2').remove();                  //Remove volcano drop down box 
 			$('#pvol').remove();                        //Remove volcano text 
             $('#vol2,label[for="vol2"]').remove();    	//Remove validation error 
-			loadconvert();  
+			loadconvert ();  
 		});	
 		
 
@@ -181,8 +165,6 @@ label.error {font-size:12px; display:block; float: none; color: red;}
 			}else{	
 				resetall();
 			}
-			
-
 		}); 
 		
 		$("select#network").live('click', function() {
@@ -219,13 +201,6 @@ label.error {font-size:12px; display:block; float: none; color: red;}
 
 				}	
 			}
-/*			else if(stationdisplay=="GasInstrument" || stationdisplay=="ThermalInstrument"){
-
-				$('#station_airborne').css('display','block');
-				$('#sta_borne_select').attr('class','required');
-				
-			}	
-*/			
 		});
 
 
@@ -349,50 +324,7 @@ label.error {font-size:12px; display:block; float: none; color: red;}
 				});	
 			}	
 		}
-/*		
-		function loadstation(){	// commented out after changing jj_volnet 
-			
-			$('#Submit').removeAttr("disabled");
-			
-			$('#kilometer').css("display","none");   // Added on 17-mAY-2012
-			
-			var networkdisplay=$('#network').attr('value');
-
-			var sg = document.form1.vol2.selectedIndex;   // get volcano index 
-			var sgu = document.form1.vol2.options[sg].value;  //get volcano value
-			
-			var stationvalue=$('#conv').attr('value');   //get File content to convert value 	
-			var stationdisplay=$("#conv option:selected").text();  //get station "display" value
-			
 	
-			$.get('./convertie/selectStation_ng.php','volcan='+sgu+ '&stationdisplay='+stationdisplay+ '&stationvalue='+stationvalue+ '&networkdisplay='+networkdisplay,function(result){
-					
-					var check_sn_jj = result;
-				
-					
-					if(check_sn_jj == 'true'){
-						$('#stationform').load('./convertie/selectInstrument_ng.php','volcan='+sgu+ '&stationdisplay='+stationdisplay+ '&stationvalue='+stationvalue+'&networkdisplay=' +networkdisplay+'&stationcheck=check2&instrucomponent=noinstru2&kilometer=nokilometer',function(result){ 
-					
-							//show disabled submit button if there is no network/station/instrument
-							
-							var check = result.substring(11,25);
-							
-							if(check == "nonetworkerror" || check == "nostationerror" || check == "noinstrumenter"){
-																
-								$('#fname').val('');
-								$('#Submit').attr("disabled","disabled");
-							}
-						});	
-					}
-					else{
-						$('#kilometer').css("display","block");
-						showkilometer();
-					}
-
-			});
-			
-		}  
-*/		
 		$("select#kmeter").live('click', function() {
 			showkilometer();
 		});
@@ -521,8 +453,7 @@ label.error {font-size:12px; display:block; float: none; color: red;}
 			}
 		});  
 	});
-		
-	</script>
+</script>
 
 <div style="padding:0px 0px 0px 5px;">
 <h2>Conversion of Monitoring System</h2>
@@ -542,7 +473,7 @@ label.error {font-size:12px; display:block; float: none; color: red;}
 						
 							if(!is_numeric($v_arr[$i]['cc_code'])){
 								$titles=htmlentities($v_arr[$i]['cc_obs'], ENT_COMPAT, "cp1252");
-
+								
 								if($v_arr[$i]['cc_country']==""){
 									if($v_arr[$i]['cc_id']==$ccd){
 										echo "<option value=\"{$v_arr[$i]['cc_code']}\" title=\"$titles\" selected=\"selected\">".$v_arr[$i]['cc_code']."</option>";
@@ -565,7 +496,7 @@ label.error {font-size:12px; display:block; float: none; color: red;}
 
 		<div style="width:10%;">&nbsp;</div>
 		<div id="convertid" style="width:45%;padding-left:90px;">
-			<p1>Type of Data to convert: </p1><br>
+			<p1>Conversion Data Type: </p1><br>
 			<div id="convertblock">
 				<select name='conv' id='conv' style="width:180px;" class="required">
 				<option value=''> ... </option>

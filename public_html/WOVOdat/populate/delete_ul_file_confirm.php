@@ -56,59 +56,47 @@ if ($query_results[0]['cu_type']!="PE" && $query_results[0]['cu_type']!="TE") {
 	header('Location: '.$url_root.'delete_ul_file_list.php');
 	exit();
 }
+include 'php/include/header.php'; 
+
+include 'php/include/menu.php'; 
+
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > <a href='http://{$_SERVER['SERVER_NAME']}/populate/home_populate.php'>Submit Data</a> > Incoming File </div>";
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
-	<div id="wrapborder">
-	<div id="wrap">
-		<?php include 'php/include/header_beta.php'; ?>
-		<!-- Content -->
-		<div id="content">	
-			<div id="contentl">
 
-		<!-- Page content -->
-		<h1>Delete uploaded file</h1>
-		<p><b>Warning!</b> File <b><?php print htmlentities($query_results[0]['cu_file'], ENT_COMPAT, "cp1252"); ?></b> will be deleted from database and server. Are you really sure you want to do that?</p>
-		<form method="post" action="delete_ul_file_check.php" name="delete_ul_file_confirm">
-			<input type="hidden" name="cu_id" value="<?php print $selected_cu_id; ?>" />
-			<input type="hidden" name="cu_file" value="<?php print htmlentities($query_results[0]['cu_file'], ENT_COMPAT, "cp1252"); ?>" />
-			<input type="hidden" name="cu_type" value="<?php print htmlentities($query_results[0]['cu_type'], ENT_COMPAT, "cp1252"); ?>" />
-			<input type="hidden" name="cu_loaddate" value="<?php print htmlentities($query_results[0]['cu_loaddate'], ENT_COMPAT, "cp1252"); ?>" />
-			<input type="hidden" name="cc_id_load" value="<?php print htmlentities($query_results[0]['cc_id_load'], ENT_COMPAT, "cp1252"); ?>" />
-			<input type="submit" name="delete_ul_file_check_ok" value="OK" />
-		</form>
+</div>  <!-- header-menu -->  
 
-		<form method="post" action="home.php" name="donot_delete_ul_file_check">
-			<input type="submit" name="delete_ul_file_check_cancel" value="Cancel" />
-		</form>
+	<div class="body">
+
+		<div class="widecontent">
 		
-			</div>
-			<div id="contentr">
-			</div>
+			<!-- Page content -->
+			<h2>Delete uploaded file</h2>
+			
+			<p><b>Warning!</b> File <b><?php print htmlentities($query_results[0]['cu_file'], ENT_COMPAT, "cp1252"); ?></b> will be deleted from database and server. Are you really sure you want to do that?</p>
+		
+			<form method="post" action="delete_ul_file_check.php" name="delete_ul_file_confirm">
+				<input type="hidden" name="cu_id" value="<?php print $selected_cu_id; ?>" />
+				<input type="hidden" name="cu_file" value="<?php print htmlentities($query_results[0]['cu_file'], ENT_COMPAT, "cp1252"); ?>" />
+				<input type="hidden" name="cu_type" value="<?php print htmlentities($query_results[0]['cu_type'], ENT_COMPAT, "cp1252"); ?>" />
+				<input type="hidden" name="cu_loaddate" value="<?php print htmlentities($query_results[0]['cu_loaddate'], ENT_COMPAT, "cp1252"); ?>" />
+				<input type="hidden" name="cc_id_load" value="<?php print htmlentities($query_results[0]['cc_id_load'], ENT_COMPAT, "cp1252"); ?>" />
+				<input type="submit" name="delete_ul_file_check_ok" value="OK" />
+			</form>
+
+			<form method="post" action="home.php" name="donot_delete_ul_file_check">
+				<input type="submit" name="delete_ul_file_check_cancel" value="Cancel" />
+			</form>
+		
 		</div>
-		
-		<!-- Footer -->
-		<div id="footer">
-			<div align="left">
-				&nbsp;Copyright © 2000-2009 <a href="http://www.wovo.org" target="_blank">The World Organization of Volcano Observatories</a></div>
-			<div align="right"><font size="1" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
-				<b>last updated: <script type="text/javascript">document.write(document.lastModified)</script>
-			 | website hosted by <a href="http://www.eos-singapore.org">EOS&nbsp;</a></b>
-			</div>
-		</div>
-		
 	</div>
-</body>
-</html>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->	

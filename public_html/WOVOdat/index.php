@@ -7,7 +7,7 @@
 	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
 	<meta name="keywords" content="Volcano, Vulcano, Volcanoes">
 	<link href="/gif/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<link href="/css/styles_beta.css" rel="stylesheet">
+
 </head>
 
 <body>

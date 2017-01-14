@@ -1,0 +1,218 @@
+{
+	"dd_tlt" : {
+		"data_type" : "ElectronicTilt",
+		"params" : [
+			{
+				"cols" : "dd_tlt1",
+				"name" : "Radial/X-axis Tilt"
+			},
+			{
+				"cols" : "dd_tlt2",
+				"name" : "Tangential/Y-axis Tilt"
+			},
+			{
+				"cols" : "dd_tlt_temp",
+				"name" : "Tilt Temperature"
+			}
+		]
+	},
+
+	"dd_edm" : {
+		"time" : "dd_edm_time",
+		"data_type" : "EDM",
+		"params" : [
+			{
+				"cols" : "dd_edm_line",
+				"name" : "EDM Line Length"
+			}
+		]	
+	},
+
+	"dd_tlv" : {
+		"stime" : "dd_tlv_stime",
+		"etime" : "dd_tlv_etime",
+		"data_type" : "TiltVector",
+		"params" : [
+			{
+				"cols" : "dd_tlv_mag",
+				"name" : "Tilt Vector"
+			},
+			{
+				"cols" : "dd_tlv_azi",
+				"name" : "Tilt Azimuth"
+			}
+		]
+	},
+
+	"dd_str" : {
+		"time" : "dd_str_time",
+		"data_type" : "Strain",
+		"params" : [
+			{
+				"cols" : "dd_str_comp1",
+				"name" : "Strain Component 1"
+			},
+			{
+				"cols" : "dd_str_comp2",
+				"name" : "Strain Component 2"
+			},
+			{
+				"cols" : "dd_str_comp3",
+				"name" : "Strain Component 3"
+			},
+			{
+				"cols" : "dd_str_comp4",
+				"name" : "Strain Component 4"
+			},
+			{
+				"cols" : "dd_str_vdstr",
+				"name" : "Volumetric Strain Change"
+			},
+			{
+				"cols" : "dd_str_sstr_ax1",
+				"name" : "Shear Strain Axis 1"
+			},
+			{
+				"cols" : "dd_str_azi_ax1",
+				"name" : "Strain Azimuth Axis 1"
+			},
+			{
+				"cols" : "dd_str_sstr_ax2",
+				"name" : "Shear Strain Axis 2"
+			},
+			{
+				"cols" : "dd_str_azi_ax2",
+				"name" : "Strain Azimuth Axis 2"
+			},
+			{
+				"cols" : "dd_str_sstr_ax3",
+				"name" : "Shear Strain Axis 3"
+			},
+			{
+				"cols" : "dd_str_azi_ax3",
+				"name" : "Strain Azimuth Axis 3"
+			},
+			{
+				"cols" : "dd_str_pmax",
+				"name" : "Maximum Strain"
+			},
+			{
+				"cols" : "dd_str_pmin",
+				"name" : "Minimum Strain"
+			},
+			{
+				"cols" : "dd_str_pmax_dir",
+				"name" : "Maximum Strain Direction"
+			},
+			{
+				"cols" : "dd_str_pmax_dir",
+				"name" : "Maximum Strain Direction"
+			},
+			{
+				"cols" : "dd_str_bpres",
+				"name" : "Barometric Pressure"
+			}
+		]
+	},
+
+	"dd_ang" : {
+		"time" : "dd_ang_time",
+		"data_type" : "Angle",
+		"params" : [
+			{
+				"cols" : "dd_ang_hort1",
+				"name" : "Horizontal Angle Target-1"
+			},
+			{
+				"cols" : "dd_ang_hort2",
+				"name" : "Horizontal Angle Target-2"
+			},
+			{
+				"cols" : "dd_ang_vert1",
+				"name" : "Vertical Angle Target-1"
+			},
+			{
+				"cols" : "dd_ang_vert2",
+				"name" : "Vertical Angle Target-2"
+			}
+		]
+	},
+
+	"dd_gps" : {
+		"time" : "dd_gps_time",
+		"data_type" : "GPSPosition&Slope",
+		"params" : [
+			{
+				"cols" : "dd_gps_lat",
+				"name" : "GPS Latitude"
+			},
+			{
+				"cols" : "dd_gps_lon",
+				"name" : "GPS Longitude"
+			},
+			{
+				"cols" : "dd_gps_slope",
+				"name" : "GPS Baseline/Slope"
+			},
+			{
+				"cols" : "dd_gps_elev",
+				"name" : "GPS Elevation"
+			}
+		]
+	}, 
+
+	"dd_gpv" : {
+		"stime" : "dd_gpv_stime",
+		"etime" : "dd_gpv_etime",
+		"data_type" : "GPSVector",
+		"params" : [
+			{
+				"cols" : "dd_gpv_dmag",
+				"name" : "GPS Displacement"
+			},
+			{
+				"cols" : "dd_gpv_daz", 
+				"name" : "GPS Displ-azimuth"
+			},
+			{
+				"cols" : "dd_gpv_N",
+				"name" : "GPS N-S Displacement"
+			},
+			{
+				"cols" : "dd_gpv_E",
+				"name" : "GPS E-W Displacement"
+			},
+			{
+				"cols" : "dd_gpv_vincl",
+				"name" : "GPS Displ-inclination"
+			},
+			{
+				"cols" : "dd_gpv_staVelNorth",
+				"name" : "GPS N-S Velocity"
+			},
+			{
+				"cols" : "dd_gpv_staVelEast",
+				"name" : "GPS E-W Velocity"
+			},
+			{
+				"cols" : "dd_gpv_staVelVert",
+				"name" : "GPS Vertical Velocity"
+			},
+			{
+				"cols" : "dd_gpv_vert",
+				"name" : "GPS Vertical Displacement"
+			}
+		]
+	},
+
+	"dd_lev" : {
+		"time" : "dd_lev_time",
+		"data_type" : "Leveling",
+		"params" : [
+			{
+				"cols" : "dd_lev_delev",
+				"name" : "Elevation Change"
+			}
+		]
+	}
+}

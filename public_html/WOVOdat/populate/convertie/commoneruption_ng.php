@@ -1,11 +1,7 @@
 <?php
-
-$servpath="C:/xampp/htdocs/home/wovodat/public_html/WOVOdat";
-
-require_once($servpath."/populate/convertie/f2genfunc/func_xmlparse.php"); 	// class xml parser 
-require_once($servpath."/populate/convertie/f2genfunc/funcgen_printarray.php"); 
-
-
+$servpath=".";
+require_once($servpath."/f2genfunc/func_xmlparse.php"); // class xml parser 
+require_once($servpath."/f2genfunc/funcgen_printarray.php"); 
 
 function getxmlheader($datatype){	
 
@@ -38,8 +34,7 @@ return $newfileheader;
 
 function getxml_head_foot($conv,&$header,&$footer){
 
-if($conv == 'ed' || $conv == 'ed_phs' || $conv == 'ed_for' || $conv == 'ed_vid'){
-
+if($conv == 'ed' || $conv == 'ed_for' || $conv == 'ed_vid'){
 $header = <<<HTMLBLOCK
 <?xml version="1.0" encoding="UTF-8" ?> 
 <wovoml xmlns="http://www.wovodat.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -48,6 +43,18 @@ version="1.1.0" xsi:schemaLocation="http://www.wovodat.org/WOVOdatV1.xsd">
 HTMLBLOCK;
 
 $footer ="\n</Eruptions>";
+$footer .="\n</wovoml>";
+} else if($conv == 'ed_phs'){
+$header = <<<HTMLBLOCK
+<?xml version="1.0" encoding="UTF-8" ?> 
+<wovoml xmlns="http://www.wovodat.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+version="1.1.0" xsi:schemaLocation="http://www.wovodat.org/WOVOdatV1.xsd">
+<Eruptions>
+<Phases>
+HTMLBLOCK;
+
+$footer  ="\n</Phases>";
+$footer .="\n</Eruptions>";
 $footer .="\n</wovoml>";
 }
 

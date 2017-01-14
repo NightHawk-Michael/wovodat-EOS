@@ -1,23 +1,19 @@
 <?php
-session_start();
+if(!isset($_SESSION))
+	session_start();
 
-include "view/common_v.php";
 require_once "php/include/get_root.php";
 
-/*
-if(!isset($_SESSION['login'])){       // can't proceed without log in
-	//echo $url_root;
-	header('Location: '.$url_root.'login_required.php');
-	exit;
-}
-*/
+include 'php/include/header.php';
 
-showExternallink();
-showHeader();
+include 'php/include/menu.php';
 
-include "php/include/header.php"; 
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > Data Download > WOVOdat Boolean Search Form</div>";
 
-showContent();
+echo "</div>";   /*** header-menu  ***/
+
+echo"<div class='body'>";
+	echo"<div class='widecontent'>";
 /*
 $rockTypeData=getRockType();
 $featureTypeData=getFeatureType();
@@ -138,10 +134,19 @@ showjquery($rockType,$featureType,$edPhaseType,$eqType,$treType,$sampleSpecies,$
 );
 */
 
-
 include "view/booleanIndex_v.php";
-showFooter1();
-include "php/include/footer.php"; 
-showFooter2();
-
 ?>
+
+	</div>
+</div>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->
+	

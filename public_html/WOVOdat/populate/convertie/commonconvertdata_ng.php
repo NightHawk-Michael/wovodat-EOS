@@ -46,10 +46,18 @@ if(isset($_POST['conv']))
 if(isset($_POST['network']))
 	$network =$_POST['network'];
 
-if(isset($_POST['stat']))  
+if(isset($_POST['stat']))
 	$station = $_POST['stat'];
+/*
+if(isset($_POST['stat2'])){
+	$station2=getstation2code($_POST['stat2'],$conv);
+}
+	
+if(isset($_POST['stat3'])){
+	$station3=getstation2code($_POST['stat3'],$conv);
+}	
+*/
 
-//Nang added line 52-69 on 26-Feb-2013. Because GPS station 2 and station 3.	
 if(isset($_POST['stat2']) || isset($_POST['gpsStat2'])){
 	if(isset($_POST['stat2']))
 		$station2 = $_POST['stat2'];
@@ -67,7 +75,6 @@ if(isset($_POST['stat3']) || isset($_POST['gpsStat3'])){
 
 	$station3=getstation2code($station3,$conv);
 }	
-
 
 if(isset($_POST['instrument']))
 	$instrument = $_POST['instrument'];
@@ -131,7 +138,7 @@ if($conv == 'EventDataFromNetwork' || $conv == 'SeismicTremor_Network' || $conv 
 else if($conv=="EventDataFromSingleStation" || $conv == 'SeismicTremor_Station' || $conv == 'SeismicIntervalSwarm_Station' || $conv=="RSAMData" || $conv=="SSAMData" || $conv == "RepresentativeWaveform" ){
 
 	$station=getstationcode($station,$conv);  // Get station code from DB
-}  
+}
 else if($conv == 'ElectronicTiltData' || $conv == 'TiltVectorData' || $conv == 'StrainMeterData' || $conv == 'GPSVectors' || $conv == 'EDMData' || $conv == 'AngleData' || $conv == 'GPSData' || $conv == 'LevelingData' || $conv == 'DirectlySampledGas' ||$conv == 'SoilEffluxData' || $conv == 'PlumeData' || $conv == "HydrologicData" || $conv == "MagneticFieldsData" || $conv == "MagnetorVectorData" || $conv == "ElectricFieldsData" || $conv == "GravityData" || $conv == "GroundBasedThermalData" || $conv == "ThermalImage and ThermalImageData" || $conv == "MeteoData"){
 
 	$station=getstationcode($station,$conv);  // Get station code from DB
@@ -157,8 +164,8 @@ $second2digitvol=substr($volcode,2,2);
 
 
 //prepare the directory of output file
-$infilepath="C:/xampp/htdocs/home/wovodat/incoming/to_be_translated/";
-$outputfilepath="C:/xampp/htdocs/home/wovodat/incoming/translated/";     
+$infilepath="../../../../incoming/to_be_translated/";
+$outputfilepath="../../../../incoming/translated/";     
 
 
 if($_FILES['fname1']['name']!="" ){
@@ -209,7 +216,7 @@ if($_FILES['secondname']['name']!="" ){
 	
 	$handle2 =fopen($secondname_info['infile'],"r");            // Read CSV Header
 	$filesize2 = $secondname_info['filesize'];
-}	
+}
 
 
 $datatype = $findtable[$conv];
@@ -246,11 +253,11 @@ for($i=0;$i<$xmlheadersize;$i++){         //Compare csv and xml Header
 }
 
 // Try to get index 
+
 $codeindex = array_search($datacode,$csvheader);
 $pubindex = array_search($datapubdate,$csvheader);
 $owner2index = array_search('cc_id2',$csvheader);
 $owner3index = array_search('cc_id3',$csvheader);
-
 
 if($conv == "DirectlySampledGas"){
 	$gdtypeindex = array_search('gd_species',$csvheader);
@@ -286,42 +293,46 @@ if($conv == "RSAMData"){
 
 if($conv == "SSAMData"){	
 	$rsam_ssam_stimeindex = array_search('sd_ssm_stime',$csvheader);
-}	
-/*
+}
+/*	
 if($conv == "LevelingData"){
 	$instrumentindex = array_search('di_gen_id',$csvheader);
 	$refStationindex = array_search('ds_id_ref',$csvheader);
 	$firstBMStationindex = array_search('ds_id1',$csvheader);
 	$secondBMStationindex = array_search('ds_id2',$csvheader);
-}*/
+} */
+
 if($conv == "IntensityData"){	
 	$sd_int_timeindex = array_search('sd_int_time',$csvheader);
 }
 if($conv=="ThermalImage and ThermalImageData" || $conv == "ThermalImage_satellite_type"){ 
-//	$imagelink="C:/xampp/htdocs/home/wovodat/region/".$first2digitvol."/".$second2digitvol."/thermal";
+	//$imagelink="../../../../region/".$first2digitvol."/".$second2digitvol."/thermal";
 	
 	$imagelink= "/".$first2digitvol."/".$second2digitvol."/thermal";   // Updated on 19-Nov-2013
 
 	$td_img_index = array_search('td_img_img',$csvheader);             //take image name from csv
 	$td_img_path_index = array_search('td_img_path',$xmlheader);       //take index from xml 
+	
+	
+	
 }
 if($conv == "RepresentativeWaveform"){
-//	$imagelink="C:/xampp/htdocs/home/wovodat/region/".$first2digitvol."/".$second2digitvol."/waveform";
-	
+//	$imagelink="../../../../region/".$first2digitvol."/".$second2digitvol."/waveform";
+
 	$imagelink="/".$first2digitvol."/".$second2digitvol."/waveform";    // Updated on 19-Nov-2013
 
 	$sd_wav_img_index = array_search('sd_wav_img',$csvheader);   //take index from xml 	
 	$sd_wav_link_index = array_search('sd_wav_link',$xmlheader);   //take index from xml 
 }
+
 if($conv == "Insar_satellite_type"){        // InSARImage and InSARData
-//	$imagelink="C:/xampp/htdocs/home/wovodat/region/".$first2digitvol."/".$second2digitvol."/insar";
+//	$imagelink="../../../../region/".$first2digitvol."/".$second2digitvol."/insar";
 	
 	$imagelink="/".$first2digitvol."/".$second2digitvol."/insar";      // Updated on 19-Nov-2013
 
 	$dd_sar_img_index = array_search('dd_sar_img',$csvheader);   //take index from xml 
-	$dd_sar_img_path_index = array_search('dd_sar_img_path',$xmlheader);   //take index from xml 
+	$dd_sar_img_path_index = array_search('dd_sar_img_path',$xmlheader);   //take index from xml  
 }
-
 
 /* Added on 17-Dec-2014  --- Only for Gas plume Satellite Data (Ground based station & Airplane data will not have image) */ 
 
@@ -332,7 +343,6 @@ if($conv == "plume_satellite_type"){
 	$gd_plu_img_path_index = array_search('gd_plu_image_path',$xmlheader);   //take index from xml 
 }
 /* (end) Added on 17-Dec-2014  */
-
 
 $xmlbody = "";
 $count=0;
@@ -357,7 +367,7 @@ while(!feof($handle)){
 	for($i=0;$i<$ordersize;$i++){
 		$sortedline[$i] =  $orgline[$order[$i]];
 	}
-	
+
 	if($conv == "ThermalImage and ThermalImageData" || $conv == "ThermalImage_satellite_type"){ 
 		
 		$imageName = $orgline[$td_img_index];               // get the image name from CSV
@@ -394,7 +404,6 @@ while(!feof($handle)){
 	}
 
 /* (end) Added on 17-Dec-2014  */
-
 	
 	// get a code
 	$code = $orgline[$codeindex];
@@ -489,8 +498,7 @@ while(!feof($handle)){
 		$r .= "\t</$xmlinitag>";
 		$xmlbody .=$r;		
 	}
-	else if($conv == 'GPSData'){  
- //Nang added line 443-456 on 26-Feb-2013. Because GPS station 2 and station 3.		
+	else if($conv == 'GPSData'){
 	
 		if($station2 == ""){
 			$refStation1 = "";
@@ -506,8 +514,6 @@ while(!feof($handle)){
 		
 		
 		$r	= "\n\t<$xmlinitag code=\"$code\" instrument=\"$instrument\" station=\"$station\"$refStation1$refStation2 owner1=\"$observ\"$owner2$owner3$pubdate>\n";	
-
-//added & changed up to here... Because GPS station 2 and station 3.		
 		
 		$r  =  convert_xml($r,$newfileheader,$sortedline,$xmlheader); //convert to xml
 		
@@ -696,6 +702,7 @@ while(!feof($handle)){
 
 		$r	= "\n\t<$xmlinitag code=\"$code\" satellite=\"$satellite\" owner1=\"$observ\"$owner2$owner3$pubdate>\n";
 		
+		
 		$r = convert_xml($r,$newfileheader,$sortedline,$xmlheader);  //convert to xml
 		$r .= convert_insar_pixel($handle2,$count2);
 
@@ -731,8 +738,7 @@ while(!feof($handle)){
 		if($secondBMStationindex)
 			$secondBMStation = $orgline[$secondBMStationindex];			
 	*/	
-		
-		
+	
 		$r	= "\n\t<$xmlinitag code=\"$code\" instrument=\"$instrument\" refStation=\"$station\" firstBMStation=\"$station2\" secondBMStation=\"$station2\" owner1=\"$observ\"$owner2$owner3$pubdate>\n";	
 	
 		$r  =  convert_xml($r,$newfileheader,$sortedline,$xmlheader); //convert to xml
@@ -798,7 +804,7 @@ while(!feof($handle)){
 		$outputxmlhead .= "\n<startTime>$startTime</startTime>"; 	
 		$outputxmlhead .= "\n<endTime>$endTime</endTime>"; 
 		$outputxmlhead .= "\n<cntInterval>$cntInterval</cntInterval>"; 
-		$outputxmlhead .= "\n<$xmldataset>"; 		
+		$outputxmlhead .= "\n<$xmldataset>"; 	
 	}	
 	
 	if($conv == 'IntensityData'){    // IntensityData link to intensity_csvxml__view_ng.php and continue from that page
@@ -826,7 +832,6 @@ while(!feof($handle)){
 
 	include "showxmlresult_ng.php";      //Show every results here...        
 
-	
 ?>
 
 

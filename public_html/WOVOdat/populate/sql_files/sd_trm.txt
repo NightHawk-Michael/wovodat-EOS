@@ -1,0 +1,13 @@
+Akan	56
+Asama	462
+Aso	4038
+Bandai	1
+Iwate	7
+Kikai	296
+Kuchinoerabu-jima	58
+Miyake-jima	681
+Sakura-jima	2724
+Suwanose-jima	648
+Tokachi	2
+Tsurumi	4
+Unzen	26

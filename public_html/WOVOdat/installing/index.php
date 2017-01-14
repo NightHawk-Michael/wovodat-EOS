@@ -1,32 +1,32 @@
 <?php
-session_start();
-// Regenerate session ID
-session_regenerate_id(true);
+if(!isset($_SESSION))
+	session_start();
 
 // Get root url
 require_once "php/include/get_root.php";
 $webpage_link="http://{$_SERVER['SERVER_NAME']}/populate";
+
 
 if(isset($_SESSION['login'])){	
 	header('Location:download_installable.php');
 }
 else{
 
-echo <<<HTMLBLOCK
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/js2/navig.css" rel="stylesheet">
-	<link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
+	// Local variable
+	$login_error="";
+
+	// Get attempt URL attribute
+	if (isset($_GET['attempt']) == 1) {
+		$login_error="Wrong username or password. Please try again.";
+	}
+
+	if(isset($_GET['nopost']) == 1) {
+		$login_error="Warning! For accessing this page, please login first."; 
+	} 
 	
-	<script type="text/javascript" src="/js/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="/js/jquery.validate.js"></script>
+	include 'php/include/header.php'; 
+?>
+
 	<script language='javascript' type='text/javascript'>
 	
 		$(document).ready(function(){
@@ -43,119 +43,94 @@ echo <<<HTMLBLOCK
 	</script>
 
 
-<style type="text/css">
-label.error {font-size:9px; float: none; color: red; padding-left: .5em; vertical-align: top; }
-</style>	
-</head>
-<body>
+	<style type="text/css">
+	label.error {font-size:9px; float: none; color: red; padding-left: .5em; vertical-align: top; }
+	</style>	
+		
+<?php	
+	include 'php/include/menu.php';  
+	
+	echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > <a href='http://{$_SERVER['SERVER_NAME']}/doc/index.php'>Documentation </a> > Login</div>";
 
-	<div id="wrapborder">
-	<div id="wrap">
-HTMLBLOCK;
+?>
+	
+</div>  <!-- header-menu -->
 
-include 'php/include/header_beta.php';
-echo <<<HTMLBLOCK
-
-		<!-- Content -->
-		<div id="content">	
+<div class="body">
+	<div class="widecontent">
+		<div class="form width50" style="margin-bottom: 0;">
+			<!-- Registration / Login -->
+			
 			<div id="disablecontent" style="display:none;">
 				echo"Download successful";  
 			</div>
-			<div id="contentl">
-HTMLBLOCK;
-
-				echo"<div style='color:red;text-align:center;'>";					
-					if (isset($_GET['nopost'])== 1) {
-						echo"<h3>Warning! For accessing this page, please login first.</h3>"; 
-					}
-				echo"</div>";
-			
-echo <<<HTMLBLOCK
-
-				<div><br/>
 				
-				<p><b>Please log in to download an installabe tool. </b></p>
-				
-			
 				<!-- Registration / Login -->
-			
-
+				<table>
 				
+					<tr>
+						<!-- Login -->
+						<td colspan="3" id="regisLoginC2"><h2>Log In</h2></td>
+					</tr>
+				
+					
 					<!-- Login form -->
 					<form name="installpackage" id="installpackage" method="post" action="install_check.php">
 				
-					<table id="regisLogin">	
-					<tr>
-						<!-- Registration -->
-						<td rowspan="10" id="regisLoginC1">
-									
-							<a href="$webpage_link/regist_form.php">Register</a>
-						</td>
-					</tr>
-					
-					
-						<!-- Login -->
-					
-						<tr>
-							<td colspan="3" id="regisLoginC2">Existing Users</td>
-						</tr>
-	
-						<!-- Username -->
-						<tr>
-							<th id="regisLoginUname">&nbsp;&nbsp;Username:</th>
-							<td>
-								<input type="text" name="uname" class="required"/>
-							</td>
-						</tr>
-								
-						<!-- Password -->
-						<tr>
-							<th id="regisLoginpw">&nbsp;&nbsp;Password:</th>
-							<td id="regisLoginpw">
-								<input type="password" name="password" class="required" minlength="6"/>
-							</td>
-							<td colspan="2" id="regisLoginSubmitButton">
-								<input type="submit" name="login_submit" value="Log In" />
-							</td>
-						</tr>
-
-					
-					<!-- Login errors -->
+						<!-- Login errors -->
 						<tr>
 							<td colspan="3" id="regisLoginError">
-				
-HTMLBLOCK;
-								if (isset($_GET['attempt'])== 1) {
-									echo"<p id=\"error\">Wrong username and password.</p>"; 
-								}
-echo <<<HTMLBLOCK
-								
+								<span style='color:red;text-align:center;'><?php print $login_error; ?></span>
 							</td>
-						</tr>			
+						</tr>
+					
+						<!-- Username -->
+						<tr>
+							<th id="regisLoginUname" class="label">Username:</th>
+							<td>
+								<input type="text" name="uname" />
+							</td>
+						</tr>
+						
+						<!-- Password -->
+						<tr>
+							<th id="regisLoginpw" class="label">Password:</th>
+							<td id="regisLoginpw">
+								<input type="password" name="password" />
+							</td>
+							<td colspan="2" id="regisLoginSubmitButton">
+								<input type="submit" name="login_submit" value="log in" id="submit" />
+							</td>
+						</tr>
+					</form>
 
 					<!-- Forgot password -->
-						<tr>
-							<td colspan="3" id="forgotPW"><a href="$webpage_link/forgot_password.php">Forgot password</a></td>
-						</tr>
-					</table>	
-					</form>	
-				</div>
-HTMLBLOCK;
-		echo"</div>";	
+					<tr> 
+						<td colspan="3" id="forgotPW"><a href="<?php echo $webpage_link ?>/forgot_password.php">Forgot Your Password?</a></td>
+					</tr>
+			</table>
+		</div>
 		
-		echo"<div id=\"contentr\">";
-		echo"</div>";
+		<div class="grey width50">
+			<h2>New User?</h2>
+			<!-- Registration -->
+			<a href="<?php echo $webpage_link ?>/regist_form.php">Register Here</a>
+		</div>
 
-	echo"</div>";
+					
+	</div>
+</div>
 
-	echo"<div>";
-	include "php/include/footer_main_beta.php"; 
-	echo"</div>";
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
 	
-echo"</div>";
-	
-echo"</body>";
-echo"</html>";	
-	
-}      //end Else statement
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->	
+
+<?php	
+	}      //end Else statement
 ?>

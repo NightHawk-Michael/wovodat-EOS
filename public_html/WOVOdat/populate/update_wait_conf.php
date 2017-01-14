@@ -26,49 +26,42 @@ $email=$_SESSION['mng_ccinfo']['email'];
 // Unset session variables used for registration
 unset($_SESSION['mng_ccinfo']);
 
+
+include 'php/include/header.php'; 
+
+include 'php/include/menu.php'; 
+
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > <a href='http://{$_SERVER['SERVER_NAME']}/populate/my_account.php'>Account</a> > Manage contact information </div>";
+
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/js2/navig.css" rel="stylesheet">
-	<link href="/gif/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
-	<script language="JavaScript" src="/js2/menu_array.js" type="text/javascript"></script>
-	<script language="JavaScript" src="/js2/mmenu.js" type="text/javascript"></script>
 
-	<div id="wrapborder">
-	<div id="wrap">
-			<?php include 'php/include/header_beta.php'; ?>
+</div>  <!-- header-menu -->  
+	
+	<div class="body">
 
-		<!-- Content -->
-		<div id="content">	
-			<div id="contentl">
-		<!-- Page content -->
-		<h1>Email update waiting confirmation</h1>
-		<p>Thank you for registering to WOVOdat. An email was sent to your new email address (<?php print $email; ?>) for you to confirm its validity. Once you receive it, please click on the link provided.</p>
-		<p>If you do not receive any email after several hours, please check your Spam/Junk email inbox. If it is not there, try to register again and make sure that the email address you entered is valid.</p>
-		<p>Feel free to <a href="http://www.wovodat.org/populate/contact_us_form.php">Contact us</a> if you have any question or issue.</p>
-		<br />
-		<p><a href="index.php">Go back to home page</a></p>
-
-			</div>
-			<div id="contentr">
-			</div>
-		</div>
+		<div class="widecontent">
 		
-		<!-- Footer -->
-		<div id="footer">
-			<?php include 'php/include/footer_beta.php'; ?>
-		</div>
+			<!-- Page content -->
+			<h2>Email update waiting confirmation</h2>
+			
+			<p>Thank you for registering to WOVOdat. An email was sent to your new email address (<?php print $email; ?>) for you to confirm its validity. Once you receive it, please click on the link provided.</p>
 		
+			<p>If you do not receive any email after several hours, please check your Spam/Junk email inbox. If it is not there, try to register again and make sure that the email address you entered is valid.</p>
+			
+			<p>Feel free to <a href="http://www.wovodat.org/populate/contact_us_form.php">Contact us</a> if you have any question or issue.</p>
+			<br />
+			
+			<p><a href="index.php">Go back to home page</a></p>
+			
+		</div>
 	</div>
-</body>
-</html>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->

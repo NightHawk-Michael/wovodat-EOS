@@ -4,16 +4,16 @@ function showUpdateTableList(){
 $i="";
 
 echo <<<HTMLBLOCK
-		<!-- Content -->
-
-		<div id="content">
 		<!-- Page content -->
+		<div class="form">
+
+			<h3>Upload online form for Bibliographic Information (Table Name: cb) </h3>
+
+			<span> (All fields * are required) </span>
 		
-		<h2 style="text-align:center;">Upload form for Bibliographic Information.  Table : cb  </h2> <br/>
-		
-		<p class="formFont">The fields preceded by an asterisk (*) are required.</p><br/>
-		<!-- Form -->
-		<form method="post" action="insertSwitch.php" name="form_cb" id="form_cb">
+			<p class="redtext"><?php if ($error) {print "Registration unsuccessful! Please correct the fields in red:";} ?></p>
+			
+			<form method="post" action="insertSwitch.php" name="form_cb" id="form_cb">
 			
 			<table class="formtable" id="formtable">
 
@@ -65,7 +65,7 @@ echo <<<HTMLBLOCK
 				<tr>
 					<td><span class="formFont">Digital Object Identifier:</span> </td>
 					<td>
-						<input type="text" maxlength="20" id="cb_doi" name="cb_doi" value="" />
+						<input type="text" maxlength="50" id="cb_doi" name="cb_doi" value="" />
 					</td>
 				</tr>
 				<tr>

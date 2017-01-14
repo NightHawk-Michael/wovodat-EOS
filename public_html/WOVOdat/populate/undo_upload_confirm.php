@@ -44,54 +44,42 @@ for ($i=0; $i<$num_files; $i++) {
 	$selected_date=$loaddates[$i];
 }
 	
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
-	<div id="wrapborder">
-	<div id="wrap">
-		<?php include 'php/include/header_beta.php'; ?>	
-		<!-- Content -->
-		<div id="content">	
-			<div id="contentl">
-		<!-- Top of the page -->
-		
-		<!-- Page content -->
-		<h1>Undo upload confirmation</h1>
-		<p>Warning! All data contained in <?php print $selected_file; ?> will be removed from the database OR get back to their previous state before upload. Are you really sure you want to do that?</p>
-		<form method="post" action="undo_upload_check.php" name="select_users">
-			<input type="hidden" name="file_id" value="<?php print $selected_id ?>" />
-			<input type="hidden" name="file_name" value="<?php print $selected_file ?>" />
-			<input type="hidden" name="file_date" value="<?php print $selected_date ?>" />
-			<input type="submit" name="undo_upload_confirm_cancel" value="Cancel" />
-			<input type="submit" name="undo_upload_confirm_ok" value="OK" />
-		</form>
+include 'php/include/header.php'; 
 
-			</div>
-			<div id="contentr">
-				<div id="top" align="left">
-					<!-- Aligned to the right: You are logged in as username (FName LName | Obs) | Logout -->
-					<p align="right">Login as <b><?php print $uname; ?></b> | <a href="logout.php">Logout</a></p>
-				</div><br>
-		
-			</div>
+include 'php/include/menu.php'; 
+
+echo "<div id='breadcrumbs'> Undo upload (Direct Access) </div>";
+
+?>
+
+</div>  <!-- header-menu -->  
+
+	<div class="body">
+
+		<div class="widecontent">
+
+			<!-- Page content -->
+			<h2>Undo upload confirmation</h2>
+			
+			<p>Warning! All data contained in <?php print $selected_file; ?> will be removed from the database OR get back to their previous state before upload. Are you really sure you want to do that?</p>
+			
+			<form method="post" action="undo_upload_check.php" name="select_users">
+				<input type="hidden" name="file_id" value="<?php print $selected_id ?>" />
+				<input type="hidden" name="file_name" value="<?php print $selected_file ?>" />
+				<input type="hidden" name="file_date" value="<?php print $selected_date ?>" />
+				<input type="submit" name="undo_upload_confirm_cancel" value="Cancel" />
+				<input type="submit" name="undo_upload_confirm_ok" value="OK" />
+			</form>
+
 		</div>
-		
-		<!-- Footer -->
-		<div id="footer">
-			<?php include 'php/include/footer_beta.php'; ?>
-		</div>
-		
 	</div>
-</body>
-</html>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->	

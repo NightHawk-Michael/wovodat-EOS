@@ -15,97 +15,76 @@ if (isset($_GET['attempt'])) {
 	}
 }
 
+
+include 'php/include/header.php'; 
+
+include 'php/include/menu.php'; 
+
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > <a href='http://{$_SERVER['SERVER_NAME']}/populate/my_account.php'>Account</a> > Manage account</div>";
+
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/gif/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
-	<div id="wrapborder">
-	<div id="wrap">
-		<?php include 'php/include/header_beta.php'; ?>
-		<!-- Content -->
-		<div id="content">	
-		<!-- Top of the page -->
-		<div id="contentl">
-		<!-- Page content -->
-		<h1>Manage account</h1>
-		<p class="redtext"><?php print $update_error; ?></p>
-		<!-- Form -->
-		<form method="post" action="update_account.php" name="update_cr">
-			<table class="formtable">
-				<tr>
-<?php
 
-if ($old_pw_error) {
-	print "\t\t\t\t\t<th class=\"red\">";
-}
-else {
-	print "\t\t\t\t\t<th>";
-}
+</div>  <!-- header-menu -->  
+	
+	<div class="body">
 
-?>Old password:</th>
-					<td>
-						<input type="password" maxlength="30" name="old_password" />
-					</td>
-				</tr>
-				<tr>
-<?php
+		<div class="widecontent">
 
-if ($new_pw_error) {
-	print "\t\t\t\t\t<th class=\"red\">";
-}
-else {
-	print "\t\t\t\t\t<th>";
-}
-
-?>New password (&ge; 6 characters):</th>
-					<td>
-						<input type="password" maxlength="30" name="new_password" />
-					</td>
-				</tr>
-				<tr>
-<?php
-
-if ($new_pw_error) {
-	print "\t\t\t\t\t<th class=\"red\">";
-}
-else {
-	print "\t\t\t\t\t<th>";
-}
-
-?>Confirm new password:</th>
-					<td>
-						<input type="password" maxlength="30" name="conf_new_password" />
-					</td>
-				</tr>
-			</table>
-			<input type="submit" name="confirm" value="Confirm" />
-		</form>
-
-			</div>
-			<div id="contentr">
-				<div id="top" align="left">
-					<!-- Aligned to the right: You are logged in as username (FName LName | Obs) | Logout -->
-					<p align="right">Login as <b><?php print $uname; ?></b> | <a href="logout.php">Logout</a></p>
-				</div><br>
 		
-			</div>
+			<div class="form">
+				<table>
+					<tr>
+						<td><h2>Manage account</h2></td>
+					</tr>
+
+					<tr>
+						<td><span style="color:red;"><?php print $update_error; ?></span></td> <td></td>
+					</tr>
+		
+					<tr>
+						<td>   
+								
+							<form method="post" action="update_account.php" name="update_cr">
+								<table class="formtable" id="formtable">
+									<tr>
+										<th>*Old password:</th>
+										<td>
+											<input type="password" maxlength="30" name="old_password" />
+										</td>
+									</tr>
+									<tr>
+										<th>*New password (&ge; 6 characters):</th>
+										<td>
+											<input type="password" maxlength="30" name="new_password" />
+										</td>
+									</tr>
+									<tr>
+										<th>*Confirm new password:</th>
+										<td>
+											<input type="password" maxlength="30" name="conf_new_password" />
+										</td>
+									</tr>
+									
+									<tr>
+										<td>&nbsp;</td>
+										<td>
+											<input type="submit" name="confirm" value="Confirm" />
+										</td>
+									</tr>	
+								</table>
+							</form>
+						</td>
+					</tr>
+				</table>		
 		</div>
-		
-		<!-- Footer -->
-		<div id="footer">
-			<?php include 'php/include/footer_beta.php'; ?>
-		</div>
-		
 	</div>
-</body>
-</html>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->

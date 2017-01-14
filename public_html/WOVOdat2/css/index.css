@@ -1,0 +1,445 @@
+/**************************
+*	GLOBAL
+**************************/
+.container {
+	width:960px;
+	margin-left: auto;
+	margin-right:auto;
+}
+.container_main {
+	width:960px;
+	margin-left: auto;
+	margin-right:auto;
+}
+/* Nhat changed on 22-May-2015*/
+a {
+	text-decoration: none;
+	color: blue;
+}
+
+/* Nhat changed on 22-May-2015*/
+
+/************
+*	SLIDE SHOW
+************/
+
+.slideshow {
+	margin-top: 15px;
+	width: 900px;
+	margin-left: auto;
+	margin-right:auto;
+	padding-top: 8px;
+	border: 2px solid lightgray;
+	box-shadow: 8px 5px 3px #444;
+	-moz-box-shadow: 8px 5px 3px #444;
+	-webkit-box-shadow: 8px 5px 3px #444;
+}
+.slideshow .box {
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	min-width: 290px;
+	max-width: 380px;
+	font-size: 13px;
+	display: block;
+	z-index: 100;
+}
+
+.slideshow .box .box-title {
+	display: block;
+	background-color: rgba(153,0,0,0.7);
+	color: white;
+	font: 400 24px/1.1 "ProximaNova","Helvetica Neue",Arial,sans-serif;
+	text-shadow:1px 1px 2px rgba(0,0,0,.33);
+	margin: 0px;
+	padding: 8px 12px;
+	border-bottom: 1px solid rgba(255,204,0,.7);
+
+}
+
+.slideshow .box .box-content {
+	background-color: rgba(0,0,0,.7);
+	color: white;
+	padding: 12px;
+	line-height: 1.5;
+	margin: 0px;
+} 
+
+.slideshow .box .box-content a {
+	color: #fc0;
+	text-decoration: none;
+	overflow: hidden;
+}
+
+.slideshow .box .box-content a:hover {
+	text-decoration: underline;
+}
+
+.container-slideshow {
+	margin-left: auto;
+	margin-right:auto;
+	margin-bottom: 8px;
+	border: 1px solid black;	
+	position: relative;
+	overflow: hidden;
+	width:884px;
+	height:416px;
+}
+
+/* jssor slider bullet navigator skin 05 css */
+/*
+.jssorb05 div           (normal)
+.jssorb05 div:hover     (normal mouseover)
+.jssorb05 .av           (active)
+.jssorb05 .av:hover     (active mouseover)
+.jssorb05 .dn           (mousedown)
+*/
+.jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
+    background: url(../image/b05.png) no-repeat;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.jssorb05 div {
+    background-position: -7px -7px;
+}
+
+.jssorb05 div:hover, .jssorb05 .av:hover {
+    background-position: -37px -7px;
+}
+
+.jssorb05 .av {
+    background-position: -67px -7px;
+}
+
+.jssorb05 .dn, .jssorb05 .dn:hover {
+    background-position: -97px -7px;
+}
+
+/* jssor slider arrow navigator skin 12 css */
+/*
+.jssora12l              (normal)
+.jssora12r              (normal)
+.jssora12l:hover        (normal mouseover)
+.jssora12r:hover        (normal mouseover)
+.jssora12ldn            (mousedown)
+.jssora12rdn            (mousedown)
+*/
+.jssora12l, .jssora12r, .jssora12ldn, .jssora12rdn {
+    position: absolute;
+    cursor: pointer;
+    display: block;
+    background: url(../image/a12.png) no-repeat;
+    overflow: hidden;
+}
+
+.jssora12l {
+    background-position: -16px -37px;
+}
+
+.jssora12r {
+    background-position: -75px -37px;
+}
+
+.jssora12l:hover {
+    background-position: -136px -37px;
+}
+
+.jssora12r:hover {
+    background-position: -195px -37px;
+}
+
+.jssora12ldn {
+    background-position: -256px -37px;
+}
+
+.jssora12rdn {
+    background-position: -315px -37px;
+}
+
+/* jssor slider arrow navigator skin 20 css */
+/*
+.jssora20l              (normal)
+.jssora20r              (normal)
+.jssora20l:hover        (normal mouseover)
+.jssora20r:hover        (normal mouseover)
+.jssora20ldn            (mousedown)
+.jssora20rdn            (mousedown)
+*/
+.jssora20l, .jssora20r, .jssora20ldn, .jssora20rdn
+{
+	position: absolute;
+	cursor: pointer;
+	display: block;
+    background: url(../image/a20.png) no-repeat;
+    overflow:hidden;
+}
+.jssora20l { background-position: -3px -33px; }
+.jssora20r { background-position: -63px -33px; }
+.jssora20l:hover { background-position: -123px -33px; }
+.jssora20r:hover { background-position: -183px -33px; }
+.jssora20ldn { background-position: -243px -33px; }
+.jssora20rdn { background-position: -303px -33px; }
+
+
+/**************
+*	END SHOW
+**************/
+
+.welcome {
+	padding-left: 10px;
+	padding-right: 30px;
+	width:60%;
+}
+
+.welcome p {
+	font-size: 12px;
+	font-family: Arial;
+	text-align: justify;
+}
+
+.welcome div {
+	height:2px;
+
+}
+
+.welcome h1 {
+	font-size: 26px;
+	font-family: Arial;
+}
+
+.download {
+	font-family: 'Trebuchet MS','Helvetica Neue',Arial,Helvetica,sans-serif; 
+	background:#e0e0e0; 
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 7px;
+	padding-bottom: 3px;
+	margin-top: 35px;
+}
+
+.download span a {
+	font-size: 14px;
+	color:black;
+	font-weight: bold;
+}
+
+
+.download p {
+	font-size: 12px;
+	font-family: Arial;
+	text-align: justify;
+}
+
+.graph-demo {
+	text-align: center;
+	margin-top: 25px;
+}
+
+
+/************************** 
+*	HEADER
+**************************/
+
+
+.header-logo {
+	padding-top: 10px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+
+.header-name {
+	margin-left: 40px;
+}
+
+.header-bigname {
+	font-family:arial,sans-serif;
+	font-size:43px; 
+	color:#B61918;
+	font-weight: bold;
+}
+
+.header-smallname {
+	font-family:Arial,sans-serif; 
+	font-size:16px; 
+	color:#222;
+}
+
+.eos-div {
+	margin-left: 270px;
+}
+
+.header-menu {
+	background-color: rgb(153,0,0);
+	color:white;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 40px;
+	font-size: 14px;
+
+	position: relative;
+}
+/* Nhat changed on 22-May-2015*/
+.header-menu a{
+	color : white;
+}
+/* Nhat changed on 22-May-2015*/
+.left-menu {
+	display:inline;
+	margin-left:-25px;
+
+}
+
+.left-menu li{
+	display: inline;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.right-menu {
+	display:inline;
+	margin-left: 370px;
+}
+
+.right-menu li {
+	display: inline;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.menu-item:hover {
+	cursor: pointer;
+}
+
+.menu-item span {
+	margin: auto;
+}
+
+.active-menu {
+	color:yellow;
+}
+
+.sub-menu-1 {
+	background-color: rgb(100,0,0);
+	display: none;
+	position: absolute;
+	list-style-type: none;
+	padding-bottom: 3px;
+	top: 12px;
+	z-index: 150;
+}
+
+.sub-menu-1 li,.sub-menu-2 li  {
+	margin-left: -23px;
+	padding-right: 5px;
+	margin-top: 6px;
+	
+}
+
+.sub-menu-1 li:last-of-type, .sub-menu-2 li:last-of-type {
+	padding-bottom: 4px;
+}
+
+.sub-menu-1 span, .sub-menu-2 span {
+	font-size: 13px;
+}
+
+.sub-menu-2 {
+	background-color: rgb(100,0,0);
+	display: none;
+	position: absolute;
+	list-style-type: none;
+	padding-bottom: 3px;
+	top: 12px;
+	left:187px;
+	z-index: 150;
+}
+
+
+.stripe {
+	width: 10px;
+	background: lightgray;
+	height: 72px;
+	display: block;
+	position: absolute;
+	left:2px;
+	top: 2px;
+}
+
+/************************** 
+*	FOOTER
+**************************/
+.footer-container {
+	background-color: rgb(153,0,0);
+	margin-top: 20px;
+}
+
+.footer-container a:hover {
+	color:yellow;
+}
+
+.upper ul {
+	list-style-type: none;
+	font-size: 12px;
+}
+
+.upper {
+	color: white;
+	font-family: Arial;
+}
+
+.upper .list {
+	padding-top: 15px;
+	padding-left: 10px;
+	vertical-align: top;
+}
+
+.upper .list span:first-of-type {
+	font-size: 16px;
+}
+
+.upper .list span:last-of-type {
+	font-size: 13px;
+}
+
+.upper .space {
+	width:370px;
+}
+
+.upper .right div:first-of-type {
+	padding-top: 10px;
+}
+
+.upper .right div:first-of-type a {
+	color:rgb(250,192,144);
+	font-size: 14px;
+}
+
+.upper .right div:last-of-type {
+	font-size: 10px;
+	margin-top: 5px;
+}
+
+.upper .right div:nth-of-type(2) {
+	text-align: center;
+}
+
+.upper .right a:hover {
+	color:yellow;
+}
+
+.lower {
+	padding-top: 8px;
+	text-align: center;
+	font-size: 12px;
+	color:rgb(250,192,144);
+	padding-bottom: 8px;
+}
+.lower a {
+	color:rgb(250,192,144);
+}
+
+
+

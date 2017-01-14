@@ -1,11 +1,4 @@
 <?php
-/*
-// Help debugging
-ini_set("display_startup_errors", "1");
-ini_set("display_errors", "1");
-error_reporting(E_ALL);
-*/
-
 // Allow unlimited capacity and time
 ini_set("memory_limit","-1");
 set_time_limit(0);
@@ -38,27 +31,23 @@ foreach ($checked_tables as $check_table) {
 	$messages[$check_table]=$msgs;
 }
 
+
+include 'php/include/header.php'; 
+
+include 'php/include/menu.php'; 
+
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > 
+<a href='http://{$_SERVER['SERVER_NAME']}/populate/home_populate.php'>Submit Data</a> > Tabel Check </div>";
+
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/gif/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
-	<div id="wrapborder">
-	<div id="wrap">
-		<?php include 'php/include/header_beta.php'; ?>
-		<!-- Content -->
-		<div id="content">
-			<div id="content_ref">
-		
+
+
+</div>  <!-- header-menu -->
+
+	<div class="body">
+
+		<div class="widecontent">
+				
 				<!-- Page content -->
 				<h1>Check tables result</h1>
 <?php
@@ -103,15 +92,17 @@ STRING;
 }
 ?>
 
-				<p><a href="/populate/home.php">Go to homepage</a> or <a href="/populate/check_select_table.php">go to table selection page</a></p>
-			</div>
+			<p><a href="/populate/home.php">Go to homepage</a> or <a href="/populate/check_select_table.php">go to table selection page</a></p>
+
 		</div>
-		
-		<!-- Footer -->
-		<div>
-			<?php include 'php/include/footer_main_beta.php'; ?>
-		</div>
-		
-	</div>
-</body>
-</html>
+</div>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->

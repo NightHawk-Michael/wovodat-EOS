@@ -1,54 +1,42 @@
-<?php
+<?php 
+if(!isset($_SESSION))
+	session_start();
 
-/**********************************
+if (!isset($_SESSION['forgot_pw'])) {   // If 1st access
+	$uname="";      	               // Blank field
+	$uname_error=FALSE;  	           // No error
+}
+else {  							  // 2nd time access
+	$uname=$_SESSION['forgot_pw']['uname'];
+	$uname_error=$_SESSION['forgot_pw']['uname_error'];     // Get error, if any
+}
 
-This page displays a small message to confirm to users that their new password was sent to their email address.
+include 'php/include/header.php';
 
-**********************************/
+include 'php/include/menu.php'; 
+
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > 
+<a href='http://{$_SERVER['SERVER_NAME']}/populate/forgot_password.php'>Forgot Password</a></div>";
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/js2/navig.css" rel="stylesheet">
-	<link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
-	<script language="JavaScript" src="/js2/menu_array.js" type="text/javascript"></script>
-	<script language="JavaScript" src="/js2/mmenu.js" type="text/javascript"></script>
+</div>  <!-- header-menu -->
 
-	<div id="wrapborder">
-	<div id="wrap">
-		<div id="headershadow">
-			<?php include 'php/include/header_beta.php'; ?>
-		</div>
-
-		<!-- Content -->
-		<div id="content">	
-			<div id="contentl">
-				<!-- Page content -->
-				<h1>New password sent!</h1>
-				<p>Your new password was sent to your email address. If you do not receive any email from us within a few hours, please try again.</p>
-				<p>Please feel free to <a href="contact_us_form.php">contact us</a> with any question.</p>
-				<p>You may now go to the <a href="welcome.php">welcome page</a> to log in.</p>
-
-			</div>
-			<div id="contentr">
-			</div>
-		</div>
+<div class="body">
+	<div class="widecontent">
 		
-		<!-- Footer -->
-		<div id="footer">
-			<?php include 'php/include/footer_beta.php'; ?>
-		</div>
-		
+		<!-- Page content -->
+		<h3>New password sent!</h3>
+		<p>Your new password was sent to your email address. If you do not receive any email from us within a few hours, please try again.</p>
+		<p>Please feel free to <a href="contact_us_form.php">contact us</a> with any question.</p>
+		<p>You may now go to the <a href="/populate/index.php">Login page</a> to see more WOVOdat tools.</p>
+
 	</div>
-</body>
-</html>
+</div>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->

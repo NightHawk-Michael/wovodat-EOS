@@ -1,17 +1,11 @@
 <?php
-	// Start session
+if(!isset($_SESSION))
 	session_start();
-	// Regenerate session ID
-	session_regenerate_id(true);
-	$uname="";
-	$ccd="";
-?>
 
-<?php
-	if (isset($_SESSION['login'])) {
-		$uname=$_SESSION['login']['cr_uname'];
-		$ccd=$_SESSION['login']['cc_id'];
-	}
+if (isset($_SESSION['login'])) {
+	$uname=$_SESSION['login']['cr_uname'];
+	$ccd=$_SESSION['login']['cc_id'];
+}
 ?>
 
 <html>
@@ -22,7 +16,7 @@
 		function update_volcanos(){
 			var institute=$('#observs').attr('value');
 			$.get('./convertie/selectVolOfInstitute2.php?kode='+institute, show_gunung);
-			
+
 		}
 		function show_gunung(res){
 			$('#volanos').html(res);
@@ -30,30 +24,25 @@
 		$(document).ready(select_observos_change);
 	</script>
 
-	<div style="padding: 0px 0px 0px 5px;">
-	<br><br>
-	<h1>Sending File</h1>
+
+	<h3>Sending File</h3>
 	<p>This page is for sending a file to the WOVOdat team.</p>
 
-<?php
-		echo "User: ".$uname."<br><br>";
-?>
 	<!-- Form -->
 	<form method="post" action="submit_file_check.php" name="upload_form" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>
 				<p1>Observatory (data owner) : </p1><br>
-					<div id='observos' style="float:left">
-						<select name='observs' id='observs' style="width:190px">
+					<div id='observos'>
+						<select name='observs' id='observs' style='width:180px;'>
 						<option value="observatory">...</option>
 <?php
 							include 'php/include/db_connect_view.php';
-//							if ($ccd==200 || $ccd=199 || $ccd=3 ||$ccd=216) {
-							if ($uname=='ratdomopurbo' || $uname='cwidiwijayanti' ||$uname='chris') {
-								$result = mysql_query("select cc_code, cc_country, cc_obs, cc_id		from cc		order by cc_country");
+							if ($uname=='ratdomopurbo' || $uname='cwidiwijayanti' || $uname='chris' || $uname='nang') {
+								$result = mysql_query("select cc_code, cc_country, cc_obs, cc_id from cc order by cc_country");
 							}else{
-								$result = mysql_query("select cc_code, cc_country, cc_obs, cc_id 	from cc 	where cc_id='$ccd'  order by cc_country");
+								$result = mysql_query("select cc_code, cc_country, cc_obs, cc_id from cc where cc_id='$ccd'  order by cc_country");
 							}
 //-- "is_numeric" to check if the user is wovodat-team; 
 							while ($v_arr = mysql_fetch_array($result)) {
@@ -78,27 +67,39 @@
 						</select>
 					</div>
 				</td>
+			</tr>
+			<tr>	
 				<td>
-				<p1>Volcano: </p1><br>
+					<p1>Volcano: </p1><br>
 					<div id="volanos">
-						<select name="vol" id="vol"  style="width:160px"><option value="volcano">.....</option></select>
+						<select name="vol" id="vol" style='width:180px;'>
+							<option value="volcano">.....</option>
+						</select>
 					</div>
 				</td>
 			</tr>
-		</table><br>			
+		</table>
+		
 		<table class="formtable" id="formtable">
 			<tr>
-				<th>Select file (max size 2M):</th>
+				<td>Description/ comments:</td>
+			</tr>	
+			<tr>
+				<td>
+					<textarea name="com" size="45" maxlength="100"><?php print $com; ?></textarea>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>Select file (max size 2M):</td>
+			</tr>
+			
+			<tr>	
 				<td>
 					<input type="file" name="submit_file_inputfile" size="25" />
 				</td>
 			</tr>
-			<tr>
-				<th>Description/ comments:</th>
-				<td>
-					<textarea name="com" cols="40" rows="8" onkeydown="limitText(this, 1024)"><?php print $com; ?></textarea>
-				</td>
-			</tr>
+			
 		</table>
 		<input type="submit" name="submit_file_form_ok" value="OK" />
 	</form>

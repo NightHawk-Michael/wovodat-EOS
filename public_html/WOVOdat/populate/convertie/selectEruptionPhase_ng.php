@@ -1,6 +1,6 @@
 <?php
 require_once "php/include/get_root.php";	 // Get root url
-include "php/include/db_connect.php";        // Changed on 29-feb-2012
+include "php/include/db_connect.php";       
 
 $dataType=trim($_GET["dataType"]);    
 $edIdValue=trim($_GET["edId"]); 
@@ -9,8 +9,6 @@ $edIdValue=trim($_GET["edId"]);
 	
 		$sql="select ed_phs.ed_phs_id,ed_phs.ed_phs_stime from ed,ed_phs where ed.ed_id=ed_phs.ed_id and ed.ed_id='$edIdValue' and ed_phs.ed_phs_stime <> '0000-00-00 00:00:00' order by ed_phs.ed_phs_stime DESC";
 	}
-	
-//echo $sql;
 
 	$result = mysql_query($sql);
 

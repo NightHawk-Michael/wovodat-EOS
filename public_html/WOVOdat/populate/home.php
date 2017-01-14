@@ -8,11 +8,8 @@ Hence, instead of replacing all the links in all the pages of the website, this 
 
 **********************************/
 
-// Start session
-session_start();
-
-// Regenerate session ID
-session_regenerate_id(true);
+if (!isset($_SESSION))
+    session_start(); 
 
 // Get root url
 require_once "php/include/get_root.php";

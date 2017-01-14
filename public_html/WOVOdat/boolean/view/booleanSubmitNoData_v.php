@@ -2,33 +2,33 @@
 
 function showNoMonitorData($noMonitorData){
 
-    echo"<div style='font-size:12px;font-weight:bold;'>";
+	echo"<h3>";
     echo "Data Search Results: ".sizeof($noMonitorData);
-    echo"</div><br/>";
+    echo"</h3><br/>";
 	
 	$tableheader=array('Volcano Name','Vol Feature','Vol Rock Types','Eruption Start time','Eruption End time','VEI','Visualization');
 
 		echo"<div>";
 		echo"<table border='1'>";
 
-		echo"<tr>";
+		echo"<tr align='center'>";
 			for($i=0;$i< sizeof($tableheader);$i++){
 
-				echo"<td align=\"center\">{$tableheader[$i]}</td>";
+				echo"<td>{$tableheader[$i]}</td>";
 				}	
 				echo"</tr>";	
 
 				for($i=0;$i<sizeof($noMonitorData); ){
 
-					echo"<tr align=\"center\">";
+					echo"<tr align='center'>";
 
 					for($j=0;$j<sizeof($tableheader);$j++){
-						echo"<td align=\"center\">";
+						echo"<td>";
 
 						if($j == 6)
-						echo"<a href='http://{$_SERVER{'SERVER_NAME'}}/eruption/index.php?{$noMonitorData[$i][$j]}'  target='_blank'>Link<a>";
+						echo"<a href='http://{$_SERVER{'SERVER_NAME'}}/eruption/index.php?{$noMonitorData[$i][$j]}' 'target='_blank'>Link</a>";
 						else
-						echo $noMonitorData[$i][$j];
+							echo $noMonitorData[$i][$j];
 						echo"</td>";
 					}
 					$i++;
@@ -36,7 +36,7 @@ function showNoMonitorData($noMonitorData){
 				}				
 		echo"	</table> ";
 		echo"	</div>";
-		echo"	</div>";	
+		//echo"	</div>";	
 
 }
 
@@ -48,7 +48,7 @@ function showNoResult(){
 
 function showcount($count){
 
-    echo"<div style='padding-top:50px;padding-left:270px;'>";
+    echo"<div id='pager'>";
     echo $count;
     echo"</div>";
 

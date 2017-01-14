@@ -1,66 +1,63 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!--
-LUIS RE-ORGANIZED STRUCTURE - 21/2/2016-->
 <?php
+if(!isset($_SESSION))
+	session_start();
+
 //check if there is connection to internet, if no, then redirect of offline version
 $connected = @fsockopen("www.google.com", 80);
 if (! $connected){
-
-	header('Location: '.'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/'.basename(__FILE__, '.php').'_offline.php');
+  header('Location: '.'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/'.basename(__FILE__, '.php').'_offline.php');
 }
-// Start session
-session_start();
+
 
 // if this code run on server then we need to cache the wovodat.js file on the 
-// client code. Otherwise, we do not cache it for the purpose of development
+// client code. Otherwise, we do not cach it for the purpose of development
 	$cache = time();
-	?> 
-	<html>
-	<head>
-		<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
-		<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-		<meta name="keywords" content="Volcano, Vulcano, Volcanoes">
-		<link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">		
-		<link href="/css/jquery.jgrowl.css" rel="stylesheet">
-		<!--<link href="/css/index.css" rel="stylesheet" type="text/css">-->
-		<link href="/css/styles_beta.css" rel="stylesheet" type="text/css">
-		<!--<link href="/css/volcano.css" rel="stylesheet" type="text/css">	-->	
-		<link href="/css/tooltip.css" rel="stylesheet">
-		<link href="/css/css_v5.css" rel="stylesheet">
-		<link type="text/css" href="/js/jqueryui/css/custom-theme/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
-		<script type="text/javascript" src="/js/jqueryui/js/jquery-1.6.4.min.js"></script>
-		<script type="text/javascript" src="/js/jqueryui/js/jquery-ui-1.8.21.custom.min.js"></script>
-		<script type="text/javascript" src="/js/flot/jquery.flot.tuan.js"></script>
-		<script type="text/javascript" src="/js/flot/jquery.flot.navigate.tuan.js"></script> 
-		<script type="text/javascript" src="/js/flot/jquery.flot.selection.js"></script>
-		<script type="text/javascript" src="/js/flot/jquery.flot.marks.js"></script>
-		<script type="text/javascript" src="/js/flot/jquery.flot.errorbars.js"></script>	
-		<script type="text/javascript" src="/js/flot/jquery.flot.labels.js"></script>
-		<script type="text/javascript" src="/js/flot/jquery.flot.symbol.js"></script>	
-		<script type="text/javascript" src="/js/flot/jquery.flot.axislabels.js"></script> 
-		<script type="text/javascript" src="/js/wovodat.js?<?php echo $cache; ?>"></script>
-		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCQ9kUvUtmawmFJ62hWVsigWFTh3CKUzzM&sensor=false&libraries=geometry"></script>
-		<script type="text/javascript" src="/js/Tooltip_v3.js"></script>
-		<script type="text/javascript" src="/js/jquery.jgrowl.js"></script>
-<!--		<script type="text/javascript" src="/js/GraphController.js"></script>-->
-		<script type="text/javascript" src="/js/BasicFunction_V5.js"></script>
-		<script type="text/javascript" src="/js/EarthQuakeController.js"></script>
-		<script type="text/javascript" src="/js/EarthQuakeUI.js"></script>
-<!--		<script type="text/javascript" src="/js/GraphUI.js"></script>-->
-		<script src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
 
-		<!-- Don't relate -->
-		
-	</head>
-	<body>
-		<script>
-		
-		</script>
-		<!-- Nhat changed 30 May, 2015 -->
-		<div class="body" style ="font-size:12px;" id="wrapborder_x">
-			<!--            <div id="loading" class="loadingPanel" style ="display:none">Loading ...</div>-->
+
+include 'php/include/header.php';
+
+?>
+
+	<link href="/css/jquery.jgrowl.css" rel="stylesheet">
+    <link href="/css/tooltip.css" rel="stylesheet">
+    <link href="/css/unrestVisual.css" rel="stylesheet">
+    <link href="/js/jqueryui/css/custom-theme/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
+	
+    <script type="text/javascript" src="/js/jqueryui/js/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="/js/jqueryui/js/jquery-ui-1.8.21.custom.min.js"></script>
+    <script type="text/javascript" src="/js/flot/jquery.flot.tuan.js"></script>
+    <script type="text/javascript" src="/js/flot/jquery.flot.navigate.tuan.js"></script> 
+    <script type="text/javascript" src="/js/flot/jquery.flot.selection.js"></script>
+    <script type="text/javascript" src="/js/flot/jquery.flot.marks.js"></script>
+    <script type="text/javascript" src="/js/flot/jquery.flot.errorbars.js"></script>  
+    <script type="text/javascript" src="/js/flot/jquery.flot.labels.js"></script>
+    <script type="text/javascript" src="/js/flot/jquery.flot.symbol.js"></script> 
+    <script type="text/javascript" src="/js/flot/jquery.flot.axislabels.js"></script> 
+    <script type="text/javascript" src="/js/wovodat.js?<?php echo $cache; ?>"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCQ9kUvUtmawmFJ62hWVsigWFTh3CKUzzM&sensor=false"></script>
+    <script type="text/javascript" src="/js/Tooltip_v3.js"></script>
+    <script type="text/javascript" src="/js/jquery.jgrowl.js"></script>
+    <script type="text/javascript" src="/js/BasicFunction_V5.js"></script>
+    <script type="text/javascript" src="/js/EarthQuakeController.js"></script>
+    <script type="text/javascript" src="/js/EarthQuakeUI.js"></script>
+    <script src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
+
+<?php
+
+include 'php/include/menu.php';   
+
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > Visualisation </a> > Side by Side Volcanoes</div>";
+
+?> 
+
+<!-- <div id="loading" class="loadingPanel" style ="display:none">Loading ...</div> -->
+
+</div>  <!-- header-menu -->
+
+
+<div class="body">
+	<div class="nearfullwidth">	
+
 			<?php
 			$vnum = " ";
 			$vcavw = " ";
@@ -72,12 +69,7 @@ session_start();
 						$vcavw = $_POST["vcavw"];
 						$vname = $_POST["vname"];
 					} else {
-                        // $link = mysql_connect("localhost", "root", "1234567") or die(mysql_error());
-                        // mysql_query("SET CHARACTER SET utf8", $link);
-                        // mysql_query("SET NAMES utf8", $link);
-                        // mysql_select_db("wovodat") or die(mysql_error());
 						include 'php/include/db_connect_view.php';/*connect to database*/
-
 						$str = "SELECT vd_name, vd_cavw, vd_num FROM vd WHERE vd_num = " . $vnum;
 						$result = mysql_query($str);
 						$row = mysql_fetch_array($result);
@@ -91,11 +83,8 @@ session_start();
 			echo "<input type='hidden' id='vcavw' name='vcavw' value='" . $vcavw . "'>";
 			echo "<input type='hidden' id='vnum' name='vnum' value='" . $vnum . "'>";
 			echo "</form>";
-			?>
-			<?php //include 'php/include/header.php'; ?>
-			<?php include 'php/include/header_beta.php'; ?>
-			<div class = "container" id = "wrap_x">
-				<div class = "content">
+		?>
+
 					<div id="switchViewPanel">
 						<button id="switchView" class="switchViewButton">Single View</button>
 					</div>
@@ -132,7 +121,7 @@ session_start();
 											<img src="/img/pin_fs.png" alt=""/> Field
 										</div>
 									</div>
-									<div style="" id="Map">
+									<div style="margin-top: 4px; width:450px; height: 420px;"  id="Map">
 									</div>
 
 
@@ -208,149 +197,174 @@ session_start();
 												</tr>
 											</table>
 										</div>
-										<div id="EquakePanel1" class="EquakePanel">
+										<div id="EquakePanel1" class="EquakePanel" style="width:450px;">
 											<div class="FilterButton" id="FilterSwitch1">Show Filter</div>
 											<form id="FormFilter1" class="FormFilter" onSubmit="return false;" style="display:none">
 												<div class="pointer"></div>
-												<div class="row">
-													<div class="leftPanel">No of events:</div>
-													<div class="rightPanel">
-														<select id="Evn1">
-															<option value="500">500</option>
-															<option value="1000">1000</option>
-															<option value="2000">2000</option>
-															<option value="3000">3000</option>
-															<option value="4000">4000</option>
-															<option value="5000">5000</option>
-															<option value="all">All</option>
-														</select>
-													</div>
-												</div>
-                                                <div class="row">
-                                                    <div class="leftPanel">Catalog Owner:</div>
-                                                    <div class="rightPanel">
-                                                        <table id="cc_id1">
-                                                            <tr>
-                                                                <td><input type='checkbox' onClick="toggle(this,'cc_id1')" value="" id="cc_id1CheckBox0" checked/></td>
-                                                                <td>All catalog owners</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </div>
-												<div class="row">
-													<div class="leftPanel">Period:</div>
-													<div class="rightPanel">
-														<div class="subrow">
-															<table>
+												
+												<table> 
+												
+													<tr>
+														<td class="row">
+															<span class="leftPanel">No of events:</span> 
+															<span class="rightPanel">	
+																<select id="Evn1">
+																	<option value="500">500</option>
+																	<option value="1000">1000</option>
+																	<option value="2000">2000</option>
+																	<option value="3000">3000</option>
+																	<option value="4000">4000</option>
+																	<option value="5000">5000</option>
+																	<option value="all">All</option>
+																</select>
+															</span> 	
+														</td>
+												  </tr>
+
+												  <tr>
+													 <td class="row">
+													   	<span class="leftPanel">Catalog Owner:</span> 
+														<span class="rightPanel">	
+															<table id="cc_id1">
 																<tr>
-																	<td>
-																		Start: <input type="text" id="SDate1" class="dateInput" size=10/> 
-																	</td>
-																	<td>
-																		End: <input type="text" id="EDate1" class="dateInput" size=10/>
-																	</td>
+																	<td><input type='checkbox' onClick="toggle(this,'cc_id1')" value="" id="cc_id1CheckBox0" checked/></td>
+																	<td>All catalog owners</td>
 																</tr>
 															</table>
-														</div>
-														<div>
-															<div id="DateRange1"></div>
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="leftPanel">Depth (km):</div>
-													<div class="rightPanel">
-														<div class="subrow">
-															<table>
+														</span> 
+													</td>
+												  </tr>		
+                                              
+											   <tr>
+													 <td class="row">
+													   	<span class="leftPanel">Period:</span> 
+														<span class="rightPanel">	
+											               <div class="subrow">
+														   
+																<table>
+																	<tr>
+																		<td>
+																			Start: <input type="text" id="SDate1" class="dateInput" size=10> 
+																			End: <input type="text" id="EDate1" class="dateInput" size=10>
+																		</td>
+																		
+																	</tr>
+																</table>
+															</div>
+															<div>
+																<div id="DateRange1"></div>
+															</div>	
+											          	</span> 
+													</td>
+												 </tr>		
+												
+												<tr>
+													 <td class="row">
+													   	<span class="leftPanel">Depth (km):</span> 
+														<span class="rightPanel">		
+															<div class="subrow">
+																<table>
+																	<tr>
+																		<td>
+																			Start: <input type="text" id="DepthLow1" class="numberInput" value="-10" size=4/>
+																			End: <input type="text" id="DepthHigh1" class="numberInput" value="40" size=4/>
+																		</td>
+																	</tr>
+																</table>
+															</div>
+															<div>
+																<div id="DepthRange1"></div>
+															</div>
+														 </span> 
+													  </td>
+												 </tr>		
+											
+                                                <tr>
+													<td class="row">
+													   	<span class="leftPanel">Magnitude:</span> 
+														<span class="rightPanel">	
+															<div class="subrow">
+																<table>
+																	<tr>
+																		<td>
+																			Start: <input type="text" id="MagnitudeLow1" class="numberInput" value="0" size=4/>
+																			End: <input type="text" id="MagnitudeHigh1" class="numberInput" value="9" size=4/>
+																		</td>
+																	</tr>
+																</table>
+															</div>
+															<div>
+																<div id="MagnitudeRange1"></div>
+															</div>
+											            </span> 
+													  </td>
+												 </tr>		
+											
+											     <tr>
+													<td class="row">
+													   	<span class="leftPanel">Errorbars:</span> 
+														<span class="rightPanel"><input type='checkbox' id='errorbars1' checked/> </span>	
+													 </td>
+												 </tr>	
+											
+												<tr>
+													<td class="row">
+											         	<span class="leftPanel">Type:</span> 
+														<span class="rightPanel">
+															<table id="EqType1">
 																<tr>
-																	<td>
-																		Start: <input type="text" id="DepthLow1" class="numberInput" value="-10" size=4/>
-																	</td>
-																	<td>
-																		End: <input type="text" id="DepthHigh1" class="numberInput" value="40" size=4/>
-																	</td>
+																	<td><input type='checkbox' onClick="toggle(this,'EqType1')" value="" id="EqType1CheckBox0" checked/></td>
+																	<td>All earthquake types</td>
 																</tr>
 															</table>
-														</div>
-														<div>
-															<div id="DepthRange1"></div>
-														</div>
-													</div>
-												</div>
-                                                <div class="row">
-                                                    <div class="leftPanel">Magnitude:</div>
-                                                    <div class="rightPanel">
-                                                        <div class="subrow">
-                                                            <table>
-                                                                <tr>
-                                                                    <td>
-                                                                        Start: <input type="text" id="MagnitudeLow1" class="numberInput" value="0" size=4/>
-                                                                    </td>
-                                                                    <td>
-                                                                        End: <input type="text" id="MagnitudeHigh1" class="numberInput" value="9" size=4/>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                        <div>
-                                                            <div id="MagnitudeRange1"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-												<div class="row">
-													<div class="leftPanel">Errorbars:</div>
-													<div class="rightPanel">
-														<div class="subrow">
-															<table>
-																<tr>
-																	<td><input type='checkbox' id='errorbars1' checked/></td>
-																</tr>
-															</table>
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="leftPanel">Type:</div>
-													<div class="rightPanel">
-                                                        <table id="EqType1">
-                                                            <tr>
-                                                                <td><input type='checkbox' onClick="toggle(this,'EqType1')" value="" id="EqType1CheckBox0" checked/></td>
-                                                                <td>All earthquake types</td>
-                                                            </tr>
-                                                        </table>
-													</div>
-												</div>
-												<div class="row">
-													<div class="leftPanel">Map Width (km):</div>
-													<div class="rightPanel">
-														<select id="wkm1">
-															<option value="10">10</option>
-															<option value="20">20</option>
-                                                            <option value="30">30</option>
-															<option value="50">50</option>
-															<option value="100">100</option>
-														</select>
-													</div>
-												</div>											
-												<div class="threeDGMTFilter">
-													For drawing in 3D-GMT only:
-												</div>
-												<div class="row">
-													<div class="leftPanel">Azimuth:</div>
-													<div class="rightPanel">
-														<input type="text" id="azim1" class="numberInput" value="175" size="10"/>
-													</div>
-												</div>
-												<div class="row">
-													<div class="leftPanel">Rotation Degree:</div>
-													<div class="rightPanel">
-														<input type="text" id="degree1" class="numberInput" value="30" size="10"/>
-													</div>
-												</div>
-												<div class="FilterBtnHolder">
-													<button id="FilterBtn1" class="FilterBtn">Filter</button>
-												</div>
+														</span>
+													  </td>
+												 </tr>		
+												 
+												 <tr>
+													<td class="row">
+											         	<span class="leftPanel">Map Width (km):</span> 
+														<span class="rightPanel">
+															<select id="wkm1">
+																<option value="10">10</option>
+																<option value="20">20</option>
+																<option value="30">30</option>
+																<option value="50">50</option>
+																<option value="100">100</option>
+															</select>
+														</span>
+													  </td>
+												 </tr>		
+												
+												  <tr>
+														<td class="threeDGMTFilter">For drawing in 3D-GMT only:</td>
+												   </tr>
+												   
+												    <tr>
+														<td class="row">
+															<span class="leftPanel">Azimuth:</span> 
+															<span class="rightPanel"><input type="text" id="azim1" class="numberInput" value="175" size="10"/></span>	
+														 </td>
+													</tr>	
+												 
+												 
+													<tr>
+														<td class="row">
+															<span class="leftPanel">Rotation Degree:</span> 
+															<span class="rightPanel"><input type="text" id="degree1" class="numberInput" value="30" size="10"/></span>	
+														 </td>
+													</tr>	
+													
+													<tr>
+														<td style="padding-left: 200px;	text-align:left;">
+															<button id="FilterBtn1" style="width:80px;">Filter</button>
+														</td>
+													</tr>		
+											</table>	
+												
 											</form>
+										
+											
 											<div class="equakeButtonsRow">
 												<label for="equakeDisplayType12D" class="equakeDisplayBox equakeDisplayBox1">
 													<input type="radio" name="equakeDisplayType1" id="equakeDisplayType12D" value="2D" onclick="drawEquake({mapUsed:1,source:this})"/>
@@ -366,32 +380,51 @@ session_start();
 											<!-- place holders for the Flot graphs and GMT images-->
 
 											<div id="equakeGraphs1">
-												<div id="twoDEquakeFlotGraph1" class="twoDEquakeFlotGraph">
+												<div id="twoDEquakeFlotGraph1" class="twoDEquakeFlotGraph" style="width:450px;">
                                                     <div class="row">
                                                         <div class="leftPanel" id="eqEvent1"></div>
                                                         <div class="leftPanel" id="owner1"></div>
                                                     </div>
-                                                    <div class="plot-label-left">
-														<b>S</b>
-													</div>
-													<div class="plot-label">
-														<b>N</b>
-													</div>
-													<div id="FlotDisplayLat1" class="equakeGraphPlaceholder">
-													</div>
-													<div class="plot-label-left">
-														<b>W</b>
-													</div>
-													<div class="plot-label">
-														<b>E</b>
-													</div>
-													<div id="FlotDisplayLon1" class="equakeGraphPlaceholder">
-													</div>
-													<div class="plot-label">
-														<b>Time</b>
-													</div>
-													<div id="FlotDisplayTime1" class="equakeGraphPlaceholder">
-													</div>
+													
+													<table>  
+														  <tr>  
+
+															<td style="font-weight:bold;font-size:10px;width:1px;"> S </td>
+															
+															<td style="right:300px;width:200px;">
+															  <div id="FlotDisplayLat1" class="equakeGraphPlaceholder">
+															  </div>
+															</td>
+															
+															<td style="font-weight:bold;font-size:10px;right:30px;padding-left:10px;"> N </td>
+														  <tr/>		
+														  
+														  <tr> 
+															<td style="font-weight:bold;font-size:10px;width:1px;"> W </td>
+														   
+															<td style="right:300px;width:200px;">
+															  <div id="FlotDisplayLon1" class="equakeGraphPlaceholder">
+															  </div>
+															</td>
+															
+															<td style="font-weight:bold;font-size:10px;right:30px;padding-left:10px;"> E </td>
+														  <tr/>		
+													
+													       <tr> 
+						     
+															<td> </td>
+															
+															<td style="right:300px;width:200px;">
+															  <div id="FlotDisplayTime1" class="equakeGraphPlaceholder">
+															  </div>
+															</td>
+															
+															<td style="font-weight:bold;font-size:10px;right:30px;padding-left:5px;"> Time </td>
+														  <tr/>	
+																			  
+													</table> 
+                                              
+										
 													<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TWOD_EQUAKE,element:document.getElementById('equakeGraphs1'),mapUsed:1,equakeGraph:equakeGraphs[1],info:document.getElementById('VolcanoList').value})" >
 														<a title="Print this graphs" href="#" >
 															<span class="app-icon light print-icon"></span>
@@ -405,30 +438,35 @@ session_start();
                                                         </a>
                                                     </div>
 												</div>
-												<div id="2DGMTEquakeGraph1" class="twoDGMTEquakeFlotGraph">
+												
+												<div id="2DGMTEquakeGraph1" class="twoDGMTEquakeFlotGraph" style="width:450px;">
 													<b class="pointer"></b>
 													<div id="2DImage" class="TwoDImage">
-														<a href="" id="imageLink" target="_blank"><img height="707" width="459" src="" id="image"/></a>
+														<a href="" id="imageLink" target="_blank"><img style="height:auto;width:445px" src="" id="image"/></a>
 													</div>
-													<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TWOD_GMT_EQUAKE,link:$('#image',document.getElementById('equakeGraphs1'))[0].src,info:document.getElementById('VolcanoList').value})">
+
+													<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TWOD_GMT_EQUAKE,link:$('#image',document.getElementById('equakeGraphs2'))[0].src,info:document.getElementById('CompVolcanoList').value})">
 														<a title="Print this graphs" href="#" >
 															<span class="app-icon light print-icon"></span>
 															<span class="app-button-text">Print Graph</span>
 														</a>
 													</div>
-                                                    <div class="PrintButton" onclick="javascript:downloadCSV({cavw:document.getElementById('VolcanoList').value})" >
-                                                        <a title="Print this graphs" href="#" >
-                                                            <span class="app-icon light print-icon"></span>
-                                                            <span class="app-button-text">Download CSV</span>
-                                                        </a>
-                                                    </div>
-													<div id="additionalInfomation">
-														Additional data:
+													<div class="PrintButton" onclick="javascript:downloadCSV({cavw:document.getElementById('CompVolcanoList').value})" >
+														<a title="Print this graphs" href="#" >
+															<span class="app-icon light print-icon"></span>
+															<span class="app-button-text">Download CSV</span>
+														</a>
+													</div>
+													<div id="additionalInfomation" style="font-size:12px;">
+														Additional data: 
 														<a id="gifImage" href="" target="_blank">Image file</a>, 
 														<a id="gmtScriptFile" href="" target="_blank">GMT script file</a><br/> 
+														<div style="padding-top:50px;"> </div>
 													</div>
 												</div>
-												<div id="3DGMTEquakeGraph1" class="threeDGMTEquakeFlotGraph">
+												
+												
+												<div id="3DGMTEquakeGraph1" class="threeDGMTEquakeFlotGraph" style="width:450px;height:650px;">
 													<b class="pointer"></b>
 													<div id="3DImage" class="ThreeDImage">
 														<div id="navigationBar" class="threeDNavigationBar">
@@ -439,9 +477,11 @@ session_start();
 
 														</div>
 														<div id="title"></div>
-														<a href="" id="imageLink" target="_blank"><img height="500" width="495" src="" id="image"/></a>
+														<a href="" id="imageLink" target="_blank"><img height="500" width="450" src="" id="image"/></a>
 													</div>
-
+													
+														
+													
 													<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.THREED_GMT_EQUAKE,link:$('#image',document.getElementById('3DGMTEquakeGraph1'))[0].src,info:document.getElementById('VolcanoList').value})">
 														<a title="Print this graphs" href="#" >
 															<span class="app-icon light print-icon"></span>
@@ -454,17 +494,20 @@ session_start();
                                                             <span class="app-button-text">Download CSV</span>
                                                         </a>
                                                     </div>
-													<div id="additionalInfomation">
+													
+													<div id="additionalInfomation" style="font-size:12px;">
 														Additional data:
 														<a id="gifImage" href=""  target="_blank">GIF image file</a>, 
-														<a id="gmtScriptFile" href="" target="_blank">GMT script file</a><br/> 
+														<a id="gmtScriptFile" href="" target="_blank">GMT script file</a>
+														<div style="padding-top:20px;"> </div>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
+									
 								<div class="flowElement">
-									<div class="button white" >
+									<div class="button white" style = "width:450px;margin-top:10px;" >
 
 										<div class="CloseButton" id="HideTimeSeriesPanel1"></div>
 										<table>
@@ -476,38 +519,16 @@ session_start();
 												</td>
 											</tr>
 										</table>
-									</div>
-									<div id="TimeSeriesView1" class="timeSeriesView" style = "height: 960px; margin-left: 0px;">
-										<iframe src="/eruption/index.php" frameborder="0", width="470" height="960"> </iframe>
+									</div>  
+									
+																		
+									 
+									<div id="TimeSeriesView1" class="timeSeriesView" style = "width:450px; height:1500px; margin-left: 0px;">
+							
+										<iframe src="eruption/index.php" frameborder="0" width="450px;" height="1500px;"> </iframe>
 
 									</div>
-									<!-- <div id="TimeSeriesView1" class="timeSeriesView">
-										<div id="OptionList1">
-											<b>Available time series data (max. 3):</b> 
-											<div id="OptionList1-1">
-												<table id="TimeSeriesList1" class="timeSeriesList">
-												</table>
-											</div>
-										</div>
-										<br/>
-										<div id="overviewPanel1" class="overviewPanel">
-											<b>Overview (select a range to redraw the graph): </b>
-											<div id="overview1" class="overviewGraph">
-
-											</div>
-											<br/>
-										</div>
-										<div style="clear:both;" id="PlotArea1">
-											<table id="GraphList1">
-											</table>
-										</div>
-										<div class="PrintButton" id="printButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TIME_SERIES,graphsTable: document.getElementById('GraphList1'),graphsPlot:graphs,info:document.getElementById('VolcanoList').value})">
-											<a title="Print this graphs" href="#" >
-												<span class="app-icon light print-icon"></span>
-												<span class="app-button-text">Print</span>
-											</a>
-										</div>
-									</div> -->
+								
 								</div>
 							</td>
 							<td><div class="separator"></div></td>
@@ -529,7 +550,7 @@ session_start();
 											Hide earthquake
 										</button>
 									</div>
-									<div>
+									<div style = "font-size:11px;">
 										<img src="/img/pin_ds.png" alt=""/> Deformation
 										<img src="/img/pin_gs.png" alt=""/> Gas
 										<img src="/img/pin_hs.png" alt=""/> Hydrologic
@@ -539,9 +560,10 @@ session_start();
 										<img src="/img/pin_fs.png" alt=""/> Field
 									</div>
 								</div>
-								<div id="Map2">
 
+								<div style="margin-top: 4px; width:450px;height: 420px;" id="Map2">
 								</div>
+								
 								<div class="button white">
 									<div class="CloseButton" id="HideVolcanoInformation2"></div>
 									<div style="float:right;padding-right: 10px">
@@ -621,149 +643,167 @@ session_start();
 									<div class="FilterButton" id="FilterSwitch2"></div>
 									<form id="FormFilter2" class="FormFilter" onSubmit="return false;" style="display:none">
 										<div class="pointer"></div>
-										      <div class="row">
-                                                    <div class="leftPanel">No of events:</div>
-                                                    <div class="rightPanel">
-                                                        <select id="Evn2">
-															<option value="500">500</option>
-															<option value="1000">1000</option>
-															<option value="1500">1500</option>
-															<option value="2000">2000</option>
-															<option value="2500">2500</option>
-															<option value="3000">3000</option>
-															<option value="3500">3500</option>
-															<option value="4000">4000</option>
-															<option value="4500">4500</option>
-															<option value="5000">5000</option>
-															<option value="All">All</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="leftPanel">Catalog Owner:</div>
-                                                    <div class="rightPanel">
-											          <table id="cc_id2">
-                                                            <tr>
-                                                                <td><input type='checkbox' onClick="toggle(this,'cc_id2')" value="" id="cc_id2CheckBox0" checked/></td>
-                                                                <td>All catalog owners</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="leftPanel">Period:</div>
-                                                    <div class="rightPanel">
-                                                        <div class="subrow">
-                                                            <table>
-                                                                <tr>
-                                                                    <td>
-                                                                        Start: <input type="text" id="SDate2" class="dateInput" size=10/> 
-                                                                    </td>
-                                                                    <td>
-                                                                        End: <input type="text" id="EDate2" class="dateInput" size=10/>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                        <div>
-                                                            <div id="DateRange2"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="leftPanel">Depth (km):</div>
-                                                    <div class="rightPanel">
-                                                        <div class="subrow">
-                                                            <table>
-                                                                <tr>
-                                                                    <td>
-                                                                        Start: <input type="text" id="DepthLow2" class="numberInput" value="-10" size=4/>
-                                                                    </td>
-                                                                    <td>
-                                                                        End: <input type="text" id="DepthHigh2" class="numberInput" value="40" size=4/>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                        <div>
-                                                            <div id="DepthRange2"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="leftPanel">Magnitude:</div>
-                                                    <div class="rightPanel">
-                                                        <div class="subrow">
-                                                            <table>
-                                                                <tr>
-                                                                    <td>
-                                                                        Start: <input type="text" id="MagnitudeLow2" class="numberInput" value="0" size=4/>
-                                                                    </td>
-                                                                    <td>
-                                                                        End: <input type="text" id="MagnitudeHigh2" class="numberInput" value="9" size=4/>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                        <div>
-                                                            <div id="MagnitudeRange2"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-													<div class="leftPanel">Errorbars:</div>
-													<div class="rightPanel">
-														<div class="subrow">
+										     <table> 
+												<tr>
+													<td class="row">
+														<span class="leftPanel">No of events:</span> 
+														<span class="rightPanel">	
+															<select id="Evn2">
+																<option value="500">500</option>
+																<option value="1000">1000</option>
+																<option value="2000">2000</option>
+																<option value="3000">3000</option>
+																<option value="4000">4000</option>
+																<option value="5000">5000</option>
+																<option value="all">All</option>
+															</select>
+														</span> 	
+													</td>
+											  </tr>
+
+											  <tr>
+												 <td class="row">
+													<span class="leftPanel">Catalog Owner:</span> 
+													<span class="rightPanel">	
+														<table id="cc_id2">
+															<tr>
+																<td><input type='checkbox' onClick="toggle(this,'cc_id2')" value="" id="cc_id2CheckBox0" checked/></td>
+																<td>All catalog owners</td>
+															</tr>
+														</table>
+													</span> 
+												</td>
+											  </tr>		
+										  
+										   <tr>
+												 <td class="row">
+													<span class="leftPanel">Period:</span> 
+													<span class="rightPanel">	
+													   <div class="subrow">
+													   
 															<table>
 																<tr>
-																	<td><input type='checkbox' id='errorbars2' checked/></td>
+																	<td>
+																		Start: <input type="text" id="SDate2" class="dateInput" size=10> 
+																		End: <input type="text" id="EDate2" class="dateInput" size=10>
+																	</td>
+																	
 																</tr>
 															</table>
 														</div>
-													</div>
-												</div>
-                                                <div class="row">
-                                                    <div class="leftPanel">Type:</div>
-                                                    <div class="rightPanel">
-                                                        <table id="EqType2">
-                                                            <tr>
-                                                                <td><input type='checkbox' onClick="toggle(this,'EqType2')" value="" id="EqType2CheckBox0" checked/></td>
-                                                                <td>All earthquake types</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="leftPanel">Map Width (km):</div>
-                                                    <div class="rightPanel">
-                                                        <select id="wkm2">
-                                                            <option value="10">10</option>
-                                                            <option value="20">20</option>
-                                                            <option value="30">30</option>
-                                                            <option value="50">50</option>
-                                                            <option value="100">100</option>
-                                                        </select>
-                                                    </div>
-                                                </div>  					
-										<div class="threeDGMTFilter">
-											For drawing in 3D-GMT only:
-										</div>
-										<div class="row">
-											<div class="leftPanel">Azimuth:</div>
-											<div class="rightPanel">
-												<input type="text" id="azim2" class="numberInput" value="175" size="10"/>
-											</div>
-										</div>
-										<div class="row">
-											<div class="leftPanel">Rotation Degree:</div>
-											<div class="rightPanel">
-												<input type="text" id="degree2" class="numberInput" value="30" size="10"/>
-											</div>
-										</div>
-										<div class="FilterBtnHolder">
-											<button id="FilterBtn2" class="FilterBtn">Filter</button>
-										</div>
-									</form>
+														<div>
+															<div id="DateRange2"></div>
+														</div>	
+													</span> 
+												</td>
+											 </tr>		
+											
+											<tr>
+												 <td class="row">
+													<span class="leftPanel">Depth (km):</span> 
+													<span class="rightPanel">		
+														<div class="subrow">
+															<table>
+																<tr>
+																	<td>
+																		Start: <input type="text" id="DepthLow2" class="numberInput" value="-10" size=4/>
+																		End: <input type="text" id="DepthHigh2" class="numberInput" value="40" size=4/>
+																	</td>
+																</tr>
+															</table>
+														</div>
+														<div>
+															<div id="DepthRange2"></div>
+														</div>
+													 </span> 
+												  </td>
+											 </tr>		
+										
+											<tr>
+												<td class="row">
+													<span class="leftPanel">Magnitude:</span> 
+													<span class="rightPanel">	
+														<div class="subrow">
+															<table>
+																<tr>
+																	<td>
+																		Start: <input type="text" id="MagnitudeLow2" class="numberInput" value="0" size=4/>
+																		End: <input type="text" id="MagnitudeHigh2" class="numberInput" value="9" size=4/>
+																	</td>
+																</tr>
+															</table>
+														</div>
+														<div>
+															<div id="MagnitudeRange2"></div>
+														</div>
+													</span> 
+												  </td>
+											 </tr>		
+										
+											 <tr>
+												<td class="row">
+													<span class="leftPanel">Errorbars:</span> 
+													<span class="rightPanel"><input type='checkbox' id='errorbars2' checked/> </span>	
+												 </td>
+											 </tr>	
+										
+											<tr>
+												<td class="row">
+													<span class="leftPanel">Type:</span> 
+													<span class="rightPanel">
+														<table id="EqType2">
+															<tr>
+																<td><input type='checkbox' onClick="toggle(this,'EqType2')" value="" id="EqType2CheckBox0" checked/></td>
+																<td>All earthquake types</td>
+															</tr>
+														</table>
+													</span>
+												  </td>
+											 </tr>		
+											 
+											 <tr>
+												<td class="row">
+													<span class="leftPanel">Map Width (km):</span> 
+													<span class="rightPanel">
+														<select id="wkm2">
+															<option value="10">10</option>
+															<option value="20">20</option>
+															<option value="30">30</option>
+															<option value="50">50</option>
+															<option value="100">100</option>
+														</select>
+													</span>
+												  </td>
+											 </tr>		
+											
+											  <tr>
+													<td class="threeDGMTFilter">For drawing in 3D-GMT only:</td>
+											   </tr>
+											   
+												<tr>
+													<td class="row">
+														<span class="leftPanel">Azimuth:</span> 
+														<span class="rightPanel"><input type="text" id="azim2" class="numberInput" value="175" size="10"/></span>	
+													 </td>
+												</tr>	
+											 
+											 
+												<tr>
+													<td class="row">
+														<span class="leftPanel">Rotation Degree:</span> 
+														<span class="rightPanel"><input type="text" id="degree2" class="numberInput" value="30" size="10"/></span>	
+													 </td>
+												</tr>	
+												
+												<tr>
+													<td style="padding-left: 200px;	text-align:left;">
+														<button id="FilterBtn2" style="width:80px;">Filter</button>
+													</td>
+												</tr>		
+											</table>	
+												
+										</form>
+									
 									<div class="equakeButtonsRow">
 										<label for="equakeDisplayType22D" class="equakeDisplayBox equakeDisplayBox2">
 											<input type="radio" name="equakeDisplayType2" id="equakeDisplayType22D" value="2D" onclick="drawEquake({mapUsed:2,source:this})"/>
@@ -778,69 +818,94 @@ session_start();
 									</div>
 									<!-- place holders for the 2D Flot graph-->
 									<div id="equakeGraphs2">
-										<div id="twoDEquakeFlotGraph2" class="twoDEquakeFlotGraph">
+										<div id="twoDEquakeFlotGraph2" class="twoDEquakeFlotGraph" style="width:450px;">
 											<div class="row">
                                                 <div class="leftPanel" id="eqEvent2"></div>
                                                 <div class="leftPanel" id="owner2"></div>
                                             </div>
-                                            <div class="plot-label-left">
-                                            	<b>S</b>
-                                            </div>
-                                            <div class="plot-label">
-                                            	<b>N</b>
-                                            </div>
-                                            <div id="FlotDisplayLat2" class="equakeGraphPlaceholder">
-                                            </div>
-                                            <div class="plot-label-left">
-                                            	<b>W</b>
-                                            </div>
-                                            <div class="plot-label">
-                                            	<b>E</b>
-                                            </div>
-											<div id="FlotDisplayLon2" class="equakeGraphPlaceholder">
+											
+											<table>  
+													  <tr>  
+
+														<td style="font-weight:bold;font-size:10px;width:1px;"> S </td>
+														
+														<td style="right:300px;width:200px;">
+														  <div id="FlotDisplayLat2" class="equakeGraphPlaceholder">
+														  </div>
+														</td>
+														
+														<td style="font-weight:bold;font-size:10px;right:30px;padding-left:10px;"> N </td>
+													  <tr/>		
+													  
+													  <tr> 
+														<td style="font-weight:bold;font-size:10px;width:1px;"> W </td>
+													   
+														<td style="right:300px;width:200px;">
+														  <div id="FlotDisplayLon2" class="equakeGraphPlaceholder">
+														  </div>
+														</td>
+														
+														<td style="font-weight:bold;font-size:10px;right:30px;padding-left:10px;"> E </td>
+													  <tr/>		
+												
+													   <tr> 
+						 
+														<td> </td>
+														
+														<td style="right:300px;width:200px;">
+														  <div id="FlotDisplayTime2" class="equakeGraphPlaceholder">
+														  </div>
+														</td>
+														
+														<td style="font-weight:bold;font-size:10px;right:30px;padding-left:5px;"> Time </td>
+													  <tr/>	
+																			  
+												</table> 
+											
+												<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TWOD_EQUAKE,element:document.getElementById('equakeGraphs2'),mapUsed:2,equakeGraph:equakeGraphs[2],info:document.getElementById('CompVolcanoList').value})">
+													<a title="Print this graphs" href="#" >
+														<span class="app-icon light print-icon"></span>
+														<span class="app-button-text">Print Graph</span>
+													</a>
+												</div>
+												
+												<div class="PrintButton" onclick="javascript:downloadCSV({cavw:document.getElementById('CompVolcanoList').value})" >
+													<a title="Print this graphs" href="#" >
+														<span class="app-icon light print-icon"></span>
+														<span class="app-button-text">Download CSV</span>
+													</a>
+												</div>
+												
 											</div>
-											<div class="plot-label">
-												<b>Time</b>
+										
+											<div id="2DGMTEquakeGraph2" class="twoDGMTEquakeFlotGraph" style="width:450px;">
+												<b class="pointer"></b>
+												<div id="2DImage" class="TwoDImage">
+													<a href="" id="imageLink" target="_blank"><img style="height:auto;width:445px" src="" id="image"/></a>
+												</div>
+
+												<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TWOD_GMT_EQUAKE,link:$('#image',document.getElementById('equakeGraphs2'))[0].src,info:document.getElementById('CompVolcanoList').value})">
+													<a title="Print this graphs" href="#" >
+														<span class="app-icon light print-icon"></span>
+														<span class="app-button-text">Print Graph</span>
+													</a>
+												</div>
+												<div class="PrintButton" onclick="javascript:downloadCSV({cavw:document.getElementById('CompVolcanoList').value})" >
+													<a title="Print this graphs" href="#" >
+														<span class="app-icon light print-icon"></span>
+														<span class="app-button-text">Download CSV</span>
+													</a>
+												</div>
+												
+												<div id="additionalInfomation" style="font-size:12px;">
+													Additional data: 
+													<a id="gifImage" href="" target="_blank">Image file</a>, 
+													<a id="gmtScriptFile" href="" target="_blank">GMT script file</a><br/> 
+													<div style="padding-top:50px;"> </div>
+												</div>
 											</div>
-											<div id="FlotDisplayTime2" class="equakeGraphPlaceholder">
-											</div>
-											<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TWOD_EQUAKE,element:document.getElementById('equakeGraphs2'),mapUsed:2,equakeGraph:equakeGraphs[2],info:document.getElementById('CompVolcanoList').value})">
-												<a title="Print this graphs" href="#" >
-													<span class="app-icon light print-icon"></span>
-													<span class="app-button-text">Print Graph</span>
-												</a>
-											</div>
-                                            <div class="PrintButton" onclick="javascript:downloadCSV({cavw:document.getElementById('CompVolcanoList').value})" >
-                                                <a title="Print this graphs" href="#" >
-                                                    <span class="app-icon light print-icon"></span>
-                                                    <span class="app-button-text">Download CSV</span>
-                                                </a>
-                                            </div>
-										</div>
-										<div id="2DGMTEquakeGraph2" class="twoDGMTEquakeFlotGraph">
-											<b class="pointer"></b>
-											<div id="2DImage" class="TwoDImage">
-												<a href="" id="imageLink" target="_blank"><img height="707" width="495" src="" id="image"/></a>
-											</div>
-											<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TWOD_GMT_EQUAKE,link:$('#image',document.getElementById('equakeGraphs2'))[0].src,info:document.getElementById('CompVolcanoList').value})">
-												<a title="Print this graphs" href="#" >
-													<span class="app-icon light print-icon"></span>
-													<span class="app-button-text">Print Graph</span>
-												</a>
-											</div>
-                                            <div class="PrintButton" onclick="javascript:downloadCSV({cavw:document.getElementById('CompVolcanoList').value})" >
-                                                <a title="Print this graphs" href="#" >
-                                                    <span class="app-icon light print-icon"></span>
-                                                    <span class="app-button-text">Download CSV</span>
-                                                </a>
-                                            </div>
-											<div id="additionalInfomation">
-												Additional data:
-												<a id="gifImage" href="" target="_blank">Image file</a>, 
-												<a id="gmtScriptFile" href="" target="_blank">GMT script file</a><br/> 
-											</div>
-										</div>
-										<div id="3DGMTEquakeGraph2" class="threeDGMTEquakeFlotGraph">
+										
+										<div id="3DGMTEquakeGraph2" class="threeDGMTEquakeFlotGraph" style="width:450px;height:650px;">
 											<b class="pointer"></b>
 											<div id="3DImage" class="ThreeDImage">
 												<div id="navigationBar" class="threeDNavigationBar">
@@ -851,7 +916,7 @@ session_start();
 
 												</div>
 												<div id="title"></div>
-												<a href="" id="imageLink" target="_blank"><img height="500" width="495" src="" id="image"/></a>
+												<a href="" id="imageLink" target="_blank"><img height="500" width="450" src="" id="image"/></a>
 											</div>
 											<div class="PrintButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.THREED_GMT_EQUAKE,link:$('#image',document.getElementById('3DGMTEquakeGraph2'))[0].src,info:document.getElementById('CompVolcanoList').value})">
 												<a title="Print this graphs" href="#" >
@@ -865,15 +930,17 @@ session_start();
                                                     <span class="app-button-text">Download CSV</span>
                                                 </a>
                                             </div>
-											<div id="additionalInfomation">
-												Additional data:
-												<a id="gifImage" href="" target="_blank">GIF image file</a>, 
-												<a id="gmtScriptFile" href="" target="_blank">GMT script file</a><br/> 
+											<div id="additionalInfomation" style="font-size:12px;">
+												Additional data: <br/>
+												<a id="gifImage" href=""  target="_blank">GIF image file</a>, 
+												<a id="gmtScriptFile" href="" target="_blank">GMT script file</a>
+												<div style="padding-top:20px;"> </div>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="button white" >
+								
+								<div class="button white" style = "width:450px;margin-top:13px;" >
 									<div class="CloseButton" id="HideTimeSeriesPanel2"></div>
 									<table>
 										<tr>
@@ -885,52 +952,25 @@ session_start();
 										</tr>
 									</table>
 								</div>
-								<div id="TimeSeriesView2" class="timeSeriesView" style = "height:960px; margin-left: 0px;">
-									<iframe src="/eruption/index.php" frameborder="0", width="470" height="960"> </iframe>
+								<div id="TimeSeriesView2" class="timeSeriesView" style="width:450px; height:1500px; margin-left: 0px;">
+									<iframe src="eruption/index.php" frameborder="0" width="450px;" height="1500px;"> </iframe>
 
 								</div>
-<!-- 								<div id="TimeSeriesView2" class="timeSeriesView">
-									<div id="OptionList2">
-										<b>Available time series data (max. 3):</b>
-										<div id="OptionList2-1">
-											<table id="TimeSeriesList2" class="timeSeriesList">
 
-											</table>
-										</div>
-									</div>
-									<br/>
-									<div id="overviewPanel2" class="overviewPanel">
-										<b>Overview (select a range to redraw the graph): </b>
-										<div id="overview2"  class="overviewGraph">
-
-										</div>
-										<br/>
-									</div>
-									<div style="clear:both;" id="PlotArea2">
-										<table id="GraphList2">
-										</table>
-									</div>
-									<div class="PrintButton" id="printButton" onclick="javascript:Wovodat.Printer.print({type:Wovodat.Printer.Printing.Type.TIME_SERIES,graphsTable: document.getElementById('GraphList2'),graphsPlot:graphs,info:document.getElementById('CompVolcanoList').value})">
-										<a title="Print this graphs" href="#" >
-											<span class="app-icon light print-icon"></span>
-											<span class="app-button-text">Print</span>
-										</a>
-									</div>
-								</div> -->
 							</td>
 						</tr>
 
 					</table>
 
-                </div><!-- end of content -->
-            </div><!-- end of container --> 
-            <div class = "push" style = "height:100px"></div>
-            <!-- Footer-->
-            <div id = "wrapborder_x">
-                <!-- <?php //include 'php/include/footer.php'; ?> -->
-                <?php include 'php/include/footer_main_beta.php'; ?>
-            </div>
-        </div>
-        <!-- // <script type="text/javascript" src="js/vendor/requirejs/require.js" data-main="js/main"></script> -->
-    </body>
-</html>
+  	</div>
+</div>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+	
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->

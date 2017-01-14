@@ -1,0 +1,21 @@
+{
+  "controller": "UserController",
+  "routing":
+  [
+    {
+      "request": "add_user",
+      "method": "addUser",
+      "params":
+      [
+        "name",
+        "email",
+        "institution",
+        "vd_name",
+        "dataType",
+        "startTimeStr",
+        "endTimeStr"
+      ]
+
+    }
+  ]
+}

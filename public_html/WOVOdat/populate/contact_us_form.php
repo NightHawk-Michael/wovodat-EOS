@@ -1,32 +1,14 @@
 <?php
+if(!isset($_SESSION))
+	session_start();
 
-// Start session
-session_start();
-
-// Regenerate session ID
-session_regenerate_id(true);
-
-// If session already started
-if (isset($_SESSION['HTTP_USER_AGENT'])) {
-	if ($_SESSION['HTTP_USER_AGENT']!=md5($_SERVER['HTTP_USER_AGENT'])) {
-		// Destroy session variables
-		session_destroy();
-	}
-}
-
-// Else
-$_SESSION['HTTP_USER_AGENT']=md5($_SERVER['HTTP_USER_AGENT']);
-
-// If 1st time access
-if (!isset($_SESSION['contact'])) {
+if (!isset($_SESSION['contact'])) {     // If 1st time access
 	// Blank fields
 	$subject="";
 	$message="";
 	$name="";
 	$email="";
-}
-// 2nd time access
-else {
+}else {                                // 2nd time access
 	// Get fields
 	$subject=$_SESSION['contact']['subject'];
 	$message=$_SESSION['contact']['message'];
@@ -34,110 +16,100 @@ else {
 	$email=$_SESSION['contact']['email'];
 }
 
+include 'php/include/header.php';
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-    <head>
-        <title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-        <meta http-equiv="content-type" content="text/html;charset=utf-8">
-        <meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-        <meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-        <meta name="keywords" content="Volcano, Vulcano, Volcanoes">
-        <link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-        <link href="/css/styles_beta.css" rel="stylesheet">
-		<script type="text/javascript" src="/js/scripts.js"></script>
-		<script src="/js/jquery-1.4.2.min.js"></script>                          <!-- Nang added -->     
-		<script type="text/javascript" src="/js/jquery.validate.js"></script>    <!-- Nang added -->    
-	    <script type="text/javascript" src="/js/formValidation.js"></script>     <!-- Nang added -->      
 
-		<style type="text/css">
-			label.error {font-size:12px; display:block; float: none; color: red;}
-		</style>	
-	</head>
+<script src="/js/jquery-1.4.2.min.js"></script>                               
+<script type="text/javascript" src="/js/jquery.validate.js"></script>    
+<script type="text/javascript" src="/js/formValidation.js"></script>        
 
-    <body>
-        <div id="wrapborder_x">
-            <!-- Header -->
-            <div id="wrap_x">
-                <?php include 'php/include/header_beta.php'; ?>  
-			<!-- Content -->
-			<div id="content" >
+<style type="text/css">
+	label.error {font-size:12px; display:block; float: none; color: red;}
+</style>
 
-				<!-- Left -->
-				<div id="contentlview"><br><br>
-					<table width="400" border="0" cellpadding="3" cellspacing="1">
-						<tr>
-							<td><strong><span style="font-size:16px;">Contact Form </span></strong></td>
-						</tr>
-						<tr>
-							<td>(All fields * are required)</td> <td></td>
-						</tr>	
+<?php
+include 'php/include/menu.php'; 
+
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > Contact</div>";
+
+?>
+
+
+</div>  <!-- header-menu -->
+
+<div class="body">
+
+	<div class="widecontent">
+
+		<div class="form">
+			<table>
+				<tr>
+					<td><h2>Contact Form </h2></td>
+				</tr>
+
+				<tr>
+					<td>(All fields * are required)</td> <td></td>
+				</tr>	
 						
-					</table>
-					<table class="formtable" id="formtable">
-						<tr>
-							<td>
-								<form id="contactUsform" name="contactUsform" method="post" action="/populate/contact_us.php">
-									<table width="100%" border="0" cellspacing="1" cellpadding="3">
-										<tr>
-											<td>*Subject</td>
-											<td>:</td>
-											<td><input id="subject" name="subject" type="text" id="subject" size="50" maxlength="255" value="<?php echo $subject; ?>" /></td>
-										</tr>
-										<tr>
-											<td>*Message</td>
-											<td>:</td>
-											<td><textarea id="message" name="message" cols="50" rows="6" id="message"><?php echo $message; ?></textarea></td>
-										</tr>
-										<tr>
-											<td>*Name</td>
-											<td>:</td>
-											<td><input id="name" name="name" type="text" id="name" size="50" maxlength="255" value="<?php echo $name; ?>" /></td>
-										</tr>
-										<tr>
-											<td>*Email</td>
-											<td>:</td>
-											<td><input id="email" name="email" type="text" id="email" size="50" maxlength="255" value="<?php echo $email; ?>" /></td>
-										</tr>
- <!-- Nang added -->
-  										<tr>
-										<td></td><td></td>
-											<td><img id="siimage" src="../securecheck/securimage_show.php" alt="CAPTCHA Image" />
-											<img id="refreshbutton" src="../securecheck/images/refresh.gif" alt="Reload Image" onclick="secureimage();" title="Reload Image">
-											</td>
-										</tr>
-										
- 										<tr>
-											<td>*Type the above security code</td>
-											<td>:</td>
-											<td><input type="text" id="code" name="code" /></td>
-										</tr>
- 										
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>
-												<input type="submit" name="Submit" value="Submit" />
-												<input type="reset" name="Submit2" value="Reset" />
-											</td>
-										</tr>
-									</table>
-								</form>
-							</td>
-						</tr>
-					</table>
-				</div>  <!-- end of contentlview-->
+				<tr>
+					<td>   
+						<form id="contactUsform" name="contactUsform" method="post" action="/populate/contact_us.php">
+							<table>
+								<tr>
+									<td class="label">*Subject: </td>
+									<td><input id="subject" name="subject" type="text" id="subject" size="50" maxlength="255" value="<?php echo $subject; ?>" /></td>
+								</tr>
+								
+								<tr>
+									<td class="label">*Message:</td>
+									<td><textarea id="message" name="message" cols="50" rows="6" id="message"></textarea></td>
+								</tr>
+								<tr>
+									<td class="label">*Name: </td>
+									<td><input id="name" name="name" type="text" id="name" size="50" maxlength="255" value="" /></td>
+								</tr>
+								
+								<tr>
+									<td class="label">*Email:</td>
+									<td><input id="email" name="email" type="text" id="email" size="50" maxlength="255" value="" /></td>
+								</tr>
 
+								<tr>
+								<td></td>
+									<td><img id="siimage" src="../securecheck/securimage_show.php" alt="CAPTCHA Image" />
+									<img id="refreshbutton" src="../securecheck/images/refresh.gif" alt="Reload Image" onclick="secureimage();" title="Reload Image">
+									</td>
+								</tr>
+								
+								<tr>
+									<td class="label">*Type the above security code:</td>
+									<td><input type="text" id="code" name="code" /></td>
+								</tr>
+								
+								<tr>
+									<td>andnbsp;</td>
+									<td>
+										<input type="submit" name="Submit" value="Submit" id="submit" />
+										<input type="reset" name="Submit2" value="Reset" id="reset" />
+									</td>
+								</tr>
+						</form>
+						</table>
+									
+									
+					</td>
+				</tr>
+			</table>
 
-               </div> <!-- end of content -->
-            </div>  <!-- end wrap_x -->     
-            <div style="height: 20px"></div>
-            <div class="reservedSpace">
-            </div>
-        </div>   <!-- end of wrapborder_x -->
-		
-        <div class="wrapborder_x">
-            <?php include 'php/include/footer_main_beta.php'; ?>
-        </div>
-    </body>
-</html>
+	</div>
+</div>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->

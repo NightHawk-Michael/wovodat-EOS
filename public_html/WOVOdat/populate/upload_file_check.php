@@ -1,4 +1,5 @@
 <?php
+
 /**********************************
 
 This script prepares the file to be uploaded to the database.
@@ -29,7 +30,7 @@ function report_error($ori_file_name, $file_name, $url_file_name, $error_code, $
 	}
 	
 	// Move file to "process_error" folder
-	$move_url_file_name="C:/xampp/htdocs/home/wovodat/incoming/process_error/".$file_name;
+	$move_url_file_name="/home/wovodat/incoming/process_error/".$file_name;
 	if (!rename($url_file_name, $move_url_file_name)) {
 		$error="report_error -> rename(url_file_name=$url_file_name, move_url_file_name=$move_url_file_name)]";
 		return FALSE;
@@ -160,7 +161,7 @@ $_SESSION['upload']['list_cb_id']=$list_cb_id;
 $cc_id_load=$_SESSION['login']['cc_id'];
 
 // Directory for uploaded files
-$incoming_dir="C:/xampp/htdocs/home/wovodat/incoming";
+$incoming_dir="/home/wovodat/incoming";
 $file_dir=$incoming_dir."/temp";
 
 // Create destination file name: (cc_id)_(YYYYMMDDhhmmiss)_(original_file_name)

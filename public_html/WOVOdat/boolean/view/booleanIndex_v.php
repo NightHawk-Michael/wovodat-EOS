@@ -2,11 +2,13 @@
 <head>
 	<title>Form</title>
 	<link rel="stylesheet" href="/css/normalize.css">
-	<script src="/js/jquery-1.11.1.min.js"></script>
 	<link rel="stylesheet" href="/js/jquery-ui-1.11.0.custom/jquery-ui.min.css">
 	<link rel="stylesheet" href="/css/jquery.multiselect.css">
+	
+	<script src="/js/jquery-1.11.1.min.js"></script>  
 	<script src="/js/jquery-ui-1.11.0.custom/jquery-ui.min.js"></script>
 	<script src="/js/jquery-ui-1.11.0.custom/jquery-ui-timepicker-addon.js"></script>
+	
 	<script src="/js/jquery.multiselect.min.js"></script>
 	<script src="/js/jquery.cookie.js"></script>
 
@@ -635,8 +637,4 @@
 </body>
 </html>
 
-<?php
-//}
-	
-?>
 

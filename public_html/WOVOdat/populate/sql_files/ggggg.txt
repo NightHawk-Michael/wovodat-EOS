@@ -1,0 +1,185 @@
+533	Goldstone 2
+536	CDMT_SCGN_CS2000
+540	MUSB_BARD_CN1997
+541	Columbia College
+542	Siberia
+544	LDSW_SCGN_CS1999
+545	Burnt Peak
+554	WOMT_SCGN_CS1999
+557	HIVI_SCGN_CS1999
+558	SCIA_SCGN_CS1999
+563	BKAP_SCGN_CS2000
+564	RAMT_SCGN_CS2000
+567	Juniper
+569	AVRY_SCGN_CS1998
+572	TONO
+575	AGMT_SCGN_CS1999
+576	OPBL_SCGN_CS1999
+578	Waterson
+581	Philips Lab
+582	I40A_SCGN_CS2000
+585	CTMS_SCGN_CS1999
+587	BMHL_SCGN_CS1999
+589	TIVA
+590	RSTP_SCGN_CS1999
+595	Blythe
+596	GMRC_SCGN_CS1999
+597	HCMN_SCGN_CS1999
+599	OPCL_SCGN_CS1999
+603	OAES_SCGN_CS1999
+604	BEPK_SCGN_CS2000
+609	UNR1
+610	SDHL_SCGN_CS2001
+611	OPRD_SCGN_CS1999
+614	OPCP_SCGN_CS1999
+622	BSRY_SCGN_CS1998
+623	NBPS_SCGN_CS1999
+624	ORMT_SCGN_CS2000
+625	RDMT_SCGN_CS1999
+627	LDES_SCGN_CS1998
+628	LNMT_SCGN_CS2000
+629	BBRY_SCGN_CS1998
+631	CPBN_SCGN_CS2000
+632	OPCX_SCGN_CS1999
+861	Akutan Village
+862	Akutan Northwest Slope
+863	Akutan West Slope
+864	Akutan Southeast Slope
+865	Akutan Open BT
+866	Akutan Fumarole
+867	Akutan Harbor
+868	Akutan East Point
+869	Port Heiden
+870	MNEIL
+871	URSUS
+872	West of Augustine
+873	South of Augustine
+874	Augustine Dome
+875	Augustine Mound
+876	Augustine Lagoon
+877	Augustine NW
+878	Augustine N
+879	Augustine SEA
+880	Augustine South
+881	Seldovia Airport
+882	Ross Lake Dam
+883	Seedrow Wooley
+884	Chignik Lagoon
+885	Hinckley
+886	Garner, AK
+887	Mayacmas
+888	Crazy Creek
+891	Sand Point
+892	Petersburg
+893	King Cove
+894	Goat Mountain
+895	Cold Bay
+897	Darrington, WA
+898	Haleakala, Maui
+901	Mt. Hood Ski Area
+902	Baldy Mountain
+903	Cascade Locks
+904	Ridgefield
+905	IsanotskiSAK2008
+906	BrownPeak_AK2008
+907	Quartz Creek
+908	Kodiak 5
+974	Savoonga
+975	LV Mt. Helen
+976	Low Diamond
+977	Bumpass Hell
+978	White
+979	Hat Lake
+980	Blue Lake Canyon
+981	Manzanita Lake
+982	Sifford Mountain
+995	Mauna Kea
+1030	Lava Beds National Monument
+1031	Medicine Lake
+1032	Glass Mountain
+1033	Adak
+1040	Fantasy Field
+1041	Mossy Rock Dam
+1042	Packwood Ball Field
+1043	Weyerhaeuser 1
+1044	Mitchell Point
+1045	Weyerhaeuser 2
+1046	South Ridge A
+1047	Studebaker Ridge
+1048	Loowit
+1049	Northwest Dome
+1050	Coldwater
+1051	Nelson Ridge
+1052	East Dome Tower
+1053	Southeast Ridge
+1054	Southeast Slope
+1055	West Radial
+1056	Butte Camp
+1057	Ape Canyon
+1058	Elk Rock
+1059	Climbers Bivouac
+1060	Windy Ridge
+1061	West Goat
+1076	La Grand
+1082	Naches
+1083	Sun Top Lookout
+1084	Watch Mt., Randle WA
+1085	Poo Poo Point
+1088	Drift River
+1089	False Pass
+1090	Santiam Junction
+1091	Pollard FLT, Lakehead, CA
+1092	Everit Hill
+1093	Grey Butte
+1094	West Side
+1095	North Gate
+1096	Gravel Creek
+1097	Ash Creek
+1098	Hotlum
+1099	Whaleback
+1100	TugamakRngAK2008
+1101	ShshldinNWAK2008
+1102	ShshldinSWAK2008
+1103	IsanotskiNAK2008
+1104	ShishaldinAK2008
+1108	Lockwood
+1109	SLID
+1110	Port Moller
+1111	Unalaska
+1113	Sisters
+1114	Pine Martin Lodge
+1116	Klawock Air
+1117	Hat Creek Radio Observatory
+1118	Hatchet Mountain
+1119	Wonderland, Shasta Lake
+1120	Perryville
+1121	CpSarichefAK2008
+1122	WestdahlNWAK2008
+1123	WestdahlW_AK2008
+1124	WestdahlNEAK2008
+1125	WestdahlSWAK2008
+1126	WestdahlSEAK2008
+1127	Big Bend Ridge
+1128	Lake Yellowstone
+1129	Hayden Valley
+1130	Mammoth Hot Springs
+1131	Norris
+1132	Old Faithful
+1133	Island Park
+1134	B Bar Ranch
+1135	Henrys Lake
+1136	West Yellowstone
+1137	YNP Fish Creek
+1138	Grand Targhee
+1139	Promontory
+1140	Grassy
+1141	Madison Junction
+1142	Bacon Rind Creek
+1143	Panther Creek
+1144	YNPCanyon_WY2005
+1145	East Gate
+1146	Slough Creek
+1147	NE Entrance
+1148	Teton Science School
+1149	White Lake
+1150	Grants

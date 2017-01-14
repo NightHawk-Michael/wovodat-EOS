@@ -15,18 +15,18 @@ require_once("php/include/login_check.php");
 require_once "php/include/get_root.php";
 
 // Direct access
-if (!isset($_POST['select_granted_user_ok'])) {         
+if (!isset($_POST['select_granted_user_ok'])) {
 	// Redirect to home page
 	header('Location: '.$url_root.'home.php');
 	exit();
 }
 
 // Get granting and granted users ids
-$granting_user_id = $_SESSION['mng_perm']['granting_user_id'];
-$granted_user_id = $_POST['slgu_radio'];
+$granting_user_id=$_SESSION['mng_perm']['granting_user_id'];
+$granted_user_id=$_POST['slgu_radio'];
 
 // Search for granting user name
-if ($granting_user_id == $_SESSION['login']['cc_id']) {
+if ($granting_user_id==$_SESSION['login']['cc_id']) {
 	$granting_user_name=$_SESSION['login']['user_name'];
 }
 else {
@@ -153,52 +153,47 @@ $_SESSION['mng_perm']['upload']=$upload;
 $_SESSION['mng_perm']['update']=$update;
 $_SESSION['mng_perm']['admin']=$admin;
 
+include 'php/include/header.php'; 
+
+include 'php/include/menu.php'; 
+
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > <a href='http://{$_SERVER['SERVER_NAME']}/populate/my_account.php'>Account</a> > Manage permissions </div>";
+
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/gif/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
-	<div id="wrapborder">
-	<div id="wrap">
-			<?php include 'php/include/header_beta.php'; ?>
 
-		<!-- Content -->
-		<div id="content">	
-			<div id="contentl">
-		<!-- Top of the page -->
-		
-		<!-- Page content -->
-		<h1>Manage permissions</h1>
-		<form method="post" action="update_permissions.php" name="form_mngperm">
-			<p>I allow <input type="hidden" name="granted_user_id" value="<?php print $granted_user_id; ?>" /><?php print $granted_user_name; ?> to:</p>
-			<ul>
-				<li><input type="checkbox" <?php if ($upload) {print "checked=\"true\"";} ?> name="upload" value="upload" /> Upload data owned by</li>
-				<li><input type="checkbox" <?php if ($update) {print "checked=\"true\"";} ?> name="update" value="update" /> Update data owned by</li>
-				<li><input type="checkbox" <?php if ($view) {print "checked=\"true\"";} ?> name="view" value="view" /> View data owned by</li>
-				<li><input type="checkbox" <?php if ($admin) {print "checked=\"true\"";} ?> name="admin" value="admin" /> Be an administrator for</li>
-			</ul>
-			<p><input type="hidden" name="granting_user_id" value="<?php print $granting_user_id; ?>" /><?php print $granting_user_name; ?></p>
-			<br />
-			<input type="submit" name="manage_permissions_ok" value="OK" />
-		</form>
+</div>  <!-- header-menu -->  
 
-			</div>
+	<div class="body">
+
+		<div class="widecontent">
+
+			<!-- Page content -->
+			
+			<h3>Manage permissions</h3>
+			
+			<form method="post" action="update_permissions.php" name="form_mngperm">
+			
+				<p>I allow <input type="hidden" name="granted_user_id" value="<?php print $granted_user_id; ?>" /><?php print $granted_user_name; ?> to:</p>
+				<ul>
+					<li><input type="checkbox" <?php if ($upload) {print "checked=\"true\"";} ?> name="upload" value="upload" /> Upload data owned by</li>
+					<li><input type="checkbox" <?php if ($update) {print "checked=\"true\"";} ?> name="update" value="update" /> Update data owned by</li>
+					<li><input type="checkbox" <?php if ($view) {print "checked=\"true\"";} ?> name="view" value="view" /> View data owned by</li>
+					<li><input type="checkbox" <?php if ($admin) {print "checked=\"true\"";} ?> name="admin" value="admin" /> Be an administrator for</li>
+				</ul>
+				<p><input type="hidden" name="granting_user_id" value="<?php print $granting_user_id; ?>" /><?php print $granting_user_name; ?></p>
+				<br />
+				<input type="submit" name="manage_permissions_ok" value="OK" />
+			</form>
+
 		</div>
-		
-		<!-- Footer -->
-		<div>
-			<?php include 'php/include/footer_main_beta.php'; ?>
-		</div>
-		
 	</div>
-</body>
-</html>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->	

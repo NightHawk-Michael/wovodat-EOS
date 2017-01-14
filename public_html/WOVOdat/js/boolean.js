@@ -146,6 +146,8 @@ $(document).ready( function() {
         $('select').material_select();
     });
 
+    disableMonitoringCheckbox();
+
 
 });
 
@@ -444,9 +446,9 @@ var addLocationTag = function(){
     if(navigator.onLine){
         $("#map_location").click(function(){
 
-            $("#location").append(" <div class=\"col s3\">Latitude: <div class=\"input-field inline\"> <input id=\"vd_inf_slat1\" type=\"text\" value='1.3553794' style = 'font-size:inherit;'  onchange='addGoogleMap()'> </div>");
-            $("#location").append(" <div class=\"col s3\">Longitude: <div class=\"input-field inline\"> <input id=\"vd_inf_slon1\" type=\"text\" value='103.86774439999999' style = 'font-size:inherit;' onchange='addGoogleMap()'> </div> ");
-            $("#location").append(" <div class=\"col s3\">Elevation: <div class=\"input-field inline\"> <input id=\"vd_inf_sleve1\" type=\"text\" value='0' style = 'font-size:inherit;' onchange='addGoogleMap()'> </div>");
+            $("#location").append(" <div class=\"col s2\">Latitude: <div class=\"input-field inline\"> <input id=\"vd_inf_slat1\" type=\"text\" value='1.3553794' style = 'font-size:inherit;'  onchange='addGoogleMap()'> </div>");
+            $("#location").append(" <div class=\"col s2\">Longitude: <div class=\"input-field inline\"> <input id=\"vd_inf_slon1\" type=\"text\" value='103.86774439999999' style = 'font-size:inherit;' onchange='addGoogleMap()'> </div> ");
+            $("#location").append(" <div class=\"col s2\">Elevation: <div class=\"input-field inline\"> <input id=\"vd_inf_sleve1\" type=\"text\" value='0' style = 'font-size:inherit;' onchange='addGoogleMap()'> </div>");
             $("#location").append("<div id='googleMap' style='height: 400px;' class ='col s9'></div>");
             addGoogleMap();
             $("#map_location").off();
@@ -508,4 +510,63 @@ var getJsonObject = function(val,isCheckAll){
     });
 };
 
+function checkgdPluFlag(type){
+    var selectVal = $("#gdPlu" + type + "Flag").val();
+    type = type.toLowerCase();
+    if (selectVal == "thresholdWithoutSpe") {
+        $("#gd_plu_" + type + "_without_spec").css("display","block");
+        $("#gd_plu_" + type + "_with_spec").css("display","none");
+    }else{
+
+        $("#gd_plu_" + type + "_without_spec").css("display","none");
+        $("#gd_plu_" + type + "_with_spec").css("display","block");
+    }
+}
+
+function checkgdPluSpec(type){
+    type = type.toLowerCase();
+    console.log(type);
+    var selectVal = $("#gd_plu_" + type).val();
+
+    var template =  "<div class = \"row col s12\">" +
+        "<p class = \"data-header col s2\">CO2:</p>" +
+        "<div id='gd_plu_CO2' class='row col s9'>" +
+        "<input class= \"col s5\" type=\"text\" name=\"gd_plu_" + type + "_min_CO2\" id=\"gd_plu_" +type + "_min_CO2\">" +
+        "<p class= \"col s2\" style=\"display:inline\">to</p>" +
+        "<input class= \"col s5\" type=\"text\" name=\"gd_plu_" + type +"_max_CO2\" id=\"gd_plu_" + type + "_max_CO2\"></div> </div>"
+    var contentGDPluSpec = "";
+    for (v in selectVal){
+        var t  = template.split("CO2").join(selectVal[v]);
+        contentGDPluSpec +=t;
+    }
+    $("#gd_plu_" + type + "_spec").html(contentGDPluSpec);
+
+}
+
+function checkAdvanceSearch(){
+    var checkBox = [];
+    $("#gd_plu_wrapper").css("display","none");
+    $("#gas").css("display","none");
+    $("#Monitoring_Data_Lists input:checked").each(function(){
+        checkBox.push($(this).attr('name'));
+        $("#gas").css("display","block");
+        $("#gd_plu_wrapper").css("display","block");
+
+    });
+}
+
+function disableMonitoringCheckbox(){
+    var checkBox = [];
+    $("#Monitoring_Data_Lists input").each(function(){
+        if (!($(this).attr('name') == 'gd_plu')){
+            $(this).prop('disabled', true);
+        }else{
+            $(this).prop('disabled', false);
+        }
+        checkBox.push($(this).attr('name'));
+
+
+    });
+
+}
 

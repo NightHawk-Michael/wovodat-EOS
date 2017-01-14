@@ -4,15 +4,15 @@ function showUpdateTableList($vol,$obs,$cbs){
 $i="";
 
 echo <<<HTMLBLOCK
-		<!-- Content -->
-
-		<div id="content" style="overflow:auto;">
 		<!-- Page content -->
+		<div class="form">
+			
+		<h3>Upload online form for regional tectonics interaction Information (Table Name: ip_tec) </h3>
+
+		<span> (All fields * are required) </span>
+	
+		<p class="redtext"><?php if ($error) {print "Registration unsuccessful! Please correct the fields in red:";} ?></p>		
 		
-		<h2 style="text-align:center;">Upload form for Regional tectonics interaction Information.  Table : ip_tec</h2>
-		
-		<p class="formFont">The fields preceded by an asterisk (*) are required.</p> 
-		<!-- Form -->
 		<form method="post" action="insertSwitch.php" name="form_ip_tec" id="form_ip_tec">
 			
 			<table class="formtable" id="formtable">
@@ -28,7 +28,7 @@ echo <<<HTMLBLOCK
 					<td><span class="formFont">*Volcano Name:</span></td>
 					<td> 
 					
-						<select id="vd_id" name="vd_id" >
+						<select id="vd_id" name="vd_id" style='width:200px;color:black;'>
 							<option value="">Select Volcano</option>
 HTMLBLOCK;
 							for($i=0; $i<sizeof($vol); $i++){
@@ -180,7 +180,7 @@ echo <<<HTMLBLOCK
 				<tr>
 					<td><span class="formFont">*Institution/Observatory:</span></td>
 					<td>
-						<select id="cc_id" name="cc_id" >
+						<select id="cc_id" name="cc_id" style='width:200px;color:black;'>
 							<option value="">Select Observer.</option>
 HTMLBLOCK;
 							for($i=0; $i<sizeof($obs); $i++){
@@ -193,7 +193,7 @@ echo <<<HTMLBLOCK
 				<tr>
 					<td><span class="formFont">Second Institution/Observatory:</span></td>
 					<td>
-						<select id="cc_id2" name="cc_id2" >
+						<select id="cc_id2" name="cc_id2" style='width:200px;color:black;'>
 							<option value="">Select Institution/Obs.</option>
 HTMLBLOCK;
 							for($i=0; $i<sizeof($obs); $i++){
@@ -206,7 +206,7 @@ echo <<<HTMLBLOCK
 				<tr>
 					<td><span class="formFont">Third Institution/Observatory:</span></td>
 					<td>
-						<select id="cc_id3" name="cc_id3" >
+						<select id="cc_id3" name="cc_id3" style='width:200px;color:black;'>
 							<option value="">Select Institution/Obs.</option>
 HTMLBLOCK;
 							for($i=0; $i<sizeof($obs); $i++){
@@ -228,9 +228,12 @@ echo <<<HTMLBLOCK
 				<input type="hidden" name="cc_id_load" value="{$_SESSION['login']['cc_id']}" />
 				
 				<tr>
-					<td><span class="formFont">Bibliographic:</span> (Hold down the Ctrl to select multiple options) </td>
 					<td>
-						<select class="bibliographic" id="cb_ids" name="cb_ids[]" multiple>
+						<p class="formFont">Bibliographic:</p> 
+						<p style="font-size:.7em;width:210px;">(Hold down the Ctrl to select multiple options)</p>  
+					</td>
+					<td>
+						<select class="bibliographic" id="cb_ids" name="cb_ids[]" multiple style='color:black;'>
 							<option value="">Select bibliographic</option>
 HTMLBLOCK;
 							for($i=0; $i<sizeof($cbs); $i++){
@@ -240,13 +243,13 @@ HTMLBLOCK;
 echo <<<HTMLBLOCK
 						</select>					
 					</td>
-
+				</tr>
 				
 			</table>
 			
-			<div style="padding:10px 130px;" >
-			<input type="button" id="back" name="back" value="Back to previous page" />
-			<input type="submit" name="confirm" value="Confirm" />
+			<div style="padding:20px 200px;" >
+				<input type="button" id="back" name="back" value="Back to previous page" />
+				<input type="submit" name="confirm" value="Confirm" />
 			</div>
 		</form>
 		 

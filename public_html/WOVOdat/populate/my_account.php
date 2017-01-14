@@ -1,45 +1,37 @@
 <?php
-// Start session
-session_start();
-
-// Regenerate session ID
-session_regenerate_id(true);
-
-// Check login
-require_once("php/include/login_check.php");
-
-// Get root url
+if(!isset($_SESSION))
+	session_start();
+	
+require_once "php/include/login_check.php";
 require_once "php/include/get_root.php";
-
+include "php/include/header.php";  
+	
 // Get information stored
 $user_admin=$_SESSION['permissions']['user_admin'];
 $l_user_admin=$_SESSION['permissions']['l_user_admin'];
-$cc_id=$_SESSION['login']['cc_id'];   // Nang added on 28-Feb-2013
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/gif/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
+$cc_id=$_SESSION['login']['cc_id'];      
 
-	<div id="wrapborder">
-	<div id="wrap">
-		<?php include 'php/include/header_beta.php'; ?>
-		<!-- Content -->
-		<div id="content">	
-			<div id="contentl">
-			<br><br>
+include 'php/include/menu.php'; 
+ 
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > Account</div>";
+
+?>
+
+</div>  <!-- header-menu -->
+
+<div class="body">
+	<div class="widecontent">
+			
+			
 			<!-- Page content -->
+			
 			<div>
-				<p>Which operation would you like to do?</p>
+			
+				<?php
+					echo "<h2>".$_SESSION['login']['cr_uname']."'s Account Summary</h2>";
+				
+				?>
+			
 				<ul>
 					<li>
 						<p><a href="manage_account.php">Change my password</a></p>
@@ -114,14 +106,15 @@ STRING;
 			</ul>
 		</div>
 			
-			</div>
+</div>
+</div>
+
+		<div class="footer">
+			<?php include 'php/include/footer.php'; ?>
 		</div>
-		
-		<!-- Footer -->
-		<div id="footer">
-			<?php include 'php/include/footer_beta.php'; ?>
-		</div>
-		
-	</div>
-</body>
-</html>
+	
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->

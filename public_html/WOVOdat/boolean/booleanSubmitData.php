@@ -6,20 +6,19 @@
 </html>
 
 <?php
+if(!isset($_SESSION))
+	session_start();
+	
 ini_set('max_execution_time', 7200);
-SESSION_START();
-include "view/common_v.php";
 include 'view/booleanSubmitData_v.php';
 include 'model/booleanSubmitData_m.php';
+include 'php/include/header.php';
+include 'php/include/menu.php';
 
-if(!isset($_SESSION['login'])){       // can't proceed without log in
-//	header('Location: '.$url_root.'login_required.php');
-}
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > Data Download > <a href='http://{$_SERVER['SERVER_NAME']}/boolean/booleanIndex.php'>WOVOdat Boolean Search Form</a> </div>";
 
-showExternallink();
-showHeader();
-include "php/include/header.php"; 
-showContent();
+echo "</div>";   /*** header-menu  ***/
+
 /********* Add Loading Bar ******************/
 
 echo "<script>
@@ -29,22 +28,29 @@ echo "<script>
 flush();
 
 /********************************************/
+echo "<div class='body'>";
+	echo "<div class='widecontent'>";
 
-	$data= getAllResult();
+		$data= getAllResult();
 
-	if(sizeof($data)!=0){
-		showMonitorData($data);
-	}else{
-		showNoResult();
-	}
+		if(sizeof($data)!=0){
+			showMonitorData($data);
+		}else{
+			showNoResult();
+		}
 
-
-
-showFooter1();
-include "php/include/footer.php"; 
-showFooter2();	   
-
-
-		
 
 ?>
+
+	</div>
+</div>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->

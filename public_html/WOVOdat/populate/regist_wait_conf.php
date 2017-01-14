@@ -3,12 +3,11 @@
 This page displays a message to a user who just registered to WOVOdat.
 This message tells the user to check their mailbox for an email to confirm registration to WOVOdat.
 **********************************/
+if(!isset($_SESSION))
+	session_start();
 
-// Start session
-session_start();
-// Get root url
 require_once "php/include/get_root.php";
-// If no registration was started
+
 if (!isset($_SESSION['register']['email_sent'])) {
 	// Redirect to welcome page
 	header('Location: '.$url_root.'index.php');
@@ -21,26 +20,19 @@ $email=$_SESSION['register']['email'];
 // Unset session variables used for registration
 unset($_SESSION['register']);
 
+include 'php/include/header.php'; 
+
+include 'php/include/menu.php'; 
+ 
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > 
+<a href='http://{$_SERVER['SERVER_NAME']}/populate/regist_form.php'>Register</a> > Registration in prgress </div>";
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
-	<div id="wrapborder">
-	<div id="wrap">
-			<?php include 'php/include/header_beta.php'; ?>
-		<!-- Content -->
-		<div id="content">	
-			<div id="contentl">
+
+</div>  <!-- header-menu -->
+
+<div class="body">
+	<div class="widecontent">
+			
 		<!-- Page content -->
 		<h1>Registration waiting for email confirmation</h1>
 		<p>Thank you for registering to WOVOdat. An email was sent to your email address (<?php print $email; ?>) <b>for you to confirm registration</b>. Once you receive it, please click on the link provided.</p>
@@ -49,17 +41,13 @@ unset($_SESSION['register']);
 		<br />
 		<p><a href="index.php">Go back to home page</a></p>
 
-
-			</div>
-			<div id="contentr">
-			</div>
-		</div>
-		
-		<!-- Footer -->
-		<div id="footer">
-			<?php include 'php/include/footer_beta.php'; ?>
-		</div>
-		
 	</div>
-</body>
-</html>
+</div>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->			

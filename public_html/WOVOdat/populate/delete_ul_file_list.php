@@ -1,20 +1,16 @@
 <?php
-if (!isset($_SESSION))
-    session_start();  // Start session
-	
+
 // Import necessary scripts
 require_once("php/funcs/db_funcs.php");
 
 // Check login
-//require_once("php/include/login_check.php");
+require_once("php/include/login_check.php");
 
 // Get root url
 require_once "php/include/get_root.php";
 
 // Check that user is a developper
-//if ($_SESSION['permissions']['access']!=0) {
-
-if (!isset($_SESSION['login'])) {
+if ($_SESSION['permissions']['access']!=0) {
 	// Redirect to home page
 	header('Location: '.$url_root.'home.php');
 	exit();
@@ -47,40 +43,55 @@ if (!db_sql($query_sql, $query_results, $query_error)) {
 // Get number of results
 $cnt_results=count($query_results);
 
+
+include 'php/include/header.php'; 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
 
-	<div id="wrapborder">
-	<div id="wrap">
-		<div id="headershadow">
-			<?php include 'php/include/header_beta.php'; ?>
-		</div>
+<style type="text/css">
+table#table_slgu {
+    text-align: left;
+    font-size: 12pt;
+    border-spacing: 0px;
+    border-width: 1px;
+    border-color: #505050;
+    border-style: solid;
+    border-collapse: collapse;
+}
 
-		<!-- Content -->
-		<div id="content">	
-			<div id="content_ref">
-			
-		<!-- Top of the page -->
-		<div id="top">
-			<!-- Aligned to the right: You are logged in as username (FName LName | Obs) | Logout -->
-			<p>You are logged in as <b><?php print $uname; ?></b> | <a href="logout.php">Logout</a></p>
-		</div>
+table#table_slgu th {
+    text-align: center;
+    font-size: 8pt;
+    border-width: 1px;
+    border-color: #505050;
+    border-style: solid;
+    padding: 2px;
+    background-color: #ccc;
+}
+
+table#table_slgu td {
+    font-size: 7pt;
+    border-width: 1px;
+    border-color: #505050;
+    border-style: solid;
+    padding: 2px;
+}
+</style>
+<?
+include 'php/include/menu.php'; 
+
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > <a href='http://{$_SERVER['SERVER_NAME']}/populate/home_populate.php'>Submit Data</a> > Incoming File </div>";
+
+?>
+
+</div>  <!-- header-menu -->  
+
+	<div class="body">
+
+		<div class="widecontent">
 		
-		<!-- Page content -->
-		<h1>Submitted files, listed in "cu" table, with processing status</h1>
-		<span class="redtext"><?php print $message; ?></span>
+			<!-- Page content -->
+			<h2>Submitted files, listed in "cu" table, with processing status</h2>
+			<span class="redtext"><?php print $message; ?></span>
 <?php
 
 if ($cnt_results==0) {
@@ -126,18 +137,18 @@ STRING;
 			</div>
 		</form>
 STRING;
-}
+} 
 
 ?>
-			
-			</div>
 		</div>
-		
-		<!-- Footer -->
-		<div id="footer">
-			<?php include 'php/include/footer_beta.php'; ?>
-		</div>
-		
 	</div>
-</body>
-</html>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->	

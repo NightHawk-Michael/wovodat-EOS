@@ -6,7 +6,9 @@ This script is run when a user chose to abort a previous upload (from upload_fil
 It deletes all related data and redirects back to the home page.
 
 **********************************/
-
+if(!isset($_SESSION))
+	session_start();
+	
 // Set unlimited capacity and time for processing
 ini_set("memory_limit","-1");
 set_time_limit(0);

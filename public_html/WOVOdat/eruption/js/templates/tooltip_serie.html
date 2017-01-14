@@ -1,0 +1,21 @@
+<%if(type == "bar"){%>
+	<div style="text-align: center;">
+	<% if (stime == etime){%>
+		<%= stime %><br/>
+	<%}else{%>
+		from <%= stime %> to <%= etime %><br/>
+	<%}%>
+	
+	<%= value %>
+	<% if(error != undefined) %>
+		&plusmn <%= error %>
+	</div>
+<%}%>
+<%if(type == "point"){%>
+	<div style="text-align: center;">
+	<%= time %><br/>
+	<%= value %>
+	<% if(error != undefined) %>
+		&plusmn <%= error %>
+	</div>
+<%}%>

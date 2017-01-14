@@ -12,7 +12,6 @@ echo <<<HTMLBLOCK
         <meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
         <meta name="keywords" content="Volcano, Vulcano, Volcanoes">
         <link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-        <link href="/css/styles_beta.css" rel="stylesheet">
 		<script src="/js/jquery-1.4.2.min.js"></script>
 
 <style type="text/css">

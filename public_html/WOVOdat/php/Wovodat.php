@@ -193,7 +193,7 @@ class Wovodat {
         if ($row === false)
             return;
         $results = Array();
-        $object = Array();
+        $object =  Array();
         while (true) {
             $object = "";
             $object[1] = $row[0];                   //vd_name

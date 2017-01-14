@@ -4,18 +4,18 @@ function showUpdateTableList(){
 $i="";
 
 echo <<<HTMLBLOCK
-		<!-- Content -->
-
-		<div id="content">
 		<!-- Page content -->
 		
-		<h2 style="text-align:center;">Upload form for Observatory Contact Information.  Table : cc </h2> <br/>
+		<div class="form">
+			<h3>Upload online form for Observatory Contact Information (Table Name: cc) </h3>
+
+			<span> (All fields * are required) </span>
 		
-		<p class="formFont">The fields preceded by an asterisk (*) are required.</p><br/>
-		<!-- Form -->
-		<form method="post" action="insertSwitch.php" name="form_cc" id="form_cc">
+			<p class="redtext"><?php if ($error) {print "Registration unsuccessful! Please correct the fields in red:";} ?></p>
+		
+			<form method="post" action="insertSwitch.php" name="form_cc" id="form_cc">
 			
-			<table class="formtable" id="formtable">
+				<table class="formtable" id="formtable">
 
 				<tr>
 					<td><span class="formFont">*Observatory Code:</span> </td>

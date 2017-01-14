@@ -50,7 +50,7 @@ $dot_pos=strrpos($selected_file, ".");
 $file_name_no_ext=substr($selected_file, 0, $dot_pos);
 
 // Undo file URL
-$undo_file="C:/xampp/htdocs/home/wovodat/incoming/processed/undo/".$user_id."_".$upload_time."_".$file_name_no_ext."_undo.xml";
+$undo_file="/home/wovodat/incoming/processed/undo/".$user_id."_".$upload_time."_".$file_name_no_ext."_undo.xml";
 
 // Undo upload
 if (!wovoml_undo($undo_file, $undo_error)) {
@@ -100,8 +100,8 @@ if (!unlink($undo_file)) {
 
 
 // Move data file to "undone"
-$file_name="C:/xampp/htdocs/home/wovodat/incoming/processed/original/".$user_id."_".$upload_time."_".$selected_file;
-$move_file_name="C:/xampp/htdocs/home/wovodat/incoming/undone/".$user_id."_".$upload_time."_".$selected_file;
+$file_name="/home/wovodat/incoming/processed/original/".$user_id."_".$upload_time."_".$selected_file;
+$move_file_name="/home/wovodat/incoming/undone/".$user_id."_".$upload_time."_".$selected_file;
 if (!rename($file_name, $move_file_name)) {
 	$_SESSION['errors'][0]=array();
 	$_SESSION['errors'][0]['code']=1151;

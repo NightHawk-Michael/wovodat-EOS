@@ -1,5 +1,7 @@
 <?php
-session_start();// Start session
+if(!isset($_SESSION))
+	session_start();
+	
 require_once "php/include/get_root.php";
 
 $uname="";
@@ -17,17 +19,15 @@ if(!isset($intensity_time)){
 	header('Location:commonconvertdata_ng.php');
 }
 
+include "php/include/header.php";  
+
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > 
+<a href='http://{$_SERVER['SERVER_NAME']}/populate/index.php'>Submit Data</a> > Converting Intensity Data </div>";
+
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
+</div>  <!-- header-menu -->
+	
 	<script src="/js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="/js/jquery.validate.js"></script>
 	<script language='javascript' type='text/javascript'>
@@ -46,30 +46,14 @@ if(!isset($intensity_time)){
 
 	</script>
 
+	<style type="text/css">
+		label.error {font-size:10px; display:block; color: red;}
+	</style>
+	
+<div class="body">
+	<div class="widecontent">
 
-<style type="text/css">
-label.error {font-size:10px; display:block; color: red;}
-</style>	
-	
-	
-	
-</head>
-<body>
-	<div id="wrapborder">
-	<div id="wrap">
 
-		<?php include 'php/include/header_beta.php'; ?>
-			<div id="content">
-			<div id="contentl">
-				<div>
-					
-					<p style="font-size:12px;font-weight:bold;">
-						Please Select Intensity Events by clicking one button for each csv line.
-					</p>
-				
-					<div id="contentlhead"></div>
-					<div id="contentlform"></div>
-					<p class="home3"></p>
 		<?php 
 			
 			echo '<form id="intensityform" name="intensityform" method="post" action="intensity_csvxml_ng.php" >';		
@@ -140,22 +124,16 @@ label.error {font-size:10px; display:block; color: red;}
 			echo "</form>";
 			
 		?>
-			</div>	
-				</div>		
-					<div><p class="home2"></p></div>
-
-			<div id="contentr">
-				<div id="top" align="left">
-					<!-- Aligned to the right: You are logged in as username (FName LName | Obs) | Logout -->
-					<p align="right">Login as: <b><?php print $uname; ?></b>|<a href="/populate/logout.php">Logout</a></p>
-				</div>
-			</div>
-		</div>
-		<!-- Footer -->
-			<?php include 'php/include/footer_main_beta.php'; ?>
 			
-		</div> <!--end of wrap-->
-	</div> <!--end of wrapborder-->
+	</div>
+</div>
 
-</body>
-</html>
+		<div class="footer">
+			<?php include 'php/include/footer.php'; ?>
+		</div>
+	
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->

@@ -41,8 +41,7 @@ define(function(require) {
         'overviewGraphMinX': event.data.graphMinX,
         'overviewGraphMaxX': event.data.graphMaxX
       });
-      // console.log(ranges.xaxis);
-      // console.log(event.data);
+
       event.data.data.trigger('update');
     },
     //selectingRegionChanged: function(selectingTimeRange){
@@ -162,6 +161,8 @@ define(function(require) {
       //this.$el.bind('plotselected', this.selectingTimeRange, this.onSelect);
       this.$el.bind('plotselected', eventData, this.onSelect);
       this.initialDataMinTime = this.initialDataMaxTime = undefined;
+
+
     },
 
     update: function() {

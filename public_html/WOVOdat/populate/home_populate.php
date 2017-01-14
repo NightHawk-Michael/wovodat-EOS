@@ -1,27 +1,22 @@
 <?php
 if (!isset($_SESSION))
-    session_start();  // Start session
+    session_start();  
+	
 
-// Initialize navigation variable
-$_SESSION['redirect']="";
-$_SESSION['mondata'] = ""; // store session data
-
-// Get root url
+// Get root url  
 require_once "php/include/get_root.php";
+include "php/include/db_connect.php";  
+
 
 // If session was already started
 if (isset($_SESSION['login'])) {
-	// Check login
-	//require_once("php/include/login_check.php");     // Nang commented out on 25-Feb-2013
 
- 
-	// Get login ID and user name 
-	$uname = $_SESSION['login']['cr_uname'];           // Nang added on 25-Feb-2013
-	$user_name=$_SESSION['login']['user_name'];        // Nang added on 25-Feb-2013
+	// Get login ID and user name                           // Nang added  on 22-Feb-2013
+	$uname = $_SESSION['login']['cr_uname'];
+	$user_name=$_SESSION['login']['user_name'];
 	
 	// Get cp_access
-    $cp_access = $_SESSION['permissions']['access']; 
-
+	$cp_access=$_SESSION['permissions']['access'];
 	
 	// Message from upload_form
 	if (isset($_SESSION['upload_form']['upload_ok'])) {
@@ -105,7 +100,7 @@ else {
 	// The user was correctly identified
 	
 	// Store information in login history file
-	$history_file=fopen("C:/xampp/htdocs/home/wovodat/login_history.txt", "a");
+	$history_file=fopen("/home/wovodat/login_history.txt", "a");
 	// If error when opening file
 	if (!$history_file) {
 		$_SESSION['errors'][0]=array();
@@ -590,20 +585,23 @@ else {
 	$upload_ok=FALSE;
 }
 
-	//Purpose to get obs to use in option (c) 
-	//Added 2-May-2012  
-
-	include "php/include/db_connect.php";  
-	include "convertie/model/common_model_ng.php";    //Nang added on 21-Mar-2013	
-	$sql="select cc.cc_obs from cc where cc.cc_id={$_SESSION['login']['cc_id']}";	
-	$result = mysql_query($sql);
-	$row= mysql_fetch_array($result);
-
-	$observatory=$row['cc_obs'];
-	//Add more arrays here if there are more new obs 
-	$observatorylist= array("Volcanological Survey of Indonesia" => "cvghm", "CVGHM" => "cvghm");  
+	include "php/include/header.php";  
+	include 'php/include/menu.php';	
+	include "convertie/model/common_model_ng.php";   
+ 
 	
-	 if ($_SESSION['login']['cc_id'] == '332' ||$_SESSION['login']['cc_id'] == '269' || $_SESSION['login']['cc_id'] == '199' || $_SESSION['login']['cc_id'] == '230' || $_SESSION['login']['cc_id'] == '331') {
+	echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > Submit Data</div>";
+	echo"</div>";
+
+	
+	$observatory = getObsAccess();       // Get log-in user' observatory name
+	
+
+	
+	//Add more arrays here if there are more new obs 
+	$observatorylist= array("Philippine Institute of Volcanology and Seismology" => "phivolcs", "PHIVOLCS" => "phivolcs", "Volcanological Survey of Indonesia" => "cvghm", "CVGHM" => "cvghm", "Plate Boundary Observatory, UNAVCO" => "pbo");  
+	
+	 if ($_SESSION['login']['cc_id'] == '332' || $_SESSION['login']['cc_id'] == '269' || $_SESSION['login']['cc_id'] == '199' || $_SESSION['login']['cc_id'] == '230' || $_SESSION['login']['cc_id'] == '331' || $_SESSION['login']['cc_id'] == '612') {
 		$obs_filename = "admin";
 	}else if(isset($observatorylist[$observatory])){
 		$obs_filename = $observatorylist[$observatory]; 
@@ -611,55 +609,15 @@ else {
 		$obs_filename = "";
 	}
 	
-	// Get observatory list to use in monitoring system/data/specific. Nang added on 21-Mar-2013	
+	$_SESSION['obs'] = $observatory;         // Create observatory session
+	
+	// Get observatory list to use in monitoring system/data/specific. 
 	if(!isset($_SESSION['obsSession']))    
-		$_SESSION['obsSession'] = getobslist();
-
-/*
-	//Purpose to get obs to use in option (c) 
-	//Added 2-May-2012  
-	include "php/include/db_connect.php";  
-	include "/convertie/model/common_model_ng.php";    //Nang added on 21-Mar-2013	
+		$_SESSION['obsSession'] = getobslist();	
 	
-	$sql="select cc.cc_obs from cc where cc.cc_id={$_SESSION['login']['cc_id']}";
-	$result = mysql_query($sql);
-	$row= mysql_fetch_array($result);
-
-	if($_SESSION['login']['cc_id'] == '200'){               // For admin purpose
-		$observatory="Volcanological Survey of Indonesia";
-	}else if($_SESSION['login']['cc_id'] == '269'){         // For admin purpose
-		$observatory="PHIVOLCS";
-	}else{
-		$observatory=$row['cc_obs'];
-	}
-	
-	//Add more arrays here if there are more new obs 
-//	$observatorylist= array("Philippine Institute of Volcanology and Seismology" => "phivolcs", "PHIVOLCS" => "phivolcs", "Volcanological Survey of Indonesia" => "cvghm", "CVGHM" => "cvghm"); 
-
-
-	$observatorylist= array("Philippine Institute of Volcanology and Seismology" => "phivolcs", "PHIVOLCS" => "phivolcs", "Volcanological Survey of Indonesia" => "cvghm", "CVGHM" => "cvghm", "Plate Boundary Observatory, UNAVCO" => "pbo");    	
-	
-	
-	if(isset($observatorylist[$observatory])){
-		$obs_filename = $observatorylist[$observatory];
-	}else{
-		$obs_filename = "";
-	}
-
-  // Get observatory list to use in monitoring system/data/specific. Nang added on 21-Mar-2013	
-	if(!isset($_SESSION['obsSession']))    
-		$_SESSION['obsSession'] = getobslist();
-*/	
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)"> 
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
+	
+
 	<script src="/js/jquery.js"></script>
 	<script language="javascript" type="text/javascript">
 		function sendfile(){
@@ -680,7 +638,7 @@ else {
 			$("#submitfile2").hide();
 			$.get('/populate/convert_eruption_csvfile_ng.php?tipedata='+"eruption", show_form_submit);
 		} 		
-		/* Nang added on 21-Mar-2015 */		
+		/* Nang added on 21-Mar-2015 */			
 		
 		//type = 5 when user is admin/developer
 
@@ -746,7 +704,7 @@ else {
 			?>
 		}		
 
-		function convertspecificfile_invalidobs(){   // This function will be calling from below (line 685)
+		function convertspecificfile_invalidobs(){   // This function will be calling from line 770 
 		
 			$("#submitfile2").hide();
 			
@@ -761,6 +719,7 @@ else {
 			$.get('/populate/controller/insertForm.php?type=insertForm', show_form_submit); // Nang added on 26-Feb-2013
 			//	$.get('/populate/upload_withform_pu.php', show_form_submit);
 		}
+		
 		function uploadcsvfile(){
 			$.get('/populate/upload_csvfile_pu.php?type=wovoml', show_form_submit);
 		}
@@ -775,40 +734,38 @@ else {
 			$("#submitfile>div:nth-child(2)").html(res);
 		}		
 	</script>
-</head>
-<body>
-	<div id="wrapborder">
-		<div id="wrap">
-			<!-- Header -->
-			<?php include 'php/include/header_beta.php'; ?>
-			<!-- Content -->
-			<div id="content">	
-				<div id="contentl"><br>
-					<!-- Top of the page -->
-					<!-- Page content -->
-					<h2 style="padding:0px 20px 0px 25px;"><b>SUBMIT DATA</b></h2>
-					<div style="padding:0px 20px 0px 25px;">
-						<p class="green"><?php if ($upload_ok) {print "Upload successful!";} ?></p>
-						<p align="justify" style="font-size:12px;">
-						For now, the database only accepts data in <a href="/doc/system/1.1.0/wovoml_110.php" title="view WOVOml descriptions">WOVOdat-XML (WOVOml)</a> format. Short explanation on how to submit data into WOVOdat is available here <a href="/populate/submitDataDoc/HowToUploadDataIntoWOVOdat.pdf" target="_blank" title="upload data into WOVOdat">(pdf)</a>.
-						<br><br>
-					  We offer 3 options for contributors to submit data:
+
+	<div class="body">
+		<div class="twocolcontent">
+			<div class="leftcolumn">
+
+				<!-- Page content -->
+				<h2 class="pagetitle">Submit Data</h2>
+					<div>
+						<?php 
+							if ($upload_ok) {
+							    echo "<p class='green'>Upload successful!</p>";
+							} 
+						?> 
+						<p>
+							For now, the database only accepts data in <a href="/doc/system/1.1.0/wovoml_110.php" title="view WOVOml descriptions">WOVOdat-XML (WOVOml)</a> format. Short explanation on how to submit data into WOVOdat is available here <a href="/populate/submitDataDoc/HowToUploadDataIntoWOVOdat.pdf" target="_blank" title="upload data into WOVOdat">(pdf)</a>.
+							<br>
+							We offer 3 options for contributors to submit data:
 						</p>
 					</div>
-					<div style="padding:0px 10px 0px 0px;font-size:12px;">
+					
+					<div>
 						<ul>
 							<li>
-								<p><a href="javascript:sendfile()"><span style="font-size:12px;">Submission of original observatory data format</a>.<span><br>
-								Send a file of any format to WOVOdat; and let the WOVOdat team convert and upload it to the database.
+								<p>
+									<a href="javascript:sendfile()"><span>Submission of original observatory data format</a>.<span><br>
+									Send a file of any format to WOVOdat; and let the WOVOdat team convert and upload it to the database.
 								</p>
 							</li>
 							<li>
-								<p><span style="font-size:12px;">Submission of spreadsheet (comma-separated values CSV) file.(<2Mb):<span><br>Send comma-separated values CSV file in WOVOdat1.1 standard/compliant format; find csv template files here <a href="/populate/submitDataDoc/csv.zip" >(zip)</a>. Please refer to <a href="/doc/database/1.1/index.php" title="view WOVOdat manual on-line">WOVOdat1.1<a> documentations for detail information on data format. <br> &nbsp&nbsp&nbsp&nbsp
-								
-								(a)<a href="javascript:convertstationfile()">CSV of monitoring system:</a> <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp network, station, instrument, airplane, satellite<br> &nbsp&nbsp&nbsp&nbsp
-								
-								(b)<a href="javascript:convertdatafile()">CSV of data:</a><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp seismic, deformation, gas, hydrology, fields, thermal, meteo<br>&nbsp&nbsp&nbsp&nbsp 
-								
+								<p><span>Submission of spreadsheet (comma-separated values CSV) file.(<2Mb):<span><br>Send comma-separated values CSV file in WOVOdat1.1 standard/compliant format; find csv template files here <a href="/populate/submitDataDoc/csv.zip" >(zip)</a>. Please refer to <a href="/doc/database/1.1/index.php" title="view WOVOdat manual on-line">WOVOdat1.1<a> documentations for detail information on data format. <br> 
+								(a)<a href="javascript:convertstationfile()">CSV of monitoring system:</a> <br>network, station, instrument, airplane, satellite<br> 
+								(b)<a href="javascript:convertdatafile()">CSV of data:</a><br> seismic, deformation, gas, hydrology, fields, thermal, meteo<br> 
 								<?php if($obs_filename==''){  ?>
 								<a href="javascript:convertspecificfile_invalidobs()">	
 								
@@ -818,16 +775,11 @@ else {
 								<?php } else {?>
 								<a href="javascript:convertspecificfile_admin()">
 								<?php }?>
-								(c)CSV of customary format data </a>&nbsp&nbsp&nbsp&nbsp<br>&nbsp&nbsp&nbsp&nbsp 
+								(c)CSV of customary format data</a><br> 
 								Send comma-separated values CSV file in customary format; known/registered by
-								&nbsp&nbsp&nbsp&nbsp	WOVOdat:<br> &nbsp&nbsp&nbsp&nbsp&nbsp	
+								and	WOVOdat:<br> 	
 								
-								(d)<a href="javascript:converteruptionfile()">Csv of Eruption data:</a><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Eruption, Eruption Phase, Eruption Forecast, Eruption Video <br>&nbsp&nbsp						
-								
-								<br>
-								(For Nang Localhost)
-								<a href="javascript:onlineForm()"> CVGHM Customary format Online Forms </a>	
-								
+								(d)<a href="javascript:converteruptionfile()">Csv of Eruption data:</a><br>and eruption, eruption phase, eruption forecast, eruption video	
 								</p>
 							</li>
 						</ul>
@@ -837,55 +789,53 @@ else {
 	if ($_SESSION['permissions']['access']==0){
 	print <<<STRING
 		
-			<div style="padding:20px 30px 0px 30px;font-size:12px;">
-			<p style="font-size:12px;">Option below appears for admin or developer team only:</p>
+			<div>
+			<p>Option below appears for admin or developer team only:</p>
 				<ul>
 					<li>
-						<p><span style="font-size:12px;">Submission of small amount of data through <a href="javascript:uploadform()">online forms.</a><br></span> bibliographic, inferred processes, volcano, Observation about volcanic activity, observatory contact information
+						<p><span>Submission of small amount of data through <a href="javascript:uploadform()">online forms.</a><br></span> bibliographic, inferred processes, volcano, Observation about volcanic activity, observatory contact information
 						</p>
 					</li>					
 				</ul>
 				<ul>
 					<li>
-						<p><a href="javascript:uploadwovomlfile()"><span style="font-size:12px;">Upload WOVOml file<span></a><br> Upload of WOVOml format file to MySQL database	</p>
+						<p><a href="javascript:uploadwovomlfile()"><span>Upload WOVOml file<span></a><br> Upload of WOVOml format file to MySQL database</p>
 					</li>
 				</ul>
-				<ul style="width:375px;margin-bottom:0px; overflow:hidden;">	
-					<b><span style="font-size:12px;">Checking Tools:</span></b><br>
-					<li style="float:left; display:inline; width:27%;"><p><a href="check_select_table.php">[1]Table check</a></p></li>
-					<li style="float:left; display:inline; width:29%;"><p><a href="delete_ul_file_list.php">[2]Incoming File</a></p></li>
-				<!--	<li style="float:left; display:inline; width:36%;"><p><a href="#">[3]Converted files</a></p></li>-->
+				<ul>	
+					<b><span>Checking Tools:</span></b><br>
+					<li style="float:left; display:inline; width:27%;"><p><a href="check_select_table.php">[1]Table check</a></p></li> 
+					<li style="float:left; display:inline; width:35%;"><p><a href="delete_ul_file_list.php">[2]Incoming File</a></p></li>
+					
 				</ul>
 			</div>
 STRING;
 }
 ?>
-			
-				</div>  <!-- end of contentl -->
-				<div id="contentr">
-					<div id="top" align="left">
-						<!-- Aligned to the right: You are logged in as username (FName LName | Obs) | Logout 
-						<p align="right">Login as: <b><?php print $uname; ?></b>|<a href="logout.php">Logout</a></p>
-						-->
-					</div>
-			
-					<div id="submitfile">
-					</div>
-					<div id="submitfile2">
-						<br><br>
-						<p align="center"><img src="/gif2/WOVOdat_submitdata2014.png" width="400" height="300" alt="schema"></p>
-					</div>
-				</div>  <!-- end of contentr -->
-             </div> <!-- end of content -->
-		</div>  <!-- end wrap_x -->         
-             
-			 <div style="height: 20px"></div>
-             <div class="reservedSpace">
-            </div>
-    </div>   <!-- end of wrapborder_x -->
+ 	
+		</div>  <!-- end of leftcontent -->		           	
+		<br/><br/>
 		
-        <div class="wrapborder_x">
-            <?php include 'php/include/footer_main_beta.php'; ?>
-        </div>
-    </body>
-</html>
+		<div id="contentr"  class="rightcolumn">   
+			<div id="submitfile"></div>
+					
+			<div id="submitfile2">
+				<p align="center"><img src="/img/flowChart/WOVOdat_submitdata2014.png" style="max-width:100%;
+				max-height:100%;" alt="WOVOdat Data Flow"></p>
+			</div>	
+		</div>		
+				
+	</div>
+</div>
+
+<br/><br/><br/>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->

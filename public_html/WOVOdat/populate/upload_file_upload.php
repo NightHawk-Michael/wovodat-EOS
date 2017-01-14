@@ -34,7 +34,7 @@ function report_error($ori_file_name, $file_name, $url_file_name, $error_code, $
 	}
 	
 	// Move file to "process_error" folder
-	$move_url_file_name="C:/xampp/htdocs/home/wovodat/incoming/process_error/".$file_name;
+	$move_url_file_name="/home/wovodat/incoming/process_error/".$file_name;
 	if (!rename($url_file_name, $move_url_file_name)) {
 		$error="report_error -> rename(url_file_name=$url_file_name, move_url_file_name=$move_url_file_name)]";
 		return FALSE;

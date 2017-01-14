@@ -1,11 +1,7 @@
 <?php
-
-$servpath="C:/xampp/htdocs/home/wovodat/public_html/WOVOdat";
-
-require_once($servpath."/populate/convertie/f2genfunc/func_xmlparse.php"); 	// class xml parser 
-require_once($servpath."/populate/convertie/f2genfunc/funcgen_printarray.php"); 
-
-
+$servpath=".";
+require_once($servpath."/f2genfunc/func_xmlparse.php"); // class xml parser 
+require_once($servpath."/f2genfunc/funcgen_printarray.php"); 
 
 function getxmlheader($datatype){	
 

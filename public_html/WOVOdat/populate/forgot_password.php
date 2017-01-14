@@ -1,79 +1,71 @@
-<?php/*
-$redirect=substr($_SERVER['PHP_SELF'], 1);
-include "php/include/check_login_beta.php";*/
-?>
-<?php
+<?php 
+if(!isset($_SESSION))
+	session_start();
 
-// Start session
-session_start();
-
-// If 1st access
-if (!isset($_SESSION['forgot_pw'])) {
-	// Blank field
-	$uname="";
-	
-	// No error
-	$uname_error=FALSE;
+if (!isset($_SESSION['forgot_pw'])) {   // If 1st access
+	$uname="";      	               // Blank field
+	$uname_error=FALSE;  	           // No error
 }
-
-// 2nd time access
-else {
-	// Get field
+else {  							  // 2nd time access
 	$uname=$_SESSION['forgot_pw']['uname'];
-	
-	// Get error, if any
-	$uname_error=$_SESSION['forgot_pw']['uname_error'];
+	$uname_error=$_SESSION['forgot_pw']['uname_error'];     // Get error, if any
 }
 
+include 'php/include/header.php';
+
+include 'php/include/menu.php'; 
+
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > 
+<a href='http://{$_SERVER['SERVER_NAME']}/populate/forgot_password.php'>Forgot Password</a></div>";
+
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
-	<div id="wrapborder">
-	<div id="wrap">
-		<div id="headershadow">
-			<?php include 'php/include/header_beta.php'; ?>
-		</div>
+</div>  <!-- header-menu -->
 
-		<!-- Content -->
-		<div id="content" style="padding-top:35px;">	
-			<div id="contentl">
-				<h1>Forgot password</h1>
-				<p>Please enter your contact information below:</p>
-			
-				<!-- Form -->
-				<form method="post" action="forgot_password_check.php" name="login_forgot_form">
-					<table class="formtable" id="formtable">
-						<tr>
-							<th>Username:</th>
-							<td>
-								<input type="text" maxlength="30" name="uname" value="<?php print $uname; ?>" /><span class="redtext"><?php if ($uname_error) {print " (User not registered, please check spelling)";} ?></span>
-							</td>
-						</tr>
-					</table>
-					<input type="submit" name="cancel" value="Cancel" />
-					<input type="submit" name="ok" value="OK" />
-				</form>
+<div class="body">
+	<div class="widecontent">
 
-			</div>
-			<div id="contentr">
-			</div>
+		<div class="form">
+			<table>
+				<tr>
+					<td><h2>Forgot password</h2></td>
+				</tr>
+
+				<tr>
+					<td>Please enter your contact information below:</td> <td></td>
+				</tr>	
+
+				<tr>
+					<td>   
+							
+						<form method="post" action="forgot_password_check.php" name="login_forgot_form">
+							<table class="formtable" id="formtable">
+								<tr>
+									<th>*Username:</th>
+									<td>
+										<input type="text" maxlength="30" name="uname" value="<?php print $uname; ?>" /><span style="color:red;"><?php if ($uname_error) {print " (User not registered, please check spelling)";} ?></span>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>
+										<input type="submit" name="cancel" value="Cancel" id="submit" />
+										<input type="submit" name="ok" value="OK"  id="reset" />
+									</td>
+								</tr>	
+							</table>
+						</form>
+					</td>
+				</tr>
+			</table>
 		</div>
-		
-		<!-- Footer -->
-		<div id="footer">
-			<?php include 'php/include/footer_beta.php'; ?>
-		</div>
-		
 	</div>
-</body>
-</html>
+</div>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+				

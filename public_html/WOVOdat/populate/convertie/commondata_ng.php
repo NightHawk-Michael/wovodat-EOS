@@ -1,18 +1,15 @@
 <?php
-
-$servpath="C:/xampp/htdocs/home/wovodat/public_html/WOVOdat";
-
-require_once($servpath."/populate/convertie/f2genfunc/func_xmlparse.php"); 	// class xml parser 
-require_once($servpath."/populate/convertie/f2genfunc/funcgen_printarray.php"); 
-
+$servpath=".";
+require_once($servpath."/f2genfunc/func_xmlparse.php"); // class xml parser 
+require_once($servpath."/f2genfunc/funcgen_printarray.php"); 
 
 function checkfile($filename,$infilepath){
 
 	$fileinfo['filesize'] = $_FILES[$filename]['size'];
 	$fileinfo['infile'] = $infilepath . $_FILES[$filename]['name'];
-	$fileinfo['filename'] = $_FILES[$filename]['name'];
-	$fileinfo['error'] = "noerror";	
-	
+	$fileinfo['filename'] = $_FILES[$filename]['name'];	
+	$fileinfo['error'] = "noerror";
+
 	$fileextension=substr($_FILES[$filename]['name'],-3);
 
 	if($_FILES[$filename]['type'] == "" && $fileinfo['filesize'] == "0") {  
@@ -30,8 +27,7 @@ function checkfile($filename,$infilepath){
 		$fileinfo['error'] = $fileerrors;
 		return $fileinfo;
 
-	}
-	else if($fileinfo['filesize'] <= 2000000){	
+	}else if($fileinfo['filesize'] <= 2000000){	
 		if(!move_uploaded_file($_FILES[$filename]['tmp_name'],$infilepath.$_FILES[$filename]['name'])){  
 			$fileerrors = "File submission fails.  Please try again!";
 			$fileinfo['error'] = $fileerrors;

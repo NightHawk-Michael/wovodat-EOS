@@ -53,10 +53,10 @@
 	<h4 style="text-align:center">Only Network Events and Sampled Gas options are working</h4>
 	<img src="/boolean/view/loader.gif" id="loadingGif">
 	<form id="boolean_form" name="boolean_form" method="post" action="">
-		<div id="mainCategory container">
+		<div id="mainCategory " class = "container">
             <!-- VOLCANO SEARCH -->
 			<div id="Volcano_Search" class = "  row" data-collapsible="expandable">
-                <button class="btn btn-primary left-align col s5 offset-s1 " type="button" data-toggle="collapse" data-target="#Volcano_Inner_Group">Volcano Search
+                <button class="btn btn-primary left-align col s4 " type="button" data-toggle="collapse" data-target="#Volcano_Inner_Group">Volcano Search
                     <i class="material-icons right">send</i>
                 </button>
                 <div id="Volcano_Inner_Group" class="innerData collapse col s10 offset-s2 ">
@@ -119,7 +119,7 @@
 			</div>
             <!-- ERUPTION SEARCH -->
 			<div id="Eruption_Search" class = "row">
-				<button class="btn btn-primary left-align col s5 offset-s1" type="button" data-toggle="collapse" data-target="#Eruption_Inner_Group">Eruption Search
+				<button class="btn btn-primary left-align col s4" type="button" data-toggle="collapse" data-target="#Eruption_Inner_Group">Eruption Search
 					<i class="material-icons right">send</i>
 				</button>
 				<div id="Eruption_Inner_Group" class="innerData collapse col s10 offset-s2">
@@ -152,12 +152,12 @@
 			</div>
 			<!-- MONITORING DATA SEARCH -->
 			<div id="Monitoring_Data_Search" class="row">
-                <button class="btn btn-primary left-align col s5 offset-s1" type="button" data-toggle="collapse" data-target="#Collapse">Monitoring Data Search
+                <button class="btn btn-primary left-align col s4" type="button" data-toggle="collapse" data-target="#Collapse">Monitoring Data Search
                     <i class="material-icons right">send</i>
                 </button>
 
 			    <div id="Collapse" class="innerData collapse col s10 offset-s1">
-				    <div id="Monitoring_Data_Lists" class="monitoring_data row col s11">
+				    <div id="Monitoring_Data_Lists" class="monitoring_data row col s11" onchange="checkAdvanceSearch();">
 				    	<p class="seismic">
 				    		<input id="radioButton" type="radio" name="Seismic" checked>Seismic<br>
 				    		<input class="checkBox" type="checkbox" name="sd_evn" id="sd_evn">
@@ -241,7 +241,7 @@
 				    </div>
 
                     <div class  = "col s12">
-                        <button class="btn btn-primary left-align col s3 row " type="button" data-toggle="collapse" data-target="#advSearchId">Advanced Search
+                        <button class="btn btn-primary left-align col s4 row " type="button" data-toggle="collapse" data-target="#advSearchId">Advanced Search
                             <i class="material-icons right">add</i>
                         </button>
                     </div>
@@ -265,7 +265,7 @@
 
 						<br/>
 						<!-- START SESIMIC -->
-                        <div class='dataType row' style="text-align='center';"> <h2 style="color:blue; "> Seismic </h2>
+                        <div class='dataType row' id = "seimic" style="text-align='center'; display:none"> <h2 style="color:blue; "> Seismic </h2>
 							<div id='sd_evn_wrapper' class="hiddenData data-wrapper">
 								<h3 >Hypocenter </h3><br>
 								<!-- Map Width -->
@@ -338,17 +338,10 @@
 
 							</div>   <!-- End Hypocenter Data Type block -->
 						</div>	 <!-- End Seismic Data Type block -->
-						
-<!--//<br/>Remaining tasks to do  (all Deformation types, gd_plu and gd_sol data types)			-->
-<!-- <br/>
-	Remaining tasks to do 
-	=>  When the user selects  Electronic Tilt check box, then Electronin Titl filter appears in the advance search placement. 
-	=>  <br/> Same idea for the remaining data types <br/>
-	
--->		
+
 
 						<!-- START DEMFORMATION -->
-						<div class='dataType row' style="text-align='center';"> <h2 style="color:blue;"> Deformation </h2>
+						<div class='dataType row' id="deformation" style="text-align='center'; display:none"> <h2 style="color:blue;"> Deformation </h2>
 							<!-- Electronic Tilt -->
 							<div id='dd_tlt_wrapper' class="hiddenData data-wrapper col s10">
 								<h3> Electronic Tilt </h3><br>
@@ -710,9 +703,9 @@
                         </div>	 <!-- End Deformation Data Type block -->
 
                         <!-- START GAS -->
-                        <div class='dataType row' style="text-align='center';"> <h2 style="color:blue;"> Gas </h2>
+                        <div class='dataType row' id = "gas" style="text-align='center'; display:none"> <h2 style="color:blue;"> Gas </h2>
 							<!-- Sample Gas -->
-                            <div id='gd_wrapper' class="hiddenData data-wrapper col s10">
+                            <div id='gd_wrapper' class="hiddenData data-wrapper col s10" style="display: none">
 								<h3>Sample Gas </h3><br>
                                 <div class = "row col s10">
                                     <p class = "data-header col s5">Gas Temperature (C):</p>
@@ -780,32 +773,10 @@
 
                                 <div id="thresholdWithSpe">
 
-
-<!--                                    <div id="selected">-->
-                                    <!-- 	<label>CO2:</label>
-                                        <input type="text" name="gd_concentration_min_CO2" id="gd_concentration_min_CO2">
-                                        <p style="display:inline">to</p>
-                                        <input type="text" name="gd_concentration_max_CO2" id="gd_concentration_max_CO2">
-                                        <br>
-                                        <br>
-
-
-                                        <label>SO2:</label>
-                                        <input type="text" name="gd_concentration_min_SO2" id="gd_concentration_min_SO2">
-                                        <p style="display:inline">to</p>
-                                        <input type="text" name="gd_concentration_max_SO2" id="gd_concentration_max_SO2">
-                                        <br>
-                                        <br>
-
-                                        <label>H2S:</label>
-                                        <br> continue for the rest .....		 -->
-<!--                                    </div>-->
-
-<!--									</div> <!-- End gdCon block -->-->
 								</div>
 							</div> <!-- End sampleGas block -->
                             <!-- Gas Plume -->
-                            <div id='gd_plu_wrapper' class="hiddenData data-wrapper col s10">
+                            <div id='gd_plu_wrapper' class="hiddenData data-wrapper col s10" style ="display:none">
                                 <h3> Gas Plume </h3><br>
                                 <div class = "row col s10">
                                     <p class = "data-header col s5">Plume Height (km):</p>
@@ -816,69 +787,121 @@
                                     </div>
                                 </div>
                                 <div class = "row col s10">
-                                    <p class="data-header col s3">Gas Emission Rate:</p>
-                                    <div id = "thresholdWithSpe" class="input-field col s5" style="font-size:inherit">
-                                        <select id="gdPluEmitFlag" name="gdPluEmitFlag">
-                                            <option value="thresholdWithSpe">Apply Threshold without species</option>
-                                            <option value="thresholdWithoutSpe">Apply Threshold with species such as CO2,SO2,etc.</option>
+                                    <p class="data-header col s5">Gas Emission Rate:</p>
+                                    <div id = "" class="row col s6" >
+                                        <select id="gdPluEmitFlag" name="gdPluEmitFlag" onchange="checkgdPluFlag('Emit')">
+                                            <option  value="thresholdWithoutSpe">Apply Threshold without species</option>
+                                            <option value="thresholdWithSpe">Apply Threshold with species such as CO2,SO2,etc.</option>
                                         </select>
                                     </div>
+									<p class = "data-header col s5"></p>
+									<div id="gd_plu_emit_without_spec" class = 'row col s6'>
+										<input class= "col s5" type="text" name="gd_plu_emit_min" id="gd_plu_emit_min">
+										<p class= "col s2" style="display:inline">to</p>
+										<input class= "col s5" type="text" name="gd_plu_emit_max" id="gd_plu_emit_max">
+									</div>
+									<div id='gd_plu_emit_with_spec' class='row col s6' style = "display:none">
+										<select id="gd_plu_emit" name="gd_plu_emit[]" multiple onchange="checkgdPluSpec('emit')">
+											<option value="" disabled selected>Choose your option</option>
+											<option value="CO2">CO2</option>
+											<option value="SO2">SO2</option>
+											<option value="H2S">H2S</option>
+											<option value="HCl">HCl</option>
+											<option value="HF">HF</option>
+											<option value="CO">CO</option>
+											<option value="CO2/SO2">CO2/SO2</option>
+										</select>
+										<div id = "gd_plu_emit_spec">
+
+										</div>
+
+									</div>
                                 </div>
                                 <div class = "row col s10">
-                                    <p class = "data-header col s5">Gas Emission Rate:</p>
-                                    <div id='gdEmit' class='row col s6'>
-                                        <input type="text" name="gd_plu_emit_min" id="gd_plu_emit_min">
-                                        <p style="display:inline">to</p>
-                                        <input type="text" name="gd_plu_emit_max" id="gd_plu_emit_max">
-                                        <br><br>
+									<p class="data-header col s5">Gas Emission Mass:</p>
+									<div id = "" class="row col s6" >
+										<select id="gdPluMassFlag" name="gdPluMassFlag" onchange="checkgdPluFlag('Mass')">
+											<option value="thresholdWithoutSpe">Apply Threshold without species</option>
+											<option value="thresholdWithSpe">Apply Threshold with species such as CO2,SO2,etc.</option>
+										</select>
+									</div>
+									<p class = "data-header col s5"></p>
+									<div id="gd_plu_mass_without_spec" class = 'row col s6'>
+										<input class= "col s5" type="text" name="gd_plu_mass_min" id="gd_plu_mass_min">
+										<p class= "col s2" style="display:inline">to</p>
+										<input class= "col s5" type="text" name="gd_plu_mass_max" id="gd_plu_mass_max">
+									</div>
+									<div id='gd_plu_mass_with_spec' class='row col s6' style = "display:none">
+										<select id="gd_plu_mass" name="gd_plu_mass[]" multiple onchange="checkgdPluSpec('mass')">
+											<option value="" disabled selected>Choose your option</option>
+											<option value="CO2">CO2</option>
+											<option value="SO2">SO2</option>
+											<option value="H2S">H2S</option>
+											<option value="HCl">HCl</option>
+											<option value="HF">HF</option>
+											<option value="CO">CO</option>
+											<option value="CO2/SO2">CO2/SO2</option>
+										</select>
+										<div id = "gd_plu_mass_spec">
 
-                                        <select id="gd_plu_emit" multiple="multiple" name="gd_plu_emit[]" style="display: block;">
-                                            <option value="CO2">CO2</option>
-                                            <option value="SO2">SO2</option>
-                                            <option value="H2S">H2S</option>
-                                            <option value="HCl">HCl</option>
-                                            <option value="HF">HF</option>
-                                            <option value="CO">CO</option>
-                                            <option value="CO2/SO2">CO2/SO2</option>
-                                        </select>
-                                        <br><br>
+										</div>
 
-                                        <label>CO2:</label>
-                                        <input type="text" name="gd_plu_emit_min_CO2" id="gd_plu_emit_min_CO2">
-                                        <p style="display:inline">to</p>
-                                        <input type="text" name="gd_plu_emit_max_CO2" id="gd_plu_emit_max_CO2">
-                                        <br>
-                                        <br>
+									</div>
+								</div>
 
-                                        <label>SO2:</label>
-                                        <input type="text" name="gd_plu_emit_min_SO2" id="gd_plu_emit_min_SO2">
-                                        <p style="display:inline">to</p>
-                                        <input type="text" name="gd_plu_emit_max_SO2" id="gd_plu_emit_max_SO2">
-                                        <br>
-                                    </div>
-                                </div>
-<!--                                <div class = "row col s10">-->
-<!--                                    <p class="data-header col s3">Gas Emission Rate:</p>-->
-<!--                                    <div id = "gd_plu_emit" class="input-field col s5" style="font-size:inherit">-->
-<!--                                        <select id="gdPluEmitFlag" name="gdPluEmitFlag">-->
-<!--                                            <option value="thresholdWithSpe">Apply Threshold without species</option>-->
-<!--                                            <option value="thresholdWithoutSpe">Apply Threshold with species such as CO2,SO2,etc.</option>-->
-<!--                                        </select>-->
-<!--                                    </div>-->
-<!--                                </div>-->
+								<div class = "row col s10">
+									<p class="data-header col s5">Total Gas Emission:</p>
+									<div id = "" class="row col s6" >
+										<select id="gdPluETotFlag" name="gdPluETotFlag" onchange="checkgdPluFlag('ETot')">
+											<option value="thresholdWithoutSpe">Apply Threshold without species</option>
+											<option value="thresholdWithSpe">Apply Threshold with species such as CO2,SO2,etc.</option>
+										</select>
+									</div>
+									<p class = "data-header col s5"></p>
+									<div id="gd_plu_etot_without_spec" class = 'row col s6'>
+										<input class= "col s5" type="text" name="gd_plu_etot_min" id="gd_plu_etot_min">
+										<p class= "col s2" style="display:inline">to</p>
+										<input class= "col s5" type="text" name="gd_plu_etot_max" id="gd_plu_etot_max">
+									</div>
+									<div id='gd_plu_etot_with_spec' class='row col s6' style = "display:none">
+										<select id="gd_plu_etot" name="gd_plu_etot[]" multiple onchange="checkgdPluSpec('etot')">
+											<option value="" disabled selected>Choose your option</option>
+											<option value="CO2">CO2</option>
+											<option value="SO2">SO2</option>
+											<option value="H2S">H2S</option>
+											<option value="HCl">HCl</option>
+											<option value="HF">HF</option>
+											<option value="CO">CO</option>
+											<option value="CO2/SO2">CO2/SO2</option>
+										</select>
+										<div id = "gd_plu_etot_spec">
+
+										</div>
+
+									</div>
+								</div>
                             </div>
                         </div>
 
-
-
-
-<!--	<div id="gdEmit" style="padding-left:140px; width:700px;">-->
-<!--		<input type="text" name="gd_plu_emit_min" id="gd_plu_emit_min">-->
-<!--		<p style="display:inline">to</p>-->
-<!--		<input type="text" name="gd_plu_emit_max" id="gd_plu_emit_max">-->
-<!--		<br><br>-->
+		
+<!--<h3> Soil Efflux </h3><br>-->
 <!--		-->
-<!--		<select id="gd_plu_emit" multiple="multiple" name="gd_plu_emit[]" style="display: block;">-->
+<!--	<label>Total Gas Flux:</label>	-->
+<!--	<select id="totalGasFluxFlag" name="totalGasFluxFlag">-->
+<!--	  <option value="thresholdWithSpe">Apply Threshold without species</option>-->
+<!--	  <option value="thresholdWithoutSpe">Apply Threshold with species such as CO2,SO2,etc.</option>-->
+<!--	</select>-->
+<!--	<br><br>-->
+<!--		-->
+<!--	<div id="gdSolTflux" style="padding-left:140px; width:700px; ">-->
+<!---->
+<!--		<input type="text" name="gd_sol_tflux_min" id="gd_sol_tflux_min">-->
+<!--		<p style="display:inline">to</p>-->
+<!--		<input type="text" name="gd_sol_tflux_max" id="gd_sol_tflux_max">-->
+<!--		<br>-->
+<!--		<br>	-->
+<!--			-->
+<!--		<select id="gd_sol_tflux" multiple="multiple" name="gd_sol_tflux[]" style="display:block;">-->
 <!--			<option value="CO2">CO2</option>-->
 <!--			<option value="SO2">SO2</option>-->
 <!--			<option value="H2S">H2S</option>-->
@@ -888,222 +911,99 @@
 <!--			<option value="CO2/SO2">CO2/SO2</option>-->
 <!--		</select>-->
 <!--		<br><br>-->
-<!---->
-<!--		<label>CO2:</label>	  -->
-<!--		<input type="text" name="gd_plu_emit_min_CO2" id="gd_plu_emit_min_CO2">-->
+<!--			-->
+<!--		<label>CO2:</label>	-->
+<!--		<input type="text" name="gd_sol_tflux_min_CO2" id="gd_sol_tflux_min_CO2">-->
 <!--		<p style="display:inline">to</p>-->
-<!--		<input type="text" name="gd_plu_emit_max_CO2" id="gd_plu_emit_max_CO2">-->
+<!--		<input type="text" name="gd_sol_tflux_max_CO2" id="gd_sol_tflux_max_CO2">-->
 <!--		<br>-->
 <!--		<br>	-->
 <!---->
 <!--		<label>SO2:</label>	-->
-<!--		<input type="text" name="gd_plu_emit_min_SO2" id="gd_plu_emit_min_SO2">-->
-<!--		<p style="display:inline">to</p>-->
-<!--		<input type="text" name="gd_plu_emit_max_SO2" id="gd_plu_emit_max_SO2">-->
-<!--		<br>-->
 <!--		<br> continue for the rest .....	-->
+<!--		-->
+<!--	 </div>   <!-- End gd_sol_tflux block -->	-->
+<!--		-->
 <!---->
+<!--	<label>Highest Gas Flux:</label>-->
 <!--	-->
-<!--	</div>   <!-- End gd_plu_emit block -->-->
-		 
-		 
-	<label>Gas Emission Mass:</label>	
-		<select id="gdPluMassFlag" name="gdPluMassFlag">
-		  <option value="thresholdWithSpe">Apply Threshold without species</option>
-		  <option value="thresholdWithoutSpe">Apply Threshold with species such as CO2,SO2,etc.</option>
-		</select>
-		<br><br>
+<!--		<select id="highestGasFluxFlag" name="highestGasFluxFlag">-->
+<!--		  <option value="thresholdWithSpe">Apply Threshold without species</option>-->
+<!--		  <option value="thresholdWithoutSpe">Apply Threshold with species such as CO2,SO2,etc.</option>-->
+<!--		</select>-->
+<!--		<br><br>-->
+<!--		-->
+<!--		<div id="gdSolHigh" style="padding-left:140px; width:700px; ">-->
+<!---->
+<!--			<input type="text" name="gd_sol_high_min" id="gd_sol_high_min">-->
+<!--			<p style="display:inline">to</p>-->
+<!--			<input type="text" name="gd_sol_high_max" id="gd_sol_high_max">-->
+<!--			<br>-->
+<!--			<br>	-->
+<!--				-->
+<!--				<select id="gd_sol_high" multiple="multiple" name="gd_sol_high[]" style="display:block;">-->
+<!--					<option value="CO2">CO2</option>-->
+<!--					<option value="SO2">SO2</option>-->
+<!--					<option value="H2S">H2S</option>-->
+<!--					<option value="HCl">HCl</option>-->
+<!--					<option value="HF">HF</option>-->
+<!--					<option value="CO">CO</option>-->
+<!--					<option value="CO2/SO2">CO2/SO2</option>-->
+<!--				</select>-->
+<!--				<br><br>-->
+<!--			-->
+<!--				<label>CO2:</label>	-->
+<!--				<input type="text" name="gd_sol_high_min_CO2" id="gd_sol_high_min_CO2">-->
+<!--				<p style="display:inline">to</p>-->
+<!--				<input type="text" name="gd_sol_high_max_CO2" id="gd_sol_high_max_CO2">-->
+<!--				<br>-->
+<!--				<br>	-->
+<!---->
+<!--				<label>SO2:</label>	-->
+<!--				<br> continue for the rest .....	-->
+<!--			-->
+<!--	</div>   <!-- End gd_sol_high block -->	-->
+<!--		-->
+<!--		-->
+<!--	<label>Highest Temperature:</label>	-->
+<!--		<select id="highestTempFlag" name="highestTempFlag">-->
+<!--		  <option value="thresholdWithSpe">Apply Threshold without species</option>-->
+<!--		  <option value="thresholdWithoutSpe">Apply Threshold with species such as CO2,SO2,etc.</option>-->
+<!--		</select>-->
+<!--		<br><br>-->
+<!--		-->
+<!--		<div id="gdSolHtemp" style="padding-left:140px; width:700px; ">-->
+<!---->
+<!--			<input type="text" name="gd_sol_htemp_min" id="gd_sol_htemp_min">-->
+<!--			<p style="display:inline">to</p>-->
+<!--			<input type="text" name="gd_sol_htemp_max" id="gd_sol_htemp_max">-->
+<!--			<br>-->
+<!--			<br>	-->
+<!--				-->
+<!--			<select id="gd_sol_htemp" multiple="multiple" name="gd_sol_htemp[]" style="display:block;">-->
+<!--				<option value="CO2">CO2</option>-->
+<!--				<option value="SO2">SO2</option>-->
+<!--				<option value="H2S">H2S</option>-->
+<!--				<option value="HCl">HCl</option>-->
+<!--				<option value="HF">HF</option>-->
+<!--				<option value="CO">CO</option>-->
+<!--				<option value="CO2/SO2">CO2/SO2</option>-->
+<!--			</select>-->
+<!--			<br><br>-->
+<!--			-->
+<!--			<label>CO2:</label>	-->
+<!--			<input type="text" name="gd_sol_htemp_min_CO2" id="gd_sol_htemp_min_CO2">-->
+<!--			<p style="display:inline">to</p>-->
+<!--			<input type="text" name="gd_sol_htemp_max_CO2" id="gd_sol_htemp_max_CO2">-->
+<!--			<br>-->
+<!--			<br>	-->
+<!---->
+<!--			<label>SO2:</label>	-->
+<!--			<br> continue for the rest .....	-->
+<!--			-->
+<!--	</div>   <!-- End gd_sol_htemp block -->	-->
 		
-		<div id="gdPluEmissMass" style="padding-left:140px; width:700px; ">
-				<input type="text" name="gd_plu_mass_min" id="gd_plu_mass_min">
-				<p style="display:inline">to</p>
-				<input type="text" name="gd_plu_mass_max" id="gd_plu_mass_max">
-				<br><br>
-				
-				<select id="gd_plu_mass" multiple="multiple" name="gd_plu_mass[]" style="display: block;">
-					<option value="CO2">CO2</option>
-					<option value="SO2">SO2</option>
-					<option value="H2S">H2S</option>
-					<option value="HCl">HCl</option>
-					<option value="HF">HF</option>
-					<option value="CO">CO</option>
-					<option value="CO2/SO2">CO2/SO2</option>
-				</select>
-				<br><br>
-			
-				<label>CO2:</label>	
-				<input type="text" name="gd_plu_mass_min_CO2" id="gd_plu_mass_min_CO2">
-				<p style="display:inline">to</p>
-				<input type="text" name="gd_plu_mass_max_CO2" id="gd_plu_mass_max_CO2">
-				<br>
-				<br>	
-
-				<label>SO2:</label>	
-				<br> continue for the rest .....		
-	</div>   <!-- End gd_plu_mass block -->	
-		
-		
-	<label>Total Gas Emission:</label>	
-	
-		<select id="gdPluTotalGasFlag" name="gdPluTotalGasFlag">
-		  <option value="thresholdWithSpe">Apply Threshold without species</option>
-		  <option value="thresholdWithoutSpe">Apply Threshold with species such as CO2,SO2,etc.</option>
-		</select>
-		<br><br>
-		
-		<div id="gdPluTotalGas" style="padding-left:140px; width:700px; ">
-				<input type="text" name="gd_plu_etot_min" id="gd_plu_etot_min">
-				<p style="display:inline">to</p>
-				<input type="text" name="gd_plu_etot_max" id="gd_plu_etot_max">
-				<br><br>
-				
-				<select id="gd_plu_etot" multiple="multiple" name="gd_plu_etot[]" style="display: block;">
-					<option value="CO2">CO2</option>
-					<option value="SO2">SO2</option>
-					<option value="H2S">H2S</option>
-					<option value="HCl">HCl</option>
-					<option value="HF">HF</option>
-					<option value="CO">CO</option>
-					<option value="CO2/SO2">CO2/SO2</option>
-				</select>
-				<br><br>
-			
-				<label>CO2:</label>	
-				<input type="text" name="gd_plu_etot_min_CO2" id="gd_plu_etot_min_CO2">
-				<p style="display:inline">to</p>
-				<input type="text" name="gd_plu_etot_max_CO2" id="gd_plu_etot_max_CO2">
-				<br>
-				<br>	
-
-				<label>SO2:</label>	
-				<br> continue for the rest .....		
-	</div>   <!-- End gd_plu_etot block -->	
-		
-		
------------------------------------
-
-// Remaining tasks to do (gd_sol)
-		
-<h3> Soil Efflux </h3><br>
-		
-	<label>Total Gas Flux:</label>	
-	<select id="totalGasFluxFlag" name="totalGasFluxFlag">
-	  <option value="thresholdWithSpe">Apply Threshold without species</option>
-	  <option value="thresholdWithoutSpe">Apply Threshold with species such as CO2,SO2,etc.</option>
-	</select>
-	<br><br>
-		
-	<div id="gdSolTflux" style="padding-left:140px; width:700px; ">
-
-		<input type="text" name="gd_sol_tflux_min" id="gd_sol_tflux_min">
-		<p style="display:inline">to</p>
-		<input type="text" name="gd_sol_tflux_max" id="gd_sol_tflux_max">
-		<br>
-		<br>	
-			
-		<select id="gd_sol_tflux" multiple="multiple" name="gd_sol_tflux[]" style="display:block;">
-			<option value="CO2">CO2</option>
-			<option value="SO2">SO2</option>
-			<option value="H2S">H2S</option>
-			<option value="HCl">HCl</option>
-			<option value="HF">HF</option>
-			<option value="CO">CO</option>
-			<option value="CO2/SO2">CO2/SO2</option>
-		</select>
-		<br><br>
-			
-		<label>CO2:</label>	
-		<input type="text" name="gd_sol_tflux_min_CO2" id="gd_sol_tflux_min_CO2">
-		<p style="display:inline">to</p>
-		<input type="text" name="gd_sol_tflux_max_CO2" id="gd_sol_tflux_max_CO2">
-		<br>
-		<br>	
-
-		<label>SO2:</label>	
-		<br> continue for the rest .....	
-		
-	 </div>   <!-- End gd_sol_tflux block -->	
-		
-
-	<label>Highest Gas Flux:</label>
-	
-		<select id="highestGasFluxFlag" name="highestGasFluxFlag">
-		  <option value="thresholdWithSpe">Apply Threshold without species</option>
-		  <option value="thresholdWithoutSpe">Apply Threshold with species such as CO2,SO2,etc.</option>
-		</select>
-		<br><br>
-		
-		<div id="gdSolHigh" style="padding-left:140px; width:700px; ">
-
-			<input type="text" name="gd_sol_high_min" id="gd_sol_high_min">
-			<p style="display:inline">to</p>
-			<input type="text" name="gd_sol_high_max" id="gd_sol_high_max">
-			<br>
-			<br>	
-				
-				<select id="gd_sol_high" multiple="multiple" name="gd_sol_high[]" style="display:block;">
-					<option value="CO2">CO2</option>
-					<option value="SO2">SO2</option>
-					<option value="H2S">H2S</option>
-					<option value="HCl">HCl</option>
-					<option value="HF">HF</option>
-					<option value="CO">CO</option>
-					<option value="CO2/SO2">CO2/SO2</option>
-				</select>
-				<br><br>
-			
-				<label>CO2:</label>	
-				<input type="text" name="gd_sol_high_min_CO2" id="gd_sol_high_min_CO2">
-				<p style="display:inline">to</p>
-				<input type="text" name="gd_sol_high_max_CO2" id="gd_sol_high_max_CO2">
-				<br>
-				<br>	
-
-				<label>SO2:</label>	
-				<br> continue for the rest .....	
-			
-	</div>   <!-- End gd_sol_high block -->	
-		
-		
-	<label>Highest Temperature:</label>	
-		<select id="highestTempFlag" name="highestTempFlag">
-		  <option value="thresholdWithSpe">Apply Threshold without species</option>
-		  <option value="thresholdWithoutSpe">Apply Threshold with species such as CO2,SO2,etc.</option>
-		</select>
-		<br><br>
-		
-		<div id="gdSolHtemp" style="padding-left:140px; width:700px; ">
-
-			<input type="text" name="gd_sol_htemp_min" id="gd_sol_htemp_min">
-			<p style="display:inline">to</p>
-			<input type="text" name="gd_sol_htemp_max" id="gd_sol_htemp_max">
-			<br>
-			<br>	
-				
-			<select id="gd_sol_htemp" multiple="multiple" name="gd_sol_htemp[]" style="display:block;">
-				<option value="CO2">CO2</option>
-				<option value="SO2">SO2</option>
-				<option value="H2S">H2S</option>
-				<option value="HCl">HCl</option>
-				<option value="HF">HF</option>
-				<option value="CO">CO</option>
-				<option value="CO2/SO2">CO2/SO2</option>
-			</select>
-			<br><br>
-			
-			<label>CO2:</label>	
-			<input type="text" name="gd_sol_htemp_min_CO2" id="gd_sol_htemp_min_CO2">
-			<p style="display:inline">to</p>
-			<input type="text" name="gd_sol_htemp_max_CO2" id="gd_sol_htemp_max_CO2">
-			<br>
-			<br>	
-
-			<label>SO2:</label>	
-			<br> continue for the rest .....	
-			
-	</div>   <!-- End gd_sol_htemp block -->	
-		
-----------------------------------							
+<!------------------------------------							-->
 							
 						</div>   <!-- End Gas Data Type block -->
 									

@@ -1,0 +1,226 @@
+{
+	"sd_evs" : {
+		"data_type" : "SeismicEventFromSingleStation",
+		"time" : "sd_evs_time",
+		"timems" : "sd_evs_time_ms",
+		"params" : [
+			{
+				"cols" : "sd_evs_spint",
+				"name" : "S-P Arrival Time",
+				"filter" : "sd_evs_eqtype"
+			},
+			{
+				"cols" : "sd_evs_maxamptrac",
+				"name" : "Earthquake Maximum Amplitude",
+				"filter" : "sd_evs_eqtype"
+			},
+			{
+				"cols" : "sd_evs_domFre",
+				"name" : "Earthquake Dominant Frequency",
+				"filter" : "sd_evs_eqtype"
+			},
+			{
+				"cols" : "sd_evs_mag",
+				"name" : "Earthquake Magnitude",
+				"filter" : "sd_evs_eqtype"
+			},
+			{
+				"cols" : "sd_evs_energy",
+				"name" : "Earthquake Energy",
+				"filter" : "sd_evs_eqtype"
+			},
+			{
+				"cols" : "sd_evs_dist_actven",
+				"name" : "Epicenter From Vent",
+				"filter" : "sd_evs_eqtype"
+			}
+		]
+	},
+
+	"sd_int" : {
+		"data_type" : "SeismicIntensity",
+		"time" : "sd_int_time",
+		"params" : [
+			{
+				"cols" : "sd_int_maxdist",
+				"name" : "Maximum Distance Felt"
+			},
+			{
+				"cols" : "sd_int_maxrint",
+				"name" : "Maximum Intensity"
+			},
+			{
+				"cols" : "sd_int_maxrint_dist",
+				"name" : "Distance At Maximum Intenstiy"
+			}
+		]
+	},
+
+	"sd_trm" : {
+		"data_type" : "SeismicTremor",
+		"stime" : "sd_trm_stime",
+		"etime" : "sd_trm_etime",
+		"params" : [
+			{
+				"cols" : "sd_trm_domfreq1",
+				"name" : "Tremor Dominant Frequency 1",
+				"filter" : "sd_trm_type",
+				"filter1" : "sd_trm_qdepth"
+			}, 
+			{
+				"cols" : "sd_trm_domfreq2",
+				"name" : "Tremor Dominant Frequency 2",
+				"filter" : "sd_trm_type",
+				"filter1" : "sd_trm_qdepth"
+			}, 
+			{
+				"cols" : "sd_trm_maxamp",
+				"name" : "Tremor Maximum Amplitude",
+				"filter" : "sd_trm_type",
+				"filter1" : "sd_trm_qdepth"
+			}, 
+			{
+				"cols" : "sd_trm_reddis",
+				"name" : "Reduced Displacement",
+				"filter" : "sd_trm_type",
+				"filter1" : "sd_trm_qdepth"
+			}
+		]
+	},
+
+	"sd_ivl" : {
+		"data_type" : "SeismicInterval",
+		"stime" : "sd_ivl_stime",
+		"etime" : "sd_ivl_etime",
+		"params" : [
+			{
+				"cols" : "sd_ivl_hdist",
+				"name" : "Swarm Distance",
+				"filter" : "sd_ivl_eqtype",
+				"unit" : "km"
+			}, 
+			{
+				"cols" : "sd_ivl_avgdepth",
+				"name" : "Swarm Mean Depth",
+				"filter" : "sd_ivl_eqtype",
+				"unit" : "m"
+			}, 
+			{
+				"cols" : "sd_ivl_vdispers",
+				"name" : "Swarm Vertical Dispersion",
+				"filter" : "sd_ivl_eqtype",
+				"unit" : "km"
+			}, 
+			{
+				"cols" : "sd_ivl_hmigr_hyp",
+				"name" : "Hypocenter Horizontal Migration",
+				"filter" : "sd_ivl_eqtype",
+				"unit" : "km"
+			}, 
+			{
+				"cols" : "sd_ivl_vmigr_hyp",
+				"name" : "Hypocenter Vertical Migration",
+				"filter" : "sd_ivl_eqtype",
+				"unit" : "km"
+			},
+			{
+				"cols" : "sd_ivl_nrec",
+				"name" : "Earthquake Counts",
+				"filter" : "sd_ivl_eqtype"
+			}, 
+			{
+				"cols" : "sd_ivl_nfelt",
+				"name" : "Felt Earthquake Counts",
+				"filter" : "sd_ivl_eqtype"
+			}, 
+			{
+				"cols" : "sd_ivl_etot",
+				"name" : "Total Seismic Energy",
+				"unit" : "erg"
+			}, 
+			{
+				"cols" : "sd_ivl_fmin",
+				"name" : "Earthquake Minimum Frequency",
+				"filter" : "sd_ivl_eqtype",
+				"unit" : "Hz"
+			},
+			{
+				"cols" : "sd_ivl_fmax",
+				"name" : "Earthquake Maximum Frequency",
+				"filter" : "sd_ivl_eqtype",
+				"unit" : "Hz"
+			}, 
+			{
+				"cols" : "sd_ivl_amin",
+				"name" : "Earthquake Minimum Amplitude",
+				"filter" : "sd_ivl_eqtype"
+			},
+			{
+				"cols" : "sd_ivl_amax",
+				"name" : "Earthquake Maximum Amplitude",
+				"filter" : "sd_ivl_eqtype"
+			}
+			
+		]
+	},
+
+	"sd_rsm" : {
+		"data_type" : "RSAM",
+		"time" : "sd_rsm_stime",
+		"params" : [
+			{
+				"cols" : "sd_rsm_count",
+				"name" : "RSAM Count"
+			}
+		]
+	},
+
+	"sd_ssm" : {
+		"data_type" : "SSAM",
+		"time" : "sd_ssm_stime",
+		"params" : [
+			{
+				"cols" : "sd_ssm_lowf",
+				"name" : "SSAM Low Frequency Limit",
+				"unit" : "Hz"
+			},
+			{
+				"cols" : "sd_ssm_highf",
+				"name" : "SSAM High Frequency Limit",
+				"unit" : "Hz"
+			},
+			{
+				"cols" : "sd_ssm_count",
+				"name" : "SSAM Counts"
+			}
+		]
+	}, 
+
+	"sd_evn" : {
+		"data_type" : "SeismicEventFromNetwork" ,
+		"time" : "sd_evn_time" , 
+		"params" : [
+			{
+				"cols" : "sd_evn_edep",
+				"name" : "Earthquake Depth",
+				"filter" : "sd_evn_eqtype"
+			},
+			{
+				"cols" : "sd_evn_pmag",
+				"name" : "Earthquake Magnitude",
+				"filter" : "sd_evn_eqtype"
+			}
+		]
+	},
+	"sd_evn_loc_eq_counts" : {
+		"data_type" : "SeismicEventFromNetwork" ,
+		"time" : "sd_evn_time" , 
+		"params" : [
+			{
+				"cols" : "loc_eq_counts",
+				"name" : "Located Earthquake Counts",
+				"filter" : "sd_evn_eqtype"
+			}
+		]
+	}
+}

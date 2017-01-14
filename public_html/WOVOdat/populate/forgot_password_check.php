@@ -227,7 +227,8 @@ if (!db_update($update_table_name, $update_field_name, $update_field_value, $upd
 }
 
 // Send email
-/*
+
+
 // Include PEAR Mail package
 require_once "Mail-1.2.0/Mail.php";
 
@@ -285,7 +286,9 @@ if (PEAR::isError($mail)) {
 unset($_SESSION['forgot_pw']);
 
 // Inform user that they will receive an email with their new password soon
+
 header('Location: '.$url_root.'forgot_password_confirm.php');
 exit();
-*/
+
+
 ?>

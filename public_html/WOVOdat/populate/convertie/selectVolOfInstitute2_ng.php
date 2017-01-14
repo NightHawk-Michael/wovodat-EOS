@@ -19,7 +19,7 @@ if(isset($_GET['dataType'])){  // Use it for Monitoring system
 		}
 		elseif($dataType == "SeismicInstrument" || $dataType == "DeformationInstrument_General" ||  $dataType == "DeformationInstrument_Tilt/Strain" ||  $dataType == "GasInstrument" || $dataType == "HydrologicInstrument" || $dataType == "ThermalInstrument" || $dataType == "FieldsInstrument" || $dataType == "MeteoInstrument"){
 			echo "<span id='pvol'>Volcano (OR) closest volcano to the instrument: </span>";
-			echo "<select name='vol2' id='vol2' style='width:180px' class='required'>";	 
+			echo "<select name='vol2' id='vol2' style='width:180px' class='required'>";	
 			
 		}
 		elseif($dataType == "SeismicComponent") {

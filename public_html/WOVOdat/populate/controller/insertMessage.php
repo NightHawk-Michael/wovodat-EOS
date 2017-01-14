@@ -1,6 +1,6 @@
 <?php
 session_start();
-	
+
 include "../view/commonInsert_v.php";
 
 if(!isset($_SESSION['login'])) {
@@ -16,7 +16,6 @@ if($result != 'false'){
 }else{
 	showUnsuccessfulMessage();         //Show Unsucessful message
 }
-
-
+		
 showCommonFooter();            		   //Show html footer
 ?>

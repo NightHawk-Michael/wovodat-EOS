@@ -127,151 +127,137 @@ else {
 	$error=$email_error || $com_error;
 }
 
+
+include 'php/include/header.php'; 
+
+include 'php/include/menu.php'; 
+
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > <a href='http://{$_SERVER['SERVER_NAME']}/populate/my_account.php'>Account</a> > Manage contact information </div>";
+
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/js2/navig.css" rel="stylesheet">
-	<link href="/gif/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
-	<script language="JavaScript" src="/js2/menu_array.js" type="text/javascript"></script>
-	<script language="JavaScript" src="/js2/mmenu.js" type="text/javascript"></script>
 
-	<div id="wrapborder">
-	<div id="wrap">
-		<div id="headershadow">
-			<?php include 'php/include/header_beta.php'; ?>
-		</div>
+</div>  <!-- header-menu -->  
+	
+	<div class="body">
 
-		<!-- Content -->
-		<div id="content">	
-			<div id="contentl">
-		<!-- Top of the page -->
+		<div class="widecontent">
+	
+			<div class="form">
+				<!-- Page content -->
+				<h2>Manage contact information</h2>
 		
-		<!-- Page content -->
-		<h1>Manage contact information</h1>
-		<p class="redtext"><?php if ($error) {print "Update unsuccessful! Please correct the fields in red:";} ?></p>
-		<!-- Form -->
-		<form method="post" action="update_contact_info.php" name="update_cc">
-			<table class="formtable">
-				<input type="hidden" name="id" value="<?php print $selected_user; ?>" />
-				<tr>
-					<th>First name:</th>
-					<td>
-						<input type="text" maxlength="30" name="fname" value="<?php print $cc_fname; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th>Last name:</th>
-					<td>
-						<input type="text" maxlength="30" name="lname" value="<?php print $cc_lname; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th>Observatory:</th>
-					<td>
-						<input type="text" maxlength="150" name="obs" value="<?php print $cc_obs; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th>Address1:</th>
-					<td>
-						<input type="text" maxlength="60" name="add1" value="<?php print $cc_add1; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th>Address2:</th>
-					<td>
-						<input type="text" maxlength="60" name="add2" value="<?php print $cc_add2; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th>City:</th>
-					<td>
-						<input type="text" maxlength="50" name="city" value="<?php print $cc_city; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th>State, Province or Prefecture:</th>
-					<td>
-						<input type="text" maxlength="30" name="state" value="<?php print $cc_state; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th>Country:</th>
-					<td>
-						<input type="text" maxlength="50" name="country" value="<?php print $cc_country; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th>Postal code:</th>
-					<td>
-						<input type="text" maxlength="30" name="post" value="<?php print $cc_post; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th>Web address:</th>
-					<td>
-						<input type="text" maxlength="255" name="url" value="<?php print $cc_url; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th<?php if ($email_error) {print " class=\"redtext\"";} ?>>E-mail address (an email will be sent to confirm validity):</th>
-					<td>
-						<input type="text" maxlength="255" name="email" value="<?php print $cc_email; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th>Phone:</th>
-					<td>
-						<input type="text" maxlength="50" name="phone" value="<?php print $cc_phone; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th>Phone 2:</th>
-					<td>
-						<input type="text" maxlength="50" name="phone2" value="<?php print $cc_phone2; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th>Fax:</th>
-					<td>
-						<input type="text" maxlength="60" name="fax" value="<?php print $cc_fax; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th<?php if ($com_error) {print " class=\"redtext\"";} ?>>Comments (max length: 255 characters):</th>
-					<td>
-						<textarea name="com" cols="40" rows="5" onkeydown="limitText(this, 255)"><?php print $cc_com; ?></textarea>
-					</td>
-				</tr>
-			</table>
-			<input type="submit" name="manage_contact_info_ok" value="OK" />
-		</form>
-
+				<p class="redtext"><?php if ($error) {print "Update unsuccessful! Please correct the fields in red:";} ?></p>
+				
+				<!-- Form -->
+				<form method="post" action="update_contact_info.php" name="update_cc">
+					<table class="formtable" id="formtable">
+						<input type="hidden" name="id" value="<?php print $selected_user; ?>" />
+						<tr>
+							<th>First name:</th>
+							<td>
+								<input type="text" maxlength="30" name="fname" value="<?php print $cc_fname; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th>Last name:</th>
+							<td>
+								<input type="text" maxlength="30" name="lname" value="<?php print $cc_lname; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th>Observatory:</th>
+							<td>
+								<input type="text" maxlength="150" name="obs" value="<?php print $cc_obs; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th>Address1:</th>
+							<td>
+								<input type="text" maxlength="60" name="add1" value="<?php print $cc_add1; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th>Address2:</th>
+							<td>
+								<input type="text" maxlength="60" name="add2" value="<?php print $cc_add2; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th>City:</th>
+							<td>
+								<input type="text" maxlength="50" name="city" value="<?php print $cc_city; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th>State, Province or Prefecture:</th>
+							<td>
+								<input type="text" maxlength="30" name="state" value="<?php print $cc_state; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th>Country:</th>
+							<td>
+								<input type="text" maxlength="50" name="country" value="<?php print $cc_country; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th>Postal code:</th>
+							<td>
+								<input type="text" maxlength="30" name="post" value="<?php print $cc_post; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th>Web address:</th>
+							<td>
+								<input type="text" maxlength="255" name="url" value="<?php print $cc_url; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th<?php if ($email_error) {print " class=\"redtext\"";} ?>>E-mail address (an email will be sent to confirm validity):</th>
+							<td>
+								<input type="text" maxlength="255" name="email" value="<?php print $cc_email; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th>Phone:</th>
+							<td>
+								<input type="text" maxlength="50" name="phone" value="<?php print $cc_phone; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th>Phone 2:</th>
+							<td>
+								<input type="text" maxlength="50" name="phone2" value="<?php print $cc_phone2; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th>Fax:</th>
+							<td>
+								<input type="text" maxlength="60" name="fax" value="<?php print $cc_fax; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th<?php if ($com_error) {print " class=\"redtext\"";} ?>>Comments (max length: 255 characters):</th>
+							<td>
+								<textarea name="com" cols="40" rows="5" onkeydown="limitText(this, 255)"><?php print $cc_com; ?></textarea>
+							</td>
+						</tr>
+					</table>
+					
+					<div style="padding:20px 250px;" >
+					<input type="submit" name="manage_contact_info_ok" value="OK" />
+					</div>
+				</form>
+	
 			</div>
-			<div id="contentr">
-				<div id="top" align="left">
-					<!-- Aligned to the right: You are logged in as username (FName LName | Obs) | Logout -->
-					<p align="right">Login as <b><?php print $uname; ?></b> | <a href="logout.php">Logout</a></p>
-				</div><br>
-		
-			</div>
-		</div>
-		
-		<!-- Footer -->
-		<div id="footer">
-			<?php include 'php/include/footer_beta.php'; ?>
-		</div>
-		
 	</div>
-</body>
-</html>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->

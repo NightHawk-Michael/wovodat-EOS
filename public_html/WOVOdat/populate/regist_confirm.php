@@ -20,10 +20,9 @@ require_once("php/funcs/db_funcs.php");
 
 // Get root url
 require_once "php/include/get_root.php";
-/*
+
 // 1st checking of parameters in URL
-//if (!isset($_GET['id']) || !isset($_GET['code']) || !isset($_GET['email'])) {
-if (!isset($_GET['id']) || !isset($_GET['email'])) {
+if (!isset($_GET['id']) || !isset($_GET['code']) || !isset($_GET['email'])) {
 	// One parameter was forgotten - redirect to error page
 	$_SESSION['errors'][0]=array();
 	$_SESSION['errors'][0]['code']=1133;
@@ -32,11 +31,10 @@ if (!isset($_GET['id']) || !isset($_GET['email'])) {
 	header('Location: '.$url_root.'regist_error.php');
 	exit();
 }
-*/
 
 // Get parameters in URL
 $id=$_GET['id'];
-//$code=urldecode($_GET['code']);
+$code=urldecode($_GET['code']);
 $email=urldecode($_GET['email']);
 
 // Get information from C14
@@ -112,7 +110,7 @@ $cr_tmp_fax=$select_field_value[0][14];
 $cr_tmp_com=$select_field_value[0][15];
 $cr_tmp_uname=$select_field_value[0][16];
 $cr_tmp_pwd=$select_field_value[0][17];
-/*
+
 // 2nd checking of parameters in URL
 // Check code (time)
 if (crypt($cr_tmp_time, $code)!=$code) {
@@ -135,7 +133,7 @@ if ($cr_tmp_email!=$email) {
 	header('Location: '.$url_root.'regist_error.php');
 	exit();
 }
-*/
+
 // Check if user was already registered
 $count_table_name="cr";
 $count_field_name=array();
@@ -165,14 +163,13 @@ if (!db_count($count_table_name, $count_field_name, $count_field_value, $num, $e
 			exit();
 	}
 }
-/*
 if ($num!=0) {
 	// User already registered
 	// Redirect user to registration success page
 	header('Location: '.$url_root.'regist_success.php');
 	exit();
 }
-*/
+
 // Store information in C2, C3 and C4
 
 // Get current time

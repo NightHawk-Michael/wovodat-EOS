@@ -209,7 +209,7 @@ SESSION_START();
 					$_SESSION['sdEvsType'] .=")";
 					
 				}else{
-					$_SESSION['sdEvsType'] =" sd_evn.sd_evn_eqtype='{$sdEvsType[0]}' ";
+					$_SESSION['sdEvsType'] =" sd_evs.sd_evs_eqtype='{$sdEvsType[0]}' ";
 				}
 			}			
 			
@@ -422,9 +422,7 @@ SESSION_START();
 			  
 	}
 
-if((isset($_POST['sd_evn'])) || (isset($_POST['sd_evs'])) || (isset($_POST['sd_int'])) || (isset($_POST['sd_ivl'])) || (isset($_POST['sd_trm'])) || (isset($_POST['sd_rsm'])) || (isset($_POST['sd_ssm'])) || (isset($_POST['dd_edm'])) || (isset($_POST['dd_gps'])) || (isset($_POST['dd_gpv'])) || (isset($_POST['dd_lev'])) || (isset($_POST['dd_sar'])) || (isset($_POST['dd_str'])) || (isset($_POST['dd_tlt'])) || (isset($_POST['dd_tlv'])) || 
-(isset($_POST['fd_ele'])) ||  (isset($_POST['fd_gra'])) || (isset($_POST['fd_mag'])) || (isset($_POST['fd_mgv'])) || (isset($_POST['gd'])) || (isset($_POST['gd_plu'])) || (isset($_POST['gd_sol'])) || (isset($_POST['hd'])) || 
-(isset($_POST['td'])) ||  (isset($_POST['med']))){
+if((isset($_POST['sd_evn'])) || (isset($_POST['sd_evs'])) || (isset($_POST['sd_int'])) || (isset($_POST['sd_ivl'])) || (isset($_POST['sd_trm'])) || (isset($_POST['sd_rsm'])) || (isset($_POST['sd_ssm'])) || (isset($_POST['dd_ang'])) || (isset($_POST['dd_edm'])) || (isset($_POST['dd_gps'])) || (isset($_POST['dd_gpv'])) || (isset($_POST['dd_lev'])) || (isset($_POST['dd_sar'])) || (isset($_POST['dd_str'])) || (isset($_POST['dd_tlt'])) || (isset($_POST['dd_tlv'])) || (isset($_POST['fd_ele'])) ||  (isset($_POST['fd_gra'])) || (isset($_POST['fd_mag'])) || (isset($_POST['fd_mgv'])) || (isset($_POST['gd'])) || (isset($_POST['gd_plu'])) || (isset($_POST['gd_sol'])) || (isset($_POST['hd'])) || (isset($_POST['td'])) ||  (isset($_POST['med']))){
 	header("location: booleanSubmitData.php");
 }		
 else if((isset($_POST['feature'])) || (isset($_POST['rock'])) || (isset($_POST['veiMin'])) || (isset($_POST['veiMax'])) || (isset($_POST['edTimeMin'])) || (isset($_POST['edTimeMax'])) || (isset($_POST['edPhase']))){      

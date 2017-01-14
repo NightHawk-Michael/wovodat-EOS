@@ -1,13 +1,7 @@
 <?php
-if (!isset($_SESSION))
-    session_start();
-	
-// Check login
-//require_once("php/include/login_check.php");
 
-if(!isset($_SESSION['login'])){       // can't proceed without log in
-	header('Location: '.$url_root.'login_required.php');
-}
+// Check login
+require_once("php/include/login_check.php");
 
 // Get root url
 require_once "php/include/get_root.php";
@@ -26,25 +20,21 @@ $current_month=date("m");
 $current_day=date("d");
 $current_time=date("H:i:s");
 
-
 /*For 199 user, $limitday variable is not using anymore becaue directly give permission in MySQL statment. 
 Nang added on 22-Feb-2013
-
-if ($user_id==199){     
-	$limitday=30;
+*/
+if ($user_id==199){
+	$limitday=60;
 }elseif($user_id==200){
 	$limitday=56;
 }else{
 	$limitday=7;
 }
 
-
-
 // Undo is allowed up to 7 days after upload date
-if ((int)($current_day)<$limitday) { 
-
+if ((int)($current_day)<$limitday) {
 	// Depending on month
-	switch ($current_month) {   
+	switch ($current_month) {
 		case "01":
 			// January
 			$year=(string)((int)($current_year)-1); // e.g.: 2009 -> 2008
@@ -59,16 +49,11 @@ if ((int)($current_day)<$limitday) {
 		case "11":
 			// February, April, June, August, September, November
 			$year=$current_year;
-		//	$month=(string)((int)($current_month)-1); // e.g.: 06 -> 05
-			
-			$month=(string)((int)($current_month)-3); // e.g.: 06 -> 05
+			$month=(string)((int)($current_month)-1); // e.g.: 06 -> 05
 			if (strlen($month)==1) {
 				$month="0".$month;
 			}
 			$day=(string)(24+(int)($current_day)); // e.g.: 01 -> 25 ... 07 -> 31
-			
-			echo "MONTH".$month."<br/>";
-			
 			break;
 		case "03":
 			// March
@@ -90,7 +75,7 @@ if ((int)($current_day)<$limitday) {
 			break;
 	}
 }
-else { 
+else {
 	$year=$current_year;
 	$month=$current_month;
 	$day=(string)((int)($current_day)-7); // e.g.: 08 -> 01 ... 31 -> 24
@@ -98,10 +83,8 @@ else {
 		$day="0".$day;
 	}
 }
-
-$limit_date = $year."-".$month."-".$day." ".$current_time;
+$limit_date=$year."-".$month."-".$day." ".$current_time;
 //$limit_date="1000-01-01 00:00:00";
-*/
 
 if($user_id==200){
 	// SELECT cu_id, cu_file, cu_loaddate FROM cu WHERE cu_loaddate > '$limit_date' 
@@ -124,7 +107,7 @@ if($user_id==200){
 	$select_where_field_comp[1]="=";
 	$select_where_field_value[1]="P";
 	$select_errors="";
-}else if($user_id==199){
+}else if($user_id==199){   //Nang added on 22-Feb-2013 
 
 	//SELECT cu_id, cu_file, cu_loaddate FROM cu WHERE cu_loaddate > date_sub(now(), interval 5 month) AND cu_type= 'P' AND cc_id_load = '199'
 	$select_table="cu";
@@ -229,87 +212,77 @@ $_SESSION['undo_upload']['files']=$files;
 $_SESSION['undo_upload']['loaddates']=$loaddates;
 
 
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
-	<div id="wrapborder">
-	<div id="wrap">
-		<?php include 'php/include/header_beta.php'; ?>
-		<!-- Content -->
-		<div id="content">	
+include 'php/include/header.php'; 
 
-			<div id="contentl">
-				<!-- Top of the page -->
+include 'php/include/menu.php'; 
+
+echo "<div id='breadcrumbs'> Undo upload (Direct Access) </div>";
+
+?>
+
+</div>  <!-- header-menu -->  
+
+	<div class="body">
+
+		<div class="widecontent">
 			
-				<!-- Page content -->
-				<h1>Undo upload</h1>
-<?php
+			<!-- Page content -->
+			<h2>Undo upload</h2>
+			
+				<?php
 
-if ($num_files==0) {
-	print "\t\t<p>You did not upload any file in the last $limitday days.</p>\n".
-	"\t\t<p><a href=\"home.php\">Go back to home page</a><p>\n".
-	"\t</body>\n".
-	"</html>";
-	exit();
-}
+				if ($num_files==0) {
+					echo "<p>You did not upload any file in the last $limitday days. <a href=\"home.php\">Go back to home page</a></p>";
+					
+					
+				}else {
 
-?>
-		<p>Select file for which you want to undo upload:</p>
-		<form method="post" action="undo_upload_confirm.php" name="select_users">
-			<table id="select_users">
-				<tr>
-					<th></th>
-					<th>File name</th>
-					<th>Upload date</th>
-				</tr>
-<?php
+				?>
+					<p>Select file for which you want to undo upload:</p>
+					<form method="post" action="undo_upload_confirm.php" name="select_users">
+						<table id="select_users">
+							<tr>
+								<th></th>
+								<th>File name</th>
+								<th>Upload date</th>
+							</tr>
+					<?php
 
-// For each file
-for ($i=0; $i<$num_files; $i++) {
-	if ($i==0) {
-		print "\t\t\t\t<tr>\n".
-		"\t\t\t\t\t<td><input type=\"radio\" checked=\"true\" name=\"file\" value=\"".$ids[0]."\" /></td>\n".
-		"\t\t\t\t\t<td>".$files[0]."</td>\n".
-		"\t\t\t\t\t<td>".$loaddates[0]."</td>\n".
-		"\t\t\t\t</tr>\n";
-	}
-	else {
-		print "\t\t\t\t<tr>\n".
-		"\t\t\t\t\t<td><input type=\"radio\" name=\"file\" value=\"".$ids[$i]."\" /></td>\n".
-		"\t\t\t\t\t<td>".$files[$i]."</td>\n".
-		"\t\t\t\t\t<td>".$loaddates[$i]."</td>\n".
-		"\t\t\t\t</tr>\n";
-	}
-}
+						// For each file
+						for ($i=0; $i<$num_files; $i++) {
+							if ($i==0) {
+								print "\t\t\t\t<tr>\n".
+								"\t\t\t\t\t<td><input type=\"radio\" checked=\"true\" name=\"file\" value=\"".$ids[0]."\" /></td>\n".
+								"\t\t\t\t\t<td>".$files[0]."</td>\n".
+								"\t\t\t\t\t<td>".$loaddates[0]."</td>\n".
+								"\t\t\t\t</tr>\n";
+							}
+							else {
+								print "\t\t\t\t<tr>\n".
+								"\t\t\t\t\t<td><input type=\"radio\" name=\"file\" value=\"".$ids[$i]."\" /></td>\n".
+								"\t\t\t\t\t<td>".$files[$i]."</td>\n".
+								"\t\t\t\t\t<td>".$loaddates[$i]."</td>\n".
+								"\t\t\t\t</tr>\n";
+							}
+						}
+					}	 
+					?>
+					
+				</table>
+				<br />
+				<input type="submit" name="undo_upload_back" value="Back" />
+				<input type="submit" name="undo_upload_ok" value="OK" />
+			</form>
 
-?>
-			</table>
-			<br />
-			<input type="submit" name="undo_upload_back" value="Back" />
-			<input type="submit" name="undo_upload_ok" value="OK" />
-		</form>
-
-			</div>
-			<div id="contentr">
-			</div>
 		</div>
-		
-		<!-- Footer -->
-		<div id="footer">
-			<?php include 'php/include/footer_beta.php'; ?>
-		</div>
-		
 	</div>
-</body>
-</html>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->	

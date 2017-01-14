@@ -15,8 +15,9 @@ set_time_limit(180);
 // Check login
 require_once "php/include/login_check.php";
 
-// Set root URL
-$url_root="http://{$_SERVER['SERVER_NAME']}/populate/";
+// Get root url
+require_once "php/include/get_root.php";
+
 
 // Check direct access
 if (!isset($_SESSION['upload'])) {
@@ -72,32 +73,25 @@ switch ($file_type) {
 		exit();
 }
 
+	include "php/include/header.php";  
+	
+	echo"<script language='javascript' type='text/javascript' src='/js/scripts.js'></script>";
+	
+	include 'php/include/menu.php'; 
+	
+	echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > 
+	<a href='http://{$_SERVER['SERVER_NAME']}/populate/index.php'>Submit Data</a> > Upload WOVOml File </div>";
+
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/gif/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
 
-	<div id="wrapborder">
-		<div id="wrap">
-			<!-- Header -->
-				<?php include 'php/include/header_beta.php'; ?>
+	</div>  <!-- header-menu -->
 
-			<!-- Content -->
-			<div id="content">
-				<!-- Left panel -->
-				<div id="contentl">
-					<!-- Page content -->
-					<h1>Please confirm upload</h1>
-					<p>You are going to upload data to WOVOdat. These data will be open to the public 2 years after date of occurrence or (if the latter is not available) date of upload.</p>
+	<div class="body">
+		<div class="twocolcontent">
+			<div class="leftcolumn">
+				<!-- Left Page content -->
+				<h1>Please confirm upload</h1>
+				<p>You are going to upload data to WOVOdat. These data will be open to the public 2 years after date of occurrence or (if the latter is not available) date of upload.</p>
 <?php
 
 // If there are warnings
@@ -124,7 +118,7 @@ STRING;
 }
 
 ?>
-					<p><?php print $main_message; ?></p>
+				<p><?php print $main_message; ?></p>
 <?php
 
 // List of data contained in file
@@ -146,20 +140,24 @@ foreach ($data_list as $data_list_element) {
 print "\t\t\t\t\t</ul>\n";
 
 ?>
-					<form method="post" action="upload_file_cancel.php" name="form1">
+				
+			
+					<form style="display:inline;" method="post" action="upload_file_cancel.php" name="form1">
 						<input type="submit" name="upload_file_cancel" value="Cancel" />
 					</form>
-					<form method="post" action="upload_file_upload.php" name="form2">
+					<form style="display:inline;" method="post" action="upload_file_upload.php" name="form2">
 						<input type="submit" name="confirm_file_upload" value="Confirm" />
 					</form>
-				</div>
-				
-				<!-- Right panel -->
-				<div id="contentr">
+			
+					
+			</div>  <!-- end of leftcontent -->		           	
+		
+			<!-- Right panel -->
+			<div id="contentr"  class="rightcolumn"> 
 <?php
 
 // Create folder for display images
-$display_folder="http://{$_SERVER['SERVER_NAME']}/output/".$_SESSION['login']['cc_id']."_".$_SESSION['upload']['current_time'];
+$display_folder="/home/wovodat/public_html/WOVOdat/output/".$_SESSION['login']['cc_id']."_".$_SESSION['upload']['current_time'];
 $src_folder="/output/".$_SESSION['login']['cc_id']."_".$_SESSION['upload']['current_time'];
 if (!file_exists($display_folder)) {
 	mkdir($display_folder);
@@ -183,16 +181,20 @@ foreach ($data_list as $data_list_key => $data_list_element) {
 
 print "\t\t\t\t\t</ul>\n";
 
-?>
-				</div>
-			</div>
+?>			
+			</div>  <!-- right contetnt -->
 			
-			<!-- Footer -->
-			<div id="footer">
-				<?php include 'php/include/footer_beta.php'; ?>
-			</div>
+			<br/><br/><br/>
 			
 		</div>
 	</div>
-</body>
-</html>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->

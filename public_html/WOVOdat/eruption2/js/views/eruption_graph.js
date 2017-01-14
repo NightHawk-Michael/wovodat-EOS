@@ -247,7 +247,7 @@ define(function(require) {
         }
 
         var ed = this.selectingEruption;
-        // console.log(ed);
+         console.log(ed);
         var ed_stime = ed.get('ed_stime'),
             ed_etime = ed.get('ed_etime'),
             ed_vei = parseInt(ed.get('ed_vei'));

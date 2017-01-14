@@ -1,0 +1,1286 @@
+[17-Oct-2016 06:46:06] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:46:06] PHP Stack trace:
+[17-Oct-2016 06:46:06] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:46:06] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:46:06] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:46:06] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:46:06] PHP Stack trace:
+[17-Oct-2016 06:46:06] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:46:06] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:46:06] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:46:07] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:46:07] PHP Stack trace:
+[17-Oct-2016 06:46:07] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:46:07] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:46:07] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:46:07] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:46:07] PHP Stack trace:
+[17-Oct-2016 06:46:07] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:46:07] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:46:07] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:46:07] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:46:07] PHP Stack trace:
+[17-Oct-2016 06:46:07] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:46:07] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:46:07] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:46:07] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:46:07] PHP Stack trace:
+[17-Oct-2016 06:46:07] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:46:07] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:46:07] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:46:07] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:46:07] PHP Stack trace:
+[17-Oct-2016 06:46:07] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:46:07] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:46:07] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:46:07] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:46:07] PHP Stack trace:
+[17-Oct-2016 06:46:07] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:46:07] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:46:07] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:46:08] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:46:08] PHP Stack trace:
+[17-Oct-2016 06:46:08] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:46:08] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:46:08] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:46:08] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:46:08] PHP Stack trace:
+[17-Oct-2016 06:46:08] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:46:08] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:46:08] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:46:10] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:46:10] PHP Stack trace:
+[17-Oct-2016 06:46:10] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:46:10] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:46:10] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:46:10] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:46:10] PHP Stack trace:
+[17-Oct-2016 06:46:10] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:46:10] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:46:10] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:46:11] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:46:11] PHP Stack trace:
+[17-Oct-2016 06:46:11] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:46:11] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:46:11] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:46:11] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:46:11] PHP Stack trace:
+[17-Oct-2016 06:46:11] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:46:11] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:46:11] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:46:11] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:46:11] PHP Stack trace:
+[17-Oct-2016 06:46:11] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:46:11] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:46:11] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:47:04] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:47:04] PHP Stack trace:
+[17-Oct-2016 06:47:04] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:47:04] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:47:04] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:47:04] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:47:04] PHP Stack trace:
+[17-Oct-2016 06:47:04] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:47:04] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:47:04] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:47:06] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:47:06] PHP Stack trace:
+[17-Oct-2016 06:47:06] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:47:06] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:47:06] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:47:06] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:47:06] PHP Stack trace:
+[17-Oct-2016 06:47:06] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:47:06] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:47:06] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:47:06] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:47:06] PHP Stack trace:
+[17-Oct-2016 06:47:06] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:47:06] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:47:06] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:47:06] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:47:06] PHP Stack trace:
+[17-Oct-2016 06:47:06] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:47:06] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:47:06] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:47:06] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:47:06] PHP Stack trace:
+[17-Oct-2016 06:47:06] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:47:06] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:47:06] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:47:06] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:47:06] PHP Stack trace:
+[17-Oct-2016 06:47:06] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:47:06] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:47:06] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:47:06] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:47:06] PHP Stack trace:
+[17-Oct-2016 06:47:06] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:47:06] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:47:06] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:47:19] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:47:19] PHP Stack trace:
+[17-Oct-2016 06:47:19] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:47:19] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:47:19] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:47:19] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:47:19] PHP Stack trace:
+[17-Oct-2016 06:47:19] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:47:19] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:47:19] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:47:20] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:47:20] PHP Stack trace:
+[17-Oct-2016 06:47:20] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:47:20] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:47:20] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:47:20] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:47:20] PHP Stack trace:
+[17-Oct-2016 06:47:20] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:47:20] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:47:20] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:47:20] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:47:20] PHP Stack trace:
+[17-Oct-2016 06:47:20] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:47:20] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:47:20] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:48:43] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:48:43] PHP Stack trace:
+[17-Oct-2016 06:48:43] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:48:43] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:48:43] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:48:43] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:48:43] PHP Stack trace:
+[17-Oct-2016 06:48:43] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:48:43] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:48:43] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:48:44] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:48:44] PHP Stack trace:
+[17-Oct-2016 06:48:44] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:48:44] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:48:44] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:48:44] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:48:44] PHP Stack trace:
+[17-Oct-2016 06:48:44] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:48:44] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:48:44] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:48:44] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:48:44] PHP Stack trace:
+[17-Oct-2016 06:48:44] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:48:44] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:48:44] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:48:44] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:48:44] PHP Stack trace:
+[17-Oct-2016 06:48:44] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:48:44] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:48:44] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:48:44] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:48:44] PHP Stack trace:
+[17-Oct-2016 06:48:44] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:48:44] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:48:44] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:48:45] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:48:45] PHP Stack trace:
+[17-Oct-2016 06:48:45] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:48:45] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:48:45] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:48:45] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:48:45] PHP Stack trace:
+[17-Oct-2016 06:48:45] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:48:45] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:48:45] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 06:48:45] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 06:48:45] PHP Stack trace:
+[17-Oct-2016 06:48:45] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 06:48:45] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 06:48:45] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 08:19:31] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 08:19:31] PHP Stack trace:
+[17-Oct-2016 08:19:31] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 08:19:31] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 08:19:31] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 08:19:31] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 08:19:31] PHP Stack trace:
+[17-Oct-2016 08:19:31] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 08:19:31] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 08:19:31] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 08:19:31] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 08:19:31] PHP Stack trace:
+[17-Oct-2016 08:19:31] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 08:19:31] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 08:19:31] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 08:19:31] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 08:19:31] PHP Stack trace:
+[17-Oct-2016 08:19:31] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 08:19:31] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 08:19:31] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 08:19:31] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 08:19:31] PHP Stack trace:
+[17-Oct-2016 08:19:31] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 08:19:31] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 08:19:31] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 08:19:31] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 08:19:31] PHP Stack trace:
+[17-Oct-2016 08:19:31] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 08:19:31] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 08:19:31] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 08:19:31] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 08:19:31] PHP Stack trace:
+[17-Oct-2016 08:19:31] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 08:19:31] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 08:19:31] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 08:19:32] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 08:19:32] PHP Stack trace:
+[17-Oct-2016 08:19:32] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 08:19:32] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 08:19:32] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 08:19:32] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 08:19:32] PHP Stack trace:
+[17-Oct-2016 08:19:32] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 08:19:32] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 08:19:32] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 08:19:32] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 08:19:32] PHP Stack trace:
+[17-Oct-2016 08:19:32] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 08:19:32] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 08:19:32] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 09:53:35] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 09:53:35] PHP Stack trace:
+[17-Oct-2016 09:53:35] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 09:53:35] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 09:53:35] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 09:59:55] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 09:59:55] PHP Stack trace:
+[17-Oct-2016 09:59:55] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 09:59:55] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 09:59:55] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 09:59:55] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 09:59:55] PHP Stack trace:
+[17-Oct-2016 09:59:55] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 09:59:55] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 09:59:55] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 09:59:55] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 09:59:55] PHP Stack trace:
+[17-Oct-2016 09:59:55] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 09:59:55] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 09:59:55] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 09:59:55] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 09:59:55] PHP Stack trace:
+[17-Oct-2016 09:59:55] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 09:59:55] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 09:59:55] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 09:59:55] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 09:59:55] PHP Stack trace:
+[17-Oct-2016 09:59:55] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 09:59:55] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 09:59:55] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 09:59:55] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 09:59:55] PHP Stack trace:
+[17-Oct-2016 09:59:55] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 09:59:55] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 09:59:55] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 09:59:55] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 09:59:55] PHP Stack trace:
+[17-Oct-2016 09:59:55] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 09:59:55] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 09:59:55] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 09:59:55] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 09:59:55] PHP Stack trace:
+[17-Oct-2016 09:59:55] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 09:59:55] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 09:59:55] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 09:59:55] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 09:59:55] PHP Stack trace:
+[17-Oct-2016 09:59:55] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 09:59:55] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 09:59:55] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 09:59:55] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 09:59:55] PHP Stack trace:
+[17-Oct-2016 09:59:55] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 09:59:55] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 09:59:55] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:22] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:22] PHP Stack trace:
+[17-Oct-2016 10:00:22] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:22] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:22] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:22] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:22] PHP Stack trace:
+[17-Oct-2016 10:00:22] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:22] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:22] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:22] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:22] PHP Stack trace:
+[17-Oct-2016 10:00:22] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:22] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:22] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:22] PHP Stack trace:
+[17-Oct-2016 10:00:22] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:22] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:22] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:22] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:22] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:22] PHP Stack trace:
+[17-Oct-2016 10:00:22] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:22] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:22] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:22] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:22] PHP Stack trace:
+[17-Oct-2016 10:00:22] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:22] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:22] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:22] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:22] PHP Stack trace:
+[17-Oct-2016 10:00:22] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:22] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:22] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:22] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:22] PHP Stack trace:
+[17-Oct-2016 10:00:22] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:22] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:22] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:22] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:22] PHP Stack trace:
+[17-Oct-2016 10:00:22] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:22] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:22] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:22] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:22] PHP Stack trace:
+[17-Oct-2016 10:00:22] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:22] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:22] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:24] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:24] PHP Stack trace:
+[17-Oct-2016 10:00:24] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:24] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:24] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:24] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:24] PHP Stack trace:
+[17-Oct-2016 10:00:24] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:24] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:24] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:24] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:24] PHP Stack trace:
+[17-Oct-2016 10:00:24] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:24] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:24] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:24] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:24] PHP Stack trace:
+[17-Oct-2016 10:00:24] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:24] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:24] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:24] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:24] PHP Stack trace:
+[17-Oct-2016 10:00:24] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:24] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:24] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:40] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:40] PHP Stack trace:
+[17-Oct-2016 10:00:40] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:40] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:40] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:40] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:40] PHP Stack trace:
+[17-Oct-2016 10:00:40] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:40] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:40] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:40] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:40] PHP Stack trace:
+[17-Oct-2016 10:00:40] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:40] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:40] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:40] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:40] PHP Stack trace:
+[17-Oct-2016 10:00:40] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:40] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:40] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:00:40] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:00:40] PHP Stack trace:
+[17-Oct-2016 10:00:40] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:00:40] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:00:40] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:01:37] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:01:37] PHP Stack trace:
+[17-Oct-2016 10:01:37] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:01:37] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:01:37] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:01:37] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:01:37] PHP Stack trace:
+[17-Oct-2016 10:01:37] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:01:37] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:01:37] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:01:37] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:01:37] PHP Stack trace:
+[17-Oct-2016 10:01:37] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:01:37] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:01:37] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:01:37] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:01:37] PHP Stack trace:
+[17-Oct-2016 10:01:37] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:01:37] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:01:37] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:01:37] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:01:37] PHP Stack trace:
+[17-Oct-2016 10:01:37] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:01:37] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:01:37] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:01:37] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:01:37] PHP Stack trace:
+[17-Oct-2016 10:01:37] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:01:37] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:01:37] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:01:37] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:01:37] PHP Stack trace:
+[17-Oct-2016 10:01:37] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:01:37] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:01:37] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:01:37] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:01:37] PHP Stack trace:
+[17-Oct-2016 10:01:37] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:01:37] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:01:37] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:01:37] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:01:37] PHP Stack trace:
+[17-Oct-2016 10:01:37] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:01:37] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:01:37] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 10:01:37] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 10:01:37] PHP Stack trace:
+[17-Oct-2016 10:01:37] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 10:01:37] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 10:01:37] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:04:45] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:04:45] PHP Stack trace:
+[17-Oct-2016 19:04:45] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:04:45] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:04:45] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:04:45] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:04:45] PHP Stack trace:
+[17-Oct-2016 19:04:45] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:04:45] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:04:45] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:04:46] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:04:46] PHP Stack trace:
+[17-Oct-2016 19:04:46] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:04:46] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:04:46] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:04:46] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:04:46] PHP Stack trace:
+[17-Oct-2016 19:04:46] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:04:46] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:04:46] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:04:47] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:04:47] PHP Stack trace:
+[17-Oct-2016 19:04:47] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:04:47] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:04:47] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:04:49] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:04:49] PHP Stack trace:
+[17-Oct-2016 19:04:49] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:04:49] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:04:49] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:04:49] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:04:49] PHP Stack trace:
+[17-Oct-2016 19:04:49] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:04:49] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:04:49] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:04:51] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:04:51] PHP Stack trace:
+[17-Oct-2016 19:04:51] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:04:51] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:04:51] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:04:51] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:04:51] PHP Stack trace:
+[17-Oct-2016 19:04:51] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:04:51] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:04:51] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:04:52] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:04:52] PHP Stack trace:
+[17-Oct-2016 19:04:52] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:04:52] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:04:52] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:08:32] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:08:32] PHP Stack trace:
+[17-Oct-2016 19:08:32] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:08:32] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:08:32] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:08:32] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:08:32] PHP Stack trace:
+[17-Oct-2016 19:08:32] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:08:32] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:08:32] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:08:33] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:08:33] PHP Stack trace:
+[17-Oct-2016 19:08:33] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:08:33] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:08:33] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:08:34] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:08:34] PHP Stack trace:
+[17-Oct-2016 19:08:34] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:08:34] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:08:34] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:08:35] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:08:35] PHP Stack trace:
+[17-Oct-2016 19:08:35] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:08:35] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:08:35] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:15:11] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:15:11] PHP Stack trace:
+[17-Oct-2016 19:15:11] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:15:11] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:15:11] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:15:11] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:15:11] PHP Stack trace:
+[17-Oct-2016 19:15:11] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:15:11] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:15:11] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:16:48] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:16:48] PHP Stack trace:
+[17-Oct-2016 19:16:48] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:16:48] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:16:48] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:16:48] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:16:48] PHP Stack trace:
+[17-Oct-2016 19:16:48] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:16:48] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:16:48] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:16:48] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:16:48] PHP Stack trace:
+[17-Oct-2016 19:16:48] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:16:48] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:16:48] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:16:49] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:16:49] PHP Stack trace:
+[17-Oct-2016 19:16:49] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:16:49] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:16:49] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:16:50] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:16:50] PHP Stack trace:
+[17-Oct-2016 19:16:50] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:16:50] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:16:50] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:16:51] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:16:51] PHP Stack trace:
+[17-Oct-2016 19:16:51] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:16:51] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:16:51] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:16:52] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:16:52] PHP Stack trace:
+[17-Oct-2016 19:16:52] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:16:52] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:16:52] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:16:53] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:16:53] PHP Stack trace:
+[17-Oct-2016 19:16:53] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:16:53] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:16:53] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:16:54] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:16:54] PHP Stack trace:
+[17-Oct-2016 19:16:54] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:16:54] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:16:54] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:16:55] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:16:55] PHP Stack trace:
+[17-Oct-2016 19:16:55] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:16:55] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:16:55] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:16:58] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:16:58] PHP Stack trace:
+[17-Oct-2016 19:16:58] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:16:58] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:16:58] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:16:58] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:16:58] PHP Stack trace:
+[17-Oct-2016 19:16:58] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:16:58] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:16:58] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:16:58] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:16:58] PHP Stack trace:
+[17-Oct-2016 19:16:58] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:16:58] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:16:58] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:17:00] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:17:00] PHP Stack trace:
+[17-Oct-2016 19:17:00] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:17:00] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:17:00] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:17:01] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:17:01] PHP Stack trace:
+[17-Oct-2016 19:17:01] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:17:01] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:17:01] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:17:23] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:17:23] PHP Stack trace:
+[17-Oct-2016 19:17:23] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:17:23] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:17:23] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:17:23] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:17:23] PHP Stack trace:
+[17-Oct-2016 19:17:23] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:17:23] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:17:23] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:17:25] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:17:25] PHP Stack trace:
+[17-Oct-2016 19:17:25] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:17:25] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:17:25] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:17:26] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:17:26] PHP Stack trace:
+[17-Oct-2016 19:17:26] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:17:26] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:17:26] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:17:26] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:17:26] PHP Stack trace:
+[17-Oct-2016 19:17:26] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:17:26] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:17:26] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:34:47] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:34:47] PHP Stack trace:
+[17-Oct-2016 19:34:47] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:34:47] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:34:47] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:34:47] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:34:47] PHP Stack trace:
+[17-Oct-2016 19:34:47] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:34:47] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:34:47] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:34:47] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:34:47] PHP Stack trace:
+[17-Oct-2016 19:34:47] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:34:47] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:34:47] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:34:48] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:34:48] PHP Stack trace:
+[17-Oct-2016 19:34:48] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:34:48] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:34:48] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:34:49] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:34:49] PHP Stack trace:
+[17-Oct-2016 19:34:49] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:34:49] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:34:49] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:34:50] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:34:50] PHP Stack trace:
+[17-Oct-2016 19:34:50] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:34:50] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:34:50] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:34:51] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:34:51] PHP Stack trace:
+[17-Oct-2016 19:34:51] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:34:51] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:34:51] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:34:52] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:34:52] PHP Stack trace:
+[17-Oct-2016 19:34:52] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:34:52] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:34:52] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:34:53] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:34:53] PHP Stack trace:
+[17-Oct-2016 19:34:53] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:34:53] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:34:53] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:34:54] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:34:54] PHP Stack trace:
+[17-Oct-2016 19:34:54] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:34:54] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:34:54] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:35:09] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:35:09] PHP Stack trace:
+[17-Oct-2016 19:35:09] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:35:09] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:35:09] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:35:09] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:35:09] PHP Stack trace:
+[17-Oct-2016 19:35:09] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:35:09] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:35:09] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:35:10] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:35:10] PHP Stack trace:
+[17-Oct-2016 19:35:10] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:35:10] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:35:10] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:35:10] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:35:10] PHP Stack trace:
+[17-Oct-2016 19:35:10] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:35:10] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:35:10] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:35:11] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:35:11] PHP Stack trace:
+[17-Oct-2016 19:35:11] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:35:11] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:35:11] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:35:12] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:35:12] PHP Stack trace:
+[17-Oct-2016 19:35:12] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:35:12] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:35:12] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:35:13] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:35:13] PHP Stack trace:
+[17-Oct-2016 19:35:13] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:35:13] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:35:13] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:35:14] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:35:14] PHP Stack trace:
+[17-Oct-2016 19:35:14] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:35:14] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:35:14] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:35:15] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:35:15] PHP Stack trace:
+[17-Oct-2016 19:35:15] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:35:15] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:35:15] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[17-Oct-2016 19:35:19] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[17-Oct-2016 19:35:19] PHP Stack trace:
+[17-Oct-2016 19:35:19] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[17-Oct-2016 19:35:19] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[17-Oct-2016 19:35:19] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[18-Oct-2016 04:28:59] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[18-Oct-2016 04:28:59] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[18-Oct-2016 04:28:59] PHP Stack trace:
+[18-Oct-2016 04:28:59] PHP Stack trace:
+[18-Oct-2016 04:28:59] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 04:28:59] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 04:28:59] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[18-Oct-2016 04:28:59] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[18-Oct-2016 04:28:59] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[18-Oct-2016 04:28:59] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[18-Oct-2016 04:28:59] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[18-Oct-2016 04:28:59] PHP Stack trace:
+[18-Oct-2016 04:28:59] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 04:28:59] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[18-Oct-2016 04:28:59] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[18-Oct-2016 04:28:59] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[18-Oct-2016 04:28:59] PHP Stack trace:
+[18-Oct-2016 04:28:59] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 04:28:59] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[18-Oct-2016 04:28:59] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[18-Oct-2016 04:29:00] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[18-Oct-2016 04:29:00] PHP Stack trace:
+[18-Oct-2016 04:29:00] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 04:29:00] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[18-Oct-2016 04:29:00] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[18-Oct-2016 04:29:00] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[18-Oct-2016 04:29:00] PHP Stack trace:
+[18-Oct-2016 04:29:00] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 04:29:00] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[18-Oct-2016 04:29:00] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[18-Oct-2016 04:29:01] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[18-Oct-2016 04:29:01] PHP Stack trace:
+[18-Oct-2016 04:29:01] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 04:29:01] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[18-Oct-2016 04:29:01] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[18-Oct-2016 04:29:02] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[18-Oct-2016 04:29:02] PHP Stack trace:
+[18-Oct-2016 04:29:02] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 04:29:02] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[18-Oct-2016 04:29:02] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[18-Oct-2016 04:29:02] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[18-Oct-2016 04:29:02] PHP Stack trace:
+[18-Oct-2016 04:29:02] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 04:29:02] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[18-Oct-2016 04:29:02] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[18-Oct-2016 04:29:03] PHP Parse error:  syntax error, unexpected '[' in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/TokenController.php on line 47
+[18-Oct-2016 04:29:03] PHP Stack trace:
+[18-Oct-2016 04:29:03] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 04:29:03] PHP   2. Loader::loadController() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:22
+[18-Oct-2016 04:29:03] PHP   3. Loader::loadFolder() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Loader.php:38
+[18-Oct-2016 04:34:20] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 33
+[18-Oct-2016 04:34:20] PHP Stack trace:
+[18-Oct-2016 04:34:20] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 04:34:20] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 04:34:20] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 04:34:20] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 04:34:20] PHP   5. mysql_query() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:33
+[18-Oct-2016 04:34:20] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 34
+[18-Oct-2016 04:34:20] PHP Stack trace:
+[18-Oct-2016 04:34:20] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 04:34:20] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 04:34:20] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 04:34:20] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 04:34:20] PHP   5. mysql_fetch_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:34
+[18-Oct-2016 04:34:20] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 39
+[18-Oct-2016 04:34:20] PHP Stack trace:
+[18-Oct-2016 04:34:20] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 04:34:20] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 04:34:20] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 04:34:20] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 04:34:20] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 39
+[18-Oct-2016 04:34:20] PHP Stack trace:
+[18-Oct-2016 04:34:20] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 04:34:20] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 04:34:20] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 04:34:20] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 04:34:20] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 41
+[18-Oct-2016 04:34:20] PHP Stack trace:
+[18-Oct-2016 04:34:20] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 04:34:20] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 04:34:20] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 04:34:20] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 04:34:20] PHP   5. mysql_query() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:41
+[18-Oct-2016 05:03:00] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 33
+[18-Oct-2016 05:03:00] PHP Stack trace:
+[18-Oct-2016 05:03:00] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:03:00] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:03:00] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:03:00] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:03:00] PHP   5. mysql_query() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:33
+[18-Oct-2016 05:03:00] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 34
+[18-Oct-2016 05:03:00] PHP Stack trace:
+[18-Oct-2016 05:03:00] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:03:00] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:03:00] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:03:00] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:03:00] PHP   5. mysql_fetch_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:34
+[18-Oct-2016 05:03:00] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 39
+[18-Oct-2016 05:03:00] PHP Stack trace:
+[18-Oct-2016 05:03:00] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:03:00] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:03:00] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:03:00] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:03:00] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 39
+[18-Oct-2016 05:03:00] PHP Stack trace:
+[18-Oct-2016 05:03:00] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:03:00] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:03:00] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:03:00] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:03:00] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 41
+[18-Oct-2016 05:03:00] PHP Stack trace:
+[18-Oct-2016 05:03:00] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:03:00] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:03:00] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:03:00] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:03:00] PHP   5. mysql_query() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:41
+[18-Oct-2016 05:15:18] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 33
+[18-Oct-2016 05:15:18] PHP Stack trace:
+[18-Oct-2016 05:15:18] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:15:18] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:15:18] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:15:18] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:15:18] PHP   5. mysql_query() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:33
+[18-Oct-2016 05:15:18] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 34
+[18-Oct-2016 05:15:18] PHP Stack trace:
+[18-Oct-2016 05:15:18] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:15:18] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:15:18] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:15:18] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:15:18] PHP   5. mysql_fetch_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:34
+[18-Oct-2016 05:15:18] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 39
+[18-Oct-2016 05:15:18] PHP Stack trace:
+[18-Oct-2016 05:15:18] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:15:18] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:15:18] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:15:18] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:15:18] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 39
+[18-Oct-2016 05:15:18] PHP Stack trace:
+[18-Oct-2016 05:15:18] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:15:18] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:15:18] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:15:18] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:15:18] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 41
+[18-Oct-2016 05:15:18] PHP Stack trace:
+[18-Oct-2016 05:15:18] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:15:18] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:15:18] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:15:18] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:15:18] PHP   5. mysql_query() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:41
+[18-Oct-2016 05:16:21] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 33
+[18-Oct-2016 05:16:21] PHP Stack trace:
+[18-Oct-2016 05:16:21] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:16:21] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:16:21] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:21] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:21] PHP   5. mysql_query() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:33
+[18-Oct-2016 05:16:21] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 34
+[18-Oct-2016 05:16:21] PHP Stack trace:
+[18-Oct-2016 05:16:21] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:16:21] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:16:21] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:21] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:21] PHP   5. mysql_fetch_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:34
+[18-Oct-2016 05:16:21] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 39
+[18-Oct-2016 05:16:21] PHP Stack trace:
+[18-Oct-2016 05:16:21] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:16:21] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:16:21] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:21] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:21] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 39
+[18-Oct-2016 05:16:21] PHP Stack trace:
+[18-Oct-2016 05:16:21] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:16:21] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:16:21] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:21] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:21] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 41
+[18-Oct-2016 05:16:21] PHP Stack trace:
+[18-Oct-2016 05:16:21] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:16:21] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:16:21] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:21] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:21] PHP   5. mysql_query() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:41
+[18-Oct-2016 05:16:44] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 33
+[18-Oct-2016 05:16:44] PHP Stack trace:
+[18-Oct-2016 05:16:44] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:16:44] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:16:44] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:44] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:44] PHP   5. mysql_query() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:33
+[18-Oct-2016 05:16:44] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 34
+[18-Oct-2016 05:16:44] PHP Stack trace:
+[18-Oct-2016 05:16:44] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:16:44] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:16:44] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:44] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:44] PHP   5. mysql_fetch_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:34
+[18-Oct-2016 05:16:44] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 39
+[18-Oct-2016 05:16:44] PHP Stack trace:
+[18-Oct-2016 05:16:44] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:16:44] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:16:44] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:44] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:44] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 39
+[18-Oct-2016 05:16:44] PHP Stack trace:
+[18-Oct-2016 05:16:44] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:16:44] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:16:44] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:44] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:44] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 41
+[18-Oct-2016 05:16:44] PHP Stack trace:
+[18-Oct-2016 05:16:44] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 05:16:44] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 05:16:44] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:44] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 05:16:44] PHP   5. mysql_query() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:41
+[18-Oct-2016 06:45:19] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 33
+[18-Oct-2016 06:45:19] PHP Stack trace:
+[18-Oct-2016 06:45:19] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 06:45:19] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 06:45:19] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:45:19] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:45:19] PHP   5. mysql_query() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:33
+[18-Oct-2016 06:45:19] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 34
+[18-Oct-2016 06:45:19] PHP Stack trace:
+[18-Oct-2016 06:45:19] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 06:45:19] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 06:45:19] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:45:19] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:45:19] PHP   5. mysql_fetch_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:34
+[18-Oct-2016 06:45:19] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 39
+[18-Oct-2016 06:45:19] PHP Stack trace:
+[18-Oct-2016 06:45:19] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 06:45:19] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 06:45:19] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:45:19] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:45:19] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 39
+[18-Oct-2016 06:45:19] PHP Stack trace:
+[18-Oct-2016 06:45:19] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 06:45:19] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 06:45:19] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:45:19] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:45:19] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 41
+[18-Oct-2016 06:45:19] PHP Stack trace:
+[18-Oct-2016 06:45:19] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 06:45:19] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 06:45:19] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:45:19] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:45:19] PHP   5. mysql_query() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:41
+[18-Oct-2016 06:47:15] PHP Notice:  Undefined index: id in /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php on line 17
+[18-Oct-2016 06:47:15] PHP Stack trace:
+[18-Oct-2016 06:47:15] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 06:47:15] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 06:47:16] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 33
+[18-Oct-2016 06:47:16] PHP Stack trace:
+[18-Oct-2016 06:47:16] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 06:47:16] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 06:47:16] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:47:16] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:47:16] PHP   5. mysql_query() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:33
+[18-Oct-2016 06:47:16] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 34
+[18-Oct-2016 06:47:16] PHP Stack trace:
+[18-Oct-2016 06:47:16] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 06:47:16] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 06:47:16] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:47:16] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:47:16] PHP   5. mysql_fetch_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:34
+[18-Oct-2016 06:49:14] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 33
+[18-Oct-2016 06:49:14] PHP Stack trace:
+[18-Oct-2016 06:49:14] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 06:49:14] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 06:49:14] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:49:14] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:49:14] PHP   5. mysql_query() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:33
+[18-Oct-2016 06:49:14] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 34
+[18-Oct-2016 06:49:14] PHP Stack trace:
+[18-Oct-2016 06:49:14] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 06:49:14] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 06:49:14] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:49:14] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:49:14] PHP   5. mysql_fetch_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:34
+[18-Oct-2016 06:49:14] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 39
+[18-Oct-2016 06:49:14] PHP Stack trace:
+[18-Oct-2016 06:49:14] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 06:49:14] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 06:49:14] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:49:14] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:49:14] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 39
+[18-Oct-2016 06:49:14] PHP Stack trace:
+[18-Oct-2016 06:49:14] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 06:49:14] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 06:49:14] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:49:14] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:49:14] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 41
+[18-Oct-2016 06:49:14] PHP Stack trace:
+[18-Oct-2016 06:49:14] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 06:49:14] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 06:49:14] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:49:14] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 06:49:14] PHP   5. mysql_query() /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php:41
+[18-Oct-2016 07:07:24] PHP Notice:  Undefined offset: 0 in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 37
+[18-Oct-2016 07:07:24] PHP Stack trace:
+[18-Oct-2016 07:07:24] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:07:24] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:07:24] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:07:24] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:07:24] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 07:07:24] PHP Stack trace:
+[18-Oct-2016 07:07:24] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:07:24] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:07:24] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:07:24] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:07:24] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 07:07:24] PHP Stack trace:
+[18-Oct-2016 07:07:24] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:07:24] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:07:24] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:07:24] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:08:07] PHP Notice:  Undefined offset: 0 in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 37
+[18-Oct-2016 07:08:07] PHP Stack trace:
+[18-Oct-2016 07:08:07] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:08:07] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:08:07] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:08:07] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:08:07] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 07:08:07] PHP Stack trace:
+[18-Oct-2016 07:08:07] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:08:07] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:08:07] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:08:07] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:08:07] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 07:08:07] PHP Stack trace:
+[18-Oct-2016 07:08:07] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:08:07] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:08:07] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:08:07] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:08:15] PHP Notice:  Undefined offset: 0 in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 37
+[18-Oct-2016 07:08:15] PHP Stack trace:
+[18-Oct-2016 07:08:15] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:08:15] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:08:15] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:08:15] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:08:15] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 07:08:15] PHP Stack trace:
+[18-Oct-2016 07:08:15] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:08:15] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:08:15] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:08:15] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:08:15] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 07:08:15] PHP Stack trace:
+[18-Oct-2016 07:08:15] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:08:15] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:08:15] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:08:15] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:22:03] PHP Notice:  Undefined offset: 0 in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 37
+[18-Oct-2016 07:22:03] PHP Stack trace:
+[18-Oct-2016 07:22:03] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:22:03] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:22:03] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:22:03] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:22:03] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 07:22:03] PHP Stack trace:
+[18-Oct-2016 07:22:03] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:22:03] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:22:03] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:22:03] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:22:03] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 07:22:03] PHP Stack trace:
+[18-Oct-2016 07:22:03] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:22:03] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:22:03] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:22:03] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:33:47] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 07:33:47] PHP Stack trace:
+[18-Oct-2016 07:33:47] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:33:47] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:33:47] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:33:47] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:33:47] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 07:33:47] PHP Stack trace:
+[18-Oct-2016 07:33:47] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:33:47] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:33:47] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:33:47] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:34:26] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 07:34:26] PHP Stack trace:
+[18-Oct-2016 07:34:26] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:34:26] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:34:26] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:34:26] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:34:26] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 07:34:26] PHP Stack trace:
+[18-Oct-2016 07:34:26] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:34:26] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:34:26] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:34:26] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:55:50] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 07:55:50] PHP Stack trace:
+[18-Oct-2016 07:55:50] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:55:50] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:55:50] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:55:50] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:55:50] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 07:55:50] PHP Stack trace:
+[18-Oct-2016 07:55:50] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:55:50] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:55:50] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:55:50] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:58:35] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 07:58:35] PHP Stack trace:
+[18-Oct-2016 07:58:35] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:58:35] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:58:35] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:58:35] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:58:35] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 07:58:35] PHP Stack trace:
+[18-Oct-2016 07:58:35] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 07:58:35] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 07:58:35] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 07:58:35] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 08:17:29] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 08:17:29] PHP Stack trace:
+[18-Oct-2016 08:17:29] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 08:17:29] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 08:17:29] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 08:17:29] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 08:17:29] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 08:17:29] PHP Stack trace:
+[18-Oct-2016 08:17:29] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 08:17:29] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 08:17:29] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 08:17:29] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 09:45:55] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 09:45:55] PHP Stack trace:
+[18-Oct-2016 09:45:55] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 09:45:55] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 09:45:55] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 09:45:55] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 09:45:55] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 09:45:55] PHP Stack trace:
+[18-Oct-2016 09:45:55] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 09:45:55] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 09:45:55] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 09:45:55] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 09:58:32] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 09:58:32] PHP Stack trace:
+[18-Oct-2016 09:58:32] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 09:58:32] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 09:58:32] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 09:58:32] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 09:58:32] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 09:58:32] PHP Stack trace:
+[18-Oct-2016 09:58:32] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 09:58:32] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 09:58:32] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 09:58:32] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 09:58:55] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 09:58:55] PHP Stack trace:
+[18-Oct-2016 09:58:55] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 09:58:55] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 09:58:55] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 09:58:55] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 09:58:55] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 09:58:55] PHP Stack trace:
+[18-Oct-2016 09:58:55] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 09:58:55] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 09:58:55] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 09:58:55] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:00:45] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 10:00:45] PHP Stack trace:
+[18-Oct-2016 10:00:45] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 10:00:45] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 10:00:45] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:00:45] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:00:45] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 10:00:45] PHP Stack trace:
+[18-Oct-2016 10:00:45] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 10:00:45] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 10:00:45] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:00:45] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:00:57] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 10:00:57] PHP Stack trace:
+[18-Oct-2016 10:00:57] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 10:00:57] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 10:00:57] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:00:57] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:00:57] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 10:00:57] PHP Stack trace:
+[18-Oct-2016 10:00:57] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 10:00:57] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 10:00:57] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:00:57] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:05:02] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 10:05:02] PHP Stack trace:
+[18-Oct-2016 10:05:02] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 10:05:02] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 10:05:02] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:05:02] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:05:02] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 10:05:02] PHP Stack trace:
+[18-Oct-2016 10:05:02] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 10:05:02] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 10:05:02] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:05:02] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:24:19] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 10:24:19] PHP Stack trace:
+[18-Oct-2016 10:24:19] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 10:24:19] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 10:24:19] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:24:19] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:24:19] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 10:24:19] PHP Stack trace:
+[18-Oct-2016 10:24:19] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 10:24:19] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 10:24:19] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:24:19] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:24:53] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 10:24:53] PHP Stack trace:
+[18-Oct-2016 10:24:53] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 10:24:53] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 10:24:53] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:24:53] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:24:53] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 10:24:53] PHP Stack trace:
+[18-Oct-2016 10:24:53] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 10:24:53] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 10:24:53] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 10:24:53] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 18:20:59] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 18:20:59] PHP Stack trace:
+[18-Oct-2016 18:20:59] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 18:20:59] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 18:20:59] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 18:20:59] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 18:20:59] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 18:20:59] PHP Stack trace:
+[18-Oct-2016 18:20:59] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 18:20:59] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 18:20:59] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 18:20:59] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 18:22:22] PHP Notice:  Undefined property: stdClass::$country in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 18:22:22] PHP Stack trace:
+[18-Oct-2016 18:22:22] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 18:22:22] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 18:22:22] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 18:22:22] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 18:22:22] PHP Notice:  Undefined property: stdClass::$city in /home/wovodat/public_html/WOVOdat/eruption2/api/Controller/UserController.php on line 42
+[18-Oct-2016 18:22:22] PHP Stack trace:
+[18-Oct-2016 18:22:22] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:0
+[18-Oct-2016 18:22:22] PHP   2. Routing::route() /home/wovodat/public_html/WOVOdat/eruption2/api/index.php:27
+[18-Oct-2016 18:22:22] PHP   3. call_user_func_array() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20
+[18-Oct-2016 18:22:22] PHP   4. UserController::addUser() /home/wovodat/public_html/WOVOdat/eruption2/api/Include/Routing.php:20

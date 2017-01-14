@@ -1,27 +1,31 @@
 <?php
-function showUpdateTableList($vol,$obs){
+function showUpdateTableList($vol,$obs,$type,$rtype,$status){
 
 $i="";
 $j="";
 $t="";
 $r="";
 
+/*
 $status=array('Anthropology','Ar/Ar','Dendrochronology','Fumarolic','Historical','Holocene','Holocene?','Hot Springs','Hydration Rind','Hydrophonic','Ice Core','Lichenometry','Magnetism','Pleistocene','Potassium-Argon','Radiocarbon','Seismicity','Surface Exposure','Tephrochronology','Thermoluminescence','Uncertain','Uranium-series','Varve Count','Unknown');
 
 $type=array('Caldera','Cinder cone','Complex volcano','Compound volcano','Cone','Crater rows','Explosion craters','Fissure vent','Hydrothermal field','Lava cone','Lava dome','Maar','Pumice cone','Pyroclastic cone','Pyroclastic shield','Scoria cone','Shield volcano','Somma volcano','Stratovolcano','Subglacial volcano','Submarine volcano','Tuff cone','Tuff ring','Unknown','Volcanic complex','Volcanic field');
 
 $rtype=array('Andesite/Basaltic Andesite','Basalt','Basalt/Picro-Basalt','Dacite','Foidite','Phonolite','Phonotephrite','Phono-tephrite/Tephri-phonolite',' Trachyte/Trachyandesite','Trachybasalt/Tephrite Basanite','Trachyandesite/Basaltic trachy-andesite','Trachyandesite','Trachyte','Rhyolite','Unknown');
+*/
 
 echo <<<HTMLBLOCK
-		<!-- Content -->
 
-		<div id="content" style="overflow:auto;">
 		<!-- Page content -->
-		
-		<h2 style="text-align:center;">Upload form for Volcano Information.  Table : vd_inf </h2> <br/>
+		<div class="form">
+			
+		<h3>Upload online form for volcano information (Table Name: vd_inf) </h3>
 
-		<p class="formFont">The fields preceded by an asterisk (*) are required.</p> <br/>
-		<!-- Form -->
+		<span> (All fields * are required) </span>
+	
+		<p class="redtext"><?php if ($error) {print "Registration unsuccessful! Please correct the fields in red:";} ?></p>	
+		
+
 		<form method="post" action="insertSwitch.php" name="form_vd_inf" id="form_vd_inf">
 			
 			<table class="formtable" id="formtable">
@@ -29,7 +33,7 @@ echo <<<HTMLBLOCK
 					<td><span class="formFont">*Volcano Name:</span></td>
 					<td> 
 					
-						<select id="vd_id" name="vd_id" >
+						<select id="vd_id" name="vd_id" style='width:200px;color:black;'>
 							<option value="">Select Volcano</option>
 HTMLBLOCK;
 							for($i=0; $i<sizeof($vol); $i++){
@@ -48,7 +52,7 @@ echo <<<HTMLBLOCK
 				<tr>
 					<td><span class="formFont">*Volcano Status:</span></td>
 					<td>
-						<select id="vd_inf_status" name="vd_inf_status" >
+						<select id="vd_inf_status" name="vd_inf_status" style='width:200px;color:black;'>
 							<option value="">Select Volcano Status</option>
 HTMLBLOCK;
 	
@@ -87,7 +91,7 @@ echo <<<HTMLBLOCK
 				<tr>
 					<td><span class="formFont">*Volcano Type:</span></td>
 					<td>
-						<select id="vd_inf_type" name="vd_inf_type" >
+						<select id="vd_inf_type" name="vd_inf_type" style='width:200px;color:black;'>
 							<option value="">Select Volcano Type</option>
 HTMLBLOCK;
 							for($t=0; $t<sizeof($type); $t++){
@@ -97,7 +101,7 @@ echo <<<HTMLBLOCK
 						</select>
 					</td>
 				</tr>
-<!--
+
 				<tr>
 					<td><span class="formFont">Country:</span> </td>
 					<td>
@@ -110,7 +114,7 @@ echo <<<HTMLBLOCK
 						<input type="text" maxlength="30" id="vd_inf_subreg" name="vd_inf_subreg" value="" />
 					</td>
 				</tr>	
--->				
+			
 				<tr>
 					<td><span class="formFont">Geographic Location:</span></td>
 					<td>
@@ -120,7 +124,7 @@ echo <<<HTMLBLOCK
 				<tr>
 					<td><span class="formFont">*Dominant Rock Type:</span></td>
 					<td>
-						<select id="vd_inf_rtype" name="vd_inf_rtype" >
+						<select id="vd_inf_rtype" name="vd_inf_rtype" style='width:200px;color:black;'>
 							<option value="">Select Rock Type</option>
 HTMLBLOCK;
 		
@@ -195,7 +199,7 @@ echo <<<HTMLBLOCK
 				<tr>
 					<td><span class="formFont">*Institution/Observatory:</span></td>
 					<td>
-						<select id="cc_id" name="cc_id" >
+						<select id="cc_id" name="cc_id" style='width:200px;color:black;'>
 							<option value="">Select Institution/Obs.</option>
 HTMLBLOCK;
 							for($i=0; $i<sizeof($obs); $i++){
@@ -215,11 +219,11 @@ echo <<<HTMLBLOCK
 		
 			</table>
 			
-			<div style="padding:10px 130px;" >
+			<div style="padding:20px 200px;" >
 
-			<input type="hidden" name="cc_id_load" value="{$_SESSION['login']['cc_id']}" />
-			<input type="button" id="back" name="back" value="Back to previous page" />
-			<input type="submit" name="confirm" value="Confirm" />
+				<input type="hidden" name="cc_id_load" value="{$_SESSION['login']['cc_id']}" />
+				<input type="button" id="back" name="back" value="Back to previous page" />
+				<input type="submit" name="confirm" value="Confirm" />
 			</div>
 		</form>  
 		 

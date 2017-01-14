@@ -1,28 +1,11 @@
 <?php
 
+function showCommonHeader (){
 
-function showCommonHeader(){
-echo <<< HTMLBLOCK
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="../../css/styles_beta.css" rel="stylesheet">
-	<link href="../../gif/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
+	include "php/include/header.php";
 	
-</head>
-<body>
-	<div id="wrapborder">
-		<div id="wrap">
-HTMLBLOCK;
-
-include "php/include/header_beta.php"; 
 }
-
+		
 function showCssExternalJs(){
 echo <<< HTMLBLOCK
 	<script language="javascript" src="/js/jquery-1.4.2.min.js"></script>
@@ -40,18 +23,30 @@ echo <<< HTMLBLOCK
 	</style>
 HTMLBLOCK;
 
+	include 'php/include/menu.php'; 
+	
+	echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > <a href='http://{$_SERVER['SERVER_NAME']}/populate/home.php'>Submit Data</a> > Online Form </div>";
+
+	echo"</div>";
+	
+	echo"<div class='body'>";
+		echo"<div class='widecontent'>";
+
 }
 
 function showCommonFooter(){
+	
+		echo"</div>";
+	echo"</div>";
 
-		echo "<div>";
-			include 'php/include/footer_main_beta.php';
-		echo "</div>";
-		
-	echo "</div>";
+	echo"<div class='footer'>";
+		include "php/include/footer.php";
+	echo"</div>";
+	
+echo"</div>";
+echo"</div>";  
 echo"</body>";
-echo"</html>";
-
+echo"</html>";  
 }
 
 
@@ -84,13 +79,13 @@ echo <<< HTMLBLOCK
 		<!-- Page content -->
 		
 			<h2>Error on Uploading form</h2>
-			<br/>
-			<ul>
+
+			<p>
 				Unexcepted error occured, 
 				please try again by clicking <a href="http://{$_SERVER['SERVER_NAME']}/populate/home_populate.php"> here </a> to go back to online form page.
 				<br/>
 				If you contiuously encounter this problem, please click <a href="http://{$_SERVER['SERVER_NAME']}/populate/contact_us_form.php"> here </a> to send email to our wovodat team. 
-			</ul>
+			</p>
 		</div>  <!-- end page content div -->
 HTMLBLOCK;
 }

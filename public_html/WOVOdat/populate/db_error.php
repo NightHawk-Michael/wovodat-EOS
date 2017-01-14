@@ -1,7 +1,6 @@
 <?php
-
-// Start session
-session_start();
+if(!isset($_SESSION))
+	session_start();
 
 // Get root url
 require_once "php/include/get_root.php";
@@ -38,7 +37,7 @@ else {
 }
 
 // Report error to WOVOdat team
-/*
+
 // Include PEAR Mail package
 require_once "Mail-1.2.0/Mail.php";
 
@@ -47,8 +46,7 @@ $mail=Mail::factory("mail");
 
 // Headers and body
 $from="system@wovodat.org";
-//$to="Alexandre Baguet <abaguet@ntu.edu.sg>, Purbo <rdpurbo@ntu.edu.sg>";
-$to="Purbo <rdpurbo@ntu.edu.sg>";
+$to ="wovodat@wovodat.org";
 $subject="WOVOdat system - Database error report";
 $headers=array("From"=>$from, "Subject"=>$subject);
 $body="Hello WOVOdat administrator,\n\n".
@@ -69,44 +67,34 @@ $body.="Date and time: ".date("Y-m-d H:i:s", (time()-date("Z")))." (UTC)\n\n".
 
 // Send email
 $mail->send($to, $headers, $body);
-*/
+
+
+include "php/include/header.php";  
+
+include 'php/include/menu.php'; 
+
+
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > 
+<a href='http://{$_SERVER['SERVER_NAME']}/populate/index.php'>Submit Data</a> > Upload WOVOml File </div>";
+
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)I</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/gif/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
+</div>  <!-- header-menu -->
 
-	<div id="wrapborder">
-	<div id="wrap">
-		<?php include 'php/include/header_beta.php'; ?>
-		<!-- Content -->
-		<div id="content">	
-			<div id="contentl"><br>
-				<!-- Page content -->
-				<h1>Database error <?php print $error_code; ?></h1>
-				<p>An error occurred during this operation. It was due to some problems with the database. Please try again later. We thank you to <a href="#">report this problem to the WOVOdat team</a> if this happens repeatedly.</p>
-				<p><?php print $link; ?></p>
+<div class="body">
+	<div class="widecontent">
+			
+		<!-- Page content -->
+		<h3>Database error <?php print $error_code; ?></h3>
+		<p>An error occurred during this operation. It was due to some problems with the database. Please try again later. We thank you to <a href="contact_us_form.php">report this problem to the WOVOdat team</a> if this happens repeatedly.</p>
+		<p><?php print $link; ?></p>
 
-			</div>
-			<div id="contentr">
-			right
-			</div>
-		</div>
-		
-		<!-- Footer -->
-		<div id="footer">
-			<?php include 'php/include/footer_beta.php'; ?>
-		</div>
-		
 	</div>
-</body>
-</html>
+</div>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+	
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->

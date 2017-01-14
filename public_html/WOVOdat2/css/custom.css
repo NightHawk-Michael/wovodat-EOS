@@ -1,0 +1,176 @@
+.btn ,
+.btn-primary,
+.btn-primary:focus {
+	background-color:#BD2031;
+}
+.btn-primary:hover,
+.btn-primary:active:focus,
+.btn-primary:active:hover {
+	background-color:#BD2031;
+}
+
+
+.hidden_data {
+    display:inline-block;
+}
+u {
+    font-size: 1.1em;
+    display: block;
+}
+form {
+    margin-left:5px;
+}
+.wrapper {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.ui-datepicker {
+    width:230px;
+    font-size: 0.9em;
+}
+.validation_alert {
+
+    font-size: 0.8em;
+    font-style: italic;
+    color:red;
+
+}
+
+body h2:first-of-type {
+    text-align: center;
+}
+input[type="submit"] {
+    margin-left: 40%;
+}
+
+.data-wrapper {
+    font-size: 15px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.data-header {
+    display: inline-block;
+    margin-right: 25px;
+    width: 175px;
+    font-weight: bold;
+}
+.selected_list {
+    display: inline-block;
+    margin-left: 20px;
+}
+.vei-input {
+    display: inline-block;
+    width: 100px;
+}
+.eruption-time-text {
+    display: inline-block;
+    font-size: 0.8em;
+}
+.eruption-time-input {
+    width: 180px;
+    display: inline-block;
+}
+button span {
+    font-size: 13px;
+}
+.monitoring_data {
+    border: 2px solid;
+    border-radius: 25px;
+    margin-left: 30px;
+    margin-right: 120px;
+    margin-top: 20px;
+    overflow:hidden;
+}
+.seismic {
+    float: left;
+    margin-left: 50px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 25%;
+}
+.deformation {
+    float: left;
+    margin-left: 50px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 25%;
+}
+.field {
+    float: left;
+    margin-left: 50px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 25%;
+}
+.gas {
+    float: left;
+    margin-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 25%;
+}
+.hydrologic {
+    float: left;
+    margin-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 25%;
+}
+.thermal {
+    float: left;
+    margin-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 25%;
+}
+.meteo {
+    float: left;
+    margin-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 25%;
+}
+.innerData {
+    margin-left: 70px;
+}
+
+p#placeHolder {
+    display: block;
+}
+img#loadingGif {
+    visibility: hidden;
+    position: absolute;
+    left: 50%;
+    top: 80%;
+    margin-left: -32px; /* -1 * image width / 2 */
+    margin-top: -32px; /* -1 * image height / 2 */
+}
+
+.btn .btn-primary {
+    background-color: #ff0000;
+}
+
+.dataType {
+
+}
+
+.range {
+
+}
+.selectOpt {
+    padding: 20px 0px 20px 0px;
+}
+.selectOptNoRange {
+    padding: 20px 0px 20px 0px;
+}
+.wowSpecies {
+
+}
+
+#thresholdWithSpe {
+    display: none;
+}
+
+.test {
+
+}

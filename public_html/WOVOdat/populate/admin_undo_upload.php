@@ -14,8 +14,9 @@ require_once("php/include/login_check.php");
 // Get root url
 require_once "php/include/get_root.php";
 
+
 // Check that user is administrator (cc_id=3 => Alex, cc_id=200 => Purbo)
-if ($_SESSION['login']['cc_id']!=3 && $_SESSION['login']['cc_id']!=200) {
+if ($_SESSION['login']['cc_id']!=269 && $_SESSION['login']['cc_id']!=199 && $_SESSION['login']['cc_id']!=359) {
 	// Redirect to home page
 	header('Location: '.$url_root.'home.php');
 	exit();
@@ -97,99 +98,81 @@ $_SESSION['undo_upload']['files']=$files;
 $_SESSION['undo_upload']['loaddates']=$loaddates;
 $_SESSION['undo_upload']['loader_ids']=$loader_ids;
 
+
+include 'php/include/header.php'; 
+
+include 'php/include/menu.php'; 
+
+echo "<div id='breadcrumbs'> Undo upload (Direct Access) </div>";
+
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/js2/navig.css" rel="stylesheet">
-	<link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
-	<script language="JavaScript" src="/js2/menu_array.js" type="text/javascript"></script>
-	<script language="JavaScript" src="/js2/mmenu.js" type="text/javascript"></script>
 
-	<div id="wrapborder">
-	<div id="wrap">
-		<div id="headershadow">
-			<?php include 'php/include/header_beta.php'; ?>
-		</div>
+</div>  <!-- header-menu -->  
 
-		<!-- Content -->
-		<div id="content">	
-			<div id="content_ref">
+	<div class="body">
+
+		<div class="widecontent">
+		
+			<!-- Page content -->
+			<h1>Undo upload</h1>
 				
-		<!-- Top of the page -->
-		<div id="top">
-			<!-- Aligned to the right: You are logged in as username (FName LName | Obs) | Logout -->
-			<p>You are logged in as <b><?php print $uname." (".$user_name.")"; ?></b> | <a href="logout.php">Logout</a></p>
+				<?php
+
+				if ($num_files==0) {
+					echo "<p>You did not upload any file in the last $limitday days. <a href=\"home.php\">Go back to home page</a></p>";
+					
+					
+				}else {
+
+				?>		
+				
+					<p>Select file for which you want to undo upload:</p>
+						<form method="post" action="admin_undo_upload_confirm.php" name="select_users">
+							<table id="select_users">
+								<tr>
+									<th></th>
+									<th>File name</th>
+									<th>Upload date</th>
+									<th>Loader ID</th>
+								</tr>
+					<?php
+
+						// For each file
+						for ($i=0; $i<$num_files; $i++) {
+							if ($i==0) {
+								print "\t\t\t\t<tr>\n".
+								"\t\t\t\t\t<td><input type=\"radio\" checked=\"true\" name=\"file\" value=\"".$ids[0]."\" /></td>\n".
+								"\t\t\t\t\t<td>".$files[0]."</td>\n".
+								"\t\t\t\t\t<td>".$loaddates[0]."</td>\n".
+								"\t\t\t\t\t<td>".$loader_ids[0]."</td>\n".
+								"\t\t\t\t</tr>\n";
+							}
+							else {
+								print "\t\t\t\t<tr>\n".
+								"\t\t\t\t\t<td><input type=\"radio\" name=\"file\" value=\"".$ids[$i]."\" /></td>\n".
+								"\t\t\t\t\t<td>".$files[$i]."</td>\n".
+								"\t\t\t\t\t<td>".$loaddates[$i]."</td>\n".
+								"\t\t\t\t\t<td>".$loader_ids[$i]."</td>\n".
+								"\t\t\t\t</tr>\n";
+							}
+						}
+					}	
+					?>
+				</table>
+				<br />
+				<input type="submit" name="undo_upload_back" value="Back" />
+				<input type="submit" name="undo_upload_ok" value="OK" />
+			</form>
+
 		</div>
-		
-		<!-- Page content -->
-		<h1>Undo upload</h1>
-<?php
-
-if ($num_files==0) {
-	print "\t\t<p>You did not upload any file in the last 7 days.</p>\n".
-	"\t\t<p><a href=\"home.php\">Go back to home page</a><p>\n".
-	"\t</body>\n".
-	"</html>";
-	exit();
-}
-
-?>
-		<p>Select file for which you want to undo upload:</p>
-		<form method="post" action="admin_undo_upload_confirm.php" name="select_users">
-			<table id="select_users">
-				<tr>
-					<th></th>
-					<th>File name</th>
-					<th>Upload date</th>
-					<th>Loader ID</th>
-				</tr>
-<?php
-
-// For each file
-for ($i=0; $i<$num_files; $i++) {
-	if ($i==0) {
-		print "\t\t\t\t<tr>\n".
-		"\t\t\t\t\t<td><input type=\"radio\" checked=\"true\" name=\"file\" value=\"".$ids[0]."\" /></td>\n".
-		"\t\t\t\t\t<td>".$files[0]."</td>\n".
-		"\t\t\t\t\t<td>".$loaddates[0]."</td>\n".
-		"\t\t\t\t\t<td>".$loader_ids[0]."</td>\n".
-		"\t\t\t\t</tr>\n";
-	}
-	else {
-		print "\t\t\t\t<tr>\n".
-		"\t\t\t\t\t<td><input type=\"radio\" name=\"file\" value=\"".$ids[$i]."\" /></td>\n".
-		"\t\t\t\t\t<td>".$files[$i]."</td>\n".
-		"\t\t\t\t\t<td>".$loaddates[$i]."</td>\n".
-		"\t\t\t\t\t<td>".$loader_ids[$i]."</td>\n".
-		"\t\t\t\t</tr>\n";
-	}
-}
-
-?>
-			</table>
-			<br />
-			<input type="submit" name="undo_upload_back" value="Back" />
-			<input type="submit" name="undo_upload_ok" value="OK" />
-		</form>
-
-			</div>
-		</div>
-		
-		<!-- Footer -->
-		<div id="footer">
-			<?php include 'php/include/footer_beta.php'; ?>
-		</div>
-		
 	</div>
-</body>
-</html>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->	

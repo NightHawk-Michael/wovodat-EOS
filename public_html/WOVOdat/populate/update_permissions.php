@@ -25,35 +25,35 @@ if (!isset($_POST['manage_permissions_ok'])) {
 // Get jj_concon_id
 $jj_concon_id=$_SESSION['mng_perm']['jj_concon_id'];
 
-
-
 // If there was no existing permission in the database
 if ($jj_concon_id==0) {
-	
 	// Get posted information
 	$granting_user_id=$_POST['granting_user_id'];
 	$granted_user_id=$_POST['granted_user_id'];
-	
-	if(isset($_POST['upload']))
+	if (isset($_POST['upload'])) {
 		$upload=1;
-	else
-		$upload="0";           // Nang updated on 28-Feb-2013
-		 
-	if(isset($_POST['update']))
+	}
+	else {
+		$upload="0";
+	}
+	if (isset($_POST['update'])) {
 		$update=1;
-	else
-		$update="0";	      // Nang updated on 28-Feb-2013
-		
-	if(isset($_POST['admin']))
-		$admin=1;
-	else
-		$admin="0";	          // Nang updated on 28-Feb-2013
-
-	if(isset($_POST['view']))
+	}
+	else {
+		$update="0";
+	}
+	if (isset($_POST['view'])) {
 		$view=1;
-	else
-		$view="0";	         // Nang updated on 28-Feb-2013
-		
+	}
+	else {
+		$view="0";
+	}
+	if (isset($_POST['admin'])) {
+		$admin=1;
+	}
+	else {
+		$admin="0";
+	}
 	
 	// Get current time
 	$current_time=date("Y-m-d H:i:s");
@@ -61,18 +61,14 @@ if ($jj_concon_id==0) {
 	// Get loader ID
 	$cc_id_load=$_SESSION['login']['cc_id'];
 	
-	
-
 	// Insert values into jj_concon (C13. Contact to contact permissions) table
 	$insert_table_name="jj_concon";
 	$insert_field_name=array();
 	$insert_field_value=array();
 	$insert_field_name[0]="cc_id";
 	$insert_field_value[0]=$granting_user_id;
-	
 	$insert_field_name[1]="cc_id_granted";
 	$insert_field_value[1]=$granted_user_id;
-	
 	$insert_field_name[2]="jj_concon_view";
 	$insert_field_value[2]=$view;
 	$insert_field_name[3]="jj_concon_upload";
@@ -87,8 +83,6 @@ if ($jj_concon_id==0) {
 	$insert_field_value[7]=$cc_id_load;
 	$insert_id=0;
 	$errors="";
-
-	
 	if (!db_insert($insert_table_name, $insert_field_name, $insert_field_value, FALSE, $insert_id, $errors)) {
 		// Database error
 		switch ($errors) {
@@ -125,7 +119,6 @@ else {
 	else {
 		$update=0;
 	}
-	
 	if (isset($_POST['view'])) {
 		$view=1;
 	}

@@ -142,7 +142,7 @@ label.error {font-size:12px; display:block; float: none; color: red;}
 	});
 	</script>
 
-<div style="padding:5px 0px 0px 5px;">
+<div style="padding:0px 0px 0px 5px;">
 <h2>Conversion of Eruption data</h2>
 <blockquote>Input: CSV file of eruption data. The data must follow the WOVOdat1.1 standard format</blockquote>
 

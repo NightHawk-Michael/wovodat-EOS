@@ -1,5 +1,9 @@
 <?php           
 include 'php/include/db_connect.php';
+//include 'db_connect_view.php';	
+
+//["feature","rock","edPhase","sd_evn","sd_evs","sd_ivl","sd_trm","gd","gd_plu","gd_sol","hd"];
+
 
  
 //get Volcano Feature Type
@@ -33,6 +37,22 @@ function getRockType(){
 	return $enum_fields;
 }
 
+//get Volcano Info Status
+function getVolInfStatus() {
+
+	global $link;
+			
+	$sql=" SHOW COLUMNS FROM vd_inf LIKE 'vd_inf_status'";
+	
+	$result = mysql_query($sql, $link);
+	$row = mysql_fetch_array($result,MYSQL_NUM );
+	$regex = "/'(.*?)'/";
+	preg_match_all( $regex , $row[1], $enum_array );
+	$enum_fields = $enum_array[1];
+	return $enum_fields;
+}
+
+
 //get Eruption Phase Type
 function getedPhaseType(){
 	global $link;
@@ -47,6 +67,7 @@ function getedPhaseType(){
 	$enum_fields = $enum_array[1];
 	return $enum_fields;
 }
+
 
 //get Eruption Phase Type - use for sd_evn, sd_evs, sd_ivl
 function geteqType(){

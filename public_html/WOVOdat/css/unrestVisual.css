@@ -1,0 +1,602 @@
+/*
+CSS file for V5 & V6
+*/          
+
+.loadingPanel{
+    position:fixed;
+    height:14px;
+    width: 80px;
+    top: 5px;
+    left:47%;
+    z-index:100;
+    border: solid 1px #3A2680;
+    color:white;
+    padding:3px;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center; 
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    /* IE10 Consumer Preview */ 
+    background-image: -ms-linear-gradient(bottom, #B3B3FF 0%, #071FF5 100%);
+
+    /* Mozilla Firefox */ 
+    background-image: -moz-linear-gradient(bottom, #B3B3FF 0%, #071FF5 100%);
+
+    /* Opera */ 
+    background-image: -o-linear-gradient(bottom, #B3B3FF 0%, #071FF5 100%);
+
+    /* Webkit (Safari/Chrome 10) */ 
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #B3B3FF), color-stop(1, #071FF5));
+
+    /* Webkit (Chrome 11+) */ 
+    background-image: -webkit-linear-gradient(bottom, #B3B3FF 0%, #071FF5 100%);
+
+    /* W3C Markup, IE10 Release Preview */ 
+    background-image: linear-gradient(to top, #B3B3FF 0%, #071FF5 100%);
+}
+
+.extendedButton{
+	width: 915px;
+}
+
+/*
+#leftpanel{
+	position:fixed;top: 170px;left: 30px;width:250px; height:200px; overflow:visible; padding:0px 0px 0px 2px
+}
+
+#rightpanel{
+	position:fixed;top: 170px;right: 30px;width:250px; height:200px; overflow:visible; padding:0px 0px 0px 2px
+}
+*/
+.equakeDisplayBox{
+	border: 1px outset #C4C2C3;
+	z-index: 3;
+	width: 60px;
+	height: 14px;
+	padding-left: 5px;
+	padding-right: 5px;
+	display: inline-block;
+	text-align: center;
+	padding-top: 4px;
+	font-size: 10px;
+	/* IE10 Consumer Preview */ 
+	background-image: -ms-linear-gradient(top, #FFFFFF 0%, #C2C4C4 100%);
+
+	/* Mozilla Firefox */ 
+	background-image: -moz-linear-gradient(top, #FFFFFF 0%, #C2C4C4 100%);
+
+	/* Opera */ 
+	background-image: -o-linear-gradient(top, #FFFFFF 0%, #C2C4C4 100%);
+
+	/* Webkit (Safari/Chrome 10) */ 
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #C2C4C4));
+
+	/* Webkit (Chrome 11+) */ 
+	background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #C2C4C4 100%);
+
+	/* W3C Markup, IE10 Release Preview */ 
+	background-image: linear-gradient(to bottom, #FFFFFF 0%, #C2C4C4 100%);
+}
+.equakeDisplayBox:hover, .equakeDisplayButtonChecked:hover{
+	border-color: #B0AEAF;
+	cursor: pointer;
+}
+.equakeDisplayButtonChecked{
+	border: 1px inset #E0DEDF;
+	position: relative;
+	z-index: 3;
+	/* IE10 Consumer Preview */ 
+	background-image: -ms-linear-gradient(top, #FFFFFF 0%, #D2D4D4 100%);
+
+	/* Mozilla Firefox */ 
+	background-image: -moz-linear-gradient(top, #FFFFFF 0%, #D2D4D4 100%);
+
+	/* Opera */ 
+	background-image: -o-linear-gradient(top, #FFFFFF 0%, #D2D4D4 100%);
+
+	/* Webkit (Safari/Chrome 10) */ 
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #D2D4D4));
+
+	/* Webkit (Chrome 11+) */ 
+	background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #D2D4D4 100%);
+
+	/* W3C Markup, IE10 Release Preview */ 
+	background-image: linear-gradient(to bottom, #FFFFFF 0%, #D2D4D4 100%);
+}
+.equakeDisplayBox input {
+	position: absolute;
+	visibility: hidden;
+}
+.navigationBar table td{
+	text-align: center;
+}
+.ThreeDImage {
+	text-align: center;
+}
+.ThreeDImage #title{
+	font-weight: bold;
+}
+
+.FormFilter{
+	margin-left: 8px;
+	border: 1px solid #D6D5D5;
+	padding: 7px 7px 7px 12px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.FormFilter div.pointer{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background-image: url('/img/pointer.png');
+	background-repeat: no-repeat;
+	margin-top: -13px;
+}
+.FilterButton{
+	margin-left: 10px;
+	margin-top: 5px;
+	font-weight: bold;
+	font-size:13px;
+	color: #4A4AC0;
+	width: 80px;
+}
+.FilterButton:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.FilterBtnHolder{
+	text-align: right;
+	padding-right: 40px;
+}
+
+
+.FilterBtn{
+	width: 60px;
+}
+
+.FormFilter .leftPanel{
+	display: inline-block;
+	width: 120px;
+}
+.FormFilter .rightPanel{
+	display: inline-block;
+	width: 300px;
+}
+.FormFilter .subrow table td{
+	width: 150px;
+}
+.FormFilter .numberInput{
+	width: 30px;
+}
+.FormFilter .dateInput{
+	width: 72px;
+}
+.FormFilter .row{
+	margin-bottom: 4px;
+}
+.FormFilter .subrow{
+	margin-bottom: 4px;
+}
+.FormFilter input[type=text]{
+	padding-left: 2px;
+}
+.FormFilter div{
+	vertical-align: middle;
+}
+.equakeButtonsRow{
+	margin-top: 6px;
+	margin-left: 10px;
+}
+.threeDGMTFilter{
+	/** border-top: 1px solid #D6D5D5; **/
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-weight: bold;
+}
+.FilterBtnHolder{
+/**	border-top: 1px solid #D6D5D5;  **/
+	padding-top: 5px;
+}
+.earthquakeTooltip{
+	background-color: white;
+	width: 180px;
+}
+
+.twoDEquakeFlotGraph , .twoDGMTEquakeFlotGraph, .threeDGMTEquakeFlotGraph{
+	display: none;
+	border: 1px solid rgb(192, 191, 191);
+	margin-top: 5px;
+	padding-bottom: 15px;
+	margin-left: 8px;
+	
+}
+.twoDEquakeFlotGraph .pointer{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin-top: -6px;
+	margin-left: 30px;
+	background-image: url('/img/pointer.png');
+	background-repeat: no-repeat;
+}
+
+.twoDGMTEquakeFlotGraph .pointer{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin-top: -6px;
+	margin-left: 100px;
+	background-image: url('/img/pointer.png');
+	background-repeat: no-repeat;
+}
+
+.threeDGMTEquakeFlotGraph .pointer{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin-top: -6px;
+	margin-left: 170px;
+	background-image: url('/img/pointer.png');
+	background-repeat: no-repeat;
+}
+.threeDGMTEquakeFlotGraph .PrintButton,.twoDGMTEquakeFlotGraph .PrintButton {
+	margin-top: 35px;
+}
+.threeDNavigationBar{
+
+	position: n;
+
+}
+#previousButton{
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	background-image: url('/img/left.png');
+	background-repeat: no-repeat;
+	cursor: pointer;
+	border: 1px solid #C0BFBF;
+	border-radius: 5px;
+}
+#showAnimation{
+	display: inline-block;
+	cursor: pointer;
+	border: 1px solid #C0BFBF;
+	border-radius: 5px;
+	width: 25px;
+	height: 25px;
+	background-image: url('/img/repeat.png');
+
+}
+#nextButton{
+	display: inline-block;
+	cursor: pointer;
+	width: 25px;
+	height: 25px;
+	background-image: url('/img/right.png');
+	background-repeat: no-repeat;
+	border: 1px solid #C0BFBF;
+	border-radius: 5px;
+
+}
+.dataOwner:hover{
+	text-decoration: underline;
+}
+.dataOwner:visited{
+	color:blue;
+}
+.stationList{
+	width: 100%;
+	font-size: 13px;
+	margin-top: 10px;
+}
+.equakeGraphPlaceholder{
+	width: 400px;
+	height: 130px;
+	font-size: 9px;
+	margin-top: 15px;
+	position: relative;
+} 
+
+
+/*
+.plot-label-left{
+	float:left;
+	font-size:14px;
+	vertical-align: middle; 
+}  
+
+.plot-label{
+   padding-bottom: 350px;
+   font-size: bold;
+}
+*/   
+
+.equakeGraphPlaceholder_v6{  
+	width: 850px;
+	height: 260px;
+	font-size: 9px;
+	margin-top: 15px;
+	position: relative;  
+ 	
+}
+ 
+.viewStationPanel{
+	height: 18px;
+}
+.timeSeriesList{
+	/*width: 100%; */
+	width: 915px;
+	padding-left: 15px;
+}
+
+.overviewPanel{
+	/*width: 100%; */
+	width: 915px;
+	padding-left: 15px;
+	display:none;
+}
+
+.overviewGraph{
+	width:85%;
+	height:42px;
+}
+
+.showHideMarkerButton{
+	display: none;
+}
+.volcanoPanel{
+	width:513px;
+	vertical-align: top;
+	display: block;   
+}
+.VolcanoPanel{
+	padding-left: 2em;
+}
+.separator{
+	width: 2px;
+}
+.fixSwitch{       
+	width: 513px;
+	float: left;
+}
+.flowElement{
+	width: 513px;
+	display: inline-block;
+}
+.switchViewButton:hover{
+	cursor: pointer;
+}
+
+
+.FormFilter div.pointer1{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin-left:370px;
+	background-image: url('/img/pointer.png');
+	background-repeat: no-repeat;
+	margin-top: -13px;
+}
+
+.ShowHideFilterButton1{
+	float:right;
+	font-weight: bold;
+	color: #4A4AC0;
+	width: 80px;
+}
+.ShowHideFilterButton1:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+
+#contentrview_x #StationList tr td:first-child{
+	width: 50px;
+	text-align: right;
+}
+#contentrview_x #CompStationList td{
+	height: 20px;
+}
+#contentrview_x #CompStationList tr td:first-child{
+	width: 50px;
+	text-align: right;
+}
+#owner1, #owner2, #eqEvent1,#eqEvent2,#SDate1,#EDate1,#cc_id1,#MinLat,#MaxLat,#MinLon,#MaxLon,#MagnitudeLow1,#MagnitudeHigh1,#Evn1,#DepthLow1, #DepthHigh1, #EqType1, #Evn2, #SDate2, #EDate2, #DepthLow2, #DepthHigh2, #EqType2{
+	font-size:13px;
+}
+#GraphList{
+	text-align: right;
+}
+.EquakePanel1, .EquakePanel2{
+	margin: 10px;
+}
+#EquakePanel1 table,#EquakePanel2 table{
+   /* width: 100%;  */
+	width: 915px;
+}
+#OptionList1 , #OptionList2{
+	width: 340px;
+	display: block;
+}
+#OptionList1-1, #OptionList2-1{
+	width: 330px;
+	height: 110px;
+	overflow:auto;
+	margin-top: 5px;
+	margin-left: 2px;
+	margin-right: 2px;
+	background-color:white;
+	border: 1px solid #b0a9a9;
+}
+#TimeSeriesView1, #TimeSeriesView2{
+	margin-top: 5px;
+	display: none;
+	margin-left: 10px;
+}
+.timeSeriesView .PrintButton{
+	display: none;
+}
+
+/* white */
+.white {
+
+    color: #606060;
+    border: solid 1px #b7b7b7;
+    background: #fff;
+	padding: 5px;
+	font-size: .8em;
+	margin-bottom: 5px;
+	/*background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+	background: -moz-linear-gradient(top,  #fff,  #ededed);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');*/
+}
+.HideTimeSeriesPanel1, .HideTimeSeriesPanel2{
+	color:black;
+}
+.HideTimeSeriesPanel1:hover,.HideTimeSeriesPanel1:active,.HideTimeSeriesPanel2:hover,.HideTimeSeriesPanel2:active{
+	cursor: pointer;
+	color: red;
+}
+.TimeSeriesHeader{
+	font-weight: bold;
+}
+.VolcanoComparisonHeader{
+	font-weight: bold;
+}
+.map_legend img{
+	width:16px;
+	height:16px;
+}
+.CloseButton{
+	float:right;
+	background-image: url('/img/inactiveCloseButton.png');
+	width:16px;
+	height:16px;
+	font-weight: bold;
+}
+.CloseButton:hover, .CloseButton:active{
+	cursor:pointer;
+	background-image: url('/img/activeCloseButton.png');
+}
+#VolcanoList, #CompVolcanoList{
+	background: transparent;
+	border: 1px solid #ccc;
+	width:220px;
+	font-size:11px;
+}
+
+td#volcanoPanel1.volcanoPanel
+{   width: 460px; 
+	padding: 0 2%;
+}
+
+td#volcanoPanel2.volcanoPanel
+{
+width: 460px;
+}
+
+.selections
+{
+	font-size: 11px;
+}
+
+#Map, #Map2{
+	width: 915px;   
+	height:470px;
+	float:left;
+	margin-top:10px;
+}
+.Gvp{
+	height: 20px;
+}
+.Gvp:hover{
+	cursor: pointer;
+}
+html, body{
+	margin: 0;
+	height: 100%;
+}
+
+#DateRange,#DateRange1, #DateRange2{
+	width: 200px;
+	padding-left: 100px;
+}
+.PrintButton{
+	margin-top: 20px;
+	padding: 2px;
+	text-align: center;
+	float: right;
+	border-radius: 3px;
+	border: 1px solid #cccccc;
+	cursor: pointer;
+	font-weight: bold;
+	/* IE10 Consumer Preview */ 
+	background-image: -ms-linear-gradient(bottom, #D6D0D0 0%, #FFFFFF 100%);
+
+	/* Mozilla Firefox */ 
+	background-image: -moz-linear-gradient(bottom, #D6D0D0 0%, #FFFFFF 100%);
+
+	/* Opera */ 
+	background-image: -o-linear-gradient(bottom, #D6D0D0 0%, #FFFFFF 100%);
+
+	/* Webkit (Safari/Chrome 10) */ 
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #D6D0D0), color-stop(1, #FFFFFF));
+
+	/* Webkit (Chrome 11+) */ 
+	background-image: -webkit-linear-gradient(bottom, #D6D0D0 0%, #FFFFFF 100%);
+
+	/* W3C Markup, IE10 Release Preview */ 
+	background-image: linear-gradient(to top, #D6D0D0 0%, #FFFFFF 100%);
+}
+.PrintButton:hover{
+	/* IE10 Consumer Preview */ 
+	background-image: -ms-linear-gradient(bottom, #BFBABA 0%, #E6E6E6 100%);
+
+	/* Mozilla Firefox */ 
+	background-image: -moz-linear-gradient(bottom, #BFBABA 0%, #E6E6E6 100%);
+
+	/* Opera */ 
+	background-image: -o-linear-gradient(bottom, #BFBABA 0%, #E6E6E6 100%);
+
+	/* Webkit (Safari/Chrome 10) */ 
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #BFBABA), color-stop(1, #E6E6E6));
+
+	/* Webkit (Chrome 11+) */ 
+	background-image: -webkit-linear-gradient(bottom, #BFBABA 0%, #E6E6E6 100%);
+
+	/* W3C Markup, IE10 Release Preview */ 
+	background-image: linear-gradient(to top, #BFBABA 0%, #E6E6E6 100%);
+}
+.PrintButton a:visited{
+	text-decoration: none;
+	color: black;
+}
+.PrintButtonFloat{
+	float: right;
+}
+.print-icon{
+	background-image: url('/img/print_icon.png');
+	margin-right: 5px;
+}
+.app-icon{
+	height: 16px;
+	width: 30px;
+	display:block;
+	float: left;
+	background-size: auto auto;
+	position: relative;
+	background-repeat: no-repeat;
+}
+.app-button-text{
+	display: block;
+	line-height: 16px;
+	text-align: center;
+}
+.eruptionList{
+	width: 100px;
+}

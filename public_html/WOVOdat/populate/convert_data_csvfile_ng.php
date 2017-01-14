@@ -1,22 +1,9 @@
 <?php
 if (!isset($_SESSION))
-    session_start();  // Start session
-/* Nang commented on 25-Feb-2013
-session_regenerate_id(true);// Regenerate session ID
-$uname="";
-$ccd="";
+    session_start();  
 
-if(isset($_SESSION['login'])) {
-	$uname=$_SESSION['login']['cr_uname'];  
-	$ccd=$_SESSION['login']['cc_id'];
-}
-else{
-header('Location: '.$url_root.'login_required.php');// Session was not yet started.... Redirect to login required page
-exit();
-}
-*/
 
-if(!isset($_GET['tipedata'])){          // Added on 25-Apr-2012
+if(!isset($_GET['tipedata'])){
 header('Location: '.$url_root.'home_populate.php');
 exit();
 }
@@ -201,87 +188,8 @@ label.error {font-size:12px; display:block; float: none; color: red;}
 				else if(stationdisplay=="EventDataFromSingleStation" || stationdisplay =="RSAMData" || stationdisplay =="SSAMData" || stationdisplay=="RepresentativeWaveform" || stationdisplay == "ElectronicTiltData" || stationdisplay == "TiltVectorData" || stationdisplay == "StrainMeterData" || stationdisplay=="EDMData" || stationdisplay =="AngleData" || stationdisplay =="GPSData" || stationdisplay == "GPSVectors" || stationdisplay == "DirectlySampledGas" || stationdisplay == "SoilEffluxData" || stationdisplay == "HydrologicData" || stationdisplay == "MagneticFieldsData" || stationdisplay == "MagnetorVectorData" || stationdisplay == "ElectricFieldsData" || stationdisplay == "GravityData" ||stationdisplay == "GroundBasedThermalData" || stationdisplay == "MeteorologicalData" || stationdisplay == "LevelingData"){  
 				// Added  stationdisplay == "MeteorologicalData" on 9-May-2012
 					
-					//alert("coming");
-					
 					$('#kilometer').css("display","block");
 					showkilometer();				
-					
-					/*
-					$.get('./convertie/selectcheckstation_data_ng.php','volcan='+sgu+ '&stationdisplay='+stationdisplay,function(result){
-					
-						var check_sn_jj = result;
-	
-						if(check_sn_jj == "true"){
-						
-							if(stationdisplay =="EDMData" || stationdisplay == "MagneticFieldsData" || stationdisplay == "ElectricFieldsData" || stationdisplay == "GravityData"){
-								
-								$('#stationform').load('./convertie/selectStation_data_ng.php','volcan='+sgu+ '&stationdisplay='+stationdisplay+ '&kilometer=nokilometer',function(){
-
-									var currentId= $("#stationform h1").attr("id");
-									
-									if(currentId != "nostation" ){
-								
-										$('#stationform2').load('./convertie/selectStation_data_ng.php','volcan='+sgu+ '&stationdisplay='+stationdisplay+ '&kilometer=nokilometer&station2=stat2');	
-									}
-									else{
-									
-										$('#fname1').val('');     
-										$('#Submit1file').attr("disabled","disabled");
-									
-									}
-								});		
-	
-							}else if(stationdisplay =="AngleData" || stationdisplay =="GPSData"){
-								
-								$('#stationform').load('./convertie/selectStation_data_ng.php','volcan='+sgu+ '&stationdisplay='+stationdisplay+ '&kilometer=nokilometer',function(){
-
-									var currentId= $("#stationform h1").attr("id");
-									
-									if(currentId != "nostation" ){
-									
-//Nang added line 245-257 on 26-Feb-2013. Because GPS needs to put option value for station 2 and station 3.
-										if(stationdisplay =="AngleData"){
-									
-											$('#stationform2').load('./convertie/selectStation_data_ng.php','volcan='+sgu+ '&stationdisplay='+stationdisplay+ '&kilometer=nokilometer&station2=stat2');
-											
-											$('#stationform3').load('./convertie/selectStation_data_ng.php','volcan='+sgu+ '&stationdisplay='+stationdisplay+ '&kilometer=nokilometer&station3=stat3');
-											
-										}else if(stationdisplay =="GPSData"){
-										
-											$('#stationform2').load('./convertie/selectStation_data_ng.php','volcan='+sgu+ '&stationdisplay='+stationdisplay+ '&kilometer=nokilometer&gpsStation2=stat2');
-											
-											$('#stationform3').load('./convertie/selectStation_data_ng.php','volcan='+sgu+ '&stationdisplay='+stationdisplay+ '&kilometer=nokilometer&gpsStation3=stat3');
-										}
-									}
-									else{
-									
-										$('#fname1').val('');     
-										$('#Submit1file').attr("disabled","disabled");
-									
-									}
-								});	
-							
-							}else {
-															
-								$('#stationform').load('./convertie/selectStation_data_ng.php','volcan='+sgu+ '&stationdisplay='+stationdisplay+ '&kilometer=nokilometer',function(result){ 
-					
-									//show disabled submit button if there is no station 
-									
-									var check = result.substring(11,25);
-									
-									if(check == "nostationerror"){
-																			
-										$('#fname1').val('');
-										$('#Submit1file').attr("disabled","disabled");
-									}
-								});
-							}		
-						}
-						else{
-							$('#kilometer').css("display","block");
-							showkilometer();
-						}
-					});	  */				
 				}     
 				else if(stationdisplay=="SeismicTremor" || stationdisplay=="IntervalSwarmData"){				
 										
@@ -458,21 +366,6 @@ label.error {font-size:12px; display:block; float: none; color: red;}
 				
 				$('#kilometer').css("display","block");
 				showkilometer();
-/*				
-				$.get('./convertie/selectcheckstation_data_ng.php','volcan='+sgu+ '&stationdisplay='+stationdisplay,function(result){
-					
-					var check_sn_jj = result;
-				
-					
-					if(check_sn_jj == 'true'){
-						$('#stationform').load('./convertie/selectStation_data_ng.php','volcan='+sgu+ '&stationdisplay='+stationdisplay+ '&kilometer=nokilometer');
-					}
-					else{
-						$('#kilometer').css("display","block");
-						showkilometer();
-					}
-				});	
-*/				
 			}
 			else{
 				$('select#network').remove();
@@ -548,22 +441,6 @@ label.error {font-size:12px; display:block; float: none; color: red;}
 				
 				$('#kilometer').css("display","block");
 				showkilometer();			
-				
-/*				
-				$.get('./convertie/selectcheckstation_data_ng.php','volcan='+sgu+ '&stationdisplay='+stationdisplay,function(result){
-					
-					var check_plume_jj = result;
-	
-					if(check_plume_jj == 'true'){
-					
-						$('#stationform').load('./convertie/selectStation_data_ng.php','volcan='+sgu+ '&stationdisplay='+stationdisplay+ '&kilometer=nokilometer');
-					}
-					else{
-						$('#kilometer').css("display","block");
-						showkilometer();
-					}
-				});		
-*/				
 			}
 			else{
 
@@ -799,7 +676,7 @@ label.error {font-size:12px; display:block; float: none; color: red;}
 		<div id="trm_ivl" style="display:none; padding-left:90px;">
 			<div id="trm_ivl_form">
 			<p> If an event is located by a network (or) by a single station, please select "Network" (or) "Station" respectively from a below drop down. </p>
-			<select id='trm_ivl_select' name='trm_ivl_select' style='width:180px'>
+			<select id='trm_ivl_select' name='trm_ivl_select' style='width:180px' class='required'>
 				<option value=''>...</option>
 				<option value='Network' selected='true'>Network</option>
 				<option value='Station'>Station</option>

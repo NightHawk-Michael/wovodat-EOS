@@ -1,0 +1,198 @@
+/*
+CSS file for V5
+*/
+
+            #contentrview_x #StationList tr td:first-child{
+                width: 50px;
+                text-align: right;
+            }
+            #contentrview_x #CompStationList td{
+                height: 20px;
+            }
+            #contentrview_x #CompStationList tr td:first-child{
+                width: 50px;
+                text-align: right;
+            }
+            #owner1, #owner2, #eqEvent1,#eqEvent2,#SDate1,#EDate1,#cc_id1,#MinLat,#MaxLat,#MinLon,#MaxLon,#MagnitudeLow1,#MagnitudeHigh1,#Evn1,#DepthLow1, #DepthHigh1, #EqType1, #Evn2, #SDate2, #EDate2, #DepthLow2, #DepthHigh2, #EqType2{
+                font-size:13px;
+            }
+            #GraphList{
+                text-align: right;
+            }
+            .EquakePanel1, .EquakePanel2{
+                margin: 10px;
+            }
+            #EquakePanel1 table,#EquakePanel2 table{
+                width: 100%;
+            }
+            #OptionList1 , #OptionList2{
+                width: 340px;
+                display: block;
+            }
+            #OptionList1-1, #OptionList2-1{
+                width: 330px;
+                height: 110px;
+                overflow:auto;
+                margin-top: 5px;
+                margin-left: 2px;
+                margin-right: 2px;
+                background-color:white;
+                border: 1px solid #b0a9a9;
+            }
+            #TimeSeriesView1, #TimeSeriesView2{
+                margin-top: 5px;
+                display: none;
+                margin-left: 10px;
+            }
+            .timeSeriesView .PrintButton{
+                display: none;
+            }
+
+            /* white */
+            .white {
+                color: #606060;
+                border: solid 1px #b7b7b7;
+                background: #fff;
+                /*background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+                background: -moz-linear-gradient(top,  #fff,  #ededed);
+                filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');*/
+            }
+            .HideTimeSeriesPanel1, .HideTimeSeriesPanel2{
+                color:black;
+            }
+            .HideTimeSeriesPanel1:hover,.HideTimeSeriesPanel1:active,.HideTimeSeriesPanel2:hover,.HideTimeSeriesPanel2:active{
+                cursor: pointer;
+                color: red;
+            }
+            .TimeSeriesHeader{
+                font-weight: bold;
+            }
+            .VolcanoComparisonHeader{
+                font-weight: bold;
+            }
+            .map_legend img{
+                width:16px;
+                height:16px;
+            }
+            .CloseButton{
+                float:right;
+                background-image: url('/img/inactiveCloseButton.png');
+                width:16px;
+                height:16px;
+                font-weight: bold;
+            }
+            .CloseButton:hover, .CloseButton:active{
+                cursor:pointer;
+                background-image: url('/img/activeCloseButton.png');
+            }
+            #VolcanoList, #CompVolcanoList{
+                background: transparent;
+                border: 1px solid #ccc;
+                width:220px;
+                font-size:11px;
+            }
+            #Map, #Map2{
+                width:100%;
+                height:470px;
+                float:left;
+                margin-top:10px;
+            }
+            .Gvp{
+                height: 20px;
+            }
+            .Gvp:hover{
+                cursor: pointer;
+            }
+            html, body{
+                margin: 0;
+                height: 100%;
+            }
+            #wrapborder_x {
+                min-height: 100%;
+                height: auto !important;
+                height: 100%;
+                margin: 0 auto -34px;
+            }
+            .footer, .reservedSpace {
+                height: 38px;
+                text-align:center;
+            }
+            #DateRange,#DateRange1, #DateRange2{
+                width: 200px;
+                padding-left: 100px;
+            }
+            .PrintButton{
+                margin-top: 20px;
+                padding: 2px;
+                width: 65px;
+                float: right;
+                border-radius: 3px;
+                border: 1px solid #cccccc;
+                cursor: pointer;
+                font-weight: bold;
+                /* IE10 Consumer Preview */ 
+                background-image: -ms-linear-gradient(bottom, #D6D0D0 0%, #FFFFFF 100%);
+
+                /* Mozilla Firefox */ 
+                background-image: -moz-linear-gradient(bottom, #D6D0D0 0%, #FFFFFF 100%);
+
+                /* Opera */ 
+                background-image: -o-linear-gradient(bottom, #D6D0D0 0%, #FFFFFF 100%);
+
+                /* Webkit (Safari/Chrome 10) */ 
+                background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #D6D0D0), color-stop(1, #FFFFFF));
+
+                /* Webkit (Chrome 11+) */ 
+                background-image: -webkit-linear-gradient(bottom, #D6D0D0 0%, #FFFFFF 100%);
+
+                /* W3C Markup, IE10 Release Preview */ 
+                background-image: linear-gradient(to top, #D6D0D0 0%, #FFFFFF 100%);
+            }
+            .PrintButton:hover{
+                /* IE10 Consumer Preview */ 
+                background-image: -ms-linear-gradient(bottom, #BFBABA 0%, #E6E6E6 100%);
+
+                /* Mozilla Firefox */ 
+                background-image: -moz-linear-gradient(bottom, #BFBABA 0%, #E6E6E6 100%);
+
+                /* Opera */ 
+                background-image: -o-linear-gradient(bottom, #BFBABA 0%, #E6E6E6 100%);
+
+                /* Webkit (Safari/Chrome 10) */ 
+                background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #BFBABA), color-stop(1, #E6E6E6));
+
+                /* Webkit (Chrome 11+) */ 
+                background-image: -webkit-linear-gradient(bottom, #BFBABA 0%, #E6E6E6 100%);
+
+                /* W3C Markup, IE10 Release Preview */ 
+                background-image: linear-gradient(to top, #BFBABA 0%, #E6E6E6 100%);
+            }
+            .PrintButton a:visited{
+                text-decoration: none;
+                color: black;
+            }
+            .PrintButtonFloat{
+                float: right;
+            }
+            .print-icon{
+                background-image: url('/img/print_icon.png');
+                margin-right: 5px;
+            }
+            .app-icon{
+                height: 16px;
+                width: 30px;
+                display:block;
+                float: left;
+                background-size: auto auto;
+                position: relative;
+                background-repeat: no-repeat;
+            }
+            .app-button-text{
+                display: block;
+                line-height: 16px;
+                text-align: center;
+            }
+            .eruptionList{
+                width: 100px;
+            }
+        

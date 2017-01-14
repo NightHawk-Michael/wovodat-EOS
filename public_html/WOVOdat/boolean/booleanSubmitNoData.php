@@ -7,26 +7,20 @@
 </html>
 
 <?php
-
-SESSION_START();
-
-
-
-include "view/common_v.php";
 include 'view/booleanSubmitNoData_v.php';
 include 'model/booleanSubmitNoData_m.php';
+include 'php/include/header.php';
 
-if(!isset($_SESSION['login'])){       // can't proceed without log in
-	//header('Location: '.$url_root.'login_required.php');
-}
- 
+include 'php/include/menu.php';
 
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > Data Download > <a href='http://{$_SERVER['SERVER_NAME']}/boolean/booleanIndex.php'>WOVOdat Boolean Search Form</a> </div>";
 
-showExternallink();
-showHeader();
-include "php/include/header.php"; 
-showContent();
+echo "</div>";   /*** header-menu  ***/
 
+echo"<div class='body'>";
+	echo"<div class='widecontent'>";
+	
+	
 /********* Add Loading Bar ******************/
 
 echo "<script>
@@ -78,11 +72,11 @@ flush();
 		
 		
 	for($page = 1; $page <= $maxPage; $page++){
-		 
+ 
 		if ($page == $pageNum) {
-			$nav .= "<span style='text-decoration:underline; color:brown;' >$page</span> "; // no need to create a link to current page
+			$nav .= "<span class='pager thispage' >$page</span> ";        // no need to create a link to current page
 		}else{                                                                                    
-			$nav .= " <a href=\"$self?page=$page\" style='text-decoration:none; color:brown;' >$page</a> ";  // using Above filter in URL link..
+			$nav .= " <a href=\"$self?page=$page\" class='pager'>$page</a> ";  // using Above filter in URL link..
 		}                                                                                   	
 	}
 	 
@@ -90,16 +84,15 @@ flush();
 			  
    if ($pageNum > 1){
 		$page  = $pageNum - 1;
-	
 		
 		if($pageNum == 2){
 			$prev = '';
 		}else{
-			$prev  = "<a href=\"$self?page=$page\" style=' border: solid 1px ;color:black;' > &nbsp; << Previous &nbsp; </a> ";
+			$prev  = "<a href=\"$self?page=$page\" id='backnext'> < Previous </a> ";
 		
 		}
 		
-		$first = " <a href=\"$self?page=1\" style=' border: solid 1px;color:black;'>&nbsp; First &nbsp; </a> ";
+		$first = " <a href=\"$self?page=1\"> << First</a> ";
 	}else{
 		$prev  = '&nbsp;'; 							// we're on page one, don't print previous link
 		$first = '&nbsp;'; 						    // nor the first page link
@@ -111,31 +104,34 @@ flush();
 		if(($maxPage-1) == $pageNum){ 
 			$next ='';
 		}else{
-			$next = " <a href=\"$self?page=$page\" style=' border: solid 1px;color:black;'>&nbsp; Next >> &nbsp;</a> ";
+			$next = " <a href=\"$self?page=$page\" id='backnext'> Next > </a>";
 		}
 		
-		$last = " <a href=\"$self?page=$maxPage\" style=' border: solid 1px;color:black;'> &nbsp; Last &nbsp; </a> ";
+		$last = " <a href=\"$self?page=$maxPage\"> Last >> </a> ";
 	}
 	else{
 		$next = '&nbsp;';					      // we're on the last page, don't print next link
 		$last = '&nbsp;';                         // nor the last page link
 	}
 	
-
-	
-	$count= $first."&nbsp;". $prev ."&nbsp;". $nav ."&nbsp;". $next ."&nbsp;". $last;
+	$count= $first.$prev.$nav.$next.$last;
 
 	if($totalItems > 100){
 		showcount($count);              			// print the navigation link
 	}
 
-
-
-   
-   
-showFooter1();
-include "php/include/footer.php"; 
-showFooter2();	
-
-
+  
 ?>
+
+	</div>
+</div>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->

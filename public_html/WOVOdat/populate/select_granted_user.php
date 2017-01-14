@@ -24,7 +24,7 @@ if (!isset($_POST['search_granted_user_ok'])) {
 }
 
 // Store information
-//$_SESSION['mng_perm']=array();     // Nang commented out on 28-Feb-2013. This session is ald started in previous page.so should not declare array again here. 
+//$_SESSION['mng_perm']=array();      // Nang commneted out on 28-Feb-2013
 
 // Get posted information
 $_SESSION['mng_perm']['search_code']=$_POST['search_code'];
@@ -199,43 +199,67 @@ $_SESSION['mng_perm']['obs_list']=$obs_list;
 $_SESSION['mng_perm']['email_list']=$email_list;
 $_SESSION['mng_perm']['l_user_list']=$l_user_list;
 
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
 
-	<div id="wrapborder">
-	<div id="wrap">
-		<?php include 'php/include/header_beta.php'; ?>
-		<!-- Content -->
-		<div id="content">	
-			<div id="contentl">
-		<!-- Top of the page -->
-		
-		<!-- Page content -->
-		<h1>Granted user selection</h1>
-		<p>Select user for whom you wish to grant permissions:</p>
-		<form method="post" action="manage_permissions.php" name="form_slgu">
-			<div id="div_slgu">
-				<table id="table_slgu">
-					<tr>
-						<th></th>
-						<th>Code</th>
-						<th>First name</th>
-						<th>Last name</th>
-						<th>Observatory</th>
-						<th>Email</th>
-					</tr>
+include 'php/include/header.php'; 
+?>
+
+<style type="text/css">
+table#table_slgu {
+    text-align: left;
+    font-size: 12pt;
+    border-spacing: 0px;
+    border-width: 1px;
+    border-color: #505050;
+    border-style: solid;
+    border-collapse: collapse;
+}
+
+table#table_slgu th {
+    text-align: center;
+    font-size: 8pt;
+    border-width: 1px;
+    border-color: #505050;
+    border-style: solid;
+    padding: 2px;
+    background-color: #ccc;
+}
+
+table#table_slgu td {
+    font-size: 7pt;
+    border-width: 1px;
+    border-color: #505050;
+    border-style: solid;
+    padding: 2px;
+}
+</style>
+<?
+include 'php/include/menu.php'; 
+
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > <a href='http://{$_SERVER['SERVER_NAME']}/populate/my_account.php'>Account</a> > Granted user selection </div>";
+
+?>
+
+</div>  <!-- header-menu -->  
+
+	<div class="body">
+
+		<div class="widecontent">
+
+				<!-- Page content -->
+				<h3>Granted user selection</h3>
+				
+				<p>Select user for whom you wish to grant permissions:</p>
+				<form method="post" action="manage_permissions.php" name="form_slgu">
+					<div id="div_slgu">
+						<table id="table_slgu">
+							<tr>
+								<th></th>
+								<th>Code</th>
+								<th>First name</th>
+								<th>Last name</th>
+								<th>Observatory</th>
+								<th>Email</th>
+							</tr>
 <?php
 
 // Display users
@@ -262,28 +286,22 @@ for ($i=1; $i<$l_user_list; $i++) {
 }
 
 ?>
-				</table>
-				<br />
-				<input type="submit" name="select_granted_user_ok" value="OK" />
-			</div>
-		</form>
-
-			</div>
-			<div id="contentr">
-				<div id="top" align="left">
-					<!-- Aligned to the right: You are logged in as username (FName LName | Obs) | Logout -->
-					<p align="right">Login as <b><?php print $uname; ?></b> | <a href="logout.php">Logout</a></p>
-				</div><br>
-		
-		
-			</div>
+						</table>
+					
+						<div style="padding:20px 150px;" >
+							<input type="submit" name="select_granted_user_ok" value="Submit" />
+						</div>				
+				</form>
+			
 		</div>
-		
-		<!-- Footer -->
-		<div id="footer">
-			<?php include 'php/include/footer_beta.php'; ?>
-		</div>
-		
 	</div>
-</body>
-</html>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->	

@@ -3,6 +3,10 @@ $(document).ready(function() {
 	addMenuHover();
 	addHoverSubMenu1();
 	addHoverSubMenu2();
+	addHoverSubMenu3();
+	addHoverSubMenu4();
+	addHoverSubMenu5();
+	addHoverSubMenu6();
 	addSlideShow();
 });
 
@@ -14,8 +18,20 @@ var addMenuHover = function () {
 			if (value=="Home") {
 				$(".sub-menu-1").show();
 			}
-			if (value=="Volcano") {
+			if (value=="Visualization") {
 				$(".sub-menu-2").show();
+			}
+			if (value=="Data Download") {
+				$(".sub-menu-3").show();
+			}
+			if (value=="LOGIN") {
+				$(".sub-menu-4").show();
+			}
+			if (value=="WOVOdat Tools Index") {
+				$(".sub-menu-5").show();
+			}
+			if (value=="Account") {
+				$(".sub-menu-6").show();
 			}
 		},
 		function() {
@@ -24,8 +40,20 @@ var addMenuHover = function () {
 			if (value=="Home") {
 				$(".sub-menu-1").hide();
 			}
-			if (value=="Volcano") {
+			if (value=="Visualization") {
 				$(".sub-menu-2").hide();
+			}
+			if (value=="Data Download") {
+				$(".sub-menu-3").hide();
+			}
+			if (value=="LOGIN") {
+				$(".sub-menu-4").hide();
+			}
+			if (value=="WOVOdat Tools Index") {
+				$(".sub-menu-5").hide();
+			}
+			if (value=="Account") {
+				$(".sub-menu-6").hide();
 			}
 		} );
 }
@@ -42,6 +70,46 @@ var addHoverSubMenu1 = function() {
 
 var addHoverSubMenu2 = function() {
 	$(".sub-menu-2").hover(
+		function() {
+			$(this).show();
+		},
+		function() {
+			$(this).hide();
+		});
+}
+
+var addHoverSubMenu3 = function() {
+	$(".sub-menu-3").hover(
+		function() {
+			$(this).show();
+		},
+		function() {
+			$(this).hide();
+		});
+}
+
+var addHoverSubMenu4 = function() {
+	$(".sub-menu-4").hover(
+		function() {
+			$(this).show();
+		},
+		function() {
+			$(this).hide();
+		});
+}
+
+var addHoverSubMenu5 = function() {
+	$(".sub-menu-5").hover(
+		function() {
+			$(this).show();
+		},
+		function() {
+			$(this).hide();
+		});
+}
+
+var addHoverSubMenu6 = function() {
+	$(".sub-menu-6").hover(
 		function() {
 			$(this).show();
 		},

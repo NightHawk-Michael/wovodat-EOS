@@ -1,9 +1,11 @@
 <?php
 session_start();
 
-//unset($_SESSION);
+var_dump($_SESSION);  
+echo "<br/>  <br/>";
 
-var_dump($_SESSION['plusql']);
+
+
 
 
 ?>

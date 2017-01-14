@@ -1,5 +1,6 @@
 <?php
-session_start();
+if(!isset($_SESSION))
+	session_start();
 include "commondata_ng.php";
 require_once "php/include/get_root.php";
 
@@ -46,11 +47,9 @@ if(isset($_POST['intenstiysize'])){
 	}
 }	
  
+$infile="../../../../incoming/to_be_translated/".$filename;
+$outputfilepath="../../../../incoming/translated/";     //prepare the directory of output file
 
-	
-$infile="C:/xampp/htdocs/home/wovodat/incoming/to_be_translated/".$filename;
-
-$outputfilepath="C:/xampp/htdocs/home/wovodat/incoming/translated/";     //prepare the directory of output file
 $outputfilename=substr($filename,0,-4).".xml"; 
 $outfile=$outputfilepath.$outputfilename;	
 
@@ -189,7 +188,6 @@ fwrite($outhandle, $fullxml);
 fclose($outhandle);
 
 //To distinguish whether a,b,c on line '143' & '168' in showxmlresult_ng.php  coz added additional folder for option 'c'
-
 $option="a/b";
 
 include "showxmlresult_ng.php";      //Show every results here...        

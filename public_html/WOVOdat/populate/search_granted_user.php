@@ -97,96 +97,79 @@ else {
 	}
 }
 
+
+include 'php/include/header.php'; 
+
+include 'php/include/menu.php'; 
+
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > <a href='http://{$_SERVER['SERVER_NAME']}/populate/my_account.php'>Account</a> > Manage contact information </div>";
+
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>	
-</head>
-<body>
 
+</div>  <!-- header-menu -->  
 
-	<div id="wrapborder">
-	<div id="wrap">
-		<?php include 'php/include/header_beta.php'; ?>
-		<div id="navblock1">
-			<div id="nav1">
-			</div>
-		</div>
-		<div id="navblock2">
-			<div id="nav2">
-			</div>
-		</div>
-		
-		<!-- Content -->
-		<div id="content">	
-			<div id="contentl">
-		<!-- Top of the page -->
-		<div id="top">
-			<!-- Aligned to the right: You are logged in as username (FName LName | Obs) | Logout -->
-			<p>You are logged in as <b><?php print $uname." (".$user_name.")"; ?></b> | <a href="logout.php">Logout</a></p>
-		</div>
-		
-		
-		<!-- Page content -->
-		<h1>Granted user selection</h1>
-		<p class="redtext"><?php print $error; ?></p>
-		<p>Select user for whom you wish to grant permissions:</p>
-		<p>Search user by:</p>
-		<form method="post" action="select_granted_user.php" name="form_sgu">
-			<table id="table_sgu">
-				<tr>
-					<th>Contact code:</th>
-					<td>
-						<input type="text" maxlength="30" name="search_code" value="<?php print $search_code; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th>First name:</th>
-					<td>
-						<input type="text" maxlength="30" name="search_fname" value="<?php print $search_fname; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th>Last name:</th>
-					<td>
-						<input type="text" maxlength="30" name="search_lname" value="<?php print $search_lname; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th>Observatory:</th>
-					<td>
-						<input type="text" maxlength="150" name="search_obs" value="<?php print $search_obs; ?>" />
-					</td>
-				</tr>
-				<tr>
-					<th>E-mail address:</th>
-					<td>
-						<input type="text" maxlength="255" name="search_email" value="<?php print $search_email; ?>" />
-					</td>
-				</tr>
-			</table>
-			<br />
-			<input type="submit" name="search_granted_user_ok" value="OK" />
-		</form>
+	<div class="body">
 
-			</div>
-			<div id="contentr">
-			</div>
+		<div class="widecontent">
+	
+			<div class="form">
+				<!-- Page content -->
+				<h2>Granted user selection</h2>
+	
+				<p class="redtext"><?php print $error; ?></p>
+				<p>Select user for whom you wish to grant permissions:</p>
+				<p>Search user by:</p>
+				
+				<form method="post" action="select_granted_user.php" name="form_sgu">
+					<table id="table_sgu">
+						<tr>
+							<th>Contact code:</th>
+							<td>
+								<input type="text" maxlength="30" name="search_code" value="<?php print $search_code; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th>First name:</th>
+							<td>
+								<input type="text" maxlength="30" name="search_fname" value="<?php print $search_fname; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th>Last name:</th>
+							<td>
+								<input type="text" maxlength="30" name="search_lname" value="<?php print $search_lname; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th>Observatory:</th>
+							<td>
+								<input type="text" maxlength="150" name="search_obs" value="<?php print $search_obs; ?>" />
+							</td>
+						</tr>
+						<tr>
+							<th>E-mail address:</th>
+							<td>
+								<input type="text" maxlength="255" name="search_email" value="<?php print $search_email; ?>" />
+							</td>
+						</tr>
+					</table>
+					<br />
+					
+					<div style="padding:20px 150px;" >
+						<input type="submit" name="search_granted_user_ok" value="submit" id="submit" />
+					</div>
+
+				</form>
+
 		</div>
-		
-		<!-- Footer -->
-		<div id="footer">
-			<?php include 'php/include/footer_beta.php'; ?>
-		</div>
-		
 	</div>
-</body>
-</html>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->

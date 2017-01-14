@@ -8,55 +8,13 @@ When form is submitted, upload_file_check.php is launched.
 
 **********************************/
 
-// Start session
-session_start();
+if(!isset($_SESSION))
+	session_start();
 
-if((!isset($_SESSION['login'])) || (!isset($_GET['type']))){          // Added on 26-Feb-2012
+if((!isset($_SESSION['login'])) || (!isset($_GET['type']))){          
 header('Location: '.$url_root.'home_populate.php');
 exit();
 }
-
-
-/*
-// Regenerate session ID
-session_regenerate_id(true);
-
-
-// If session already started
-if (isset($_SESSION['HTTP_USER_AGENT'])) {
-	if ($_SESSION['HTTP_USER_AGENT']!=md5($_SERVER['HTTP_USER_AGENT'])) {
-		// Destroy session variables
-		session_destroy();
-		// Redirect to "login required" page for user to re-login
-print <<<STRING
-<html>
-	<br><br>
-	<div style="padding:0px 0px 0px 25px;"><br>
-		<p>Please <a href="http://{$_SERVER['SERVER_NAME']}/populate/login_required.php">log in</a></p>
-	</div>
-</html>
-STRING;
-		exit();
-	}
-}
-// Else
-$_SESSION['HTTP_USER_AGENT']=md5($_SERVER['HTTP_USER_AGENT']);
-
-// If the session was not started yet
-if (!isset($_SESSION['login']['cr_uname'])) {
-	// Redirect to login required page
-print <<<STRING
-<html>
-	<br><br>
-	<div style="padding:0px 0px 0px 25px;"><br>
-		<p>Please <a href="http://{$_SERVER['SERVER_NAME']}/populate/login_required.php">login</a></p>
-	</div>
-</html>
-STRING;
-	exit();
-}
-*/
-
 
 
 // Get values
@@ -295,8 +253,8 @@ $max_filesize=ini_get('upload_max_filesize');
 		
 <html>
 	<script type="text/javascript" src="/js/upload_file.js" language="JavaScript"></script>	
-	<br><br>
-	<div style="padding:0px 0px 0px 25px;"><br>
+
+	<div><br>
 		<!-- Page content -->
 		<form name="translate_file_form" method="post" action="upload_file_check.php" enctype="multipart/form-data" onsubmit="return check_form()">
 			<input type="hidden" name="file_type" value="<?php print $file_type; ?>" />
@@ -309,7 +267,7 @@ $max_filesize=ini_get('upload_max_filesize');
 			<div id="another_pub">
 				<table class="formtable">
 					<tr>
-						<th id="another_pub_p">Are the data issued from a publication?</th>
+						<td id="another_pub_p">Are the data issued from a publication?</td>
 						<td><input type="radio" onclick="add_another()" name="another_pub" id="another_pub_yes" value="yes" /> Yes</td>
 						<td><input type="radio" onclick="no_more()" checked="true" name="another_pub" id="another_pub_no" value="no" /> No</td>
 					</tr>

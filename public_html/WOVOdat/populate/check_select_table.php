@@ -13,51 +13,37 @@ if ($_SESSION['permissions']['access']!=0) {
 	exit();
 }
 
+
+include 'php/include/header.php'; 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/gif2/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
+
+<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
 	
 <style type="text/css" media=screen>
-<!--
-ul{width:760px;margin-bottom:10px; overflow:hidden;}
-li{line-height:1.5em; float:left; display:inline;}
-#six li { width:16.666%; } /* 6 col */
--->
+	#six li { width:16.666%; display:inline; float:left; line-height:1.5em; } /* 6 col */
 </style>
 
-</head>
-<body>
+<?php
 
-	<div id="wrapborder">
-	<div id="wrap">
-		<div id="headershadow">
-			<?php include 'php/include/header_beta.php'; ?>
-		</div>
+include 'php/include/menu.php'; 
 
-		<!-- Content -->
-		<div id="content">
-			<div id="content_ref">
-			
-				<!-- Top of the page -->
-				<div id="top">
-					<!-- Aligned to the right: You are logged in as username (FName LName | Obs) | Logout -->
-					<p>Login as <b><?php print $uname; ?></b> | <a href="logout.php">Logout</a></p>
-				</div>
+echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'>Home</a> > 
+<a href='http://{$_SERVER['SERVER_NAME']}/populate/home_populate.php'>Submit Data</a> > Tabel Check </div>";
 
+?>
+
+</div>  <!-- header-menu -->
+
+	<div class="body">
+
+		<div class="widecontent">
+	
 				<!-- Page content -->
 				<h1>Table selection</h1>
 				<p>Select the tables that you wish to check:</p>
 				<form method="post" action="check.php" name="check_select_table_form">
-				<input type="checkbox" name="select_all" onClick="checkUncheckAll(this)" /> Uncheck all  <!-- Nang added on 07-Mar-2013-->
+				<input type="checkbox" name="select_all" onClick="checkUncheckAll(this)" /> Uncheck all 
+				<br/><br/>
 					<ul id="six">
 						<li><input type="checkbox" name="select_table[]" value="cb" /> cb</li>
 						<li><input type="checkbox" name="select_table[]" value="cc" /> cc</li>
@@ -135,21 +121,22 @@ li{line-height:1.5em; float:left; display:inline;}
 						<li><input type="checkbox" name="select_table[]" value="vd_inf" /> vd_inf</li>
 						<li><input type="checkbox" name="select_table[]" value="vd_mag" /> vd_mag</li>
 						<li><input type="checkbox" name="select_table[]" value="vd_tec" /> vd_tec</li>
-						<li><input type="checkbox" name="select_table[]" value="ms" /> ms</li><!-- Nang added on 07-Mar-2013-->
-						<li><input type="checkbox" name="select_table[]" value="mi" /> mi</li><!-- Nang added on 07-Mar-2013-->
-						<li><input type="checkbox" name="select_table[]" value="med"/>med</li><!-- Nang added on 07-Mar-2013-->
+						<li><input type="checkbox" name="select_table[]" value="ms" /> ms</li>
+						<li><input type="checkbox" name="select_table[]" value="mi" /> mi</li>
+						<li><input type="checkbox" name="select_table[]" value="med" /> med</li>						
 					</ul>
 					<input type="submit" name="check_select_table_ok" value="OK" />
 				</form>
 
-			</div>
 		</div>
-		
-		<!-- Footer -->
-		<div id="footer">
-			<?php include 'php/include/footer_beta.php'; ?>
-		</div>
-		
-	</div>
-</body>
-</html>
+</div>
+
+<div class="footer">
+	<?php include 'php/include/footer.php'; ?>
+</div>
+
+</div>   <!-- header From header.php -->
+</div>   <!-- pagewrapper From header.php  -->
+</body>  <!-- body From header.php  -->
+
+</html>  <!-- html From header.php  -->

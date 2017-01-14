@@ -52,9 +52,12 @@ $phaseCode=getEruptionPhaseCode($edPhsId);  // Get station code from DB
 $filename=$_FILES['fname']['name'];
 $filesize=$_FILES['fname']['size'];
 
-$infile="C:/xampp/htdocs/home/wovodat/incoming/to_be_translated/".$filename;//prepare the name of inputfile
 
-$outputfilepath="C:/xampp/htdocs/home/wovodat/incoming/translated/";     //prepare the directory of output file
+//prepare the directory of output file
+$infile="../../../../incoming/to_be_translated/".$filename;       //prepare the name of inputfile
+$outputfilepath="../../../../incoming/translated/";              //prepare the directory of output file
+
+
 $outputfilename=substr($filename,0,-4).".xml"; 
 $outfile=$outputfilepath.$outputfilename;
 
@@ -211,7 +214,7 @@ while(!feof($handle)){
 		
 	}else if($conv == 'ed_for'){
 
-		$r	= "\n\t<Forecast code=\"$code\" volcano=\"$volcode\" phase=\"$phaseCode\"owner1=\"$observ\"$owner2$owner3$pubdate>\n";
+		$r	= "\n\t<Forecast code=\"$code\" volcano=\"$volcode\" phase=\"$phaseCode\" owner1=\"$observ\"$owner2$owner3$pubdate>\n";
 	
 		$r	= convert_xml($r,$newfileheader,$sortedline,$xmlheader);  // convert to xml
 	
@@ -219,7 +222,7 @@ while(!feof($handle)){
 
 	}else if($conv == 'ed_vid'){
 
-		$r	= "\n\t<Video code=\"$code\" volcano=\"$volcode\" eruption=\"$edCode\" phase=\"$phaseCode\"owner1=\"$observ\"$owner2$owner3$pubdate>\n";
+		$r	= "\n\t<Video code=\"$code\" volcano=\"$volcode\" eruption=\"$edCode\" phase=\"$phaseCode\" owner1=\"$observ\"$owner2$owner3$pubdate>\n";
 	
 		$r	= convert_xml($r,$newfileheader,$sortedline,$xmlheader);  // convert to xml
 	

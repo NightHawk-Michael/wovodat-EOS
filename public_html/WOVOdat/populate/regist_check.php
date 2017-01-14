@@ -4,46 +4,11 @@ This script checks the values entered in regist_form.php.
 If any error is found, the user is redirected back to the form page.
 Else, a confirmation email is sent to the user while they are redirected to the regist_wait_conf.php page.
 **********************************/
+if(!isset($_SESSION))
+	session_start();
 
 require_once("php/funcs/db_funcs.php");
-// Start session
-session_start();
-
-/* Nang commented out on 20-Aug-2013. Below links are not working on IE & safari.. 
-// Regenerate session ID
-session_regenerate_id(true);
-
-// If session already started
-if (isset($_SESSION['HTTP_USER_AGENT'])) {
-	if ($_SESSION['HTTP_USER_AGENT']!=md5($_SERVER['HTTP_USER_AGENT'])) {
-		// Destroy session variables
-		session_destroy();
-		
-		// Redirect to registration form
-		header('Location: '.$url_root.'regist_form.php');
-		exit();
-	}
-}
-
-// Else
-$_SESSION['HTTP_USER_AGENT']=md5($_SERVER['HTTP_USER_AGENT']);
-
-*/
-
-// Get root url
 require_once "php/include/get_root.php";
-
-/*
-// If button cancel was pressed, go back to welcome page
-if (isset($_POST['cancel'])) {
-	// Erase session data
-	if (isset($_SESSION['register'])) {
-		unset($_SESSION['register']);
-	}
-	header('Location: '.$url_root.'index.php');
-	exit();
-}
-
 
 // Direct access
 if (!isset($_POST['uname'])) {
@@ -52,6 +17,7 @@ if (!isset($_POST['uname'])) {
 	exit();
 }
 
+
 // Get posted fields
 $uname=trim($_POST['uname']);
 $password=crypt($_POST['password']);
@@ -59,10 +25,10 @@ $conf_password=crypt($_POST['conf_password']);
 $fname=trim($_POST['fname']);
 $lname=trim($_POST['lname']);
 
-if($_POST['obs'] == 'other'){                  // Nang added on 21-Nov-2013
-	$obs=trim($_POST['otherObs']);             // Nang added on 21-Nov-2013
-}else{                                         // Nang added on 21-Nov-2013
-	$obs=trim($_POST['obs']);                 // Nang added on 21-Nov-2013
+if($_POST['obs'] == 'other'){                  
+	$obs=trim($_POST['otherObs']);             
+}else{                                         
+	$obs=trim($_POST['obs']);                 
 }
 	
 $add1=trim($_POST['add1']);
@@ -77,7 +43,7 @@ $phone=trim($_POST['phone']);
 $phone2=trim($_POST['phone2']);
 $fax=trim($_POST['fax']);
 $com=trim($_POST['com']);
-$captcha=(trim($_POST['code']));       //Nang added
+$captcha=(trim($_POST['code']));
 
 // Store fields
 $_SESSION['register']['uname']=$_POST['uname'];
@@ -86,7 +52,7 @@ $_SESSION['register']['conf_password']=$_POST['conf_password'];
 $_SESSION['register']['fname']=$_POST['fname'];
 $_SESSION['register']['lname']=$_POST['lname'];
 $_SESSION['register']['obs']=$_POST['obs'];
-$_SESSION['register']['otherObs']=$_POST['otherObs'];    // Nang added on 21-Nov-2013
+$_SESSION['register']['otherObs']=$_POST['otherObs'];   
 $_SESSION['register']['add1']=$_POST['add1'];
 $_SESSION['register']['add2']=$_POST['add2'];
 $_SESSION['register']['city']=$_POST['city'];
@@ -99,8 +65,7 @@ $_SESSION['register']['phone']=$_POST['phone'];
 $_SESSION['register']['phone2']=$_POST['phone2'];
 $_SESSION['register']['fax']=$_POST['fax'];
 $_SESSION['register']['com']=$_POST['com'];
-$_SESSION['register']['captcha']=(trim($_POST['code']));  //Nang added
-
+$_SESSION['register']['captcha']=(trim($_POST['code']));
 
 // Check if user was already registered
 $count_table_name="cr";
@@ -131,6 +96,8 @@ if (!db_count($count_table_name, $count_field_name, $count_field_value, $num, $e
 			exit();
 	}
 }
+
+
 if ($num!=0) {
 	// User already registered
 	$_SESSION['register']['regist_error']=TRUE;
@@ -138,6 +105,7 @@ if ($num!=0) {
 	header('Location: '.$url_root.'regist_form.php');
 	exit();
 }
+
 
 // Check if user has already tried to register
 $count_table_name="cr_tmp";
@@ -168,6 +136,8 @@ if (!db_count($count_table_name, $count_field_name, $count_field_value, $num, $e
 			exit();
 	}
 }
+
+
 if ($num!=0) {
 	// User already registered
 	$_SESSION['register']['regist_error']=TRUE;
@@ -286,8 +256,7 @@ if (!db_insert($insert_table_name, $insert_field_name, $insert_field_value, FALS
 			exit();
 	}
 }
-/*
-When you active this Mail function, you need to change a few places such as $from (should be a sender email), $body (email contents including your website link). 
+
 
 // Send confirmation email
 // Include PEAR Mail package
@@ -310,6 +279,7 @@ else {
 		$user_name.=$obs;
 	}
 }
+
 
 // New mail object
 $mail=Mail::factory("mail");
@@ -341,56 +311,11 @@ if (PEAR::isError($mail)) {
 	header('Location: '.$url_root.'regist_error.php');
 	exit();
 }
+
 // Inform user that they will receive an email for confirming registration soon
 $_SESSION['register']['email_sent']=TRUE;
 header('Location: '.$url_root.'regist_wait_conf.php');
 exit();
-?>
-*/
 
-
-// Note:After activating above mail function, all below lines are needed to delete. Those are for using in localhost.
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>WOVOdat :: The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat), by IAVCEI</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<meta name="description" content="The World Organization of Volcano Observatories (WOVO): Database of Volcanic Unrest (WOVOdat)">
-	<meta name="keywords" content="Volcano, Vulcano, Volcanoes, Vulcanoes, Volcan, Vulkan, eruption, forecasting, forecast, predict, prediction, hazard, desaster, disaster, desasters, disasters, database, data warehouse, format, formats, WOVO, WOVOdat, IAVCEI, sharing, streaming, earthquake, earthquakes, seismic, seismicity, seismology, deformation, INSar, GPS, uplift, caldera, stratovolcano, stratovulcano">
-	<link href="/css/styles_beta.css" rel="stylesheet">
-	<link href="/gif/WOVOfavicon.ico" type="image/x-icon" rel="SHORTCUT ICON">
-	<script language="javascript" type="text/javascript" src="/js/scripts.js"></script>
-</head>
-<body>
-
-	<div id="wrapborder">
-	<div id="wrap">
-			<?php include 'php/include/header_beta.php'; ?>
-		<!-- Content -->
-		<div id="content">	
-			<div id="contentl">
-			<!-- Page content -->
-			<h1>Registration in progress</h1>
-			<br/>
-
-			<?php	
-				$_SESSION['register']['email_sent']=TRUE;
-				echo "<p> id= ".$cr_tmp_id.", email=".$email."</p>";
-				echo "<p>Click to <a href=\"regist_confirm.php?id=$cr_tmp_id&email=$email\">continue </a></p>";
-			
-			?>
-			</div>
-
-		</div>
-		
-		<!-- Footer -->
-			<div>
-				<?php include 'php/include/footer_main_beta.php'; ?>
-			</div>
-			
-	</div>
-</body>
-</html>
