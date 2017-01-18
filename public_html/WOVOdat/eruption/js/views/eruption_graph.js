@@ -39,6 +39,8 @@ define(function (require) {
             this.ed_stime_num = options.ed_stime_num;
             this.ed_etime_num = options.ed_etime_num;
 
+
+
         },
         eruptionTimeRangeChanged: function (selectingTimeRange) {
             this.selectingTimeRange  = selectingTimeRange;
@@ -233,18 +235,23 @@ define(function (require) {
         },
 
         setUpTimeranges: function (startTime, endTime) {
-            //this.serieGraphTimeRange.set({
-            //    'startTime': startTime,
-            //    'endTime': endTime,
-            //});
-            // console.log(this.serieGraphTimeRange);
+            this.serieGraphTimeRange.set({
+                'startTime': startTime,
+                'endTime': endTime,
+                'minX': startTime,
+                'maxX': endTime,
+            });
+             console.log(this.serieGraphTimeRange);
 
-            //this.serieGraphTimeRange.trigger('update', this.serieGraphTimeRange);
+            this.trigger('update');
             this.forecastsGraphTimeRange.set({
                 'startTime': startTime,
                 'endTime': endTime,
             });
             this.forecastsGraphTimeRange.trigger('update', this.forecastsGraphTimeRange);
+
+
+
 
         },
         prepareData: function () {

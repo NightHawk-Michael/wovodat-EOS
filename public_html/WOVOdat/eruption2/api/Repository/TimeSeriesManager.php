@@ -61,9 +61,11 @@ class TimeSeriesManager {
     //   return null;
     $serie['data'] = array();
     $data = array();
-    // var_dump($this->timeSeriesManagers);
+
+
 
     foreach ($this->timeSeriesManagers as $type => $class){
+//      var_dump($class);
       if($type == $serie['category']){
         $temp = $class->getStationData($serie);
 
@@ -73,6 +75,7 @@ class TimeSeriesManager {
       }
     }
     $serie["data"] = $data;
+//        var_dump($serie);
     return $serie;
   }
 

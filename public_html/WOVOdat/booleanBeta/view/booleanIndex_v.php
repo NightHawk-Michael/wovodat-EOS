@@ -20,7 +20,11 @@
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/custom.css">
     <link rel="stylesheet" href="/css/nouislider.min.css">
-    <link rel="stylesheet prefetch" href="https://cdn.rawgit.com/chingyawhao/materialize-clockpicker/master/dist/css/materialize.clockpicker.css">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<link rel="stylesheet" href="/css/material-datetime-picker.css">
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/jquery.min.js"></script>
 
@@ -37,7 +41,10 @@
     <script type="text/javascript" src="/js/materialize.min.js"></script>
     <script type="text/javascript" src="/js/nouislider.min.js"></script>
     <script src="/js/locationpicker.jquery.js"></script>
-    <script src="https://cdn.rawgit.com/chingyawhao/materialize-clockpicker/master/dist/js/materialize.clockpicker.js"></script>
+	<script src="https://unpkg.com/babel-polyfill@6.2.0/dist/polyfill.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/rome/2.1.22/rome.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
+	<script src="/js/material-datetime-picker.js"></script>
 
     <!-- Google Map Api requires browser key to function! key used here key=AIzaSyCbWJuHGfa_2MzsOL2ARASmqV2JyCpdmm8 -->
 	<!-- To upload to server, a modification of browser key may need to be done! -->
@@ -141,8 +148,10 @@
 					</div>
 					<div id="edTime_wrapper" class="row">
 						<p class="data-header col s3">Eruption Time:</p>
-						<input placeholder="Date" class = "col s3 datepicker" type="date" name="edTimeMin" id="edTimeMin"  style = ' font-size:inherit; width: 10%'>
-                        <input placeholder="Time" class = "col s3 timepicker" type="date" name="edTimeMin" id="edTimeMin"  style = 'font-size:inherit;width: 9%'>
+						<a class="c-btn c-datepicker-btn">
+							<span class="material-icon">Open date picker</span>
+						</a>
+                        <input placeholder="Time" class = "col s12 datetime " type="date" name="edTimeMin" id="edTimeMin"  style = 'font-size:inherit;width: 9%'>
 						<p class="col s2" style ="width:11%">&lt;=Range&lt;= </p>
 						<input placeholder="Date" class = "col s3 datepicker" type="date" name="edTimeMax" id="edTimeMax"  style = 'font-size:inherit;width: 10%'>
                         <input  placeholder="Time" class = "col s3 timepicker" type="date" name="edTimeMax" id="edTimeMax"  style = 'font-size:inherit;width: 9%'>
@@ -253,12 +262,11 @@
 					</div> -->
 					<div id="advSearchId" class=" innerData collapse row">
 						<div id="searchPeriod" class = "row">
-
                             <div class = "col s3">Priority Time Period: </div>
                             <div class = "col s1">Start:</div>
-                            <input disabled class = "col s2 " type="datetime" name="timeMin" id="timeMin" style = "width:18%" >
+                            <input disabled class = "col s2 datetime" type="datetime" name="priorityTimeMin" id="priorityTimeMin" style = "width:18%" >
                             <div class = "col s1">End:</div>
-                            <input disabled  class = "col s3 " type="datetime" name="timeMax" id="timeMax" style = "width:18%">
+                            <input disabled  class = "col s3 " type="datetime" name="priorityTimeMax" id="priorityTimeMax" style = "width:18%">
 						</div>
                         <div id="slider-range" class = "row col s10"></div>
 

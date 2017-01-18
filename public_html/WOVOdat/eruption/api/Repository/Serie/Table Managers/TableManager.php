@@ -170,7 +170,16 @@ abstract class TableManager implements TableManagerInterface {
 		$db->query($query, $id1,$id2);
 
 		$res = $db->getList();
+		if (empty($res)){
+			$query1 = "SELECT `sn_id` FROM " . $this->table_name . " WHERE `ss_id`=" . $id1;
+			$db->query($query1);
+			$sn_id = $db->getValue();
+			$query = str_replace("a.ss_id","sn_id" ,$query);
 
+			$db->query($query, $sn_id,$sn_id);
+
+			$res = $db->getList();
+		}
 		foreach ($res as $row) {
 			//add value attributes
 

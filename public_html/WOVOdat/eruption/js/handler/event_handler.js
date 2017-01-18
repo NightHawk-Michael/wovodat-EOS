@@ -75,6 +75,8 @@ define(function(require) {
       this.listenTo(this.selectingTimeSeries, 'change', this.selectingTimeSeriesChangedCheck);
       this.listenTo(this.selectingEruptions, 'add', this.changeSelectingEruptions);
       this.listenTo(this.serieGraphTimeRange,'update',this.serieGraphTimeRangeChanged);
+      this.listenTo(this.eruptionGraph,'update',this.eruptionGraphTimeRangeChanged);
+
 
       this.listenTo(this.forecastsGraphTimeRange,'update',this.forecastsGraphTimeRangeChanged);
       this.listenTo(this.selectingTimeRange,'update',this.selectingTimeRangeChanged);
@@ -198,8 +200,12 @@ define(function(require) {
     },
 
     serieGraphTimeRangeChanged: function(e){
-      console.log("TIMERANGE CHANGE");
       this.eruptionGraph.eruptionTimeRangeChanged(this.serieGraphTimeRange);
+      this.timeSeriesGraphContainer.serieGraphTimeRangeChanged(this.serieGraphTimeRange);
+
+    },
+    eruptionGraphTimeRangeChanged: function(e){
+      //console.log(this.serieGraphTimeRange;
       this.timeSeriesGraphContainer.serieGraphTimeRangeChanged(this.serieGraphTimeRange);
 
     },

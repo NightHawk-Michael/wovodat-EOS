@@ -33,6 +33,7 @@ abstract class TableManager implements TableManagerInterface {
 	protected function getStationCodeQuery($sta_id){
 		$table_name = $this->getTableNameFromIdName($sta_id);
 		$sta_id_code_query = "SELECT DISTINCT ".$table_name."_id as sta_id, " . $table_name ."_code as sta_code FROM $table_name order by sta_id";
+
 		return $sta_id_code_query;
 	}
 	protected function getStationIdCodeDictionary(){
@@ -67,7 +68,6 @@ abstract class TableManager implements TableManagerInterface {
 	abstract protected function setStationID(); // column names represent stationID1,station ID2
 	protected function setDataCode(){
 		$code =  substr($this->table_name,3,strlen($this->table_name)-3) ."_code";
-//		var_dump($code);
 		return $code;
 
 	}
@@ -149,7 +149,6 @@ abstract class TableManager implements TableManagerInterface {
  	}
 
   	public function getStationData($stations){
-  		
 		$this->vd_long = $stations["vd_long"];
 		$this->vd_lat = $stations["vd_lat"];
   		$id1 = $stations["station_id1"];
@@ -163,6 +162,7 @@ abstract class TableManager implements TableManagerInterface {
 		$stationDataParams = $this->setStationDataParams($stations['component']);
 		$errorbar = $stationDataParams["errorbar"];
 		$query = $stationDataParams["query"];
+
 		//Add select data code from query. Add in this tableManager to apply all data.
 		$temp =  "select a." . $this->data_code ." as data_code, cc_id, cc_id2, cc_id3, cb_ids,";
 
@@ -171,6 +171,17 @@ abstract class TableManager implements TableManagerInterface {
 		$db->query($query, $id1,$id2);
 
 		$res = $db->getList();
+
+		if (empty($res)){
+			$query1 = "SELECT `sn_id` FROM " . $this->table_name . " WHERE `ss_id`=" . $id1;
+			$db->query($query1);
+			$sn_id = $db->getValue();
+			$query = str_replace("a.ss_id","sn_id" ,$query);
+
+			$db->query($query, $sn_id,$sn_id);
+
+			$res = $db->getList();
+		}
 
 		foreach ($res as $row) {
 			//add value attributes

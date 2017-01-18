@@ -60,7 +60,7 @@ define(function (require) {
             this.maxX = TimeRange.get('maxX');
             this.overviewGraphMinX = TimeRange.get('overviewGraphMinX');
             this.overviewGraphMaxX = TimeRange.get('overviewGraphMaxX');
-            // this.render();
+             this.render();
             //console.log(this.filters);
             // put this new time range into filter as attributes.
             //this.prepareData();

@@ -109,13 +109,13 @@ $(document).ready( function() {
             //End date
             var date1 =  new Date(parseInt(value));
             var endTimeStr = date1.getDate() + "-" + (date1.getMonth()+1) + "-" + date1.getFullYear() + " " + date1.getHours() + ":" + date1.getMinutes() + ":" +  date1.getSeconds();
-            $("#timeMax").val(endTimeStr);
+            $("#priorityTimeMax").val(endTimeStr);
             //inputNumber.value = value;
         } else {
             //start date
             var date0 =  new Date(parseInt(value));
             var startTimeStr = date0.getDate() + "-" + (date0.getMonth()+1) + "-" + date0.getFullYear() + " " + date0.getHours() + ":" + date0.getMinutes() + ":" +  date0.getSeconds();
-            $("#timeMin").val(startTimeStr);
+            $("#priorityTimeMin").val(startTimeStr);
             //select.value = Math.round(value);
         }
 
@@ -410,20 +410,47 @@ var addTimePicker = function(){
         format: 'yyyy-mm-dd',
         selectYears: 100 // Creates a dropdown of 15 years to control year
     });
-    $('.timepicker').pickatime({
-        default: 'now',
-        twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
-        donetext: 'OK',
-        autoclose: true,
-        format: 'hh:mm:ss',
-        vibrate: true // vibrate the device when dragging clock hand
-    });
+    //$('.timepicker').pickatime({
+    //    default: 'now',
+    //    twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
+    //    donetext: 'OK',
+    //    autoclose: true,
+    //    format: 'hh:mm:ss',
+    //    vibrate: true // vibrate the device when dragging clock hand
+    //});
+
+    var picker = new MaterialDatetimePicker({})
+        .on('submit', function(d) {
+            output.innerText = d;
+        });
+
+    var el = document.querySelector('.c-datepicker-btn');
+    el.addEventListener('click', function() {
+        picker.open();
+    }, false);
+
+
 
 
     //$("input[name$='TimeMin']").addClass("PriorityTime").datetimepicker(datetimepicker_option);
     //$("input[name$='TimeMax']").addClass("PriorityTime").datetimepicker(datetimepicker_option);
 
 };
+function dateFormat(date, fmt) {
+    var o = {
+        "M+": date.getMonth() + 1,
+        "d+": date.getDate(),
+    };
+    if (/(y+)/.test(fmt)){
+        fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+    }
+    for (var k in o) {
+        if (new RegExp("(" + k + ")").test(fmt)){
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        }
+    }
+    return fmt;
+}
 
 function addGoogleMap() {
 
