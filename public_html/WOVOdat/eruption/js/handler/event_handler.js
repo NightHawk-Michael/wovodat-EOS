@@ -163,6 +163,7 @@ define(function(require) {
     },
 
     changeSelectingEruptions: function(e){
+      this.eruptionGraph.initialEruption(this.eruptionSelect.availableEruptions);
       this.eruptionGraph.changeEruption(e,this.selectingTimeRange);
       this.eruptionForecastsGraph.changeEruption(e);
     },

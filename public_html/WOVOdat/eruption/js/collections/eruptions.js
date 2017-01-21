@@ -25,26 +25,32 @@ define(function(require) {
       });
     },
     getAvailableEruptions: function(timeRange){
-      
+      var result = [];
+
       if(timeRange == undefined){
-        // console.log(this.models);
         return this.models;
-      }else{
-        var result = [];
+      }else {
+
         var startTime = timeRange.get('minX');
         var endTime = timeRange.get('maxX');
-        for(var i=0;i<this.models.length;i++){
-          var mo =  this.models[i];
-          var edStime  =  mo.get('ed_stime');
-          var edEtime  =  mo.get('ed_etime');
-          if (edStime<endTime && edEtime> startTime){
-            result.push(mo);
-          }
+
+      }
+      if (startTime == undefined || endTime == undefined){
+        startTime = -100000000000000;
+        endTime =  new Date().getTime();
+      }
+      for(var i=0;i<this.models.length;i++){
+        var mo =  this.models[i];
+        var edStime  =  mo.get('ed_stime');
+        var edEtime  =  mo.get('ed_etime');
+        if (edStime<endTime && edEtime> startTime){
+          result.push(mo);
         }
+      }
 
         // console.log(this.models.length);
-        return result;
-      }
+      return result;
+
     }
   });
 });

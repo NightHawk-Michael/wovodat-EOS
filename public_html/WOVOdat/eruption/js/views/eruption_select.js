@@ -26,9 +26,7 @@ define(function(require) {
       this.ed_stime_num = options.ed_stime_num;
       this.ed_etime_num = options.ed_etime_num;
       this.selectingTimeRange = options.selectingTimeRange;
-      // this.setUpTimeRange(this.ed_stime_num,this.ed_etime_num);
-      //this.showEruption();
-      //console.log(this.selectingEruptions);
+
 
     },
     
@@ -37,13 +35,41 @@ define(function(require) {
       this.eruptions.changeVolcano(vd_id);
       this.eruptionForecasts.changeVolcano(vd_id);
       this.availableEruptions = this.eruptions.getAvailableEruptions(this.selectingTimeRange);
-      //console.log(this.eruptions);
-      // this.show(); // newly changed
     },
 
     changeEruption: function(selectingEruption) {
       this.$el.find('select').val(selectingEruption.get('ed_id'));
       this.$el.find('select').change();
+    },
+
+    displayEruptionGraph: function(ed_id){
+      if(ed_id == -1){
+        this.selectingEruptions.add(new Eruption({'ed_id':-1})); // select ----
+      }else{
+        this.selectingEruptions.add(this.eruptions.get(ed_id));
+      }
+      //console.log(this.selectingEruptions);
+      var ed_etime = this.selectingEruptions.models[0].attributes.ed_etime;
+      var ed_stime = this.selectingEruptions.models[0].attributes.ed_stime;
+      var hash = Backbone.history.location.hash;
+      hash = hash.substring(1);
+      var params=hash.split('&');
+      var options  =[];
+      for(var i = 0 ;i< params.length;i++){
+        var keyVal = params[i].split('=');
+        if(!(keyVal[0] == "ed_stime" || keyVal[0] == 'ed_etime')){
+          options.push(params[i]);
+        }
+      }
+      hash = "";
+      for(var i = 0;i<options.length;i++){
+        if(i!=0){
+          hash += '&';
+        }
+        hash += options[i];
+      }
+      hash = hash + "&ed_stime="+ed_stime+"&ed_etime="+ed_etime;
+      Backbone.history.navigate(hash);
     },
     selectingTimeRangeChanged: function(timeRange){
       // only show eruptions within that timeRange
@@ -77,6 +103,7 @@ define(function(require) {
         }
         this.selectingEruptions.reset();
         this.selectingEruptions.add(this.eruptions.get(ed_id));
+
         this.render();
       }
     },
@@ -87,6 +114,7 @@ define(function(require) {
       if(selectingEruption == undefined){
         selectingEruption = new Eruption({'ed_id':-1});
       }
+
       this.$el.html(this.template({
         eruptions: this.availableEruptions,
         eruptionsNotAvailable: this.availableEruptions.notAvailable,
@@ -97,41 +125,12 @@ define(function(require) {
 
     onChangeEruption: function() {
       var ed_id = this.$el.find('select').val();
+
       // if(ed_id)
       // var startTime = this.collection.get(ed_id).get('ed_stime');
       this.selectingEruptions.reset();
-      if(ed_id == -1){
-        this.selectingEruptions.add(new Eruption({'ed_id':-1})); // select ----
-      }else{
-        this.selectingEruptions.add(this.eruptions.get(ed_id));
-      }
-      //console.log(this.selectingEruptions);
-      var ed_etime = this.selectingEruptions.models[0].attributes.ed_etime;
-      var ed_stime = this.selectingEruptions.models[0].attributes.ed_stime;
-      var hash = Backbone.history.location.hash;
-      hash = hash.substring(1);
-      var params=hash.split('&');
-      var options  =[];
-      for(var i = 0 ;i< params.length;i++){
-        var keyVal = params[i].split('=');
-        
-        if(!(keyVal[0] == "ed_stime" || keyVal[0] == 'ed_etime')){
-          options.push(params[i]);
-        }
-        
-      }
-      hash = "";
-      for(var i = 0;i<options.length;i++){
-        if(i!=0){
-          hash += '&';
-        }
-        hash += options[i];
-      }
-      hash = hash + "&ed_stime="+ed_stime+"&ed_etime="+ed_etime;
-      Backbone.history.navigate(hash);
-      // this.selectingEruption.set('ed_id', ed_id);
-      // this.selectingEruption.trigger('change');
-      // this.observer.trigger('change', this.selectingEruption);
+      this.displayEruptionGraph(ed_id);
+
     },
 
     //hide eruption_select from page

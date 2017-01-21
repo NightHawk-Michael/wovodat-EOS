@@ -24,6 +24,8 @@ var maxSelectedDropdownbox = 2;
 
 
 $(document).ready( function() {
+    'use strict';
+
     // Display location tag when the browser is online
     addLocationTag();
     addTimePicker();
@@ -418,16 +420,19 @@ var addTimePicker = function(){
     //    format: 'hh:mm:ss',
     //    vibrate: true // vibrate the device when dragging clock hand
     //});
+    $('#edTimeMin').datetimepicker();
+    $('#edTimeMax').datetimepicker();
 
-    var picker = new MaterialDatetimePicker({})
-        .on('submit', function(d) {
-            output.innerText = d;
-        });
 
-    var el = document.querySelector('.c-datepicker-btn');
-    el.addEventListener('click', function() {
-        picker.open();
-    }, false);
+    //var picker = new MaterialDatetimePicker({})
+    //    .on('submit', function(d) {
+    //        output.innerText = d;
+    //    });
+    //
+    //var el = document.querySelector('.c-datepicker-btn');
+    //el.addEventListener('click', function() {
+    //    picker.open();
+    //}, false);
 
 
 

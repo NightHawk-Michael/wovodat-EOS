@@ -7,7 +7,7 @@ $(document).ready(function() {
 	addHoverSubMenu4();
 	addHoverSubMenu5();
 	addHoverSubMenu6();
-	addSlideShow();
+	//addSlideShow();
 });
 
 var addMenuHover = function () {

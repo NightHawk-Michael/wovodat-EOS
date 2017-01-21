@@ -28,6 +28,7 @@
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/jquery.min.js"></script>
 
+
 	<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -55,7 +56,9 @@
 
 <body>
 	<!--Import jQuery before materialize.js-->
-
+	<link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.css"/ >
+	<script src="/jquery.js"></script>
+	<script src="/js/jquery.datetimepicker.full.min.js"></script>
 	<h2>WOVOdat Boolean Search Form (Beta Version)</h2>
 	<h4 style="text-align:center">Only Network Events and Sampled Gas options are working</h4>
 	<img src="/boolean/view/loader.gif" id="loadingGif">
@@ -148,13 +151,13 @@
 					</div>
 					<div id="edTime_wrapper" class="row">
 						<p class="data-header col s3">Eruption Time:</p>
-						<a class="c-btn c-datepicker-btn">
-							<span class="material-icon">Open date picker</span>
-						</a>
-                        <input placeholder="Time" class = "col s12 datetime " type="date" name="edTimeMin" id="edTimeMin"  style = 'font-size:inherit;width: 9%'>
+						<div class = "col s2">
+							<input id="edTimeMin" type="text" name = "edTimeMin" style  = "font-size: inherit">
+						</div>
 						<p class="col s2" style ="width:11%">&lt;=Range&lt;= </p>
-						<input placeholder="Date" class = "col s3 datepicker" type="date" name="edTimeMax" id="edTimeMax"  style = 'font-size:inherit;width: 10%'>
-                        <input  placeholder="Time" class = "col s3 timepicker" type="date" name="edTimeMax" id="edTimeMax"  style = 'font-size:inherit;width: 9%'>
+						<div class = "col s2">
+							<input id="edTimeMax" type="text" name = "edTimeMax" style  = "font-size: inherit">
+						</div>
 					</div>
 				</div>
 
