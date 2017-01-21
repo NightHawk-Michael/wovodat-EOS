@@ -144,6 +144,7 @@ define(function(require) {
               max: this.endTime,
               autoscale: true,
               mode: 'time',
+              ticks: 6,
               timeformat: '%d-%b-%Y'
             },
             yaxis: {

@@ -26,6 +26,7 @@ define(function(require) {
     
     selectingFiltersChanged: function(selectingFilters) {
       this.selectingFilters = selectingFilters;
+      console.log(this.selectingFilters);
       if(selectingFilters.empty){
         this.hide();
       }

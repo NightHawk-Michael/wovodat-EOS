@@ -19,11 +19,8 @@ define(function (require) {
             var numStep = 7;
             /** compute exponential Degree **/
             var expDeg = undefined
-            if (this.exponentialDegree(min) < this.exponentialDegree(max)) {
-                expDeg = this.exponentialDegree(max);
-            } else {
-                expDeg = this.exponentialDegree(min)
-            }
+            expDeg = Math.max(this.exponentialDegree(min),this.exponentialDegree(max));
+
             var step = this.roundNumber((max - min) / numStep, expDeg); // step of ticks
             //if step is 0.xxx in computing exponential Degree, decrement expDeg
             while (step == 0) {
@@ -171,6 +168,8 @@ define(function (require) {
                     data.push(this.formatGraphAppearance(list, filter.timeSerie.getName(), filterName, styleParams));
 
 
+
+
                 }
 
 
@@ -307,7 +306,7 @@ define(function (require) {
         roundNumber: function (numberStr, desExpDegree) {
             var desCoe; // destination Coefficient
             var number = parseFloat(numberStr)
-            number = number / Math.pow(10, desExpDegree);
+                number = number / Math.pow(10, desExpDegree);
             //   var sourceExpDegree = this.exponentialDegree(number); //expoential Degree of this number
 
             //   var sourceCoe = this.coefficient(number);
@@ -317,14 +316,14 @@ define(function (require) {
             // }else{
             //    desCoe = 0;
             //  }
+
             number = Math.ceil(number);
             return number * Math.pow(10, desExpDegree);
         },
         exponentialDegree: function (v) {
-            var value = v.toExponential();
-            var a = value.toString().split("e")[1];
-            var exp = parseInt(a);
-            return exp;
+            var s = Math.abs(parseInt(v)).toString();
+            return s.length -1;
+
         },
         /** no decimal place **/
         coefficient: function (value) {

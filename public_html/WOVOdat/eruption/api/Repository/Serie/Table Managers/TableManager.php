@@ -162,6 +162,7 @@ abstract class TableManager implements TableManagerInterface {
 		$stationDataParams = $this->setStationDataParams($stations['component']);
 		$errorbar = $stationDataParams["errorbar"];
 		$query = $stationDataParams["query"];
+
 		//Add select data code from query. Add in this tableManager to apply all data.
 		$temp =  "select a." . $this->data_code ." as data_code, cc_id, cc_id2, cc_id3, cb_ids,";
 
@@ -180,10 +181,12 @@ abstract class TableManager implements TableManagerInterface {
 
 			$res = $db->getList();
 		}
+
 		foreach ($res as $row) {
 			//add value attributes
 
-            $temp = array("value" => floatval(number_format($row["value"], 2, '.', ',')));
+            $temp = array("value" => floatval($row["value"]));
+
 			//add time value attributes (time or (etime, stime))
 			if(array_key_exists("time", $row)){
 				$time = strtotime($row["time"]);
@@ -254,7 +257,7 @@ abstract class TableManager implements TableManagerInterface {
 		$result["errorbar"] = $errorbar;
 		$result["data"] = $data;
 		$result["unit"] = $unit;
-		// var_dump($result);
+//		 var_dump($result);
 		return $result;
   	}
 	/*

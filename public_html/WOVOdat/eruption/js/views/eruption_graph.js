@@ -143,14 +143,16 @@ define(function (require) {
                     max: maxVEI + 1,
                     tickSize: 1,
                     zoomRange: false,
+
                     labelWidth: 60,
                     label : 'VEI',
                 },
 
-                pan: {
+
+                zoom: {
                     interactive: true
                 },
-                zoom: {
+                pan: {
                     interactive: true
                 }
             };
@@ -183,16 +185,13 @@ define(function (require) {
             }
 
 
-
-
-
             el.width('auto');
             el.height(150);
             el.addClass("eruption-graph card-panel");
 
             var eventDataZoom = {
-                startTime: this.startTime,
-                endTime: this.endTime,
+                startTime: this.overviewGraphTimeRange.get('startTime'),
+                endTime: this.overviewGraphTimeRange.get('endTime'),
                 data: graph_pram_data,
                 graph: this.graph,
                 el: this.$el,
@@ -200,8 +199,8 @@ define(function (require) {
                 original_option: option
             };
             var eventDataPan = {
-                minX: Math.min(this.startTime, this.overviewGraphTimeRange.get('startTime')),
-                maxX: Math.max(this.endTime, this.overviewGraphTimeRange.get('endTime')),
+                minX: this.overviewGraphTimeRange.get('startTime'),
+                maxX: this.overviewGraphTimeRange.get('endTime'),
                 data: graph_pram_data,
                 graph: this.graph,
                 el: this.$el,
@@ -211,15 +210,18 @@ define(function (require) {
             var eventDataHover = {
                 // ed_phs_data_type: data.ed_phs_data_type
             };
-            el.unbind('plotHover');
+            el.unbind('plotpan');
+
+            el.bind('plotpan', eventDataPan, this.onPan);
+            el.unbind('plothover');
             el.bind('plothover', eventDataHover, this.onHover);
             el.unbind('plotzoom');
             el.bind('plotzoom', eventDataZoom, this.onZoom);
-            el.unbind('plotpan');
-            el.bind('plotpan', eventDataPan, this.onPan);
+
             this.graph = $.plot(el, graph_pram_data, option);
         },
         onPan: function (event, plot) {
+            console.log("PAN");
             var option = event.data.original_option;
             var xaxis = plot.getXAxes()[0];
             var data = event.data.data;
@@ -242,6 +244,7 @@ define(function (require) {
             }
         },
         onZoom: function (event, plot) {
+            console.log("ZOOM");
             var option = event.data.original_option;
             var xaxis = plot.getXAxes()[0];
             var data = event.data.data;
