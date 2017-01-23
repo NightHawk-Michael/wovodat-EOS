@@ -143,7 +143,7 @@ define(function (require) {
                     max: maxVEI + 1,
                     tickSize: 1,
                     zoomRange: false,
-
+                    panRange: false,
                     labelWidth: 60,
                     label : 'VEI',
                 },
@@ -221,7 +221,6 @@ define(function (require) {
             this.graph = $.plot(el, graph_pram_data, option);
         },
         onPan: function (event, plot) {
-            console.log("PAN");
             var option = event.data.original_option;
             var xaxis = plot.getXAxes()[0];
             var data = event.data.data;
@@ -244,7 +243,6 @@ define(function (require) {
             }
         },
         onZoom: function (event, plot) {
-            console.log("ZOOM");
             var option = event.data.original_option;
             var xaxis = plot.getXAxes()[0];
             var data = event.data.data;

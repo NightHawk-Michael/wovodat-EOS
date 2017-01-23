@@ -1,4 +1,4 @@
-(function($) {
+﻿(function($) {
 
 	function init(plot) {
 		plot.hooks.processOptions.push(addLastDrawHook);

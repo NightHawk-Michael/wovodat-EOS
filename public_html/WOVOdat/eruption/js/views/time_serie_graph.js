@@ -38,12 +38,20 @@ define(function (require) {
             this.id = this.filters.timeSerie.get("sr_id") + "." + this.filters.filterAttributes[0].name;
             this.$el.attr('id', this.id);
             this.hasErrorBar = this.filters.timeSerie.get('data').errorbar;
-            // this.owner = this.filters.timeSerie.get('data').
+            console.log(this.filters.timeSerie.get('data').data);
+            this.owner = (this.filters.timeSerie.get('data').data[0]).data_owner[0];
+            this.owner_link = (this.filters.timeSerie.get('data').data[0]).data_owner[1];
+            this.reference = (this.filters.timeSerie.get('data').data[0]).reference[0];
+            this.ref_link = (this.filters.timeSerie.get('data').data[0]).reference[1];
             var preHtml = Handlebars.compile(template);
             var options = {
                 id: this.id,
                 hasErrorBar: this.hasErrorBar,
-                owner: ""
+                owner: this.owner,
+                owner_link:  this.owner_link,
+                reference: this.reference,
+                ref_link:  this.ref_link,
+
             };
             var html = preHtml(options);
             this.$el.html(html);
@@ -98,7 +106,7 @@ define(function (require) {
             if (e.currentTarget.id == ("csv." + this.id)) {
                 this.popUpInfoForm();
             }
-            // if(e.currentTarget.id == )
+
         },
         showFunctions: function () {
             //checkbox
@@ -293,6 +301,7 @@ define(function (require) {
                 this.data = undefined;
                 return;
             }
+            console.log(this.data);
             var filters = [this.filters];
             var allowErrorbar = this.allowErrorBar;
             var allowAxisLabel = true;
@@ -341,8 +350,10 @@ define(function (require) {
                 }
 
                 var value = data[p].value;
-                // var dataOwner  =   data[p].data_owner.join(",");
-                var dataOwner  =  this.filters.dataOwner;
+                var owner = data[p].data_owner[0];
+                var owner_link = data[p].data_owner[1];
+                var dataOwner  =   owner + " - " + owner_link;
+                //var dataOwner  =  this.filters.dataOwner;
                 var station = this.filters.timeSerie.get("station_code1");
                 var dataCode = data[p].data_code;
                 var network =  this.filters.timeSerie.get("short_data_type");
@@ -413,32 +424,44 @@ define(function (require) {
                 data : "check_token",
                 token : token,
             }
-
-            var volcanoName = this.filters.timeSerie.attributes.volcanoName;
-            var filterName =  this.filters.filterAttributes[0].name;
-            var dataType = this.filters.timeSerie.attributes.component +" (" + filterName + ")";
-            var dataDownload = {
-                data : "add_user",
-                id : new Date(),
-                name : name,
-                email : "",
-                institution: "",
-                vd_name : volcanoName,
-                dataType  : dataType
-            }
-            var URL = "/eruption/api/";
+            var URL = "/eruption2/api/";
             var tokenExists;
+            var self = this;
             $.get(URL,dataToken,function(data,status,xhr){
                 tokenExists = data;
                 if (tokenExists){
-                    $.get(URL, dataDownload );
-                    this.generateCSV();
+                    self.getDataForSendingEmail(URL,"","","");
+
                 }else{
                     $('#formPopup').openModal();
 
                 }
             },"json")
-            $('.submit-form').click(this,this.submitDownloadForm);
+
+        },
+        /**
+         * Prepare data for sending email and add to database
+         */
+        getDataForSendingEmail : function(URL,name,email,institution){
+            var startTimeStr = "";
+            var endTimeStr= "";
+            var volcanoName = this.filters.timeSerie.attributes.volcanoName;
+            var filterName =  this.filters.filterAttributes[0].name;
+            var dataType = this.filters.timeSerie.attributes.component +" (" + filterName + ")";
+            if (endTimeStr == "") endTimeStr = startTimeStr;
+
+            this.generateCSV();
+            var dataDownload = {
+                data : "add_user",
+                name : name,
+                email : email,
+                institution: institution,
+                vd_name : volcanoName,
+                dataType  : dataType,
+                startTimeStr: startTimeStr,
+                endTimeStr: endTimeStr
+            }
+            $.get(URL, dataDownload );
         },
         submitDownloadForm : function(e) {
             var self = e.data;

@@ -321,8 +321,10 @@ define(function (require) {
             return number * Math.pow(10, desExpDegree);
         },
         exponentialDegree: function (v) {
-            var s = Math.abs(parseInt(v)).toString();
-            return s.length -1;
+            v = v.toExponential();
+            var a =  v.toString().split("e")[1];
+            var exp = parseInt(a);
+            return exp;
 
         },
         /** no decimal place **/

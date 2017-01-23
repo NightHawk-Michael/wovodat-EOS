@@ -9,10 +9,10 @@ define(function(require) {
 
   return Backbone.View.extend({
     el: '',
-    
+
     initialize: function(options) {
       _(this).bindAll('onHover');
-      
+
       this.observer = options.observer;
       this.timeRange = options.timeRange;
 
@@ -21,21 +21,21 @@ define(function(require) {
       });
       this.eruptionForecasts = options.eruptionForecasts;
       this.data = this.prepareData();
-        
+
     },
 
     previousHover: {
       dataIndex: null,
       savedContent: null
     },
-    
+
     onHover: function(event, pos, item) {
       if(item!=undefined){
-       this.tooltip.update(pos, item, this.data.ed_forDataType[item.dataIndex]); 
-     }else{
-      this.tooltip.hide();
-     }
-      
+        this.tooltip.update(pos, item, this.data.ed_forDataType[item.dataIndex]);
+      }else{
+        this.tooltip.hide();
+      }
+
     },
 
     // onDataChange: function() {
@@ -60,24 +60,25 @@ define(function(require) {
     // },
 
     changeEruption: function(selectingEruption){
-
+      if(selectingEruption.get('ed_id') == -1){
+        this.hide();
+      }else{
         this.selectingEruption = selectingEruption;
         this.show();
-
+      }
 
     },
     forecastsGraphTimeRangeChanged: function(timeRange){
       this.startTime = timeRange.get('startTime');
       this.endTime = timeRange.get('endTime');
-      this.render();
-      
+      //this.render();
+
     },
-    
+
     //show eruption forecast graph
     show: function(){
-     this.data = this.prepareData();
-      this.render();
-
+      //this.data = this.prepareData();
+      //this.render();
     },
     //hide eruption cast graph
     hide: function(){
@@ -91,7 +92,7 @@ define(function(require) {
           ed_forData = [],
           ed_forDataType = [];
 
-      
+
       // if(this.eruptionForecasts == undefined){
       //   return;
       // }
@@ -108,12 +109,12 @@ define(function(require) {
       });
 
       // Saves prepared data to the view object.
-      
+
       return {
         ed_forData: ed_forData,
         ed_forDataType: ed_forDataType
-                }; 
-      
+      };
+
     },
     gernerateBarChartFlotData: function(data,color,label,dataType,name){
       return {
@@ -124,7 +125,7 @@ define(function(require) {
           show: true,
           fullparams: true,
           horizontal:true,
-          
+
 
         },
         dataType: dataType,
@@ -132,41 +133,40 @@ define(function(require) {
       }
     },
     render: function(options) {
-      var el = this.$el,
-          data = this.data.ed_forData,
-          option = {
-            grid: {
-              hoverable: true
-            },
-            xaxis: {
-              min: this.startTime,
-              max: this.endTime,
-              autoscale: true,
-              mode: 'time',
-              ticks: 6,
-              timeformat: '%d-%b-%Y'
-            },
-            yaxis: {
-              show:true,
-              canvas: false,
-              ticks: [0,1],
-              min:0,
-              max:1,
-              labelWidth: 60,
-              panRange: false
-            }
-          };
-      var graph_pram_data = [];
-      
-      graph_pram_data.push(this.gernerateBarChartFlotData(data,'#F44336','Alert Level','ed_for',""));
-        
-      
-      el.width('auto');
-      el.height(200);
-      el.addClass("eruption-forecasts-graph card-panel");
-
-      $.plot(el, graph_pram_data, option);
-      el.bind('plothover', this.onHover);
+      //var el = this.$el,
+      //    data = this.data.ed_forData,
+      //    option = {
+      //      grid: {
+      //        hoverable: true
+      //      },
+      //      xaxis: {
+      //        min: this.startTime,
+      //        max: this.endTime,
+      //        autoscale: true,
+      //        mode: 'time',
+      //        timeformat: '%d-%b-%Y'
+      //      },
+      //      yaxis: {
+      //        show:true,
+      //        canvas: false,
+      //        ticks: [0,1],
+      //        min:0,
+      //        max:1,
+      //        labelWidth: 60,
+      //        panRange: false
+      //      }
+      //    };
+      //var graph_pram_data = [];
+      //
+      ////graph_pram_data.push(this.gernerateBarChartFlotData(data,'#F44336','Alert Level','ed_for',""));
+      //
+      //
+      //el.width('auto');
+      //el.height(150);
+      //el.addClass("eruption-forecasts-graph card-panel");
+      //
+      //$.plot(el, graph_pram_data, option);
+      //el.bind('plothover', this.onHover);
     },
   });
 });

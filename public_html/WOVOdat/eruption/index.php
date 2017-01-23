@@ -13,7 +13,7 @@ echo "<div id='breadcrumbs'><a href='http://{$_SERVER['SERVER_NAME']}/index.php'
 
 	
 <link href="css/style.css" rel="stylesheet">
-<link href="css/materialize.css" rel="stylesheet">  
+<link href="css/materialize.css" rel="stylesheet">
 <link href="css/icon.css" rel="stylesheet">
 <link href="/css/tooltip.css" rel="stylesheet">
 

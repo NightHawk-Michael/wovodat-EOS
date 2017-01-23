@@ -8,6 +8,9 @@ define(function (require) {
         template = require('text!templates/time_serie_graph_container.html');
 
     return Backbone.View.extend({
+        events: {
+            'click #close': 'closePopUpForm'
+        },
         el: '',
         className: "time-series-graph-container",
         initialize: function (options) {
@@ -40,6 +43,9 @@ define(function (require) {
 
         // 	this.filterObserver.trigger("filter-change");
         // },
+        closePopUpForm: function(){
+            $('#formPopup').closeModal();
+        },
         addGraph: function (filters) {
             // var val = filter.get("filter");
             // selectingTimeSeries.
