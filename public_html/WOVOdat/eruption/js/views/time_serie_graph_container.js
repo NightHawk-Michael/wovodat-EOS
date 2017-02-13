@@ -113,7 +113,11 @@ define(function (require) {
                 this.graphs[i].show();
 
             }
-            ;
+            if (this.graphs.length == 0){
+                this.hide();
+
+            }
+
         },
 
     });
