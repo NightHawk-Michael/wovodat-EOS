@@ -38,7 +38,6 @@ define(function (require) {
             this.id = this.filters.timeSerie.get("sr_id") + "." + this.filters.filterAttributes[0].name;
             this.$el.attr('id', this.id);
             this.hasErrorBar = this.filters.timeSerie.get('data').errorbar;
-            console.log(this.filters.timeSerie.get('data').data);
             this.owner = (this.filters.timeSerie.get('data').data[0]).data_owner[0];
             this.owner_link = (this.filters.timeSerie.get('data').data[0]).data_owner[1];
             this.reference = (this.filters.timeSerie.get('data').data[0]).reference[0];
@@ -58,6 +57,7 @@ define(function (require) {
             this.allowErrorBar = true;
             this.token = "";
             this.prepareData();
+
         },
 
         timeRangeChanged: function (TimeRange) {
@@ -118,6 +118,10 @@ define(function (require) {
             if (checkbox[0] != undefined) {
                 checkbox[0].checked = !this.allowErrorBar;
             }
+
+            //data owner
+            var owner = $('[id="owner.' + this.id + '"]');
+            owner.css({display: "block"});
 
 
         },
@@ -301,7 +305,7 @@ define(function (require) {
                 this.data = undefined;
                 return;
             }
-            console.log(this.data);
+
             var filters = [this.filters];
             var allowErrorbar = this.allowErrorBar;
             var allowAxisLabel = true;

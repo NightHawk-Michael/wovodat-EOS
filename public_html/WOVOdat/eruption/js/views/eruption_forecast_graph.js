@@ -30,11 +30,12 @@ define(function(require) {
     },
     
     onHover: function(event, pos, item) {
-      if(item!=undefined){
-       this.tooltip.update(pos, item, this.data.ed_forDataType[item.dataIndex]); 
-     }else{
-      this.tooltip.hide();
-     }
+
+        if(item!=undefined){
+          this.tooltip.update(pos, item, this.data.ed_forDataType[item.dataIndex]);
+        }else{
+          this.tooltip.hide();
+        }
       
     },
 
@@ -124,6 +125,7 @@ define(function(require) {
           show: true,
           fullparams: true,
           horizontal:true,
+
           
 
         },
@@ -166,7 +168,11 @@ define(function(require) {
       el.addClass("eruption-forecasts-graph card-panel");
 
       $.plot(el, graph_pram_data, option);
-      el.bind('plothover', this.onHover);
+      var eventDataHover = {
+        // ed_phs_data_type: data.ed_phs_data_type
+      };
+      el.unbind('plothover');
+      el.bind('plothover', eventDataHover,this.onHover);
     },
   });
 });

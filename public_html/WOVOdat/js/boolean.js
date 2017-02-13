@@ -22,6 +22,11 @@ var maxSelectedMainCategory = 6;
  **************************************************/
 var maxSelectedDropdownbox = 2;
 
+/**
+ * multiselect
+ */
+var checkAll = ["feature","edPhase","rock","gd_plu_emit", "gd_plu_mass", "gd_plu_etot"];
+
 
 $(document).ready( function() {
     'use strict';
@@ -128,31 +133,36 @@ $(document).ready( function() {
      * Handle selection
      */
     $('select').material_select();
-    $('#feature_checkAll').click(function(){
-        $('select').material_select("destroy");
-        var isCheck = this.checked;
-        $("#feature > option").each(function() {
-                this.selected = isCheck;
+    var checkAll = ["feature","edPhase","rock","gd_plu_emit", "gd_plu_mass", "gd_plu_etot"];
 
-        });;
-        $('select').material_select();
-    });
-    $('#rock_checkAll').click(function(){
-        $('select').material_select("destroy");
-        var isCheck = this.checked;
+    for (var i = 0 ; i < checkAll.length; i++){
+        handleCheckAll(checkAll[i]);
 
-        $("#rock > option").each(function() {
-            this.selected = isCheck;
-
-        });;
-        $('select').material_select();
-    });
+    }
 
     disableMonitoringCheckbox();
 
 
 });
 
+var handleCheckAll = function(id){
+    var checkAll = "#" + id +"_checkAll";
+    var input = "#" + id + " > option";
+    $(checkAll).click(function(){
+        $('select').material_select("destroy");
+        var isCheck = this.checked;
+
+        $(input).each(function() {
+            this.selected = isCheck;
+
+        });
+        $('select').material_select();
+        if (id.indexOf("gd") >=0){
+            checkgdPluSpec(id);
+        }
+    });
+
+}
 var monitoringData = function() {
     var hasDrop = ["sd_evn_eqtype","gd_concentration","gd_plu_emit","gd_plu_mass","gd_plu_etot","gd_sol_tflux","gd_sol_high","gd_sol_htemp"];
     for (var i =0; i<hasDrop.length; i++) {
@@ -280,7 +290,22 @@ var removeRedundantDataToSubmit = function(){
 }
 
 var clearAllData = function(){
-    $("#featureSelect,#rockSelect,#eruptionSelect").multiselect("uncheckAll");
+
+    /*
+    uncheck all CheckAll
+     */
+    for (var i = 0 ; i < this.checkAll.length; i++){
+        var id = this.checkAll[i];
+        var checkAll = "#" + id +"_checkAll";
+        if ($(checkAll).prop("checked")){
+            $(checkAll).click();
+        }else{
+            $(checkAll).click();
+            $(checkAll).click();
+        }
+    }
+
+    $("#advSearchId  input").val("");
     $("input[name='veiMin']").val("");
     $("input[name='veiMax']").val("");
     $("input[name$='TimeMin']").datetimepicker( "setDate", "" );
@@ -293,6 +318,7 @@ var clearAllData = function(){
     $("label[id$='_hidden']").css("display","none");
     $("input[id='googleMap-radius']").val("");
     $("input[id='googleMap-location']").val("");
+    checkAdvanceSearch();
 };
 
 var monitoringDataInput = function(){
@@ -557,33 +583,39 @@ function checkgdPluFlag(type){
 
 function checkgdPluSpec(type){
     type = type.toLowerCase();
-    console.log(type);
-    var selectVal = $("#gd_plu_" + type).val();
+    var selectVal = $("#" + type).val();
 
     var template =  "<div class = \"row col s12\">" +
         "<p class = \"data-header col s2\">CO2:</p>" +
         "<div id='gd_plu_CO2' class='row col s9'>" +
-        "<input class= \"col s5\" type=\"text\" name=\"gd_plu_" + type + "_min_CO2\" id=\"gd_plu_" +type + "_min_CO2\">" +
+        "<input class= \"col s5\" type=\"text\" name=\"" + type + "_min_CO2\" id=\"" +type + "_min_CO2\">" +
         "<p class= \"col s2\" style=\"display:inline\">to</p>" +
-        "<input class= \"col s5\" type=\"text\" name=\"gd_plu_" + type +"_max_CO2\" id=\"gd_plu_" + type + "_max_CO2\"></div> </div>"
+        "<input class= \"col s5\" type=\"text\" name=\"" + type +"_max_CO2\" id=\"" + type + "_max_CO2\"></div> </div>"
     var contentGDPluSpec = "";
-    for (v in selectVal){
+
+    for (var v in selectVal){
         var t  = template.split("CO2").join(selectVal[v]);
         contentGDPluSpec +=t;
     }
-    $("#gd_plu_" + type + "_spec").html(contentGDPluSpec);
+    $("#" + type + "_spec").html(contentGDPluSpec);
 
 }
 
+/**
+ * Check all checkbox in mointoring data search to display approriate section in advanced search
+ */
 function checkAdvanceSearch(){
-    var checkBox = [];
-    $("#gd_plu_wrapper").css("display","none");
-    $("#gas").css("display","none");
-    $("#Monitoring_Data_Lists input:checked").each(function(){
-        checkBox.push($(this).attr('name'));
-        $("#gas").css("display","block");
-        $("#gd_plu_wrapper").css("display","block");
-
+    $("#Monitoring_Data_Lists input[class='checkBox']").each(function(){
+        if ($(this).attr('name') == "gd_plu"){
+            var temp = "#" + $(this).attr('name') + "_wrapper";
+            if ($(this).prop("checked")){
+                $("#gas").css("display","block");
+                $(temp).css("display","block");
+            }else{
+                $(temp).css("display","none");
+                $("#gas").css("display","none");
+            }
+        }
     });
 }
 

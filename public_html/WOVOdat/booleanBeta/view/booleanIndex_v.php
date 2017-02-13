@@ -134,12 +134,17 @@
 				</button>
 				<div id="Eruption_Inner_Group" class="innerData collapse col s10 offset-s2">
                     <!-- ERUPTION PHASE TYPE -->
-                    <br/>
+					<br>
 					<div id="edPhase_wrapper" class=" row">
 						<p class="data-header col s3">Eruption Phase Type: </p>
-						<select id = "edPhase" class = "col s6" id="eruptionSelect" name="eruption[]" multiple >
-                            <option value=""  label = "Choose your option" disabled selected>Choose your option</option>
-						</select>
+						<div id = "edPhaseSelect" class="input-field col s5">
+							<select id = "edPhase" class = "col s12" id="eruptionSelect" name="eruption[]" multiple >
+								<option value=""  label = "Choose your option" disabled selected>Choose your option</option>
+							</select>
+						</div>
+						<div class ="col s2">
+							<input type="checkbox" id ="edPhase_checkAll"/><label style = "color:black" for="edPhase_checkAll">Check All</label>
+						</div>
 					</div>
                     <!-- VEI -->
 					<div id="vei_wrapper" class="row" style="display: block;">
@@ -797,31 +802,38 @@
                                         <input class= "col s5" type="text" name="gd_plu_height_max" id="gd_plu_height_max">
                                     </div>
                                 </div>
-                                <div class = "row col s10">
-                                    <p class="data-header col s5">Gas Emission Rate:</p>
-                                    <div id = "" class="row col s6" >
-                                        <select id="gdPluEmitFlag" name="gdPluEmitFlag" onchange="checkgdPluFlag('Emit')">
-                                            <option  value="thresholdWithoutSpe">Apply Threshold without species</option>
-                                            <option value="thresholdWithSpe">Apply Threshold with species such as CO2,SO2,etc.</option>
-                                        </select>
-                                    </div>
-									<p class = "data-header col s5"></p>
+                                <div class = "row col s12">
+                                    <p class="data-header col s4">Gas Emission Rate:</p>
+
+									<div id = "gdPluEmitFlagSelect" class="input-field col s6">
+										<select id="gdPluEmitFlag" name="gdPluEmitFlag" onchange="checkgdPluFlag('Emit')">
+											<option  value="thresholdWithoutSpe">Apply Threshold without species</option>
+											<option value="thresholdWithSpe">Apply Threshold with species such as CO2,SO2,etc.</option>
+										</select>
+									</div>
+
+									<p class = "data-header col s4"></p>
 									<div id="gd_plu_emit_without_spec" class = 'row col s6'>
 										<input class= "col s5" type="text" name="gd_plu_emit_min" id="gd_plu_emit_min">
 										<p class= "col s2" style="display:inline">to</p>
 										<input class= "col s5" type="text" name="gd_plu_emit_max" id="gd_plu_emit_max">
 									</div>
 									<div id='gd_plu_emit_with_spec' class='row col s6' style = "display:none">
-										<select id="gd_plu_emit" name="gd_plu_emit[]" multiple onchange="checkgdPluSpec('emit')">
-											<option value="" disabled selected>Choose your option</option>
-											<option value="CO2">CO2</option>
-											<option value="SO2">SO2</option>
-											<option value="H2S">H2S</option>
-											<option value="HCl">HCl</option>
-											<option value="HF">HF</option>
-											<option value="CO">CO</option>
-											<option value="CO2/SO2">CO2/SO2</option>
-										</select>
+										<div id = "gd_plu_emitSelect" class = "col s8">
+											<select id="gd_plu_emit" name="gd_plu_emit[]" multiple onchange="checkgdPluSpec('gd_plu_emit')">
+												<option value="" disabled selected>Choose your option</option>
+												<option value="CO2">CO2</option>
+												<option value="SO2">SO2</option>
+												<option value="H2S">H2S</option>
+												<option value="HCl">HCl</option>
+												<option value="HF">HF</option>
+												<option value="CO">CO</option>
+												<option value="CO2/SO2">CO2/SO2</option>
+											</select>
+										</div>
+										<div class ="col s4">
+											<input type="checkbox" id ="gd_plu_emit_checkAll"/><label style = "color:black" for="gd_plu_emit_checkAll">Check All</label>
+										</div>
 										<div id = "gd_plu_emit_spec">
 
 										</div>
@@ -843,16 +855,22 @@
 										<input class= "col s5" type="text" name="gd_plu_mass_max" id="gd_plu_mass_max">
 									</div>
 									<div id='gd_plu_mass_with_spec' class='row col s6' style = "display:none">
-										<select id="gd_plu_mass" name="gd_plu_mass[]" multiple onchange="checkgdPluSpec('mass')">
-											<option value="" disabled selected>Choose your option</option>
-											<option value="CO2">CO2</option>
-											<option value="SO2">SO2</option>
-											<option value="H2S">H2S</option>
-											<option value="HCl">HCl</option>
-											<option value="HF">HF</option>
-											<option value="CO">CO</option>
-											<option value="CO2/SO2">CO2/SO2</option>
-										</select>
+										<div id = "gd_plu_emitSelect" class = "col s8">
+
+											<select id="gd_plu_mass" name="gd_plu_mass[]" multiple onchange="checkgdPluSpec('gd_plu_mass')">
+												<option value="" disabled selected>Choose your option</option>
+												<option value="CO2">CO2</option>
+												<option value="SO2">SO2</option>
+												<option value="H2S">H2S</option>
+												<option value="HCl">HCl</option>
+												<option value="HF">HF</option>
+												<option value="CO">CO</option>
+												<option value="CO2/SO2">CO2/SO2</option>
+											</select>
+										</div>
+										<div class ="col s4">
+											<input type="checkbox" id ="gd_plu_mass_checkAll"/><label style = "color:black" for="gd_plu_mass_checkAll">Check All</label>
+										</div>
 										<div id = "gd_plu_mass_spec">
 
 										</div>
@@ -875,16 +893,21 @@
 										<input class= "col s5" type="text" name="gd_plu_etot_max" id="gd_plu_etot_max">
 									</div>
 									<div id='gd_plu_etot_with_spec' class='row col s6' style = "display:none">
-										<select id="gd_plu_etot" name="gd_plu_etot[]" multiple onchange="checkgdPluSpec('etot')">
-											<option value="" disabled selected>Choose your option</option>
-											<option value="CO2">CO2</option>
-											<option value="SO2">SO2</option>
-											<option value="H2S">H2S</option>
-											<option value="HCl">HCl</option>
-											<option value="HF">HF</option>
-											<option value="CO">CO</option>
-											<option value="CO2/SO2">CO2/SO2</option>
-										</select>
+										<div id = "gd_plu_etotSelect" class = "col s8">
+											<select id="gd_plu_etot" name="gd_plu_etot[]" multiple onchange="checkgdPluSpec('gd_plu_etot')">
+												<option value="" disabled selected>Choose your option</option>
+												<option value="CO2">CO2</option>
+												<option value="SO2">SO2</option>
+												<option value="H2S">H2S</option>
+												<option value="HCl">HCl</option>
+												<option value="HF">HF</option>
+												<option value="CO">CO</option>
+												<option value="CO2/SO2">CO2/SO2</option>
+											</select>
+										</div>
+										<div class ="col s4">
+											<input type="checkbox" id ="gd_plu_etot_checkAll"/><label style = "color:black" for="gd_plu_etot_checkAll">Check All</label>
+										</div>
 										<div id = "gd_plu_etot_spec">
 
 										</div>
