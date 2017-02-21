@@ -185,7 +185,6 @@ abstract class TableManager implements TableManagerInterface {
 		 $query = str_replace("select",$temp ,$query);
 
 		$db->query($query, $id1,$id2);
-		var_dump($db);
 		$res = $db->getList();
 		if (empty($res)){
 			$query1 = "SELECT `sn_id` FROM " . $this->table_name . " WHERE `ss_id`=" . $id1;
