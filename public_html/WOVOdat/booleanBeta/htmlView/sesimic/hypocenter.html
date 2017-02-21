@@ -1,0 +1,71 @@
+<div id='sd_evn_wrapper' class="hiddenData data-wrapper">
+    <h3 >Hypocenter </h3><br>
+    <!-- Map Width -->
+    <div id="MapWidth" class=" selectOpt row col s10 ">
+        <p class="data-header col s3">Map Width (km):</p>
+        <div id = "feature_select" class="input-field col s5" style="font-size:inherit">
+            <select id="sd_evn_distance" name="sd_evn_distance">
+                <option value="10" style="font-size:inherit">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+    </div>
+    <div class ="col s2"><br/></div>
+
+    <!-- Depth(km) -->
+    <div class = "row col s10">
+        <p class = "data-header col s3">Depth (km):</p>
+        <div id='Depth' class='col s5'>
+            <input class = "col s5" type="text" name="sd_evn_edep_min" id="sd_evn_edep_min">
+            <p class = "col s2" style="display:inline">to</p>
+            <input class=  "col s5" type="text" name="sd_evn_edep_max" id="sd_evn_edep_max">
+        </div>
+    </div>
+    <!-- Magnitude -->
+    <div class = "row col s10">
+        <p class = "data-header col s3">Magnitude:</p>
+        <div id='Magnitude' class='row col s5'>
+            <input class = "col s5" type="text" name="sd_evn_pmag_min" id="sd_evn_pmag_min" >
+            <p class = "col s2" >to</p>
+            <input class = "col s5" type="text" name="sd_evn_pmag_max" id="sd_evn_pmag_max" >
+        </div>
+    </div>
+
+    <!-- Earthquake type -->
+    <div class = "row col s10">
+        <p class = "data-header col s3">Earthquake Type:</p>
+        <div id='EqType' class='selectOptNoRange row col s5'>
+            <select id="sd_evn_eqtype" multiple="multiple" name="sd_evn_eqtype[]">
+                <option value="R">R</option>
+                <option value="Q">Q</option>
+                <option value="V">V</option>
+                <option value="VT">VT</option>
+                <option value="VT_D">VT_D</option>
+                <option value="VT_S">VT_S</option>
+                <option value="H">H</option>
+                <option value="H_HLF">H_HLF</option>
+                <option value="H_LHF">H_LHF</option>
+                <option value="LF">LF</option>
+                <option value="LF_LP">LF_LP</option>
+                <option value="LF_T">LF_T</option>
+                <option value="LF_ILF">LF_ILF</option>
+                <option value="VLP">VLP</option>
+                <option value="RF">RF</option>
+                <option value="E">E</option>
+                <option value="U">U</option>
+                <option value="O">O</option>
+                <option value="X">X</option>
+                <option value="G">G</option>
+                <option value="PF">PF</option>
+            </select>
+
+            <div id='selected' style='display:inline-block'>
+
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -10,15 +10,14 @@ abstract class MonitoryTypeManager implements MonitoryTypeManagerInterface {
 		$this->tableManagers = $this->setTableManagers();
 		$this->type = $this->setMonitoryType();
 		$this->infor = json_decode( file_get_contents($this->type."/".$this->type.".json", true) , true);
+
 	}
 	abstract protected function setMonitoryType();
 	abstract protected function setTableManagers();
 	public function getTimeSeriesList($vd_id){
 		$result = array();
 
-		// var_dump($this->tableManagers);
 		foreach ($this->tableManagers as $col => $tableManager) {
-			// var_dump($tableManager);	
 			$result = array_merge($result,$tableManager->getTimeSeriesList($vd_id));
 			// var_dump($result);
 		}
@@ -27,11 +26,13 @@ abstract class MonitoryTypeManager implements MonitoryTypeManagerInterface {
 	}
 	public function getStationData($serie ){
 		$result = array();
-		// var_dump($this->infor);
-		// var_dump($serie);
+//		 var_dump($this->infor);
+
 		$table = "";
 		foreach ($this->infor as $key => $type) {
+//			var_dump($type["data_type"]);
 			if ( $type["data_type"] == $serie["data_type"] ){
+
 				foreach ($type["params"] as $params) {
 					if($params["name"] == $serie["component"]){
 						$table =$key;
@@ -45,7 +46,7 @@ abstract class MonitoryTypeManager implements MonitoryTypeManagerInterface {
 		}
 			
 		foreach ($this->tableManagers as $tableName=> $tableManager) {
-			// var_dump($table);
+
 			if($table == $tableName){
 				$result = array_merge($result,$tableManager->getStationData($serie));
 			}

@@ -1,0 +1,73 @@
+<div id='gd_wrapper' class="hiddenData data-wrapper col s10" style="display: none">
+    <h3>Sample Gas </h3><br>
+    <div class = "row col s10">
+        <p class = "data-header col s5">Gas Temperature (C):</p>
+        <div id='gasTemp' class='row col s6'>
+            <input class= "col s5" type="text" name="gd_gtemp_min" id="gd_gtemp_min">
+            <p class= "col s2" style="display:inline">to</p>
+            <input class= "col s5" type="text" name="gd_gtemp_max" id="gd_gtemp_max">
+        </div>
+    </div>
+    <div class = "row col s10">
+        <p class = "data-header col s5">Atmospheric Pressure (mbar):</p>
+        <div id='atmPres' class='row col s6'>
+            <input class= "col s5" type="text" name="gd_bp_min" id="gd_bp_min">
+            <p class= "col s2" style="display:inline">to</p>
+            <input class= "col s5" type="text" name="gd_bp_max" id="gd_bp_max">
+        </div>
+    </div>
+    <div class = "row col s10">
+        <p class = "data-header col s5">Gas Emission:</p>
+        <div id='gasEmiss' class='row col s6'>
+            <input class= "col s5" type="text" name="gd_flow_min" id="gd_flow_min">
+            <p class= "col s2" style="display:inline">to</p>
+            <input class= "col s5" type="text" name="gd_flow_max" id="gd_flow_max">
+        </div>
+    </div>
+    <div class = "row col s10">
+        <p class = "data-header col s5">Gas Concentration:</p>
+        <div id = "gd_concentrationFlagSelect" class="row col s6" >
+            <select id="gd_concentrationFlag" name="gd_concentrationFlag" onchange="checkFlag('gd_concentration')">
+                <option value="thresholdWithoutSpe">Apply Threshold without species</option>
+                <option value="thresholdWithSpe">Apply Threshold with species such as CO2,SO2,etc.</option>
+            </select>
+        </div>
+        <p class = "data-header col s5"></p>
+        <div id="gd_concentration_without_spec" class = 'row col s6'>
+            <input class= "col s5" type="text" name="gd_concentration_min" id="gd_concentration_min">
+            <p class= "col s2" style="display:inline">to</p>
+            <input class= "col s5" type="text" name="gd_concentration_max" id="gd_concentration_max">
+        </div>
+        <div id='gd_concentration_with_spec' class='row col s6' style = "display:none">
+            <div id = "gd_concentrationSelect" class = "col s8">
+                <select id="gd_concentration" name="gd_concentration[]" multiple onchange="checkSpec('gd_concentration')">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="CO2">CO2</option>
+                    <option value="SO2">SO2</option>
+                    <option value="H2S">H2S</option>
+                    <option value="HCl">HCl</option>
+                    <option value="HF">HF</option>
+                    <option value="CH4">CH4</option>
+                    <option value="H2">H2</option>
+                    <option value="CO">CO</option>
+                    <option value="3He4He">3He4He</option>
+                    <option value="d13C">d13C</option>
+                    <option value="d34S">d34S</option>
+                    <option value="d18O">d18O</option>
+                    <option value="dD">dD</option>
+                    <option value="NH3">NH3</option>
+                    <option value="N2">N2</option>
+                    <option value="Ar">Ar</option>
+                </select>
+            </div>
+            <div class ="col s4">
+                <input type="checkbox" id ="gd_concentration_checkAll"/><label style = "color:black" for="gd_concentration_checkAll">Check All</label>
+            </div>
+            <div id = "gd_concentration_spec">
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

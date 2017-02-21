@@ -27,7 +27,6 @@ abstract class TableManager implements TableManagerInterface {
 		$this->shortDataType = $this->setShortDataType();
 
 		$this->data_code =  $this->setDataCode();
-
 	}
 	//must return 1 sta_code column
 	protected function getStationCodeQuery($sta_id){
@@ -42,7 +41,7 @@ abstract class TableManager implements TableManagerInterface {
 
 			$sta_id_code = array();
 			$sta_id_code_query = $this->getStationCodeQuery($sta_id);
-			// echo $sta_id_code_query."\n";
+
 			$db->query($sta_id_code_query);
 			$temp = $db->getList();
 			$sta_id_code[0] = "";
@@ -50,10 +49,8 @@ abstract class TableManager implements TableManagerInterface {
 			foreach($temp as $tmp){
 				$sta_id_code[$tmp["sta_id"]]  = $tmp['sta_code'];
 			}
-
 			array_push($sta_id_codes,$sta_id_code);
 		}
-
 
 		return $sta_id_codes;
 	}
@@ -78,6 +75,7 @@ abstract class TableManager implements TableManagerInterface {
 		return $temp[0];
 	}
 	protected function getTimeSeriesListQuery($vd_id){
+
 		$query_format = 'select b.vd_inf_slat as vd_lat, b.vd_inf_slon as vd_long, a.%s as sta_id1,  a.%s as sta_id2, vd.vd_name ';
 		$query = sprintf($query_format,$this->stationId[0],$this->stationId[1]);
 		foreach ($this->cols_name as $name) {
@@ -88,7 +86,7 @@ abstract class TableManager implements TableManagerInterface {
 	}
 	public function getTimeSeriesList($vd_id){
 
-  		$result = array();
+		$result = array();
 		global $db;
 		$query = $this->getTimeSeriesListQuery($vd_id);
 		$db->query( $query);
@@ -98,8 +96,6 @@ abstract class TableManager implements TableManagerInterface {
 		$v = "";
 
 		foreach ($serie_list as $serie) {
-
-
 			foreach ($this->cols_name as $col_name) {
 
 				if(!array_key_exists($serie["sta_id1"], $this->sta_id_code_dictionary[0])){
@@ -114,7 +110,6 @@ abstract class TableManager implements TableManagerInterface {
 				}else{
 
 				}
-
 				if($serie[$col_name]!=""){
 
 					$x = array('category' => $this->monitoryType ,
@@ -148,18 +143,18 @@ abstract class TableManager implements TableManagerInterface {
  	}
 
   	public function getStationData($stations){
-  		
 		$this->vd_long = $stations["vd_long"];
 		$this->vd_lat = $stations["vd_lat"];
   		$id1 = $stations["station_id1"];
   		$id2 = $stations["station_id2"];
-
 		global $db;
 		$result = array();
 		$res = array();
 		$data = array();
 		$unit = "";
+//		var_dump($stations);
 		$stationDataParams = $this->setStationDataParams($stations['component']);
+
 		$errorbar = $stationDataParams["errorbar"];
 		$query = $stationDataParams["query"];
 
@@ -181,6 +176,8 @@ abstract class TableManager implements TableManagerInterface {
 
 			$res = $db->getList();
 		}
+//		var_dump($db);
+
 
 		foreach ($res as $row) {
 			//add value attributes
@@ -257,7 +254,6 @@ abstract class TableManager implements TableManagerInterface {
 		$result["errorbar"] = $errorbar;
 		$result["data"] = $data;
 		$result["unit"] = $unit;
-//		 var_dump($result);
 		return $result;
   	}
 	/*

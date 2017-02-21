@@ -1,0 +1,60 @@
+<button class="btn btn-primary left-align col s4 " type="button" data-toggle="collapse" data-target="#Volcano_Inner_Group">Volcano Search
+    <i class="material-icons right">send</i>
+</button>
+<div id="Volcano_Inner_Group" class="innerData collapse col s10 offset-s2 ">
+    <!-- FEATURE -->
+    <br/>
+    <div id="feature_wrapper" class=" row">
+        <p class="data-header col s3">Feature:</p>
+        <div id = "feature_select" class="input-field col s5">
+            <select id="feature" name="feature[]"  multiple >
+                <option value="" disabled selected>Choose your option</option>
+            </select>
+        </div>
+        <div class ="col s2">
+            <input type="checkbox" id ="feature_checkAll"/><label style = "color:black" for="feature_checkAll">Check All</label>
+        </div>
+    </div>
+
+
+    <!--ROCK TYPE-->
+    <div id="rock_wrapper" class="row">
+        <p class="data-header col s3">Rock Types: </p>
+        <div  id = "rock_select" class="input-field col s5">
+            <select id="rock" name="rock[]" multiple>
+                <option value=""  label = "Choose your option" disabled selected>Choose your option</option>
+                <optgroup id = "Mafic" disabled label="Mafic">Mafic</optgroup>
+                <option value="Basalt">Basalt</option>
+                <option value="Tephrite Basanite">Tephrite Basanite</option>
+                <option value="Foidite">Foidite</option>
+                <option value="Trachybasalt">Trachybasalt</option>
+                <option value="Picobrasalt">Picrobasalt</option>
+                <optgroup id = "Intermediate" label="Intermediate" disabled ></optgroup>
+                <option value="Basaltic Andesite">Basaltic Andesite</option>
+                <option value="Basaltic Trachyandesite">Basaltic Trachyandesite</option>
+                <option value="Phonotephrite">Phonotephrite</option>
+                <option value="Andesite">Andesite </option>
+                <option value="Trachyandesite">Trachyandesite</option>
+                <option value="Tephra-phonolite">Tephra-phonolite</option>
+                <optgroup id = "Felsic" label="Felsic"></optgroup>
+                <option value="Dacite">Dacite</option>
+                <option value="Trachyte">Trachyte</option>
+                <option value="Trachydacite ">Trachydacite</option>
+                <option value="Phonolite ">Phonolite </option>
+                <option value="Rhyolite ">Rhyolite</option>
+
+            </select>
+        </div>
+        <div class ="col s2">
+            <input type="checkbox" id ="rock_checkAll"/><label style = "color:black" for="rock_checkAll">Check All</label>
+        </div>
+    </div>
+
+    <!-- GOOGLE MAP LOCATION -->
+    <div id="location_wrapper" class="row">
+        <p class="data-header col s3">Location:</p>
+        <img cursor='pointer' id='map_location' src='/img/Maps-icon.png' width='10%' height='10%'>(Click map icon to set location)</img><br>
+        <div id="location"></div>
+    </div>
+
+</div>

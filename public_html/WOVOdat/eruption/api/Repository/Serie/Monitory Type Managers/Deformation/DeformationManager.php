@@ -3,7 +3,7 @@ class DeformationManager extends MonitoryTypeManager{
 
 	protected function setTableManagers(){
 		$result = array();
-		
+
 		$prefix = "dd_";
 		$result[$prefix."tlt"] = new dd_tltManager;
 		// $result[$prefix."tlv"] = new dd_tlvManager;
@@ -13,7 +13,7 @@ class DeformationManager extends MonitoryTypeManager{
 		$result[$prefix."gps"] = new dd_gpsManager;
 		$result[$prefix."gpv"] = new dd_gpvManager;
 		$result[$prefix."lev"] = new dd_levManager;
-		return $result;
+				return $result;
 	}
 	protected function setMonitoryType(){
 		return 'Deformation';

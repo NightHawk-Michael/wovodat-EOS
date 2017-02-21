@@ -22,10 +22,7 @@ var maxSelectedMainCategory = 6;
  **************************************************/
 var maxSelectedDropdownbox = 2;
 
-/**
- * multiselect
- */
-var checkAll = ["feature","edPhase","rock","gd_plu_emit", "gd_plu_mass", "gd_plu_etot"];
+
 
 
 $(document).ready( function() {
@@ -133,7 +130,10 @@ $(document).ready( function() {
      * Handle selection
      */
     $('select').material_select();
-    var checkAll = ["feature","edPhase","rock","gd_plu_emit", "gd_plu_mass", "gd_plu_etot"];
+    var checkAll = ["feature","edPhase","rock",
+        "gd_plu_emit", "gd_plu_mass", "gd_plu_etot",
+        "gd_concentration",
+        "gd_sol_tflux","gd_sol_high", "gd_sol_htemp"];
 
     for (var i = 0 ; i < checkAll.length; i++){
         handleCheckAll(checkAll[i]);
@@ -157,8 +157,8 @@ var handleCheckAll = function(id){
 
         });
         $('select').material_select();
-        if (id.indexOf("gd") >=0){
-            checkgdPluSpec(id);
+        if (id.indexOf("_") >=0){
+            checkSpec(id);
         }
     });
 
@@ -568,26 +568,27 @@ var getJsonObject = function(val,isCheckAll){
     });
 };
 
-function checkgdPluFlag(type){
-    var selectVal = $("#gdPlu" + type + "Flag").val();
+function checkFlag(type){
+    var selectVal = $("#" + type + "Flag").val();
+    console.log(selectVal);
     type = type.toLowerCase();
     if (selectVal == "thresholdWithoutSpe") {
-        $("#gd_plu_" + type + "_without_spec").css("display","block");
-        $("#gd_plu_" + type + "_with_spec").css("display","none");
+        $("#" + type + "_without_spec").css("display","block");
+        $("#" + type + "_with_spec").css("display","none");
     }else{
 
-        $("#gd_plu_" + type + "_without_spec").css("display","none");
-        $("#gd_plu_" + type + "_with_spec").css("display","block");
+        $("#" + type + "_without_spec").css("display","none");
+        $("#" + type + "_with_spec").css("display","block");
     }
 }
 
-function checkgdPluSpec(type){
+function checkSpec(type){
     type = type.toLowerCase();
     var selectVal = $("#" + type).val();
 
     var template =  "<div class = \"row col s12\">" +
         "<p class = \"data-header col s2\">CO2:</p>" +
-        "<div id='gd_plu_CO2' class='row col s9'>" +
+        "<div id='" + type + "_CO2' class='row col s9'>" +
         "<input class= \"col s5\" type=\"text\" name=\"" + type + "_min_CO2\" id=\"" +type + "_min_CO2\">" +
         "<p class= \"col s2\" style=\"display:inline\">to</p>" +
         "<input class= \"col s5\" type=\"text\" name=\"" + type +"_max_CO2\" id=\"" + type + "_max_CO2\"></div> </div>"
@@ -604,31 +605,49 @@ function checkgdPluSpec(type){
 /**
  * Check all checkbox in mointoring data search to display approriate section in advanced search
  */
+var gas = ["gd_plu", "gd", "gd_sol"];
 function checkAdvanceSearch(){
+
+    var ids = [gas];
+    var name = ["gas"];
+
     $("#Monitoring_Data_Lists input[class='checkBox']").each(function(){
-        if ($(this).attr('name') == "gd_plu"){
-            var temp = "#" + $(this).attr('name') + "_wrapper";
-            if ($(this).prop("checked")){
-                $("#gas").css("display","block");
-                $(temp).css("display","block");
-            }else{
-                $(temp).css("display","none");
-                $("#gas").css("display","none");
-            }
+        var temp = "#" + $(this).attr('name') + "_wrapper";
+        if ($(this).prop("checked")){
+            $(temp).css("display","block");
+        }else {
+            $(temp).css("display","none");
         }
     });
+
+    for (var i = 0 ;  i < ids.length; i++){
+        $("#" + name[i]).css("display", "none");
+        for (var j = 0 ;  j < ids[i].length; j++){
+            var temp = "#" + ids[i][j] + "_wrapper";
+            if ($(temp).css("display") == "block"){
+                $("#" + name[i]).css("display", "block");
+                break;
+            }
+        }
+    }
 }
 
+/*
+Disable some check box in monitoring search
+ */
 function disableMonitoringCheckbox(){
-    var checkBox = [];
+    var enableIDs = [];
+    enableIDs = enableIDs.concat(gas);
     $("#Monitoring_Data_Lists input").each(function(){
-        if (!($(this).attr('name') == 'gd_plu')){
-            $(this).prop('disabled', true);
-        }else{
-            $(this).prop('disabled', false);
+        var isEnable = false;
+        for (var i = 0 ; i < enableIDs.length; i++){
+            if (($(this).attr('name') == enableIDs[i])){
+                $(this).prop('disabled', false);
+                isEnable = true;
+                break;
+            }
         }
-        checkBox.push($(this).attr('name'));
-
+        if (!isEnable)$(this).prop('disabled', true);
 
     });
 

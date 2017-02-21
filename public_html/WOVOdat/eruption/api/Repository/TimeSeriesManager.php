@@ -21,6 +21,7 @@ class TimeSeriesManager
 
     private function TimeSeriesManager()
     {
+
         $this->timeSeriesManagers = array(
             "Deformation" => new DeformationManager,
             "Seismic" => new SeismicManager,
@@ -48,10 +49,9 @@ class TimeSeriesManager
 
     public function getTimeSeriesList($vd_id)
     {
+
         $result = array();
-        // var_dump($this->timeSeriesManagers);
         foreach ($this->timeSeriesManagers as $type => $class) {
-            // var_dump($class);
             $series = $class->getTimeSeriesList($vd_id);
             $result = array_merge($result, $series);
         }

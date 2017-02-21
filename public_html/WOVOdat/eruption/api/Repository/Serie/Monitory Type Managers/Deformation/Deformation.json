@@ -140,7 +140,7 @@
 
 	"dd_gps" : {
 		"time" : "dd_gps_time",
-		"data_type" : "GPSPosition&Slope",
+		"data_type" : "GPSPositionSlope",
 		"params" : [
 			{
 				"cols" : "dd_gps_lat",

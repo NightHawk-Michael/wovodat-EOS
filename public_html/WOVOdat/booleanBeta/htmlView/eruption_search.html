@@ -1,0 +1,36 @@
+<button class="btn btn-primary left-align col s4" type="button" data-toggle="collapse" data-target="#Eruption_Inner_Group">Eruption Search
+    <i class="material-icons right">send</i>
+</button>
+<div id="Eruption_Inner_Group" class="innerData collapse col s10 offset-s2">
+    <!-- ERUPTION PHASE TYPE -->
+    <br>
+    <div id="edPhase_wrapper" class=" row">
+        <p class="data-header col s3">Eruption Phase Type: </p>
+        <div id = "edPhaseSelect" class="input-field col s5">
+            <select id = "edPhase" class = "col s12" id="eruptionSelect" name="eruption[]" multiple >
+                <option value=""  label = "Choose your option" disabled selected>Choose your option</option>
+            </select>
+        </div>
+        <div class ="col s2">
+            <input type="checkbox" id ="edPhase_checkAll"/><label style = "color:black" for="edPhase_checkAll">Check All</label>
+        </div>
+    </div>
+    <!-- VEI -->
+    <div id="vei_wrapper" class="row" style="display: block;">
+        <p class="data-header col s3">VEI:</p>
+        <input class = "col s2 " type="text" name="veiMin" id="veiMin" style = 'font-size:inherit;' >
+        <p class="col s2 " style = "width:11%">&lt;=Range&lt;=</p>
+        <input class = "col s2" type="text" name="veiMax" id="veiMax" style = 'font-size:inherit;' >
+
+    </div>
+    <div id="edTime_wrapper" class="row">
+        <p class="data-header col s3">Eruption Time:</p>
+        <div class = "col s2">
+            <input id="edTimeMin" type="text" name = "edTimeMin" style  = "font-size: inherit">
+        </div>
+        <p class="col s2" style ="width:11%">&lt;=Range&lt;= </p>
+        <div class = "col s2">
+            <input id="edTimeMax" type="text" name = "edTimeMax" style  = "font-size: inherit">
+        </div>
+    </div>
+</div>

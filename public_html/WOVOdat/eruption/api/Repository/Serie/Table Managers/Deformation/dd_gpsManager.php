@@ -15,7 +15,9 @@ class dd_gpsManager extends DeformationTablesManager {
 		return "es_dd_gps";
 	}
 	protected function setDataType(){
-		return "GPSPosition&Slope";
+
+		return "GPSPositionSlope";
+//		return "GPSPosition&Slope";
 	} // Data type for each data table
 	//if there is 1 station, station1 is the same as station2
 	protected function setStationID(){
@@ -32,7 +34,8 @@ class dd_gpsManager extends DeformationTablesManager {
 		$query = "";
 		$table = "dd_gps";
 		$errorbar = true;
-		$style = "dot";  
+		$style = "dot";
+
 		if($component == 'GPS Latitude'){
 			$unit = "o";
 			$attribute = "dd_gps_lat";
@@ -40,7 +43,7 @@ class dd_gpsManager extends DeformationTablesManager {
 		}else if($component == 'GPS Longitude'){
 			$unit = "o";
 			$attribute = "dd_gps_lon";
-			$query = "select a.dd_gps_ewerr as err ,a.dd_gps_time as time, $cc a.$attribute as value from $table as a where a.ds_id=%s and a.ds_id_ref1=%s and a.$attribute IS NOT NULL";
+			$query = "select a.dd_gps_ewerr as err ,a.dd_gps_time as time,a.$attribute as value from $table as a where a.ds_id=%s and a.ds_id_ref1=%s and a.$attribute IS NOT NULL";
 		}else if($component == 'GPS Elevation'){
 			$unit = "m";
 			$attribute = "dd_gps_elev";

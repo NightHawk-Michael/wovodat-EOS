@@ -1,0 +1,117 @@
+<div id='gd_sol_wrapper' class="hiddenData data-wrapper col s10" style="display: none">
+    <h3> Soil Efflux </h3><br>
+    <div class = "row col s12">
+        <p class="data-header col s4">Total Gas Flux:</p>
+        <div id = "gd_sol_tfluxFlagSelect" class="input-field col s6">
+            <select id="gd_sol_tfluxFlag" name="gd_sol_tfluxFlag" onchange="checkFlag('gd_sol_tflux')">
+                <option  value="thresholdWithoutSpe">Apply Threshold without species</option>
+                <option value="thresholdWithSpe">Apply Threshold with species such as CO2,SO2,etc.</option>
+            </select>
+        </div>
+
+        <p class = "data-header col s4"></p>
+        <div id="gd_sol_tflux_without_spec" class = 'row col s6'>
+            <input class= "col s5" type="text" name="gd_sol_tflux_min" id="gd_sol_tflux_min">
+            <p class= "col s2" style="display:inline">to</p>
+            <input class= "col s5" type="text" name="gd_sol_tflux_max" id="gd_sol_tflux_max">
+        </div>
+        <div id='gd_sol_tflux_with_spec' class='row col s6' style = "display:none">
+            <div id = "gd_sol_tfluxSelect" class = "col s8">
+                <select id="gd_sol_tflux" name="gd_sol_tflux[]" multiple onchange="checkSpec('gd_sol_tflux')">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="CO2">CO2</option>
+                    <option value="SO2">SO2</option>
+                    <option value="H2S">H2S</option>
+                    <option value="HCl">HCl</option>
+                    <option value="HF">HF</option>
+                    <option value="CO">CO</option>
+                    <option value="CO2/SO2">CO2/SO2</option>
+                </select>
+            </div>
+            <div class ="col s4">
+                <input type="checkbox" id ="gd_sol_tflux_checkAll"/><label style = "color:black" for="gd_sol_tflux_checkAll">Check All</label>
+            </div>
+            <div id = "gd_sol_tflux_spec">
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class = "row col s12">
+        <p class="data-header col s4">Highest Gas Flux:</p>
+        <div id = "gd_sol_highFlagSelect" class="input-field col s6">
+            <select id="gd_sol_highFlag" name="gd_sol_highFlag" onchange="checkFlag('gd_sol_high')">
+                <option  value="thresholdWithoutSpe">Apply Threshold without species</option>
+                <option value="thresholdWithSpe">Apply Threshold with species such as CO2,SO2,etc.</option>
+            </select>
+        </div>
+
+        <p class = "data-header col s4"></p>
+        <div id="gd_sol_high_without_spec" class = 'row col s6'>
+            <input class= "col s5" type="text" name="gd_sol_high_min" id="gd_sol_high_min">
+            <p class= "col s2" style="display:inline">to</p>
+            <input class= "col s5" type="text" name="gd_sol_high_max" id="gd_sol_high_max">
+        </div>
+        <div id='gd_sol_high_with_spec' class='row col s6' style = "display:none">
+            <div id = "gd_sol_highSelect" class = "col s8">
+                <select id="gd_sol_high" name="gd_sol_high[]" multiple onchange="checkSpec('gd_sol_high')">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="CO2">CO2</option>
+                    <option value="SO2">SO2</option>
+                    <option value="H2S">H2S</option>
+                    <option value="HCl">HCl</option>
+                    <option value="HF">HF</option>
+                    <option value="CO">CO</option>
+                    <option value="CO2/SO2">CO2/SO2</option>
+                </select>
+            </div>
+            <div class ="col s4">
+                <input type="checkbox" id ="gd_sol_high_checkAll"/><label style = "color:black" for="gd_sol_high_checkAll">Check All</label>
+            </div>
+            <div id = "gd_sol_high_spec">
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class = "row col s12">
+        <p class="data-header col s4">Highest Gas Flux:</p>
+        <div id = "gd_sol_htempFlagSelect" class="input-field col s6">
+            <select id="gd_sol_htempFlag" name="gd_sol_htempFlag" onchange="checkFlag('gd_sol_htemp')">
+                <option  value="thresholdWithoutSpe">Apply Threshold without species</option>
+                <option value="thresholdWithSpe">Apply Threshold with species such as CO2,SO2,etc.</option>
+            </select>
+        </div>
+
+        <p class = "data-header col s4"></p>
+        <div id="gd_sol_htemp_without_spec" class = 'row col s6'>
+            <input class= "col s5" type="text" name="gd_sol_htemp_min" id="gd_sol_htemp_min">
+            <p class= "col s2" style="display:inline">to</p>
+            <input class= "col s5" type="text" name="gd_sol_htemp_max" id="gd_sol_htemp_max">
+        </div>
+        <div id='gd_sol_htemp_with_spec' class='row col s6' style = "display:none">
+            <div id = "gd_sol_htempSelect" class = "col s8">
+                <select id="gd_sol_htemp" name="gd_sol_htemp[]" multiple onchange="checkSpec('gd_sol_htemp')">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="CO2">CO2</option>
+                    <option value="SO2">SO2</option>
+                    <option value="H2S">H2S</option>
+                    <option value="HCl">HCl</option>
+                    <option value="HF">HF</option>
+                    <option value="CO">CO</option>
+                    <option value="CO2/SO2">CO2/SO2</option>
+                </select>
+            </div>
+            <div class ="col s4">
+                <input type="checkbox" id ="gd_sol_htemp_checkAll"/><label style = "color:black" for="gd_sol_htemp_checkAll">Check All</label>
+            </div>
+            <div id = "gd_sol_htemp_spec">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

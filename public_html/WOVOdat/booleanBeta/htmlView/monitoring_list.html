@@ -1,0 +1,80 @@
+<div id="Monitoring_Data_Lists" class="monitoring_data row col s11" onchange="checkAdvanceSearch();">
+    <p class="seismic">
+        <input id="radioButton" type="radio" name="Seismic" checked>Seismic<br>
+        <input class="checkBox" type="checkbox" name="sd_evn" id="sd_evn">
+        <label for="sd_evn">Network Events</label><br>
+        <input class="checkBox" type="checkbox" name="sd_evs" id="sd_evs">
+        <label for="sd_evs">Single Station Events</label><br>
+        <input class="checkBox" type="checkbox" name="sd_int" id="sd_int">
+        <label for="sd_int">Seismic Intensity</label><br>
+        <input class="checkBox" type="checkbox" name="sd_ivl" id="sd_ivl">
+        <label for="sd_ivl">Interval (Swarm)</label><br>
+        <input class="checkBox" type="checkbox" name="sd_trm" id="sd_trm">
+        <label for="sd_trm">Tremor</label><br>
+        <input class="checkBox" type="checkbox" name="sd_rsm" id="sd_rsm">
+        <label for="sd_rsm">RSAM</label><br>
+        <input class="checkBox" type="checkbox" name="sd_ssm" id="sd_ssm">
+        <label for="sd_ssm">SSAM</label><br>
+    </p>
+
+    <p class="deformation">
+        <input id="radioButton" type="radio" name="Deformation" checked>Deformation<br>
+        <input class="checkBox" type="checkbox" name="dd_ang" id="dd_ang">
+        <label for="dd_ang">Angle</label><br>
+        <input class="checkBox" type="checkbox" name="dd_edm" id="dd_edm">
+        <label for="dd_edm">EDM</label><br>
+        <input class="checkBox" type="checkbox" name="dd_gps" id="dd_gps">
+        <label for="dd_gps">GPS</label><br>
+        <input class="checkBox" type="checkbox" name="dd_gpv" id="dd_gpv">
+        <label for="dd_gpv">GPS vector</label><br>
+        <input class="checkBox" type="checkbox" name="dd_lev" id="dd_lev">
+        <label for="dd_lev">Leveling</label><br>
+        <input class="checkBox" type="checkbox" name="dd_str" id="dd_str">
+        <label for="dd_str">Strain</label><br>
+        <input class="checkBox" type="checkbox" name="dd_tlt" id="dd_tlt">
+        <label for="dd_tlt">Tilt</label><br>
+        <input class="checkBox" type="checkbox" name="dd_tlv" id="dd_tlv">
+        <label for="dd_tlv">Tilt vector</label><br>
+    </p>
+
+    <p class="field">
+        <input id="radioButton" type="radio" name="Field" checked>Field<br>
+        <input class="checkBox" type="checkbox" name="fd_ele" id="fd_ele">
+        <label for="fd_ele">Electricity (SP)</label><br>
+        <input class="checkBox" type="checkbox" name="fd_gra" id="fd_gra">
+        <label for="fd_gra">Gravity</label><br>
+        <input class="checkBox" type="checkbox" name="fd_mag" id="fd_mag">
+        <label for="fd_mag">Magnetic Fields</label><br>
+        <input class="checkBox" type="checkbox" name="fd_mgv" id="fd_mgv">
+        <label for="fd_mgv">Magnetic Vector</label><br>
+    </p>
+
+    <p class="gas">
+        <input id="radioButton" type="radio" name="Gas" checked>Gas<br>
+        <input class="checkBox" type="checkbox" name="gd" id="gd">
+        <label for="gd">Sampled Gas</label><br>
+        <input class="checkBox" type="checkbox" name="gd_plu" id="gd_plu">
+        <label for="gd_plu">Plume</label><br>
+        <input class="checkBox" type="checkbox" name="gd_sol" id="gd_sol">
+        <label for="gd_sol">Soil Effux</label><br>
+    </p>
+
+    <p class="hydrologic">
+        <input id="radioButton" type="radio" name="Hydrologic" checked>Hydrologic<br>
+        <input class="checkBox" type="checkbox" name="hd" id="hd">
+        <label for="hd">Hydrologic Sampled Data</label><br>
+    </p>
+
+    <p class="thermal">
+        <input id="radioButton" type="radio" name="Thermal" checked>Thermal<br>
+        <input class="checkBox" type="checkbox" name="td" id="td">
+        <label for="td">Thermal Data</label><br>
+    </p>
+
+    <p class="meteo">
+        <input id="radioButton" type="radio" name="Meteo" checked>Meteo<br>
+        <input class="checkBox" type="checkbox" name="med" id="med">
+        <label for="med">Meteo Data</label><br>
+    </p>
+
+</div>
