@@ -61,7 +61,6 @@ class gd_pluManager extends GasTablesManager {
 			$query = "select a.gd_plu_units as unit, a.gd_plu_species as filter, a.gd_plu_etot_err as err, a.gd_plu_time as time, a.$attribute as value from $table as a where (a.gs_id=%s or a.cs_id=%s) and a.$attribute IS NOT NULL";
 			
 		}
-		// echo($query);
 		$result = array("unit" => $unit,
 						"style" => $style,
 						"errorbar" => $errorbar,

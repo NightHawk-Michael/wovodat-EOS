@@ -291,6 +291,7 @@ abstract class TableManager implements TableManagerInterface {
 			if ($cc_id != null) {
 				$query1_2 = mysql_query("select cc_code,cc_url, cc_email from cc where cc_id=" . $cc_id);
 				$result1_2 = mysql_fetch_array($query1_2);
+				if (sizeof($result1_2) == 0) continue;
 				if ($result1_2[1] != null) {
 					array_push($dataOwners, $result1_2[0]);
 					array_push($dataOwners, $result1_2[1]);
@@ -309,12 +310,26 @@ abstract class TableManager implements TableManagerInterface {
 	 * Get reference of data (cb)
 	 */
 	private function getDataReference($cb_ids) {
+		global $db;
+		$reference = array();
+		if ($cb_ids != null) {
+			$temp = join(" OR cb_id=",explode(",",$cb_ids));
 
-			if ($cb_ids != null) {
-				$query = mysql_query("select cb_auth,cb_url from cb where cb_id=" . $cb_ids);
-				$result = mysql_fetch_array($query);
-				return $result;
+			$sql = "select cb_auth,cb_url from cb where cb_id=" . $temp;
+			$db->query($sql);
+			$result = $db->getList();
+			if(sizeof($result) == 0){
+				array_push($reference,"");
+				array_push($reference, "");
+			}else{
+				$result = $result[0];
+				array_push($reference, $result["cb_auth"]);
+				array_push($reference, $result["cb_url"]);
 			}
-		return array();
+		}else{
+			array_push($reference,"");
+			array_push($reference, "");
+		}
+		return $reference;
 	}
 } 

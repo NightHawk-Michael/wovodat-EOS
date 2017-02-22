@@ -158,8 +158,11 @@ abstract class TableManager implements TableManagerInterface {
 		if ($groupByPos == FALSE) $groupByPos = strlen($query);
 		$query2 = "SELECT COUNT(*) as count " . substr($query,$fromPos,$groupByPos-$fromPos);
 		$db->query($query2, $id1,$id2);
-
 		$res = $db->getList();
+//		var_dump($db);
+		if(sizeof($res) == 0) {
+			return true;
+		}
 		if ($res[0]["count"] == "0") return false;
 		else return true;
 	}
@@ -262,6 +265,7 @@ abstract class TableManager implements TableManagerInterface {
 			$cc_ids[2]= $row["cc_id3"];
 			$cb_ids  = $row["cb_ids"];
 			//echo $cc_ids[2];
+
 			$dataOwner = $this->getCCUrl($cc_ids);
 			$temp["data_owner"] = $dataOwner;
 
@@ -289,6 +293,7 @@ abstract class TableManager implements TableManagerInterface {
 				$sql = "select cc_code,cc_url, cc_email from cc where cc_id=" . $cc_id;
 				$db->query($sql);
 				$result = $db->getList();
+				if (sizeof($result) == 0) continue;
 				$result = $result[0];
 				if ($result["cc_url"] != null) {
 					array_push($dataOwners, $result["cc_code"]);
@@ -311,12 +316,21 @@ abstract class TableManager implements TableManagerInterface {
 		global $db;
 		$reference = array();
 		if ($cb_ids != null) {
-			$sql = "select cb_auth,cb_url from cb where cb_id=" . $cb_ids;
+			$temp = join(" OR cb_id=",explode(",",$cb_ids));
+
+			$sql = "select cb_auth,cb_url from cb where cb_id=" . $temp;
 			$db->query($sql);
 			$result = $db->getList();
-			$result = $result[0];
-			array_push($reference, $result["cb_auth"]);
-			array_push($reference, $result["cb_url"]);
+			if(sizeof($result) == 0){
+				array_push($reference,"");
+				array_push($reference, "");
+			}else{
+				$result = $result[0];
+				array_push($reference, $result["cb_auth"]);
+				array_push($reference, $result["cb_url"]);
+			}
+
+
 		}else{
 			array_push($reference,"");
 			array_push($reference, "");
