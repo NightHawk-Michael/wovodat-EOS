@@ -99,6 +99,7 @@
 			if(!label) continue;
 			if(lf) label = lf(label, s);
 			if (options.legend.horizontal){
+				 posy = y-25;
 			}else{
 				posx=x;
 				posy = y + (i * 18);

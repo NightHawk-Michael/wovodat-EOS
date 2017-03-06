@@ -1,4 +1,4 @@
-/* Javascript plotting library for jQuery, version 0.9.0-alpha.
+    /* Javascript plotting library for jQuery, version 0.9.0-alpha.
 
 Copyright (c) 2007-2014 IOLA and Ole Laursen.
 Licensed under the MIT license.
@@ -620,7 +620,8 @@ Licensed under the MIT license.
                     backgroundOpacity: 0.85,
 
                     // default to no legend sorting
-                    sorted: null
+                    sorted: null,
+                    horizontal: true,
                 },
                 xaxis: {
 
