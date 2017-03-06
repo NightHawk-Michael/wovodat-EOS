@@ -8,37 +8,49 @@ define(function (require) {
                 return [-0.5,0,0.5];
             }
             if(min == max){
-                var temp = this.exponentialDegree(min);
-                if(temp == 0){
-                    temp = 1;
-                }
-                var diff = 0.5*temp;
+
+                var diff = 0.5;
                 return [min - diff,min,min+diff];
             }
             var ticks = [];
             var numStep = 7;
             /** compute exponential Degree **/
-            var expDeg = undefined
-            expDeg = Math.max(this.exponentialDegree(min),this.exponentialDegree(max));
+            //var expDeg = undefined
+            //expDeg = Math.max(this    .exponentialDegree(min),this.exponentialDegree(max));
 
-            var step = this.roundNumber((max - min) / numStep, expDeg); // step of ticks
-            //if step is 0.xxx in computing exponential Degree, decrement expDeg
-            while (step == 0) {
-                expDeg--;
-                step = this.roundNumber((max - min) / numStep, expDeg);
+            //var step = this.roundNumber((max - min) / numStep, expDeg); // step of ticks
+            var step = (max-min)/(numStep-2);
+            if (step < 1){
+                var rounded = Math.round( step * 10 ) / 10;
+                var fixed = rounded.toFixed(1);
+                //return parseFloat( val.toFixed(2) )
+                step = fixed;
+                step = Math.max(step,0.2);
+            }else{
+                step = parseInt(step);
             }
-            min = this.roundNumber(min, expDeg);
-            max = this.roundNumber(max, expDeg);
+
+
+            //if step is 0.xxx in computing exponential Degree, decrement expDeg
+            //while (step == 0) {
+            //    expDeg--;
+            //    step = this.roundNumber((max - min) / numStep, expDeg);
+            //}
+            //min = this.roundNumber(min, expDeg);
+            //max = this.roundNumber(max, expDeg);
 
             /**** compute ticks ****/
-            var startTick = this.roundNumber(min - step, expDeg); // start tick
-            var endTick = this.roundNumber(max + step, expDeg); // end tick
+            //var startTick = this.roundNumber(min - step, expDeg); // start tick
+            //var endTick = this.roundNumber(max + step, expDeg); // end tick
+            var startTick = min - step; // start tick
+            var endTick = max + step; // end tick
+
             var curTick = startTick;
             if (curTick == endTick) {
                 ticks.push(curTick);
             } else {
                 for (var i = 0; curTick < endTick; i++) {
-                    curTick = this.roundNumber(startTick + i * step, expDeg);
+                    curTick = startTick + i * step;
                     ticks.push(curTick);
 
                 }
@@ -165,10 +177,9 @@ define(function (require) {
                         axisLabel: axisLabel,
                         filterColor: filterColor // Pre-coded color for certain earthquake type
                     }
-                    data.push(this.formatGraphAppearance(list, filter.timeSerie.getName(), filterName, styleParams));
-
-
-
+                    var lineConnected = false;
+                    if (filter.timeSerie.get("data_type") == "EDM") lineConnected  = true;
+                    data.push(this.formatGraphAppearance(list, filter.timeSerie.getName(), filterName, styleParams, lineConnected));
 
                 }
 
@@ -181,12 +192,12 @@ define(function (require) {
 
             /** setup y-axis tick **/
             if (maxY != undefined && minY != undefined) {
-                maxY = maxY * 1.1;//1.1
-                minY = minY * 0.9;
+                maxY = maxY + (maxY-minY)/5;//1.1
+                minY = minY - (maxY-minY)/5;
                 if (minY == maxY) {
                     if (minY != 0) {
-                        minY = minY * 0.5;
-                        maxY = maxY * 1.5;
+                        minY = minY * 0.99;
+                        maxY = maxY * 1.01;
                     } else {
                         minY = -0.5;
                         maxY = 0.5;
@@ -210,15 +221,17 @@ define(function (require) {
          *   filterName: filter name
          *   styleParams: params for styling graph {barwith,errorbar, y-axis unit....}
          **/
-        formatGraphAppearance: function (data, timeSerieName, filterName, styleParams) {
+        formatGraphAppearance: function (data, timeSerieName, filterName, styleParams, lineConnected) {
 
             var dataParam = {
                 data: data, //data is 3D array (y-error value is included in the data passed in)
                 label: filterName + ":" + timeSerieName,
+
                 color: null,
                 lines: {
-                    show: false
+                    show: lineConnected
                 },
+
                 yaxis: {
                     axisLabel: ""
                 },
@@ -272,7 +285,6 @@ define(function (require) {
 
             if (styleParams.earthquakeTypeColor != null) {
                 dataParam.color = styleParams.earthquakeTypeColor;
-                console.log(dataParam.earthquakeTypeColor);
             }
 
             if (styleParams.style == 'dot') {
@@ -303,30 +315,30 @@ define(function (require) {
         },
         //expDegree always greater than expDegree of numberStr
         // Round the number to expDegree
-        roundNumber: function (numberStr, desExpDegree) {
-            var desCoe; // destination Coefficient
-            var number = parseFloat(numberStr)
-                number = number / Math.pow(10, desExpDegree);
-            //   var sourceExpDegree = this.exponentialDegree(number); //expoential Degree of this number
-
-            //   var sourceCoe = this.coefficient(number);
-            //   if(sourceExpDegree >=desExpDegree){
-            //     var differExpDeg = sourceExpDegree-desExpDegree;
-            //     desCoe = sourceCoe * Math.pow(10,differExpDeg);
-            // }else{
-            //    desCoe = 0;
-            //  }
-
-            number = Math.ceil(number);
-            return number * Math.pow(10, desExpDegree);
-        },
-        exponentialDegree: function (v) {
-            v = v.toExponential();
-            var a =  v.toString().split("e")[1];
-            var exp = parseInt(a);
-            return exp;
-
-        },
+        //roundNumber: function (numberStr, desExpDegree) {
+        //    var desCoe; // destination Coefficient
+        //    var number = parseFloat(numberStr)
+        //        number = number / Math.pow(10, desExpDegree);
+        //    //   var sourceExpDegree = this.exponentialDegree(number); //expoential Degree of this number
+        //
+        //    //   var sourceCoe = this.coefficient(number);
+        //    //   if(sourceExpDegree >=desExpDegree){
+        //    //     var differExpDeg = sourceExpDegree-desExpDegree;
+        //    //     desCoe = sourceCoe * Math.pow(10,differExpDeg);
+        //    // }else{
+        //    //    desCoe = 0;
+        //    //  }
+        //
+        //    number = Math.ceil(number);
+        //    return number * Math.pow(10, desExpDegree);
+        //},
+        //exponentialDegree: function (v) {
+        //    v = v.toExponential();
+        //    var a =  v.toString().split("e")[1];
+        //    var exp = parseInt(a);
+        //    return exp;
+        //
+        //},
         /** no decimal place **/
         coefficient: function (value) {
             value = value.toExponential();

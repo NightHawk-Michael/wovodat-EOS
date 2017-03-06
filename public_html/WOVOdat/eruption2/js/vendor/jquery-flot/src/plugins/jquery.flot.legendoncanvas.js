@@ -18,7 +18,7 @@
 
 		var f = {
 			style: placeholder.css("font-style"),
-			size: Math.round(0.8 * (+placeholder.css("font-size").replace("px", "") || 13)),
+			size: Math.round(0.5	 * (+placeholder.css("font-size").replace("px", "") || 13)),
 			variant: placeholder.css("font-variant"),
 			weight: placeholder.css("font-weight"),
 			family: placeholder.css("font-family")
@@ -98,12 +98,11 @@
 			label = s.label;
 			if(!label) continue;
 			if(lf) label = lf(label, s);
-                        if (options.legend.horizontal){
-                             posy = y+2;
-                        }else{
-                            posx=x;
-                            posy = y + (i * 18);
-                        }
+			if (options.legend.horizontal){
+			}else{
+				posx=x;
+				posy = y + (i * 18);
+			}
 			
 			ctx.fillStyle = options.legend.labelBoxBorderColor;
 			ctx.fillRect(posx, posy, 18, 14);

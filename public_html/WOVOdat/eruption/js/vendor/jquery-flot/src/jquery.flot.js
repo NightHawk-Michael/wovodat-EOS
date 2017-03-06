@@ -596,7 +596,7 @@ Licensed under the MIT license.
                     show: true,
 
                     // number of colums in legend table
-                    noColumns: 1,
+                    noColumns: 7,
 
                     // fn: string -> string
                     labelFormatter: null,
@@ -620,7 +620,8 @@ Licensed under the MIT license.
                     backgroundOpacity: 0.85,
 
                     // default to no legend sorting
-                    sorted: null
+                    sorted: null,
+                    horizontal : true,
                 },
                 xaxis: {
 

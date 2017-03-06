@@ -138,6 +138,7 @@ define(function(require) {
           data = this.data.ed_forData,
           option = {
             grid: {
+              minBorderMargin : 20,
               hoverable: true
             },
             xaxis: {

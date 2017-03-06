@@ -16,10 +16,10 @@ abstract class MonitoryTypeManager implements MonitoryTypeManagerInterface {
 	abstract protected function setTableManagers();
 	public function getTimeSeriesList($vd_id){
 		$result = array();
-
+//		var_dump($this->tableManagers);
 		foreach ($this->tableManagers as $col => $tableManager) {
+
 			$result = array_merge($result,$tableManager->getTimeSeriesList($vd_id));
-			// var_dump($result);
 		}
 		// var_dump($result);
 		return $result;

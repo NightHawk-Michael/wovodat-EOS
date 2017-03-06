@@ -134,7 +134,7 @@ define(function(require) {
         grid:{
 
           // margin: 20,
-          minBorderMargin : 10
+          minBorderMargin : 20
         },
         xaxis: {
           mode:'time',
@@ -150,15 +150,16 @@ define(function(require) {
         yaxis: {
           show: true,
           canvas: false,
-          // tickFormatter: function(val, axis) {
-          //   // console.log(val);
-          //   if(val > 9999 || val <-9999){
-          //     val = val.toPrecision(1);
-          //   }else{
-
-          //   }
-          //   return val;
-          // },
+          tickFormatter: function (val, axis) {
+            var string = val.toString();
+            if (string.length > 7) {
+              var rounded = Math.round( val * 10 ) / 10;
+              var fixed = rounded.toFixed(1);
+              //return parseFloat( val.toFixed(2) )
+              return fixed;
+            }
+            return val;
+          },
           //min: this.minY,
           //max: this.maxY,
           ////axisLabelUseCanvas: true,

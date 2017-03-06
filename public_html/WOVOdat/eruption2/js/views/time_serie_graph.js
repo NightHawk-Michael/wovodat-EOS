@@ -174,7 +174,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       this.data.minY = this.minY;
       var options = {
             grid:{
-             // margin: 50,
+              minBorderMargin : 20,
               hoverable: true,
             },
             xaxis: { 
@@ -196,8 +196,11 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
               labelWidth: 60,
               tickFormatter: function (val, axis) {
                 var string = val.toString();
-                if(string.length >7){
-                  return val.toPrecision(2);
+                if (string.length > 7) {
+                  var rounded = Math.round( val * 10 ) / 10;
+                  var fixed = rounded.toFixed(1);
+                  //return parseFloat( val.toFixed(2) )
+                  return fixed;
                 }
                 return val;
               },

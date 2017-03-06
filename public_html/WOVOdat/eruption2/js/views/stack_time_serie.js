@@ -73,7 +73,7 @@ define(function(require) {
 
             var options = {
                 grid:{
-                    //margin: 50,
+                    minBorderMargin : 20,
                     hoverable: true,
                     labelMargin:20,
                 },
@@ -92,6 +92,16 @@ define(function(require) {
                     show: true,
                     min: this.minY,
                     max: this.maxY,
+                    tickFormatter: function (val, axis) {
+                        var string = val.toString();
+                        if (string.length > 7) {
+                            var rounded = Math.round( val * 10 ) / 10;
+                            var fixed = rounded.toFixed(1);
+                            //return parseFloat( val.toFixed(2) )
+                            return fixed;
+                        }
+                        return val;
+                    },
                     ticks: 6 //this.ticks
 
       ,

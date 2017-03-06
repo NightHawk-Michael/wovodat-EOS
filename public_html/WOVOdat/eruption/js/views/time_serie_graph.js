@@ -1,4 +1,4 @@
-define(function (require) {
+        define(function (require) {
     'use strict';
     var
         $ = require('jquery'),
@@ -206,6 +206,7 @@ define(function (require) {
 
             options = {
                 grid: {
+                    minBorderMargin : 20,
                     hoverable: true,
                 },
                 xaxis: {
@@ -227,7 +228,11 @@ define(function (require) {
                     tickFormatter: function (val, axis) {
                         var string = val.toString();
                         if (string.length > 7) {
-                            return val.toPrecision(2);
+
+                            var rounded = Math.round( val * 10 ) / 10;
+                            var fixed = rounded.toFixed(1);
+                            //return parseFloat( val.toFixed(2) )
+                            return fixed;
                         }
                         return val;
                     },

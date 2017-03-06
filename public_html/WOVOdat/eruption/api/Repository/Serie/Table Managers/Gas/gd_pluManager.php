@@ -28,6 +28,7 @@ class gd_pluManager extends GasTablesManager {
 		return $result;
 	} // column name represent primary stationCode1, stationCode2.
 	protected function setStationDataParams($component){
+//		var_dump($component);
 		$unit="";
 		$attribute = "";
 		$query = "";
@@ -52,7 +53,9 @@ class gd_pluManager extends GasTablesManager {
 			$errorbar = false;
 			$style = 'dot';
 			$query = "select a.gd_plu_units as unit, a.gd_plu_species as filter, a.gd_plu_time as time, a.$attribute as value from $table as a where (a.gs_id=%s or a.cs_id=%s) and a.$attribute IS NOT NULL";
-			
+			var_dump($query);
+
+
 		}else if($component == 'Total Gas Emission'){
 
 			$attribute = "gd_plu_etot";

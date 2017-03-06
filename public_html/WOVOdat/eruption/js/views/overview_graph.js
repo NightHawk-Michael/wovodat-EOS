@@ -26,7 +26,6 @@ define(function(require) {
     
     selectingFiltersChanged: function(selectingFilters) {
       this.selectingFilters = selectingFilters;
-      console.log(this.selectingFilters);
       if(selectingFilters.empty){
         this.hide();
       }
@@ -97,11 +96,10 @@ define(function(require) {
       if(this.initialDataMaxTime != undefined){
         this.maxX = this.initialDataMaxTime;
       }
-
       var options = {
         grid:{
           // margin: 20,
-          minBorderMargin : 10
+          minBorderMargin : 20
         },
         xaxis: { 
           mode:'time',
@@ -118,6 +116,17 @@ define(function(require) {
           show: true,
           color: '#00000000',
           canvas: false,
+
+          tickFormatter: function (val, axis) {
+            var string = val.toString();
+            if (string.length > 7) {
+              var rounded = Math.round( val * 10 ) / 10;
+              var fixed = rounded.toFixed(1);
+              //return parseFloat( val.toFixed(2) )
+              return fixed;
+            }
+            return val;
+          },
           // tickFormatter: function(val, axis) { 
           //   // console.log(val);
           //   if(val > 9999 || val <-9999){
@@ -129,7 +138,7 @@ define(function(require) {
           // },
           min: this.minY,
           max: this.maxY,
-          //axisLabelUseCanvas: true,
+
           autoscaleMargin: 5,
           ticks: this.ticks,
           labelWidth: 40
@@ -239,9 +248,10 @@ define(function(require) {
       var allowErrorbar = false;
       var allowAxisLabel =false;
       var limitNumberOfData =true;
+      //console.log(this.serieGraphTimeRange);
       //var adjustTimeRange = false;
       //formatData: function(graph,filters,allowErrorbar,allowAxisLabel,limitNumberOfData)
-      GraphHelper.formatData(this,filters,allowErrorbar,allowAxisLabel,limitNumberOfData); 
+      GraphHelper.formatData(this,filters,allowErrorbar,allowAxisLabel,limitNumberOfData);
       
     },
     

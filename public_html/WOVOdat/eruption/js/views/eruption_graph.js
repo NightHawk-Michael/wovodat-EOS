@@ -128,6 +128,7 @@ define(function (require) {
             graph_pram_data = [],
             option = {
                 grid: {
+                    minBorderMargin : 20,
                     hoverable: true,
                 },
                 xaxis: {

@@ -39,7 +39,11 @@
  			{
  				"name" : "Total Gas Emission",
  				"cols" : "gd_plu_etot"
- 			}
+ 			},
+			{
+				"name" : "Gas Emission Mass",
+				"cols" : "gd_plu_mass"
+			}
 		]
 	},
 

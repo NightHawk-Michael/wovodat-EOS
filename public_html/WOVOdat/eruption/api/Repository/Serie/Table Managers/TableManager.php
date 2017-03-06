@@ -28,6 +28,10 @@ abstract class TableManager implements TableManagerInterface {
 
 		$this->data_code =  $this->setDataCode();
 	}
+
+	public function getTableName(){
+		return $this->table_name;
+	}
 	//must return 1 sta_code column
 	protected function getStationCodeQuery($sta_id){
 		$table_name = $this->getTableNameFromIdName($sta_id);
@@ -90,19 +94,21 @@ abstract class TableManager implements TableManagerInterface {
 		global $db;
 		$query = $this->getTimeSeriesListQuery($vd_id);
 		$db->query( $query);
-		// echo $query."\n";
 		$serie_list = $db->getList();
 		$exsited = array();
 		$v = "";
 
 		foreach ($serie_list as $serie) {
+//			var_dump($serie);
 			foreach ($this->cols_name as $col_name) {
 
 				if(!array_key_exists($serie["sta_id1"], $this->sta_id_code_dictionary[0])){
-					continue;
+					$this->sta_id_code_dictionary[0][$serie["sta_id1"]] = "0";
+					$serie["sta_id1"] = "0";
 				}
 				if(!array_key_exists($serie["sta_id2"], $this->sta_id_code_dictionary[1])){
-					continue;
+					$this->sta_id_code_dictionary[1][$serie["sta_id2"]] = "0";
+					$serie["sta_id2"] = "0";
 				}
 
 				if (array_key_exists("vd_name",$serie)){
@@ -133,9 +139,6 @@ abstract class TableManager implements TableManagerInterface {
 					}else{
 
 					}
-
-
-
 				}
 			}
 		}
@@ -159,7 +162,10 @@ abstract class TableManager implements TableManagerInterface {
 		$query2 = "SELECT COUNT(*) as count " . substr($query,$fromPos,$groupByPos-$fromPos);
 		$db->query($query2, $id1,$id2);
 		$res = $db->getList();
+//		var_dump("IS HAS DATA ----------------------");
 //		var_dump($db);
+//		var_dump("END IS HAS DATA ----------------------");
+
 		if(sizeof($res) == 0) {
 			return true;
 		}
@@ -176,7 +182,6 @@ abstract class TableManager implements TableManagerInterface {
 		$res = array();
 		$data = array();
 		$unit = "";
-//		var_dump($stations);
 		$stationDataParams = $this->setStationDataParams($stations['component']);
 
 		$errorbar = $stationDataParams["errorbar"];
