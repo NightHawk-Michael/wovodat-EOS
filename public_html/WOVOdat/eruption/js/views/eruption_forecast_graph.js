@@ -138,6 +138,7 @@ define(function(require) {
           data = this.data.ed_forData,
           option = {
             grid: {
+              margin: 24,
               minBorderMargin : 20,
               hoverable: true
             },
@@ -150,6 +151,7 @@ define(function(require) {
               timeformat: '%d-%b-%Y'
             },
             yaxis: {
+
               show:true,
               canvas: false,
               ticks: [0,1],

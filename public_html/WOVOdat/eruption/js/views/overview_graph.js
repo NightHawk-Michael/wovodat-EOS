@@ -98,7 +98,7 @@ define(function(require) {
       }
       var options = {
         grid:{
-          // margin: 20,
+           margin: 20,
           minBorderMargin : 20
         },
         xaxis: { 

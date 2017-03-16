@@ -37,6 +37,13 @@ define(function (require) {
 
         initialize: function (options) {
             this.selecting_vd_num = options.vnum;
+            var op="";
+            var threshold=-1000000;
+            if (options.dataRange != undefined){
+                op = options.dataRange.substr(0,1);
+                threshold = parseFloat(options.dataRange.substr(1,options.dataRange.length));
+
+            }
             if(options.ed_etime != undefined&&options.ed_stime != undefined ){
                 this.ed_stime_num = new Date(options.ed_stime.replace(" ","T")).getTime();
                 this.ed_etime_num = new Date(options.ed_etime.replace(" ","T")).getTime();
@@ -44,15 +51,19 @@ define(function (require) {
 
             this.selectedTimeSeries = {};
             if(options.dataType != undefined){
-                var temp = options.dataType.split(" (");
+                var temp = options.dataType.split("(");
                 if(temp[1]!=undefined){
                     temp[1] = temp[1].slice(0,-1) // remove brackets
                 }else{
                     temp[1] = " "; // no filter
                 }
                 this.selectedTimeSeries = {
-                    dataType: temp[0],
+                    dataType: temp[0].trim(),
                     filter: temp[1],
+                    dataRange: {
+                        op: op,
+                        threshold: threshold
+                    },
                     dataMinTime: new Date(options.dataMinTime.replace(" ","T")).getTime(),
                     dataMaxTime: new Date(options.dataMaxTime.replace(" ","T")).getTime(),
                 };
@@ -126,7 +137,8 @@ define(function (require) {
                     categories: categories,
                     selectings: selectingTimeSeries,
                     selectingFilters: selectingFilters,
-                    selectedFilters: this.selectedTimeSeries.filter
+                    selectedFilters: this.selectedTimeSeries.filter,
+                    dataRange: this.selectedTimeSeries.dataRange,
                 }),
                 overviewGraph = new OverviewGraph({
                     categories: categories,

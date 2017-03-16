@@ -22,6 +22,8 @@ define(function (require) {
             this.categories = options.categories;
             this.selectedFilter = options.selectedFilters;
             this.filters = new Filters;
+            this.dataRange = options.dataRange;
+
         },
         selectingTimeSeriesChanged: function (selectingTimeSeries) {
             this.selectingTimeSeries = selectingTimeSeries;
@@ -42,7 +44,17 @@ define(function (require) {
                 this.filters.push(timeSerie, "  "); //no data
             }
             for (var i = 0; i < data.length; i++) {
-                this.filters.push(timeSerie, data[i].filter,data[i].dataOwner);
+                var d = data[i];
+                var v = d.value;
+                var isPush = false;
+                if (this.dataRange == undefined || this.dataRange.op == "") isPush = true;
+                else if (this.dataRange.op =="a" && v > this.dataRange.threshold) isPush = true; //>
+                else if (this.dataRange.op =="b" && v >= this.dataRange.threshold) isPush = true; //>=
+                else if (this.dataRange.op =="c" && v < this.dataRange.threshold) isPush = true; // <
+                else if (this.dataRange.op =="d" && v <= this.dataRange.threshold) isPush = true;// <=
+                else if (this.dataRange.op =="e" && v == this.dataRange.threshold) isPush = true; //==
+                else if (this.dataRange.op =="f" && v != this.dataRange.threshold) isPush = true; //!=
+                if (isPush) this.filters.push(timeSerie, d.filter,d.dataOwner);
             }
         },
 
@@ -94,11 +106,13 @@ define(function (require) {
             }
             this.filters.empty = true;
             var models = this.selectingTimeSeries.models;
+            var tempFilter = false;
             for (var i = 0; i < models.length; i++) {
                 this.getFilter(models[i]);
+                tempFilter = true;
 
             }
-            ;
+
 
             // var categories=["Seismic","Deformation","Gas","Hydrology","Thermal","Field","Meteology"];
             // var selectingFilters = [];
@@ -133,7 +147,12 @@ define(function (require) {
 
             $('.filter-select').material_select();
             this.showGraph();
-            this.selectedFilter = undefined; // selectedFIlter only valid at the first time of loading
+            //selectedFIlter only valid at the first time of loading
+            if(this.dataRange != undefined && tempFilter){
+                this.dataRange.op = "";
+                this.selectedFilter = undefined;
+            }
+            //this.selectedFilter = undefined; // selectedFIlter only valid at the first time of loading
         },
         //generate data for html template
         /* {[{nodata,

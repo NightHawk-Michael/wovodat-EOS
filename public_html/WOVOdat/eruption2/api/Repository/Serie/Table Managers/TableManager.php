@@ -84,7 +84,6 @@ abstract class TableManager implements TableManagerInterface {
 			$query = $query.",a.".$name;
 		}
 		$query = $query." from $this->table_name as a,vd ,vd_inf as b where a.vd_id=$vd_id AND vd.vd_id = $vd_id and b.vd_id = $vd_id group by a.vd_id, sta_id1, sta_id2 order by a.vd_id";
-//		var_dump($query);
 		return $query;
 	}
 	public function getTimeSeriesList($vd_id){
@@ -98,16 +97,18 @@ abstract class TableManager implements TableManagerInterface {
 		$exsited = array();
 		$v = "";
 
+
 		foreach ($serie_list as $serie) {
 
 
 			foreach ($this->cols_name as $col_name) {
-
 				if(!array_key_exists($serie["sta_id1"], $this->sta_id_code_dictionary[0])){
-					continue;
+					$this->sta_id_code_dictionary[0][$serie["sta_id1"]] = "0";
+					$serie["sta_id1"] = "0";
 				}
 				if(!array_key_exists($serie["sta_id2"], $this->sta_id_code_dictionary[1])){
-					continue;
+					$this->sta_id_code_dictionary[1][$serie["sta_id2"]] = "0";
+					$serie["sta_id2"] = "0";
 				}
 
 				if (array_key_exists("vd_name",$serie)){
@@ -115,7 +116,7 @@ abstract class TableManager implements TableManagerInterface {
 				}else{
 
 				}
-
+//				var_dump($serie);
 				if($serie[$col_name]!=""){
 
 					$x = array('category' => $this->monitoryType ,
@@ -162,7 +163,6 @@ abstract class TableManager implements TableManagerInterface {
 		if ($groupByPos == FALSE) $groupByPos = strlen($query);
 		$query2 = "SELECT COUNT(*) as count " . substr($query,$fromPos,$groupByPos-$fromPos);
 		$db->query($query2, $id1,$id2);
-
 		$res = $db->getList();
 		if ($res[0]["count"] == "0") return false;
 		else return true;
@@ -188,7 +188,6 @@ abstract class TableManager implements TableManagerInterface {
 		 $query = str_replace("select",$temp ,$query);
 
 		$db->query($query, $id1,$id2);
-
 		$res = $db->getList();
 
 		if (empty($res)){

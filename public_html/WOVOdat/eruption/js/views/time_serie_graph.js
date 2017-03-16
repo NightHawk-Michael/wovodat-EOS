@@ -206,6 +206,7 @@
 
             options = {
                 grid: {
+
                     minBorderMargin : 20,
                     hoverable: true,
                 },
@@ -224,7 +225,7 @@
                     min: this.minY,
                     max: this.maxY,
                     ticks: this.ticks,
-                    labelWidth: 60,
+
                     tickFormatter: function (val, axis) {
                         var string = val.toString();
                         if (string.length > 7) {
