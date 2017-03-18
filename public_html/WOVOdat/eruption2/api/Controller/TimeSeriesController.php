@@ -8,15 +8,18 @@
 		*		data list
 		*/
 		public static function loadDataList($vd_id) {
+
+
 			$instance = TimeSeriesManager::getInstance();
 			$result = $instance->getTimeSeriesList($vd_id);
+
 			return $result;
 		}	
 
 
-		public static function loadTimeSerie($serie) {
+		public static function loadTimeSerie($serie,$vd_id) {
 			$instance = TimeSeriesManager::getInstance();
-			$result = $instance->getTimeSerie($serie);
+			$result = $instance->getTimeSerie($serie,$vd_id);
 			return $result;
 		}
 
