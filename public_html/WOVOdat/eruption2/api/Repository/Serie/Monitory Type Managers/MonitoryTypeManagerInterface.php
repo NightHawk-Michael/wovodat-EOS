@@ -7,5 +7,5 @@
 
 interface MonitoryTypeManagerInterface {
   public function getTimeSeriesList($vd_id);
-  public function getStationData($serie );
+  public function getStationData($serie,$vd_id);
 } 

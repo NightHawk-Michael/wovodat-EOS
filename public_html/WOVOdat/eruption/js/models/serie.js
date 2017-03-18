@@ -49,8 +49,12 @@ define(['jquery', 'backbone'], function($, Backbone) {
       return station1 + station2 + "(" + component +")";
       
     },
+    updateURL: function (vd_id){
+      this.url = this.url + "&vd_id=" + vd_id;
+    },
     /** return the data of time serie in term of filter**/
     getDataFromFilter: function(filterName){
+
       var data = [];
       var serieDatas = this.get('data').data;
       for(var i=0; i< serieDatas.length;i++ ){

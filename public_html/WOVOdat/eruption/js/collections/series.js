@@ -14,12 +14,13 @@ define(function(require) {
     },
     
     changeVolcano: function(vd_id, handler) {
+      this.vd_id = vd_id;
       if(this.offline){
         this.url = 'offline-data/time_series_list.json';
       }else{
         this.url = 'api/?data=time_series_list&vd_id=' + vd_id;
       }
-      
+
       var categories=["Seismic","Deformation","Gas","Hydrology","Thermal","Field","Meteology"];
       for(var i = 0; i<categories.length;i++){
         delete this[categories[i]];
@@ -56,6 +57,8 @@ define(function(require) {
             model.attributes.showingName = station1 + station2 + "(" + item.component + ")";
             if(self.offline){
               model.url ='offline-data/'+model.attributes.sr_id+'.json';
+            }else{
+              model.updateURL(vd_id);
             }
             if(currentCategory == "" | currentCategory != item.category){
               collection[item.category] = [];
@@ -74,6 +77,7 @@ define(function(require) {
     
 
     get: function(serie){
+
       for(var i =0;i<this.models.length;i++){
         if(serie.sr_id != undefined){
           if(this.models[i].get('sr_id') == serie.sr_id){

@@ -56,6 +56,8 @@ define(function(require) {
             model.attributes.showingName = station1 + station2 + "(" + item.component + ")";
             if(self.offline){
               model.url ='offline-data/'+model.attributes.sr_id+'.json';
+            }else{
+              model.updateURL(vd_id);
             }
             if(currentCategory == "" | currentCategory != item.category){
               collection[item.category] = [];

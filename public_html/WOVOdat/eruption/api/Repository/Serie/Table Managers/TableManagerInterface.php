@@ -7,5 +7,5 @@
 
 interface TableManagerInterface {
   public function getTimeSeriesList($vd_id);
-  public function getStationData($stations);
+  public function getStationData($stations,$vd_id);
 } 

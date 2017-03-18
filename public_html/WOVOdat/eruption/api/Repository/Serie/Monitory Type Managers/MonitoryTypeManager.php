@@ -24,7 +24,7 @@ abstract class MonitoryTypeManager implements MonitoryTypeManagerInterface {
 		// var_dump($result);
 		return $result;
 	}
-	public function getStationData($serie ){
+	public function getStationData($serie,$vd_id ){
 		$result = array();
 //		 var_dump($this->infor);
 
@@ -48,7 +48,7 @@ abstract class MonitoryTypeManager implements MonitoryTypeManagerInterface {
 		foreach ($this->tableManagers as $tableName=> $tableManager) {
 
 			if($table == $tableName){
-				$result = array_merge($result,$tableManager->getStationData($serie));
+				$result = array_merge($result,$tableManager->getStationData($serie,$vd_id));
 			}
 			
 		}

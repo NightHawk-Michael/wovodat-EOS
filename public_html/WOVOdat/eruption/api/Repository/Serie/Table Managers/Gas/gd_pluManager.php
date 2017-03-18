@@ -39,20 +39,20 @@ class gd_pluManager extends GasTablesManager {
 			$unit = "km";
 			$attribute = "gd_plu_height";
 			$errorbar = false;
-			$query = "select a.gd_plu_time as time, a.$attribute as value from $table as a where (a.gs_id=%s or a.cs_id=%s)  and a.$attribute IS NOT NULL";
+			$query = "select a.gd_plu_time as time, a.$attribute as value from $table as a where (a.gs_id=%s or a.cs_id=%s) and vd_id = %s and a.$attribute IS NOT NULL";
 	
 		}else if($component == 'Gas Emission Rate'){
 
 			$attribute = "gd_plu_emit"; 	
 			$errorbar = true;
 			$style = 'dot';
-			$query = "select a.gd_plu_units as unit, a.gd_plu_species as filter, a.gd_plu_emit_err as err, a.gd_plu_time as time, a.$attribute as value from $table as a where (a.gs_id=%s or a.cs_id=%s) and a.$attribute IS NOT NULL";
+			$query = "select a.gd_plu_units as unit, a.gd_plu_species as filter, a.gd_plu_emit_err as err, a.gd_plu_time as time, a.$attribute as value from $table as a where (a.gs_id=%s or a.cs_id=%s) and vd_id = %s and a.$attribute IS NOT NULL";
 		}else if($component == 'Gas Emission Mass'){
 			$unit ="tons";
 			$attribute = "gd_plu_mass";
 			$errorbar = false;
 			$style = 'dot';
-			$query = "select a.gd_plu_units as unit, a.gd_plu_species as filter, a.gd_plu_time as time, a.$attribute as value from $table as a where (a.gs_id=%s or a.cs_id=%s) and a.$attribute IS NOT NULL";
+			$query = "select a.gd_plu_units as unit, a.gd_plu_species as filter, a.gd_plu_time as time, a.$attribute as value from $table as a where (a.gs_id=%s or a.cs_id=%s) and vd_id = %s and a.$attribute IS NOT NULL";
 			var_dump($query);
 
 
@@ -61,7 +61,7 @@ class gd_pluManager extends GasTablesManager {
 			$attribute = "gd_plu_etot";
 			$errorbar = true;
 			$style = 'dot';
-			$query = "select a.gd_plu_units as unit, a.gd_plu_species as filter, a.gd_plu_etot_err as err, a.gd_plu_time as time, a.$attribute as value from $table as a where (a.gs_id=%s or a.cs_id=%s) and a.$attribute IS NOT NULL";
+			$query = "select a.gd_plu_units as unit, a.gd_plu_species as filter, a.gd_plu_etot_err as err, a.gd_plu_time as time, a.$attribute as value from $table as a where (a.gs_id=%s or a.cs_id=%s) and vd_id = %s and a.$attribute IS NOT NULL";
 			
 		}
 		$result = array("unit" => $unit,

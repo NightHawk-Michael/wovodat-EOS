@@ -10,8 +10,10 @@ class TimeSeriesManager
     private static $instance;
     protected $timeSeriesManagers;
 
+
     public static function getInstance()
     {
+
         if (self::$instance == null) {
             self::$instance = new TimeSeriesManager;
 
@@ -47,8 +49,9 @@ class TimeSeriesManager
         return null;
     }
 
-    public function getTimeSeriesList($vd_id)
-    {
+    public function getTimeSeriesList($vd_id){
+
+
 
         $result = array();
         foreach ($this->timeSeriesManagers as $type => $class) {
@@ -60,7 +63,7 @@ class TimeSeriesManager
     }
 
 
-    public function getTimeSerie($serie)
+    public function getTimeSerie($serie,$vd_id)
     {
 
         // $serie = $this->getSerieInfo($sr_id);
@@ -73,7 +76,7 @@ class TimeSeriesManager
         foreach ($this->timeSeriesManagers as $type => $class) {
             if ($type == $serie['category']) {
 //                 var_dump($class);
-                $temp = $class->getStationData($serie);
+                $temp = $class->getStationData($serie,$vd_id);
                 $data = array_merge($data, $temp);
                 // var_dump($temp);
             }
