@@ -136,7 +136,7 @@ abstract class TableManager implements TableManagerInterface {
 					$x["sr_id"] = md5( $x["category"].$x["data_type"].$x["station_id1"].$x["station_id2"].$x["component"].$x["volcanoName"] );
 					if(!array_key_exists($x["sr_id"], $exsited)){
 						$exsited[$x["sr_id"]] = true;
-						if ($this->isHasData($x)) array_push($result,  $x );
+						if ($this->isHasData($x,$vd_id)) array_push($result,  $x );
 					}else{
 
 					}
@@ -148,7 +148,7 @@ abstract class TableManager implements TableManagerInterface {
 		return $result;
 
  	}
-	public function isHasData($stations){
+	public function isHasData($stations,$vd_id){
 		$this->vd_long = $stations["vd_long"];
 		$this->vd_lat = $stations["vd_lat"];
 		$id1 = $stations["station_id1"];
@@ -162,12 +162,12 @@ abstract class TableManager implements TableManagerInterface {
 		$groupByPos = stripos($query, "group by");
 		if ($groupByPos == FALSE) $groupByPos = strlen($query);
 		$query2 = "SELECT COUNT(*) as count " . substr($query,$fromPos,$groupByPos-$fromPos);
-		$db->query($query2, $id1,$id2);
+		$db->query($query2, $id1,$id2,$vd_id);
 		$res = $db->getList();
 		if ($res[0]["count"] == "0") return false;
 		else return true;
 	}
-  	public function getStationData($stations){
+  	public function getStationData($stations,$vd_id){
 		$this->vd_long = $stations["vd_long"];
 		$this->vd_lat = $stations["vd_lat"];
   		$id1 = $stations["station_id1"];
@@ -187,7 +187,7 @@ abstract class TableManager implements TableManagerInterface {
 
 		 $query = str_replace("select",$temp ,$query);
 
-		$db->query($query, $id1,$id2);
+		$db->query($query, $id1,$id2,$vd_id);
 		$res = $db->getList();
 
 		if (empty($res)){
@@ -196,7 +196,7 @@ abstract class TableManager implements TableManagerInterface {
 			$sn_id = $db->getValue();
 			$query = str_replace("a.ss_id","sn_id" ,$query);
 
-			$db->query($query, $sn_id,$sn_id);
+			$db->query($query, $sn_id,$sn_id,$vd_id);
 
 			$res = $db->getList();
 		}
