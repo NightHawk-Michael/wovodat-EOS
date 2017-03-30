@@ -8,56 +8,87 @@ define(function(require) {
                 return [-0.5,0,0.5];
             }
             if(min == max){
-
-                var diff = 0.5;
+                var temp = this.exponentialDegree(min);
+                if(temp == 0){
+                    temp = 1;
+                }
+                var diff = 0.5*temp;
                 return [min - diff,min,min+diff];
             }
       var ticks = [];
       var numStep = 7;
       /** compute exponential Degree **/
-      //var expDeg = undefined
-      //expDeg = Math.max(this    .exponentialDegree(min),this.exponentialDegree(max));
+	  
+	
+	  var expDeg = undefined
+	  if(this.exponentialDegree(min) < this.exponentialDegree(max)){
+		expDeg = this.exponentialDegree(max);
+	  }else{
+		expDeg = this.exponentialDegree(min);
+	  }
+	  
+	  
+	  if(expDeg > 5) {	  
+		  var step = this.roundNumber((max-min)/numStep,expDeg); // step of ticks
+		  //if step is 0.xxx in computing exponential Degree, decrement expDeg
+		  while(step == 0){
+			expDeg--;
+			step = this.roundNumber((max-min)/numStep,expDeg);
+		  }
+		  min = this.roundNumber(min,expDeg);
+		  max = this.roundNumber(max,expDeg);
 
-      //var step = this.roundNumber((max - min) / numStep, expDeg); // step of ticks
-      var step = (max-min)/(numStep-2);
-      if (step < 1){
-        var rounded = Math.round( step * 10 ) / 10;
-        var fixed = rounded.toFixed(1);
-        //return parseFloat( val.toFixed(2) )
-        step = fixed;
-        step = Math.max(step,0.2);
-      }else{
-        step = parseInt(step);
-      }
+		  /**** compute ticks ****/
+		  var startTick = this.roundNumber(min -step,expDeg); // start tick
+		  var endTick = this.roundNumber(max+step,expDeg); // end tick  
+		  
+		    var curTick = startTick;
+			  if(curTick == endTick){
+				ticks.push(curTick);
+			  }else{
+				for(var i=0; curTick<endTick;i++){
+				  curTick = this.roundNumber(startTick + i *step,expDeg);
+				  ticks.push(curTick);
+				  
+				}  
+			  }
+	  }
+	  else {
+		//	var step = (max-min)/(numStep-2);
+			var step = (max-min)/numStep;
+            
+			if (step < 1){
+                var rounded = Math.round( step * 10 ) / 10;
+                var fixed = rounded.toFixed(1);
+                //return parseFloat( val.toFixed(2) )
+                step = fixed;
+                step = Math.max(step,0.2);
+            }else{
+                step = parseInt(step);
+            }
 
+        	//var startTick = min - step;
+           // var endTick = max + step; 
+		   
+			 var maxTick  = max + step; 
+			 var startTick  = maxTick - (step * numStep);    // start tick
+		     var endTick  = maxTick; // end tick
+			 
+			 var curTick = startTick;
+            if (curTick == endTick) {
+                ticks.push(curTick);
+            } else {
+                for (var i = 0; curTick < endTick; i++) {
+                    curTick = startTick + i * step;
+                    ticks.push(curTick);
 
-      //if step is 0.xxx in computing exponential Degree, decrement expDeg
-      //while (step == 0) {
-      //    expDeg--;
-      //    step = this.roundNumber((max - min) / numStep, expDeg);
-      //}
-      //min = this.roundNumber(min, expDeg);
-      //max = this.roundNumber(max, expDeg);
-
-      /**** compute ticks ****/
-      //var startTick = this.roundNumber(min - step, expDeg); // start tick
-      //var endTick = this.roundNumber(max + step, expDeg); // end tick
-      var startTick = min - step; // start tick
-      var endTick = max + step; // end tick
-
-      var curTick = startTick;
-      if (curTick == endTick) {
-        ticks.push(curTick);
-      } else {
-        for (var i = 0; curTick < endTick; i++) {
-          curTick = startTick + i * step;
-          ticks.push(curTick);
-
-        }
-      }
-      return ticks;
-
+                }
+            }
+	  }
+      return ticks;  
     },
+	
+	
     formatData: function(graph,filters,allowErrorbar,allowAxisLabel,limitNumberOfData, eruptions){
      var minX = undefined,
          maxX = undefined,
@@ -167,21 +198,16 @@ define(function(require) {
             list.push(tempData);
           });
 
-
-
-
-          var styleParams = {
-            style: style,
-            errorbar: errorbar,
-            axisLabel: axisLabel,
-            filterColor: filterColor // Pre-coded color for certain earthquake type
-          }
-
-          var lineConnected = false;
-          if (filter.timeSerie.get("data_type") == "EDM") lineConnected  = true;
-          data.push(this.formatGraphAppearance(list, filter.timeSerie.getName(), filterName, styleParams, lineConnected));
-
-
+		var styleParams = {
+			style: style,
+			errorbar: errorbar,
+			axisLabel: axisLabel,
+			filterColor: filterColor // Pre-coded color for certain earthquake type
+		}
+		var lineConnected = false;
+		if (filter.timeSerie.get("data_type") == "EDM") lineConnected  = true;
+		data.push(this.formatGraphAppearance(list, filter.timeSerie.getName(), filterName, styleParams, lineConnected));
+          
         }
 
           
@@ -215,21 +241,25 @@ define(function(require) {
 
 
       /** setup y-axis tick **/
-      if (maxY != undefined && minY != undefined) {
-        maxY = maxY + (maxY-minY)/5;//1.1
-        minY = minY - (maxY-minY)/5;
-        if (minY == maxY) {
-          if (minY != 0) {
-            minY = minY * 0.99;
-            maxY = maxY * 1.01;
-          } else {
+      if(maxY != undefined && minY != undefined){
+   //     maxY = maxY*1.1;//1.1
+    //    minY = minY*0.9;
+	
+		maxY = maxY + (maxY-minY)/5;//1.1
+		minY = minY - (maxY-minY)/5;
+     
+		if(minY == maxY){
+          if(minY!=0){
+            minY = minY*0.5;
+            maxY = maxY*1.5; 
+          }else{
             minY = -0.5;
             maxY = 0.5;
           }
         }
-        graph.ticks = this.generateTick(minY, maxY);
+        graph.ticks = this.generateTick(minY,maxY);
         graph.minY = graph.ticks[0];
-        graph.maxY = graph.ticks[graph.ticks.length - 1]
+        graph.maxY = graph.ticks[graph.ticks.length-1]
         graph.ticks.push();
       }
       graph.timeRange.set({
@@ -245,14 +275,14 @@ define(function(require) {
     *   filterName: filter name
     *   styleParams: params for styling graph {barwith,errorbar, y-axis unit....}
     **/
-      formatGraphAppearance: function(data,timeSerieName,filterName,styleParams, lineConnected){
+      formatGraphAppearance: function(data,timeSerieName,filterName,styleParams, lineConnected) {
 
       var dataParam = {
         data: data, //data is 3D array (y-error value is included in the data passed in)
         label: filterName + ":"+timeSerieName,
         color: null,
-        lines: { 
-          show: lineConnected
+        lines: {
+           show: lineConnected
         },
         yaxis: {
           axisLabel: ""
@@ -411,20 +441,20 @@ define(function(require) {
             number = Math.ceil(number);
         return number*Math.pow(10,desExpDegree);
     },
-    //exponentialDegree: function(value){
-    //    value = value.toExponential();
-    //    var a =  value.toString().split("e")[1];
-    //    var exp = parseInt(a);
-    //    return exp;
-    //},
+    exponentialDegree: function(value){
+        value = value.toExponential();
+        var a =  value.toString().split("e")[1];
+        var exp = parseInt(a);
+        return exp;
+    },
     /** no decimal place **/
-    //coefficient: function(value){
-        //value = value.toExponential();
-        //var a =  value.toString().split("e")[0];
-        //var coe = parseFloat(a);
-        //coe = Math.round(coe);
-        //return coe;
-        //},
+    coefficient: function(value){ 
+        value = value.toExponential();
+        var a =  value.toString().split("e")[0];
+        var coe = parseFloat(a);
+        coe = Math.round(coe);
+        return coe;
+        },
 
   };
 });

@@ -36,27 +36,27 @@ class sd_evsManager extends SeismicTablesManager {
 		if($component == 'S-P Arrival Time'){
 			$unit = "s";   
 			$attribute = "sd_evs_spint";
-			$query = "select a.sd_evs_eqtype as filter,a.sd_evs_time as time, a.$attribute as value from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.sd_evs_eqtype as filter,a.sd_evs_time as time, a.$attribute as value from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL and a.sd_evs_pubdate <= now()";
 		}else if($component == 'Epicenter From Vent'){
 			$unit = "km";
 			$attribute = "sd_evs_dist_actven";
-			$query = "select a.sd_evs_eqtype as filter,a.sd_evs_time as time, a.$attribute as value from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.sd_evs_eqtype as filter,a.sd_evs_time as time, a.$attribute as value from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL and a.sd_evs_pubdate <= now()";
 		}else if($component == 'Earthquake Maximum Amplitude'){
 			$unit = "cm";
 			$attribute = "sd_evs_maxamptrac";
-			$query = "select a.sd_evs_eqtype as filter,a.sd_evs_time as time, a.$attribute as value from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.sd_evs_eqtype as filter,a.sd_evs_time as time, a.$attribute as value from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL and a.sd_evs_pubdate <= now()";
 		}else if($component == 'Earthquake Dominant Frequency'){
 			$unit = "Hz";
 			$attribute = "sd_evs_domFre";
-			$query = "select a.sd_evs_eqtype as filter,a.sd_evs_time as time, a.$attribute as value from $table as a where a.ss_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.sd_evs_eqtype as filter,a.sd_evs_time as time, a.$attribute as value from $table as a where a.ss_id=%s and a.$attribute IS NOT NULL and a.sd_evs_pubdate <= now()";
 		}else if($component == 'Earthquake Magnitude'){
 			$unit = "Hz";
 			$attribute = "sd_evs_mag";  
-			$query = "select a.sd_evs_eqtype as filter,a.sd_evs_time as time, a.$attribute as value from $table as a where a.ss_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.sd_evs_eqtype as filter,a.sd_evs_time as time, a.$attribute as value from $table as a where a.ss_id=%s and a.$attribute IS NOT NULL and a.sd_evs_pubdate <= now()";
 		}else if($component == 'Earthquake Energy'){
 			$unit = "Erg";
 			$attribute = "sd_evs_energy";  
-			$query = "select a.sd_evs_eqtype as filter,a.sd_evs_time as time,a.$attribute as value from $table as a where a.ss_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.sd_evs_eqtype as filter,a.sd_evs_time as time,a.$attribute as value from $table as a where a.ss_id=%s and a.$attribute IS NOT NULL and a.sd_evs_pubdate <= now()";
 		}
 		$result = array("unit" => $unit,
 						"style" => $style,

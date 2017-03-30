@@ -39,52 +39,52 @@ class sd_ivlManager extends SeismicTablesManager {
 		if($component == 'Swarm Distance'){
 			$unit = "km";
 			$attribute = "sd_ivl_hdist";
-			$query = "select a.sd_ivl_eqtype  as filter ,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL";
+			$query = "select a.sd_ivl_eqtype  as filter ,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL and a.sd_ivl_pubdate <= now()";
 		}else if($component == 'Swarm Mean Depth'){
 			$unit = "km";
 			$attribute = "sd_ivl_avgdepth";
-			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value   from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL";
+			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value   from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL and a.sd_ivl_pubdate <= now()";
 		}else if($component == 'Swarm Vertical Dispersion'){
 			$unit = "km";
 			$attribute = "sd_ivl_vdispers";
-			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL";
+			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL and a.sd_ivl_pubdate <= now()";
 		}else if($component == 'Hypocenter Horizontal Migration'){
 			$unit = "km";
 			$attribute = "sd_ivl_hmigr_hyp";
-			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL";
+			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL and a.sd_ivl_pubdate <= now()";
 		}else if($component == 'Hypocenter Vertical Migration'){
 			$unit = "km";
 			$attribute = "sd_ivl_vmigr_hyp";
-			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL";
+			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL and a.sd_ivl_pubdate <= now()";
 		}else if($component == 'Earthquake Counts'){
 			$unit = "counts";
 			$attribute = "sd_ivl_nrec";
-			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL";
+			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL and a.sd_ivl_pubdate <= now()";
 		}else if($component == 'Felt Earthquake Counts'){
 			$unit = "counts";
 			$attribute = "sd_ivl_nfelt";
-			$query = "select a.sd_ivl_eqtype as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL";
+			$query = "select a.sd_ivl_eqtype as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL and a.sd_ivl_pubdate <= now()";
 		}
 		else if($component == 'Total Seismic Energy'){
 			$unit = "Erg";
 			$attribute = "sd_ivl_etot";
-			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL";
+			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL and a.sd_ivl_pubdate <= now()";
 		}else if($component == 'Earthquake Minimum Frequency'){
 			$unit = "Hz";
 			$attribute = "sd_ivl_fmin";
-			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL";
+			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL and a.sd_ivl_pubdate <= now()";
 		}else if($component == 'Earthquake Maximum Frequency'){
 			$unit = "Hz";
 			$attribute = "sd_ivl_fmax";
-			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL";
+			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL and a.sd_ivl_pubdate <= now()";
 		}else if($component == 'Earthquake Minimum Amplitude'){
 			$unit = "cm";
 			$attribute = "sd_ivl_amin";
-			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL";
+			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL and a.sd_ivl_pubdate <= now()";
 		}else if($component == 'Earthquake Maximum Amplitude'){
 			$unit = "cm";
 			$attribute = "sd_ivl_amax";
-			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL";
+			$query = "select a.sd_ivl_eqtype  as filter,a.sd_ivl_stime as stime,a.sd_ivl_etime as etime, a.$attribute as value  from $table  as a where (a.sn_id=%s OR a.ss_id=%s) and a.$attribute IS NOT NULL and a.sd_ivl_pubdate <= now()";
 		}
 		$result = array("unit" => $unit,
 						"style" => $style,

@@ -48,15 +48,15 @@ class sd_intManager extends SeismicTablesManager {
 		if($component == 'Maximum Distance Felt'){
 			$unit = "km";
 			$attribute = "sd_int_maxdist";
-			$query = "select a.sd_int_time as time, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.sd_int_time as time, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL and a.sd_int_pubdate<= now()";
 		}else if($component == 'Maximum Intensity'){
 			$unit = "";
 			$attribute = "sd_int_maxrint";
-			$query = "select a.sd_int_time as time, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.sd_int_time as time, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL and a.sd_int_pubdate<= now()";
 		}else if($component == 'Distance At Maximum Intenstiy'){
 			$unit = "km";
 			$attribute = "sd_int_maxrint_dist";
-			$query = "select a.sd_int_time as time, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.sd_int_time as time, a.$attribute as value  from $table  as a where a.ss_id=%s and a.$attribute IS NOT NULL and a.sd_int_pubdate<= now()";
 		}
 		$result = array("unit" => $unit,
 						"style" => $style,

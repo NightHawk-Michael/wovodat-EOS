@@ -37,17 +37,17 @@ class dd_tltManager extends DeformationTablesManager {
 		if($component == 'Radial/X-axis Tilt'){
 			$unit = "urad";
 			$attribute = "dd_tlt1";
-			$query = "select a.dd_tlt_err1 as err ,a.dd_tlt_time as time, a.$attribute as value from $table as a where a.ds_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.dd_tlt_err1 as err ,a.dd_tlt_time as time, a.$attribute as value from $table as a where a.ds_id=%s and a.$attribute IS NOT NULL and a.dd_tlt_pubdate<= now()";
 		}
 		else if($component == 'Tangential/Y-axis Tilt'){
 			$unit = "urad";
 			$attribute = "dd_tlt2";
-			$query = "select a.dd_tlt_err2 as err ,a.dd_tlt_time as time, a.$attribute as value  from $table as a where a.ds_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.dd_tlt_err2 as err ,a.dd_tlt_time as time, a.$attribute as value  from $table as a where a.ds_id=%s and a.$attribute IS NOT NULL and a.dd_tlt_pubdate<= now()";
 		}else if($component == 'Tilt Temperature'){
 			$unit = "oC";
 			$attribute = "dd_tlt_temp";
 			$errorbar = false;
-			$query = "select a.dd_tlt_time as time, a.$attribute as value from $table as a where  a.ds_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.dd_tlt_time as time, a.$attribute as value from $table as a where  a.ds_id=%s and a.$attribute IS NOT NULL and a.dd_tlt_pubdate<= now()";
 		}
 		$result = array("unit" => $unit,
 						"style" => $style,

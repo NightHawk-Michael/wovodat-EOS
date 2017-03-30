@@ -57,7 +57,7 @@ define(function (require) {
             //   }
             // });
             var timeSerieGraph = new TimeSerieGraph({
-                // timeRange : this.timeRange,
+                timeRange : this.timeRange,
                 filters: filters,
                 eruptionTimeRange: this.eruptionTimeRange,
                 serieGraphTimeRange: this.serieGraphTimeRange,

@@ -164,6 +164,9 @@ abstract class TableManager implements TableManagerInterface {
 		$query2 = "SELECT COUNT(*) as count " . substr($query,$fromPos,$groupByPos-$fromPos);
 		$db->query($query2, $id1,$id2,$vd_id);
 		$res = $db->getList();
+		if(sizeof($res) == 0) {
+			return true;
+		}
 		if ($res[0]["count"] == "0") return false;
 		else return true;
 	}
@@ -183,8 +186,14 @@ abstract class TableManager implements TableManagerInterface {
 		$query = $stationDataParams["query"];
 
 		//Add select data code from query. Add in this tableManager to apply all data.
-		$temp =  "select a." . $this->data_code ." as data_code, cc_id, cc_id2, cc_id3, cb_ids,";
+		//$temp =  "select a." . $this->data_code ." as data_code, cc_id, cc_id2, cc_id3, cb_ids,";
 
+		if($this->table_name == 'es_sd_rsm' || $this->table_name == 'es_sd_ssm') {
+			$temp =  "select b.sd_sam_code as data_code, cc_id, cc_id2, cc_id3, cb_ids,";
+		}else{	
+			$temp =  "select a." . $this->data_code ." as data_code, cc_id, cc_id2, cc_id3, cb_ids,";
+		}
+		
 		 $query = str_replace("select",$temp ,$query);
 
 		$db->query($query, $id1,$id2,$vd_id);
@@ -285,19 +294,25 @@ abstract class TableManager implements TableManagerInterface {
 
 	private function getCCUrl($cc_ids) {
 		$dataOwners = array();
+		global $db;
 		foreach ($cc_ids as $cc_id) {
 
 			if ($cc_id != null) {
-				$query1_2 = mysql_query("select cc_code,cc_url, cc_email from cc where cc_id=" . $cc_id);
-				$result1_2 = mysql_fetch_array($query1_2);
-				if (sizeof($result1_2) == 0) continue;
-				if ($result1_2[1] != null) {
-					array_push($dataOwners, $result1_2[0]);
-					array_push($dataOwners, $result1_2[1]);
-				} else if ($result1_2[2] != null) {
-					array_push($dataOwners, $result1_2[0]);
-					array_push($dataOwners, $result1_2[2]);
-				}
+				$sql = "select cc_code,cc_url, cc_email from cc where cc_id=" . $cc_id;
+				$db->query($sql);
+				$result = $db->getList();
+				if (sizeof($result) == 0) continue;
+				$result = $result[0]; 
+				
+				$result["cc_code"]  = "Data Owner: ".$result["cc_code"];
+				
+				if ($result["cc_url"] != null) {  
+					array_push($dataOwners, $result["cc_code"]);
+					array_push($dataOwners, $result["cc_url"]);
+				} else if ($result["cc_url"] != null) {
+					array_push($dataOwners, $result["cc_code"]);
+					array_push($dataOwners, $result["cc_email"]);
+				} 
 			}
 		}
 		return array_unique($dataOwners);
@@ -314,7 +329,7 @@ abstract class TableManager implements TableManagerInterface {
 		if ($cb_ids != null) {
 			$temp = join(" OR cb_id=",explode(",",$cb_ids));
 
-			$sql = "select cb_auth,cb_url from cb where cb_id=" . $temp;
+			$sql = "select cb_auth,cb_year,cb_url from cb where cb_id=" . $temp;
 			$db->query($sql);
 			$result = $db->getList();
 			if(sizeof($result) == 0){
@@ -322,9 +337,19 @@ abstract class TableManager implements TableManagerInterface {
 				array_push($reference, "");
 			}else{
 				$result = $result[0];
-				array_push($reference, $result["cb_auth"]);
+				
+				$firstAuth  = stristr($result["cb_auth"], ',', true);
+				
+				if($firstAuth == ""){
+					$result['cb_auth'] =  " - Author: ".$result['cb_auth']." et al. (".$result['cb_year'].")";
+				}else{
+					$result['cb_auth'] =  "- Author: ".$firstAuth." et al. (".$result['cb_year'].")";
+				}	
+				
+				array_push($reference, $result['cb_auth']);
 				array_push($reference, $result["cb_url"]);
 			}
+
 		}else{
 			array_push($reference,"");
 			array_push($reference, "");

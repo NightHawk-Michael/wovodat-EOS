@@ -33,16 +33,19 @@ class sd_rsmManager extends SeismicTablesManager {
 		$query = "";
 		$errorbar = false;
 		$style = "bar";
-		$query1 = "select a.sd_sam_id from sd_rsm as a";
+		$query1 = "select distinct a.sd_sam_id from sd_rsm as a";
 		$db->query($query1);
 		$rsm_ids = $db->getList();
+		
+		
 		foreach ($rsm_ids as $rsm_id) {
 			$id = $rsm_id["sd_sam_id"];
 		}
 
 		if($component == 'RSAM Count'){
 			$unit = "counts";
-			$query = "select a.sd_rsm_stime as stime, a.sd_rsm_count as value from sd_rsm as a, sd_sam as b where a.sd_sam_id=b.sd_sam_id and b.ss_id=%s and a.sd_rsm_count IS NOT NULL";
+			$query = "select a.sd_rsm_stime as stime, a.sd_rsm_count as value from sd_rsm as a, sd_sam as b where a.sd_sam_id=b.sd_sam_id and b.ss_id=%s and a.sd_rsm_count IS NOT NULL and b.sd_sam_pubdate<= now()";
+			
 		}
 		$result = array("unit" => $unit,
 						"style" => $style,

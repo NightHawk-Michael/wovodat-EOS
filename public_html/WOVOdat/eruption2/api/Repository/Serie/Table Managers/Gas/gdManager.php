@@ -42,18 +42,18 @@ class gdManager extends GasTablesManager {
 		else if($component == 'Atmospheric Pressure'){
 			$unit = "mbar";
 			$attribute = "gd_bp";
-			$query = "select a.gd_time as time, a.$attribute as value  from $table as a where a.gs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.gd_time as time, a.$attribute as value  from $table as a where a.gs_id=%s and a.$attribute IS NOT NULL and a.gd_pubdate<= now()";
 		}
 		else if($component == 'Gas Concentration'){
 			$unit = "oC";
 			$attribute = "gd_concentration";
 			$errorbar = true;
-			$query = "select a.gd_species as filter, a.gd_time as time, a.gd_concentration_err as err, a.gd_units as unit, a.$attribute as value  from $table as a where  a.gs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.gd_species as filter, a.gd_time as time, a.gd_concentration_err as err, a.gd_units as unit, a.$attribute as value  from $table as a where  a.gs_id=%s and a.$attribute IS NOT NULL and a.gd_pubdate<= now()";
 		}
 		else if($component == 'Gas Emission'){  
 			$unit = "";
 			$attribute = "gd_flow";
-			$query = "select a.gd_time as time, a.$attribute as value  from $table as a where a.gs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.gd_time as time, a.$attribute as value  from $table as a where a.gs_id=%s and a.$attribute IS NOT NULL and a.gd_pubdate<= now()";
 		}
 		// echo($query);
 		$result = array("unit" => $unit,

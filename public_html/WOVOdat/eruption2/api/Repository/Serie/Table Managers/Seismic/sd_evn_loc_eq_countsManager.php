@@ -34,33 +34,7 @@ class sd_evn_loc_eq_countsManager extends sd_evnManager {
 
 	}
 	protected function getTimeSeriesListQuery($vd_id){
-		$query = "select \"Located Earthquake Counts\" as loc_eq_counts, b.vd_inf_slat as vd_lat, b.vd_inf_slon as vd_long, a.cc_id as sta_id1,  a.cc_id as sta_id2, vd.vd_name
- 				from sd_evn as a,vd, vd_inf as b
- 				where ABS( b.vd_inf_slat - sd_evn_elat) < 1
- 					AND ABS( b.vd_inf_slon - sd_evn_elon) < 6
- 					AND (6371*2*ATAN2(
- 										SQRT(
- 											SIN((RADIANS(sd_evn_elat)-RADIANS( b.vd_inf_slat))/2)*
- 											SIN((RADIANS(sd_evn_elat)-RADIANS( b.vd_inf_slat))/2)+
- 											SIN((RADIANS(sd_evn_elon)-RADIANS( b.vd_inf_slon))/2)*
- 											SIN((RADIANS(sd_evn_elon)-RADIANS( b.vd_inf_slon))/2)*
- 											COS(RADIANS( b.vd_inf_slat))*
- 											COS(RADIANS(sd_evn_elat))
- 										),
- 										SQRT(
- 											1-(
- 												SIN((RADIANS(sd_evn_elat)-RADIANS( b.vd_inf_slat))/2)*
- 												SIN((RADIANS(sd_evn_elat)-RADIANS( b.vd_inf_slat))/2)+
- 												SIN((RADIANS(sd_evn_elon)-RADIANS( b.vd_inf_slon))/2)*
- 												SIN((RADIANS(sd_evn_elon)-RADIANS( b.vd_inf_slon))/2)*
- 												COS(RADIANS( b.vd_inf_slat))*
- 												COS(RADIANS(sd_evn_elat)))
- 											)
- 										)
- 					) < 100
- 					and b.vd_id = 583
- 					AND vd.vd_id = 583
- 					group by b.vd_id, sta_id1, sta_id2 order by b.vd_id";
+		$query = "select \"Located Earthquake Counts\" as loc_eq_counts, b.vd_inf_slat as vd_lat, b.vd_inf_slon as vd_long, a.cc_id as sta_id1,  a.cc_id as sta_id2 from sd_evn as a, vd_inf as b, es_sd_evn as c where ABS( b.vd_inf_slat - sd_evn_elat) < 1 AND ABS( b.vd_inf_slon - sd_evn_elon) < 6 AND (6371*2*ATAN2(SQRT(SIN((RADIANS(sd_evn_elat)-RADIANS( b.vd_inf_slat))/2)*SIN((RADIANS(sd_evn_elat)-RADIANS( b.vd_inf_slat))/2)+SIN((RADIANS(sd_evn_elon)-RADIANS( b.vd_inf_slon))/2)*SIN((RADIANS(sd_evn_elon)-RADIANS( b.vd_inf_slon))/2)*COS(RADIANS( b.vd_inf_slat))*COS(RADIANS(sd_evn_elat))),SQRT(1-(SIN((RADIANS(sd_evn_elat)-RADIANS( b.vd_inf_slat))/2)*SIN((RADIANS(sd_evn_elat)-RADIANS( b.vd_inf_slat))/2)+SIN((RADIANS(sd_evn_elon)-RADIANS( b.vd_inf_slon))/2)*SIN((RADIANS(sd_evn_elon)-RADIANS( b.vd_inf_slon))/2)*COS(RADIANS( b.vd_inf_slat))*COS(RADIANS(sd_evn_elat)))))) < 100 and b.vd_id = $vd_id and a.sn_id=c.sn_id AND a.sd_evn_pubdate <= now() and a.sd_evn_edep BETWEEN -10 AND 40 and b.vd_id=c.vd_id group by b.vd_id, sta_id1, sta_id2 order by b.vd_id";
 		return $query;
 	}
 	protected function setStationDataParams($component){
