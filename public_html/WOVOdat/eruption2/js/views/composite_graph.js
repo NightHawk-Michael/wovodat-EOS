@@ -73,9 +73,6 @@ define(function(require) {
         var maxY = -500000;
         for (var p  = 0 ; p < this.data.length; p++){
           if(this.data[p].points.symbol == "volcano") continue;
-
-          //  console.log(this.data[p]);
-
           var eventData = this.data[p].data;
           for (var i = 0; i < eventData.length; i++) {
             var eData = eventData[i];
@@ -135,8 +132,6 @@ define(function(require) {
             eData[i][1] = (maxY + minY)/2;
           }
         }
-
-
       }
 
       // this.showLoading();

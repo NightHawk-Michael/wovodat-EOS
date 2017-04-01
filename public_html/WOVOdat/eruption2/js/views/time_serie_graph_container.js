@@ -6,6 +6,7 @@ define(function(require) {
         hs  = require ('highslide'),
         //fs = require('vendor/zip/dist/FileSaver'),
         template = require('text!templates/time_serie_graph.html'),
+        downloadButton = require ('text!templates/download_button.html'),
         form_submit = require('text!templates/submit_info_form.html'),
   _ = require('underscore');
 
@@ -495,7 +496,7 @@ define(function(require) {
 
       //var temp = "<ul id=\"select-options-db1b710c-f8a1-9f8a-19a7-ed5afcfe7c60\" class=\"dropdown-content select-dropdown multiple-select-dropdown active\" style=\"width: 1026px; position: absolute; top: 0px; left: 0px; opacity: 1; display: block;\"><li class=\"active\"><span><input type=\"checkbox\"><label></label>Pinatubo0703-083SeisNet(Earthquake Depth) </span></li><li class=\"active\"><span><input type=\"checkbox\"><label></label>Pinatubo0703-083SeisNet(Earthquake Magnitude) </span></li><li class=\"\"><span><input type=\"checkbox\"><label></label>UBO(Felt Earthquake Counts) </span></li><li class=\"\"><span><input type=\"checkbox\"><label></label>CAB(Earthquake Counts) </span></li><li class=\"\"><span><input type=\"checkbox\"><label></label>CRA(Earthquake Counts) </span></li></ul>";
       //this.$el.append("<ul id=\"select-options-e90cc158-e580-29c7-f252-ab6c6b42c2ad\" class=\"dropdown-content select-dropdown multiple-select-dropdown active\" style=\"width: 1026px; position: absolute; top: 0px; left: 0px; opacity: 1; display: block;\">");
-      var padding_left =this.$el[0].clientWidth-60;
+      var padding_left =$(".time-series-graph-container").width() - 60;
       var padding_top = this.$el[0].clientHeight-10;
 
       for (var i = 0; i < this.graphs.length; i++) {
@@ -511,11 +512,11 @@ define(function(require) {
         /*
         Add data Owner
          */
-        var dataOwner = "<div>";
+        var dataOwner = "<div id=\"data-owner\" style = \"display:block;\">";
         for (var ii = 0 ; ii < this.filters[i].timeSerie.attributes.data.data[0].data_owner.length; ii = ii+2){
           var cc_code = this.filters[i].timeSerie.attributes.data.data[0].data_owner[ii];
           var dataOwnerVal = this.filters[i].timeSerie.attributes.data.data[0].data_owner[ii+1];
-          dataOwner +="<a href = \"" + dataOwnerVal + "\" target=\"_blank\" style = \"font-size: 10px;color: black;padding-left: " + padding_left/4 +"px; right:0px; \"> " + cc_code + "</a> "
+          dataOwner +="<a href = \"" + dataOwnerVal + "\" target=\"_blank\" style = \"font-size: 10px;color: black;padding-left: " + padding_left*0.6 +"px; right:0px; \"> " + cc_code + "</a> "
         }
 
         dataOwner += " - ";
@@ -538,11 +539,8 @@ define(function(require) {
        * Add form for user to fill in when user want to download csv
        */
 
-      var button = "<a > <input style = \"background-color:grey; padding:2px 10px 2px 10px; \" class = \"waves-effect waves-light stack-graph-btn btn \"  type=\"button\" value = \"Stacked Graph (no limit)\" /> <label ></label> </a>";
-      button += "<a > <input style = \" background-color:grey; padding:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light composite-graph-btn btn\"  type=\"button\" value = \"Composite Graph (max 5 graphs)\"/> <label ></label> </a>";
-      button += "<a > <input style = \" background-color:grey; padding:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light btn gen-pdf\"  type=\"button\" value = \"Print PDF\"/> <label ></label> </a>";
-      button += "<a  style = \" background-color:grey; padding:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light btn gen-csv modal-trigger\"  type=\"button\" >Print CSV </a>";
-      this.$el.append(button);
+
+      this.$el.append(downloadButton);
       this.$el.append(form_submit);
       this.stackGraphContainer.width = this.$el.width();
       this.compositeGraphContainer.width = this.$el.width();

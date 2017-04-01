@@ -15,47 +15,72 @@ define(function (require) {
             var ticks = [];
             var numStep = 7;
             /** compute exponential Degree **/
-            //var expDeg = undefined
-            //expDeg = Math.max(this    .exponentialDegree(min),this.exponentialDegree(max));
-
-            //var step = this.roundNumber((max - min) / numStep, expDeg); // step of ticks
-            var step = (max-min)/(numStep-2);
-            if (step < 1){
-                var rounded = Math.round( step * 10 ) / 10;
-                var fixed = rounded.toFixed(1);
-                //return parseFloat( val.toFixed(2) )
-                step = fixed;
-                step = Math.max(step,0.2);
+            var expDeg = undefined
+            if(this.exponentialDegree(min) < this.exponentialDegree(max)){
+                expDeg = this.exponentialDegree(max);
             }else{
-                step = parseInt(step);
+                expDeg = this.exponentialDegree(min);
             }
 
 
-            //if step is 0.xxx in computing exponential Degree, decrement expDeg
-            //while (step == 0) {
-            //    expDeg--;
-            //    step = this.roundNumber((max - min) / numStep, expDeg);
-            //}
-            //min = this.roundNumber(min, expDeg);
-            //max = this.roundNumber(max, expDeg);
+            if(expDeg > 5) {
+                var step = this.roundNumber((max-min)/numStep,expDeg); // step of ticks
+                //if step is 0.xxx in computing exponential Degree, decrement expDeg
+                while(step == 0){
+                    expDeg--;
+                    step = this.roundNumber((max-min)/numStep,expDeg);
+                }
+                min = this.roundNumber(min,expDeg);
+                max = this.roundNumber(max,expDeg);
 
-            /**** compute ticks ****/
-            //var startTick = this.roundNumber(min - step, expDeg); // start tick
-            //var endTick = this.roundNumber(max + step, expDeg); // end tick
-            var startTick = min - step; // start tick
-            var endTick = max + step; // end tick
+                /**** compute ticks ****/
+                var startTick = this.roundNumber(min -step,expDeg); // start tick
+                var endTick = this.roundNumber(max+step,expDeg); // end tick
 
-            var curTick = startTick;
-            if (curTick == endTick) {
-                ticks.push(curTick);
-            } else {
-                for (var i = 0; curTick < endTick; i++) {
-                    curTick = startTick + i * step;
+                var curTick = startTick;
+                if(curTick == endTick){
                     ticks.push(curTick);
+                }else{
+                    for(var i=0; curTick<endTick;i++){
+                        curTick = this.roundNumber(startTick + i *step,expDeg);
+                        ticks.push(curTick);
 
+                    }
                 }
             }
+            else {
+                //	var step = (max-min)/(numStep-2);
+                var step = (max-min)/numStep;
 
+                if (step < 1){
+                    var rounded = Math.round( step * 10 ) / 10;
+                    var fixed = rounded.toFixed(1);
+                    //return parseFloat( val.toFixed(2) )
+                    step = fixed;
+                    step = Math.max(step,0.2);
+                }else{
+                    //step = parseInt(step);
+                    step = this.roundNumber(step,expDeg);
+                }
+
+                //var startTick = min - step;
+                // var endTick = max + step;
+
+                var maxTick  = this.roundNumber(max + step,expDeg);
+                var startTick  = maxTick - (step * numStep);    // start tick
+                var endTick  = maxTick; // end tick
+
+                var curTick = startTick;
+                if (curTick == endTick) {
+                    ticks.push(curTick);
+                } else {
+                    for (var i = 0; curTick < endTick; i++) {
+                        curTick = startTick + i * step;
+                        ticks.push(curTick);
+
+                    }
+                }
+            }
 
             return ticks;
         },
@@ -315,30 +340,30 @@ define(function (require) {
         },
         //expDegree always greater than expDegree of numberStr
         // Round the number to expDegree
-        //roundNumber: function (numberStr, desExpDegree) {
-        //    var desCoe; // destination Coefficient
-        //    var number = parseFloat(numberStr)
-        //        number = number / Math.pow(10, desExpDegree);
-        //    //   var sourceExpDegree = this.exponentialDegree(number); //expoential Degree of this number
-        //
-        //    //   var sourceCoe = this.coefficient(number);
-        //    //   if(sourceExpDegree >=desExpDegree){
-        //    //     var differExpDeg = sourceExpDegree-desExpDegree;
-        //    //     desCoe = sourceCoe * Math.pow(10,differExpDeg);
-        //    // }else{
-        //    //    desCoe = 0;
-        //    //  }
-        //
-        //    number = Math.ceil(number);
-        //    return number * Math.pow(10, desExpDegree);
-        //},
-        //exponentialDegree: function (v) {
-        //    v = v.toExponential();
-        //    var a =  v.toString().split("e")[1];
-        //    var exp = parseInt(a);
-        //    return exp;
-        //
-        //},
+        roundNumber: function (numberStr, desExpDegree) {
+            var desCoe; // destination Coefficient
+            var number = parseFloat(numberStr)
+                number = number / Math.pow(10, desExpDegree);
+            //   var sourceExpDegree = this.exponentialDegree(number); //expoential Degree of this number
+
+            //   var sourceCoe = this.coefficient(number);
+            //   if(sourceExpDegree >=desExpDegree){
+            //     var differExpDeg = sourceExpDegree-desExpDegree;
+            //     desCoe = sourceCoe * Math.pow(10,differExpDeg);
+            // }else{
+            //    desCoe = 0;
+            //  }
+
+            number = Math.ceil(number);
+            return number * Math.pow(10, desExpDegree);
+        },
+        exponentialDegree: function (v) {
+            v = v.toExponential();
+            var a =  v.toString().split("e")[1];
+            var exp = parseInt(a);
+            return exp;
+
+        },
         /** no decimal place **/
         coefficient: function (value) {
             value = value.toExponential();

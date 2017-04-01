@@ -167,7 +167,7 @@ define(function(require) {
                     var maxY = -500000;
                     if (this.data[p] == undefined) continue;
                     var eventData = this.data[p].data;
-                    console.log (this.minX + "\t" + this.maxX);
+                    //console.log (this.minX + "\t" + this.maxX);
                     for (var i = 0 ; i < eventData.length; i++){
                         if (eventData[i][0] < this.minX || eventData[i][0] > this.maxX) continue;
                         console.log(eventData[i]);
