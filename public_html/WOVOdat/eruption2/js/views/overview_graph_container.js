@@ -5,7 +5,7 @@ define(function(require) {
       _ = require('underscore'),
       // Serie = require('models/serie'),
       // TimeSerieGraph = require('views/time_serie_graph'),
-      
+      template = require('text!templates/overview_graph_container.html'),
       TimeRange = require('models/time_range'),
       Eruption = require('models/eruption'),
       Eruptions = require('collections/eruptions'),
@@ -26,9 +26,7 @@ define(function(require) {
     hide: function(){
       this.$el.html("");
       this.$el.addClass("overview-graph-container card-panel");
-      this.$el.append("<div id = \"overview-title\" style = \"padding-left: 50px;display:none;\">" +
-          "<a style = \" font-weight: bold; color : black;\">Overview Graph.</a> <br>" +
-          "<a style = \" padding-left : 10px;color : black; \">Highlight selected time range using mouse</a></div>");
+      this.$el.append(template);
 
       this.trigger('hide');
     },

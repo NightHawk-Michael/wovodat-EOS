@@ -36,22 +36,22 @@ class dd_angManager extends DeformationTablesManager {
 		if($component == 'Horizontal Angle Target-1'){ 
 			$unit = "o";
 			$attribute = "dd_ang_hort1";
-			$query = "select a.ds_id2 as filter, a.dd_ang_herr1 as err ,a.dd_ang_time as time, a.$attribute as value from $table as a where a.ds_id=%s and a.ds_id1=%s and a.$attribute IS NOT NULL";
+			$query = "select a.ds_id2 as filter, a.dd_ang_herr1 as err ,a.dd_ang_time as time, a.$attribute as value from $table as a where a.ds_id=%s and a.ds_id1=%s and a.$attribute IS NOT NULL and a.dd_ang_pubdate<= now()";
 		}
 		else if($component == 'Horizontal Angle Target-2'){
 			$unit = "o";
 			$attribute = "dd_ang_hort2";
-			$query = "select a.ds_id2 as filter,a.dd_ang_herr2 as err ,a.dd_ang_time as time, a.$attribute as value from $table as a where a.ds_id=%s and a.ds_id1=%s and a.$attribute IS NOT NULL";
+			$query = "select a.ds_id2 as filter,a.dd_ang_herr2 as err ,a.dd_ang_time as time, a.$attribute as value from $table as a where a.ds_id=%s and a.ds_id1=%s and a.$attribute IS NOT NULL and a.dd_ang_pubdate<= now()";
 		}
 		else if($component == 'Vertical Angle Target-1'){
 			$unit = "o";
 			$attribute = "dd_ang_vert1";
-			$query = "select a.ds_id2 as filter,a.dd_ang_verr1 as err ,a.dd_ang_time as time, a.$attribute as value from $table as a where a.ds_id=%s and a.ds_id1=%s and a.$attribute IS NOT NULL";
+			$query = "select a.ds_id2 as filter,a.dd_ang_verr1 as err ,a.dd_ang_time as time, a.$attribute as value from $table as a where a.ds_id=%s and a.ds_id1=%s and a.$attribute IS NOT NULL and a.dd_ang_pubdate<= now()";
 		}
 		else if($component == 'Vertical Angle Target-2'){
 			$unit = "o";
 			$attribute = "dd_ang_vert2";
-			$query = "select a.ds_id2 as filter,a.dd_ang_verr2 as err ,a.dd_ang_time as time, a.$attribute as value from $table as a where a.ds_id=%s and a.ds_id1=%s and a.$attribute IS NOT NULL";
+			$query = "select a.ds_id2 as filter,a.dd_ang_verr2 as err ,a.dd_ang_time as time, a.$attribute as value from $table as a where a.ds_id=%s and a.ds_id1=%s and a.$attribute IS NOT NULL and a.dd_ang_pubdate<= now()";
 		}
 		$result = array("unit" => $unit,
 						"style" => $style,

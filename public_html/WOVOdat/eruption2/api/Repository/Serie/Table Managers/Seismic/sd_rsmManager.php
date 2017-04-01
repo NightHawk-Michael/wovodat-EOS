@@ -42,7 +42,7 @@ class sd_rsmManager extends SeismicTablesManager {
 
 		if($component == 'RSAM Count'){
 			$unit = "counts";
-			$query = "select a.sd_rsm_stime as stime, a.sd_rsm_count as value from sd_rsm as a, sd_sam as b where a.sd_sam_id=b.sd_sam_id and b.ss_id=%s and a.sd_rsm_count IS NOT NULL";
+			$query = "select a.sd_rsm_stime as stime, a.sd_rsm_count as value from sd_rsm as a, sd_sam as b where a.sd_sam_id=b.sd_sam_id and b.ss_id=%s and a.sd_rsm_count IS NOT NULL and b.sd_sam_pubdate <= now()";
 		}
 		$result = array("unit" => $unit,
 						"style" => $style,

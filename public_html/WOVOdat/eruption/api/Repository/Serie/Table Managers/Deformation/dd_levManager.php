@@ -37,7 +37,7 @@ class dd_levManager extends DeformationTablesManager {
 		if($component == 'Elevation Change'){
 			$unit = "mm";
 			$attribute = "dd_lev_delev";
-			$query = "select  a.dd_lev_herr as err ,a.dd_lev_time as time, a.$attribute as value   from $table as a where a.ds_id1=%s and a.ds_id2=%s and a.$attribute IS NOT NULL";
+			$query = "select  a.dd_lev_herr as err ,a.dd_lev_time as time, a.$attribute as value from $table as a where a.ds_id1=%s and a.ds_id2=%s and a.$attribute IS NOT NULL and a.dd_lev_pubdate<= now()";
 		}
 		$result = array("unit" => $unit,
 						"style" => $style,

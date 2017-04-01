@@ -37,20 +37,20 @@ class tdManager extends ThermalTablesManager {
 			$attribute = "td_temp";
 			$errorbar = true;
 			$unit ="oC";
-			$query = "select a.td_time as time, a.td_terr as err, a.$attribute as value  from $table as a where a.ts_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.td_time as time, a.td_terr as err, a.$attribute as value  from $table as a where a.ts_id=%s and a.$attribute IS NOT NULL and a.td_pubdate<= now()";
 		}else if($component == 'Heat Flux'){
 			$attribute = "td_flux";
 			$unit ="W/m2";
 			$errorbar = true;  
-			$query = "select a.td_time as time, a.td_ferr as err, a.$attribute as value  from $table as a where a.ts_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.td_time as time, a.td_ferr as err, a.$attribute as value  from $table as a where a.ts_id=%s and a.$attribute IS NOT NULL and a.td_pubdate<= now()";
 		}else if($component == 'Gethermal Gradient'){
 			$attribute = "td_bkgg";
 			$unit ="oC/km";
-			$query = "select a.td_time as time, a.$attribute as value  from $table as a where a.ts_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.td_time as time, a.$attribute as value  from $table as a where a.ts_id=%s and a.$attribute IS NOT NULL and a.td_pubdate<= now()";
 		}else if($component == 'Thermal Conductivity'){
 			$attribute = "td_tcond";
 			$unit ="W/(m2*oC)";
-			$query = "select a.td_time as time, a.td_ferr as err, a.$attribute as value  from $table as a where a.ts_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.td_time as time, a.td_ferr as err, a.$attribute as value  from $table as a where a.ts_id=%s and a.$attribute IS NOT NULL and a.td_pubdate<= now()";
 		}
 		// echo($query);
 		$result = array("unit" => $unit,

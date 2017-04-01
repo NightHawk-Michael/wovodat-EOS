@@ -69,11 +69,10 @@ define(function(require) {
         //console.log(this.data);
         var colors = ["#000000", "#0072BB", "#FF4C3B", "#FFD034"];
         var positionLeft = true;
-
-        for (var p  = 0 ; p < this.data.length; p = p+2){
-        //  console.log(this.data[p]);
-          var minY = 100000;
-          var maxY = -500000
+        var minY = 100000;
+        var maxY = -500000;
+        for (var p  = 0 ; p < this.data.length; p++){
+          if(this.data[p].points.symbol == "volcano") continue;
           var eventData = this.data[p].data;
           for (var i = 0; i < eventData.length; i++) {
             var eData = eventData[i];
@@ -124,6 +123,15 @@ define(function(require) {
 
 
         }
+
+        //Set Y value of eruption between maxY and MinY
+        for (var p  = 0 ; p < this.data.length; p++){
+          if(this.data[p].points.symbol != "volcano") continue;
+          var eData = this.data[p].data;
+          for (var i = 0 ; i < eData.length; i++){
+            eData[i][1] = (maxY + minY)/2;
+          }
+        }
       }
 
       // this.showLoading();
@@ -164,7 +172,7 @@ define(function(require) {
           //max: this.maxY,
           ////axisLabelUseCanvas: true,
           //autoscaleMargin: 5,
-          //ticks: 6,
+          ticks: 6,
           //errorbar : 0,
           //labelWidth: 40
         },
@@ -200,7 +208,8 @@ define(function(require) {
       //this.$el.bind('plotselected', this.selectingTimeRange, this.onSelect);
 
       //reset data
-      for (var p  = 0 ; p < this.data.length; p = p+2) {
+      for (var p  = 0 ; p < this.data.length; p++) {
+        if(this.data[p].points.symbol == "volcano") continue;
         this.data[p].yaxis = 1;
         this.data[p].color = backUpcolors[p/2];
         this.data[p].fillColor = backUpcolors[p/2];

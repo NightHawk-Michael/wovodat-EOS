@@ -37,52 +37,52 @@ class hdManager extends HydrologyTablesManager {
 		if($component == 'Water Temperature'){
 			$attribute = "hd_temp";
 			$unit ="oC";
-			$query = "select a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL and a.hd_pubdate<= now()";
 		}else if($component == 'Water Elevation'){
 			$attribute = "hd_welev";
 			$unit ="m";
-			$query = "select a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL and a.hd_pubdate<= now()";
 		}else if($component == 'Water Depth'){
 			$attribute = "hd_wdepth";
 			$unit ="m";
-			$query = "select a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL  and a.hd_pubdate<= now()";
 		}else if($component == 'Water Level Changes'){
 			$attribute = "hd_dwlev";
 			$unit ="m";
-			$query = "select a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL  and a.hd_pubdate<= now()";
 		}else if($component == 'Barometric Pressure'){
 			$attribute = "hd_bp";
 			$unit ="mbar";
-			$query = "select a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL  and a.hd_pubdate<= now()";
 		}else if($component == 'Spring Discharge Rate'){
 			$attribute = "hd_sdisc";
 			$unit ="L/s";
-			$query = "select a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL and a.hd_pubdate<= now()";
 		}else if($component == 'Precipitation'){
 			$attribute = "hd_prec";
 			$unit ="mm";
-			$query = "select a.hd_tprec  as filter, a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.hd_tprec  as filter, a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL and a.hd_pubdate<= now()";
 		}else if($component == 'Water PH'){
 			$errorbar = true;
 			$attribute = "hd_ph";
-			$query = "select a.hd_ph_err as err,a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.hd_ph_err as err,a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL  and a.hd_pubdate<= now()";
 		}else if($component == 'Conductivity'){
 			$errorbar = true;  
 			$attribute = "hd_cond";
-			$query = "select a.hd_cond_err as err,a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.hd_cond_err as err,a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL  and a.hd_pubdate<= now()";
 		}else if($component == 'Content Of Compound'){
 			$errorbar = true;
 			$attribute = "hd_comp_content";
-			$query = "select a.hd_comp_species  as filter,a.hd_comp_units as unit,a.hd_comp_content_err as err,a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.hd_comp_species  as filter,a.hd_comp_units as unit,a.hd_comp_content_err as err,a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL  and a.hd_pubdate<= now()";
 
 		}else if($component == 'Air Temperature'){
 			$attribute = "hd_atemp";
 			$unit ="oC";
-			$query = "select  a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select  a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL  and a.hd_pubdate<= now()";
 		}else if($component == 'TDS'){
 			$attribute = "hd_tds";
 			$unit ="mg/L";
-			$query = "select a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.hd_time as time, a.$attribute as value  from $table as a where a.hs_id=%s and a.$attribute IS NOT NULL and a.hd_pubdate<= now()";
 		}
 		// echo($query);
 		$result = array("unit" => $unit,

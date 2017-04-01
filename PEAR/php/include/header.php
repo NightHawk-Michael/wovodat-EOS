@@ -5,10 +5,10 @@ if (!isset($_SESSION))
 <!-- Nhat changed, 18 June 2015 -->
 <script src="/js/menu.js"></script>
 <link href="/css/index.css" rel="stylesheet" type="text/css">
-<link href="/css/normalize.css" rel="stylesheet" type="text/css">
+        <link href="/css/normalize.css" rel="stylesheet" type="text/css">
 </style>
 <div class="header">
-    <div class="container"> 
+    <div class="container">
         <div class="header-logo">  <!-- header -->
             <table>
                 <tr>
@@ -55,11 +55,11 @@ if (!isset($_SESSION))
                     if (isset($_SESSION['login'])) {
                         ?>
                         <li>
-                            <a href="/populate/my_account.php"><?php 
+                            <a href="/populate/my_account.php"><?php
                             $n = $_SESSION['login']['cr_uname'];
                             $l = strlen($n);
                             if($l > 12) $n = substr($n,0,12) . '...';
-                            echo $n; 
+                            echo $n;
                             ?></a>
                         </li>
                         <li class="menu-item">

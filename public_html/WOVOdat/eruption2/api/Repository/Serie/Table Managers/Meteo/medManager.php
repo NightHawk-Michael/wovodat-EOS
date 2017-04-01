@@ -38,46 +38,46 @@ class medManager extends MeteoTablesManager {
 		if($component == 'Air Temperature'){
 			$attribute = "med_temp";
 			$unit ="oC";
-			$query = "select a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL and a.med_pubdate<= now()";
 		}else if($component == 'Soil Temperature'){
 			$attribute = "med_stemp";
 			$unit ="oC";
-			$query = "select a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL and a.med_pubdate<= now()";
 		}else if($component == 'Barometric Pressure'){
 			$attribute = "med_bp";
 			$unit ="Mbar";
-			$query = "select a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL and a.med_pubdate<= now()";
 		}else if($component == 'Precipitation'){
 			$attribute = "med_prec";
 			$unit ="mm";
-			$query = "select a.med_tprec  as filter, a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.med_tprec  as filter, a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL  and a.med_pubdate<= now()";
 		}else if($component == 'Humidity'){
 			$unit = "%";
 			$attribute = "med_hd";
-			$query = "select a.med_ph_err as err,a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.med_ph_err as err,a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL  and a.med_pubdate<= now()";
 		}else if($component == 'Wind Speed'){
 			$unit ="m/s";
 			$attribute = "med_wind";
-			$query = "select a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL and a.med_pubdate<= now()";
 		}else if($component == 'Minimum Wind Speed'){
 			$unit ="m/s";
 			$attribute = "med_wsmin";  	
-			$query = "select a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL and a.med_pubdate<= now()";
 
 		}else if($component == 'Maximum Wind Speed'){
 			
 			$unit ="m/s";
 			$attribute = "med_wsmax";
-			$query = "select a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL and a.med_pubdate<= now()";
 
 		}else if($component == 'Wind Direction'){
 			$attribute = "med_wdir";
 			$unit ="o";
-			$query = "select  a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL";
+			$query = "select  a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL  and a.med_pubdate<= now()";
 		}else if($component == 'Cloud Coverage'){
 			$attribute = "med_clc";
 			$unit ="%";
-			$query = "select a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.med_time as time, a.$attribute as value  from $table as a where a.ms_id=%s and a.$attribute IS NOT NULL  and a.med_pubdate<= now()";
 		}
 		// echo($query);
 		$result = array("unit" => $unit,

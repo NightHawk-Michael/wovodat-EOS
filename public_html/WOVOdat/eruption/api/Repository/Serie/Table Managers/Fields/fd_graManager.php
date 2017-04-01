@@ -37,7 +37,7 @@ class fd_graManager extends FieldsTablesManager {
 		if($component == 'Gravity'){
 			$unit = "Gal";
 			$attribute = "fd_gra_fstr";
-			$query = "select a.fd_gra_ferr as err ,a.fd_gra_time as time, a.$attribute as value from $table as a where a.fs_id=%s and a.fs_id_ref=%s and a.$attribute IS NOT NULL";
+			$query = "select a.fd_gra_ferr as err ,a.fd_gra_time as time, a.$attribute as value from $table as a where a.fs_id=%s and a.fs_id_ref=%s and a.$attribute IS NOT NULL and a.fd_gra_pubdate<= now()";
 		}
 		$result = array("unit" => $unit,
 						"style" => $style,

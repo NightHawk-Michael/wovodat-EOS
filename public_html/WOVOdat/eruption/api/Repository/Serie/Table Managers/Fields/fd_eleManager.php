@@ -38,19 +38,19 @@ class fd_eleManager extends FieldsTablesManager {
 		if($component == 'Electric Field'){
 			$unit = "mV";
 			$attribute = "fd_ele_field";
-			$query = "select a.fd_ele_ferr as err ,a.fd_ele_time as time, a.$attribute as value  from $table as a where a.fs_id1=%s and a.fs_id2=%s and a.$attribute IS NOT NULL";
+			$query = "select a.fd_ele_ferr as err ,a.fd_ele_time as time, a.$attribute as value  from $table as a where a.fs_id1=%s and a.fs_id2=%s and a.$attribute IS NOT NULL and a.fd_ele_pubdate<= now()";
 		}else if($component == 'Self Potential'){
 			$unit = "mV";
 			$attribute = "fd_ele_spot";
-			$query = "select a.fd_ele_spot_err as err ,a.fd_ele_time as time, a.$attribute as value  from $table as a where a.fs_id1=%s and a.fs_id2=%s and a.$attribute IS NOT NULL";
+			$query = "select a.fd_ele_spot_err as err ,a.fd_ele_time as time, a.$attribute as value  from $table as a where a.fs_id1=%s and a.fs_id2=%s and a.$attribute IS NOT NULL and a.fd_ele_pubdate<= now()";
 		}else if($component == 'Apparent Resistivity'){
 			$unit = "Omega";
 			$attribute = "fd_ele_ares";
-			$query = "select a.fd_ele_ares_err as err ,a.fd_ele_time as time, a.$attribute as value  from $table as a where a.fs_id1=%s and a.fs_id2=%s and a.$attribute IS NOT NULL";
+			$query = "select a.fd_ele_ares_err as err ,a.fd_ele_time as time, a.$attribute as value  from $table as a where a.fs_id1=%s and a.fs_id2=%s and a.$attribute IS NOT NULL and a.fd_ele_pubdate<= now()";
 		}else if($component == 'Direct Resistivity'){
 			$unit = "Omega";
 			$attribute = "fd_ele_dres";
-			$query = "select a.fd_ele_dres_err as err ,a.fd_ele_time as time, a.$attribute as value  from $table as a where a.fs_id1=%s and a.fs_id2=%s and a.$attribute IS NOT NULL";
+			$query = "select a.fd_ele_dres_err as err ,a.fd_ele_time as time, a.$attribute as value  from $table as a where a.fs_id1=%s and a.fs_id2=%s and a.$attribute IS NOT NULL and a.fd_ele_pubdate<= now()";
 		}
 		// echo($query);
 		$result = array("unit" => $unit,

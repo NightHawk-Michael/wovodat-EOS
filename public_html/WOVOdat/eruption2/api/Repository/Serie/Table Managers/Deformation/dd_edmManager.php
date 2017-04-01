@@ -37,7 +37,7 @@ class dd_edmManager extends DeformationTablesManager {
 		if($component == 'EDM Line Length'){    
 			$unit = "m";
 			$attribute = "dd_edm_line";
-			$query = "select a.dd_edm_cerr as err ,a.dd_edm_time as time, a.$attribute as value  from $table as a where a.ds_id1=%s and a.ds_id2=%s and a.$attribute IS NOT NULL";
+			$query = "select a.dd_edm_cerr as err ,a.dd_edm_time as time, a.$attribute as value  from $table as a where a.ds_id1=%s and a.ds_id2=%s and a.$attribute IS NOT NULL and a.dd_edm_pubdate<= now()";
 		}
 		$result = array("unit" => $unit,
 						"style" => $style,

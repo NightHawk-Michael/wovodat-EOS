@@ -38,22 +38,49 @@
             this.id = this.filters.timeSerie.get("sr_id") + "." + this.filters.filterAttributes[0].name;
             this.$el.attr('id', this.id);
             this.hasErrorBar = this.filters.timeSerie.get('data').errorbar;
-            this.owner = (this.filters.timeSerie.get('data').data[0]).data_owner[0];
-            this.owner_link = (this.filters.timeSerie.get('data').data[0]).data_owner[1];
-            this.reference = (this.filters.timeSerie.get('data').data[0]).reference[0];
-            this.ref_link = (this.filters.timeSerie.get('data').data[0]).reference[1];
-            var preHtml = Handlebars.compile(template);
+      
+
+          this.owner = (this.filters.timeSerie.get('data').data[0]).data_owner[0];
+          this.owner_link = (this.filters.timeSerie.get('data').data[0]).data_owner[1];
+          this.reference = (this.filters.timeSerie.get('data').data[0]).reference[0];
+          this.ref_link = (this.filters.timeSerie.get('data').data[0]).reference[1];
+
+
+                //console.log(this.filters.timeSerie.get('data').data);
+            /*
+             Add data Owner
+             */
+            //console.log(this.$el[0]);
+            var padding_left =500;
+            var dataOwner = "<div id=\"data-owner\" style = \"display:none; float:right; margin-right:20px;\">";
+            for (var ii = 0 ; ii < this.filters.timeSerie.attributes.data.data[0].data_owner.length; ii = ii+2){
+                var cc_code = this.filters.timeSerie.attributes.data.data[0].data_owner[ii];
+                var dataOwnerVal = this.filters.timeSerie.attributes.data.data[0].data_owner[ii+1];
+                dataOwner +="<a href = \"" + dataOwnerVal + "\" target=\"_blank\" style = \"font-size: 10px;color: black;padding-left: " + padding_left/4 +"px; right:0px; \"> " + cc_code + "</a> "
+            }
+
+            dataOwner += " - ";
+            for (var ii = 0 ; ii < this.filters.timeSerie.attributes.data.data[0].reference.length; ii = ii + 2){
+                var reference_code =  this.filters.timeSerie.attributes.data.data[0].reference[ii];
+                var reference_val =  this.filters.timeSerie.attributes.data.data[0].reference[ii+1];
+                dataOwner += "<a href = \"" + reference_val + "\" target=\"_blank\" style = \"font-size: 10px;color: black; right:0px; \"> " + reference_code + "</a>"
+            }
+
+
+
+            dataOwner += "</div>";
+
+			var preHtml = Handlebars.compile(template);
             var options = {
                 id: this.id,
                 hasErrorBar: this.hasErrorBar,
-                owner: this.owner,
-                owner_link:  this.owner_link,
-                reference: this.reference,
-                ref_link:  this.ref_link,
+
 
             };
             var html = preHtml(options);
             this.$el.html(html);
+            this.$el.append(dataOwner);
+	 
             this.allowErrorBar = true;
             this.token = "";
             this.prepareData();
@@ -122,7 +149,7 @@
             //data owner
             var owner = $('[id="owner.' + this.id + '"]');
             owner.css({display: "block"});
-
+            $('[id ="data-owner"]').css({display: "block"});
 
         },
         render: function () {

@@ -37,11 +37,11 @@ class fd_mgvManager extends FieldsTablesManager {
 		if($component == 'Magnetic Declination'){
 			$unit = "o";
 			$attribute = "fd_mgv_dec";
-			$query = "select a.fd_mgv_time as time, a.$attribute as value  from $table as a where a.fs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.fd_mgv_time as time, a.$attribute as value  from $table as a where a.fs_id=%s and a.$attribute IS NOT NULL and a.fd_mgv_pubdate<= now()";
 		}else if($component == 'Magnetic Inclination'){
 			$unit = "o";
 			$attribute = "fd_mgv_incl";
-			$query = "select a.fd_mgv_time as time, a.$attribute as value from $table as a where a.fs_id=%s and a.$attribute IS NOT NULL";
+			$query = "select a.fd_mgv_time as time, a.$attribute as value from $table as a where a.fs_id=%s and a.$attribute IS NOT NULL and a.fd_mgv_pubdate<= now()";
 		}
 		$result = array("unit" => $unit,
 						"style" => $style,
