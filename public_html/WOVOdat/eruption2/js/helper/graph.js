@@ -64,13 +64,14 @@ define(function(require) {
                 step = fixed;
                 step = Math.max(step,0.2);
             }else{
-                step = parseInt(step);
+                //step = parseInt(step);
+                step = this.roundNumber(step,expDeg);
             }
 
         	//var startTick = min - step;
            // var endTick = max + step; 
 		   
-			 var maxTick  = max + step; 
+			 var maxTick  = this.roundNumber(max + step,expDeg);
 			 var startTick  = maxTick - (step * numStep);    // start tick
 		     var endTick  = maxTick; // end tick
 			 

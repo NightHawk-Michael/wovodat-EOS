@@ -143,11 +143,6 @@ define(function(require) {
       this.$el.height(200);
 
       this.$el.addClass("overview-graph");
-
-
-      //limit data to be rendered
-      
-
       document.getElementById('overview-title').style.display = 'block';
       (document.getElementsByClassName('overview-graph-container'))[0].style.padding = '20px';
 

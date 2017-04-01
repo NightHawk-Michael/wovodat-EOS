@@ -40,51 +40,38 @@
             this.hasErrorBar = this.filters.timeSerie.get('data').errorbar;
       
 
-      this.owner = (this.filters.timeSerie.get('data').data[0]).data_owner[0];
-      this.owner_link = (this.filters.timeSerie.get('data').data[0]).data_owner[1];
-      this.reference = (this.filters.timeSerie.get('data').data[0]).reference[0];
-      this.ref_link = (this.filters.timeSerie.get('data').data[0]).reference[1];
+          this.owner = (this.filters.timeSerie.get('data').data[0]).data_owner[0];
+          this.owner_link = (this.filters.timeSerie.get('data').data[0]).data_owner[1];
+          this.reference = (this.filters.timeSerie.get('data').data[0]).reference[0];
+          this.ref_link = (this.filters.timeSerie.get('data').data[0]).reference[1];
 
-/*
+
                 //console.log(this.filters.timeSerie.get('data').data);
 
-            var dataOwner = "<div>";
+            var dataOwner = "";
 			for (var i=0; i < this.filters.timeSerie.get('data').data[0].data_owner.length; i = i+2)
 			{
 				this.owner = this.filters.timeSerie.get('data').data[0].data_owner[i];
 				this.owner_link = this.filters.timeSerie.get('data').data[0].data_owner[i+1];
-			
-				//dataOwner +="<a href = \"" + this.owner_link + "\" target=\"_blank\">" + this.owner + "</a> "
-				
 				dataOwner +=  this.owner_link + this.owner
 			
 			}
 	
-			dataOwner += " - ";
+			var dataRef = "";
 			for (var i=0; i < this.filters.timeSerie.get('data').data[0].reference.length; i = i+2)
 			{
 			  this.reference =  this.filters.timeSerie.get('data').data[0].reference[i];
 			  this.ref_link =  this.filters.timeSerie.get('data').data[0].reference[i+1];
-			  //  dataOwner += "<a href = \"" + this.ref_link + "\" target=\"_blank\">" + this.reference + "</a>"
-		
-			  dataOwner +=  this.ref_link + this.reference
-			  
-			  
-			}
-			
-		   dataOwner += "</div> ";
-		   this.$el.html(dataOwner);
-*/		  
-		
 
+			  dataRef +=  this.ref_link + this.reference
+			}
 			var preHtml = Handlebars.compile(template);
             var options = {
                 id: this.id,
                 hasErrorBar: this.hasErrorBar,
-                owner: this.owner,
-                owner_link:  this.owner_link,
-                reference: this.reference,
-                ref_link:  this.ref_link,
+                owner: dataOwner,
+                reference: dataRef,
+
             };
             var html = preHtml(options);
             this.$el.html(html);
