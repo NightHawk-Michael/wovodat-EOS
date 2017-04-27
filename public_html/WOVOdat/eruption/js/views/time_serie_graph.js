@@ -287,14 +287,15 @@
             this.$el.width('auto');
             this.$el.height('auto');
             var graphHolder = $('[id="graph.' + this.id + '"]');
+            graphHolder.css("marginLeft",'30px');
             graphHolder.height('200');
             graphHolder.width('auto');
+
             this.$el.addClass('time-serie-graph');
             // plot the time series graph after being selected (eg. onSelect in OverViewGraph).
             // config graph theme colors
             options.colors = ["#000000", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"];
             //console.log(this.data);
-            var temp = this.$el.children();
             // console.log(this.minX+" "+this.maxX);
             this.graph = $.plot(graphHolder, this.data, options);
             this.$el.bind('plothover', this.tooltip, this.onHover);

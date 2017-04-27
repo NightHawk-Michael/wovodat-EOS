@@ -24,7 +24,7 @@ define(function (require) {
 
 
             if(expDeg > 5) {
-                var step = this.roundNumber((max-min)/numStep,expDeg); // step of ticks
+                var step = this.roundNumber((max-min)/(numStep),expDeg); // step of ticks
                 //if step is 0.xxx in computing exponential Degree, decrement expDeg
                 while(step == 0){
                     expDeg--;
@@ -36,7 +36,9 @@ define(function (require) {
                 /**** compute ticks ****/
                 var startTick = this.roundNumber(min -step,expDeg); // start tick
                 var endTick = this.roundNumber(max+step,expDeg); // end tick
-
+                startTick = startTick.toExponential();
+                endTick = endTick.toExponential();
+                step  = step.toExponential();
                 var curTick = startTick;
                 if(curTick == endTick){
                     ticks.push(curTick);
@@ -66,11 +68,21 @@ define(function (require) {
                 //var startTick = min - step;
                 // var endTick = max + step;
 
-                var maxTick  = this.roundNumber(max + step,expDeg);
-                var startTick  = maxTick - (step * numStep);    // start tick
-                var endTick  = maxTick; // end tick
+                var startTick = undefined;
+                var maxTick = undefined;
+                var curTick = undefined;
+                var endTick = undefined;
+                maxTick  = this.roundNumber(max + step,expDeg);
+                while (startTick == undefined ||startTick >= min){
 
-                var curTick = startTick;
+                    startTick  = maxTick - (step * numStep);    // start tick
+                    step = step+step;
+                    endTick  = maxTick; // end tick
+
+                    curTick = startTick;
+
+                }
+
                 if (curTick == endTick) {
                     ticks.push(curTick);
                 } else {
@@ -80,6 +92,9 @@ define(function (require) {
 
                     }
                 }
+
+
+
             }
 
             return ticks;

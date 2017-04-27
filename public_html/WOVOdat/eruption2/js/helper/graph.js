@@ -38,10 +38,12 @@ define(function(require) {
 		  min = this.roundNumber(min,expDeg);
 		  max = this.roundNumber(max,expDeg);
 
+          step = step.toExponential();
 		  /**** compute ticks ****/
 		  var startTick = this.roundNumber(min -step,expDeg); // start tick
 		  var endTick = this.roundNumber(max+step,expDeg); // end tick  
-		  
+		  startTick = startTick.toExponential();
+          endTick = endTick.toExponential();
 		    var curTick = startTick;
 			  if(curTick == endTick){
 				ticks.push(curTick);
@@ -70,12 +72,19 @@ define(function(require) {
 
         	//var startTick = min - step;
            // var endTick = max + step; 
-		   
-			 var maxTick  = this.roundNumber(max + step,expDeg);
-			 var startTick  = maxTick - (step * numStep);    // start tick
-		     var endTick  = maxTick; // end tick
-			 
-			 var curTick = startTick;
+          var startTick = undefined;
+          var maxTick = undefined;
+          var curTick = undefined;
+          var endTick = undefined;
+          while (startTick == undefined ||startTick >= min){
+              maxTick  = this.roundNumber(max + step,expDeg);
+              startTick  = maxTick - (step * numStep);    // start tick
+              step = step+step;
+              endTick  = maxTick; // end tick
+
+              curTick = startTick;
+
+          }
             if (curTick == endTick) {
                 ticks.push(curTick);
             } else {

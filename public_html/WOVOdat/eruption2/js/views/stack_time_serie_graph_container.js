@@ -29,15 +29,15 @@ define(function(require) {
     /*
     Add graph
      */
-    addGraph : function( filters) {
+    addGraph : function( filters,displayXAxis) {
 
       var stackGraph = new StackGraph( {
         // timeRange : this.timeRange,
         filters : filters,
+        isXaxis : displayXAxis,
         //data: data,
         eruptionTimeRange: this.eruptionTimeRange,
         serieGraphTimeRange: this.timeRange,
-
         eruptions : this.eruptions,
      //   eruptionData : eruptionData,
       });
@@ -123,7 +123,7 @@ define(function(require) {
       this.graphs = [];
       if (this.filters != undefined) {
         for (var i = 0; i < this.filters.length; i++) {
-          this.addGraph(this.filters[i]);
+          this.addGraph(this.filters[i], i==this.filters.length-1);
         }
 
       }

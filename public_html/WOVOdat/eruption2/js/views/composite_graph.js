@@ -71,8 +71,18 @@ define(function(require) {
         var positionLeft = true;
         var minY = 100000;
         var maxY = -500000;
+
         for (var p  = 0 ; p < this.data.length; p++){
-          if(this.data[p].points.symbol == "volcano") continue;
+          //Set Y value of eruption between maxY and MinY
+          if(this.data[p].points.symbol == "volcano" ){
+            var eData = this.data[p].data;
+            for (var i = 0 ; i < eData.length; i++){
+              eData[i][1] = (maxY + minY)/2;
+            }
+            continue;
+          }
+          minY = 100000;
+          maxY = -500000;
           var eventData = this.data[p].data;
           for (var i = 0; i < eventData.length; i++) {
             var eData = eventData[i];
@@ -124,14 +134,6 @@ define(function(require) {
 
         }
 
-        //Set Y value of eruption between maxY and MinY
-        for (var p  = 0 ; p < this.data.length; p++){
-          if(this.data[p].points.symbol != "volcano") continue;
-          var eData = this.data[p].data;
-          for (var i = 0 ; i < eData.length; i++){
-            eData[i][1] = (maxY + minY)/2;
-          }
-        }
       }
 
       // this.showLoading();

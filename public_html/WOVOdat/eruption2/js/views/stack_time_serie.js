@@ -18,6 +18,7 @@ define(function(require) {
             this.serieGraphTimeRange = options.serieGraphTimeRange;
             this.timeRange = options.overviewGraphTimeRange;
             this.selectingTimeRange = options.selectingTimeRange;
+            this.isDisplayXaxis = options.isXaxis;
             this.filterColorCollection = new FilterColorCollection({
                 offline: false
             });
@@ -70,7 +71,6 @@ define(function(require) {
         render: function() {
             //this.data.yaxis = 1;
             //this.$el.html("");
-
             var options = {
                 grid:{
                     minBorderMargin : 20,
@@ -82,14 +82,14 @@ define(function(require) {
                     timeformat: "%d-%b<br>%Y",
                     min: this.minX,
                     max: this.maxX,
-                    show: true,
+                    show: this.isDisplayXaxis,
                     autoscale: true,
                     canvas: true,
                     ticks: 6,
                     zoomRange: [30000000],
                 },
                 yaxis: {
-                    show: true,
+                    show:true,
                     min: this.minY,
                     max: this.maxY,
                     tickFormatter: function (val, axis) {
@@ -170,7 +170,6 @@ define(function(require) {
                     //console.log (this.minX + "\t" + this.maxX);
                     for (var i = 0 ; i < eventData.length; i++){
                         if (eventData[i][0] < this.minX || eventData[i][0] > this.maxX) continue;
-                        console.log(eventData[i]);
                         var y;
                         if (eventData[i].length == 3){
                             y = eventData[i][1];
