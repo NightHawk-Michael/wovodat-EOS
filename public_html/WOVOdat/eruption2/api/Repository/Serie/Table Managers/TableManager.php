@@ -209,7 +209,7 @@ abstract class TableManager implements TableManagerInterface {
 
 			$res = $db->getList();
 		}
-		var_dump($db);
+
 
 		foreach ($res as $row) {
 			//add value attributes

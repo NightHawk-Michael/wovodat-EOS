@@ -123,7 +123,9 @@ define(function(require) {
       this.graphs = [];
       if (this.filters != undefined) {
         for (var i = 0; i < this.filters.length; i++) {
-          this.addGraph(this.filters[i], i==this.filters.length-1);
+          if (i ==  this.filters.length-1) this.addGraph(this.filters[i],true);
+          else this.addGraph(this.filters[i],false);
+
         }
 
       }

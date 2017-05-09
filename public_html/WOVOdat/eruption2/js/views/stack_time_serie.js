@@ -68,6 +68,13 @@ define(function(require) {
         showLoading: function(){
             //this.$el2.html(this.loading);
         },
+        displayXaxis: function(isDisplayXaxis){
+            if (isDisplayXaxis){
+                return "%d-%b<br>%Y";
+            }  else{
+                return "";
+            }
+        },
         render: function() {
             //this.data.yaxis = 1;
             //this.$el.html("");
@@ -79,10 +86,10 @@ define(function(require) {
                 },
                 xaxis: {
                     mode:'time',
-                    timeformat: "%d-%b<br>%Y",
+                    timeformat: this.displayXaxis(this.isDisplayXaxis),
                     min: this.minX,
                     max: this.maxX,
-                    show: this.isDisplayXaxis,
+                    show: true,
                     autoscale: true,
                     canvas: true,
                     ticks: 6,

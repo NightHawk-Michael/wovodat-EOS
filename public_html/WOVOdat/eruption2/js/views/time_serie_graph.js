@@ -281,8 +281,35 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       }
       this.$el.html("");
       var unit = undefined;
+      var minY= Number.MAX_VALUE;
+      var maxY = Number.MIN_VALUE;
+      var d = this.data[0].data;
+      var count = 0;
+      for (var j = 0 ; j < d.length; j++){
+        if (d[j][0] < this.maxX && d[j][0]> this.minX){
+          count++;
+          minY = Math.min(minY, d[j][1]);
+          maxY = Math.max(maxY, d[j][1]);
+        }
+      }
+      if (count == 0){
+        this.minY=-1;
+        this.maxY = 1;
+      }else{
+        this.minY=minY;
+        this.maxY = maxY;
+      }
+      var d2 = this.data[1].data;
+      for (var j = 0 ; j < d2.length; j++){
+        if (d2[j][0] < this.maxX && d2[j][0]> this.minX){
+          d2[j][1] = (this.minY + this.maxY)/2;
+
+        }
+      }
       for(var i=0;i<this.data.length;i++){
         if(this.data[i].yaxis.axisLabel != undefined){
+
+          if (this.data[i].data)
           unit = this.data[i].yaxis.axisLabel;
         }
       };
@@ -375,7 +402,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
         //console.log(1);
         self.setUpTimeranges(option.xaxis.min,option.xaxis.max);
       }else{
-        //console.log(2);
+
         self.setUpTimeranges(xaxis.min,xaxis.max);
       }
 
@@ -388,9 +415,10 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
          'serieID' : this.serieId,
        });
 
-
         this.serieGraphTimeRange.trigger('nav',this.serieGraphTimeRange);
-
+      this.minX = startTime;
+      this.maxX = endTime;
+        this.update();
 
 
 

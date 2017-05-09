@@ -84,10 +84,12 @@ define(function(require) {
           minY = 100000;
           maxY = -500000;
           var eventData = this.data[p].data;
+          var count = 0;
           for (var i = 0; i < eventData.length; i++) {
             var eData = eventData[i];
 
             if (eData[0] < this.timeRange.attributes.startTime || eData[0] > this.timeRange.attributes.endTime) continue;
+            count++;
             /*
              Remove error bar
              */
@@ -101,6 +103,10 @@ define(function(require) {
             }
 
           }
+          if (count==0){
+            maxY = 1;
+            minY = -1;
+          }else
           if (maxY > 0)maxY = maxY * 1.1;
           else maxY = maxY * 0.9;
           if (minY > 0)minY = minY * 0.9;
