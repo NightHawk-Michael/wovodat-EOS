@@ -74,6 +74,7 @@ define(function(require) {
 
         for (var p  = 0 ; p < this.data.length; p++){
           //Set Y value of eruption between maxY and MinY
+          if (this.data[p].points ==  undefined) continue;
           if(this.data[p].points.symbol == "volcano" ){
             var eData = this.data[p].data;
             for (var i = 0 ; i < eData.length; i++){
@@ -120,7 +121,7 @@ define(function(require) {
             positionLeft =  true;
           }
           backUpcolors.push(this.data[p].color);
-          this.data[p].points.color = colors[p/2];
+          this.data[p].points.color = this.data[p].color;
           this.data[p].fillColor = this.data[p].color;
 
           var option = {
@@ -136,6 +137,23 @@ define(function(require) {
           }
           yaxes.push(option);
           this.data[p].yaxis = yaxes.length;
+
+
+        }
+
+        this.dataOwner = "";
+        for (var p  = 0 ; p < this.data.length; p++){
+          //Set Y value of eruption between maxY and MinY
+          //Data Owner
+          if (this.data[p].points ==  undefined){
+            var owner = this.data[p];
+
+            var label = this.data[p-2].label;
+            var color = this.data[p-2].points.color;
+            owner = owner.split("color: black").join("color: " + color);
+            owner = owner.split("Data Owner:").join (label + " - Data Owner: ")
+            this.dataOwner += owner;
+          }
 
 
         }
@@ -203,8 +221,8 @@ define(function(require) {
       };
 
 
-      this.$el.width(this.width);
-        this.$el.height(300);
+      this.$el.width();
+      this.$el.height(300);
 
       this.$el.addClass("composite-graph");
       document.getElementById('composite-title').style.visibility = "visible";
@@ -214,14 +232,15 @@ define(function(require) {
 
       //To edit the series object, go to GraphHelper used for data in the prepareData method below.
       //this.$el.bind('plotselected', this.selectingTimeRange, this.onSelect);
-
       //reset data
       for (var p  = 0 ; p < this.data.length; p++) {
-        if(this.data[p].points.symbol == "volcano") continue;
-        this.data[p].yaxis = 1;
-        this.data[p].color = backUpcolors[p/2];
-        this.data[p].fillColor = backUpcolors[p/2];
+          if (this.data[p].points ==  undefined) continue;
+          if(this.data[p].points.symbol == "volcano") continue;
+          this.data[p].yaxis = 1;
+          this.data[p].color = backUpcolors[p/3];
+          this.data[p].fillColor = backUpcolors[p/3];
       }
+
     },
 
     update: function() {
@@ -236,11 +255,11 @@ define(function(require) {
       if (this.timeRange != undefined && this.data != undefined && this.data.length > 0){
           var minY = 100000;
           var maxY = -500000;
-        this.minX = this.timeRange.attributes.startTime;
-        this.maxX = this.timeRange.attributes.endTime;
+          this.minX = this.timeRange.attributes.startTime;
+          this.maxX = this.timeRange.attributes.endTime;
 
 
-        //console.log(this);
+          //console.log(this);
 
       }
     },

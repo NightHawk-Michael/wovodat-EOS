@@ -85,6 +85,19 @@ abstract class TableManager implements TableManagerInterface {
 		}
 		$query = $query." from $this->table_name as a,vd ,vd_inf as b where a.vd_id=$vd_id AND vd.vd_id = $vd_id and b.vd_id = $vd_id group by a.vd_id, sta_id1, sta_id2 order by a.vd_id";
 		return $query;
+//		$query_format = 'select b.vd_inf_slat as vd_lat, b.vd_inf_slon as vd_long, a.%s as sta_id1,  a.%s as sta_id2, d.vd_name ';
+//		$query = sprintf($query_format,$this->stationId[0],$this->stationId[1]);
+//		foreach ($this->cols_name as $name) {
+//			$query = $query.",a.".$name;
+//		}
+//
+//		////$query = $query." from $this->table_name as a,vd ,vd_inf as b where a.vd_id=$vd_id AND vd.vd_id = $vd_id and b.vd_id = $vd_id group by a.vd_id, sta_id1, sta_id2 order by a.vd_id";
+//		$station_table = $this->setStationTable();
+//		if (is_array($station_table)) $station_table = $station_table[0];
+//		$query = $query." from $this->table_name as a,vd_inf as b, ". $station_table . "  as c, vd as d where a.vd_id=$vd_id and
+//		a.vd_id=b.vd_id and a.ds_id1=c.ds_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ds_nlat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ds_nlat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ds_nlon))) < 30 group by a.vd_id, sta_id1, sta_id2 order by a.vd_id";
+//
+//		return $query;
 	}
 	public function getTimeSeriesList($vd_id){
 
@@ -136,7 +149,8 @@ abstract class TableManager implements TableManagerInterface {
 					$x["sr_id"] = md5( $x["category"].$x["data_type"].$x["station_id1"].$x["station_id2"].$x["component"].$x["volcanoName"] );
 					if(!array_key_exists($x["sr_id"], $exsited)){
 						$exsited[$x["sr_id"]] = true;
-						if ($this->isHasData($x,$vd_id)) array_push($result,  $x );
+//						if ($this->isHasData($x,$vd_id)) array_push($result,  $x );
+						array_push($result,  $x );
 					}else{
 
 					}

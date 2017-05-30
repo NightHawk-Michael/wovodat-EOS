@@ -136,7 +136,8 @@ abstract class TableManager implements TableManagerInterface {
 					$x["sr_id"] = md5( $x["category"].$x["data_type"].$x["station_id1"].$x["station_id2"].$x["component"].$x["volcanoName"] );
 					if(!array_key_exists($x["sr_id"], $exsited)){
 						$exsited[$x["sr_id"]] = true;
-						if($this->isHasData($x,$vd_id)) array_push($result,  $x );
+//						if($this->isHasData($x,$vd_id)) array_push($result,  $x );
+						array_push($result,  $x );
 					}else{
 
 					}

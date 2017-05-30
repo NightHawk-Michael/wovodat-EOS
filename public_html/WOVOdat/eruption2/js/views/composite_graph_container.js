@@ -3,6 +3,7 @@ define(function(require) {
   var $ = require('jquery'),
       Backbone = require('backbone'),
       _ = require('underscore'),
+
   // Serie = require('models/serie'),
   // TimeSerieGraph = require('views/time_serie_graph'),
 
@@ -19,7 +20,7 @@ define(function(require) {
     initialize: function(options) {
       /** Variable declaration **/
       this.overviewSelectingTimeRange = new TimeRange();
-
+      this.selectingTimeSeries = options.selectingTimeSeries;
       this.observer = options.observer;
       this.overviewSelectingTimeSeries = options.selectingTimeSeries;
       this.compositeGraph = options.graph;
@@ -91,6 +92,8 @@ define(function(require) {
       this.$el.append("<div id = \"composite-title\" style = \"padding-left: 50px; margin-bottom:10px; margin-top:10px;\">" +
           "<a style = \" font-weight: bold; color : black;\">Composite Graph.</a> <br>" +
           "</div>");
+      this.$el.append("<div id = \"composite-data-owner\" style = \"padding-left: 50px; margin-bottom:10px; margin-top:10px;\">" +
+          "</div>");
 
       (document.getElementsByClassName("composite-graph-container")[0]).style.display = "none";
       document.getElementById('composite-title').style.visibility = "collapse";
@@ -128,10 +131,12 @@ define(function(require) {
     render: function() {
 
       //console.log(this.overviewGraph);
+      //$(".composite-data-owner").empty();
       this.compositeGraph.width = this.width;
-
       this.compositeGraph.update();
       this.compositeGraph.$el.appendTo(this.$el);
+      //this.$el.addClass("composite-data-owner");
+      $("#composite-data-owner").html(this.compositeGraph.dataOwner);
       var button = "<a > <input style = \"margin-left:50px;background-color: grey;pading:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light btn gen-pdf\"  type=\"button\" value = \"Print PDF\"/> <label ></label> </a>";
       if (this.data == undefined) (document.getElementsByClassName("composite-graph-container")[0]).style.display = "none";
       if (this.data != undefined && this.$el.context.childNodes.length <=2) this.$el.append(button);

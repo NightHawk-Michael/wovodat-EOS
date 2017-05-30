@@ -378,7 +378,8 @@ define(function(require) {
       //if(checkboxes.length == 0){
       //  this.stackGraphContainer.hide();
       //}
-      this.data = [];
+      this.compositeData = [];
+      this.stackData = [];
       var graphs = [];
       var count = 0;
       this.checkedTimeRangeFilter = [];
@@ -388,24 +389,27 @@ define(function(require) {
             break;
           }
           if (checkboxes.indexOf(this.graphs[i].serieId) >=0) {
-              //console.log (this.graphs[i])
-              this.data.push(this.graphs[i].data[0]);
-              this.data.push(this.graphs[i].data[1]);
+
+              var data = this.graphs[i].filters.timeSerie.attributes.data;
+
+              var dataOwner = this.genDataOwner(data,30);
+
+              this.compositeData.push(this.graphs[i].data[0]);
+              this.compositeData.push(this.graphs[i].data[1]);
+              this.stackData.push(this.graphs[i].data[0]);
+              this.stackData.push(this.graphs[i].data[1]);
+              this.compositeData.push(dataOwner);
               graphs.push(this.graphs[i]);
               this.checkedTimeRangeFilter.push(this.graphs[i]);
               count++;
           }
       }
 
-      this.compositeGraphContainer.data = this.data;
-      this.stackGraphContainer.data = this.data;
+      this.compositeGraphContainer.data = this.compositeData;
+      this.stackGraphContainer.data = this.compositeData;
        this.stackGraphContainer.serieGraphTimeRange =  this.serieGraphTimeRange;
       this.stackGraphContainer.filters =  this.filters;
 
-
-      //this.stackGraphContainer.graphs = graphs;
-      //this.generateStackGraph();
-      //this.generateCompositeGraph();
 
 
     },
@@ -484,6 +488,23 @@ define(function(require) {
       this.$el.html("");
      // this.stackGraphContainer.hide();
     },
+    genDataOwner: function(data, padding_left){
+      var dataOwner = "<div id=\"data-owner\" style = \"display:block;\">";
+      for (var ii = 0 ; ii < data.data[0].data_owner.length; ii = ii+2){
+        var cc_code = data.data[0].data_owner[ii];
+        var dataOwnerVal = data.data[0].data_owner[ii+1];
+        dataOwner +="<a href = \"" + dataOwnerVal + "\" target=\"_blank\" style = \"font-size: 10px;color: black;padding-left: " + padding_left*0.6 +"px; right:0px; \"> " + cc_code + "</a> "
+      }
+
+      dataOwner += " - ";
+      for (var ii = 0 ; ii < data.data[0].reference.length; ii = ii + 2){
+        var reference_code =  data.data[0].reference[ii];
+        var reference_val =  data.data[0].reference[ii+1];
+        dataOwner += "<a href = \"" + reference_val + "\" target=\"_blank\" style = \"font-size: 10px;color: black; right:0px; \"> " + reference_code + "</a>"
+      }
+      dataOwner += "</div>";
+      return dataOwner;
+    },
     show: function(){
       this.$el.html("");
       this.$el.addClass("time-series-graph-container card-panel");
@@ -506,30 +527,15 @@ define(function(require) {
         var select = "<a style = \"padding-left: " + padding_left +"px; right:0px; \"> <input class = \"select_time_range\"  type=\"checkbox\" id=\"" +checkboxid +"\" /> <label for=\"" + checkboxid+ "\"></label> </a>";
         this.$el.append(select);
         this.$el.append(this.graphs[i].$el);
+        var data = this.filters[i].timeSerie.attributes.data;
 
         this.graphs[i].show();
 
         /*
         Add data Owner
          */
-        var dataOwner = "<div id=\"data-owner\" style = \"display:block;\">";
-        for (var ii = 0 ; ii < this.filters[i].timeSerie.attributes.data.data[0].data_owner.length; ii = ii+2){
-          var cc_code = this.filters[i].timeSerie.attributes.data.data[0].data_owner[ii];
-          var dataOwnerVal = this.filters[i].timeSerie.attributes.data.data[0].data_owner[ii+1];
-          dataOwner +="<a href = \"" + dataOwnerVal + "\" target=\"_blank\" style = \"font-size: 10px;color: black;padding-left: " + padding_left*0.6 +"px; right:0px; \"> " + cc_code + "</a> "
-        }
 
-        dataOwner += " - ";
-        for (var ii = 0 ; ii < this.filters[i].timeSerie.attributes.data.data[0].reference.length; ii = ii + 2){
-          var reference_code =  this.filters[i].timeSerie.attributes.data.data[0].reference[ii];
-          var reference_val =  this.filters[i].timeSerie.attributes.data.data[0].reference[ii+1];
-          dataOwner += "<a href = \"" + reference_val + "\" target=\"_blank\" style = \"font-size: 10px;color: black; right:0px; \"> " + reference_code + "</a>"
-        }
-
-
-
-        dataOwner += "</div>";
-        this.$el.append(dataOwner);
+        this.$el.append(this.genDataOwner(data,padding_left));
 
         // this.graphs[i].draw();
 

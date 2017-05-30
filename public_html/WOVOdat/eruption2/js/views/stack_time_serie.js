@@ -19,6 +19,8 @@ define(function(require) {
             this.timeRange = options.overviewGraphTimeRange;
             this.selectingTimeRange = options.selectingTimeRange;
             this.isDisplayXaxis = options.isXaxis;
+            this.isMargin = options.isMargin;
+            this.order = options.order;
             this.filterColorCollection = new FilterColorCollection({
                 offline: false
             });
@@ -63,7 +65,7 @@ define(function(require) {
             this.$el.height(0);
             (document.getElementsByClassName('stack-graph-container'))[0].style.display = 'none';
 
-            this.trigger('hide');
+
         },
         showLoading: function(){
             //this.$el2.html(this.loading);
@@ -80,9 +82,9 @@ define(function(require) {
             //this.$el.html("");
             var options = {
                 grid:{
-                    minBorderMargin : 20,
+                    minBorderMargin : 50,
                     hoverable: true,
-                    labelMargin:20,
+
                 },
                 xaxis: {
                     mode:'time',
@@ -113,7 +115,6 @@ define(function(require) {
 
       ,
                 },
-
                 zoom: {
                     interactive: false,
 
@@ -127,13 +128,15 @@ define(function(require) {
                 },
 
             };
-            if (!this.data || this.data.length == 0 || !this.data[1] || !this.data[0]) {
+
+            if (!this.data || this.data.length == 0 || !this.data[1] || !this.data[0] ) {
                 this.$el.html('');
                 return;
             }
             this.$el.width(this.width);
             this.$el.height(300);
-            this.$el.addClass('stack-graph');
+            this.$el.addClass('stack-graph' + this.order);
+            if (this.isMargin) $(".stack-graph" + this.order).css("margin-top","-95px");
             //this.$el.append(' Individual graph display </br>');
             // plot the time series graph after being selected (eg. onSelect in OverViewGraph).
             // config graph theme colors
@@ -159,6 +162,7 @@ define(function(require) {
 
             this.showLoading();
             this.prepareData();
+
             this.render();
         },
 
@@ -169,12 +173,13 @@ define(function(require) {
                 this.maxX = this.serieGraphTimeRange.get('endTime');
             }
             if (this.data != undefined){
+                //if(this.data);
                 for (var p = 0 ;  p < this.data.length;p = p+2){
                     var minY = 100000;
                     var maxY = -500000;
                     if (this.data[p] == undefined) continue;
                     var eventData = this.data[p].data;
-                    //console.log (this.minX + "\t" + this.maxX);
+                    if (eventData == undefined) continue;
                     for (var i = 0 ; i < eventData.length; i++){
                         if (eventData[i][0] < this.minX || eventData[i][0] > this.maxX) continue;
                         var y;
@@ -209,12 +214,7 @@ define(function(require) {
                         }
 
                     }
-
-
-
             }
-
-
         },
 
         destroy: function() {

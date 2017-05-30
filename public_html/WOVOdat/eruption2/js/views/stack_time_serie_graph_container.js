@@ -29,12 +29,14 @@ define(function(require) {
     /*
     Add graph
      */
-    addGraph : function( filters,displayXAxis) {
+    addGraph : function( filters,displayXAxis, isMargin, order) {
 
       var stackGraph = new StackGraph( {
         // timeRange : this.timeRange,
         filters : filters,
         isXaxis : displayXAxis,
+        isMargin: isMargin,
+        order : order,
         //data: data,
         eruptionTimeRange: this.eruptionTimeRange,
         serieGraphTimeRange: this.timeRange,
@@ -110,6 +112,8 @@ define(function(require) {
       this.$el.append("<div id = \"stack-title\" style = \"padding-left: 50px; margin-bottom:30px; margin-top:10px;\">" +
           "<a style = \" font-weight: bold; color : black;\">Stack Graph.</a> <br>" +
           "</div>");
+      this.$el.append("<div id = \"stack-data-owner\" style = \"padding-left: 50px; margin-bottom:10px; margin-top:10px;\">" +
+          "</div>");
 
       (document.getElementsByClassName("stack-graph-container")[0]).style.display = "none";
       document.getElementById('stack-title').style.visibility = "collapse";
@@ -123,8 +127,11 @@ define(function(require) {
       this.graphs = [];
       if (this.filters != undefined) {
         for (var i = 0; i < this.filters.length; i++) {
-          if (i ==  this.filters.length-1) this.addGraph(this.filters[i],true);
-          else this.addGraph(this.filters[i],false);
+          var isMargin = true;
+          if (i == 0 ) isMargin = false;
+
+          if (i ==  this.filters.length-1) this.addGraph(this.filters[i],true, isMargin,i);
+          else this.addGraph(this.filters[i],false, isMargin,i);
 
         }
 
@@ -136,14 +143,26 @@ define(function(require) {
       //this.stackGraph.data = this.data;
       //this.stackGraph.timeRange = this.timeRange;
       this.hide();
+      this.dataOwner = "";
       for (var i = 0; i < this.graphs.length; i++) {
         this.$el.append(this.graphs[i].$el);
-        if (this.data != undefined){
+        if (this.data != undefined && this.data[i*3] != undefined){
           var data2 = [];
-          data2.push(this.data[i*2]);
-          data2.push(this.data[1]);
+          data2.push(this.data[i*3]);
+          data2.push(this.data[i*3+1]);
+
           this.graphs[i].data = data2;
           this.graphs[i].width = this.width;
+
+          //data owner
+          var owner = this.data[i*3+2];
+
+          var label = this.data[i*3].label;
+          var color = this.data[i*3].points.color;
+          console.log(owner);
+          owner = owner.split("color: black").join("color: " + color);
+          owner = owner.split("Data Owner:").join (label + " - Data Owner: ")
+          this.dataOwner += owner;
 
         }
 
@@ -175,7 +194,7 @@ define(function(require) {
     render: function() {
       (document.getElementsByClassName("stack-graph-container")[0]).style.display = "block";
       document.getElementById('stack-title').style.visibility = "visible";
-
+      $("#stack-data-owner").html(this.dataOwner);
       var button = "<a > <input style = \"margin-top: 50px; margin-left:50px;pading:2px 10px 2px 10px;right:0px; \" class = \"waves-effect waves-light btn gen-pdf\"  type=\"button\" value = \"Print PDF\"/> <label ></label> </a>";
       if (this.data == undefined) (document.getElementsByClassName("stack-graph-container")[0]).style.display = "none";
      this.$el.append(button);

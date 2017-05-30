@@ -103,7 +103,6 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
           unit = this.data[i].yaxis.axisLabel;
         }
       };
-
       // change yaxix of timeseriesgraph according to zoomed in data
 
       var zoomedDataMinY = undefined;
