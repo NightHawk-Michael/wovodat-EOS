@@ -1,6 +1,0 @@
-[16-Sep-2016 02:48:05] PHP Notice:  Undefined index: dataType in /home/wovodat/public_html/WOVOdat/boolean/model/booleanIndex_m.php on line 154
-[16-Sep-2016 02:48:05] PHP Stack trace:
-[16-Sep-2016 02:48:05] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/boolean/model/booleanIndex_m.php:0
-[01-Oct-2016 04:03:42] PHP Notice:  Undefined index: dataType in /home/wovodat/public_html/WOVOdat/boolean/model/booleanIndex_m.php on line 154
-[01-Oct-2016 04:03:42] PHP Stack trace:
-[01-Oct-2016 04:03:42] PHP   1. {main}() /home/wovodat/public_html/WOVOdat/boolean/model/booleanIndex_m.php:0

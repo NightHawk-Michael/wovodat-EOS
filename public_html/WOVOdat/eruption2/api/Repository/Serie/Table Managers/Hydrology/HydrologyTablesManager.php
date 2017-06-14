@@ -13,5 +13,8 @@ abstract class HydrologyTablesManager extends TableManager {
 	protected function setMonitoryType(){
 		return "Hydrology";
 	} // monitory type Deformation, Gas, ....
-	
+
+	protected function setLatLong(){
+		return array("hs_lat", "hs_lon");
+	}
 } 

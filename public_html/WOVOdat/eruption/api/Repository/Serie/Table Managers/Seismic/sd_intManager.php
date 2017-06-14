@@ -32,7 +32,7 @@ class sd_intManager extends SeismicTablesManager {
 	} // Data type for each data table
 	//if there is 1 station, station1 is the same as station2
 	protected function setStationID(){
-		$result = array("sn_id","ss_id");
+		$result = array("ss_id","sn_id");
 		return $result;
 	} // column names represent stationID1,station ID2
 	protected function setStationCode(){

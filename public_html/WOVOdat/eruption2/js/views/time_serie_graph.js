@@ -64,22 +64,43 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       var self = event.data.self;
       /* The zooming range cannot wider than the selected range */
       //console.log(xaxis.min + "\t"+ event.data.startSelectTime);
-      if(xaxis.min<event.data.startSelectTime || xaxis.max > event.data.endSelectTime){
         var diffTime =  xaxis.max - xaxis.min;
-        if (xaxis.min < event.data.startSelectTime){
-          option.xaxis.min = event.data.startSelectTime;
-          option.xaxis.max = event.data.startSelectTime + diffTime;
-        }else if (xaxis.max > event.data.endSelectTime){
-          option.xaxis.max = event.data.endSelectTime;
-          option.xaxis.min = event.data.endSelectTime - diffTime;
-        }
-        event.data.graph = $.plot(event.data.el,data,option);
-        self.setUpTimeranges(option.xaxis.min,option.xaxis.max);
+        if(xaxis.min<event.data.startSelectTime || xaxis.max > event.data.endSelectTime){
+            if (xaxis.min < event.data.startSelectTime){
+              option.xaxis.min = event.data.startSelectTime;
+              option.xaxis.max = event.data.startSelectTime + diffTime;
+            }else if (xaxis.max > event.data.endSelectTime){
+              option.xaxis.max = event.data.endSelectTime;
+              option.xaxis.min = event.data.endSelectTime - diffTime;
+            }
+            event.data.graph = $.plot(event.data.el,data,option);
+            self.setUpTimeranges(option.xaxis.min,option.xaxis.max);
       }else{
 
         self.setUpTimeranges(xaxis.min,xaxis.max);
       }
     },
+      onZoom: function(event,plot){
+          // console.log("zoom");
+          var option = event.data.original_option;
+          var xaxis = plot.getXAxes()[0];
+          var data = event.data.data;
+          var self = event.data.self;
+          /* The zooming range cannot wider than the selected range */
+
+          if(xaxis.min<event.data.startSelectTime || xaxis.max > event.data.endSelectTime){
+              option.xaxis.min = event.data.startSelectTime;
+              option.xaxis.max = event.data.endSelectTime;
+
+              event.data.graph = $.plot(event.data.el,data,option);
+              //console.log(1);
+              self.setUpTimeranges(option.xaxis.min,option.xaxis.max);
+          }else{
+
+              self.setUpTimeranges(xaxis.min,xaxis.max);
+          }
+
+      },
     onHover: function(event, pos, item) {
       // if(item!=null){
         var tooltip = event.data;
@@ -287,8 +308,9 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       for (var j = 0 ; j < d.length; j++){
         if (d[j][0] < this.maxX && d[j][0]> this.minX){
           count++;
-          minY = Math.min(minY, d[j][1]);
-          maxY = Math.max(maxY, d[j][1]);
+          var l = d[j].length;
+          minY = Math.min(minY, d[j][l-1]);
+          maxY = Math.max(maxY, d[j][l-1]);
         }
       }
       if (count == 0){
@@ -301,7 +323,8 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       var d2 = this.data[1].data;
       for (var j = 0 ; j < d2.length; j++){
         if (d2[j][0] < this.maxX && d2[j][0]> this.minX){
-          d2[j][1] = (this.minY + this.maxY)/2;
+          var l = d[j].length;
+          d2[j][l-1] = (this.minY + this.maxY)/2;
 
         }
       }
@@ -385,27 +408,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
 
 
     },
-    onZoom: function(event,plot){
-     // console.log("zoom");
-      var option = event.data.original_option;
-      var xaxis = plot.getXAxes()[0];
-      var data = event.data.data;
-      var self = event.data.self;
-      /* The zooming range cannot wider than the selected range */
 
-      if(xaxis.min<event.data.startSelectTime || xaxis.max > event.data.endSelectTime){
-        option.xaxis.min = event.data.startSelectTime;
-        option.xaxis.max = event.data.endSelectTime;
-
-        event.data.graph = $.plot(event.data.el,data,option);
-        //console.log(1);
-        self.setUpTimeranges(option.xaxis.min,option.xaxis.max);
-      }else{
-
-        self.setUpTimeranges(xaxis.min,xaxis.max);
-      }
-
-    },
     setUpTimeranges: function(startTime, endTime){
 
        this.serieGraphTimeRange.set({

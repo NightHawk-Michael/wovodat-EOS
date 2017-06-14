@@ -67,7 +67,7 @@ define(function(require) {
                 step = Math.max(step,0.2);
             }else{
                 //step = parseInt(step);
-                step = this.roundNumber(step,expDeg);
+                //step = this.roundNumber(step);
             }
 
         	//var startTick = min - step;
@@ -77,7 +77,12 @@ define(function(require) {
           var curTick = undefined;
           var endTick = undefined;
           while (startTick == undefined ||startTick >= min){
-              maxTick  = this.roundNumber(max + step,expDeg);
+              if (step >= 1){
+                  maxTick = this.roundNumber(max+step,expDeg);
+              }else{
+                  maxTick  = Math.round(max);
+              }
+
               startTick  = maxTick - (step * numStep);    // start tick
               step = step+step;
               endTick  = maxTick; // end tick

@@ -13,5 +13,8 @@ abstract class FieldsTablesManager extends TableManager {
 	protected function setMonitoryType(){
 		return "Fields";
 	} // monitory type Deformation, Gas, ....
-	
+
+	protected function setLatLong(){
+		return array("fs_lat", "fs_lon");
+	}
 } 

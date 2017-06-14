@@ -159,7 +159,6 @@ define(function(require) {
 
           var label = this.data[i*3].label;
           var color = this.data[i*3].points.color;
-          console.log(owner);
           owner = owner.split("color: black").join("color: " + color);
           owner = owner.split("Data Owner:").join (label + " - Data Owner: ")
           this.dataOwner += owner;

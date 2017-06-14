@@ -26,6 +26,7 @@ abstract class TableManager implements TableManagerInterface {
 		$this->stationId = $this->setStationID();
 		$this->sta_id_code_dictionary = $this->getStationIdCodeDictionary();
 		$this->shortDataType = $this->setShortDataType();
+		$this->stationTable = $this->setStationTable();
 
 		$this->data_code =  $this->setDataCode();
 	}
@@ -65,6 +66,8 @@ abstract class TableManager implements TableManagerInterface {
 	abstract protected function setMonitoryType(); // monitory type Deformation, Gas, ....
 	abstract protected function setDataType(); // Data type for each data table
     abstract protected function setShortDataType();
+	abstract protected function setLatLong();	//Set param Lat Long fo get Table Query
+
 	//if there is 1 station, station1 is the same as station2
 	abstract protected function setStationID(); // column names represent stationID1,station ID2
 	protected function setDataCode(){
@@ -79,6 +82,7 @@ abstract class TableManager implements TableManagerInterface {
 		$temp = explode("_", $id);
 		return $temp[0];
 	}
+/*	
 	protected function getTimeSeriesListQuery($vd_id){
 
 		$query_format = 'select b.vd_inf_slat as vd_lat, b.vd_inf_slon as vd_long, a.%s as sta_id1,  a.%s as sta_id2, vd.vd_name ';
@@ -89,6 +93,120 @@ abstract class TableManager implements TableManagerInterface {
 		$query = $query." from $this->table_name as a,vd ,vd_inf as b where a.vd_id=$vd_id AND vd.vd_id = $vd_id and b.vd_id = $vd_id group by a.vd_id, sta_id1, sta_id2 order by a.vd_id";
 		return $query;
 	}
+*/	
+	protected function getTimeSeriesListQuery($vd_id){
+
+		$query_format = 'select b.vd_inf_slat as vd_lat, b.vd_inf_slon as vd_long, a.%s as sta_id1,  a.%s as sta_id2, d.vd_name ';
+		$query = sprintf($query_format,$this->stationId[0],$this->stationId[1]);
+		foreach ($this->cols_name as $name) {
+			$query = $query.",a.".$name;
+		}
+//		$query = $query." from $this->table_name as a,vd ,vd_inf as b where a.vd_id=$vd_id AND vd.vd_id = $vd_id and b.vd_id = $vd_id group by a.vd_id, sta_id1, sta_id2 order by a.vd_id";
+		$stationTable = $this->stationTable;
+		if (is_array($stationTable)) $stationTable  = $stationTable[0];
+
+		$stationID = $this->stationId[0];
+		if($this->table_name == "es_dd_lev") $stationID = "ds_id_ref";
+		$lat = $this->setLatLong()[0];
+		$long =  $this->setLatLong()[1];
+		$prefixQuery = $query." from " . $this->table_name . " a, vd_inf b, " . $stationTable ." c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id " ;
+		$prefixQuery2 = $prefixQuery . " and a." . $stationID . "=c." . $stationTable . "_id and a.vd_id = d.vd_id and 6371*acos(sin(RADIANS(". $lat ."))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(". $lat ."))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(". $long ."))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+
+
+//		if($this->table_name == "es_gd_plu") {
+//			$query = $prefixQuery2. " union ".$query." from es_gd_plu a, vd_inf b, cs c ,vd d where a.vd_id=b.vd_id and a.cs_id=c.cs_id and a.vd_id=d.vd_id group by d.vd_id, sta_id1, sta_id2";
+//		}
+//		else if($this->table_name == "es_sd_evn") {
+//			$query = $prefixQuery . " a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(" . $lat . "))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(" . $lat . ")) *cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(" . $long . "))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+//		}
+//		else if($this->table_name == "es_sd_int" || $this->table_name == "es_sd_ivl" || $this->table_name == "es_sd_trm") {
+//			$query = $prefixQuery. " (a.ss_id=c.ss_id || a.sn_id = c.sn_id) and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(". $lat. "))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(" . $lat ."))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(". $long."))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+//		}
+//		else{
+//			$query = $prefixQuery2;
+//		}
+		if($this->table_name == "es_dd_edm") {
+			$query = $query." from es_dd_edm a, vd_inf b, ds c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.ds_id1=c.ds_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ds_nlat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ds_nlat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ds_nlon))) < 30  group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_dd_gps") {
+
+			$query = $query." from es_dd_gps a, vd_inf b, ds c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.ds_id=c.ds_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ds_nlat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ds_nlat)) *cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ds_nlon))) < 30  group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_dd_gpv") {
+
+			$query = $query." from es_dd_gpv a, vd_inf b, ds c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.ds_id=c.ds_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ds_nlat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ds_nlat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ds_nlon))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_dd_lev") {
+
+			$query = $query." from es_dd_lev a, vd_inf b, ds c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.ds_id_ref=c.ds_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ds_nlat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ds_nlat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ds_nlon))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_dd_str") {
+			$query = $query." from es_dd_str a, vd_inf b, ds c,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.ds_id=c.ds_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ds_nlat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ds_nlat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ds_nlon))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_dd_tlt") {
+			$query = $query." from es_dd_tlt a, vd_inf b, ds c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.ds_id=c.ds_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ds_nlat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ds_nlat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ds_nlon))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_dd_tlv") {
+			$query = $query." from es_dd_tlv a, vd_inf b, ds c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.ds_id=c.ds_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ds_nlat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ds_nlat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ds_nlon))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_fd_ele") {
+			$query = $query." from es_fd_ele a, vd_inf b, fs c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.fs_id1=c.fs_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(fs_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(fs_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(fs_lon))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_fd_gra") {
+			$query = $query." from es_fd_gra a, vd_inf b, fs c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.fs_id=c.fs_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(fs_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(fs_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(fs_lon))) < 30  group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_fd_mag") {
+			$query = $query." from es_fd_mag a, vd_inf b, fs c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.fs_id=c.fs_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(fs_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(fs_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(fs_lon))) < 30  group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_fd_mgv") {
+			$query = $query." from es_fd_mgv a, vd_inf b, fs c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.fs_id=c.fs_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(fs_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(fs_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(fs_lon))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_gd") {
+			$query = $query." from es_gd a, vd_inf b, gs c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.gs_id=c.gs_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(gs_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(gs_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(gs_lon))) < 30  group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_gd_plu") {
+			$query = $query." from es_gd_plu a, vd_inf b, gs c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.gs_id=c.gs_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(gs_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(gs_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(gs_lon))) < 30  group by d.vd_id, sta_id1, sta_id2 union ".$query."
+			from es_gd_plu a, vd_inf b, cs c ,vd d where a.vd_id=b.vd_id and a.cs_id=c.cs_id and a.vd_id=d.vd_id group by d.vd_id, sta_id1, sta_id2";
+		}
+		else if($this->table_name == "es_gd_sol") {
+			$query = $query." from es_gd_sol a, vd_inf b, gs c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.gs_id=c.gs_id and  a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(gs_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(gs_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(gs_lon))) < 30  group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_hd") {
+			$query = $query." from es_hd a, vd_inf b, hs c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.hs_id=c.hs_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(hs_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(hs_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(hs_lon))) < 30  group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_med") {
+			$query = $query." from es_med a, vd_inf b, ms c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.ms_id=c.ms_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ms_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ms_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ms_lon))) < 30  group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_td") {
+			$query = $query." from es_td a, vd_inf b, ts c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.ts_id=c.ts_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ts_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ts_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ts_lon))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_sd_evn") {
+			$query = $query." from es_sd_evn a, vd_inf b ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.vd_id=d.vd_id and
+			6371*acos(sin(RADIANS(sd_evn_elat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(sd_evn_elat)) *cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(sd_evn_elon))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_sd_evs") {
+			$query = $query." from es_sd_evs a, vd_inf b, ss c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.ss_id=c.ss_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ss_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ss_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ss_lon))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_sd_int") {
+			$query = $query." from es_sd_int a, vd_inf b, ss c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and (a.ss_id=c.ss_id || a.sn_id = c.sn_id) and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ss_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ss_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ss_lon))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_sd_ivl") {
+			$query = $query." from es_sd_ivl a, vd_inf b, ss c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and (a.ss_id=c.ss_id || a.sn_id = c.sn_id) and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ss_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ss_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ss_lon))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_sd_rsm") {
+			$query = $query." from es_sd_rsm a, vd_inf b, ss c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.ss_id=c.ss_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ss_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ss_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ss_lon))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_sd_ssm") {
+			$query = $query." from es_sd_ssm a, vd_inf b, ss c ,vd d where a.vd_id=b.vd_id and a.ss_id=c.ss_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ss_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ss_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ss_lon))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else if($this->table_name == "es_sd_trm") {
+			$query = $query." from es_sd_trm a, vd_inf b, ss c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and (a.ss_id=c.ss_id || a.sn_id = c.sn_id) and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ss_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ss_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ss_lon))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+
+		return $query;
+	}
+	
+	
 	public function getTimeSeriesList($vd_id){
 
 		$result = array();

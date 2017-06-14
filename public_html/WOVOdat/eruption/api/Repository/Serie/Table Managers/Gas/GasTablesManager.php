@@ -13,5 +13,7 @@ abstract class GasTablesManager extends TableManager {
 	protected function setMonitoryType(){
 		return "Gas";
 	} // monitory type Deformation, Gas, ....
-	
+	protected function setLatLong(){
+		return array("gs_lat", "gs_lon");
+	}
 } 

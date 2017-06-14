@@ -108,10 +108,10 @@ define(function(require) {
             maxY = 1;
             minY = -1;
           }else
-          if (maxY > 0)maxY = maxY * 1.1;
-          else maxY = maxY * 0.9;
-          if (minY > 0)minY = minY * 0.9;
-          else minY = minY * 1.1;
+          //if (maxY > 0)maxY = maxY * 1.1;
+          //else maxY = maxY * 0.9;
+          //if (minY > 0)minY = minY * 0.9;
+          //else minY = minY * 1.1;
           var position;
           if (positionLeft){
             position =  "left";

@@ -13,5 +13,8 @@ abstract class MeteoTablesManager extends TableManager {
 	protected function setMonitoryType(){
 		return "Meteology";
 	} // monitory type Deformation, Gas, ....
-	
+
+	protected function setLatLong(){
+		return array("ms_lat", "ms_lon");
+	}
 } 

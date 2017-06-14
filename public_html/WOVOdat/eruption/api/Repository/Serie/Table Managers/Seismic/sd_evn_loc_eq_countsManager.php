@@ -25,7 +25,7 @@ class sd_evn_loc_eq_countsManager extends sd_evnManager {
 		return $result;
 	} // column name represent primary stationCode1, stationCode2.
 	protected function getTimeSeriesListQuery($vd_id){
-		$query = "select \"Located Earthquake Counts\" as loc_eq_counts, b.vd_inf_slat as vd_lat, b.vd_inf_slon as vd_long, a.cc_id as sta_id1,  a.cc_id as sta_id2 from sd_evn as a, vd_inf as b, es_sd_evn as c where ABS( b.vd_inf_slat - sd_evn_elat) < 1 AND ABS( b.vd_inf_slon - sd_evn_elon) < 6 AND (6371*2*ATAN2(SQRT(SIN((RADIANS(sd_evn_elat)-RADIANS( b.vd_inf_slat))/2)*SIN((RADIANS(sd_evn_elat)-RADIANS( b.vd_inf_slat))/2)+SIN((RADIANS(sd_evn_elon)-RADIANS( b.vd_inf_slon))/2)*SIN((RADIANS(sd_evn_elon)-RADIANS( b.vd_inf_slon))/2)*COS(RADIANS( b.vd_inf_slat))*COS(RADIANS(sd_evn_elat))),SQRT(1-(SIN((RADIANS(sd_evn_elat)-RADIANS( b.vd_inf_slat))/2)*SIN((RADIANS(sd_evn_elat)-RADIANS( b.vd_inf_slat))/2)+SIN((RADIANS(sd_evn_elon)-RADIANS( b.vd_inf_slon))/2)*SIN((RADIANS(sd_evn_elon)-RADIANS( b.vd_inf_slon))/2)*COS(RADIANS( b.vd_inf_slat))*COS(RADIANS(sd_evn_elat)))))) < 100 and b.vd_id = $vd_id and a.sn_id=c.sn_id AND a.sd_evn_pubdate <= now() and a.sd_evn_edep BETWEEN -10 AND 40 and b.vd_id=c.vd_id and a.sd_evn_pubdate <= now() group by b.vd_id, sta_id1, sta_id2 order by b.vd_id"; 
+		$query = "select \"Located Earthquake Counts\" as loc_eq_counts, b.vd_inf_slat as vd_lat, b.vd_inf_slon as vd_long, a.cc_id as sta_id1,  a.cc_id as sta_id2 from sd_evn as a, vd_inf as b, es_sd_evn as c where 6371*acos(sin(RADIANS(a.sd_evn_elat))*sin(RADIANS(b.vd_inf_slat))+cos(RADIANS(a.sd_evn_elat)) *cos(RADIANS(b.vd_inf_slat))*cos(RADIANS(b.vd_inf_slon)-RADIANS(a.sd_evn_elon))) <= 30 and b.vd_id = $vd_id and a.sn_id=c.sn_id AND a.sd_evn_pubdate <= now() and a.sd_evn_edep BETWEEN -10 AND 40 and b.vd_id=c.vd_id group by b.vd_id, sta_id1, sta_id2 order by b.vd_id";
 		return $query;
 	}
 	protected function setStationDataParams($component){
@@ -39,7 +39,7 @@ class sd_evn_loc_eq_countsManager extends sd_evnManager {
 		$vd_lat = $this->vd_lat;
 		// var_dump($this);
 		if($component == 'Located Earthquake Counts'){
-			$query = "select count(sd_evn_edep) as value, sd_evn_eqtype as filter, concat(DATE(sd_evn_time),\" 00:00:00\") as stime, concat(DATE(sd_evn_time), \" 23:59:59\") as etime, sd_evn_eqtype, cc_id, sd_evn_derr FROM sd_evn as a WHERE a.cc_id =%s AND a.sd_evn_pmag IS NOT NULL AND a.sd_evn_pubdate <= now() and a.sd_evn_edep BETWEEN -10 AND 40 GROUP BY DATE(a.sd_evn_time), filter order by a.sd_evn_time desc";
+			$query = "select count(sd_evn_edep) as value, sd_evn_eqtype as filter, concat(DATE(sd_evn_time),\" 00:00:00\") as stime, concat(DATE(sd_evn_time), \" 23:59:59\") as etime, sd_evn_eqtype, cc_id, sd_evn_derr FROM sd_evn as a WHERE a.cc_id =%s and sd_evn_pubdate <= now() and sd_evn_edep BETWEEN -10 AND 40 GROUP BY DATE(sd_evn_time), filter  order by sd_evn_time desc";
 		}
 
 

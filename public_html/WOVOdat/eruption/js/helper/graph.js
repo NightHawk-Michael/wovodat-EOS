@@ -3,18 +3,23 @@ define(function (require) {
     'use strict';
     // var this = require('helper/math');
     return {
-        generateTick: function (min, max) {
+        generateTick: function(min,max){
             if(min == undefined || max == undefined){
                 return [-0.5,0,0.5];
             }
             if(min == max){
-
-                var diff = 0.5;
+                var temp = this.exponentialDegree(min);
+                if(temp == 0){
+                    temp = 1;
+                }
+                var diff = 0.5*temp;
                 return [min - diff,min,min+diff];
             }
             var ticks = [];
             var numStep = 7;
             /** compute exponential Degree **/
+
+
             var expDeg = undefined
             if(this.exponentialDegree(min) < this.exponentialDegree(max)){
                 expDeg = this.exponentialDegree(max);
@@ -24,7 +29,7 @@ define(function (require) {
 
 
             if(expDeg > 5) {
-                var step = this.roundNumber((max-min)/(numStep),expDeg); // step of ticks
+                var step = this.roundNumber((max-min)/numStep,expDeg); // step of ticks
                 //if step is 0.xxx in computing exponential Degree, decrement expDeg
                 while(step == 0){
                     expDeg--;
@@ -33,12 +38,12 @@ define(function (require) {
                 min = this.roundNumber(min,expDeg);
                 max = this.roundNumber(max,expDeg);
 
+                step = step.toExponential();
                 /**** compute ticks ****/
                 var startTick = this.roundNumber(min -step,expDeg); // start tick
                 var endTick = this.roundNumber(max+step,expDeg); // end tick
                 startTick = startTick.toExponential();
                 endTick = endTick.toExponential();
-                step  = step.toExponential();
                 var curTick = startTick;
                 if(curTick == endTick){
                     ticks.push(curTick);
@@ -62,18 +67,21 @@ define(function (require) {
                     step = Math.max(step,0.2);
                 }else{
                     //step = parseInt(step);
-                    step = this.roundNumber(step,expDeg);
+                    //step = this.roundNumber(step);
                 }
 
                 //var startTick = min - step;
                 // var endTick = max + step;
-
                 var startTick = undefined;
                 var maxTick = undefined;
                 var curTick = undefined;
                 var endTick = undefined;
-                maxTick  = this.roundNumber(max + step,expDeg);
                 while (startTick == undefined ||startTick >= min){
+                    if (step >= 1){
+                        maxTick = this.roundNumber(max+step,expDeg);
+                    }else{
+                        maxTick  = Math.round(max);
+                    }
 
                     startTick  = maxTick - (step * numStep);    // start tick
                     step = step+step;
@@ -82,7 +90,6 @@ define(function (require) {
                     curTick = startTick;
 
                 }
-
                 if (curTick == endTick) {
                     ticks.push(curTick);
                 } else {
@@ -92,11 +99,7 @@ define(function (require) {
 
                     }
                 }
-
-
-
             }
-
             return ticks;
         },
         formatData: function (graph, filters, allowErrorbar, allowAxisLabel, limitNumberOfData) {

@@ -160,7 +160,7 @@
                 return;
 
             panTimeout = setTimeout(function () {
-                plot.pan({ left: prevPageX - e.pageX,
+                plot.pan({ left: prevPageX - e.pageX-100,
                     top: prevPageY - e.pageY });
                 prevPageX = e.pageX;
                 prevPageY = e.pageY;

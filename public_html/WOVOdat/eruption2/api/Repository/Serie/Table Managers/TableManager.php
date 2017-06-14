@@ -17,6 +17,7 @@ abstract class TableManager implements TableManagerInterface {
 	protected $vd_long;
 	protected $vd_lat;
 	protected $data_code;
+	protected $vd_id;
 	public function TableManager(){
 		$this->cols_name = $this->setColumnsName();
 		$this->table_name = $this->setTableName();
@@ -25,15 +26,17 @@ abstract class TableManager implements TableManagerInterface {
 		$this->stationId = $this->setStationID();
 		$this->sta_id_code_dictionary = $this->getStationIdCodeDictionary();
 		$this->shortDataType = $this->setShortDataType();
-
+		$this->stationTable = $this->setStationTable();
 		$this->data_code =  $this->setDataCode();
+	}
 
+	public function getTableName(){
+		return $this->table_name;
 	}
 	//must return 1 sta_code column
 	protected function getStationCodeQuery($sta_id){
 		$table_name = $this->getTableNameFromIdName($sta_id);
 		$sta_id_code_query = "SELECT DISTINCT ".$table_name."_id as sta_id, " . $table_name ."_code as sta_code FROM $table_name order by sta_id";
-
 		return $sta_id_code_query;
 	}
 	protected function getStationIdCodeDictionary(){
@@ -43,7 +46,7 @@ abstract class TableManager implements TableManagerInterface {
 
 			$sta_id_code = array();
 			$sta_id_code_query = $this->getStationCodeQuery($sta_id);
-			// echo $sta_id_code_query."\n";
+
 			$db->query($sta_id_code_query);
 			$temp = $db->getList();
 			$sta_id_code[0] = "";
@@ -51,10 +54,8 @@ abstract class TableManager implements TableManagerInterface {
 			foreach($temp as $tmp){
 				$sta_id_code[$tmp["sta_id"]]  = $tmp['sta_code'];
 			}
-
 			array_push($sta_id_codes,$sta_id_code);
 		}
-
 
 		return $sta_id_codes;
 	}
@@ -64,10 +65,12 @@ abstract class TableManager implements TableManagerInterface {
 	abstract protected function setMonitoryType(); // monitory type Deformation, Gas, ....
 	abstract protected function setDataType(); // Data type for each data table
     abstract protected function setShortDataType();
+	abstract protected function setLatLong();	//Set param Lat Long fo get Table Query
 	//if there is 1 station, station1 is the same as station2
 	abstract protected function setStationID(); // column names represent stationID1,station ID2
 	protected function setDataCode(){
 		$code =  substr($this->table_name,3,strlen($this->table_name)-3) ."_code";
+//		var_dump($code);
 		return $code;
 
 	}
@@ -78,43 +81,55 @@ abstract class TableManager implements TableManagerInterface {
 		return $temp[0];
 	}
 	protected function getTimeSeriesListQuery($vd_id){
-		$query_format = 'select b.vd_inf_slat as vd_lat, b.vd_inf_slon as vd_long, a.%s as sta_id1,  a.%s as sta_id2, vd.vd_name ';
+
+		$query_format = 'select b.vd_inf_slat as vd_lat, b.vd_inf_slon as vd_long, a.%s as sta_id1,  a.%s as sta_id2, d.vd_name ';
 		$query = sprintf($query_format,$this->stationId[0],$this->stationId[1]);
 		foreach ($this->cols_name as $name) {
 			$query = $query.",a.".$name;
 		}
-		$query = $query." from $this->table_name as a,vd ,vd_inf as b where a.vd_id=$vd_id AND vd.vd_id = $vd_id and b.vd_id = $vd_id group by a.vd_id, sta_id1, sta_id2 order by a.vd_id";
+//		$query = $query." from $this->table_name as a,vd ,vd_inf as b where a.vd_id=$vd_id AND vd.vd_id = $vd_id and b.vd_id = $vd_id group by a.vd_id, sta_id1, sta_id2 order by a.vd_id";
+		$stationTable = $this->stationTable;
+		if (is_array($stationTable)) $stationTable  = $stationTable[0];
+
+		$stationID = $this->stationId[0];
+		if($this->table_name == "es_dd_lev") $stationID = "ds_id_ref";
+		$lat = $this->setLatLong()[0];
+		$long =  $this->setLatLong()[1];
+		$prefixQuery = $query." from " . $this->table_name . " a, vd_inf b, " . $stationTable ." c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id " ;
+		$prefixQuery2 = $prefixQuery . " and a." . $stationID . "=c." . $stationTable . "_id and a.vd_id = d.vd_id and 6371*acos(sin(RADIANS(". $lat ."))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(". $lat ."))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(". $long ."))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+
+
+		if($this->table_name == "es_gd_plu") {
+			$query = $prefixQuery2. " union ".$query." from es_gd_plu a, vd_inf b, cs c ,vd d where a.vd_id=b.vd_id and a.cs_id=c.cs_id and a.vd_id=d.vd_id group by d.vd_id, sta_id1, sta_id2";
+		}
+	    else if($this->table_name == "es_sd_evn") {
+			$query = $prefixQuery . " and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(" . $lat . "))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(" . $lat . ")) *cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(" . $long . "))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+
+		}
+		else if($this->table_name == "es_sd_int" || $this->table_name == "es_sd_ivl" || $this->table_name == "es_sd_trm") {
+			$query = $prefixQuery. " and (a.ss_id=c.ss_id || a.sn_id = c.sn_id) and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(". $lat. "))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(" . $lat ."))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(". $long."))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
+		else{
+			$query = $prefixQuery2;
+		}
 		return $query;
-//		$query_format = 'select b.vd_inf_slat as vd_lat, b.vd_inf_slon as vd_long, a.%s as sta_id1,  a.%s as sta_id2, d.vd_name ';
-//		$query = sprintf($query_format,$this->stationId[0],$this->stationId[1]);
-//		foreach ($this->cols_name as $name) {
-//			$query = $query.",a.".$name;
-//		}
-//
-//		////$query = $query." from $this->table_name as a,vd ,vd_inf as b where a.vd_id=$vd_id AND vd.vd_id = $vd_id and b.vd_id = $vd_id group by a.vd_id, sta_id1, sta_id2 order by a.vd_id";
-//		$station_table = $this->setStationTable();
-//		if (is_array($station_table)) $station_table = $station_table[0];
-//		$query = $query." from $this->table_name as a,vd_inf as b, ". $station_table . "  as c, vd as d where a.vd_id=$vd_id and
-//		a.vd_id=b.vd_id and a.ds_id1=c.ds_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ds_nlat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ds_nlat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ds_nlon))) < 30 group by a.vd_id, sta_id1, sta_id2 order by a.vd_id";
-//
-//		return $query;
 	}
+	
+	
 	public function getTimeSeriesList($vd_id){
 
-  		$result = array();
+		$result = array();
 		global $db;
 		$query = $this->getTimeSeriesListQuery($vd_id);
 		$db->query( $query);
-		// echo $query."\n";
 		$serie_list = $db->getList();
 		$exsited = array();
 		$v = "";
 
-
 		foreach ($serie_list as $serie) {
-
-
+//			var_dump($serie);
 			foreach ($this->cols_name as $col_name) {
+
 				if(!array_key_exists($serie["sta_id1"], $this->sta_id_code_dictionary[0])){
 					$this->sta_id_code_dictionary[0][$serie["sta_id1"]] = "0";
 					$serie["sta_id1"] = "0";
@@ -129,7 +144,6 @@ abstract class TableManager implements TableManagerInterface {
 				}else{
 
 				}
-//				var_dump($serie);
 				if($serie[$col_name]!=""){
 
 					$x = array('category' => $this->monitoryType ,
@@ -149,19 +163,17 @@ abstract class TableManager implements TableManagerInterface {
 					$x["sr_id"] = md5( $x["category"].$x["data_type"].$x["station_id1"].$x["station_id2"].$x["component"].$x["volcanoName"] );
 					if(!array_key_exists($x["sr_id"], $exsited)){
 						$exsited[$x["sr_id"]] = true;
-//						if ($this->isHasData($x,$vd_id)) array_push($result,  $x );
-						array_push($result,  $x );
+						if($this->isHasData($x,$vd_id)) array_push($result,  $x );
 					}else{
 
 					}
-
-
 				}
 			}
 		}
 		return $result;
 
  	}
+
 	public function isHasData($stations,$vd_id){
 		$this->vd_long = $stations["vd_long"];
 		$this->vd_lat = $stations["vd_lat"];
@@ -178,6 +190,10 @@ abstract class TableManager implements TableManagerInterface {
 		$query2 = "SELECT COUNT(*) as count " . substr($query,$fromPos,$groupByPos-$fromPos);
 		$db->query($query2, $id1,$id2,$vd_id);
 		$res = $db->getList();
+//		var_dump("IS HAS DATA ----------------------");
+//		var_dump($db);
+//		var_dump("END IS HAS DATA ----------------------");
+
 		if(sizeof($res) == 0) {
 			return true;
 		}
@@ -196,6 +212,7 @@ abstract class TableManager implements TableManagerInterface {
 		$data = array();
 		$unit = "";
 		$stationDataParams = $this->setStationDataParams($stations['component']);
+
 		$errorbar = $stationDataParams["errorbar"];
 		$query = $stationDataParams["query"];
 
@@ -212,7 +229,6 @@ abstract class TableManager implements TableManagerInterface {
 
 		$db->query($query, $id1,$id2,$vd_id);
 		$res = $db->getList();
-
 		if (empty($res)){
 			$query1 = "SELECT `sn_id` FROM " . $this->table_name . " WHERE `ss_id`=" . $id1;
 			$db->query($query1);
@@ -225,10 +241,12 @@ abstract class TableManager implements TableManagerInterface {
 		}
 
 
+
 		foreach ($res as $row) {
 			//add value attributes
 
-			$temp = array("value" => floatval($row["value"]));
+            $temp = array("value" => floatval($row["value"]));
+
 			//add time value attributes (time or (etime, stime))
 			if(array_key_exists("time", $row)){
 				$time = strtotime($row["time"]);
@@ -288,6 +306,7 @@ abstract class TableManager implements TableManagerInterface {
 			$cc_ids[2]= $row["cc_id3"];
 			$cb_ids  = $row["cb_ids"];
 			//echo $cc_ids[2];
+
 			$dataOwner = $this->getCCUrl($cc_ids);
 			$temp["data_owner"] = $dataOwner;
 
@@ -299,7 +318,6 @@ abstract class TableManager implements TableManagerInterface {
 		$result["errorbar"] = $errorbar;
 		$result["data"] = $data;
 		$result["unit"] = $unit;
-		// var_dump($result);
 		return $result;
   	}
 	/*
@@ -316,6 +334,9 @@ abstract class TableManager implements TableManagerInterface {
 				$sql = "select cc_code,cc_url, cc_email from cc where cc_id=" . $cc_id;
 				$db->query($sql);
 				$result = $db->getList();
+				
+				//var_dump($sql);
+				
 				if (sizeof($result) == 0) continue;
 				$result = $result[0]; 
 				

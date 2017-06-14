@@ -13,5 +13,8 @@ abstract class ThermalTablesManager extends TableManager {
 	protected function setMonitoryType(){
 		return "Thermal";
 	} // monitory type Deformation, Gas, ....
-	
+
+	protected function setLatLong(){
+		return array("ts_lat", "ts_lon");
+	}
 } 

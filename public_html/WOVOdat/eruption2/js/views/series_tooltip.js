@@ -57,7 +57,7 @@ define(function(require) {
                 type: "bar",
                 stime: DateHelper.formatDate(item.datapoint[0]),
                 etime: DateHelper.formatDate(item.datapoint[1]),
-                value: (item.datapoint[2] + item.datapoint[3])/2,
+                value: item.datapoint[3],
                 error: item.datapoint[4]
               })
               break;
