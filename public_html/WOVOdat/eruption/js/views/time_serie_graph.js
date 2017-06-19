@@ -202,7 +202,7 @@
 
             var options = {
                 grid:{
-                    //  margin: 50,
+                      margin: 20,
                     hoverable: true,
                 },
                 xaxis: {
