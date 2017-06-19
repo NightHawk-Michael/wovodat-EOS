@@ -119,131 +119,92 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       }
       this.$el.html("");
       var unit = undefined;
+      var minY= Number.MAX_VALUE;
+      var maxY = Number.MIN_VALUE;
+      var d = this.data[0].data;
+      var count = 0;
+      for (var j = 0 ; j < d.length; j++){
+        if (d[j][0] < this.maxX && d[j][0]> this.minX){
+          count++;
+          var l = d[j].length;
+          minY = Math.min(minY, d[j][l-1]);
+          maxY = Math.max(maxY, d[j][l-1]);
+        }
+      }
+      if (count == 0){
+        this.minY=-1;
+        this.maxY = 1;
+      }else{
+        this.minY=minY;
+        this.maxY = maxY;
+      }
+      var d2 = this.data[1].data;
+      for (var j = 0 ; j < d2.length; j++){
+        if (d2[j][0] < this.maxX && d2[j][0]> this.minX){
+          var l = d[j].length;
+          d2[j][l-1] = (this.minY + this.maxY)/2;
+
+        }
+      }
       for(var i=0;i<this.data.length;i++){
         if(this.data[i].yaxis.axisLabel != undefined){
-          unit = this.data[i].yaxis.axisLabel;
+
+          if (this.data[i].data)
+            unit = this.data[i].yaxis.axisLabel;
         }
       };
-      // change yaxix of timeseriesgraph according to zoomed in data
+      //this.data.yaxis = 1;
 
-      var zoomedDataMinY = undefined;
-      var zoomedDataMaxY = undefined;
-      for(var j=0;j<this.data.length;j++){
-        for(var k=0;k<this.data[j].data.length;k++){
-                var currentData = this.data[j].data[k];
-                var previousData = this.data[j].data[k-1];
-                if(this.data[j].points.show){
-                  if(currentData[0]>=this.minX&&currentData[0]<=this.maxX){
-                    if(zoomedDataMinY == undefined){
-                      zoomedDataMinY = currentData[1]-currentData[2];
-                    }
-                    else if(currentData[1]-currentData[2]<zoomedDataMinY){
-                      zoomedDataMinY = currentData[1]-currentData[2];
-                    };
-                  }
-
-                  if(currentData[0]<=this.maxX&&currentData[0]>=this.minX){
-                    if(zoomedDataMaxY == undefined){
-                      zoomedDataMaxY = currentData[1]+currentData[2];
-                    }
-                    else if(currentData[1]+currentData[2]>zoomedDataMaxY){
-                      zoomedDataMaxY = currentData[1]+currentData[2];
-                    };
-                  }
-                }
-                else if(this.data[j].bars.show){
-                  if(currentData[0]>=this.minX&&currentData[1]<=this.maxX){
-                    if(zoomedDataMinY == undefined){
-                      zoomedDataMinY = currentData[3]-currentData[4];
-                    }
-                    else if((currentData[3]-currentData[4])<zoomedDataMinY){
-                      zoomedDataMinY = currentData[3]-currentData[4];
-                    };
-                  }
-
-                  if(currentData[1]<=this.maxX&&currentData[0]>=this.minX){
-                    if(zoomedDataMaxY == undefined){
-                      zoomedDataMaxY = currentData[2]+currentData[4];
-                    }
-                    else if((currentData[2]+currentData[4])>zoomedDataMaxY){
-                      zoomedDataMaxY = currentData[2]+currentData[4];
-                    };
-                  }
-                }
-        }
-      };
-      if(zoomedDataMaxY>=0&&zoomedDataMinY>=0){
-        this.minY = zoomedDataMinY*0.95;
-        this.maxY = zoomedDataMaxY*1.05;
-      }
-      else if(zoomedDataMaxY<0&&zoomedDataMinY<0){
-        this.minY = zoomedDataMinY*1.05;
-        this.maxY = zoomedDataMaxY*0.95;
-      }
-      else if(zoomedDataMaxY>0&&zoomedDataMinY<0){
-        this.minY = zoomedDataMinY*1.05;
-        this.maxY = zoomedDataMaxY*1.05;
-      }
-      /*
-      Config Y-value of eruption
-       */
-      var eruptionData = this.data[1].data;
-      for (var i = 0 ; i < eruptionData.length;i++){
-        eruptionData[i][1] = this.maxY;
-      }
-      this.data.minY = this.minY;
       var options = {
-            grid:{
-              minBorderMargin : 20,
-              hoverable: true,
-            },
-            xaxis: { 
-              mode:'time',
-              timeformat: "%d-%b<br>%Y",
-              min: this.minX,
-              max: this.maxX,
+        grid:{
+          //  margin: 50,
+          hoverable: true,
+        },
+        xaxis: {
+          mode:'time',
+          timeformat: "%d-%b<br>%Y",
+          min: this.minX,
+          max: this.maxX,
 
-              autoscale: true,
-              canvas: true,
-              ticks: 6,
-              zoomRange: [30000000],
-            },
-            yaxis: {
-              show: true,
-              min: this.minY,
-              max: this.maxY,
-              ticks: 6, //this.ticks
-              labelWidth: 60,
-              tickFormatter: function (val, axis) {
-                var string = val.toString();
-                if (string.length > 7) {
-                  var rounded = Math.round( val * 10 ) / 10;
-                  var fixed = rounded.toFixed(1);
-                  //return parseFloat( val.toFixed(2) )
-                  return fixed;
-                }
-                return val;
-              },
-              zoomRange: false,
-              panRange: false,
-              axisLabel: unit,
-              canvas: true,
-              autoscaleMargin: 5,
-            },
+          autoscale: true,
+          canvas: true,
+          ticks: 6,
+          zoomRange: [30000000],
+        },
+        yaxis: {
+          show: true,
+          min: this.minY,
+          max: this.maxY,
+          ticks: 6, //this.ticks
+          labelWidth: 60,
+          tickFormatter: function (val, axis) {
+            var string = val.toString();
+            if(string.length >7){
+              return val.toPrecision(2);
+            }
+            return val;
+          },
+          zoomRange: false,
+          panRange: false,
+          axisLabel: unit,
+          //label : "test",
+          canvas: true,
+          autoscaleMargin: 15,
+        },
 
-            zoom: {
-              interactive: true,
-              
-            },
-            pan: {
-              interactive: true,
+        zoom: {
+          interactive: true,
 
-            },
-            tooltip:{
-              show: false,
-            },
-            
-          }; 
+        },
+        pan: {
+          interactive: true,
+
+        },
+        tooltip:{
+          show: true,
+        },
+
+      };
       if (!this.data || !this.data.length) {
         this.$el.html('');
         return;
@@ -251,8 +212,8 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
 
       this.$el.width('auto');
       this.$el.height(200);
-
       this.$el.addClass('time-serie-graph');
+      //this.$el.append(' Individual graph display </br>');
       // plot the time series graph after being selected (eg. onSelect in OverViewGraph).
       // config graph theme colors
       options.colors = ["#000000", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"];
@@ -260,14 +221,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       //Push data eruption
 
       //this.data.push
-
-
       this.graph = $.plot(this.$el, this.data, options);
-      //console.log(this.$el);
-
-      //this.$el.append("<div><input type=\"checkbox\" >aaa</div>");
-      this.$el.bind('plothover', this.tooltip,this.onHover);
-      //this.tooltip.update()
 
       var   eventData = {
         startTime: this.minX,
@@ -284,7 +238,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       }
     // this.eventData =  eventData;
 
-
+      this.$el.bind('plothover', this.tooltip,this.onHover);
       this.$el.bind('plotzoom',eventData, this.onZoom);
       this.$el.bind('plotpan',eventData, this.onPan);
 

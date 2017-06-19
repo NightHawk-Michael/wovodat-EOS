@@ -152,96 +152,65 @@
             $('[id ="data-owner"]').css({display: "block"});
 
         },
-        render: function () {
-
-            var options;
-            if (this.data == undefined) {
+        render: function() {
+            if(this.data==undefined){
                 return;
             }
 
             this.showFunctions();
             var unit = undefined;
-            for (var i = 0; i < this.data.length; i++) {
-                if (this.data[i].yaxis.axisLabel != undefined) {
-                    unit = this.data[i].yaxis.axisLabel;
+            var minY= Number.MAX_VALUE;
+            var maxY = Number.MIN_VALUE;
+            var d = this.data[0].data;
+            var count = 0;
+            for (var j = 0 ; j < d.length; j++){
+                if (d[j][0] < this.maxX && d[j][0]> this.minX){
+                    count++;
+                    var l = d[j].length;
+                    if (l == 3) l = 2;
+                    minY = Math.min(minY, d[j][l-1]);
+                    maxY = Math.max(maxY, d[j][l-1]);
                 }
             }
-            ;
+            if (count == 0){
+                this.minY=-1;
+                this.maxY = 1;
+            }else{
+                this.minY=minY;
+                this.maxY = maxY;
+            }
+            if (this.data.length > 1){
+                var d2 = this.data[1].data;
+                for (var j = 0 ; j < d2.length; j++){
+                    if (d2[j][0] < this.maxX && d2[j][0]> this.minX){
+                        var l = d[j].length;
+                        d2[j][l-1] = (this.minY + this.maxY)/2;
 
-            // change yaxix of timeseriesgraph according to zoomed in data
-
-            var zoomedDataMinY = undefined;
-            var zoomedDataMaxY = undefined;
-            for (var j = 0; j < this.data.length; j++) {
-                for (var k = 0; k < this.data[j].data.length; k++) {
-                    var currentData = this.data[j].data[k];
-                    var previousData = this.data[j].data[k - 1];
-                    if (this.data[j].points.show) {
-                        if (currentData[2] == undefined) {
-                            currentData[2] = 0;
-                        }
-                        if (currentData[0] >= this.minX && currentData[0] <= this.maxX) {
-                            if (zoomedDataMinY == undefined) {
-                                zoomedDataMinY = currentData[1] - currentData[2];
-                            }
-                            else if (currentData[1] - currentData[2] < zoomedDataMinY) {
-                                zoomedDataMinY = currentData[1] - currentData[2];
-                            }
-                            ;
-                        }
-
-                        if (currentData[0] <= this.maxX && currentData[0] >= this.minX) {
-                            if (zoomedDataMaxY == undefined) {
-                                zoomedDataMaxY = currentData[1] + currentData[2];
-                            }
-                            else if (currentData[1] + currentData[2] > zoomedDataMaxY) {
-                                zoomedDataMaxY = currentData[1] + currentData[2];
-                            }
-                            ;
-                        }
-                    }
-                    else if (this.data[j].bars.show) {
-                        if (currentData[4] == undefined) {
-                            currentData[4] = 0;
-                        }
-                        if (currentData[0] >= this.minX && currentData[1] <= this.maxX) {
-                            if (zoomedDataMinY == undefined) {
-                                zoomedDataMinY = currentData[2] - currentData[4];
-                            }
-                            else if ((currentData[2] - currentData[4]) < zoomedDataMinY) {
-                                zoomedDataMinY = currentData[2] - currentData[4];
-                            }
-                            ;
-                        }
-
-                        if (currentData[1] <= this.maxX && currentData[0] >= this.minX) {
-                            if (zoomedDataMaxY == undefined) {
-                                zoomedDataMaxY = currentData[3] + currentData[4];
-                            }
-                            else if ((currentData[3] + currentData[4]) > zoomedDataMaxY) {
-                                zoomedDataMaxY = currentData[3] + currentData[4];
-                            }
-                            ;
-                        }
                     }
                 }
             }
-            ;
-            this.ticks = GraphHelper.generateTick(zoomedDataMinY, zoomedDataMaxY)
-            this.minY = this.ticks[0];
-            this.maxY = this.ticks[this.ticks.length - 1];
 
-            options = {
-                grid: {
+            for(var i=0;i<this.data.length;i++){
+                if(this.data[i].yaxis.axisLabel != undefined){
 
-                    minBorderMargin : 20,
+                    if (this.data[i].data)
+                        unit = this.data[i].yaxis.axisLabel;
+                }
+            };
+            //this.data.yaxis = 1;
+
+
+            var options = {
+                grid:{
+                    //  margin: 50,
                     hoverable: true,
                 },
                 xaxis: {
-                    mode: 'time',
+                    mode:'time',
                     timeformat: "%d-%b<br>%Y",
                     min: this.minX,
                     max: this.maxX,
+
                     autoscale: true,
                     canvas: true,
                     ticks: 6,
@@ -251,30 +220,32 @@
                     show: true,
                     min: this.minY,
                     max: this.maxY,
-                    ticks: this.ticks,
-
+                    ticks: 6, //this.ticks
+                    labelWidth: 60,
                     tickFormatter: function (val, axis) {
                         var string = val.toString();
-                        if (string.length > 7) {
-
-                            var rounded = Math.round( val * 10 ) / 10;
-                            var fixed = rounded.toFixed(1);
-                            //return parseFloat( val.toFixed(2) )
-                            return fixed;
+                        if(string.length >7){
+                            return val.toPrecision(2);
                         }
                         return val;
                     },
                     zoomRange: false,
+                    panRange: false,
                     axisLabel: unit,
+                    //label : "test",
                     canvas: true,
+                    autoscaleMargin: 15,
                 },
+
                 zoom: {
                     interactive: true,
+
                 },
-                // pan: {
-                //   interactive: true,
-                // },
-                tooltip: {
+                pan: {
+                    interactive: true,
+
+                },
+                tooltip:{
                     show: true,
                 },
 
@@ -283,39 +254,43 @@
                 this.$el.html('');
                 return;
             }
-            // console.log(this.data);
-            this.$el.width('auto');
-            this.$el.height('auto');
-            var graphHolder = $('[id="graph.' + this.id + '"]');
-            graphHolder.css("marginLeft",'30px');
-            graphHolder.height('200');
-            graphHolder.width('auto');
 
+            this.$el.width('auto');
+            this.$el.height(200);
             this.$el.addClass('time-serie-graph');
+            //this.$el.append(' Individual graph display </br>');
             // plot the time series graph after being selected (eg. onSelect in OverViewGraph).
             // config graph theme colors
             options.colors = ["#000000", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"];
-            //console.log(this.data);
-            // console.log(this.minX+" "+this.maxX);
-            this.graph = $.plot(graphHolder, this.data, options);
-            this.$el.bind('plothover', this.tooltip, this.onHover);
-            var eventData = {
+
+            //Push data eruption
+
+            //this.data.push
+            this.graph = $.plot(this.$el, this.data, options);
+            //console.log(this.$el);
+
+            //this.$el.append("<div><input type=\"checkbox\" >aaa</div>");
+            this.$el.bind('plothover', this.tooltip,this.onHover);
+            //this.tooltip.update()
+
+            var   eventData = {
                 startTime: this.minX,
                 endTime: this.maxX,
-                overviewGraphMinX: this.overviewGraphMinX,
-                overviewGraphMaxX: this.overviewGraphMaxX,
+                startSelectTime: this.startSelectTime,
+                endSelectTime: this.endSelectTime,
                 data: this.data,
                 graph: this.graph,
                 el: this.$el,
                 self: this,
                 original_option: options,
-                timeRange: this.serieGraphTimeRange
+                timeRange: this.serieGraphTimeRange,
+                // isTrigger : this.isTrigger,
             }
-            // if(!this.zoomBounded){
-            this.$el.unbind('plotzoom');
-            this.$el.bind('plotzoom', eventData, this.onZoom);
-            this.zoomBounded = true;
-            // }
+            // this.eventData =  eventData;
+
+
+            this.$el.bind('plotzoom',eventData, this.onZoom);
+            this.$el.bind('plotpan',eventData, this.onPan);
 
 
         },
