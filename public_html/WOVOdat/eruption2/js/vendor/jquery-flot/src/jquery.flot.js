@@ -2781,7 +2781,7 @@ Licensed under the MIT license.
                         y2 = axisy.min;
                     }
 
-                    // clip with ymax
+                     //clip with ymax
                     if (y1 >= y2 && y1 > axisy.max) {
                         if (y2 > axisy.max) {
                             continue;

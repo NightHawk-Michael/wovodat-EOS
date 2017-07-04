@@ -123,21 +123,40 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       var maxY = Number.MIN_VALUE;
       var d = this.data[0].data;
       var count = 0;
+      var max = maxY;
+      var min = minY;
       for (var j = 0 ; j < d.length; j++){
+        var l = d[j].length;
         if (d[j][0] < this.maxX && d[j][0]> this.minX){
           count++;
-          var l = d[j].length;
           minY = Math.min(minY, d[j][l-1]);
           maxY = Math.max(maxY, d[j][l-1]);
         }
+        min = Math.min(minY, d[j][l-1]);
+        max = Math.max(maxY, d[j][l-1]);
       }
-      if (count == 0){
-        this.minY=-1;
-        this.maxY = 1;
-      }else{
-        this.minY=minY;
-        this.maxY = maxY;
+      if (count == 0) {
+        minY = min;
+        maxY = max;
+        //for (var j = 0; j < d.length; j++) {
+        //  maxY = Number.MAX_VALUE;
+        //  minY = Number.MIN_VALUE;
+        //  if (d[j][0] > this.maxX) {
+        //    var l = d[j].length;
+        //    maxY = Math.min(maxY, d[j][l - 1]);
+        //  }
+        //  if (d[j][0] < this.minX) {
+        //    var l = d[j].length;
+        //    minY = Math.max(minY, d[j][l - 1]);
+        //  }
+        //
+        //}
+        //if (maxY == Number.MAX_VALUE) maxY = minY +1;
+        //if (minY == Number.MIN_VALUE) minY = maxY -1;
       }
+      this.minY=minY;
+      this.maxY = maxY;
+
       var d2 = this.data[1].data;
       for (var j = 0 ; j < d2.length; j++){
         if (d2[j][0] < this.maxX && d2[j][0]> this.minX){
@@ -221,6 +240,7 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
       //Push data eruption
 
       //this.data.push
+      console.log(this.data);
       this.graph = $.plot(this.$el, this.data, options);
 
       var   eventData = {
@@ -267,13 +287,25 @@ define(['require','views/series_tooltip','text!templates/tooltip_serie.html'],
           maxY = Math.max(maxY, d[j][l-1]);
         }
       }
-      if (count == 0){
-        this.minY=-1;
-        this.maxY = 1;
-      }else{
-        this.minY=minY;
-        this.maxY = maxY;
+      if (count == 0) {
+        for (var j = 0; j < d.length; j++) {
+          maxY = Number.MAX_VALUE;
+          minY = Number.MIN_VALUE;
+          if (d[j][0] > this.maxX) {
+            var l = d[j].length;
+            maxY = Math.min(maxY, d[j][l - 1]);
+          }
+          if (d[j][0] < this.minX) {
+            var l = d[j].length;
+            minY = Math.max(minY, d[j][l - 1]);
+          }
+          if (maxY == Number.MAX_VALUE) maxY = minY +1;
+          if (minY == Number.MIN_VALUE) minY = maxY -1;
+        }
       }
+      this.minY=minY;
+      this.maxY = maxY;
+      console.log(this.minY + " " + this.maxY);
       var d2 = this.data[1].data;
       for (var j = 0 ; j < d2.length; j++){
         if (d2[j][0] < this.maxX && d2[j][0]> this.minX){

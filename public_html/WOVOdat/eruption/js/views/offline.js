@@ -77,9 +77,24 @@ define(function(require) {
       return deferredObject.promise();
     },
     makeZipFile: function (){
-      // console.log(options);
+      // console.log(options;
+      var os = navigator.appVersion;
       var zip = new JSZip();
-      zip.file(this.selectingVolcano.get('vd_name')+'.bat','start miniweb.exe \nstart chrome http://localhost:8000/offline.html#vnum='+this.selectingVolcano.get('vd_num'));
+      if (os.indexOf("Win") != -1){
+        zip.file(this.selectingVolcano.get('vd_name')+'.bat','start miniweb.exe \nstart chrome http://localhost:8000/offline.html#vnum='+this.selectingVolcano.get('vd_num'));
+      }else if (os.indexOf("Linux") != -1){
+        var content  ="sudo apt-get install lighttpd -y\n"
+
+         + "var=\"$(echo $PWD | sed 's,/,\\/,g')\"\n"
+         + "sed -i 's/root_dir/'$var'/g' lighttpd.conf\n"
+         + "lighttpd -t -f $PWD/lighttpd.conf\n"
+         + "lighttpd -D -f $PWD/lighttpd.conf d"
+        zip.file(this.selectingVolcano.get('vd_name')+'.sh',content);
+        var readme  = '1.Run bash file\n2.Go to this url:  http://172.0.0.1:3001/offline.html#vnum='+this.selectingVolcano.get('vd_num');
+        zip.file('READ.ME"',readme);
+      }
+
+
       zip.file('htdocs/offline-data/volcano_list.json',JSON.stringify(this.volcano_list));
       zip.file('htdocs/offline-data/eruption_list.json',JSON.stringify(this.eruption_list));
       zip.file('htdocs/offline-data/eruption_forecast.json',JSON.stringify(this.eruption_forecast_list));
@@ -100,8 +115,12 @@ define(function(require) {
             // pos: pos,
             target: this,
             success: function(data){
-              if (this.url.indexOf(".exe") !== -1){
-                this.zip.file(this.url,data);
+              if (this.url.indexOf(".exe") !== -1 ){
+                if (navigator.appVersion.indexOf("Win") != -1)
+                  this.zip.file(this.url,data);
+              }else if (this.url.indexOf(".conf") !== -1 ){
+                if (navigator.appVersion.indexOf("Linux") != -1)
+                  this.zip.file(this.url,data);
               }else{
                 this.zip.file("htdocs/"+this.url,data);
               }
