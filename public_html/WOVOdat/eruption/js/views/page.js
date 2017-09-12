@@ -30,8 +30,8 @@ define(function (require) {
         TimeSeriesGraphContainer = require('views/time_serie_graph_container'),
         EventHandler = require('handler/event_handler'),
         FilterColorCollection = require('collections/filter_colors'),
-        Offline = require('views/offline');
-
+        Offline = require('views/offline'),
+        ProgressBar = require('text!templates/progressbar.html');
     return Backbone.View.extend({
         el: '#main',
 
@@ -49,7 +49,7 @@ define(function (require) {
                 this.ed_etime_num = new Date(options.ed_etime.replace(" ","T")).getTime();
             }
 
-            this.selectedTimeSeries = {};
+            this.urlTimeSeries = {};
             if(options.dataType != undefined){
                 var temp = options.dataType.split("(");
                 if(temp[1]!=undefined){
@@ -57,7 +57,7 @@ define(function (require) {
                 }else{
                     temp[1] = " "; // no filter
                 }
-                this.selectedTimeSeries = {
+                this.urlTimeSeries = {
                     dataType: temp[0].trim(),
                     filter: temp[1],
                     dataRange: {
@@ -92,7 +92,7 @@ define(function (require) {
                 filterColorCollection = new FilterColorCollection({
                     offline: offline
                 }),
-                selectingFilters = new Filters(),
+                selectingFilters = [],
                 volcanoes = new Volcanoes({
                     offline: offline
                 }),
@@ -129,16 +129,15 @@ define(function (require) {
                     volcano: selectingVolcano,
                     offline: offline,
                     selectingTimeSeries: selectingTimeSeries,
-                    selectedTimeSeries: this.selectedTimeSeries,
+                    urlTimeSeries: this.urlTimeSeries,
                     timeSeries: timeSeries,
-                    selectingFilters: selectingFilters
                 }),
                 filtersSelect = new FilterSelect({
                     categories: categories,
                     selectings: selectingTimeSeries,
                     selectingFilters: selectingFilters,
-                    selectedFilters: this.selectedTimeSeries.filter,
-                    dataRange: this.selectedTimeSeries.dataRange,
+                    urlFilters: this.urlTimeSeries.filter,
+                    dataRange: this.urlTimeSeries.dataRange,
                 }),
                 overviewGraph = new OverviewGraph({
                     categories: categories,
@@ -147,8 +146,8 @@ define(function (require) {
                     selectingTimeRange: selectingTimeRange,
                     overviewGraphTimeRange: overviewGraphTimeRange,
                     offline: offline,
-                    initialDataMaxTime: this.selectedTimeSeries.dataMaxTime,
-                    initialDataMinTime: this.selectedTimeSeries.dataMinTime,
+                    initialDataMaxTime: this.urlTimeSeries.dataMaxTime,
+                    initialDataMinTime: this.urlTimeSeries.dataMinTime,
                     filterColorCollection: filterColorCollection
                 }),
 
@@ -232,9 +231,11 @@ define(function (require) {
                     forecastsGraphTimeRange: forecastsGraphTimeRange,
                     selectingTimeRange: selectingTimeRange,
                     selectingFilters: selectingFilters,
+                    eruptionForecasts: eruptionForecasts,
                     eruptionForecastsGraph: eruptionForecastsGraph,
                     eruptions: eruptions,
                     offline: offline,
+
                 });
             //console.log(volcanoes);
             // console.log(filterColorCollection);
@@ -255,6 +256,8 @@ define(function (require) {
             eruptionGraph.$el.appendTo(this.$el);
             eruptionForecastsGraph.$el.appendTo(this.$el);
             timeSeriesGraphContainer.$el.appendTo(this.$el);
+            this.$el.append(ProgressBar);
+            // $('#progressbar').modal();
             // urlLoader.$el.appendTo(this.$el);
 
             // new EruptionForecastGraph({

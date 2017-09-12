@@ -45,9 +45,9 @@ define(function(require) {
     showLoading: function(){
       this.$el.html(this.loading);
     },
-    render: function() {
-      this.$el.html("");
 
+    render: function() {
+      this.$el.html("")
       var temp = Handlebars.compile(template);
       // this.$el.html(template);
       /** selecting volcano from url **/

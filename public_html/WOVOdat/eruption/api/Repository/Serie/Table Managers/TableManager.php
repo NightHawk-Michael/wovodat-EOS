@@ -317,9 +317,16 @@ abstract class TableManager implements TableManagerInterface {
 			$temp =  "select a." . $this->data_code ." as data_code, cc_id, cc_id2, cc_id3, cb_ids,";
 		}
 		
-		 $query = str_replace("select",$temp ,$query);
+        $query = str_replace("select",$temp ,$query);
+		if(strpos($query,"stime") >0 ){
+		    $query = $query . " order by filter, stime asc";
+        }else{
+            $query = $query . " order by filter, time asc";
+        }
+		$temp = $db->query($query, $id1,$id2,$vd_id);
 
-		$db->query($query, $id1,$id2,$vd_id);
+//        echo $temp."\n";
+//        return;
 		$res = $db->getList();
 		if (empty($res)){
 			$query1 = "SELECT `sn_id` FROM " . $this->table_name . " WHERE `ss_id`=" . $id1;
@@ -327,16 +334,19 @@ abstract class TableManager implements TableManagerInterface {
 			$sn_id = $db->getValue();
 			$query = str_replace("a.ss_id","sn_id" ,$query);
 
-			$db->query($query, $sn_id,$sn_id,$vd_id);
+			$query = $db->query($query, $sn_id,$sn_id,$vd_id);
 
 			$res = $db->getList();
 		}
 
-
-
+        $filter_list = array();
+        $last_filter = null;
+		$current_filter = null;
+		$reference = "";
+		$dataOwner = "";
 		foreach ($res as $row) {
 			//add value attributes
-
+            
             $temp = array("value" => floatval($row["value"]));
 
 			//add time value attributes (time or (etime, stime))
@@ -364,17 +374,18 @@ abstract class TableManager implements TableManagerInterface {
 
 			if(array_key_exists("filter", $row)){
 				
-				$temp["filter"] = $row["filter"];
-				if($temp["filter"] === null){
+				$current_filter = $row["filter"];
+				if($current_filter === null){
 					// echo("a\n");
-					$temp["filter"] = " ";
+					$current_filter = " ";
 				}
-				if($temp["filter"] == ""){
-					$temp["filter"] = "Others";
+				if($current_filter == ""){
+					$current_filter = "Others";
 				}
 			}else{
-				$temp["filter"] = " ";
+				$current_filter = " ";
 			}
+			
 			// find attribute
 			if(array_key_exists("unit", $row)){
 				
@@ -399,16 +410,30 @@ abstract class TableManager implements TableManagerInterface {
 			$cb_ids  = $row["cb_ids"];
 			//echo $cc_ids[2];
 
-			$dataOwner = $this->getCCUrl($cc_ids);
-			$temp["data_owner"] = $dataOwner;
 
-			$reference =  $this->getDataReference($cb_ids);
-			$temp["reference"] = $reference;
-			array_push($data, $temp );			
+
+            if($current_filter != $last_filter){
+                array_push($filter_list,$current_filter);
+                if($last_filter == null){
+                    $dataOwner = $this->getCCUrl($cc_ids);
+                    $reference =  $this->getDataReference($cb_ids);
+
+                }
+
+                $data[$current_filter] = array();
+//                $data[$current_filter]["data"] = array();
+
+
+			    $last_filter = $current_filter;
+            }
+			array_push($data[$current_filter], $temp );
 		}
 		$result["style"] = $stationDataParams["style"];
 		$result["errorbar"] = $errorbar;
+        $result["reference"] = $reference;
+        $result["data_owner"] = $dataOwner;
 		$result["data"] = $data;
+		$result["filters"] = $filter_list;
 		$result["unit"] = $unit;
 		return $result;
   	}

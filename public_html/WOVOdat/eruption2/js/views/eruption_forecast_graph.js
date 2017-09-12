@@ -71,7 +71,7 @@ define(function(require) {
     forecastsGraphTimeRangeChanged: function(timeRange){
       this.startTime = timeRange.get('startTime');
       this.endTime = timeRange.get('endTime');
-      //this.render();
+      this.render();
 
     },
 
@@ -116,7 +116,7 @@ define(function(require) {
       };
 
     },
-    gernerateBarChartFlotData: function(data,color,label,dataType,name){
+    generateBarChartFlotData: function(data, color, label, dataType, name){
       return {
         data: data,
         color: color,
@@ -158,7 +158,7 @@ define(function(require) {
       //    };
       //var graph_pram_data = [];
       //
-      ////graph_pram_data.push(this.gernerateBarChartFlotData(data,'#F44336','Alert Level','ed_for',""));
+      ////graph_pram_data.push(this.generateBarChartFlotData(data,'#F44336','Alert Level','ed_for',""));
       //
       //
       //el.width('auto');

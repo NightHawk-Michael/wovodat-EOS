@@ -43,10 +43,10 @@ define(function (require) {
 
         // 	this.filterObserver.trigger("filter-change");
         // },
-        closePopUpForm: function(){
+        closePopUpForm: function () {
             $('#formPopup').closeModal();
         },
-        addGraph: function (filters) {
+        addGraph: function (filter, selectingTimeSeries) {
             // var val = filter.get("filter");
             // selectingTimeSeries.
             // timeSerie.fetch({
@@ -56,42 +56,47 @@ define(function (require) {
 
             //   }
             // });
-            var timeSerieGraph = new TimeSerieGraph({
+            var timeSeriesGraph = new TimeSerieGraph({
                 //timeRange : this.timeRange,
-                filters: filters,
+                container: this,
+                filter: filter,
                 eruptionTimeRange: this.eruptionTimeRange,
                 serieGraphTimeRange: this.serieGraphTimeRange,
                 forecastsGraphTimeRange: this.forecastsGraphTimeRange,
-                selectedVolcano: this.selectedVolcano
+                selectedVolcano: this.selectedVolcano,
+                selectingTimeSeries: selectingTimeSeries,
+                timeRangeLimit: this.timeRangeLimit,
             });
-            this.$el.children("#graph").append(timeSerieGraph.$el);
-            this.graphs.push(timeSerieGraph);
+            this.$el.children("#graph").append(timeSeriesGraph.$el);
+            this.graphs.push(timeSeriesGraph);
             // this.show();
 
             // this.graphs[val].filter.trigger("change");
 
             // this.filterObserver.trigger("filter-change");
         },
-        serieGraphTimeRangeChanged: function (timeRange) {
-
+        updateTimeRangeLimit: function (timeRange) {
+            this.timeRangeLimit = timeRange;
+        },
+        seriesGraphTimeRangeChanged: function (timeRange, id,display) {
+            // if(!display){
+            //     return;
+            // }
             for (var i = 0; i < this.graphs.length; i++) {
-                this.graphs[i].timeRangeChanged(timeRange);
+                // if (this.graphs[i].filter.id != id) {
+                    this.graphs[i].timeRangeChanged(timeRange);
+                // }
+
             }
-            this.show();
+            // this.show();
 
         },
-        selectingFiltersChanged: function (selectingFilters) {
+        selectingFiltersChanged: function (selectingFilters, selectingTimeSeries) {
             this.graphs.length = 0;
             this.$el.children("#graph").html("");
-            var filters = [];
-            var categories = this.categories;
-            for (var i = 0; i < categories.length; i++) {
-                if (selectingFilters[categories[i]] != undefined) {
-                    filters = filters.concat(selectingFilters.getAllFilters(categories[i]));
-                }
-            }
+            var filters = selectingFilters;
             for (var i = 0; i < filters.length; i++) {
-                this.addGraph(filters[i]);
+                this.addGraph(filters[i], selectingTimeSeries);
             }
             this.hide();
         },
@@ -113,7 +118,7 @@ define(function (require) {
                 this.graphs[i].show();
 
             }
-            if (this.graphs.length == 0){
+            if (this.graphs.length == 0) {
                 this.hide();
 
             }

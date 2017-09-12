@@ -26,7 +26,7 @@
 	Loader::setJSONHeader();
 	$data = Routing::route();
 
-	
+//	sleep(5);
 	echo json_encode($data);	
 	
 	

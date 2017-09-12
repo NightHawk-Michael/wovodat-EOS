@@ -136,6 +136,7 @@
 
         function onMouseWheel(e, delta) {
             e.preventDefault();
+
             onZoomClick(e, delta < 0);
             return false;
         }
@@ -206,6 +207,7 @@
         };
 
         plot.zoom = function (args) {
+            console.log("zoom");
             if (!args)
                 args = {};
 
@@ -234,6 +236,7 @@
                     min = minmax[axis.direction].min,
                     max = minmax[axis.direction].max,
                     zr = opts.zoomRange,
+                    zLimit = opts.zoomRangeLimit,
                     pr = opts.panRange;
 
                 if (zr === false) // no zooming on this axis
@@ -263,6 +266,16 @@
                     ((zr[0] != null && range < zr[0] && amount >1) ||
                     (zr[1] != null && range > zr[1] && amount <1)))
                     return;
+
+                //cannot zoom over zoom limit
+                if(zLimit){
+                    if(min < zLimit[0]){
+                        min = zLimit[0];
+                    }
+                    if(max > zLimit[1]){
+                        max = zLimit[1];
+                    }
+                }
 
                 opts.min = min;
                 opts.max = max;

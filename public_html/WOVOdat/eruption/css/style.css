@@ -21,7 +21,21 @@
   top: 0;
   will-change: top, left;
 }
-
+#progressbar {
+  width: auto;
+  /*bottom: 100px;*/
+  top: 50%;
+  left: 50%;
+  /*right: 100px;*/
+  /*min-height: 100%;*/
+  background: #eeeeee;
+  /*color: #E3F2FD;*/
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 2px 2px 1px #888888;
+  position: fixed;
+  z-index: 99999;
+}
 div.overview-graph div.flot-text div.yAxis div.tickLabel
 {    
     color: transparent;

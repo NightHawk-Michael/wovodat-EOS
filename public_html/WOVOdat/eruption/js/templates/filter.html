@@ -1,22 +1,23 @@
 {{#list series}}
-{{#if hasfilter}}
-	<div class="input-field col s12 ">
-      {{#if nodata}}
-        No Data
-      {{else}}
-      <p class="label">{{name}}</p>
-        {{#list filters}}
-          {{#if isSelected}}
-          <input type="checkbox" id="{{value}}" class="filled-in filter-select-option" checked="checked" />
-          <label for="{{value}}" class="col s12">{{showingName}}</label>      
-      		  <!-- <option class="filter-select-option"  selected value="{{value}}">{{showingName}}</option> -->
-          {{else}}
-          <input type="checkbox" id="{{value}}" class="filled-in filter-select-option"/>
-          <label for="{{value}}" class="col s12">{{showingName}}</label>      
-            <!-- <option class="filter-select-option" value="{{value}}">{{showingName}} </option> -->
-          {{/if}}
-        {{/list}}
-      {{/if}}
-  </div>
-  {{/if}}
+{{#if hasFilter}}
+<div class="input-field col s12 ">
+    <p class="label">{{name}}</p>
+    {{#if nodata}}
+    <i>No Data </i>
+    {{else}}
+
+    {{#list filters}}
+    {{#if isSelected}}
+    <input type="checkbox" id="{{value}}" class="filled-in filter-select-option" checked="checked"/>
+    <label for="{{value}}" class="col s12">{{showingName}}</label>
+    <!-- <option class="filter-select-option"  selected value="{{value}}">{{showingName}}</option> -->
+    {{else}}
+    <input type="checkbox" id="{{value}}" class="filled-in filter-select-option"/>
+    <label for="{{value}}" class="col s12">{{showingName}}</label>
+    <!-- <option class="filter-select-option" value="{{value}}">{{showingName}} </option> -->
+    {{/if}}
+    {{/list}}
+    {{/if}}
+</div>
+{{/if}}
 {{/list}}

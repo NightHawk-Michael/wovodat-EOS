@@ -26,7 +26,7 @@ define(function (require) {
             this.timeSeries = options.timeSeries;
             this.categories = options.categories;
             this.selectingFilters = options.selectingFilters;
-            this.selectedTimeSeries = options.selectedTimeSeries;
+            this.urlTimeSeries = options.urlTimeSeries;
             this.selectingTimeSeries.reachLimit = function () {
                 return (this.length >= 5);
             }
@@ -34,15 +34,17 @@ define(function (require) {
         showLoading: function () {
             this.$el.html(this.loading);
         },
-        changeVolcano: function (vd_id, timeSeries) {
-            this.showLoading();
+        /**
+         *
+         * @param vd_id
+         *
+         */
+        changeVolcano: function (vd_id,timeSeries) {
             if (vd_id == -1) { // when user select "Please select vocalno"
                 this.$el.html(""); // no time serie appears
                 this.trigger('hide');
             } else {
-                timeSeries.changeVolcano(vd_id);
-                this.selectingTimeSeries.reset();
-                this.selectingTimeSeries.trigger('update');
+                this.render(timeSeries)
             }
 
         },
@@ -73,10 +75,11 @@ define(function (require) {
             var html = temp(options);
             $('.time_series_select_container').append(html);
             $('.time-serie-select').material_select();
-            if (this.selectedTimeSeries != undefined) {
-                this.showFilter();
+            if (this.urlTimeSeries.dataType != undefined) {
+                this.updateSelectedTimeSeriesList()
+                this.trigger("show-filters");
             }
-            this.selectedTimeSeries = {}; // selectedTimeSeries only valid at the first time of loading
+            this.urlTimeSeries = {}; // selectedTimeSeries only valid at the first time of loading
         },
         //generate Categories for html template
         //output: [{title,data}]
@@ -112,33 +115,33 @@ define(function (require) {
         selectChangedHandler: function (event) {
 
             if (event.target.classList[0] == "time-serie-select") {
+                this.updateSelectedTimeSeriesList()
+                this.trigger("show-filters");
 
-
-                this.showFilter();
 
             } else {
-                this.trigger("filter-select-change");
+                this.trigger("filter-select-change",event.target.id);
             }
         },
-        showFilter: function (event) {
-
-
+        updateSelectedTimeSeriesList: function () {
             // this.$el.append(this.loading);
 
             this.selectingTimeSeries.reset();
-            var selectedTimeSeries=[];
+            var selectedTimeSeries = [];
             var options = $('.time-serie-select-option');
-            if (this.selectedTimeSeries != undefined) {
+            // get Time series input by url
+            if (this.urlTimeSeries.dataType != undefined) {
                 for (var i = 0; i < this.timeSeries.length; i++) {
                     // var temp = this.timeSeries.models[i].get("short_data_type");
-                    if (this.timeSeries.models[i].get("short_data_type") == this.selectedTimeSeries.dataType) {
+                    if (this.timeSeries.models[i].get("short_data_type") == this.urlTimeSeries.dataType) {
                         selectedTimeSeries.push(this.timeSeries.models[i]);
                     }
 
                 }
             }
             var selectedPos = [];
-            for (var i = 0,count=0; i < options.length; i++) {
+
+            for (var i = 0, count = 0; i < options.length; i++) {
                 var option = options[i];
                 //check the timeseries selected from url
 
@@ -153,12 +156,12 @@ define(function (require) {
                 }
                 // }
                 if (option.selected) {
-                    if(this.selectingTimeSeries.reachLimit()){
+                    if (this.selectingTimeSeries.reachLimit()) {
                         option.selected = false;
-                    }else{
+                    } else {
                         selectedPos.push(i);
                         if (selectedTimeSerie != undefined) {
-                            this.selectingTimeSeries.add(this.timeSeries.get({sr_id:selectedTimeSerie.get("sr_id")}));
+                            this.selectingTimeSeries.add(this.timeSeries.get({sr_id: selectedTimeSerie.get("sr_id")}));
                         } else {
                             this.selectingTimeSeries.add(this.timeSeries.get({sr_id: option.value}));
                         }
@@ -170,10 +173,10 @@ define(function (require) {
             $('.time-serie-select').material_select();
             // set limitation of
             var groupItems = $('.multiple-select-dropdown');
-            for (var i = 0,count=0,itemsVisited=0; i < groupItems.length; i++) {
+            for (var i = 0, count = 0, itemsVisited = 0; i < groupItems.length; i++) {
                 var items = groupItems[i].children;
                 //dont traverse the first item
-                for (var j = 1; j < items.length; j++,itemsVisited++) {
+                for (var j = 1; j < items.length; j++, itemsVisited++) {
                     var item = items[j];
                     //check if item is active or disable or not
                     var isActive = false;
@@ -186,7 +189,7 @@ define(function (require) {
                             isDisabled = true;
                         }
                     }
-                    if(selectedPos[count] != itemsVisited){
+                    if (selectedPos[count] != itemsVisited) {
                         if (!isActive && this.selectingTimeSeries.reachLimit()) {
                             item.classList.add('disabled');
                             //disable checkbox
@@ -198,7 +201,7 @@ define(function (require) {
 
                             item.children[0].children[0].disabled = false;
                         }
-                    }else{
+                    } else {
                         count++;
                     }
 
@@ -208,7 +211,6 @@ define(function (require) {
 
                 // $('.time-serie-select').material_select();
             }
-            this.selectingTimeSeries.trigger("change");
 
 
         },

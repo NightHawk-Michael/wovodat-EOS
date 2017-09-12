@@ -81,7 +81,7 @@ define(function(require) {
             this.$el.width(0);
             this.trigger('hide');
         },
-        gernerateBarChartFlotData: function(data,color,label,dataType,name){
+        generateBarChartFlotData: function(data, color, label, dataType, name){
             return {
                 data: data,
                 color: color,
@@ -138,11 +138,11 @@ define(function(require) {
             //      }
             //    };
             ///** Eruption part **/
-            //graph_pram_data.push(this.gernerateBarChartFlotData ([data.edData.data], 'Black','Eruption','ed',""));
+            //graph_pram_data.push(this.generateBarChartFlotData ([data.edData.data], 'Black','Eruption','ed',""));
             ///** Phreatic Eruption **/
             //var temp = data.ed_phs_data;
             //
-            //graph_pram_data.push(this.gernerateBarChartFlotData(temp,'#F44336','Eruption Phase','ed_phs',""));
+            //graph_pram_data.push(this.generateBarChartFlotData(temp,'#F44336','Eruption Phase','ed_phs',""));
             //
             //
             //el.width('auto');

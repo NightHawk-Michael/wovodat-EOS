@@ -32,7 +32,11 @@ define(function (require) {
         },
 
         //show overview graph on page
-        show: function () {
+        show: function (selectingFilters) {
+            if(selectingFilters.length ==0){
+                this.hide();
+                return;
+            }
             $('#overview-title').css({display:"block"});
             this.render();
         },
