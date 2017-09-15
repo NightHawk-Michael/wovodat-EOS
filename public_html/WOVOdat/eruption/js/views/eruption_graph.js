@@ -233,18 +233,26 @@ define(function (require) {
         },
         updateTimeRangeLimit: function (range) {
             this.timeRangeLimit = range;
-            if(range == undefined){
-                var xaxis = this.graph.getAxes().xaxis;
+            var xaxis = this.graph.getAxes().xaxis;
+            if(range === undefined){
+
                 xaxis.options.zoomRangeLimit[0] = this.startTime;
                 xaxis.options.zoomRangeLimit[1] = this.endTime;
                 xaxis.options.min = this.startTime;
                 xaxis.options.max = this.endTime;
-                this.graph.setupGrid();
-                this.graph.draw();
-            }
-            if(this.graph !== undefined){
 
+            }else{
+                xaxis.options.zoomRangeLimit = this.timeRangeLimit
+                xaxis.options.min = this.timeRangeLimit.MinX;
+                xaxis.options.max = this.timeRangeLimit.MaxX;
             }
+            this.graph.setupGrid();
+            this.graph.draw();
+            var timeRange = {
+                minX: xaxis.options.min,
+                maxX: xaxis.options.max
+            };
+            this.trigger("show",timeRange)
         },
         prepareDataAllEruption: function (eruptions) {
             var startTime = 100000000000000;

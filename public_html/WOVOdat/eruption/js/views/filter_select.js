@@ -96,8 +96,24 @@ define(function (require) {
                     $('.filter-select').material_select();
 
                 }
-                if(self.selectingFilters.length != 0){
+
+                for (var j = 0; j < self.selectingFilters.length; j++) {
+                    var temp = self.selectingFilters[j].split(".");
+                    var selected = false;
+                    for (var i = 0; i < self.selectingTimeSeries.models.length; i++) {
+                        if (temp[0] === self.selectingTimeSeries.models[i].get("sr_id")) {
+                            selected = true;
+                        }
+                    }
+                    if(!selected){
+                        self.selectingFilters.splice(j,1);
+                        j--;
+                    }
+                }
+                if (self.selectingFilters.length != 0) {
                     self.trigger("show-overview-graph");
+                }else{
+                    self.trigger("hide-overview-graph");
                 }
                 deferredObject.resolve("success");
             });
@@ -125,13 +141,13 @@ define(function (require) {
                 if (item.category === category) {
                     //get Filters
                     var filters = [];
-                    for(var j = 0; j < item.data.filters.length;j++){
-                        var value = item.sr_id +"."+item.data.filters[j];
+                    for (var j = 0; j < item.data.filters.length; j++) {
+                        var value = item.sr_id + "." + item.data.filters[j];
                         var isSelected = true;
-                        if(!selectingFilters.includes(value)){
+                        if (!selectingFilters.includes(value)) {
                             isSelected = false;
                         }
-                        filters.push( {isSelected: isSelected,value: value,showingName: item.data.filters[j]});
+                        filters.push({isSelected: isSelected, value: value, showingName: item.data.filters[j]});
                     }
 
                     var item2 = {
@@ -140,10 +156,10 @@ define(function (require) {
                         name: item.showingName,
                         filters: filters
                     }
-                    if(!item2.hasFilter){
-                        var filterID  = filters[0].value;
-                        var pos =  this.selectingFilters.indexOf(filterID);
-                        if(pos == -1){
+                    if (!item2.hasFilter) {
+                        var filterID = filters[0].value;
+                        var pos = this.selectingFilters.indexOf(filterID);
+                        if (pos == -1) {
                             this.selectingFilters.push(filterID);
                         }
                     }
@@ -166,25 +182,25 @@ define(function (require) {
         },
 
         filterSelectChange: function (filterID) {
-            if(filterID.split(".")[1] == " "){
-                var checkbox = {checked:true}
-            }else{
+            if (filterID.split(".")[1] == " ") {
+                var checkbox = {checked: true}
+            } else {
                 var temp = document.getElementById(filterID);
                 var checkbox = $(temp)[0];
             }
 
-            if(filterID == this.urlFilter){
+            if (filterID == this.urlFilter) {
                 checkbox.checked = true;
-            }else{
-                var pos =  this.selectingFilters.indexOf(filterID);
-                if(checkbox.checked){
+            } else {
+                var pos = this.selectingFilters.indexOf(filterID);
+                if (checkbox.checked) {
 
-                    if(pos == -1){
+                    if (pos == -1) {
                         this.selectingFilters.push(filterID);
                     }
-                }else{
-                    if(pos !=-1){
-                        this.selectingFilters.splice(pos,1);
+                } else {
+                    if (pos != -1) {
+                        this.selectingFilters.splice(pos, 1);
                     }
                 }
             }

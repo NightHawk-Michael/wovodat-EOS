@@ -100,7 +100,6 @@ define(function (require) {
                 this.minX = TimeRange.minX;
                 this.maxX = TimeRange.maxX;
                 this.render();
-                return;
             }
             // console.log("zoom");
             var xaxis =this.graph.getAxes().xaxis;
@@ -113,7 +112,7 @@ define(function (require) {
             yaxis.options.max = temp.maxY;
             var dataSize = temp.dataSize;
             this.graph.setupGrid();
-            this.graph.draw();
+            this.graph.draw(false,temp.startPos,temp.endPos);
         },
 
         onScroll: function (event, minX, maxX) {
@@ -218,9 +217,11 @@ define(function (require) {
 
 
             var options = {
+                virtual:true,
                 grid: {
                     margin: 20,
                     hoverable: true,
+                    autoHighlight: false,
                 },
                 xaxis: {
                     mode: 'time',
@@ -232,7 +233,7 @@ define(function (require) {
                     canvas: true,
                     ticks: 6,
                     zoomRangeLimit: [this.timeRangeLimit.MinX, this.timeRangeLimit.MaxX],
-                    limit: 10
+                    limit: 500
                 },
                 yaxis: {
                     show: true,
@@ -263,6 +264,7 @@ define(function (require) {
                     interactive: true,
 
                 },
+
                 tooltip: {
                     show: true,
                 },
@@ -285,6 +287,7 @@ define(function (require) {
 
             //this.data.push
             this.graph = $.plot(this.$el, this.data, options);
+
             //console.log(this.$el);
 
             //this.$el.append("<div><input type=\"checkbox\" >aaa</div>");

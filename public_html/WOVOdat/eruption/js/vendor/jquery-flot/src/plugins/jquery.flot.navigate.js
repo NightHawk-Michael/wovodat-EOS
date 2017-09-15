@@ -207,7 +207,6 @@
         };
 
         plot.zoom = function (args) {
-            console.log("zoom");
             if (!args)
                 args = {};
 
@@ -282,7 +281,8 @@
             });
 
             plot.setupGrid();
-            plot.draw();
+            var virtual = plot.getOptions().virtual;
+            plot.draw(virtual);
 
             if (!args.preventEvent)
                 plot.getPlaceholder().trigger("plotzoom", [ plot, args ]);

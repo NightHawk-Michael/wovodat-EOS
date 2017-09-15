@@ -85,11 +85,12 @@ define(function (require) {
             this.listenTo(this.timeSeriesSelect, 'hide', this.timeSeriesSelectHidden);
             this.listenTo(this.filtersSelect, 'hide', this.filtersSelectHidden);
             this.listenTo(this.filtersSelect, 'show-overview-graph', this.showOverviewGraph);
-            this.listenTo(this.overviewGraphContainer, 'hide', this.overviewGraphHidden);
+            this.listenTo(this.filtersSelect, 'hide-overview-graph', this.hideOverviewGraph);
+            this.listenTo(this.overviewGraph, 'hide', this.overviewGraphHidden);
             this.listenTo(this.overviewGraph, 'show', this.overviewGraphShown);
-
-            this.listenTo(this.eruptionSelect, 'hide', this.eruptionSelectHidden);
-            this.listenTo(this.eruptionGraph, 'hide', this.eruptionGraphHidden);
+            //
+            // this.listenTo(this.eruptionSelect, 'hide', this.eruptionSelectHidden);
+            // this.listenTo(this.eruptionGraph, 'hide', this.eruptionGraphHidden);
             this.listenTo(this.eruptionGraph, 'show', this.eruptionGraphShown);
 
 
@@ -167,6 +168,11 @@ define(function (require) {
             this.timeSeriesGraphContainer.selectingFiltersChanged(this.selectingFilters, this.selectingTimeSeries);
             this.turnProgressbar(false);
         },
+        hideOverviewGraph: function () {
+            this.overviewGraphContainer.hide();
+            this.overviewGraph.hide();
+            this.timeSeriesGraphContainer.selectingFiltersChanged(this.selectingFilters, this.selectingTimeSeries);
+        },
         changeSelectingEruptions: function (e) {
             this.eruptionGraph.initialEruption(this.eruptionSelect.availableEruptions);
             this.eruptionGraph.changeEruption(e, this.selectingTimeRange);
@@ -191,7 +197,8 @@ define(function (require) {
             // this.eruptionSelect.hide();
             // this.eruptionSelect.show();
         },
-        overviewGraphHidden: function (e) {
+        overviewGraphHidden: function (e,range) {
+            this.eruptionGraph.updateTimeRangeLimit(range);
             // this.eruptionSelect.hide();
             // this.eruptionSelect.show();
         },

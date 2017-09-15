@@ -589,7 +589,7 @@ Licensed under the MIT license.
         // or { data: [ [x1, y1], [x2, y2], ... ], label: "some label", ... }
         var series = [],
             options = {
-
+                virtual: null,
                 // the color theme used for graphs
                 colors: ["#edc240", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"],
                 legend: {
@@ -922,7 +922,7 @@ Licensed under the MIT license.
         setupCanvases();
         setData(data_);
         setupGrid();
-        draw();
+        draw(options.virtual);
         bindEvents();
 
         function executeHooks(hook, args) {
@@ -2258,8 +2258,10 @@ Licensed under the MIT license.
             }
         }
 
-        function draw() {
-
+        function draw(virtual,startPos,endPos) {
+            if(virtual){
+                return;
+            }
             surface.clear();
 
             executeHooks(hooks.drawBackground, [ctx]);
@@ -2274,13 +2276,13 @@ Licensed under the MIT license.
             if (grid.show && !grid.aboveData) {
                 drawGrid();
             }
-
+            executeHooks(hooks.draw, [ctx]);
             for (var i = 0; i < series.length; ++i) {
-                executeHooks(hooks.drawSeries, [ctx, series[i]]);
-                drawSeries(series[i]);
+                executeHooks(hooks.drawSeries, [ctx, series[i],startPos,endPos]);
+                drawSeries(series[i],startPos,endPos);
             }
 
-            executeHooks(hooks.draw, [ctx]);
+
 
             if (grid.show && grid.aboveData) {
                 drawGrid();
@@ -2729,19 +2731,19 @@ Licensed under the MIT license.
             });
         }
 
-        function drawSeries(series) {
+        function drawSeries(series,startPos,endPos) {
             if (series.lines.show) {
-                drawSeriesLines(series);
+                drawSeriesLines(series,startPos,endPos);
             }
             if (series.bars.show) {
-                drawSeriesBars(series);
+                drawSeriesBars(series,startPos,endPos);
             }
             if (series.points.show) {
-                drawSeriesPoints(series);
+                drawSeriesPoints(series,startPos,endPos);
             }
         }
 
-        function drawSeriesLines(series) {
+        function drawSeriesLines(series,startPos,endPos) {
             function plotLine(datapoints, xoffset, yoffset, axisx, axisy) {
                 var points = datapoints.points,
                     ps = datapoints.pointsize,
@@ -2749,7 +2751,26 @@ Licensed under the MIT license.
                     prevx = null, prevy = null;
 
                 ctx.beginPath();
-                for (var i = ps; i < points.length; i += ps) {
+                if(startPos === undefined){
+                    startPos = 0;
+                }
+                if(endPos === undefined){
+                    endPos = points.length;
+                }
+                var step = 1;
+                var length = endPos-startPos;
+                var limit = axisx.options.limit;
+                if(limit !==undefined){
+                    step = Math.ceil(length/limit);
+
+                }
+                step = step*ps;
+                startPos = startPos*ps;
+                endPos = endPos*ps;
+                datapoints.startPos = startPos;
+                datapoints.endPos = endPos;
+                datapoints.step = step;
+                for (var i = startPos; i < endPos; i += step) {
                     var x1 = points[i - ps], y1 = points[i - ps + 1],
                         x2 = points[i], y2 = points[i + 1];
 
@@ -3033,11 +3054,30 @@ Licensed under the MIT license.
             ctx.restore();
         }
 
-        function drawSeriesPoints(series) {
+        function drawSeriesPoints(series,startPos,endPos) {
+
             function plotPoints(datapoints, radius, fillStyle, offset, shadow, axisx, axisy, symbol) {
                 var points = datapoints.points, ps = datapoints.pointsize;
+                if(startPos === undefined){
+                    startPos = 0;
+                }
+                if(endPos === undefined){
+                    endPos = points.length;
+                }
+                var step = 1;
+                var length = endPos-startPos;
+                var limit = axisx.options.limit;
+                if(limit !==undefined){
+                        step = Math.ceil(length/limit);
 
-                for (var i = 0; i < points.length; i += ps) {
+                }
+                step = step*ps;
+                startPos = startPos*ps;
+                endPos = endPos*ps;
+                datapoints.startPos = startPos;
+                datapoints.endPos = endPos;
+                datapoints.step = step;
+                for (var i = startPos; i < endPos; i += step) {
                     var x = points[i], y = points[i + 1];
                     if (x == null || x < axisx.min || x > axisx.max || y < axisy.min || y > axisy.max) {
                         continue;
@@ -3057,6 +3097,7 @@ Licensed under the MIT license.
                         ctx.fillStyle = fillStyle;
                         ctx.fill();
                     }
+
                     ctx.stroke();
                 }
             }
@@ -3080,22 +3121,22 @@ Licensed under the MIT license.
             if (lw > 0 && sw > 0) {
 
                 // draw shadow in two steps
-                var w = sw / 2;
-                ctx.lineWidth = w;
-                ctx.strokeStyle = "rgba(0,0,0,0.1)";
-                plotPoints(series.datapoints, radius, null, w + w / 2, true,
-                           series.xaxis, series.yaxis, symbol);
-
-                ctx.strokeStyle = "rgba(0,0,0,0.2)";
-                plotPoints(series.datapoints, radius, null, w / 2, true,
-                           series.xaxis, series.yaxis, symbol);
+                // var w = sw / 2;
+                // ctx.lineWidth = w;
+                // ctx.strokeStyle = "rgba(0,0,0,0.1)";
+                // plotPoints(series.datapoints, radius, null, w + w / 2, true,
+                //            series.xaxis, series.yaxis, symbol);
+                //
+                // ctx.strokeStyle = "rgba(0,0,0,0.2)";
+                // plotPoints(series.datapoints, radius, null, w / 2, true,
+                //            series.xaxis, series.yaxis, symbol);
             }
 
             ctx.lineWidth = lw;
             ctx.strokeStyle = series.points.strokeColor || series.color;
-            plotPoints(series.datapoints, radius,
-                       getFillStyle(series.points, series.color), 0, false,
-                       series.xaxis, series.yaxis, symbol);
+                plotPoints(series.datapoints, radius,
+                           getFillStyle(series.points, series.color), 0, false,
+                           series.xaxis, series.yaxis, symbol);
             ctx.restore();
         }
 
@@ -3286,21 +3327,57 @@ Licensed under the MIT license.
                 c.stroke();
             }
         }
-        function drawSeriesBars(series) {
-            function plotBars(datapoints, barLeft, barRight, fillStyleCallback, axisx, axisy) {
+        function drawSeriesBars(series,startPos,endPos) {
+            function plotBars(datapoints, barLeft, barRight, fillStyleCallback, axisx, axisy,startPos,endPos) {
                 var points = datapoints.points, ps = datapoints.pointsize;
+                if(startPos === undefined){
+                    startPos = 0;
+                }
+                if(endPos === undefined){
+                    endPos = points.length;
+                }
+                var step = 1;
+                var length = endPos-startPos;
+                var limit = axisx.options.limit;
+                if(limit !==undefined){
+                    step = Math.ceil(length/limit);
 
-                for (var i = 0; i < points.length; i += ps) {
+                }
+                step = step*ps;
+                startPos = startPos*ps;
+                endPos = endPos*ps;
+                datapoints.startPos = startPos;
+                datapoints.endPos = endPos;
+                datapoints.step = step;
+                for (var i = startPos; i < points.endPos; i += step) {
                     if (points[i] == null) {
                         continue;
                     }
                     drawBar(points[i], points[i + 1], points[i + 2], barLeft, barRight, fillStyleCallback, axisx, axisy, ctx, series.bars.horizontal, series.bars.lineWidth);
                 }
             }
-            function plotBars4params(datapoints,fillStyleCallback,axisx,axisy){
+            function plotBars4params(datapoints,fillStyleCallback,axisx,axisy,startPos,endPos){
                 var points = datapoints.points, ps = datapoints.pointsize;
+                if(startPos === undefined){
+                    startPos = 0;
+                }
+                if(endPos === undefined){
+                    endPos = points.length;
+                }
+                var step = 1;
+                var length = endPos-startPos;
+                var limit = axisx.options.limit;
+                if(limit !==undefined){
+                    step = Math.ceil(length/limit);
 
-                for (var i = 0; i < points.length; i += ps) {
+                }
+                step = step*ps;
+                startPos = startPos*ps;
+                endPos = endPos*ps;
+                datapoints.startPos = startPos;
+                datapoints.endPos = endPos;
+                datapoints.step = step;
+                for (var i = startPos; i < endPos; i += step) {
                     if (points[i] == null)
                         continue;
                     drawBar4params(points[i], points[i + 1], points[i + 2],points[i+3], fillStyleCallback, axisx, axisy, ctx, series.bars.horizontal, series.bars.lineWidth);
@@ -3328,9 +3405,9 @@ Licensed under the MIT license.
 
             var fillStyleCallback = series.bars.fill ? function(bottom, top) { return getFillStyle(series.bars, series.color, bottom, top); } : null;
             if(series.bars.fullparams){
-                plotBars4params(series.datapoints,fillStyleCallback,series.xaxis,series.yaxis);
+                plotBars4params(series.datapoints,fillStyleCallback,series.xaxis,series.yaxis,startPos,endPos);
             }else{
-                plotBars(series.datapoints, barLeft, barLeft + series.bars.barWidth, fillStyleCallback, series.xaxis, series.yaxis);
+                plotBars(series.datapoints, barLeft, barLeft + series.bars.barWidth, fillStyleCallback, series.xaxis, series.yaxis,startPos,endPos);
             }
             ctx.restore();
         }
@@ -3516,7 +3593,9 @@ Licensed under the MIT license.
                     x, y;
 
                 ps = s.datapoints.pointsize;
-
+                var step = s.datapoints.step;
+                var startPos = s.datapoints.startPos;
+                var endPos = s.datapoints.endPos;
                 // with inverse transforms, we can't use the maxx/maxy
                 // optimization, sadly
                 if (axisx.options.inverseTransform) {
@@ -3527,7 +3606,7 @@ Licensed under the MIT license.
                 }
 
                 if (s.lines.show || s.points.show) {
-                    for (j = 0; j < points.length; j += ps) {
+                    for (j = startPos; j < endPos; j += step) {
 
                         x = points[j];
                         y = points[j + 1];

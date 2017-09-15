@@ -9,6 +9,8 @@ define(function (require) {
             var data = plotData.data;
             var min = undefined;
             var max = undefined;
+            var startPos = undefined;
+            var endPos = undefined;
             var length = 0;
             if (plotData.points.show) {
                 for (var i = 0; i < data.length; i++) {
@@ -18,10 +20,18 @@ define(function (require) {
                     var error = data[i][2] | 0;
 
                     if (x >= maxX) {
+                        if(startPos === undefined){
+                            endPos = undefined;
+                        }else{
+                            endPos = startPos+length;
+                        }
                         break;
                     }
                     if (x > minX) {
                         length++;
+                        if(startPos === undefined){
+                            startPos =i;
+                        }
                         if (value + error > max || max === undefined) {
                             max = value + error;
                         }
@@ -31,6 +41,12 @@ define(function (require) {
                     }
 
 
+                }
+                if(endPos === undefined && startPos !== undefined){
+                    endPos = data.length;
+                }
+                if(endPos > data.length){
+                    endPos = data.length;
                 }
             }
 
@@ -58,19 +74,16 @@ define(function (require) {
                 min = -1;
                 max = 1;
             } else {
-                if (max > 0) {
-                    var temp = max * 0.1;
-                    min = min - temp;
-                    max = max + temp;
-                } else {
-                    var temp = min * 0.1;
-                    min = min - temp;
-                    max = max + temp;
-
-                }
+                var temp = Math.max(Math.abs(max),Math.abs(min))*0.1;
+                max = max +temp;
+                min = min-temp;
 
             }
-            return {minY: min, maxY: max,dataSize:length};
+            if(max == 0 && min == 0){
+                min = -1;
+                max = 1;
+            }
+            return {minY: min, maxY: max,dataSize:length, startPos: startPos, endPos: endPos};
 
         },
         generateTick: function (min, max) {
@@ -376,11 +389,11 @@ define(function (require) {
                 yaxis: {
                     axisLabel: ""
                 },
-                shadowSize: 2,
+                // shadowSize: 2,
                 points: {
                     show: false,
                     radius: 2,
-                    lineWidth: 2, // in pixels
+                    // lineWidth: 2, // in pixels
                     fill: false,
                     fillColor: null,
                     symbol: "circle",
