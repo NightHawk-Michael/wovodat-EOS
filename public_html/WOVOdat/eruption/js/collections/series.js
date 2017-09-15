@@ -73,8 +73,6 @@ define(function (require) {
                         collection[currentCategory].push(model);
                         // collection.length++;
                     }
-                    // console.log(collection);
-                    console.log("fetch Series List done");
                     deferredObject.resolve("success");
                 }
             });

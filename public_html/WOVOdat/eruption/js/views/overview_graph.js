@@ -99,22 +99,10 @@ define(function (require) {
                     show: true,
                     color: '#00000000',
                     canvas: false,
-
-                    tickFormatter: function (val, axis) {
-                        var string = val.toString();
-                        if (string.length > 7) {
-                            var rounded = Math.round(val * 10) / 10;
-                            var fixed = rounded.toFixed(1);
-                            //return parseFloat( val.toFixed(2) )
-                            return fixed;
-                        }
-                        return val;
-                    },
                     min: this.minY,
                     max: this.maxY,
 
                     autoscaleMargin: 5,
-                    ticks: this.ticks,
                     labelWidth: 40
                 },
                 selection: {
@@ -122,6 +110,9 @@ define(function (require) {
                     color: '#451A2B'
                 },
                 zoom: {
+                    interactive: false,
+                },
+                pan:{
                     interactive: false,
                 },
                 legend: {
@@ -218,11 +209,10 @@ define(function (require) {
 
             var allowErrorbar = false;
             var allowAxisLabel = false;
-            var limitNumberOfData = true;
             //console.log(this.serieGraphTimeRange);
             //var adjustTimeRange = false;
             //formatData: function(graph,filters,allowErrorbar,allowAxisLabel,limitNumberOfData)
-            GraphHelper.formatData(this, filters, allowErrorbar, allowAxisLabel, limitNumberOfData,null,this.selectingTimeSeries);
+            GraphHelper.formatData(this, filters, allowErrorbar, allowAxisLabel,this.selectingTimeSeries);
 
         },
 

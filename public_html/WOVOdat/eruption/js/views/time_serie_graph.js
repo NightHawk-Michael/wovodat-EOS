@@ -232,6 +232,7 @@ define(function (require) {
                     autoscale: true,
                     canvas: true,
                     ticks: 6,
+                    panRange: [this.timeRangeLimit.MinX, this.timeRangeLimit.MaxX],
                     zoomRangeLimit: [this.timeRangeLimit.MinX, this.timeRangeLimit.MaxX],
                     limit: 500
                 },
@@ -240,7 +241,7 @@ define(function (require) {
                     min: this.minY,
                     max: this.maxY,
                     ticks: 6, //this.ticks
-                    labelWidth: 60,
+                    labelWidth: 50,
                     tickFormatter: function (val, axis) {
                         var string = val.toString();
                         if (string.length > 7) {
@@ -303,12 +304,12 @@ define(function (require) {
             // this.eventData =  eventData;
 
 
-            this.$el.bind('plotzoom', eventData, this.onZoom);
-            this.$el.bind('plotpan', eventData, this.onPan);
+            this.$el.bind('plotzoom', eventData, this.onTimeRangeChange);
+            this.$el.bind('plotpan', eventData, this.onTimeRangeChange);
 
 
         },
-        onZoom: function (event, plot) {
+        onTimeRangeChange: function (event, plot) {
             var xaxis = plot.getXAxes()[0];
             /* The zooming range cannot wider than the original range */
 
@@ -328,8 +329,7 @@ define(function (require) {
             var filters = [this.filter];
             var allowErrorbar = this.allowErrorBar;
             var allowAxisLabel = true;
-            var limitNumberOfData = false;
-            GraphHelper.formatData(this, filters, allowErrorbar, allowAxisLabel, limitNumberOfData,null, this.selectingTimeSeries);
+            GraphHelper.formatData(this, filters, allowErrorbar, allowAxisLabel, this.selectingTimeSeries);
         },
         /**
          *Generate CSV file when click CSV button

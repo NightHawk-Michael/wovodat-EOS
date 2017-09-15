@@ -50,7 +50,6 @@ define(function (require) {
             var self = this;
 
             $.when.apply(this, getFilterListCalls).then(function () {
-                console.log("getFilterListCalls Done");
                 deferredObject.resolve("success");
             })
             return deferredObject.promise();

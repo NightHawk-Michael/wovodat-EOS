@@ -121,7 +121,6 @@ define(function (require) {
         changeVolcano: function (e) {
             this.turnProgressbar(true);
             var vd_id = this.selectingVolcano.get('vd_id');
-            console.log("volcano start");
             var self = this;
             $.when(
                 // this.volcanoSelect.changeSelection(vd_id),
@@ -129,8 +128,6 @@ define(function (require) {
                 this.eruptions.changeVolcano(vd_id),
                 this.eruptionForecasts.changeVolcano(vd_id)
             ).then(function () {
-
-                    console.log("volcano done");
                     self.eruptionSelect.changeVolcano(self.eruptions);
                     self.timeSeriesSelect.changeVolcano(vd_id, self.timeSeries);
 

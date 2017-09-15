@@ -30,11 +30,11 @@ abstract class MonitoryTypeManager implements MonitoryTypeManagerInterface {
 
 		$table = "";
 		foreach ($this->infor as $key => $type) {
-//			var_dump($type["data_type"]);
-			if ( $type["data_type"] == $serie["data_type"] ){
 
+			if ( $type["data_type"] == $serie["data_type"] ){
 				foreach ($type["params"] as $params) {
 					if($params["name"] == $serie["component"]){
+
 						$table =$key;
 						break;
 					}
@@ -48,6 +48,7 @@ abstract class MonitoryTypeManager implements MonitoryTypeManagerInterface {
 		foreach ($this->tableManagers as $tableName=> $tableManager) {
 
 			if($table == $tableName){
+//			    echo $tableName;
 				$result = array_merge($result,$tableManager->getStationData($serie,$vd_id));
 			}
 			

@@ -242,7 +242,7 @@ define(function (require) {
                 xaxis.options.max = this.endTime;
 
             }else{
-                xaxis.options.zoomRangeLimit = this.timeRangeLimit
+                xaxis.options.zoomRangeLimit = [this.timeRangeLimit.MinX,this.timeRangeLimit.MaxX];
                 xaxis.options.min = this.timeRangeLimit.MinX;
                 xaxis.options.max = this.timeRangeLimit.MaxX;
             }

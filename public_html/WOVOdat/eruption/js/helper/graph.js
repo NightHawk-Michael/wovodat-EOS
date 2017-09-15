@@ -20,17 +20,17 @@ define(function (require) {
                     var error = data[i][2] | 0;
 
                     if (x >= maxX) {
-                        if(startPos === undefined){
+                        if (startPos === undefined) {
                             endPos = undefined;
-                        }else{
-                            endPos = startPos+length;
+                        } else {
+                            endPos = startPos + length;
                         }
                         break;
                     }
                     if (x > minX) {
                         length++;
-                        if(startPos === undefined){
-                            startPos =i;
+                        if (startPos === undefined) {
+                            startPos = i;
                         }
                         if (value + error > max || max === undefined) {
                             max = value + error;
@@ -42,10 +42,10 @@ define(function (require) {
 
 
                 }
-                if(endPos === undefined && startPos !== undefined){
+                if (endPos === undefined && startPos !== undefined) {
                     endPos = data.length;
                 }
-                if(endPos > data.length){
+                if (endPos > data.length) {
                     endPos = data.length;
                 }
             }
@@ -74,121 +74,21 @@ define(function (require) {
                 min = -1;
                 max = 1;
             } else {
-                var temp = Math.max(Math.abs(max),Math.abs(min))*0.1;
-                max = max +temp;
-                min = min-temp;
+                var temp = Math.max(Math.abs(max), Math.abs(min)) * 0.1;
+                max = max + temp;
+                min = min - temp;
 
             }
-            if(max == 0 && min == 0){
+            if (max == 0 && min == 0) {
                 min = -1;
                 max = 1;
             }
-            return {minY: min, maxY: max,dataSize:length, startPos: startPos, endPos: endPos};
+            return {minY: min, maxY: max, dataSize: length, startPos: startPos, endPos: endPos};
 
         },
-        generateTick: function (min, max) {
-            if (min == undefined || max == undefined) {
-                return [-0.5, 0, 0.5];
-            }
-            if (min == max) {
-                var temp = this.exponentialDegree(min);
-                if (temp == 0) {
-                    temp = 1;
-                }
-                var diff = 0.5 * temp;
-                return [min - diff, min, min + diff];
-            }
-            var ticks = [];
-            var numStep = 7;
-            /** compute exponential Degree **/
 
 
-            var expDeg = undefined
-            if (this.exponentialDegree(min) < this.exponentialDegree(max)) {
-                expDeg = this.exponentialDegree(max);
-            } else {
-                expDeg = this.exponentialDegree(min);
-            }
-
-
-            if (expDeg > 5) {
-                var step = this.roundNumber((max - min) / numStep, expDeg); // step of ticks
-                //if step is 0.xxx in computing exponential Degree, decrement expDeg
-                while (step == 0) {
-                    expDeg--;
-                    step = this.roundNumber((max - min) / numStep, expDeg);
-                }
-                min = this.roundNumber(min, expDeg);
-                max = this.roundNumber(max, expDeg);
-
-                step = step.toExponential();
-                /**** compute ticks ****/
-                var startTick = this.roundNumber(min - step, expDeg); // start tick
-                var endTick = this.roundNumber(max + step, expDeg); // end tick
-                startTick = startTick.toExponential();
-                endTick = endTick.toExponential();
-                var curTick = startTick;
-                if (curTick == endTick) {
-                    ticks.push(curTick);
-                } else {
-                    for (var i = 0; curTick < endTick; i++) {
-                        curTick = this.roundNumber(startTick + i * step, expDeg);
-                        ticks.push(curTick);
-
-                    }
-                }
-            }
-            else {
-                //	var step = (max-min)/(numStep-2);
-                var step = (max - min) / numStep;
-
-                if (step < 1) {
-                    var rounded = Math.round(step * 10) / 10;
-                    var fixed = rounded.toFixed(1);
-                    //return parseFloat( val.toFixed(2) )
-                    step = fixed;
-                    step = Math.max(step, 0.2);
-                } else {
-                    //step = parseInt(step);
-                    //step = this.roundNumber(step);
-                }
-
-                //var startTick = min - step;
-                // var endTick = max + step;
-                var startTick = undefined;
-                var maxTick = undefined;
-                var curTick = undefined;
-                var endTick = undefined;
-                while (startTick == undefined || startTick >= min) {
-                    if (step >= 1) {
-                        maxTick = this.roundNumber(max + step, expDeg);
-                    } else {
-                        maxTick = Math.round(max);
-                    }
-
-                    startTick = maxTick - (step * numStep);    // start tick
-                    step = step + step;
-                    endTick = maxTick; // end tick
-
-                    curTick = startTick;
-
-                }
-                if (curTick == endTick) {
-                    ticks.push(curTick);
-                } else {
-                    for (var i = 0; curTick < endTick; i++) {
-                        curTick = startTick + i * step;
-                        ticks.push(curTick);
-
-                    }
-                }
-            }
-            return ticks;
-        }
-        ,
-
-
-        formatData: function (graph, filters, allowErrorbar, allowAxisLabel, limitNumberOfData, eruptions, selectingTimeSeries) {
+        formatData: function (graph, filters, allowErrorbar, allowAxisLabel, selectingTimeSeries) {
             var minX = undefined,
                 maxX = undefined,
                 minY = undefined,
@@ -233,17 +133,9 @@ define(function (require) {
                 Here we limit the amount of data to be presented on Graph to 5000 data
                 */
                 var requiredData = [];
-                if (limitNumberOfData && filterData.length > 5000) {
-                    //threshold = 5000 data to be rendered each Overview Graph
-                    var threshold = parseInt(filterData.length / 5000) + 1;
-                    for (var k = 0; k < filterData.length; k += threshold) {
-                        requiredData.push(filterData[k]);
-                    }
-                }
-                else {
-                    requiredData = filterData;
-                }
-                ;
+
+                requiredData = filterData;
+
 
                 //requiredData is the array of filterData that has been restricted in amount.
                 requiredData.forEach(function (d) {
@@ -312,29 +204,6 @@ define(function (require) {
 
 
             }
-            if (eruptions != undefined) {
-                var models = eruptions.models;
-
-                var listEruption = [];
-
-                for (var k = 0; k < models.length; k++) {
-                    var ed_stime = models[k].attributes.ed_stime;
-                    if (ed_stime < 0) continue;
-
-                    var tempEruption = [];
-
-                    //tempEruption.push(675890001000,(maxY + minY) / 2);
-                    //
-                    //console.log (models[k]);
-                    tempEruption.push(ed_stime, (maxY) * 0.9);
-
-                    //console.log(tempEruption);
-                    listEruption.push(tempEruption);
-                    //break;
-                }
-                //console.log(minY);
-                data.push(this.formatGraphEruptionAppearance(listEruption, minY, maxY));
-            }
 
             graph.minX = minX - 86400000;
             graph.maxX = maxX + 86400000;
@@ -346,7 +215,7 @@ define(function (require) {
                 //    minY = minY*0.9;
 
 
-                if (maxY > 0) {
+                if (Math.abs(maxY) > Math.abs(minY)) {
                     var temp = maxY * 0.1;
                     minY = minY - temp;
                     maxY = maxY + temp;
@@ -358,10 +227,12 @@ define(function (require) {
                 }
 
 
-                graph.ticks = this.generateTick(minY, maxY);
-                graph.minY = graph.ticks[0];
-                graph.maxY = graph.ticks[graph.ticks.length - 1]
-                graph.ticks.push();
+                // graph.ticks = this.generateTick(minY, maxY);
+                // graph.minY = graph.ticks[0];
+                // graph.maxY = graph.ticks[graph.ticks.length - 1]
+                graph.minY = minY;
+                graph.maxY = maxY;
+                // graph.ticks.push();
             }
             graph.timeRange.set({
                 'startTime': graph.minX,
@@ -417,7 +288,6 @@ define(function (require) {
             if (styleParams.filterColor) {
                 dataParam.color = styleParams.filterColor;
             }
-            ;
 
             if (styleParams.errorbar) {
                 dataParam.points.errorbars = "y";
@@ -429,7 +299,6 @@ define(function (require) {
                     radius: 2,
                 }
             }
-            ;
 
             if (styleParams.axisLabel) {
                 dataParam.yaxis.axisLabel = styleParams.axisLabel;
@@ -465,105 +334,7 @@ define(function (require) {
             // parameter to enable error-bar presentation.
             return dataParam;
         }
-        ,
-        formatGraphEruptionAppearance: function (data) {
-            //console.log(data);
-            var dataParam = {
-                data: data, //data is 3D array (y-error value is included in the data passed in)
-                //label: filterName + ":"+timeSerieName,
-                color: null,
-                lines: {
-                    show: false,
-                    radius: 10,
-                    lineWidth: 2,
-                    symbol: "line",
-                },
-                yaxis: {},
-                shadowSize: 3,
-                points: {
-                    show: true,
-                    radius: 10,
-                    lineWidth: 2, // in pixels
-                    fill: true,
-                    fillColor: "#FF0000",
-                    symbol: "volcano",
-                    //text: date,
 
-                },
-                bars: {
-                    // wovodat: true;
-                    show: false,
-                    fullparams: true,
-                    lineWidth: 2,
-                    barWidth: 0,
-                    fill: false,
-                    fillColor: 0,
-                    align: "left", // "left", "right", or "center"
-                    horizontal: false,
-                    zero: true
-                }
-            };
-
-            // Set up for special earthquake type Colors
-            dataParam.color = "#FF0000";
-            dataParam.points.show = true;
-
-            dataParam.points.fillColor = "#FF0000";
-            //  // console.log(dataParam);
-            //}
-            //else if(styleParams.style == 'horizontalbar'||styleParams.style == 'bar'){
-            //  dataParam.bars.show = true;
-            //  dataParam.bars.horizontal = true;
-            //  dataParam.points.shadowSize = 0;
-            //
-            //  // Have not accounted for the case horizontal bar with no start time and end time
-            //console.log("dataParam");
-            // console.log(dataParam);
-            //}
-            // parameter to enable error-bar presentation.
-            return dataParam;
-        }
-        ,
-        decimalPlaces: function (value) {
-            if (Math.floor(value) === value) return 0;
-            return value.toString().split(".")[1].length || 0;
-        }
-        ,
-        //expDegree always greater than expDegree of numberStr
-        // Round the number to expDegree
-        roundNumber: function (numberStr, desExpDegree) {
-            var desCoe; // destination Coefficient
-            var number = parseFloat(numberStr)
-            number = number / Math.pow(10, desExpDegree);
-            //   var sourceExpDegree = this.exponentialDegree(number); //expoential Degree of this number
-
-            //   var sourceCoe = this.coefficient(number);
-            //   if(sourceExpDegree >=desExpDegree){
-            //     var differExpDeg = sourceExpDegree-desExpDegree;
-            //     desCoe = sourceCoe * Math.pow(10,differExpDeg);
-            // }else{
-            //    desCoe = 0;
-            //  }
-            number = Math.ceil(number);
-            return number * Math.pow(10, desExpDegree);
-        }
-        ,
-        exponentialDegree: function (value) {
-            value = value.toExponential();
-            var a = value.toString().split("e")[1];
-            var exp = parseInt(a);
-            return exp;
-        }
-        ,
-        /** no decimal place **/
-        coefficient: function (value) {
-            value = value.toExponential();
-            var a = value.toString().split("e")[0];
-            var coe = parseFloat(a);
-            coe = Math.round(coe);
-            return coe;
-        }
-        ,
 
     };
 })

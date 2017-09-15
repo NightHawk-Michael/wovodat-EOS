@@ -301,10 +301,12 @@
 
             $.each(plot.getAxes(), function (_, axis) {
                 var opts = axis.options,
+                    zLimit = opts.zoomRangeLimit,
                     min, max, d = delta[axis.direction];
-
-                min = axis.c2p(axis.p2c(axis.min) + d),
-                    max = axis.c2p(axis.p2c(axis.max) + d);
+                var preMin = axis.min;
+                var preMax = axis.max;
+                min = axis.c2p(axis.p2c(preMin) + d);
+                max = axis.c2p(axis.p2c(preMax) + d);
 
                 var pr = opts.panRange;
                 if (pr === false) // no panning on this axis
@@ -324,13 +326,13 @@
                         max += d;
                     }
                 }
-
                 opts.min = min;
                 opts.max = max;
             });
 
             plot.setupGrid();
-            plot.draw();
+            var virtual = plot.getOptions().virtual;
+            plot.draw(virtual);
 
             if (!args.preventEvent)
                 plot.getPlaceholder().trigger("plotpan", [ plot, args ]);
