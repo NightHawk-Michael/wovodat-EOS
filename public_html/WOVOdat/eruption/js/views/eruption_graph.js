@@ -144,6 +144,7 @@ define(function (require) {
                         mode: 'time',
                         timeformat: "%d-%b-%Y",
                         zoomRangeLimit: [this.timeRangeLimit.MinX, this.timeRangeLimit.MaxX],
+                        panRange: [this.timeRangeLimit.MinX, this.timeRangeLimit.MaxX],
                     },
                     yaxis: {
                         min: 0,
@@ -238,11 +239,13 @@ define(function (require) {
 
                 xaxis.options.zoomRangeLimit[0] = this.startTime;
                 xaxis.options.zoomRangeLimit[1] = this.endTime;
+                xaxis.options.panRange = xaxis.options.zoomRangeLimit;
                 xaxis.options.min = this.startTime;
                 xaxis.options.max = this.endTime;
 
             }else{
                 xaxis.options.zoomRangeLimit = [this.timeRangeLimit.MinX,this.timeRangeLimit.MaxX];
+                xaxis.options.panRange = xaxis.options.zoomRangeLimit;
                 xaxis.options.min = this.timeRangeLimit.MinX;
                 xaxis.options.max = this.timeRangeLimit.MaxX;
             }

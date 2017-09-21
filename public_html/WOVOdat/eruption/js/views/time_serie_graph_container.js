@@ -88,7 +88,7 @@ define(function (require) {
                 // }
 
             }
-            // this.show();
+            this.show();
 
         },
         selectingFiltersChanged: function (selectingFilters, selectingTimeSeries) {
@@ -113,15 +113,15 @@ define(function (require) {
             // this.$el.html("");
             $('#individual-graph-title').css({display: "block"});
             this.$el.addClass("card-panel");
-            for (var i = 0; i < this.graphs.length; i++) {
-
-                this.graphs[i].show();
-
-            }
-            if (this.graphs.length == 0) {
-                this.hide();
-
-            }
+            // for (var i = 0; i < this.graphs.length; i++) {
+            //
+            //     this.graphs[i].show();
+            //
+            // }
+            // if (this.graphs.length == 0) {
+            //     this.hide();
+            //
+            // }
 
         },
 

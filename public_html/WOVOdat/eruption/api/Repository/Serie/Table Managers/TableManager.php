@@ -66,7 +66,7 @@ abstract class TableManager implements TableManagerInterface {
 	abstract protected function setMonitoryType(); // monitory type Deformation, Gas, ....
 	abstract protected function setDataType(); // Data type for each data table
     abstract protected function setShortDataType();
-	abstract protected function setLatLong();	//Set param Lat Long fo get Table Query
+//	abstract protected function setLatLong();	//Set param Lat Long fo get Table Query
 
 	//if there is 1 station, station1 is the same as station2
 	abstract protected function setStationID(); // column names represent stationID1,station ID2
@@ -102,29 +102,10 @@ abstract class TableManager implements TableManagerInterface {
 			$query = $query.",a.".$name;
 		}
 //		$query = $query." from $this->table_name as a,vd ,vd_inf as b where a.vd_id=$vd_id AND vd.vd_id = $vd_id and b.vd_id = $vd_id group by a.vd_id, sta_id1, sta_id2 order by a.vd_id";
-		$stationTable = $this->stationTable;
-		if (is_array($stationTable)) $stationTable  = $stationTable[0];
 
-		$stationID = $this->stationId[0];
-		if($this->table_name == "es_dd_lev") $stationID = "ds_id_ref";
-		$lat = $this->setLatLong()[0];
-		$long =  $this->setLatLong()[1];
-		$prefixQuery = $query." from " . $this->table_name . " a, vd_inf b, " . $stationTable ." c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id " ;
-		$prefixQuery2 = $prefixQuery . " and a." . $stationID . "=c." . $stationTable . "_id and a.vd_id = d.vd_id and 6371*acos(sin(RADIANS(". $lat ."))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(". $lat ."))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(". $long ."))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
-
-
-//		if($this->table_name == "es_gd_plu") {
-//			$query = $prefixQuery2. " union ".$query." from es_gd_plu a, vd_inf b, cs c ,vd d where a.vd_id=b.vd_id and a.cs_id=c.cs_id and a.vd_id=d.vd_id group by d.vd_id, sta_id1, sta_id2";
-//		}
-//		else if($this->table_name == "es_sd_evn") {
-//			$query = $prefixQuery . " a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(" . $lat . "))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(" . $lat . ")) *cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(" . $long . "))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
-//		}
-//		else if($this->table_name == "es_sd_int" || $this->table_name == "es_sd_ivl" || $this->table_name == "es_sd_trm") {
-//			$query = $prefixQuery. " (a.ss_id=c.ss_id || a.sn_id = c.sn_id) and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(". $lat. "))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(" . $lat ."))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(". $long."))) < 30 group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
-//		}
-//		else{
-//			$query = $prefixQuery2;
-//		}
+		if($this->table_name == "es_dd_ang") {
+			$query = $query." from es_dd_ang a, vd_inf b, ds c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.ds_id=c.ds_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ds_nlat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ds_nlat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ds_nlon))) < 30  group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
+		}
 		if($this->table_name == "es_dd_edm") {
 			$query = $query." from es_dd_edm a, vd_inf b, ds c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.ds_id1=c.ds_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(ds_nlat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(ds_nlat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(ds_nlon))) < 30  group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
 		}
@@ -165,9 +146,8 @@ abstract class TableManager implements TableManagerInterface {
 			$query = $query." from es_gd a, vd_inf b, gs c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.gs_id=c.gs_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(gs_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(gs_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(gs_lon))) < 30  group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
 		}
 		else if($this->table_name == "es_gd_plu") {
-			$query = $query." from es_gd_plu a, vd_inf b, gs c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.gs_id=c.gs_id and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(gs_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(gs_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(gs_lon))) < 30  group by d.vd_id, sta_id1, sta_id2 union ".$query."
-			from es_gd_plu a, vd_inf b, cs c ,vd d where a.vd_id=b.vd_id and a.cs_id=c.cs_id and a.vd_id=d.vd_id group by d.vd_id, sta_id1, sta_id2";
-		}
+            $query = $query . " from es_gd_plu a, vd_inf b, gs c , cs d, vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and (a.gs_id=c.gs_id or a.cs_id = d.cs_id) and a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(gs_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(gs_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(gs_lon))) < 30  group by d.vd_id, sta_id1, sta_id2";
+        }
 		else if($this->table_name == "es_gd_sol") {
 			$query = $query." from es_gd_sol a, vd_inf b, gs c ,vd d where a.vd_id=$vd_id and a.vd_id=b.vd_id and a.gs_id=c.gs_id and  a.vd_id=d.vd_id and 6371*acos(sin(RADIANS(gs_lat))*sin(RADIANS(vd_inf_slat))+cos(RADIANS(gs_lat))*cos(RADIANS(vd_inf_slat))*cos(RADIANS(vd_inf_slon)-RADIANS(gs_lon))) < 30  group by d.vd_id, sta_id1, sta_id2 order by d.vd_id";
 		}
@@ -212,7 +192,8 @@ abstract class TableManager implements TableManagerInterface {
 		$result = array();
 		global $db;
 		$query = $this->getTimeSeriesListQuery($vd_id);
-		$db->query( $query);
+		$temp = $db->query( $query);
+//		echo $temp."\n";
 		$serie_list = $db->getList();
 		$exsited = array();
 		$v = "";
@@ -318,11 +299,20 @@ abstract class TableManager implements TableManagerInterface {
 		}
 		
         $query = str_replace("select",$temp ,$query);
-		if(strpos($query,"stime") >0 ){
-		    $query = $query . " order by filter, stime asc";
+		if(strpos($query,"filter") >0){
+            if(strpos($query,"stime") >0 ){
+                $query = $query . " order by filter, stime asc";
+            }else{
+                $query = $query . " order by filter, time asc";
+            }
         }else{
-            $query = $query . " order by filter, time asc";
+            if(strpos($query,"stime") >0 ){
+                $query = $query . " order by stime asc";
+            }else{
+                $query = $query . " order by time asc";
+            }
         }
+
 		$temp = $db->query($query, $id1,$id2,$vd_id);
 
 //        echo $temp."\n";

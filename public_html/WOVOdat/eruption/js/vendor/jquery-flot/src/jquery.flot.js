@@ -3362,7 +3362,7 @@ Licensed under the MIT license.
                     startPos = 0;
                 }
                 if(endPos === undefined){
-                    endPos = points.length;
+                    endPos = points.length/ps;
                 }
                 var step = 1;
                 var length = endPos-startPos;
@@ -3377,11 +3377,14 @@ Licensed under the MIT license.
                 datapoints.startPos = startPos;
                 datapoints.endPos = endPos;
                 datapoints.step = step;
+                var count = 0;
                 for (var i = startPos; i < endPos; i += step) {
+                    count++;
                     if (points[i] == null)
                         continue;
                     drawBar4params(points[i], points[i + 1], points[i + 2],points[i+3], fillStyleCallback, axisx, axisy, ctx, series.bars.horizontal, series.bars.lineWidth);
                 }
+
             }
             ctx.save();
             ctx.translate(plotOffset.left, plotOffset.top);

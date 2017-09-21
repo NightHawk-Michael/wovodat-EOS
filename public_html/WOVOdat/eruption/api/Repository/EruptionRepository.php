@@ -19,7 +19,7 @@
 			$temp = $db->query($query);
 //			echo $temp."\n";
 			$result = $db->getList();
-			$output = [];
+			$output = array();
 			foreach($result as $row){
                 $row['ed_stime'] = TimeFormatter::getJavascriptTimestamp($row['ed_stime']);
                 if($row["ed_stime_bc"] != null){
@@ -51,7 +51,7 @@
 			$temp = $db->query($query);
 //			echo $temp."\n";
 			$result = $db->getList();
-            $output = [];
+            $output = array();
 			foreach($result as $row){
                 if(array_key_exists('ed_phs_stime', $row)){
                     $row['ed_phs_stime'] = TimeFormatter::getJavascriptTimestamp($row['ed_phs_stime']);

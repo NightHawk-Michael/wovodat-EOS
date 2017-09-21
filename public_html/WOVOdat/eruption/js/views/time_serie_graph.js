@@ -217,6 +217,7 @@ define(function (require) {
 
 
             var options = {
+
                 virtual:true,
                 grid: {
                     margin: 20,
@@ -228,13 +229,12 @@ define(function (require) {
                     timeformat: "%d-%b<br>%Y",
                     min: this.minX,
                     max: this.maxX,
-
                     autoscale: true,
                     canvas: true,
                     ticks: 6,
                     panRange: [this.timeRangeLimit.MinX, this.timeRangeLimit.MaxX],
                     zoomRangeLimit: [this.timeRangeLimit.MinX, this.timeRangeLimit.MaxX],
-                    limit: 500
+                    limit: 1000
                 },
                 yaxis: {
                     show: true,

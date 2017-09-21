@@ -42,16 +42,12 @@ define(function (require) {
 
 
                 }
-                if (endPos === undefined && startPos !== undefined) {
-                    endPos = data.length;
-                }
-                if (endPos > data.length) {
-                    endPos = data.length;
-                }
+
             }
 
 
             if (plotData.bars.show) {
+                length = 0;
                 for (var i = 0; i < data.length; i++) {
                     var x1 = data[i][0];
                     var x2 = data[i][1];
@@ -59,16 +55,30 @@ define(function (require) {
                     var error = data[i][4] | 0;
                     min = 0;
                     if (x1 >= maxX) {
+                        if (startPos === undefined) {
+                            endPos = undefined;
+                        } else {
+                            endPos = startPos + length;
+                        }
                         break;
                     }
                     if (x2 > minX) {
                         length++;
+                        if (startPos === undefined) {
+                            startPos = i;
+                        }
                         if (value + error > max || max === undefined) {
                             max = value + error;
                         }
                     }
                 }
 
+            }
+            if (endPos === undefined && startPos !== undefined) {
+                endPos = data.length;
+            }
+            if (endPos > data.length) {
+                endPos = data.length;
             }
             if (min === undefined || max === undefined) {
                 min = -1;
